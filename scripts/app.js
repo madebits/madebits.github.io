@@ -608,7 +608,7 @@ var lastPage = null
 		console.error(e);
 	}
 }, 2000, 10, function() {
-	$('#mbg-comments').html('<div><small><span class="text-muted"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <i>Failed to load <em>DISQUS</em> comments.</i></span></small></div>');
+	$('#mbg-comments').html('<div><small><span class="text-muted"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <i>Cannot load <em>DISQUS</em> comments.</i></span></small></div>');
 })
 ;
 
