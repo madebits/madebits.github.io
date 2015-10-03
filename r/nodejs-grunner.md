@@ -136,7 +136,7 @@ Here `g` represents a `GRunner` instance object.
 
         You can also exit a task using errors:
 
-        * Emit an error in a returned stream. In this case, you should **not** call `cb()`.
+        * Emit an error in a returned `Stream`. In this case, you should **not** call `cb()`.
         * In a returned *promise* `throw` an error, or fail. In this case you should **not** call `cb()`.
         * `throw` a JS error. This works only directly within `taskFun`. If you `throw` inside a `pipe` stream, or `setTimeout`, and similar async functions, Node.js will stop execution. Use `try / catch` and callbacks to report errors in such cases.
     * `userData` - can be any object, accessible via `info.task.userData` within `taskFun`.
