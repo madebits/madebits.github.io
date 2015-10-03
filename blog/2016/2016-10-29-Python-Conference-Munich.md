@@ -12,7 +12,7 @@ The benefit of being alone in a conference cannot be overstated. One does not ha
 
 I attended a workshop on *Python for Mathematics, Science and Engineering* and the trainer was a really nice guy. I had a chance to speak with him during the lunch. He keeps similar workshops in similar Python events. If you have the possibility to go there, I would recommend it. The notebooks are on [GitHub](https://github.com/caichinger/slides), but having the possibility to pair with similar interested people, helping each other adds extra value that you cannot get at home alone. 
 
-The conference was at LMU Institute of Computer Science, and the the food was fully ok and more that enough for everyone. With kind support from ProSieben, we had a really nice coffee team there. I could not drink enough of the cappuccino they instantly made, but still slept well, maybe I was too tired. The Internet at LMU was tricky to setup in Ubuntu, but I managed to get it work without running the script the offered. I am not a fun of ready made scripts.
+The conference was at LMU Institute of Computer Science, and the the food was fully ok and more that enough for everyone. With kind support from ProSieben, we had a really nice coffee team there. I could not drink enough of the cappuccino they instantly made, but still slept well, maybe I was too tired. Internet access at LMU was tricky to setup in Ubuntu, but I managed to get it work without running the script the offered. I am not a fun of ready made scripts.
 
 Several companies were represented and JetBrains was giving free PyCharm licenses. I only got a nice yo-yo from them, my son is going to like. In overall, the conference was a nice place, with people being kind to each other, sharing ideas and having fun with Python.
 
