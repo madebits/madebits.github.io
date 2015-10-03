@@ -1,4 +1,4 @@
-* [Web Noise](#blog/2016/2016-04-07-Web-Noise.md)
+* [Background Sounds](#blog/2016/2016-04-07-Background-Sounds.md)
 * [WebWorker Patterns](#blog/2016/2016-03-03-WebWorker-Patterns.md)
 * [Key Derivation Functions](#blog/2016/2016-02-24-Key-Derivation-Functions.md)
 * [Sharing Local Folders Over Remote Desktop](#blog/2016/2016-02-17-Sharing-Local-Folders-Over-Remote-Desktop.md)

@@ -209,4 +209,4 @@ onconnect = function(e) {
 
 The shared worker sends the result back to the same parent. We can keep track of connected parent ports (*clients*) in order to be able broadcast to them. In this example, the clients are additive (do not go away way over time). If clients were to be removed over time, we could use `broadcast` message, for example, (along some client response protocol) to *ping* alive clients and update the clients list.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2016/2016-04-07-Web-Noise.md'>Web Noise</a> <a id='fnext' href='#blog/2016/2016-02-24-Key-Derivation-Functions.md'>Key Derivation Functions</a></ins>
+<ins class='nfooter'><a id='fprev' href='#blog/2016/2016-04-07-Background-Sounds.md'>Background Sounds</a> <a id='fnext' href='#blog/2016/2016-02-24-Key-Derivation-Functions.md'>Key Derivation Functions</a></ins>
