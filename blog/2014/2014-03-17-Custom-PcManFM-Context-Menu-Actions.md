@@ -1,4 +1,4 @@
-#Custom PcManFM Context Menu Actions (in Lubuntu 14.04)
+#Custom PcManFM Context Menu Actions
 
 2014-03-17 
 
