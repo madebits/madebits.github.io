@@ -4,7 +4,7 @@
 
 2016-02-07
 
-After reviewing Windows 8 beta some years ago while adapting some software to run with it, I become aware that Windows is evolving to be an untrusted personal operating system, in same level as Android, Chrome OS, and others. I made back then a strategic technical decision to move slowly to Linux based desktops for personal use at home, where I know at least more or less accurately what is running. As of today, no one at my home uses Windows anymore and almost all machines run only Linux. [JetBrains](https://www.jetbrains.com/) software fills most of my personal needs for application development IDEs in Linux. 
+After reviewing Windows 8 beta some years ago while adapting some software to run with it, I become aware that Windows is evolving to be an untrusted personal operating system, in same level as Android, Chrome OS, and others. I made back then the decision to move slowly to Linux based desktops for personal use at home, where I know at least more or less accurately what is running. As of today, no one at my home uses Windows anymore and almost all machines run only Linux. [JetBrains](https://www.jetbrains.com/) software fills most of my personal needs for application development IDEs in Linux. 
 
 Still, having an updated copy of Windows running on real hardware (and not in a virtual machine) is useful up and now mainly for running Visual Studio, and some other work related software. I decided to upgrade my single dual boot machine with Windows 7 and Ubuntu to Windows 10, given a) it is *free*, b) some of new .NET and Visual Studio features only work with latest version of Windows, c) given I do not really use Windows privately, Windows 10 privacy issues do not affect me much.
 
