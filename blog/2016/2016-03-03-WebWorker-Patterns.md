@@ -4,11 +4,11 @@
 
 <!--- tags: javascript -->
 
-[WebWorkers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) are a HTML5 JavaScript [API](https://html.spec.whatwg.org/multipage/workers.html) than enable multi-threading in client web browser code. Dedicated workers are created per page, whereas shared workers are shared across windows of the same domain. Three representative communication patterns of communication between workers and the DOM window thread are shown next. They do not cover all possible cases, but should be enough to get an idea how to chain web workers in custom topologies.
+[WebWorkers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) are a HTML5 JavaScript [API](https://html.spec.whatwg.org/multipage/workers.html) enabling multi-threaded client side code. Dedicated workers are created per page, whereas shared workers are shared across windows. Workers can be combined in different ways. Three representative communication patterns of communication between workers and the DOM window thread are shown next to help getting started chaining web workers in custom topologies.
 
 ##Dedicated Workers Pool
 
-A configurable pool of dedicated workers can be used to load balance data  processing. I show a pool of *dedicated* workers (DW) next that are randomly load balanced to process data coming from the window (W).
+A configurable pool of dedicated workers can be used to load balance data  processing. The pool of *dedicated* workers (DW) shown in this example are randomly load balanced to process data coming from the window (W).
 
 <br>
 <svg version="1.2" baseProfile="tiny" width="129.41mm" height="48.2mm" viewBox="4311 2688 12941 4820" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xml:space="preserve">
@@ -156,7 +156,7 @@ onmessage = function(e) {
 
 ##Nested Dedicated Workers
 
-Nested workers are interesting because they enable sharing work between worker threads without having the main window deal with cross worker communication. There are some places in the Internet that will tell you that workers can be created within workers. In my understanding, creating workers within workers is not part of workers scope API and Chrome, where I tried these examples out, conforms to that. We need to create all workers in the window thread, but we can chain their messaging channels so that they still communicate directly without going though the window.
+Nesting workers is interesting for sharing work between worker threads without having the main window deal with cross worker communication. There are some places in the Internet that will tell you that workers can be created within workers. In my understanding, creating workers within workers is not part of workers scope API and Chrome, where I tried these examples out, conforms to that. We need to create all workers in the window thread, but we can chain their messaging channels so that they still communicate directly without going through the window.
 
 <br>
 <svg version="1.2" baseProfile="tiny" width="129.41mm" height="73.59mm" viewBox="6611 5088 12941 7359" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xml:space="preserve">
@@ -314,7 +314,7 @@ Nested workers are interesting because they enable sharing work between worker t
 </svg>
 <br>
 
-We will build up the previous example and add two nested *dedicated* web workers, one per each previous load balanced worker. The setup code can look as follows:
+I have modified the previous example to add two nested *dedicated* web workers, one per each previous load balanced worker:
 
 ```javascript
 var workersPoolMax = 2;
@@ -336,7 +336,7 @@ var idx = Math.floor(Math.random() * workersPoolMax);
 workers[idx].w.postMessage({cmd: 'process'}); // input from application 
 ```
 
-To establish a bidirectional communication pipe thought the workers we use `MessageChannel`. Currently `MessageChannel` [cannot](https://bugs.chromium.org/p/chromium/issues/detail?id=334408) support transferable types in Chrome, which can be a drawback for this kind of topology, depending on the data you have. However, understanding how this is done is still useful. The updated code of the `worker.js` is shown next. Using `cmd` as shown is just a convention. You can use any convention of your choice to manage your data flow protocol.
+To establish a bidirectional communication pipe thought the workers we can use `MessageChannel`. Currently, `MessageChannel` does [not](https://bugs.chromium.org/p/chromium/issues/detail?id=334408) support transferable types in Chrome, which can be a drawback for this kind of topology, depending on the data you have. However, understanding how this is done is still useful. The updated code of the `worker.js` is shown next. Using `cmd` as shown is just a convention. You can use any convention of choice to manage your data flow protocol.
 
 ```javascript
 var nestedPort;
@@ -383,7 +383,7 @@ onmessage = function(e) {
 
 ##Nested Shared Worker
 
-This example is similar to the previous one, but uses a nested *shared* worker (SW). SharedWorkers are shared across windows and you get access to same worker (different port) when creating instances. We can use the shared worker in this example to make a diamond like topology, where the nested shared worker is shared between the pool workers.
+This example is similar to the previous one, but uses a nested *shared* worker (SW). SharedWorkers are shared across windows and you get access to same worker (different port) when creating instances. I use the shared worker in this example to make a diamond shaped topology, where the nested shared worker is shared between the pool workers.
 
 <br>
 <svg version="1.2" baseProfile="tiny" width="129.41mm" height="85.68mm" viewBox="6611 5089 12941 8568" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xml:space="preserve">
@@ -533,7 +533,7 @@ This example is similar to the previous one, but uses a nested *shared* worker (
 </svg>
 <br>
 
-Similar to above, we need to setup all code in the window, but the communication will be direct between workers without having the window deal with it.
+Similar to above, we need to setup all code in the window, but the communication will still be direct between workers, without having the window deal with it.
 
 ```javascript
 var workersPoolMax = 2;
@@ -554,7 +554,7 @@ var idx = Math.floor(Math.random() * workersPoolMax);
 workers[idx].w.postMessage({cmd: 'process'}); // input from application
 ```
 
-We shared the port of the shared worker with its parent worker, whose  `worker.js` is shown next. The nested shared worker `n` can handle data `process` message same as before. Additionally the shared worker can also `broadcast` some event to all parents.
+The code passes the port of the shared worker to its parent worker, whose  `worker.js` is shown next. The nested shared worker `n` handles data `process` message same as before. Additionally, the shared worker also `broadcast`s some event of interest to all parents if needed.
 
 ```javascript
 var nestedPort;
@@ -586,7 +586,7 @@ onmessage = function (e) {
 };
 ```
 
-Finally, `sharedWorker.js` can be implemented as:
+Finally, `sharedWorker.js` implementation:
 
 ```javascript
 var parents = [];
@@ -609,6 +609,6 @@ onconnect = function(e) {
 };
 ```
 
-The shared worker sends the result back to the same parent. We can keep track of connected parent ports (clients) in order to be able broadcast to them if needed. In this example, the clients are additive (do not go away way over time). If clients were to be removed over time, we could use broadcast, for example, (along some client response protocol) to *ping* alive clients.
+The shared worker sends the result back to the same parent. We can keep track of connected parent ports (*clients*) in order to be able broadcast to them. In this example, the clients are additive (do not go away way over time). If clients were to be removed over time, we could use `broadcast` message, for example, (along some client response protocol) to *ping* alive clients and update the clients list.
 
 <ins class='nfooter'><a id='fnext' href='#blog/2016/2016-02-24-Key-Derivation-Functions.md'>Key Derivation Functions</a></ins>
