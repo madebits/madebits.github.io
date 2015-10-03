@@ -12,6 +12,8 @@ h2 { font-weight: 600; }
 
 .mbg-entry-background h2 { border-bottom: 0px; } 
 
+.mbg-search-container { padding: 10px 10px 0px 0px; }
+
 div#mbg-fixed-top {
     position: fixed;
     bottom: 5px;

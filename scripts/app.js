@@ -1145,7 +1145,7 @@ var lastPage = null
 			pageData.isSecret = true;
 			pageData.page = pageData.page.substr(4);
 		}
-
+		pageData.isSearch = pageData.page.startsWith('s/search.html');
 		pageData.isEntryPage = (pageData.page === entryPage);
 		pageData.isRepoPage = (pageData.page.startsWith('r/')
 			&& pageData.page.endsWith('.md') 
@@ -1205,6 +1205,8 @@ var lastPage = null
 		onPageError(pageData);
 		return;
 	}
+
+	if(!pageData.isSearch) $('#mbg-search-btn').show();
 
 	//pageData.container.fadeOut(function() {
 		pageData.container.html(data);
@@ -1387,7 +1389,6 @@ var lastPage = null
 ;
 
 $(function() {
-
 	$('.nav a').on('click', function(){
     	hideMenu();
 	});
@@ -1408,12 +1409,12 @@ $(function() {
 	dataUriTest();
 	//showCookieBar();
 
-	$('#mbg-psearch').click(function(event) {
-		event.preventDefault();
-		triggerSearch();
-		hideMenu();
-		return false;
-	});
+	// $('#mbg-psearch').click(function(event) {
+	// 	event.preventDefault();
+	// 	triggerSearch();
+	// 	hideMenu();
+	// 	return false;
+	// });
 	$('#mbg-search').on('keydown', function(event){
 		var keyCode = event.keyCode || event.which;
 		switch(keyCode) {

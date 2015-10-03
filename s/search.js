@@ -172,6 +172,7 @@ mbApp.setCurrentPageHashHandler(function(h){
 
 $(function() {
 	load();
+	$('#mbg-search-btn').hide();
 	$('#psearch').click(function(event) {
 		event.preventDefault();
 		triggerSearch();

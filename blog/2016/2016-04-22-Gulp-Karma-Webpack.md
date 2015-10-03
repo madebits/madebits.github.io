@@ -2,7 +2,7 @@
 
 2016-04-22
 
-<!--- tags: javascript architecture -->
+<!--- tags: javascript architecture angular -->
 
 [Webpack](https://webpack.github.io/) is a cool tool that helps bundle Javascript applications. I had to port an existing Angular 1.x application from a Grunt based build to Webpack and decided for maximum control to trigger Webpack and [Karma](https://karma-runner.github.io) via [Gulp](http://gulpjs.com/) task runner. 
 
