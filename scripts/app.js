@@ -1064,8 +1064,11 @@ var applyStyle = function(containerId) {
 		return;
 	}
 	id = id.toCssId();
-	var eid = $(id);
-	if(!eid.length) {
+	var eid = null;
+	try {
+		eid = $(id);
+	} catch(e) { }
+	if(!eid || !eid.length) {
 		window.scrollTo(0, 0);
 		return;
 	}
@@ -1099,6 +1102,7 @@ madebits.app = (function(mbGitHub
 "use strict";
 
 var lastPage = null
+, lastPageData = null
 , lastPageHashHandler = null
 , contentContainerId = '#content'
 , entryPage = 's/index.html'
@@ -1317,6 +1321,7 @@ var lastPage = null
 			return;
 		}
 		lastPage = pageData.page;
+		lastPageData = pageData;
 		lastPageHashHandler = null;
 	}
 	mbHtml.preProcessPage(pageData);
@@ -1472,7 +1477,10 @@ $(function() {
 return {
 	  pageContainerId: function() { return contentContainerId; }
 	, currentPage: function() { return lastPage; }
-	, setCurrentPageHashHandler: function(cb) { lastPageHashHandler = cb; }
+	, setCurrentPageHashHandler: function(cb) { 
+		lastPageHashHandler = cb;
+		if(lastPageData) lastPageData.scroll();
+	}
 	, navigateToHash: function(hash) { 
 		if(hash === undefined) return;
 		var url = hash || lastPage.toCssId();
