@@ -41,6 +41,8 @@ G.t('t2', cb => {
 G.t('default', ['t1', 't2']);
 ```
 
+Tasks can be split in as many files you like. Use `require` to include them as needed.
+
 Run a task via:
 
 ```
