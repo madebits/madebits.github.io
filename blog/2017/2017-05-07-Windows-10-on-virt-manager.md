@@ -69,7 +69,7 @@ In `virt-manager` *Edit / Preferences* menu, *Console* tab, you can change the g
 
 ##Basic Networking
 
-A `virbr0` bridge will be created during install, along with a NAT [tap](http://www.innervoice.in/blogs/2013/12/08/tap-interfaces-linux-bridge/):
+A `virbr0` bridge will be created during install, along with a NAT [tap](http://www.innervoice.in/blogs/2013/12/08/tap-interfaces-linux-bridge/) when VM runs:
 
 ```
 $ ifconfig
