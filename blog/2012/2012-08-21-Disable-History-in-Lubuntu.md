@@ -128,18 +128,19 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 
 	Finally, clean the created `rm zero.*` files. 
 
-	As disk cleanup commands are boring to manually type all the time, I set up a small script:
+	All these disk cleanup commands are boring to manually type all the time, so I set up a small script:
 
 	```
 	#!/bin/bash
 
-	#has to be done before once:
+	#call once before manually per partition
 	#sudo tune2fs -m 0 /dev/sda1
 	#sudo tune2fs -l /dev/sda1 | grep 'Reserved block count'
 
+	start=$(date +%s)
 	dir=$1
 	if [ -z "$dir" ]; then
-		dir="$HOME/temp"
+		dir="$HOME/tmp"
 	fi
 
 	dir="${dir}/zero"
@@ -150,7 +151,9 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 			echo -e "\nRemoving ${dir}"
 			rm -rf "${dir}"
 		fi
-		echo "Done"
+		end=$(date +%s)
+		runtime=$((end-start))
+		echo "Done: ${runtime} seconds"
 		exit
 	}
 
@@ -172,7 +175,7 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 			fi
 		fi
 	done
-	sleep 60 ; sync
+	sleep 10 ; sync
 	cleanUp
 	```
 	
