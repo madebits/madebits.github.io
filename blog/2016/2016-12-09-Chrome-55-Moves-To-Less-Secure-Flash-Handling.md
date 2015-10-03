@@ -18,7 +18,7 @@ For the majority of users, Chrome Flash handling change is a security downgrade.
 
 As a power user, *click to play* for plugins was really useful. Even if I want to use allow Flash temporary to view a video, I in general do not want to allow all Flash instances in that page to run. It also helps to notice hidden invisible Flash tracking plugins in pages.
 
-Such fine Flash control, seems still be there in Chrome 55 in Windows, if you had click to play for plugins configured before. I suspect this is a bug, they may remove that in some future version - it did not work like that for me with current Chrome canary (57) on Linux.
+Such fine Flash control, seems still be there in Chrome 55 in Windows, if you had click to play for plugins configured before. I suspect this is a bug, they may remove that in some future version - it did not work like that for me with [current](https://download-chromium.appspot.com/) Chrome builds (57) on Linux.
 
 ##Firefox Leads The Way
 
