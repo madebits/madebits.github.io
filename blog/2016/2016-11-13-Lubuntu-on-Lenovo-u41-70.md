@@ -115,7 +115,7 @@ I tried [disabling](https://wiki.archlinux.org/index.php/Wireless_network_config
 options iwlwifi bt_coex_active=0 11n_disable=8
 ```
 
-Bluetooth and wireless may have [coexistence](https://wiki.archlinux.org/index.php/Wireless_network_configuration) issues, so I [tried](http://superuser.com/questions/924559/wifi-connection-troubles-solved-why-does-my-fix-work) `bt_coex_active=0`.
+Bluetooth and wireless could have [coexistence](https://wiki.archlinux.org/index.php/Wireless_network_configuration) issues, so I [tried](http://superuser.com/questions/924559/wifi-connection-troubles-solved-why-does-my-fix-work) `bt_coex_active=0`.
 
 I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. I configured a second wireless connection over NetworkManager manually for the same SSID and then selected as Device the Hamma WLan USB (via its MAC). I can plug the stick and select its WLAN connection. I might give network [bonding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future. **Update**: I added a WLAN repeater.
 
