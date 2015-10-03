@@ -29,7 +29,7 @@ username user
 reauth yes
 ```
 
-Then we can run only `snx`. Full list of options for the `~/.snxrc` file from documentation are:
+Then we can run only `snx`. Full list of options for `~/.snxrc` file from documentation are:
 
 ```
    - server          SNX server to connet to
