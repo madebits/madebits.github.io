@@ -95,7 +95,7 @@ This is because, I did not reset BIOS to defaults before doing the update.
 
 ##Graphics
 
-My u41-70 model comes with Intel HD Graphics 5500 and a 1920x1080 TN screen.
+My u41-70 model comes with Intel HD Graphics 5500 and an 1920x1080 TN screen.
 
 ###Screen
 
