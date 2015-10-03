@@ -77,4 +77,18 @@ It seems, the Intel GPU is used. There is sometimes video tearing on the top of 
 
 Battery lasts around 3-4 hours with [TLP](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html) active (with default settings). This is somehow more that the battery lasts on Windows 10, but this could be related to the different applications and the screen brightness.
 
+##Time
+
+My dual-boot was affected by the different ways Ubuntu and Windows interpret time zone of the bios time. To [fix](http://askubuntu.com/questions/169376/clock-time-is-off-on-dual-boot) that I had to run in Ubuntu:
+
+```bash
+$ sudo timedatectl set-local-rtc 1
+$ timedatectl | grep local
+ RTC in local TZ: yes
+Warning: The system is configured to read the RTC time in the local time zone.
+         'timedatectl set-local-rtc 0'.
+```
+
+The output of grep also shows how to undo this if ever needed.
+
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-12-24-Ubuntu-Chromium-Flags-Per-User.md'>Ubuntu Chromium Flags Per User</a></ins>
