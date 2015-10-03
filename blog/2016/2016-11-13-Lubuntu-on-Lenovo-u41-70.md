@@ -28,7 +28,7 @@ For SublimeText 3 sidebar font size, I had to [overwrite](http://stackoverflow.c
 
 ##Monitor Screen
 
-u41-70 comes with a full-hd [TFT](https://www.quora.com/What-is-the-difference-between-an-IPS-screen-and-a-TFT-screen) LCD, which is ok for its kind. I found black was not properly rendered as I expected. Given, I am using [redshift](http://jonls.dk/redshift/), I configured gamma to be 0.8 for day and 0.6 for night. This improves the readability of black and gray text.
+u41-70 comes with a full-hd [TFT](https://www.quora.com/What-is-the-difference-between-an-IPS-screen-and-a-TFT-screen) LCD, which is ok for its kind. I found black was not properly rendered as I expected. Given, I am using [redshift](http://jonls.dk/redshift/), I configured gamma to be 0.8 for day and 0.7 for night. This improves the readability of black and gray text.
 
 ##Openbox Configurarion
 
