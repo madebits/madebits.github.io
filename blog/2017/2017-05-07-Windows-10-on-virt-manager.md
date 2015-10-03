@@ -64,7 +64,9 @@ Once the VM is started, use `ps aux | grep qemu` to find the exact command-line 
 
 ##Connecting and Host Keyboard Grab Key
 
-In `virt-manager` *Edit / Preferences* menu, *Console* tab, you can change the grab key. I usually use only right `Ctr` key, same as in Virtualbox. The toolbar is not show for me in fullscreen due to some bug, so I use the grab key, and then `F11` key to exit the fullscreen, if I cannot find the invisible toolbar button blindly using the mouse (toolbar works if you use `virt-viewer`).  
+In `virt-manager` *Edit / Preferences* menu, *Console* tab, you can change the grab key. I usually use only right `Ctr` key, same as in Virtualbox. 
+
+The toolbar is not show for me in fullscreen due to some bug, so I use the grab key, and then `F11` key to exit the fullscreen, if I cannot find the invisible toolbar button blindly using the mouse (toolbar works if you use `virt-viewer`).  
 
 Alternative way to access the machine:
 
@@ -81,7 +83,7 @@ remote-viewer $(virsh domdisplay win10) -f --hotkeys=toggle-fullscreen=shift+f11
 Another alternative is to use [RDP](https://wiki.archlinux.org/index.php/QEMU#Remote_Desktop_Protocol) (`sudo apt install freerdp-x11`), via (Ctrl+Alt+Enter toggles fullscreen). I am also sharing a folder:
 
 ```
-xfreerdp /v:192.168.122.74 /u:userName /drive:home,$HOME/work-remote /sound /f /toggle-fullscreen +async-input +async-update +async-transport +async-channels +clipboard
+xfreerdp /bpp:32 /v:192.168.122.74 /u:userName /drive:home,$HOME/work-remote /sound /f /toggle-fullscreen +async-input +async-update +async-transport +async-channels +clipboard
 ```
 
 To find the IP of the guest VM from outside use:
