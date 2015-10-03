@@ -86,9 +86,9 @@
 		});
 	});
 
-	mbApp.setCurrentPageHashHandler(function(h){
-		if(!h) h = '#license';
-		var t = $('a[href=' + h + ']');
+	mbApp.setCurrentPageHashHandler(function(h, p, url){
+		if(!h) url = p + '#license';
+		var t = $('a[href="' + url + '"]');
         if (t && t.length) {
         	t.tab('show');
         	return true;

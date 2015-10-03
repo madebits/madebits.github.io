@@ -1087,7 +1087,7 @@ var lastPage = null
 
 , handleScrollId = function(scrollId) {
 	try{
-		if(!lastPageHashHandler || !lastPageHashHandler(scrollId)) {
+		if(!lastPageHashHandler || !lastPageHashHandler(scrollId, lastPage.toCssId(), lastPage.toCssId() + scrollId.toCssId())) {
 			mbHtml.scrollToId(scrollId);
 		} else mbHtml.scrollToId(null);
 	} catch(e) {
@@ -1407,7 +1407,10 @@ return {
 	, setCurrentPageHashHandler: function(cb) { lastPageHashHandler = cb; }
 	, navigateToHash: function(hash) { 
 		if(hash === undefined) return;
-		var url = hash ? '{0}{1}'.format(lastPage.toCssId(), hash.toCssId()) : lastPage.toCssId();
+		var url = hash || lastPage.toCssId();
+		if(hash && !hash.startsWith(lastPage.toCssId() + '#')) {
+			url = '{0}{1}'.format(lastPage.toCssId(), hash.toCssId());
+		}
 		window.location.replace(url); 
 	}
 };
