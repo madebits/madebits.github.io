@@ -103,7 +103,7 @@ Dependency strings that evaluate to `false` are ignored. This can be convenient 
 
 ##Running a Task Once
 
-There is no direct support to run a task refereed more than once in the dependencies only once (default behavior in Gulp). However, using the custom task state data, you can easy create a `once` wrapper to execute own task function code only once (see *Task API Reference* below for details on objects used in this example):
+There is no direct support to run a task refereed more than once in the dependencies only once (default behavior in Gulp). However, using the custom task state data, you can easy create a `once` wrapper to execute own task function code only once (check *Task API Reference* below for details on objects used in this example):
 
 ```javascript
 const once = ucb => {
