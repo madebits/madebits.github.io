@@ -26,7 +26,7 @@ Starting `snx`, creates a tunnel named `tunsnx` visible via `ifconfig`. To allow
 To access windows remote desktops, install `sudo apt install freerdp-x11` and use something like (`xfreerdp` has much more options):
 
 ```
-xfreerdp /v:10.111.0.2 /u:user
+xfreerdp /v:10.11.11.11 /u:user
 ```
 
 To stop `snx` use:
