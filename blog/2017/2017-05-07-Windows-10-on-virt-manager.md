@@ -78,7 +78,7 @@ Or:
 remote-viewer $(virsh domdisplay win10) -f --hotkeys=toggle-fullscreen=shift+f11
 ```
 
-Another alternative is to use RDP (`sudo apt install freerdp-x11`), via (Ctrl+Alt+Enter toggles fullscreen). I am also sharing a folder:
+Another alternative is to use [RDP](https://wiki.archlinux.org/index.php/QEMU#Remote_Desktop_Protocol) (`sudo apt install freerdp-x11`), via (Ctrl+Alt+Enter toggles fullscreen). I am also sharing a folder:
 
 ```
 xfreerdp /v:192.168.122.74 /u:userName /drive:home,$HOME/work-remote /sound /f /toggle-fullscreen +async-input +async-update +async-transport +async-channels +clipboard
@@ -87,10 +87,37 @@ xfreerdp /v:192.168.122.74 /u:userName /drive:home,$HOME/work-remote /sound /f /
 To find the IP of the guest VM from outside use:
 
 ```
+$ virsh domifaddr win10
+```
+
+Or the more evolved:
+
+```
 $ virsh net-list
 # ... default
 $ virsh net-dhcp-leases default
 ```
+
+To parse only the IP use this evolved line:
+
+```
+$ virsh domifaddr win10 | tail -2 | head -1 | tr -s ' ' | cut -d ' ' -f 5 | cut -d '/' -f 1
+```
+
+You can add it to `$HOME/.bashrc` as:
+
+```
+virship() {
+virsh domifaddr "$1" | tail -2 | head -1 | tr -s ' ' | cut -d ' ' -f 5 | cut -d '/' -f 1
+}
+```
+
+And use it as:
+
+```
+virship win10
+```
+
 
 ##Basic Networking
 
