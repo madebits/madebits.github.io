@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-I was looking for relatively portable laptop to use in the evening at home, and [Lenovo u41-70](http://support.lenovo.com/us/en/products/laptops-and-netbooks/u-series/u41-70) with around 1.6 kg of weight, an i5 CPU, 8GB of RAM, and 256 GB SSD looked like a good match. I bought it relatively cheap (a bit over 400 euro) as b-ware returned over Amazon service. The price was somehow uncommon for such a machine despite being sold from Amazon ware deals. The reason it was cheap was obvious to me after I received it. The machine had no more the original Levono Windows installation and the recovery partition of both Lenovo and Windows were not present. I goggled a bit around before I bough it, and found Ubuntu could run ok. Given my plan was to remove Windows anyway, it looked like a perfect deal.
+I was looking for relatively portable laptop to use in the evening at home, and [Lenovo u41-70](https://filedownload.lenovo.com/supportdata/product.html?id=Laptops-and-netbooks/u-series/u41-70) with around 1.6 kg of weight, an i5 CPU, 8GB of RAM, and 256 GB SSD looked like a good match. I bought it relatively cheap (a bit over 400 euro) as b-ware returned over Amazon service. The price was somehow uncommon for such a machine despite being sold from Amazon ware deals. The reason it was cheap was obvious to me after I received it. The machine had no more the original Levono Windows installation and the recovery partition of both Lenovo and Windows were not present. I goggled a bit around before I bough it, and found Ubuntu could run ok. Given my plan was to remove Windows anyway, it looked like a perfect deal.
 
 ##Lubuntu 16.04
 
@@ -118,7 +118,7 @@ I installed [tlp](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-manag
 
 u41-70 comes with [Intel Wireless 3160](https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi). It can handle both 2.4 Ghz and 5.8 Ghz and bluetooth. I found the card reach is a bit weak on large distances. It has full speed in rooms near the router, but the quality (`watch -n1 iwconfig`) falls down four rooms away. This means at some locations at home, the wlan is not very usable.
 
-Fortunately, I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. The trick is to configure a second wireless connection over NetworkManager manually for the same SSID and then select as Device the Hamma WLan USB (via its MAC). When I am in a room far away, I can plug the stick (via a short UBS cable to the machine for better signal reception and that it is convenient to move around freely) and then I just select that other WLAN connection.
+Fortunately, I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. The trick is to configure a second wireless connection over NetworkManager manually for the same SSID and then select as Device the Hamma WLan USB (via its MAC). When I am in a room far away, I can plug the stick (via a short UBS cable to the machine for better signal reception and that it is convenient to move around freely) and then I just select that other WLAN connection. I might give network [bounding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future.
 
 ##Other Applications
 
