@@ -113,7 +113,7 @@ GRunner tasks are non-blocking, but there is no direct *parallelism* involved. I
 ...
 let gspawn = require('gspawn');
 ...
-let externalCode = (filePath) => {
+let externalCode = filePath => {
     return cb => {
         gspawn({
            cmd: 'node',
