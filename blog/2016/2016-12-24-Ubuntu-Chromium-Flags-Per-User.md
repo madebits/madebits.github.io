@@ -22,7 +22,7 @@ I like how the start script of `chromium-browser` on Arch Linux [expects](https:
     CHROMIUM_FLAGS="$USER_PARAMS"
     ```
 
-* **Method 2**: Another way to achieve same is to leave `/etc/chromium-browser/default` unchanged as is:
+* **Method 2**: Another way to achieve same is to leave `/etc/chromium-browser/default` unchanged:
 
     ```bash
     # Default settings for chromium-browser. This file is sourced by /bin/sh from
@@ -32,7 +32,7 @@ I like how the start script of `chromium-browser` on Arch Linux [expects](https:
     CHROMIUM_FLAGS=""
     ```
 
- And instead, add a new file `/etc/chromium-browser/customizations/99-user`:
+ and instead, add a new file `/etc/chromium-browser/customizations/99-user`:
 
     ```bash
     USER_PARAMS=""
