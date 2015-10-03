@@ -12,7 +12,7 @@ I upgraded some of my machines home from Lubuntu 14.04 LTS to 16.04.1 LTS. I wai
 * `virtualbox` key has been [changed](https://askubuntu.com/questions/768569/ubuntu-16-04-update-manager-error) and I had to remove the old key using `sudo apt-key list` and `sudo apt-key del 1024D/98AB5139`, and installed the new [key](https://www.virtualbox.org/wiki/Linux_Downloads). After this, I could update `virtualbox` to version 5.1.
 * `php` is silently removed and I had to install the new version `sudo apt install php7.0-cli`.
 * `leafpad` seems to have a bug in this version. When saving `smb://` files you are left silently with empty files. SublimeText and `geany` both seem to work fine as replacements.
-* KeePass has been updated to KeePassX 2 and old files need to be imported and converted.
+* KeePass has been updated to the safer KeePassX 2 and old files need to be imported and converted.
 * I kept a copy of all configuration file diffs shown during install, and accepted all new versions. After install, I went through the diffs and took over any previous settings I still needed.
 * After installation, I updated the few ppa-s I use, and did an update.
 
