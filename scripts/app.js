@@ -174,9 +174,12 @@ var	goa = null
 		{
 			$(this).data('mbgce', true);
 			if(startsWithAny(href, ['http:', 'https:', 'ftp:'])) {
-				$(this).click(function(){
-					collect($(this).attr('href'));
-				});
+				if(!pageData || !pageData.isSecret) { 
+					$(this).click(function(){
+						collect($(this).attr('href'));
+					});
+				}
+
 				if(!startsWithAny(href, ['https://' + madebits.constDomain, 'http://' + madebits.constDomain, 
 					'https://' + madebits.constDomain2, 'http://' + madebits.constDomain2])
 					&& !endsWithAny(href, ['.zip', '.tar', '.jar', '.deb', '.xpi', '.7z', '.msi', '.exe'])
@@ -230,15 +233,22 @@ var	goa = null
 
 	$(document).ajaxSend(function(event, xhr, settings){
 		try {
+			if(!pageData || !pageData.isSecret) {
 			__gaTracker('send', 'pageview', settings.url);
+			}
 		} catch(e) { }
 	});
-}	
+}
+
+, pageData = null	
 ;
 
 return {
 	  init: collectStats
 	, collectExternal: collectExternal
+	, setPageData: function(pd) {
+		pageData = pd;
+	}
 };
 
 })();
@@ -1149,6 +1159,10 @@ var lastPage = null
 		window.location.replace(window.location.href + '/index.md');
 		return null;
 	}
+
+	if(pageData.isContentContainer) {
+		mbStats.setPageData(pageData);
+	}	
 
 	return pageData;
 }
