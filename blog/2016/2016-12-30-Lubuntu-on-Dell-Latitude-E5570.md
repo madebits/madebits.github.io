@@ -91,4 +91,4 @@ Warning: The system is configured to read the RTC time in the local time zone.
 
 The output of grep also shows how to undo this if ever needed.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-12-24-Ubuntu-Chromium-Flags-Per-User.md'>Ubuntu Chromium Flags Per User</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-01-19-Embracing-Team-Practices-Variability.md'>Embracing Team Practices Variability</a> <a rel='next' id='fnext' href='#blog/2016/2016-12-24-Ubuntu-Chromium-Flags-Per-User.md'>Ubuntu Chromium Flags Per User</a></ins>
