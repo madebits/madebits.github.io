@@ -126,7 +126,7 @@ G.t('t1', once(cb => {
   }));
 G.t('t2', 't1'); 
 G.t('t3', 't2');
-g.t('tt', ['t3', 't2', 't1']); 
+G.t('tt', ['t3', 't2', 't1']); 
 ```
 
 Task `t1` will be invoked several times if we run `tt`, but its user defined callback code will run only once. The `once` wrapper does not affect how often any task dependencies of `t1` will be run. They have also to be wrapped using `once`, in case single execution is also needed for them.
