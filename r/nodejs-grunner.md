@@ -30,7 +30,7 @@ If installed locally, you can run GRunner as `npm run grunner` appending any arg
 
 And run it as `npm run grunner --`, appending any arguments after `--`.
 
-Tasks are coded in Javascript, in one or more files, the default task file name is `gfile.js`:
+Tasks are coded in Javascript files. Default task file name is `gfile.js`:
 
 ```javascript
 'use strict';
