@@ -54,7 +54,7 @@ Given Docker Machine `ssh` command supports `ssh` arguments, we can directly run
 $ alias docker='docker-machine ssh default docker'
 ```
 
-And use it directly from Git bash:
+This alias will work with most commands (apart of `docker exec -it some-container bash`), and we can use it directly from Git bash:
 
 ```
 $ docker --version
