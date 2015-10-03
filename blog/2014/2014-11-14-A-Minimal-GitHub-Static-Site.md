@@ -52,4 +52,17 @@ I managed to port back most of my stuff I can publicly share that I could find. 
 
 A benefit of hosting pages to GitHub (if that works for you) is *Git*. With most classic web hosting providers, what you get is space and a way to copy up and down files (FTP, SFTP, etc). Unless you pay for some VPS, you cannot run `rsync` or something similar, and you end up transferring more data than needed. With GitHub pages, Git is used as deployment tool. This is perfect for static files, as only the difference is transmitted. The source control is integrated on same place and tool as deployment. By the way Git itself works, a complete, up-to-date, local backup is always available.
 
+
+##Git Resources
+
+* https://git-scm.com/book
+* https://jwiegley.github.io/git-from-the-bottom-up/
+* http://www.sbf5.com/~cduan/technical/git/
+* https://wildlyinaccurate.com/a-hackers-guide-to-git/
+* https://codewords.recurse.com/issues/two/git-from-the-inside-out
+* http://tom.preston-werner.com/2009/05/19/the-git-parable.html
+* https://www.youtube.com/watch?v=MYP56QJpDr4
+* https://www.youtube.com/watch?v=sevc6668cQ0
+* https://medium.com/@pierreda/understanding-git-for-real-by-exploring-the-git-directory-1e079c15b807
+
 <ins class='nfooter'><a id='fprev' href='#blog/2014/2014-12-12-Using-DNSCrypt-on-Ubuntu-14.04.md'>Using DNSCrypt on Ubuntu 14.04</a> <a id='fnext' href='#blog/2014/2014-11-08-Moving-Ubuntu-Hard-Disk-to-a-New-Machine.md'>Moving Ubuntu Hard Disk to a New Machine</a></ins>
