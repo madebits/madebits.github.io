@@ -143,8 +143,9 @@ I experienced some sporadic [tearing](https://wiki.archlinux.org/index.php/intel
 Section "Device"
    Identifier  "Intel Graphics"
    Driver      "intel"
-   Option      "TearFree" "true"
+   Option      "TearFree"    "true"
    Option      "AccelMethod"  "uxa"
+   Option      "DRI" "2"
 EndSection
 ```
 
