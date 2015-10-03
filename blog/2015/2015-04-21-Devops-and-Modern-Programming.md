@@ -39,6 +39,6 @@ The challenges put into the business translate into challenges to the business s
 devalls
 ```
 
-Most problems of software are directly management related. Each generation of management goes over same processes to try and learn on its own. Management is hard. It tends to focus on shorter term goals more than in long term ones. Despite being called science, there is no formal method to evaluate the expected error of a management decision in advance to it being applied, one can only experiment and see in small loops (cybernetics). Devalls fit into this management model and we will very likely see this promoted more (via devops propaganda), not only in small startups, but also in bigger corporations.
+Most problems of software are directly management related. Each generation of management goes over same processes to try and learn on its own. Management is hard. It tends to focus on shorter term goals more than in long term ones. Despite being called science, there is no formal method to evaluate the expected error of a management decision in advance to it being applied, one can only experiment and see in small loops (cybernetics). Devalls fit into this management model and we will very likely see this promoted more (via devops), not only in small startups, but also in bigger corporations.
 
 <ins class='nfooter'><a id='fprev' href='#blog/2015/2015-04-23-Test-Code-Coverage-As-Quality-Metric.md'>Test Code Coverage As Quality Metric</a> <a id='fnext' href='#blog/2015/2015-04-16-Invoking-Custom-.NET-Plugins.md'>Invoking Custom .NET Plugins</a></ins>
