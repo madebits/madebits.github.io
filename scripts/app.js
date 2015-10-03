@@ -1076,7 +1076,7 @@ var lastPage = null
 , onPageError = function(pageData) {
 	pageData.container.html('<br><div class="well"><h1 style="text-transform: none;"><span class="text-danger"><i class="fa fa-exclamation-circle"></i></span> Page Load Error</h1><p class="text-danger">' 
 		+ (pageData.errorStatus ? pageData.errorStatus : ''	) + ' '
-		+ (pageData.errorStatusText ? pageData.errorStatusText : 'Nothing found'	)
+		+ (pageData.errorStatusText ? pageData.errorStatusText : 'Nothing found')
 		+ '</p><br><a href="#' + entryPage + '" class="btn btn-primary">Continue to home page <i class="fa fa-chevron-right"></i></a></div>'); //<p>Not found!</p>
 	mbHtml.scrollToId();
 }
