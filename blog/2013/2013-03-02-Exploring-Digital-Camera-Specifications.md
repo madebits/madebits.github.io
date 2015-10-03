@@ -83,7 +83,7 @@ One cannot judge any of the above image sensor quality factors directly. The bes
 
 ##Actual Zoom
 
-An object with height $$$H\_1$$$ at distance $$$S\_1$$$ from the lens is projected into the image sensor at distance $$$S\_2$$$ from the lens. Image sensor has a fixed height $$$H\_2$$$. 'Zooming in' to the distant object means we want to map some sub-part of it with height $$$H\_{11} < H\_1$$$ into same $$$H\_2$$$$ image sensor size. The actual zoom factor (magnification) is then $$$m = \frac{H\_1}{H\_{11}}$$$.
+An object with height $$$H\_1$$$ at distance $$$S\_1$$$ from the lens is projected into the image sensor at distance $$$S\_2$$$ from the lens. Image sensor has a fixed height $$$H\_2$$$. 'Zooming in' to the distant object means we want to map some sub-part of it with height $$$H\_{11} < H\_1$$$ into same $$$H\_2$$$ image sensor size. The actual zoom factor (magnification) is then $$$m = \frac{H\_1}{H\_{11}}$$$.
 
 As both the image sensor and the distant object position does not change, we have to control (increase) $$$S\_2$$$ to a new value $$$S\_{21}$$$ to zoom in ($$$S\_1$$$ decreases when $$$S\_2$$$ in increased in focal length formula. $$$\frac{S\_{21}} {S\_2}$$$ is the **optical zoom** of the lens used to obtain the **actual zoom** $$$\frac{H\_1} { H\_{11}}$$$.
 
