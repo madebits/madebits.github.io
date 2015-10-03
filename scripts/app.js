@@ -980,6 +980,7 @@ var lastPage = null
 , lastPageHashHandler = null
 , contentContainerId = '#content'
 , entryPage = 's/index.html'
+, appSessionKeys = {}
 
 , preProcessPage = function(page) {
 	if(!page) return false;
@@ -1056,6 +1057,10 @@ var lastPage = null
 	pageData.isMarkdown = pageData.page.endsWith('.md') || pageData.page.endsWith('.mx');
 	pageData.isHtml = pageData.page.endsWith('.html')
 
+	pageData.pageDir = '';
+	var dirIdx = pageData.page.lastIndexOf('/');
+	if(dirIdx >= 0) pageData.pageDir = pageData.page.substr(0, dirIdx);
+
 	if(page.endsWith('/') || page.endsWith('\\')) { 
 		window.location.replace(window.location.href + 'index.md');
 		return null;
@@ -1087,19 +1092,31 @@ var lastPage = null
 }
 
 , setPageDataEnc = function(pageData, data) {
-	// key in url?
-	if(pageData.scrollId && pageData.scrollId.startsWith('#key-')) { 
+	if(!pageData.pageDir) pageData.pageDir = '';
+	var keys = appSessionKeys[pageData.pageDir] || [];
+	var addKey = function(key) {
+		if(keys.indexOf(key) >= 0) return;
+		keys.push(key);
+		if(pageData.pageDir) {
+			appSessionKeys[pageData.pageDir] = keys;
+		}
+	}
+
+	if(pageData.scrollId && pageData.scrollId.startsWith('#key-')) {
 		var pass = pageData.scrollId.substr('#key-'.length);
-		var pdata = mbSecret.encrypt(data, pass, false);
-		if(!pdata) {
-			pageData.scrollId = null;
-			setPageDataEnc(pageData, data);
+		pageData.scrollId = null;
+		addKey(pass);
+	}
+
+	for(var keyIdx = 0; keyIdx < keys.length; i++) {
+		var pdata = mbSecret.encrypt(data, keys[keyIdx], false);
+		if(pdata) {
+			pdata = mbHtml.markup(pdata);
+			setPageData(pageData, pdata);
 			return;
 		}
-		pdata = mbHtml.markup(pdata);
-		setPageData(pageData, pdata);
-		return;
 	}
+
 	mbSecret.getPass().then(function(pass) {
 		var pdata = mbSecret.encrypt(data, pass, false);
 		if(!pdata) {
@@ -1109,6 +1126,7 @@ var lastPage = null
 			}, 0);
 			return;
 		} 
+		addKey(pass);
 		pdata = mbHtml.markup(pdata);
 		setPageData(pageData, pdata);
 	}, function() {
