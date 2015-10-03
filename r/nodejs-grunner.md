@@ -14,7 +14,7 @@ Install globally for comfort:
 npm install grunner -g
 ```
 
-And install locally in your node project where the task file is:
+To install locally in your node project where the task file is:
 
 ```
 npm i grunner -D
