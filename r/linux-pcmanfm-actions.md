@@ -20,4 +20,4 @@ The following actions are provided:
 * Rename Shortcut - renames a .desktop file.
 * Create Desktop Shortcut - create a .desktop file on Desktop for the selected file, offering to edit it further.
 
-If you have installed a previous version, uninstall it and install the latest. You need to logout and login again after the package install for the custom actions to appear.
+If you have installed a previous version, uninstall it and install the latest. You need to logout and login again after the package install for the custom actions to appear. Some more details can be found in my original blog [post](#blog/2014/2014-03-17-Custom-PcManFM-Context-Menu-Actions.md).
