@@ -144,6 +144,28 @@ G.t('t1', extern('./t1.js'));
 
 The console output (`log`) of the external task in the example is redirected to be printed via `G.log` for consistent formating.
 
+##Watching for File Changes
+
+Example of using [npm-watch](https://www.npmjs.com/package/npm-watch) with GRunner. Modify your `package.json` to add:
+
+```
+  "watch": {
+    "mywatch": "app/*.js"
+  },
+  "scripts": {
+    "mywatch": "grunner --gfile gfile.js --gtask myWatchTask",
+    "watch": "npm-watch"
+  }
+```
+
+And start watching using:
+
+```
+npm run watch
+```
+
+See [npm-watch](https://www.npmjs.com/package/npm-watch) documentation for more information.
+
 ##Task API Reference
 
 Here `g` represents a `GRunner` instance object.
@@ -230,7 +252,8 @@ The following helper functions are also provided:
      _cb(); // or _cb(null, o);
    }));
    });
-  ``` 
+  ```
+
 
 * `g.throughPipe([eachFn], [flushFn])` - this is a wrapper around [through2](https://www.npmjs.com/package/through2) object streams. `eachFn(o, cbFn)` is called for every stream object. `flushFn(cbFn)`, if specified, is called when the stream ends. The callback `cbFn` must be called within these function's code. For `eachFn`, the callback is `cbFn([error], [object])` and it can be used to return an optional `object` in the successive stream. For `flushFn`, the callback is `cbFn([error])`. Both `cnFn` functions have a `cbFn.push(object)` function property to introduce additional objects in successive stream. See `g.startPipe` above for an example.
 
@@ -240,24 +263,3 @@ The following helper functions are also provided:
 
 * `g.envResolveValue(value)` - this is similar to `g.envResolve(key)`, but operates on a `process.env[key]` returned value (and not `key` name). 
 
-##Watching for File Changes
-
-Example of using [npm-watch](https://www.npmjs.com/package/npm-watch) with GRunner. Modify your `package.json` to add:
-
-```
-  "watch": {
-    "mywatch": "app/*.js"
-  },
-  "scripts": {
-    "mywatch": "grunner --gfile gfile.js --gtask myWatchTask",
-    "watch": "npm-watch"
-  }
-```
-
-And start watching using:
-
-```
-npm run watch
-```
-
-See [npm-watch](https://www.npmjs.com/package/npm-watch) documentation for more information.
