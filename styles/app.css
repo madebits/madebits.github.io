@@ -40,7 +40,7 @@ pre {
     overflow: auto;
     word-wrap: normal;
     white-space: pre;
-    border-left: 2px solid rgb(157, 187, 157);
+    border-left: 2px solid #666;
     background-color: #f7f7f7;
     font-size: 0.8em;
 }
