@@ -60,4 +60,4 @@ Using any of the above methods, per user arguments can be defined one per line i
 
 Lines starting with `#` are treated as comments.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-12-19-Opera-On-Ubuntu.md'>Opera On Ubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-12-30-Lubuntu-on-Dell-Latitude-E5570.md'>Lubuntu on Dell Latitude E5570</a> <a rel='next' id='fnext' href='#blog/2016/2016-12-19-Opera-On-Ubuntu.md'>Opera On Ubuntu</a></ins>

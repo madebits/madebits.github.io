@@ -8,7 +8,7 @@ I use a Dell Latitude E5570 machine (i7-6820HQ at 2.7Gz and 16 GB RAM) with Wind
 
 ##Installation
 
-Boot menu on this machine is accessible via `F12` key, and BIOS via `F2` key. I installed Lubuntu 16.10 in a *SanDisk Extreme* 64 GB USB stick connected to one of USB 3.0 ports. I was somehow unlucky with the install, as I run into two bugs []() and []() - the first was caused by the way I created the install USB. This made me spent more time that I though to install Lubuntu, as I had to figure out what was happening. After trial and error, finally Lubuntu run from the external USB. USB stick is quite fast:
+Boot menu on this machine is accessible via `F12` key, and BIOS via `F2` key. I installed Lubuntu 16.10 in a *SanDisk Extreme* 64 GB USB stick connected to one of USB 3.0 ports. I was somehow unlucky with the install, as I run into two issues - [first](http://askubuntu.com/questions/689595/bootloader-install-failed) was caused by the way I created the install USB, and second related to disk being formatted for a previous install attempt. This made me spent more time that I though to install Lubuntu, as I had to figure out what was happening. After trial and error, finally Lubuntu run from the external USB. USB stick is quite fast:
 
 ```bash
 $ dd bs=2M count=512 if=/dev/zero of=test1 conv=fdatasync
@@ -16,7 +16,7 @@ $ dd bs=2M count=512 if=/dev/zero of=test1 conv=fdatasync
 1073741824 bytes (1,1 GB, 1,0 GiB) copied, 5,97716 s, 180 MB/s
 ```
 
-After I installed all core software I need, I still have plenty of space left:
+After I installed all core software I need (and a VM), I still have plenty of space left:
 
 ```bash
 $ df -h | grep -E "sdb|Avail"
@@ -26,7 +26,7 @@ Filesystem         Size  Used Avail Use% Mounted on
 
 ##Startup
 
-I get some issues reported at startup, which I had no time to loop up what they mean yet:
+I get some issues reported at startup, which I had [no](https://bugzilla.kernel.org/show_bug.cgi?id=107381) time to loop up what they mean yet:
 
 ```bash
 u7@vm-l10:~/git/madebits.github.io$ dmesg | grep -iE "failed|error"
@@ -38,7 +38,6 @@ u7@vm-l10:~/git/madebits.github.io$ dmesg | grep -iE "failed|error"
 [   10.607827] iwlwifi 0000:02:00.0: Direct firmware load for iwlwifi-8000C-23.ucode failed with error -2
 [   10.622297] iwlwifi 0000:02:00.0: Direct firmware load for iwlwifi-8000C-22.ucode failed with error -2
 [   11.005477] thermal thermal_zone6: failed to read out thermal zone (-5)
-[   11.213805] vboxdrv: module verification failed: signature and/or required key missing - tainting kernel
 [   11.568827] radeon 0000:01:00.0: failed VCE resume (-110).
 [   13.122759] Bluetooth: hci0: Setting Intel event mask failed (-16)
 ```
@@ -78,3 +77,4 @@ It seems, the Intel GPU is used. There is sometimes video tearing on the top of 
 
 Battery lasts around 3 hours with [TLP](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html) active (with default settings). This is somehow more that the battery lasts on Windows 10, but this could be related to the different applications and the screen brightness.
 
+<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-12-24-Ubuntu-Chromium-Flags-Per-User.md'>Ubuntu Chromium Flags Per User</a></ins>
