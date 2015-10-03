@@ -4,7 +4,7 @@
 
 <!--- tags: virtualization docker -->
 
-[Docker Machine](https://docs.docker.com/machine/overview/) offers a way to run Docker under a virtual machine (VM) in Windows. You can always create a Linux virtual machine with `docker` on your own and use it without Docker Machine. Docker Machine makes some things easier (such as, setting up a host-only network in VirtualBox), and is a handy tool to use with different drivers.
+[Docker Machine](https://docs.docker.com/machine/overview/) offers a way to run Docker under a virtual machine (VM) in Windows. For more control, you can always create a Linux virtual machine with `docker` on your own and use it without Docker Machine. Docker Machine makes some things easier (such as, setting up a host-only network in VirtualBox), and is a handy tool to use with different drivers.
 
 To [install](https://docs.docker.com/machine/install-machine/) Docker Machine in Windows is easy, assuming you have Git with Git bash and VirtualBox (5+) already installed. [Installation](https://docs.docker.com/machine/install-machine/) documentation lists the following command: 
 
@@ -14,7 +14,7 @@ curl -L https://github.com/docker/machine/releases/download/v0.12.0/docker-machi
 chmod +x "$HOME/bin/docker-machine.exe"
 ```
 
-This command will download and install Docker Machine in `$HOME/bin` folder (`$HOME` is by default, your Windows user folder: `%HOMEPATH%`). You may want to append `$HOME/bin` to `$PATH`. Docker Machine keeps its data files under `$HOME/.docker` folder.
+This command will download and install Docker Machine in `$HOME/bin` folder (`$HOME` is by default, your Windows user folder: `%HOMEPATH%`). You may want to append `$HOME/bin` to `$PATH`. Docker Machine keeps its data files under `$HOME/.docker` folder. The parent folder of $HOME (i.e., `C:\Users`) is shared read/write in VM as `/c/Users`. In theory, this folder could be used with persistent `docker -v` volumes, but due to `vboxsf` issues not all software may work with it.
 
 After installation, to create Docker Engine VM, use:
 
@@ -72,6 +72,18 @@ A common case for `docker` containers is to be able to access some service from 
 ```
 $ docker run -d -p 8000:80 nginx
 $ curl $(docker-machine ip):8000
+```
+
+As another example, we can access the RabbitMQ web [management plugin](https://docs.docker.com/samples/rabbitmq/#management-plugin) from host as `http://192.168.99.100:15672` [using](https://hub.docker.com/r/library/rabbitmq/tags/) default *guest / guest* credentials:
+
+```
+$ docker pull rabbitmq:management
+$ docker run -d --hostname my-rabbit \
+ -p 5672:5672 -p 15672:15672 \ 
+ -v /opt/test:/var/lib/rabbitmq/mnesia/ \
+ rabbit\@my-rabbit --name my-rabbit rabbitmq:management
+$ docker-machine.exe ip
+192.168.99.100
 ```
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-05-16-The-New-Docker.md'>The New Docker</a></ins>
