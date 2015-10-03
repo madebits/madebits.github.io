@@ -110,7 +110,7 @@ const once = ucb => {
   return cb => {
     if(!cb.ctx.task.once) {
       cb.ctx.task.once = true;
-      cb.ctx.runner.log('@once', false, cb.ctx.taskName);
+      cb.ctx.log('@once', false);
       return ucb(cb);
     }
     cb();
@@ -240,7 +240,7 @@ In the sections that follow `g` represents a `GRunner` instance object.
   Tasks are added as keys (`taskName`) to `g.tasks` object. Adding a task with same `taskName` as a previous one, replaces it. While you can add tasks directly to `g.tasks` (and sometimes this can be useful), using `g.t` is recommended. The arguments of `g.t(...)` are:
     * `taskName` - string (valid JS object key name).
     * `taskDependecies` - optional string, or array of strings of task names to be run before.
-    * `taskFun(cb)` - optional body of the task. The optional `ct.ctx` object contains information about the task `ctx = {taskName, task, runner}` , where `runner` is the GRunner instance. Normally, `cb.ctx` should be treated as read-only information, but you can modify the custom `userData` passed to `g.t`. There are several valid ways to denote that you are done within `taskFun` code:
+    * `taskFun(cb)` - optional body of the task. The optional `ct.ctx` object contains information about the task `ctx = {taskName, task, runner, log}` , where `runner` is the GRunner instance and `log` is shortcut to `runner.log` with `taskName` already set. Normally, `cb.ctx` should be treated as read-only information, but you can modify the custom `userData` passed to `g.t`. There are several valid ways to denote that you are done within `taskFun` code:
         * Call `cb();` on success, or `cb(error);` on error. If your code calls `cb`, it must be called once.
         * Return a JS *promise*. Any promise object that supports `then` is supported. In this case you should **not** call `cb()`.
         * Return a `stream`, such as `return gulp.src(...).pipe(...);`. In this case you should **not** call `cb()`.
