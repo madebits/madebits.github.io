@@ -328,8 +328,10 @@ For example, to share a folder via WebDAV append `--spice-shared-dir=$HOME/temp`
 In Ubuntu guests, to install Spice guest tools use:
 
 ```
-sudo apt install spice-vdagent spice-webdavd xserver-xorg-video-qxl
+sudo apt install spice-vdagent spice-webdavd xserver-xorg-video-qxl linux-image-extra-virtual
 ```
+
+The last one `linux-image-extra-virtual` is need to use `9p` shared folders.
 
 To access WebDAV shared folders use [gvfs](https://wiki.ubuntuusers.de/gvfs-mount/):
 
@@ -345,6 +347,38 @@ WebDAV port can be found using any of:
 ```
 ps aux | grep webdavd
 systemctl status spice-webdavd.service
+```
+
+####Using Filesystemshare
+
+To use [9p](https://askubuntu.com/questions/819773/is-there-something-like-virtualbox-guest-additions-for-qemu-kvm) shared folders, add a Filesystemshare to the VM, using *Mapped* mode and give it a target path [tag](https://www.kernel.org/doc/Documentation/filesystems/9p.txt), for example: `share` - this is just a tag, not a path. 
+
+Select a host folder to share, e.g. `/data/share`. VM runs as user `librivt-qemu` under group `kvm` - ensure this user and group has [access](https://unix.stackexchange.com/questions/257372/how-can-i-store-files-in-the-mounted-shared-folder), along with your own user to the host shared folder: 
+
+```
+$ sudo setfacl -R -m u:libvirt-qemu:rwx /data/share
+$ getfacl /data/udata/kvm/share
+getfacl: Removing leading '/' from absolute path names
+# file: data/udata/kvm/share
+# owner: ...
+# group: ...
+user::rwx
+user:libvirt-qemu:rwx
+group::rwx
+mask::rwx
+other::rwx
+```
+
+In guest, mount the share by referring it by its tag `share` (create `/mnt/share` if not there):
+
+```
+# mount -t 9p -o trans=virtio,version=9p2000.L,rw share /mnt/share
+```
+
+To [add](http://troglobit.github.io/blog/2013/07/05/file-system-pass-through-in-kvm-slash-qemu-slash-libvirt/) it to `/etc/fstab` use:
+
+```
+share /mnt/share  9p  trans=virtio,version=9p2000.L,rw  0 0
 ```
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-05-09-Ubuntu-Block-Application-Internet-Access.md'>Ubuntu Block Application Internet Access</a> <a rel='next' id='fnext' href='#blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md'>Cross Cutting Concerns Evolution</a></ins>
