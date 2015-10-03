@@ -355,22 +355,38 @@ systemctl status spice-webdavd.service
 
 To use [9p](https://askubuntu.com/questions/819773/is-there-something-like-virtualbox-guest-additions-for-qemu-kvm) shared folders, add a [Filesystemshare](http://wiki.qemu.org/Documentation/9psetup) to the VM, using *Mapped* mode and give it a target path [tag](https://www.kernel.org/doc/Documentation/filesystems/9p.txt), for example: `share` - this is just a tag, not a path. 
 
-Select a host folder to share, e.g. `/data/share`. VM [runs](http://rabexc.org/posts/p9-setup-in-libvirt) as user `librivt-qemu` under group `kvm` (configurable in `/etc/libvirt/qemu.conf`) - ensure this user and group has [access](https://unix.stackexchange.com/questions/257372/how-can-i-store-files-in-the-mounted-shared-folder), along with your own user to the host shared folder (files are create as not-shareable with the group): 
+Select a host folder to share, e.g. `/data/share`. VM [runs](http://rabexc.org/posts/p9-setup-in-libvirt) as user `librivt-qemu` under group `kvm` (configurable in `/etc/libvirt/qemu.conf`) - ensure this user and group has [access](https://unix.stackexchange.com/questions/257372/how-can-i-store-files-in-the-mounted-shared-folder), along with your own user to the host shared folder.
+
+Normally the following setting should be enough, but they do not work:
 
 ```
-$ sudo setfacl -R -m u:libvirt-qemu:rwx /data/share
-$ getfacl /data/udata/kvm/share
-getfacl: Removing leading '/' from absolute path names
-# file: data/udata/kvm/share
-# owner: ...
-# group: ...
+#
+chown -R libvirt-qemu:kvm /data/share
+sudo setfacl -R -m u:$(id -un):rwx,g:(id -gn):rwx /data/share
+sudo setfacl -m default:u::rwx,default:g::rwx /data/share
+sudo setfacl -m default:m::rwx /data/share
+```
+
+New files are in guest are created as not-shareable with the group. The above does not work as somehow default and mask ACL is ignored for new files. A permission fix is need in host after creation of new files guest:
+
+```
+$ sudo setfacl -R -m u:libvirt-qemu:rwx,u:$(id -un):rwx /data/share
+$ getfacl share
+# file: share
+# owner: libvirt-qemu
+# group: kvm
 user::rwx
+user:u7:rwx
 user:libvirt-qemu:rwx
 group::rwx
+group:kvm:rwx
+group:u7:rwx
 mask::rwx
 other::rwx
-# permission fix is needed for new files
-$ sudo setfacl -R -m u:user:rwx /data/share
+default:user::rwx
+default:group::rwx
+default:mask::rwx
+default:other::rwx
 ```
 
 In guest, mount the share by referring it by its tag `share` (create `/mnt/share` if not there):
