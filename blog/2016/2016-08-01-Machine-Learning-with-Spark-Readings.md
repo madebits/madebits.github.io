@@ -1,4 +1,4 @@
-#Starting with Machine Learning in Spark Readings
+#Starting Machine Learning in Spark Readings
 
 <!--- tags: ml scala -->
 
