@@ -79,7 +79,7 @@ Other options:
 * `--P` - by default `--gtask` tasks run blocking one after the other. If `--P` is specified they are started non-blocking.
 * `--C` - GRunner does circular dependency loop detection as it runs the tasks by default. If you do **not** need that functionality, turn it off by specifying this option.
 * `--L timeInMinutes` - if set, the process will self terminate when the time in minutes is reached.
-* `--env.KEY=VALUE` - this is a convenience option to set environment variables. It is same as calling `export KEY=VALUE` in `bash` shell, before calling `grunner`. This option helps to set environment variables without the need for some platform specific surrounding script (see also `envResolve` API function). It can be repeated as needed.
+* `--env.KEY=VALUE` - this is a convenience option to set environment variables. It is same as calling `export KEY=VALUE` in `bash` shell, before calling `grunner`. This option helps to set environment variables without the need for some platform specific surrounding script (see also `g.env` API function). It can be repeated as needed.
 
 ##Task Dependencies
 
@@ -240,7 +240,7 @@ Here `g` represents a `GRunner` instance object.
 
 * `g.dumpTasks([logger])` - dump the current list of tasks using `console.log` (can be changed by supplying your own `logger(str)` function). Used by `--T` command-line option.
 
-The following helper functions are also provided:
+The following helper functions are provided:
 
 * `g.pipeStart([objectOrIterator])` - returns a starting object `stream` from one or more objects. If an array or iterator is given as argument, then there will be an element in stream per each array or iterator element. For example:
    ```javascript
@@ -259,7 +259,35 @@ The following helper functions are also provided:
 
 * `g.setProcessMaxLifeTime(timeInMinutes, [cb])` - if set to a `timeInMinutes > 0`, then the process will terminate when that time is reached. To reset the timer, call same function with a new value. `0` cancels any existing timer. The timer is per GRunner instance, but the process is killed, no matter what instance timer expires first. The optional callback `cb` is called if set, in place of `process.exit(1)`. The `--L` command-line option calls this function on global ` G` instance.
 
-* `g.envResolve(key)` - returns `process.env[key]`. Additionally, this function knows to process nested environment variables in values using the special `[[KEY]]` syntax. For example, if `K1=V1` and `K2=V2[[K1]]`, then `g.envResolve('K2')` will return `V2V1`. Environment variable nesting and replacement is platform specific (both syntax and behavior). This function offers a way to handle environment variable nesting using own platform agnostic syntax, if needed. Non found variables are replaced with empty values.
+* `g.env(key)` - returns `process.env[key]`. Additionally, this function knows to process nested environment variables in values using the special `[[KEY]]` syntax. For example, if `K1=V1` and `K2=V2[[K1]]`, then `g.env('K2')` will return `V2V1`. Environment variable nesting and replacement is platform specific (both syntax and behavior). This function offers a way to handle environment variable nesting using own platform agnostic syntax, if needed. Non found variables are replaced with empty values.
 
-* `g.envResolveValue(value)` - this is similar to `g.envResolve(key)`, but operates on a `process.env[key]` returned value (and not `key` name). 
+* `g.envValue(value)` - this is similar to `g.env(key)`, but operates on a `process.env[key]` returned value (and not `key` name). 
+
+Some simple low level file manipulation functions are provided. You can either use these or `gulp.src` and similar, or other libraries.
+
+* `g.fileReadBin(file, [throwErr])` - (synchronous) reads a file as a buffer. By default if file is not found or in case of error `null` is returned. Passing `true` for `throwErr` will raise an error instead of retuning `null`.
+
+* `g.fileReadTxt(file, [throwErr])` - (synchronous) reads a file as UTF8 text taking care to remove BOM if present. Same semantics as `g.fileReadBin` for errors.
+
+* `g.fileReadJson(file, [throwErr])` - (synchronous) returns an object from a JSON file. Same semantics as `g.fileReadBin` for errors.
+
+* `g.fileWriteBin(file, data)` - (synchronous) write data to file. If the folder of file does not exist it is created.
+
+* `g.fileWriteTxt(file, data)` - (synchronous) write data to file as UTF8. If the folder of file does not exist it is created.
+
+* `g.fileWriteJson(file, data)` - (synchronous) write data object to file. If the folder of file does not exist it is created.
+
+* `g.files(dir, [recursive], [filter])` - normally you would use `gulp.src` to get a stream of files, or the `glob` module. I have found `glob` module to be not very reliable with [UNC](https://en.wikipedia.org/wiki/Universal_Naming_Convention) paths, so this function offers a simple alternative. It will return all files in a given folder specified by `dir`. If `recursive` is `true` then all files in all subfolder are returned. `filter` is a optional function of form `fn(fileObject)` that can be used to filter which files are included by returning `true` or `false` not to include them. The `fileObject` is of form: `{dir, file, name, ext}` - where `dir` is the path passed to `g.files`, `file` is the absolute path of file, `name` is the filename with extension and `ext` is the file extension together with the dot. `g.files` return immediately a `stream` of `fileObject`s. Assuming you have imported `gulp` `File` class, you can interface the file data provided by the stream returned by this function to `gulp` ones, by using code similar to the following:
+
+  ```javascript
+  g.t('tt', () => {
+    return g.files('./src', true, obj => obj.ext.toLowerCase() === '.js')
+      .pipe(g.pipeThrough((o, _cb) => {
+        _cb(null, new File({ base: '', cwd: '', path: o.file }));
+      }))
+      .pipe(gulp.dest(...));  
+  });
+  ```
+ * `g.rm(dirOrFile)` - (synchronous) will delete `dirOrFile` completely if it exists or do nothing if it does not exist. This function retries internally several times on folders to avoid possible timing issues before giving up.
+
 
