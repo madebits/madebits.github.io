@@ -20,9 +20,9 @@ While these extensions appear to be safe at the point I added them here, there i
 
  You need to configure this one. Ghostery itself will still track you.
 
-* [Fix Compose for Gmail](https://chrome.google.com/webstore/detail/fix-compose-for-gmail%C2%AE-to/hpoidnelefpoofhdioielagfklahfcjg)
-
- Really good if you like the old Gmail compose. Will track you, but it is worth it if you use a separate browser for Google apps. The only such extension that still works.
+* [uBlock Origin](https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm)
+  
+ Open alternative to Ghostery. If you enable all filters some legit sites may not work.   
 
 * [Empty New Tab Page](https://chrome.google.com/webstore/detail/empty-new-tab-page/dpjamkmjmigaoobjbekmfgabipmfilij)
 
@@ -36,7 +36,11 @@ While these extensions appear to be safe at the point I added them here, there i
 
  Can be occasionally useful if you have too many tabs open and do not really want to close them.
 
-* [Neater Bookmarks](https://chrome.google.com/webstore/detail/neater-bookmarks/ofgjggbjanlhbgaemjbkiegeebmccifi?hl=en) or [Popup my Bookmarks](https://chrome.google.com/webstore/detail/popup-my-bookmarks/mppflflkbbafeopeoeigkbbdjdbeifni/)
+* [The Great Suspender](https://chrome.google.com/webstore/detail/the-great-suspender/klbibkeccnjlkjkiokjodocebajanakg?hl=en) 
+  
+ An alternative to One Tab.
+
+* [Simple Bookmarks](https://chrome.google.com/webstore/detail/simple-bookmarks/nafmgkhgdblkabfjfegmafagpccaobfg?hl=en)
 
  Bookmarks menu
 
@@ -59,6 +63,12 @@ While these extensions appear to be safe at the point I added them here, there i
 * [Minimal Theme](https://chrome.google.com/webstore/detail/minimal-modern/hgcdmgdfnieebdpkopialjdofdjbdmcg?hl=en) | [Slinky Modern](https://chrome.google.com/webstore/detail/slinky-modern/nilnodhmmonndffbejancdeiggflcehi?hl=en) | [Slinky Classic](https://chrome.google.com/webstore/detail/slinky-classic/hfjhlpgahgkpncekpdkgfoeppikldble?hl=en) | [DevTools Dark Theme](https://chrome.google.com/webstore/detail/devtools-theme-zero-dark/bomhdjeadceaggdgfoefmpeafkjhegbo/reviews?hl=en-US) | [Red Theme](https://chrome.google.com/webstore/detail/simple-red-theme/ealcinkolodcnkokioepdoheohkffejc)
 
  Themes
+
+* [Auto RePlay for YouTube](https://chrome.google.com/webstore/detail/auto-replay-for-youtube/kanbnempkjnhadplbfgdaagijdbdbjeb?hl=en) 
+* [Audio Only for YouTube](https://chrome.google.com/webstore/detail/audio-only-youtube/pkocpiliahoaohbolmkelakpiphnllog)
+* [ImprovedTube - YouTube](https://chrome.google.com/webstore/detail/improvedtube-youtube-exte/bnomihfieiccainjcjblhegjgglakjdd) 
+ 
+ h264 play, and so on.
 
 ##Firefox
 
