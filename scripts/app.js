@@ -1067,7 +1067,7 @@ var applyStyle = function(containerId) {
 	var eid = null;
 	try {
 		eid = $(id);
-	} catch(e) { }
+	} catch(e) {}
 	if(!eid || !eid.length) {
 		window.scrollTo(0, 0);
 		return;
