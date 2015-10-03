@@ -107,9 +107,7 @@ Instances do not share any state, same task name in two different instances can 
 
 ##Invoking External Tools
 
-GRunner tasks are non-blocking, but there is no direct *parallelism* involved. If you invoke external tasks (tools), they will run in separate processes and achieve thus parallelism.
-
-If you your GRunner tasks functions are plain javascript and you want to run them in a separate process, just put the code is some file and run it via `node`, similarly to running an external tool. You cannot (easy) share process memory, but normally build and deploy tasks process and share files. As an example, lets use [GSpawn](https://www.npmjs.com/package/gspawn) library to run some arbitrary JS code in an external file as part of a GRunner task function:
+GRunner tasks are non-blocking, but there is no direct *parallelism* involved. If you invoke external tasks (tools), they will run in separate processes and achieve thus parallelism. Arbitrary Node.js code can run similarly in a different process using `node` as an external tool (you cannot (easy) share process memory, but normally build and deploy tasks process and share files). As an example, lets use [GSpawn](https://www.npmjs.com/package/gspawn) library to run some arbitrary JS code found in an external file in a separate process as part of a GRunner task function:
 
 ```
 ...
@@ -125,11 +123,11 @@ let externalCode = (filePath) => {
         }, cb);
     };
 };
-let dependencies = []; //...
-G.t('t1', dependencies, externalCode('./t1.js'));
+
+G.t('t1', externalCode('./t1.js'));
 ```
 
-Of course, if you do not need different processes, using Node.js `require` with GRunner task files works as well.
+Of course, if you do not need to use different processes, using Node.js `require` with GRunner task files works as well.
 
 ##Reacting To Change
 
