@@ -198,7 +198,7 @@ Optical lens have various kinds of light distortion and aberration [28] (mostly 
 
 In most digital cameras with built-in lens, the angle of coverage (the part of lens aperture applied to the image sensor) is usually smaller than the physically visible lens diameter to compensate for the distortion. Also the image sensor is usually a square, while lens form a circle, so only a part of the light coming through the circle gets into the square image sensor.
 
-Natural light is diffused reflected light. A lens system may diffuse even more the light that goes through it. The more parts the lens are made or the more the light gets diffused. This shows up in images as unsharpened object boundaries – where the light in object edges in mixture of the object colors and the background ones. The final image can be sharpened with post-processing either built-in the camera, or in software.
+Natural light is diffused reflected light. A lens system may diffuse even more the light that goes through it. The more parts the lens are made of, the more the light gets diffused. This shows up in images as unsharpened object boundaries – where the light in object edges in mixture of the object colors and the background ones. The final image can be sharpened with post-processing either built-in the camera, or in software.
 
 ##Image Post-Processing
 
