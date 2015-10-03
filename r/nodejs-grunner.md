@@ -85,7 +85,7 @@ When you define a task (via `G.t`) you can pass optional task dependencies to be
 
 *Parallel* here means execution will not block, *sequential* means the execution blocks until all tasks before finish. In general, if the task dependencies array is considered *level 1* and the first nested arrays as level 2, then the tasks in *even* levels of nested arrays are started in parallel and those in *odd* levels are started sequentially. Tasks started in parallel have pipe symbol `|` listed in console before their name. Run-time nesting depth of tasks is shown in console with dots `.` before the task name.
 
-Circular task dependencies, such as, `G.t('t1', ['t2']); G.t('t2', ['t1']);` direct or indirect, will result in failure.
+Circular task dependencies, such as, `G.t('t1', ['t2']); G.t('t2', ['t1']);`, direct or indirect, will result in failure.
 
 ##GRunner Instances
 
@@ -140,7 +140,7 @@ The console output (`log`) of the external task in the example is redirected to 
 
 Here `g` represents a `GRunner` instance object.
 
-* `GRunner([options])` - constructor, you can pass an optional `options` object. Options can be accessed also via `g.options`. Options can be changed at any time before calling `g.run()`. Options are:
+* `GRunner([options])` - constructor, you can pass an optional `options` object. Options can be accessed also via `g.options`. Options can be changed at any time before calling `g.run()`. Available options are:
     * `log = fn(msg, isError, taskName)` - replaces the internal log function which logs in `console`.
     * `name` - if set, instance name is used by default log function and printed in console.
     * `exec = fn(doneCb)` - gives an option to wrap each `taskFun` call. Basically, `fn` could be implemented as:
