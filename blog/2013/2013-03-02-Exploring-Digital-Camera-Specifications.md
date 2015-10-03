@@ -180,7 +180,7 @@ My camera supports several light metering options: Intelligent Multiple / Center
 
 ##Image Sensor Light Sensitivity
 
-Luminous flux or luminous power is the measure of the perceived power of light (per spherical unit) measured in lumen (lm) [31] (how much light is produced by a source). Illuminance is the total luminous flux incident on a surface, per unit area [30] measured in lux (lx) = lm/squaremeter [17] (how much light is receviced and reflected by a destination). Illuminance can be seen as the intensity of light reflected or emitted by a surface. Luminance (L) is measure of the luminous intensity per unit area of light traveling in a given direction. Luminance is an indicator of how bright the surface will appear.
+Luminous flux or luminous power is the measure of the perceived power of light (per spherical unit) measured in lumen (lm) [31] (translated: how much light seems to be produced by a source). Illuminance is the total luminous flux incident on a surface, per unit area [30] measured in lux (lx) = lm/squaremeter [17] (translated: how much light is receviced and reflected by a destination). Illuminance can be seen as the intensity of light reflected or emitted by a surface. Luminance (L) is measure of the luminous intensity per unit area of light traveling in a given direction. Luminance is an indicator of how bright the surface will appear.
 
 Luminance is invariant in lens optics: the luminance at the output is the same as the input one [30]. The luminous power is concentrated into a image sensor smaller area, meaning that the illuminance is higher at the image that at source. The projected image can never be "brighter" than the source [30].
 
