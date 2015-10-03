@@ -104,7 +104,7 @@ If you share a folder in the VM, you can access it using Samba in your Ubuntu fi
 
 Windows 10 guest works fine without any custom software installed. However, to get most of Spice and QEMU, such as to share clipboard, install [Spice guest tools](https://www.spice-space.org/download/binaries/spice-guest-tools/), in the Windows guest. Spice guest tool already contains the [Virtio Drivers](https://fedoraproject.org/wiki/Windows_Virtio_Drivers). 
 
-* I changed Windows VM [NIC](https://pve.proxmox.com/wiki/Paravirtualized_Network_Drivers_for_Windows) type from rtl3189 to virtio.
+* I changed Windows VM [NIC](https://pve.proxmox.com/wiki/Paravirtualized_Network_Drivers_for_Windows) type from `rtl3189` to `virtio`.
 * To [change](https://pve.proxmox.com/wiki/Paravirtualized_Block_Drivers_for_Windows) the VM disk type from IDE to VirtIO SCSI, I used first *Add Hardware* button to a new *Controller* of Type: SCSI, Model: VirtIO SCSI and started the VM. The controller was shown in the Windows Device Manager. After that, I shut down the VM, and changed the Disk bus to SCSI. After starting the VM, I checked disk type was changed in the Device Manager. Disk [stats](https://superuser.com/questions/130143/how-to-measure-disk-performance-under-windows):
  ```
  C:\Windows\system32>winsat disk -drive c
@@ -130,9 +130,9 @@ Spice guest tools offer several other features, such as direct [folder sharing](
 
  ```
  virsh list
- virsh start virtualMachineName
- virt-viewer -a virtualMachineName
- virsh shutdown virtualMachineName
+ virsh start win10
+ virt-viewer -a win10
+ virsh shutdown win10
  ```
 
 * In the `virt-viewer` in *File / Preferences* menu you can share a folder. After sharing the folder, in Window guest open a `cmd.exe` console as Administrator and run the following commands:
