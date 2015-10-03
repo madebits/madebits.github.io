@@ -60,7 +60,7 @@ Given Docker Machine `ssh` command supports `ssh` arguments, we can directly run
 $ alias docker='docker-machine ssh default docker'
 ```
 
-This alias will work with most commands (apart of `docker exec -it some-container bash`), and we can use it directly from Git bash:
+This alias will work with most commands (apart of `docker exec -it some-container bash` and some others), and we can use it directly from Git bash:
 
 ```
 $ docker --version
@@ -87,10 +87,16 @@ $ docker pull rabbitmq:management
 $ docker run --restart always -d \
  --hostname my-rabbit \
  -p 5672:5672 -p 15672:15672 \ 
- -v /opt/test:/var/lib/rabbitmq/mnesia/rabbit\@my-rabbit \
+ -v /opt/storage/rabbitmq:/var/lib/rabbitmq/mnesia/rabbit\@my-rabbit \
  --name my-rabbit rabbitmq:management
 $ docker-machine ip
 192.168.99.100
+```
+
+A last example, we can run MongoDB as follows:
+
+```
+$ docker run --restart always -d -p 27017:27017 -v /opt/storage/mongo:/data/db --name my-mongo mongo
 ```
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-05-16-The-New-Docker.md'>The New Docker</a></ins>
