@@ -265,7 +265,7 @@ Spice guest tools offer several other features, such as direct [folder sharing](
  virsh shutdown win10
  ```
 
-* In the `virt-viewer` in *File / Preferences* menu you can share a folder. After sharing the folder, in Window guest open a `cmd.exe` console as Administrator and run the following commands:
+* In the `virt-viewer` in *File / Preferences* menu you can share a folder. After sharing the folder, in Window guest open a `cmd.exe` console as Administrator and [run](https://github.com/lofyer/spice-webdav) the following commands:
 
  ```
  sc start spice-webdavd
