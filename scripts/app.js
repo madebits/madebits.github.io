@@ -1276,7 +1276,7 @@ var lastPage = null
 	var options = {
 		  dataType: 'text'
 		, url: pageData.page
-		, cache: true
+		, cache: false
 	};
 	if(pageData.isSecret && window.XMLHttpRequest) {
 		options.xhr = function () {
