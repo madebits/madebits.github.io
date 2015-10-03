@@ -37,7 +37,7 @@ Tasks are coded in Javascript files. Default task file name is `gfile.js`:
 ```javascript
 'use strict';
 
-let G = require('grunner')
+const G = require('grunner')
     , gulp = require('gulp');
 
 G.t('t1', () => {
@@ -101,6 +101,34 @@ Dependency strings that evaluate to `false` are ignored. This can be convenient 
 
 * `G.t('t2', [null, 't1', [null, null], ''])` - `t1` will be run before `t2`.
 
+##Running a Task Once
+
+There is no direct support to run a task refereed more than once in the dependencies only once (default behavior in Gulp). However, using the custom task state data, you can easy create a `once` wrapper to execute own tasks function only once (see *Task API Reference* below for details of objects used in this example).
+
+```javascript
+const once = (ucb) => {
+    return cb => {
+        if(cb.ctx.task.once) {
+            cb();
+            return;
+        }
+        cb.ctx.task.once = true;
+        cb.ctx.runner.log(`@once: ${cb.ctx.taskName}`, false, cb.ctx.taskName);
+        return ucb(cb);
+    };
+};
+
+G.t('t1', once(cb => {
+    console.log('this code will run only once');
+    cb();
+  }));
+G.t('t2', 't1'); 
+G.t('t3', 't2');
+g.t('tt', ['t3', 't2', 't1']); 
+```
+
+Task `t1` will be invoked several times if we run `tt`, but its user defined callback code will run only once. The `once` wrapper does not affect how often any task dependencies of `t1` will be run. They have also to be wrapped using `once` if single execution is needed also for them.
+
 ##GRunner Instances
 
 When you use `let G = require('grunner');` you get *same* process wide singleton instance `G` of `GRunner` class. This instance `G` is used by default, by all `gfile.js` tasks. If you want to use the `grunner` command-line, you should only use this process wide singleton object to define your tasks. 
@@ -108,11 +136,11 @@ When you use `let G = require('grunner');` you get *same* process wide singleton
 For more advanced scenarios, you can create as many `GRunner` instances as needed using code such as:
 
 ```javascript
-let G = require('grunner');
+const G = require('grunner');
 G.t('t1'); // G is the per process singleton instance
 
-let g1 = new G.GRunner(); // new instance
-let g2 = new G.GRunner(); // another new instance
+const g1 = new G.GRunner(); // new instance
+const g2 = new G.GRunner(); // another new instance
 g1.t('t1'); // a task on g1 instance
 g2.t('t1'); // a task on g2 instance
 
@@ -125,7 +153,7 @@ Instances do not share any state, same task name in two different instances can 
 When using the `grunner` command-line tool, `G.run` is called for you automatically. Using `grunner` command-line tool is just a convenience. You can also use `.js` task files (that include others via `require`) that call `G.run` explicitly, and run those task files directly via `node`. For example, to debug your `gfile.js` you can start with something like this:
 
 ```javascript
-let G = require('grunner');
+const G = require('grunner');
 require('./gfile.js');
 G.run('default', err => {
   console.log('done');
@@ -139,9 +167,9 @@ GRunner tasks are non-blocking, but there is no direct *parallelism* involved. I
 
 ```javascript
 ...
-let gspawn = require('gspawn');
+const gspawn = require('gspawn');
 ...
-let extern = (filePath, cmd) => {
+const extern = (filePath, cmd) => {
     return cb => {
         gspawn({
            cmd: cmd || 'node',
@@ -237,7 +265,7 @@ In the sections that follow `g` represents a `GRunner` instance object.
         * `cb.onDone(streamOrPromise, [cbFn])` - described above. Example:
           ```javascript
           g.t('tt', cb => {
-            let s = gulp.src(...).pipe(g.pipeThrough(...));
+            const s = gulp.src(...).pipe(g.pipeThrough(...));
             cb.onDone(s, () => {
               console.log('done');
               cb();
