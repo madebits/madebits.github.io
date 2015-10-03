@@ -52,7 +52,7 @@ pre code {
 }
 
 pre code.hljs { background-color: transparent; }
-pre code.nohighlight { background-color: transparent; color: #000; }
+pre code.nohighlight { background-color: transparent; } /* color: #000; */
 
 
 .btn-file {

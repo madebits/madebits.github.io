@@ -31,7 +31,7 @@ After start, I used `opera://plugins` can be used to disable the build in news f
 
 I created also a startup `$HOME/opt/opera.desktop` file (if you want Opera to show in menu in Lubuntu, copy this file in `$HOME/.local/share/applications`):
 
-```
+```ini
 [Desktop Entry]
 Version=1.0
 Name=Opera
