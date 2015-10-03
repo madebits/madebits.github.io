@@ -79,12 +79,24 @@ pre code.nohighlight { background-color: transparent; color: #000; }
     -moz-background-size: cover;    /* Mozilla*/
     background-origin: padding-box;
     background-size: cover;         /* Generic*/
-    border-radius: 5px;
+    border-radius: 4px;
     min-height: 50px;
     margin-bottom: 5px;
     cursor: pointer;
 }
 
+.mbg-entry-background h1 {
+    font-size: 63px;
+}
+
+#mbg-nav {
+    border-top: 5px solid #1d9d74;
+}
+
+
+.mbg-navtoggle {
+    padding: 1px 9px 1px 9px;
+}
 /*
 .mbg-entry-background:hover {
     animation: animatedBackground 1s ease-out 1;
