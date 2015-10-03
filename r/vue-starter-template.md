@@ -4,7 +4,7 @@
 
 <!--- tags: javascript -->
 
-Custom-made [Webpack](https://webpack.js.org/) template for [Vue.js](https://vuejs.org) web client applications. **Vue Starter Template** comes with a working minimal Vue.js application.
+[Webpack](https://webpack.js.org/) based template for [Vue.js](https://vuejs.org) web client applications.
 
 ![](r/vue-starter-template/app.png)
 
