@@ -98,7 +98,27 @@ For SublimeText 3 sidebar font size, I had to [overwrite](http://stackoverflow.c
 
 ##Battery
 
-I installed [tlp](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html) via `sudo apt install tlp` and activated its service (`sudo systemctl enable tlp`). TLP [configuration](http://linrunner.de/en/tlp/docs/tlp-configuration.html) is in `/etc/default/tlp`. The battery lasts normally for around 2.5 hours, but if I reduce the brightness and only browse and read, I can get up to 4 hours - more than enough for my usage and I am usually always near a power source.
+I installed [tlp](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html) via `sudo apt install tlp` and activated its service (`sudo systemctl enable tlp`). TLP [configuration](http://linrunner.de/en/tlp/docs/tlp-configuration.html) is in `/etc/default/tlp`. 
+
+```
+$ sudo tlp-stat -s
+--- TLP 0.8 --------------------------------------------
+
++++ System Info
+System         = LENOVO Lenovo U41-70 80JV
+BIOS           = BDCN31WW
+Release        = Ubuntu 16.10
+Kernel         = 4.8.0-30-generic #32-Ubuntu SMP Son Nov 13 03:43:27 UTC 2016 x86_64
+/proc/cmdline  = BOOT_IMAGE=/boot/vmlinuz-4.8.0-30-generic root=UUID=567c7acd-af49-415c-8ac1-4fedb6e962db ro quiet
+Init system    = systemd
+
++++ System Status
+TLP power save = enabled
+power source   = battery
+
+```
+
+The battery lasts normally for around 2.5 hours, but if I reduce the screen brightness and only browse and read, I can get up to 4 hours - more than enough for my usage and I am usually always near a power source.
 
 ##Wireless
 
