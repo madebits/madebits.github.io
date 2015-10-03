@@ -128,6 +128,6 @@ RELEASES artifacts are persevered for a longer time. While we allow artifact ove
 
 ##Summary
 
-GO.CD is a great tool to manage continuous delivery pipelines. Templates guide creation and combination of pipelines and in our case invoke custom Node.js code that manages the builds and deployments. Node.js code is parameterized via files found in Git repositories, so that builds and configurations are fully versioned and controlled. As part of the Node.js code actions, we store and consume binary artifact to and from Nexus, using each tool for what it does best. 
+GO.CD is a great tool to manage continuous delivery pipelines. Templates guide creation and combination of pipelines and in our case invoke custom Node.js code that manages builds and deployments. Node.js code is parameterized via files found in Git repositories, so that builds and configurations are fully versioned and controlled. As part of the Node.js code actions, we store and consume binary artifact to and from Nexus, using each tool for what it does best. 
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-01-19-Embracing-Team-Practices-Variability.md'>Embracing Team Practices Variability</a></ins>
