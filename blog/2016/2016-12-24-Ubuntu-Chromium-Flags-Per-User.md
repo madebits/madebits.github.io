@@ -43,7 +43,7 @@ I like how the start script of `chromium-browser` on Arch Linux [expects](https:
     fi
     ```
 
-Now, using any of the above methods, per user arguments can be defined one per line in `~/.config/chromium-flags.conf`, for example:
+Using any of the above methods, per user arguments can be defined one per line in `~/.config/chromium-flags.conf`, for example:
 
 ```
 --disk-cache-dir=/dev/null
@@ -58,6 +58,6 @@ Now, using any of the above methods, per user arguments can be defined one per l
 --enable-vaapi
 ```
 
-Lines starting with `#` will be treated as comments.
+Lines starting with `#` are treated as comments.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-12-19-Opera-On-Ubuntu.md'>Opera On Ubuntu</a></ins>

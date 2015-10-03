@@ -66,7 +66,7 @@ network-manager network-manager-gnome network-manager-openvpn  network-manager-o
 
 ##Bios
 
-Machine had an old BIOS version BDCN31WW. Lenovo already offers a newer version BDCN71WW. There is no BIOS updater provided for DOS, so I could not use FreeDOS (I already removed Windows :). I used [WinToUsb](http://www.easyuefi.com/wintousb/) to create a *Windows To Go* USB (Win10 64bit, MBR, VHD, 64GB) and used that to update the BIOS (there is no need to activate Windows if you use it only for this purpose). After the BIOS update, Bluetooth was not working:
+Bios can be reached either via the *novo* button, or via `Fn-F2`. Machine had an old BIOS version BDCN31WW. Lenovo already offers a newer version BDCN71WW. There is no BIOS updater provided for DOS, so I could not use FreeDOS (I already removed Windows :). I used [WinToUsb](http://www.easyuefi.com/wintousb/) to create a *Windows To Go* USB (Win10 64bit, MBR, VHD, 64GB) and used that to update the BIOS (there is no need to activate Windows if you use it only for this purpose). After the BIOS update, Bluetooth was not working:
 
 ```
 [   19.677613] Bluetooth: hci0 sending Intel patch command (0xfc8e) failed (-110)
