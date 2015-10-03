@@ -4,7 +4,12 @@
 
 <!--- tags: javascript nodejs -->
 
-[**numericsort**](https://www.npmjs.com/package/numericsort) enables sorting strings numerically (*natural* order) in [Node.js](https://nodejs.org/). It is a Javascript port of [some C#](r/msnet-numeric-sort.md) code as a lightweight Node.js package with no external dependencies.
+[**numericsort**](https://www.npmjs.com/package/numericsort) enables sorting strings numerically (*natural* order) in [Node.js](https://nodejs.org/). It is a Javascript port of [some C#](r/msnet-numeric-sort.md) code as a lightweight Node.js package.
+
+* No external dependencies
+* No limit on the size and number of numeric parts compared
+* Locale aware
+* Directly usable with `array.prototype.sort`
 
 ##Usage
 
