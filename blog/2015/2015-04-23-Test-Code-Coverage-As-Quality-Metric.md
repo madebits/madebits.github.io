@@ -63,9 +63,7 @@ Recommended **testing pyramid** for a software project looks as follows (the mor
 *   (manual tests, M)
 ```
 
-Without setting code coverage as goal, we want to maximize the number of automated unit tests we have. The more automated unit tests we have, the less of other types of tests we need. If the number of (repeated) manual integration tests is large, we try to handle them as automated integration tests. Manual tests can be add hoc, but to maintain statistics often *test scripts* are used. Automated integration test are more costly to write an more fragile to maintain that unit tests, therefore if something can be tested with unit tests, they are preferable and cheaper that the other types of tests.
-
-The assumption here is that if something can be tested with a unit tests, there is no need to repetitively test it with other types of tests when the software is modified.
+Without setting code coverage as goal, we want to maximize the number of automated unit tests we have. The more automated unit tests we have, the less of other types of tests we need. If the number of (repeated) manual integration tests is large, we try to handle them as automated integration tests. Manual tests can be add hoc, but to maintain statistics often *test scripts* are used. Automated integration test are more costly to write an more fragile to maintain that unit tests, therefore if something can be tested with unit tests, they are preferable and cheaper that the other types of tests. The assumption here is that if something can be tested with a unit tests, there is no need to repetitively test it with other types of tests when the software is modified.
 
 For completes, one can imagine how the test pyramid may look like in a project with hard to maintain quality - it will be the reverse of the recommend pyramid above:
 
