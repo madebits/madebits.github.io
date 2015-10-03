@@ -26,4 +26,4 @@ If used [without](https://unix.stackexchange.com/questions/214909/xdotool-does-n
 
 The combination of `WinKey+z` allows closing the Chromium downloads bar with a much more convenient shortcut than `ctrl+j`, `ctrl+w`.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-07-30-Upgrading-to-Lubuntu-16.04.1.md'>Upgrading to Lubuntu 16.04.1</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-08-30-Ubuntu-Monitor-Tools.md'>Ubuntu Monitor Tools</a> <a rel='next' id='fnext' href='#blog/2016/2016-07-30-Upgrading-to-Lubuntu-16.04.1.md'>Upgrading to Lubuntu 16.04.1</a></ins>
