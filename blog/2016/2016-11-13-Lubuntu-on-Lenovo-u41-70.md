@@ -287,7 +287,7 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
 * To enable my bluetooth headset, I [installed](http://askubuntu.com/questions/801404/bluetooth-connection-failed-blueman-bluez-errors-dbusfailederror-protocol-no):
 
   ```
-  sudo apt-get install pulseaudio-module-bluetooth
+  sudo apt install pulseaudio-module-bluetooth
   pactl load-module module-bluetooth-discover
   ```
 
@@ -321,7 +321,7 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
 * I set up a [Private](https://help.ubuntu.com/community/EncryptedPrivateDirectory) folder using:
 
   ```
-  sudo apt-get install ecryptfs-utils
+  sudo apt install ecryptfs-utils
   ecryptfs-setup-private
   ```
 
