@@ -11,8 +11,6 @@ Default `vi`-like key binds are ok, but I also would like to use the arrow keys,
 ```
 daemonize
 
-daemonize
-
 ctrl+shift+Right start
 ctrl+shift+Left end
 Left cut-left
@@ -37,4 +35,4 @@ I found it easier to use if I start at current mouse location. To start `keynav`
 
 Along with *daemonize* option in the configuration, this enables running `keynav` in background automatically.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-07-26-Getting-Started-With-Spark-Ml.md'>Getting Started With Spark Ml</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-07-30-Upgrading-to-Lubuntu-16.04.1.md'>Upgrading to Lubuntu 16.04.1</a> <a rel='next' id='fnext' href='#blog/2016/2016-07-26-Getting-Started-With-Spark-Ml.md'>Getting Started With Spark Ml</a></ins>
