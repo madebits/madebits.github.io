@@ -6,7 +6,7 @@
 
 The following simple bash script changes the Lubuntu pcmanfm desktop wallpaper using a different file each time it is run at login from the current user Pictures folder:
 
-```
+```bash
 #!/bin/bash
 
 picturesPath=~/Pictures
@@ -58,7 +58,7 @@ Now Lubuntu will change the desktop wallpaper every time you login. It may take 
 
 Update: Filling a bash array as in the above script and selecting a line randomly from it, is how a generic programmer approaches the shuffle problem. A shell programmer would better use something like (modified from Ubuntu [forums](http://ubuntuforums.org/showthread.php?t=1843824&page=2)):
 
-```
+```bash
 #!/bin/bash
 
 picturesPath=~/Pictures
@@ -74,6 +74,27 @@ fi
 ```
 
 `shuf`(fle) does whatever I did above.
+
+And this is the version that changes wallpaper every 30 seconds:
+
+```bash
+#!/bin/bash
+
+picturesPath=~/Pictures
+
+while :
+do
+	selectedFile=$(ls "${picturesPath}"/*.* | shuf -n1)
+	if  [ -f "$selectedFile"  ]
+	then
+	    #echo "$selectedFile"
+	    #sleep 1s #increase if problems
+	    pcmanfm --set-wallpaper="$selectedFile"
+	fi
+	sleep 30
+done
+
+```
 
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-08-21-Disable-History-in-Lubuntu.md'>Disable History in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2012/2012-07-21-Converting-Swap-Partition-to-a-Swap-File-in-Lubuntu.md'>Converting Swap Partition to a Swap File in Lubuntu</a></ins>
