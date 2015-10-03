@@ -288,5 +288,5 @@ Some simple low level file manipulation functions are provided. You can either u
       .pipe(gulp.dest(...));  
   });
   ```
- * `g.rm(dirOrFile)` - (synchronous) will delete `dirOrFile` completely if it exists or do nothing if it does not exist. This function retries internally several times on folders to avoid possible timing issues before giving up.
+* `g.rm(dirOrFile)` - (synchronous) will delete `dirOrFile` completely if it exists or do nothing if it does not exist. This function retries internally several times on folders to avoid possible timing issues before giving up.
 
