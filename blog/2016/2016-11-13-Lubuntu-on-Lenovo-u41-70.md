@@ -165,7 +165,7 @@ For SublimeText 3 sidebar font size, I had to [overwrite](http://stackoverflow.c
 
 ##Battery
 
-Battery lasts normally for around 2.5 hours, but if I reduce the screen brightness and only browse and read, I can get up to 3.5 hours - more than enough for my usage and I am usually always near a power source.
+Battery lasts normally for around 2.5 hours if I reduce the screen brightness and only browse and read.
 
 ###TLP
 
@@ -189,7 +189,7 @@ power source   = battery
 
 ```
 
-Normally, I do not [configure](http://linrunner.de/en/tlp/docs/tlp-troubleshooting.html) TLP, but given the system started to freeze on battery with TLP, I had a look at PCI devices. Without TLP, on both AC / BAT the machine defaults are:
+Normally, I do not [configure](http://linrunner.de/en/tlp/docs/tlp-troubleshooting.html) TLP, but system started to freeze on battery with TLP. Without TLP, on both AC / BAT the machine defaults are:
 
 ```
 /sys/bus/pci/devices/0000:00:00.0/power/control = on   (0x060000, Host bridge, bdw_uncore)
@@ -217,10 +217,10 @@ RUNTIME_PM_ON_AC=on
 RUNTIME_PM_ON_BAT=auto
 ```
 
-This was causing freeze on BAT. I decided to leave default southbridge *auto* devices to *auto* all the time by blacklisting them, and disabled power management for <a href="https://en.wikipedia.org/wiki/Northbridge_(computing)">northbridge</a> and VGA controller, as while on PCI bus, they are still part of CPU:
+This was causing freeze on BAT. What worked is to disable TLP for PCI devices - I still have to find what exact device causes the issue:
 
 ```
-RUNTIME_PM_BLACKLIST="00:1c.0 00:1c.2 00:1c.3 00:00.0 00:02.0"
+RUNTIME_PM_ALL=0
 ```
 
 ###CPU Scaling 
