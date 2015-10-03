@@ -31,7 +31,7 @@ and run `sudo update-grub` to update grub.
 
 ###ZRam
 
-My u41-70 model has 8GB of RAM, more than enough for Lubuntu, but still I installed `zram-config` and enabled and started the its service (`sudo systemctl enable zram-config`). `zram` is lightweight for the i5 CPU and practically gives you 60% of more RAM for free (if you ever need it). I do not use any swap memory in Lubuntu, so RAM is all I have, but have still to see the day, I am using all of it.
+My u41-70 model has 8GB of RAM, more than enough for Lubuntu, but still I installed `zram-config` and enabled and started the its service (`sudo systemctl enable zram-config`). `zram` is lightweight for the i5 CPU and practically gives you 60% of more RAM for free (if you ever need it for virtual machines or so). I do not use any swap memory in Lubuntu, but have still to see the day I am using all of RAM.
 
 ##Graphics
 
