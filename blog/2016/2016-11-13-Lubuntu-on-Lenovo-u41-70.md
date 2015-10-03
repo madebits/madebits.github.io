@@ -74,7 +74,7 @@ Machine had an old BIOS version BDCN31WW. Lenovo already offers a newer version 
 [   21.693573] Bluetooth: hci0: Exiting manufacturer mode failed (-110)
 ```
 
-Bluetooth has to be [activated](http://askubuntu.com/questions/437304/cannot-enable-bluetooth-anymore):
+Bluetooth has to be [activated](http://askubuntu.com/questions/437304/cannot-enable-bluetooth-anymore), because I did not reset BIOS to defaults before doing the update:
 
 ```
 sudo apt install rfkill
@@ -90,8 +90,6 @@ sudo rfkill list all
   Hard blocked: no
 sudo rfkill unblock 1 #id
 ```
-
-This is because I did not reset BIOS to defaults before doing the update.
 
 `+` and `-` keys are not working to move USB devices up in the BIOS boot list, as the keyboard lacks a numeric pad. To be able to press those, I attached an external keyboard.
 
