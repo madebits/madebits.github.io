@@ -83,6 +83,27 @@ For an alternative tool to handle invert see: https://github.com/zoltanp/xrandr-
 @xgamma -gamma 0.8
 ```
 
-In my machine, this makes black text, in general, more readable. Similar effects can be achieved by modifying gamma via `redshift`.
+In my machine, this makes black text, in general, more readable. Similar effects can be achieved by modifying gamma via `redshift`. A useful script:
+
+```
+#!/bin/bash
+
+xgamma -gamma $(echo "$(xgamma 2>&1 | cut -d ' ' -f 4 | tr -d ',')${1}" | bc -l)
+```
+
+If saved as `gamma` this can used: `gamma +.1` or `gamma -.1` and combined with Openbox config keys:
+
+```xml
+<keybind key="W-g">
+  <action name="Execute">
+    <command>/home/user/bin/gamma -0.1</command>
+  </action>
+</keybind>
+<keybind key="W-S-g">
+  <action name="Execute">
+    <command>/home/user/bin/gamma +0.1</command>
+  </action>
+</keybind>
+```
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-10-02-xrandr-Panning-with-no-Tracking.md'>xrandr Panning with no Tracking</a> <a rel='next' id='fnext' href='#blog/2016/2016-08-02-Lubuntu-Closing-Chrome-Downloads-Bar.md'>Lubuntu Closing Chrome Downloads Bar</a></ins>
