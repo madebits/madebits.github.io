@@ -888,7 +888,7 @@ var applyStyle = function(containerId) {
 
 	if(pageData.isBlogIndex) {
 		if(pageData.isBlogIndexEntry) {
-			$('h1').first().prepend('<i class="fa fa-newspaper-o"></i> ');
+			$('h1').first().prepend('<i class="fa fa-comments"></i> ');
 			$('.bloglinks a').wrapInner('<strong></strong>').prepend('<span class="text-muted"><i class="fa fa-chevron-right"></i></span> ').wrap('<li class="list-group-item"></li>');
 			$('.bloglinks').wrapAll('<ul class="list-group"></ui>');
 		}
