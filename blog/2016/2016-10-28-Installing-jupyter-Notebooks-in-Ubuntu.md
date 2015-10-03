@@ -70,7 +70,7 @@ sudo apt install libzmq3-dev python-zmq
 
 Then within R (or RStudio) run:
 
-```
+```r
 install.packages(c('rzmq','repr','IRkernel','IRdisplay'),
                   repos = c('http://irkernel.github.io/',     
                   getOption('repos')),
