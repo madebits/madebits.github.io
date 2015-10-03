@@ -31,11 +31,13 @@ To move the tilda window, keep `Alt` key pressed and drag one of the tilda windo
 
 To make Terminator [single instance](http://askubuntu.com/questions/88705/terminator-single-window-focus-on-launch) point the desktop shortcut to a bash file containing:
 
-'''
+
+```bash
 #/bin/bash
 
 wmctrl -xa MyCustomTerminator.Terminator || terminator -c MyCustomTerminator
-'''
+
+```
 
 Terminator can be configured to start with a given layout and you have to fine-tune its behavior in the Preferences.
 
