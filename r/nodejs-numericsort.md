@@ -27,7 +27,7 @@ console.log(['1', '10', '3'].sort());  // logs: ["1", "10", "3"]
 
 **numericsort** package exports a single function
 
-`numericsort(s1, s2, [zeroesFirst])`:
+`numericsort(s1, s2, [zeroesFirst])` where:
 
 * `s1`: first string to compare.
 * `s2`: second string to compare.
@@ -35,7 +35,7 @@ console.log(['1', '10', '3'].sort());  // logs: ["1", "10", "3"]
 
 The function returns:
 
-* `0` if `s1 === s2`
+* `0` if `s1 == s2`
 * `-1` if `s1 < s2`
 * `1` if `s1 > s2`. 
 
