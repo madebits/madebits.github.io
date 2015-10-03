@@ -168,7 +168,9 @@ See [npm-watch](https://www.npmjs.com/package/npm-watch) documentation for more 
 
 ##Task API Reference
 
-Here `g` represents a `GRunner` instance object.
+In the sections that follow `g` represents a `GRunner` instance object.
+
+###API: Tasks
 
 * `GRunner([options])` - constructor, you can pass an optional `options` object. Options can be accessed also via `g.options`. Options can be changed at any time before calling `g.run()`. Available options are:
     * `log = fn(msg, isError, taskName)` - replaces the internal log function which logs in `console`.
@@ -240,6 +242,8 @@ Here `g` represents a `GRunner` instance object.
 
 * `g.dumpTasks([logger])` - dump the current list of tasks using `console.log` (can be changed by supplying your own `logger(str)` function). Used by `--T` command-line option.
 
+###API: Helpers
+
 The following helper functions are provided:
 
 * `g.pipeStart([objectOrIterator])` - returns a starting object `stream` from one or more objects. If an array or iterator is given as argument, then there will be an element in stream per each array or iterator element. For example:
@@ -262,6 +266,8 @@ The following helper functions are provided:
 * `g.env(key)` - returns `process.env[key]`. Additionally, this function knows to process nested environment variables in values using the special `[[KEY]]` syntax. For example, if `K1=V1` and `K2=V2[[K1]]`, then `g.env('K2')` will return `V2V1`. Environment variable nesting and replacement is platform specific (both syntax and behavior). This function offers a way to handle environment variable nesting using own platform agnostic syntax, if needed. Non found variables are replaced with empty values.
 
 * `g.envValue(value)` - this is similar to `g.env(key)`, but operates on a `process.env[key]` returned value (and not `key` name). 
+
+###API: Files
 
 Some simple low level file manipulation functions are provided. You can either use these (you can call them on any GRunner instance), or `gulp.src`, or other similar libraries.
 
