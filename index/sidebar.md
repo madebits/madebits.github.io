@@ -1,3 +1,4 @@
+* [Cross Cutting Concerns Evolution](#blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md)
 * [User Driven Password Policy](#blog/2017/2017-03-22-User-Driven-Password-Policy.md)
 * [Checkpoint Security On Ubuntu](#blog/2017/2017-03-08-Checkpoint-Security-On-Ubuntu.md)
 * [Integrating GO.CD with Nexus](#blog/2017/2017-02-21-Integrating-GO.CD-with-Nexus.md)
@@ -5,4 +6,3 @@
 * [Lubuntu on Dell Latitude E5570](#blog/2016/2016-12-30-Lubuntu-on-Dell-Latitude-E5570.md)
 * [Ubuntu Chromium Flags Per User](#blog/2016/2016-12-24-Ubuntu-Chromium-Flags-Per-User.md)
 * [Opera On Ubuntu](#blog/2016/2016-12-19-Opera-On-Ubuntu.md)
-* [From User Stories To Code](#blog/2016/2016-11-29-From-User-Stories-To-Code.md)

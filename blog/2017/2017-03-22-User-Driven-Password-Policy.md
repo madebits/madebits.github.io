@@ -27,4 +27,4 @@ Length is the most important factor of password quality, but not the only one. A
 
 In this model, the user has the control to decide what kind of password strength is needed and gets feedback on the quality of the actual password used.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-03-08-Checkpoint-Security-On-Ubuntu.md'>Checkpoint Security On Ubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md'>Cross Cutting Concerns Evolution</a> <a rel='next' id='fnext' href='#blog/2017/2017-03-08-Checkpoint-Security-On-Ubuntu.md'>Checkpoint Security On Ubuntu</a></ins>
