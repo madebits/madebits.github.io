@@ -11,6 +11,8 @@ Default `vi`-like key binds are ok, but I also would like to use the arrow keys,
 ```
 daemonize
 
+daemonize
+
 ctrl+shift+Right start
 ctrl+shift+Left end
 Left cut-left
@@ -22,9 +24,12 @@ ctrl+Left move-left
 ctrl+Down move-down
 ctrl+Up move-up
 ctrl+Right move-right
+ctrl+Home windowzoom
+ctrl+End cursorzoom 512 512
+ctrl+semicolon start,cursorzoom 512 512
 ```
 
-To start `keynav` automatically, I added to `~/.config/lxsession/Lubuntu/autostart` file:
+I found it easier to use if I start at current mouse location. To start `keynav` automatically, I added to `~/.config/lxsession/Lubuntu/autostart` file:
 
 ```
 @keynav
