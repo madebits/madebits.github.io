@@ -32,4 +32,4 @@ Complete workflow is for more mature, industrial teams. A lot of thinking and wo
 
 A team used to ad hoc simple workflow may find complete workflow as a time burden and find themselves being ineffective initially. This is a sign that either problems of simple workflow are not present or very likely not understood by the team.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-08-10-Product-Definition-Life-Cycle.md'>Product Definition Life Cycle</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-10-05-Clustering-Express-Node-Servers.md'>Clustering Express Node Servers</a> <a rel='next' id='fnext' href='#blog/2017/2017-08-10-Product-Definition-Life-Cycle.md'>Product Definition Life Cycle</a></ins>

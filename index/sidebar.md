@@ -1,3 +1,4 @@
+* [Clustering Express Node Servers](#blog/2017/2017-10-05-Clustering-Express-Node-Servers.md)
 * [From Requirements To Stories](#blog/2017/2017-09-11-From-Requirements-To-Stories.md)
 * [Product Definition Life Cycle](#blog/2017/2017-08-10-Product-Definition-Life-Cycle.md)
 * [Low Information Density User Interfaces](#blog/2017/2017-06-30-Low-Information-Density-User-Interfaces.md)
@@ -5,4 +6,3 @@
 * [The New Docker](#blog/2017/2017-05-16-The-New-Docker.md)
 * [Ubuntu Block Application Internet Access](#blog/2017/2017-05-09-Ubuntu-Block-Application-Internet-Access.md)
 * [Windows 10 on Virt Manager](#blog/2017/2017-05-07-Windows-10-on-Virt-Manager.md)
-* [Cross Cutting Concerns Evolution](#blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md)
