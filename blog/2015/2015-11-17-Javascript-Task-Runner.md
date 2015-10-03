@@ -75,10 +75,10 @@ This is all you need to implement a Gulp task runner on your own. Gulp provides 
 
 ```javascript
 
-var throught = require('through2');
+var through = require('through2');
 
 var onPipeEnd = function(onDone) {
-    return throught.obj(
+    return through.obj(
         function(file, enc, cb) { cb(); }
         , function(cb) { onDone(); cb(); });
 };
