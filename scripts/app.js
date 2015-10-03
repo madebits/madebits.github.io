@@ -791,11 +791,10 @@ var applyStyle = function(containerId) {
 		});
 	}
 	var bg = container.find('#mbg-background');
-	var bgUrl = null;
 	if(bg.length) {
-		bgUrl = bg.data('url');
+		var bgUrl = bg.data('url');
+		$('body').css('background', 'url(' + bgUrl + ') no-repeat center center fixed').css('background-size', 'cover');
 	}
-	$('body').css('background', 'url(' + bgUrl + ') no-repeat center center fixed').css('background-size', 'cover');
 }
 
 , markup = function(data) {
@@ -895,9 +894,9 @@ var applyStyle = function(containerId) {
 		pageData.container.prepend('<div class="hidden-print"><span class="label label-warning"><i class="fa fa-exclamation-triangle"></i> External content: ' + pageData.page + '</span></div>');
 	}
 
+
 	addToc(pageData.containerId, pageData.page);
 	if(pageData.isBlogContent) processBlogNav(pageData.page);
-
 	if(pageData.isBlogIndex) {
 		if(pageData.isBlogIndexEntry) {
 			$('h1').first().prepend('<i class="fa fa-comments"></i> ');
