@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-Lubuntu logout window is a bit too big. I already use a smaller custom banner image for `/usr/share/lubuntu/images/logout-banner.png`, but the text shown on the top is also too long. I think they have hardcoded 'Logout Lubuntu 14.04 session?' as default text there. The text to show can be passed to `lxsession-logout` via the `-p` parameter.
+Lubuntu logout window is a bit too big. I already use a smaller custom banner [image](blog/images/logout-banner.png) for `/usr/share/lubuntu/images/logout-banner.png`, but the text shown on the top is also too long. I think they have hardcoded 'Logout Lubuntu 14.04 session?' as default text there. The text to show can be passed to `lxsession-logout` via the `-p` parameter.
 
 `lxsession-logout` is invoked via `lxsession` (using org.lxde.SessionManager.SessionLaunch dbus service). The only way to hook to that call I could found, is to rename `/usr/bin/lxsession-logout` to `/usr/bin/lxsession-logout-original` and then add an executable bash script with name `/usr/bin/lxsession-logout` with this content:
 ```
