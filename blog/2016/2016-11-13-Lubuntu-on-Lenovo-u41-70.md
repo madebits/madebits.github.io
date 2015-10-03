@@ -61,6 +61,35 @@ It seems, [acpi](https://wiki.archlinux.org/index.php/ACPI_modules) information 
 
 8GB of RAM is more than enough for Lubuntu, but still I installed `zram-config` and enabled and started the its service (`sudo systemctl enable zram-config`). `zram` is lightweight for the i5 CPU and practically gives you 60% of more RAM for free (if you ever need it for virtual machines or so). I do not use any swap memory in Lubuntu, but have still to see the day I am using all of RAM.
 
+network-manager network-manager-gnome network-manager-openvpn  network-manager-openvpn-gnome network-manager-pptp network-manager-vpnc  resolvconf ubuntu-minimal
+
+##Bios
+
+Machine had an old BIOS version BDCN31WW. Lenovo already offers a newer version BDCN71WW. There is no BIOS update provided for DOS, so I could not use FreeDOS (and I already removed Windows :). I used [WinToUsb](http://www.easyuefi.com/wintousb/) to create a *Windows To Go* USB (Win10 64bit, MBR, VHD) and used that to update the BIOS. After the BIOS update, Bluetooth was not working:
+
+```
+[   19.677613] Bluetooth: hci0 sending Intel patch command (0xfc8e) failed (-110)
+[   19.677676] Bluetooth: hci0 sending frame failed (-19)
+[   21.693573] Bluetooth: hci0: Exiting manufacturer mode failed (-110)
+```
+
+Bluetooth has to be [activated](http://askubuntu.com/questions/437304/cannot-enable-bluetooth-anymore):
+
+```
+sudo apt install rfkill
+sudo rfkill list all
+0: ideapad_wlan: Wireless LAN
+  Soft blocked: no
+  Hard blocked: no
+1: ideapad_bluetooth: Bluetooth
+  Soft blocked: yes
+  Hard blocked: no
+3: phy0: Wireless LAN
+  Soft blocked: no
+  Hard blocked: no
+sudo rfkill unblock 1 #id
+```
+
 ##Graphics
 
 My u41-70 model comes with Intel HD Graphics 5500 and a 1920x1080 TFT screen.
