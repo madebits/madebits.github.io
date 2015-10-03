@@ -113,7 +113,7 @@ GRunner tasks are non-blocking, but there is no direct *parallelism* involved. I
 ...
 let gspawn = require('gspawn');
 ...
-let externalProcess = filePath => {
+let extern = filePath => {
     return cb => {
         gspawn({
            cmd: 'node',
@@ -125,7 +125,7 @@ let externalProcess = filePath => {
     };
 };
 
-G.t('t1', externalProcess('./t1.js'));
+G.t('t1', extern('./t1.js'));
 ```
 
 Of course, if you do not need to use different processes, using Node.js `require` with GRunner task files works as well.
