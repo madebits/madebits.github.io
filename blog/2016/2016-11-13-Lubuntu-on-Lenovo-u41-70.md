@@ -43,7 +43,7 @@ u41-70 comes with a full-hd [TFT](https://www.quora.com/What-is-the-difference-b
 
 ###GPU
 
-I experienced some sporadic [tearing](https://wiki.archlinux.org/index.php/intel_graphics#Tips_and_tricks) with display and it seems creating `/usr/share/X11/xorg.conf.d/20-intel.conf` with (ArchWiki writes that `TearFree` ... option should not be needed with DRI3 enabled, but I can confirm that this works for me):
+I experienced some sporadic [tearing](https://wiki.archlinux.org/index.php/intel_graphics#Tips_and_tricks) with display. Tearing was up and now in Chrome browser given its GPU usage, but also in sometimes VLC given it also uses hardware acceleration for video. It seems creating `/usr/share/X11/xorg.conf.d/20-intel.conf` with (ArchWiki writes that `TearFree` ... option should not be needed with DRI3 enabled, but I can confirm that this works for me):
 
 ```
 Section "Device"
@@ -55,7 +55,7 @@ Section "Device"
 EndSection
 ```
 
-Tearing is visible up and now in Chrome browser given its GPU usage, but also in sometimes VLC given it also uses hardware acceleration for video. There are some more hints to try [here](http://askubuntu.com/questions/766725/annoying-flickering-in-16-04-lts-chrome). For Chrome, force-enabling GPU rasterization for all layers, via `chrome://flags/#enable-gpu-rasterization`, seems to fix the issue for me in 16.10. 
+There are some more hints to try [here](http://askubuntu.com/questions/766725/annoying-flickering-in-16-04-lts-chrome). For Chrome I also tried force-enabling GPU rasterization for all layers, via `chrome://flags/#enable-gpu-rasterization`. 
 
 ###High DPI
 
