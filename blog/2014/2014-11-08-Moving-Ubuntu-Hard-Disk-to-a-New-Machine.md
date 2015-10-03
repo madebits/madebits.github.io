@@ -2,7 +2,7 @@
 
 2014-11-08
 
-<!--- tags: linux -->
+<!--- tags: linux windows -->
 
 I moved my hard disk with Lubuntu from my Asus machine to a Dell machine and Lubuntu run there almost without any changes. I encountered a few minor issues during the new setup.
 
