@@ -6,7 +6,7 @@
 
 Thanks to a *tip* from a friend, based on instruction [here](http://kenfallon.com/checkpoint-snx-install-instructions-for-major-linux-distributions/), I installed `snx` on Ubuntu. The following steps summary is a reminder to self, in case I need to do this again.
 
-Checkpoint does not offer `snx` for direct download, however, in your corporate Checkpoint website, there is link to *Download SSL Network Extender manual installation* for Linux. The downloaded `snx_install.sh` has to be made executable and run as root. It is binary, so it is up to you to choose on what machine you trust to run it. Additionally, the following libraries are needed:
+[Checkpoint](https://www.checkpoint.com/) does not offer `snx` for direct download, however, in your corporate Checkpoint website, there is link to *Download SSL Network Extender manual installation* for Linux. The downloaded `snx_install.sh` has to be made executable and run as root. It is binary, so it is up to you to choose on what machine you trust to run it. Additionally, the following libraries are needed:
 
 ```
 sudo apt install libstdc++5:i386 libpam0g:i386 libx11-6:i386
