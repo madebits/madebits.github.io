@@ -62,7 +62,7 @@ grunner --gfile gfile.js --gtask default
 
 If `--gfile` and / or `--gtask` are missing defaults with values as shown above are used.
 
-Using Gulp is not a requirement for using GRunner (GRunner itself does use Gulp). GRunner can be used with own task logic that does not need anything from Gulp. If you like to, you can use GRunner with most Gulp plugins, as well with `gulp.src`, and other Gulp stream based constructs, similarly, as you would use them inside Gulp tasks. 
+Using Gulp is not a requirement for using GRunner (GRunner itself does NOT use Gulp). GRunner can be used with own task logic that does not need anything from Gulp. If you like to, you can use GRunner with most Gulp plugins, as well with `gulp.src`, and other Gulp stream based constructs, similarly, as you would use them inside Gulp tasks. 
 
 ##Command Line Reference
 
