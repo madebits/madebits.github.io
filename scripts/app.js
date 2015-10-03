@@ -681,7 +681,9 @@ var applyStyle = function(containerId) {
 		m.addClass('img-thumbnail');
 	}
 	else {
-		m.addClass('img-rounded');
+		if(!alt || (alt.indexOf('@noround@') < 0)) {
+			m.addClass('img-rounded');
+		}
 	}
 
 	if(!alt || (alt && !(alt.endsWith('inline') || (alt.indexOf('@inline@') >= 0) ))) {
