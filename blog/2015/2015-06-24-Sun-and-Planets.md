@@ -62,6 +62,8 @@ var dataMax = {
     d: d3.max(data, function(d, i){ return d.d }) };
 
 var width = 640, height = 200;
+if(width > window.screen.width) width = window.screen.width;
+if(width < 360) width = 360;
 var xscale = d3.scale.linear().domain([0, dataMax.d]).range([0, width - 100]);
 var rscale = function(r, scale) { 
     var t = r * radiusRatioFactor * scale; 
