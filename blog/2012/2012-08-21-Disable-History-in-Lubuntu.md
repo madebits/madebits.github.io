@@ -113,9 +113,9 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	sudo tune2fs -l /dev/sda1 | grep 'Reserved block count'
 	```
 
-	Then run in a new folder once per disk partition:
+	Then run in a new folder once per disk partition (`102400` is not magic here, any approximate size will do):
 	```
-	dd if=/dev/zero of=zero.small.file bs=1024 count=102400
+	dd if=/dev/zero of=zero.000 bs=1024 count=102400
 	while :; do cat /dev/zero > zero.$RANDOM; done
 	```  
 
@@ -126,6 +126,7 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 
 	Check using `df` command that *Avail*able disk space is 4 or smaller. If not, run the two commands above (while ... and sync ...) again. Repeat until `df` command reports that *Avail*able disk space is 4 or smaller.
 
-	Finally, clean the created `zero.*` files.
+	Finally, clean the created `rm zero.*` files.
+	
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-08-25-Fully-Remove-Installed-Packages-in-Lubuntu.md'>Fully Remove Installed Packages in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2012/2012-08-01-Change-Wallpaper-at-Startup-in-Lubuntu.md'>Change Wallpaper at Startup in Lubuntu</a></ins>
