@@ -23,7 +23,7 @@ Starting `snx`, creates a tunnel named `tunsnx` visible via `ifconfig`. To allow
 /sbin/iptables -A OUTPUT -j ACCEPT -o tunsnx
 ```
 
-To access windows remote desktops, install `sudo apt install freerdp-x11` and use something like (`xfreerdp` has much more options):
+To access windows remote desktops, install `sudo apt install freerdp-x11` and use something like ( `xfreerdp` has much more [options](http://manpages.ubuntu.com/manpages/yakkety/man1/xfreerdp.1.html) ):
 
 ```
 xfreerdp /v:10.11.11.11 /u:user
