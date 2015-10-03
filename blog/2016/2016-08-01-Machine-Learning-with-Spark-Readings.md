@@ -1,5 +1,7 @@
 #Starting Machine Learning in Spark Readings
 
+2016-08-01
+
 <!--- tags: ml scala -->
 
 Apache [Spark](http://spark.apache.org/) is an open framework to manipulate big data - data that does not fit in the memory of a single machine. I was mostly interested in machine learning with Spark. Spark MLLib [helps](https://www.youtube.com/watch?v=HG2Yd-3r4-M&list=PLTPXxbhUt-YWGNTaDj6HSjnHMxiTD1HCR) processing distributed large set of samples and do parallel parametric model evaluation. The number of features for a single data sample has to fit in the memory. Below is a list of resources I used to get familiar with Spark.
