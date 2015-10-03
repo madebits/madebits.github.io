@@ -58,6 +58,6 @@ Now, using any of the above methods, per user arguments can be defined one per l
 --enable-vaapi
 ```
 
-Line starting with `#` will be treated as comments.
+Lines starting with `#` will be treated as comments.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-12-19-Opera-On-Ubuntu.md'>Opera On Ubuntu</a></ins>
