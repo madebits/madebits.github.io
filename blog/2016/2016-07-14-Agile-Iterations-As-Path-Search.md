@@ -30,4 +30,4 @@ Doing most of planning around the starting point $$$A$$$ may ignore new possibil
 
 With agile methodologies moving towards $$$B_i$$$, we may become aware that our 2D world has indeed a third dimension and it may be possible to use the newest [warp drive](https://en.wikipedia.org/wiki/Warp_drive) to jump from $$$B_i$$$ to $$$C$$$. Path optimization based on lean thinking events are more probable in an agile project as the meta-reflection happens more often.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-06-27-Agile-Development-Readings.md'>Agile Development Readings</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-07-26-Getting-Started-With-Spark-Ml.md'>Getting Started With Spark Ml</a> <a rel='next' id='fnext' href='#blog/2016/2016-06-27-Agile-Development-Readings.md'>Agile Development Readings</a></ins>
