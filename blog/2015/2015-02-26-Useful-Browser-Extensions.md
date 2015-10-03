@@ -56,7 +56,7 @@ While these extensions appear to be safe at the point I added them here, there i
  
  Hide selected portions of pages and remember choices. 
 
-* [Minimal Theme](https://chrome.google.com/webstore/detail/minimal-modern/hgcdmgdfnieebdpkopialjdofdjbdmcg?hl=en) | [Slinky Modern](https://chrome.google.com/webstore/detail/slinky-modern/nilnodhmmonndffbejancdeiggflcehi?hl=en) | [Slinky Classic](https://chrome.google.com/webstore/detail/slinky-classic/hfjhlpgahgkpncekpdkgfoeppikldble?hl=en) | [DevTools Dark Theme](https://chrome.google.com/webstore/detail/devtools-theme-zero-dark/bomhdjeadceaggdgfoefmpeafkjhegbo/reviews?hl=en-US)
+* [Minimal Theme](https://chrome.google.com/webstore/detail/minimal-modern/hgcdmgdfnieebdpkopialjdofdjbdmcg?hl=en) | [Slinky Modern](https://chrome.google.com/webstore/detail/slinky-modern/nilnodhmmonndffbejancdeiggflcehi?hl=en) | [Slinky Classic](https://chrome.google.com/webstore/detail/slinky-classic/hfjhlpgahgkpncekpdkgfoeppikldble?hl=en) | [DevTools Dark Theme](https://chrome.google.com/webstore/detail/devtools-theme-zero-dark/bomhdjeadceaggdgfoefmpeafkjhegbo/reviews?hl=en-US) | [Red Theme](https://chrome.google.com/webstore/detail/simple-red-theme/ealcinkolodcnkokioepdoheohkffejc)
 
  Themes
 
