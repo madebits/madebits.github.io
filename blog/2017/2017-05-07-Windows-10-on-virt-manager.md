@@ -28,7 +28,11 @@ $ sudo adduser `id -un` libvirt-qemu
 
 ###Configuration Files
 
-Configuration of VMs is stored in `/etc/libvirt`. [Nested](https://docs.openstack.org/developer/devstack/guides/devstack-with-nested-kvm.html) virtualization is enabled by default in `/etc/modprobe.d/qemu-system-x86.conf`.
+Configuration of VMs is stored in `/etc/libvirt`. [Nested](https://docs.openstack.org/developer/devstack/guides/devstack-with-nested-kvm.html) virtualization is enabled by default in `/etc/modprobe.d/qemu-system-x86.conf`. To manually edit a VM configuration use:
+
+```
+virsh edit win10
+```
 
 ##Creating a Windows 10 VM
 
