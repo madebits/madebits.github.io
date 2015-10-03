@@ -192,4 +192,4 @@ This looks like a lot of code for a unit test and somehow it is, but it also doe
 Enabling isolated unit testing in C\# code requires uniformly caring about that form the start. DI with constructor injection offers a nice way to manage C\# limitations for mocking static types. Autofac, AutoFixture, and Moq libraries help realize isolated unit testing.
 
 
-<ins class='nfooter'><a id='fnext' href='#blog/2016/2016-02-07-Upgrading-To-Windows-10.md'>Upgrading To Windows 10</a></ins>
+<ins class='nfooter'><a id='fprev' href='#blog/2016/2016-02-17-Sharing-Local-Folders-Over-Remote-Desktop.md'>Sharing Local Folders Over Remote Desktop</a> <a id='fnext' href='#blog/2016/2016-02-07-Upgrading-To-Windows-10.md'>Upgrading To Windows 10</a></ins>

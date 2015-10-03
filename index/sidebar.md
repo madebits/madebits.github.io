@@ -1,3 +1,4 @@
+* [Sharing Local Folders Over Remote Desktop](#blog/2016/2016-02-17-Sharing-Local-Folders-Over-Remote-Desktop.md)
 * [Using Autofac to Organize CSharp Code](#blog/2016/2016-02-12-Using-Autofac-to-Organize-CSharp-Code.md)
 * [Upgrading To Windows 10](#blog/2016/2016-02-07-Upgrading-To-Windows-10.md)
 * [Bootstrapping Intercorrelated Data](#blog/2016/2016-02-03-Bootstrapping-Intercorrelated-Data.md)
@@ -5,4 +6,3 @@
 * [Javascript Task Runner](#blog/2015/2015-11-17-Javascript-Task-Runner.md)
 * [Lean Process Certified](#blog/2015/2015-11-02-Lean-Process-Certified.md)
 * [Agile Vocabulary](#blog/2015/2015-09-29-Agile-Vocabulary.md)
-* [Client Contracts in Scrum](#blog/2015/2015-09-11-Client-Contracts-in-Scrum.md)
