@@ -26,26 +26,27 @@ gspawn({
     collectStdout: true,
     logCall: true
     }, function(err, exitCode, signal, stdoutTxt, stderrTxt) {
+        console.log('done');
     });
 ```
 
 ##Details
 
-`gspawn(options, cb)` is the only exposed function. It returns the started `child_process` instance. This function is non-blocking. To be informed about the external stated process end (or of any possible errors), use the `cb` callback parameter. The callback `cb` is a function of form `fn(error, exitCode, signal, stdoutTxt, stderrTxt)`, where:
+`gspawn(options, cb)` is the only exposed function by the library. It returns the started `child_process` instance. `gspawn` function is non-blocking. To be informed about the external stated process end (or of any possible errors), use the `cb` callback parameter. The callback `cb` is a function of form `fn(error, exitCode, signal, stdoutTxt, stderrTxt)`, where:
     
 * `error` - not null in case of errors
-* `exitCode` - exit code of spawned process
+* `exitCode` - exit code of spawned process (if known)
 * `signal` - if known, signal use to close the process (may not be set)
 * `stdoutTxt` - default null or empty, see `options.collectStdout`.
 * `stderrTxt` - default null or empty, see `options.collectStderr`.
 
 A summary of available `gspawn` `options` follows (*boolean* options are all by default `false`):
 
-* `cmd`: the command to run. This can be a full system path, or a relative path if the command is inside the node package, or a command name (see `resolveCmd` option).
+* `cmd`: the command to run. This can be a full system path, or a relative path if the command is inside same the node package, or a command name (see `resolveCmd` option).
 
 * `args`: optional command line arguments for `cmd`. This can be null, a string, or an array of string (one arry element per each option) (passed to `child_process.spawn` after checks).
 
-* `resolveCmd`: if the `cmd` is a system program, such as, `bash`, specifying `resolveCmd: true` uses (which)[https://github.com/npm/node-which] library to find the whole path of the `cmd`.
+* `resolveCmd`: if the `cmd` is a system program, such as, `bash`, specifying `resolveCmd: true` uses [which](https://github.com/npm/node-which) library to find the whole path of the `cmd`.
 
 * `options`: if set, are passed as are to `child_process.spawn`. See `child_process.spawn` documentation, to specify `options.options.env`, and `options.options.cwd`.
 
