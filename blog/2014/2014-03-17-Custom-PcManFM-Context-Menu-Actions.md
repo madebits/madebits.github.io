@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-Lubuntu 14.04 comes bundled with PcManFm 1.2.0 which contains several new features. It is now possible to customize PcManFm context-menu with own actions for selected files and folders. It was possible also before to add custom context-menu for single files and folders using associated application desktop shortcuts and that still works. PcManFm 1.2.0 brings in more options.
+Lubuntu 14.04 comes bundled with PcManFm 1.2.0 which contains several new features. It is now possible to customize PcManFm context-menu with own actions for selected files and folders. Before that is was possible to add custom context-menu for single files and folders using associated application desktop shortcuts and that still works.
 
 <div id='toc'></div>
 
@@ -22,6 +22,7 @@ Due to a bug in original Lubuntu 14.04, GDebi will not install package dependenc
 sudo dpkg -i madebits-pca_1.0.0-1.deb
 sudo apt-get -f install
 ```
+
 Update: GDebi bug has now been fixed. With the latest GDebi version it should be able to install the package by double-clicking.
 
 ##Preparing to Test
