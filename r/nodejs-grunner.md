@@ -75,12 +75,13 @@ Other options:
 
 ##Task Dependencies
 
-When you define a task (via `G.t`) you can pass optional task dependencies to be run before it as second argument. The dependencies can be one task as string, or a array of strings. Nested arrays are supported and have special meaning.
+When you define a task (via `G.t`) you can pass optional task dependencies to be run before it as second argument. Dependencies can be one task as string, or a array of strings. *Nested* arrays are supported and have special meaning.
 
 * `G.t('t1')` - no dependencies.
-* `G.t('t2', 't1')` - t1 will be run before t2.
-* `G.t('t3', ['t1', 't2'])` - sequential, t1 will be run first than t2, and then t3.
-* `G.t('t4', ['t1', ['t2', 't3'], 't1'])` - t1 will be run first, then t2 and t3 will both start in parallel, then t1 will run again after t2 and t3 are done, and then t4 will run.
+* `G.t('t2', 't1')` - `t1` will be run before `t2`.
+* `G.t('t3', ['t1', 't2'])` - sequential, `t1` will be run first then `t2`, and then `t3`.
+* `G.t('t4', ['t1', ['t2', 't3'], 't1'])` - `t1` will be run first, then `t2` and `t3` will both start in parallel, then `t1` will run again after `t2` and `t3` are done, and then `t4` will run.
+* `G.t('t3', [['t1', 't2'])` - `t1` and `t2` will start first in parallel, and then `t3` will run once `t1` and `t2` are both done.
 
 *Parallel* here means execution will not block, *sequential* means the execution blocks until all tasks before finish. In general, if the task dependencies array is considered *level 1* and the first nested arrays as level 2, then the tasks in *even* levels of nested arrays are started in parallel and those in *odd* levels are started sequentially. Tasks started in parallel have pipe symbol `|` listed in console before their name. Run-time nesting depth of tasks is shown in console with dots `.` before the task name.
 
@@ -105,7 +106,9 @@ g1.run('t1'); // run t1 on g1
 g2.run('t1'); // run t1 on g2
 ```
 
-Instances do not share any state, same task name in two different instances can be used to mean two different things. Methods documented in *Task API Reference* section can be called on any `GRunner` instance. The `new G.GRunner()` can be called only on the process singleton instance. The `run` method does not block. When using the `grunner` in command-line, `G.run` is called for you automatically.
+Instances do not share any state, same task name in two different instances can be used to mean two different things. Methods documented in *Task API Reference* section can be called on any `GRunner` instance. The `new G.GRunner()` can be called only on the process singleton instance. The `run` method does not block. 
+
+When using the `grunner` in command-line, `G.run` is called for you automatically. Using `grunner` in command-line is just a convenience. You can also use `.js` task files (that include others via `require`) that call `G.Run`explicitly, and run those task files via directly `node`.
 
 ##Invoking External Tools
 
@@ -177,12 +180,13 @@ Here `g` represents a `GRunner` instance object.
         The `taskFun` callback `cb` contains the following properties:
 
         * `cb.ctx` - described above. Example:
-           ```javascript
+          ```javascript
           g.t('tt', cb => {
             console.log(cb.ctx.task.userData);
             cb();
             });
           ```
+
         * `cb.onDone(streamOrPromise, [cbFn])` - described above. Example:
           ```javascript
           g.t('tt', cb => {
@@ -198,7 +202,7 @@ Here `g` represents a `GRunner` instance object.
 
 * `g.addTask` - this is a synonym for `g.t`.
 
-* `g.tasks` - array of tasks. Use `g.t` to add tasks to `g.tasks`. The minimal task object is `{dep: [], cb: null, userData: null}`. You can modify `g.tasks` as needed for advanced scenarios.
+* `g.tasks` - array of tasks. Use `g.t` to add tasks to `g.tasks`. The minimal task object is `{dep: [], cb: null, userData: null}`. You can modify `g.tasks` as needed in advanced scenarios. `dep` is a JS array so it is easy to manipulate.
 
 * `g.run(taskName, cb)` - is used to run a task. When used via command-line this function is called for you for each `--gtask` task. `g.run` does not block - use `cb(error)` to be notified when done. If a task has any dependencies, then those tasks will be run before (*recursively*). `g.run()` only reads options and tasks, so you can invoke `g.run()` more than once on same instance without waiting for previous invocation to finish (as long as you do not modify options and tasks in between).
 
@@ -209,7 +213,6 @@ Here `g` represents a `GRunner` instance object.
 The following helper functions are also provided:
 
 * `g.startPipe([objectOrIterator])` - returns a starting object `Stream` from one or more objects. If an array or iterator is given as argument, then there will be an element in stream per each array or iterator element. For example:
-       
    ```javascript
    g.t('tt', cb => {
    return g.startPipe(['a', 'b', 'c'])
@@ -219,7 +222,7 @@ The following helper functions are also provided:
      _cb(); // or _cb(null, o);
    }));
    });
-   ``` 
+  ``` 
 
 * `g.throughPipe([eachFn], [flushFn])` - this is a wrapper around [through2](https://www.npmjs.com/package/through2) object streams. `eachFn(o, cbFn)` is called for every stream object. `flushFn(cbFn)`, if specified, is called when the stream ends. The callback `cbFn` must be called within these function's code. For `eachFn`, the callback is `cbFn([error], [object])` and it can be used to return an optional `object` in the successive stream. For `flushFn`, the callback is `cbFn([error])`. Both `cnFn` functions have a `cbFn.push(object)` function property to introduce additional objects in successive stream. See `g.startPipe` above for an example.
 
