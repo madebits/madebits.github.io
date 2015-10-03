@@ -658,7 +658,7 @@ var applyStyle = function(containerId) {
 	if(!alt || (alt && !(alt.endsWith('inline') || (alt.indexOf('@inline@') >= 0) ))) {
 		// data links
 		var parentTag = m.parent().get( 0 ).tagName;
-		if(parentTag.toLowerCase() !== 'a') {
+		if((parentTag.toLowerCase() !== 'a') || (alt.indexOf('@responsive@') >= 0) ) {
 			m.addClass('img-responsive');
 			var src = m.attr('src');
 			var processed = m.data('dimg') || false;
