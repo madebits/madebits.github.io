@@ -1,1 +1,1 @@
-var homeUrl='blog/2016/2016-02-24-Key-Derivation-Functions.md';
+var homeUrl='blog/2016/2016-03-03-WebWorker-Patterns.md';

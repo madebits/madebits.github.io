@@ -1,3 +1,4 @@
+* [WebWorker Patterns](#blog/2016/2016-03-03-WebWorker-Patterns.md)
 * [Key Derivation Functions](#blog/2016/2016-02-24-Key-Derivation-Functions.md)
 * [Sharing Local Folders Over Remote Desktop](#blog/2016/2016-02-17-Sharing-Local-Folders-Over-Remote-Desktop.md)
 * [Using Autofac to Organize CSharp Code](#blog/2016/2016-02-12-Using-Autofac-to-Organize-CSharp-Code.md)
@@ -5,4 +6,3 @@
 * [Bootstrapping Intercorrelated Data](#blog/2016/2016-02-03-Bootstrapping-Intercorrelated-Data.md)
 * [WebEx On Ubuntu](#blog/2015/2015-12-10-WebEx-On-Ubuntu.md)
 * [Javascript Task Runner](#blog/2015/2015-11-17-Javascript-Task-Runner.md)
-* [Lean Process Certified](#blog/2015/2015-11-02-Lean-Process-Certified.md)
