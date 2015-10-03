@@ -4,6 +4,8 @@
 
 <!--- tags: editor -->
 
+An incomplete list of useful [VSCode extensions](https://marketplace.visualstudio.com/vscode).
+
 ##Look and Feel
 
 * [Afterglow Theme](https://marketplace.visualstudio.com/items?itemName=gerane.Theme-Afterglow) - I am used to this theme from SublimeText and find it the most comfortable one to work, thought I switch up and now to other themes.
