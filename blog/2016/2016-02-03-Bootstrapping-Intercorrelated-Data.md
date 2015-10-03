@@ -27,7 +27,7 @@ indexToRange <- function(index) {
 }
 ```
 
-Now, we can use `boot` library, to re-sample windows:
+Now, we can use `boot`, to re-sample windows:
 
 ```r
 library(boot)
