@@ -21,6 +21,30 @@ Starting `snx`, creates a tunnel named `tunsnx` visible via `ifconfig`. To allow
 /sbin/iptables -A OUTPUT -j ACCEPT -o tunsnx
 ```
 
+An alternative way to start `snx` without having to type server and use all the time is to add a `~/.snxrc` file:
+
+```
+server remote.example.com
+username user
+reauth yes
+```
+
+Then run only `snx`. Full list of options for the `~/.snxrc` file from documentation are:
+
+```
+   - server          SNX server to connet to
+   - sslport         The SNX SSL port (if not default)
+   - username        the user name
+   - certificate     certificate file to use
+   - calist          directory containing CA files
+   - reauth          enable automatic reauthentication. Valid values { yes, no }
+   - debug           enable debug output. Valid values { yes, 1-5 }
+   - cipher          encryption algorithm to use. Valid values { RC4 / 3DES }
+   - proxy_name      proxy hostname 
+   - proxy_port      proxy port
+   - proxy_user      username for proxy authentication
+```
+
 To access windows remote desktops, install `sudo apt install freerdp-x11` and use something like:
 
 ```
