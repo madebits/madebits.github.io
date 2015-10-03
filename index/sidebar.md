@@ -1,4 +1,4 @@
-* [Ubuntu Monitor Tools](#blog/2016/2016-08-30-Ubuntu-Monitor-Tools.md)
+* [Ubuntu Screen Tools](#blog/2016/2016-08-30-Ubuntu-Screen-Tools.md)
 * [Lubuntu Closing Chrome Downloads Bar](#blog/2016/2016-08-02-Lubuntu-Closing-Chrome-Downloads-Bar.md)
 * [Upgrading to Lubuntu 16.04.1](#blog/2016/2016-07-30-Upgrading-to-Lubuntu-16.04.1.md)
 * [Using keynav to move mouse pointer on Lubuntu](#blog/2016/2016-07-27-Using-keynav-to-move-mouse-pointer-on-Lubuntu.md)
