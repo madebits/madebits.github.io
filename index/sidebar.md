@@ -1,3 +1,4 @@
+* [xrandr Panning with no Tracing](#blog/2016/2016-10-02-xrandr-Panning-with-no-Tracing.md)
 * [Ubuntu Screen Tools](#blog/2016/2016-08-30-Ubuntu-Screen-Tools.md)
 * [Lubuntu Closing Chrome Downloads Bar](#blog/2016/2016-08-02-Lubuntu-Closing-Chrome-Downloads-Bar.md)
 * [Machine Learning with Spark Readings](#blog/2016/2016-08-01-Machine-Learning-with-Spark-Readings.md)
@@ -5,4 +6,3 @@
 * [Using keynav to move mouse pointer on Lubuntu](#blog/2016/2016-07-27-Using-keynav-to-move-mouse-pointer-on-Lubuntu.md)
 * [Getting Started With Spark Ml](#blog/2016/2016-07-26-Getting-Started-With-Spark-Ml.md)
 * [Agile Iterations As Path Search](#blog/2016/2016-07-14-Agile-Iterations-As-Path-Search.md)
-* [Agile Development Readings](#blog/2016/2016-06-27-Agile-Development-Readings.md)
