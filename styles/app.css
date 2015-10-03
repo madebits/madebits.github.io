@@ -2,6 +2,8 @@ body, .mbg-label, .btn, .form-control, .panel-title { font-size: 20px; }
 
 h1, h2, h3, h4, .nfooter, .sidebar { text-transform: capitalize; }
 
+a, code { word-wrap: break-word; }
+
 /* #31708f */
 h1, h2, h3, h4 { color: #1a1a1a; }
 h2 { border-bottom: 1px solid #dfdedc; padding-bottom: 9px; }
@@ -29,7 +31,7 @@ a[target="_blank"]:after {
 
 /* content: url(ext.png); margin: 0 0 0 2px; */
 
-code { padding-bottom: 0px; padding-top: 1px; padding-left: 2px; padding-right: 2px; background-color: #f7f7f7; color: #333333; font-size: 1.01em; word-wrap: break-word; }
+code { padding-bottom: 0px; padding-top: 1px; padding-left: 2px; padding-right: 2px; background-color: #f7f7f7; color: #333333; font-size: 1.01em; }
 
 pre { 
     overflow: auto;
