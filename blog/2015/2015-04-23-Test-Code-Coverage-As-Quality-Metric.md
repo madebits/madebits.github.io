@@ -90,7 +90,7 @@ RUO = U / (I + M)
 RIO = I / (U + M)
 RMO = M / (U / M)
 
-(U / I) > (I / M) > (U / M)
+(U / M) > (U / I) > (I / M)
 ```
 
 
