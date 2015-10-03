@@ -48,6 +48,9 @@ While these extensions appear to be safe at the point I added them here, there i
   
  Stop WebRTC [IP Leaks](https://diafygi.github.io/webrtc-ips/)  
 
+* [Page Eraser](https://chrome.google.com/webstore/detail/page-eraser/ekofpchjmoalonajopdeegdappocgcmj?hl=en)
+ 
+ Hide selected portions of pages and remember choices. 
 
 ##Firefox
 
