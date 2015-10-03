@@ -103,7 +103,7 @@ Dependency strings that evaluate to `false` are ignored. This can be convenient 
 
 ##Running a Task Once
 
-There is no direct support to run a task refereed more than once in the dependencies only once (default behavior in Gulp). However, using the custom task state data, you can easy create a `once` wrapper to execute own tasks function only once (see *Task API Reference* below for details of objects used in this example).
+There is no direct support to run a task refereed more than once in the dependencies only once (default behavior in Gulp). However, using the custom task state data, you can easy create a `once` wrapper to execute own task function code only once (see *Task API Reference* below for details of objects used in this example):
 
 ```javascript
 const once = (ucb) => {
@@ -129,7 +129,7 @@ G.t('t3', 't2');
 g.t('tt', ['t3', 't2', 't1']); 
 ```
 
-Task `t1` will be invoked several times if we run `tt`, but its user defined callback code will run only once. The `once` wrapper does not affect how often any task dependencies of `t1` will be run. They have also to be wrapped using `once` if single execution is needed also for them.
+Task `t1` will be invoked several times if we run `tt`, but its user defined callback code will run only once. The `once` wrapper does not affect how often any task dependencies of `t1` will be run. They have also to be wrapped using `once`, in case single execution is also needed for them.
 
 ##GRunner Instances
 
