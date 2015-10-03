@@ -109,14 +109,15 @@ Here `g` represents a `GRunner` instance object.
 
 * `GRunner([options])` - constructor, you can pass an optional `options` object. Options can be accessed also via `g.options`. Options can be changed at any time before calling `g.run()`. Options are:
     * `log = fn(msg, isError)` - replaces the internal log function which logs in `console`.
-    * `exec = fn(doneCb, ctx)` - gives an option to wrap each `taskFun` call. Basically `fn` can be implemented as:
+    * `exec = fn(doneCb)` - gives an option to wrap each `taskFun` call. Basically `fn` can be implemented as:
         ``` 
         if(!ctx.task.cb) { doneCb(); return; }
-        return ctx.task.cb(doneCb, ctx);
+        return ctx.task.cb(doneCb);
         ```
     * `dryRun` - if `true`, same as `--D` command-line option.
-    * `beforeTaskRun = fn(ctx)` - called before taskFun is run (see `g.t`). This method and the next are intended for extra logging and testing. For more advanced wrapping use the `exec` option.
-    * `afterTaskRun = fn(ctx)` - called after `taskFun` is run (see `g.t`).
+    * `beforeTaskRun = fn(ctx)` - called before taskFun is run (see `g.t` for `ctx`). This method and the next are intended for extra logging and testing. For more advanced wrapping use the `exec` option.
+    * `afterTaskRun = fn(ctx)` - called after `taskFun` is run (see `g.t` for `ctx`).
+    * `noLoopDetection` - GRunner does circular dependency loop detection as it runs the tasks. If you do not need that functionality, turn it off by setting this option `true`. 
 
 * `g.t(...)` - adds a task and has several forms:
 
@@ -130,11 +131,11 @@ Here `g` represents a `GRunner` instance object.
   Tasks are added as keys (`taskName`) to `g.tasks` object. Adding a task with same `taskName` a previous one, replaces it. While you can add tasks directly to `g.tasks` (and sometimes this can be useful), using `g.t` is recommended. The arguments of `g.t(...)` are:
     * `taskName` - string (valid JS object key name).
     * `taskDependecies` - optional string, or array of strings of task names to be run before.
-    * `taskFun(cb, ctx)` - optional body of the task. The optional `ctx` object contains information about the task `{taskName, task, runner, onDone}`. Normally, `ctx` should be treated as read-only information, but you can modify the custom `userData` passed to `g.t`. There are several valid ways to denote that you are done within `taskFun` code:
+    * `taskFun(cb)` - optional body of the task. The optional `ct.ctx` object contains information about the task `ctx = {taskName, task, runner}`. Normally, `cb.ctx` should be treated as read-only information, but you can modify the custom `userData` passed to `g.t`. There are several valid ways to denote that you are done within `taskFun` code:
         * Call `cb();` on success, or `cb(error);` on error. If your code calls `cb`, it must be called once.
         * Return a JS *promise*. Any promise object that supports `then` is supported. In this case you should **not** call `cb()`.
         * Return a `Stream`, such as `return gulp.src(...).pipe(...);`. In this case you should **not** call `cb()`.
-        * A bit more advanced, instead of returning a stream or promise, call `ctx.onDone(streamOrPromise, cb);` on a stream or promise. You may never need this, but if you ever feel like you need it, it can come handy. In this case you should **not** call `cb()`. You should also **not** `return` anything in this case from `taskFun`. `ctx.onDone(null, cb);` is same as calling `cb();` directly.
+        * A bit more advanced, instead of returning a stream or promise, call `cb.onDone(streamOrPromise, [cb]);` on a stream or promise. You may never need this, but if you ever feel like you need it, it can come handy. In this case you should **not** call `cb()`. You should also **not** `return` anything in this case from `taskFun`. `cb.onDone(null);` is same as calling `cb();` directly. The optional `[cb]` parameter enables wrapping the `cb()` call in your own function. If you do that, call `cb()` on your own within it.
 
         You can also exit a task using errors:
 
@@ -144,6 +145,8 @@ Here `g` represents a `GRunner` instance object.
     * `userData` - can be any object, accessible via `ctx.task.userData` within `taskFun`.
 
 * `g.addTask` - this is a synonym for `g.t`.
+
+* `g.tasks` - array of tasks. Use `g.t` to add tasks to `g.tasks`. The minimal task object is `{dep: [], cb: null, userData: null}`.
 
 * `g.run(taskName, cb)` - is used to run a task. When used via command-line this function is called for you for each `--gtask` task. `g.run` does not block - use `cb(error)` to be notified when done. If a task has any dependencies, then those tasks will be run before (*recursively*). `g.run()` only reads options and tasks, so you can invoke `g.run()` more than once on same instance without waiting for previous invocation to finish (as long as you do not modify options and tasks in between).
 
