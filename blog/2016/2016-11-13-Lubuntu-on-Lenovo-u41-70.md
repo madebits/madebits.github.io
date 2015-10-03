@@ -419,40 +419,40 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
   Additionally, the following script allows me to switch mouse buttons and touchpad as needed, run as `mouse.sh right`:
 
   ```bash
-  #!/bin/bash
+    #!/bin/bash
 
-  function getIds()
-  {
-    ids=$(xinput | grep pointer | grep "$1" | column -t | cut -d ' ' -f 11 | cut -d = -f 2)
-    echo $ids
-  }
+    function getIds()
+    {
+      ids=$(xinput | grep pointer | grep "$1" | column -t | cut -d ' ' -f 11 | cut -d = -f 2)
+      echo $ids
+    }
 
-  function configureDevice()
-  {
-    ids=( $(getIds "$1") )
-    for id in "${ids[@]}"
-    do
-      xinput set-button-map $id $2 $3 $4
-    done
-  }
+    function configureDevice()
+    {
+      ids=( $(getIds "$1") )
+      for id in "${ids[@]}"
+      do
+        xinput set-button-map $id $2 $3 $4
+      done
+    }
 
-  mouseDevice="Logitech USB Receiver"
-  touchDevice="SynPS/2 Synaptics TouchPad"
+    mouseDevice="Logitech USB Receiver"
+    touchDevice="SynPS/2 Synaptics TouchPad"
 
-  if [[ right = $1* ]]; then
-    echo "mouse right"
-    configureDevice "$mouseDevice" 1 2 3
-    configureDevice "$touchDevice" 1 2 3
-    #xinput enable "${touchDevice}"
-  else
-    echo "mouse left"
-    configureDevice "$mouseDevice" 3 2 1
-    configureDevice "$touchDevice" 1 2 3
-    #xinput disable "${touchDevice}"
-  fi
+    if [[ right = $1* ]]; then
+      echo "mouse right"
+      configureDevice "$mouseDevice" 1 2 3
+      configureDevice "$touchDevice" 1 2 3
+      #xinput enable "${touchDevice}"
+    else
+      echo "mouse left"
+      configureDevice "$mouseDevice" 3 2 1
+      configureDevice "$touchDevice" 1 2 3
+      #xinput disable "${touchDevice}"
+    fi
 
-  synclient PalmDetect=1
-  xmodmap -e "keycode 66 = Shift_L"
+    synclient PalmDetect=1
+    xmodmap -e "keycode 66 = Shift_L"
  ```
 
 * Mandatory custom `/etc/hosts` entries:
