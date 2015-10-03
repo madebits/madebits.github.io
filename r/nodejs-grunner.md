@@ -113,7 +113,9 @@ const once = (ucb) => {
             return;
         }
         cb.ctx.task.once = true;
-        cb.ctx.runner.log(`@once: ${cb.ctx.taskName}`, false, cb.ctx.taskName);
+        cb.ctx.runner.log(`@once: ${cb.ctx.taskName}`
+          , false
+          , cb.ctx.taskName);
         return ucb(cb);
     };
 };
