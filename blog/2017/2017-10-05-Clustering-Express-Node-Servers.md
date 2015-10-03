@@ -11,7 +11,6 @@ Following code, assembled from looking at various places, enables process cluset
 
 var cluster = require('cluster');
 if(cluster.isMaster) {
-	
 	var isShutdown = false;
 	var workers = [];
 	var cpuCount = require('os').cpus().length;
