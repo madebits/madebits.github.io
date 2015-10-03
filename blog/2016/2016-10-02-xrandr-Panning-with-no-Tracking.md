@@ -10,6 +10,12 @@ To scale up a 1366x768 screen to 1920x1080 with no tracking using [xrandr](https
 xrandr --fb 1920x1080 --output LVDS1 --panning 1920x1080+0+0/1366x768+0+0/0/0/0/00 --scale 1.4x1.4
 ```
 
+It can be combined with `chromium-browser` using:
+
+```
+chromium --force-device-scale-factor=1.4
+```
+
 To undo the change:
 
 ```
