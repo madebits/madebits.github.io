@@ -17,13 +17,13 @@ This does not work as intended, as Chromium detects the key is synthetic and ign
 If used [without](https://unix.stackexchange.com/questions/214909/xdotool-does-not-send-keys) a window id, `xdotool` sends keys differently and Chromium cannot detect that. The only drawback is that unlike the script above, it has to be triggered manually. To do this, I added a key binding to `~/.config/openbox/lubuntu-rc.xml`:
 
 ```xml
-<keybind key="W-y">
+<keybind key="W-z">
   <action name="Execute">
     <command>xdotool key ctrl+j ctrl+w</command>
   </action>
 </keybind>
 ```
 
-The combination of `WindowsKey+y` allows closing the Chromium downloads bar with a much more convenient shortcut than `ctrl+j`, `ctrl+w`.
+The combination of `WinKey+z` allows closing the Chromium downloads bar with a much more convenient shortcut than `ctrl+j`, `ctrl+w`.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-07-30-Upgrading-to-Lubuntu-16.04.1.md'>Upgrading to Lubuntu 16.04.1</a></ins>
