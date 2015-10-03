@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-I upgraded some of my machines home from Lubuntu 14.04 LTS to 16.04.1 LTS. I waited until the new versions was offered via the System Update tool. The update process went mostly quite well:
+I upgraded my machines at home from Lubuntu 14.04 LTS to 16.04.1 LTS. I waited until the new versions was offered via the *Software Updater* tool. The update process went mostly quite well:
 
 * I was left without network access after install. I had played once with `dnscrypt-proxy` and `dnsmasq` and they were activated as services by `systemd`. I had to remove them both and restart to be able to use my current network configuration.
 * Pulseaudio did not work and volume settings were unreachable. I happen to have run to this [issue](https://askubuntu.com/questions/23018/revert-audio-configuration-to-defaults) before (when installing 15.10 in a virtual machine), so I knew I had to clean `~/.config/pulse` folder. I had also to [restart](https://askubuntu.com/questions/15223/how-can-i-restart-pulseaudio-without-logout) pulseaudio using `pulseaudio -k`.
@@ -13,6 +13,7 @@ I upgraded some of my machines home from Lubuntu 14.04 LTS to 16.04.1 LTS. I wai
 * `php` is silently removed and I had to install the new version `sudo apt install php7.0-cli`.
 * `leafpad` seems to have a bug in this version. When saving `smb://` files you are left silently with empty files. SublimeText and `geany` both seem to work fine as replacements.
 * KeePass has been updated to the safer KeePassX 2 and old files need to be imported and converted.
+* In one machine, I run into an `_apt` user permission [issue](https://bugs.launchpad.net/ubuntu/+source/aptitude/+bug/1543280) and had to use the workaround specified there.
 * I kept a copy of all configuration file diffs shown during install, and accepted all new versions. After install, I went through the diffs and took over any previous settings I still needed.
 * After installation, I updated the few ppa-s I use, and did an update.
 
