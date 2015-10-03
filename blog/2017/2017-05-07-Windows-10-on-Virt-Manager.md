@@ -366,7 +366,7 @@ sudo setfacl -m default:u::rwx,default:g::rwx /data/share
 sudo setfacl -m default:m::rwx /data/share
 ```
 
-New files are in guest are created as not-shareable with the group. The above does not work as somehow default and mask ACL is ignored for new files. A permission fix is need in host after creation of new files guest:
+New files are in guest are created as non-shareable with the group. The above does not work as somehow default and mask ACL is ignored for new files. A permission fix is need in host after creation of new files guest:
 
 ```bash
 $ sudo setfacl -R -m u:libvirt-qemu:rwx,u:$(id -un):rwx /data/share
