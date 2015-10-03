@@ -166,21 +166,34 @@ var	goa = null
 
 , collectExternal = function(containerId) {
 	$(containerId + ' a[href]').each(function(i, e) {
+		var _this =$(this);
 		var href = $(this).attr('href').toLowerCase();
 		var processed = $(this).data('mbgce') || false;
 		if(!processed 
-			&& href
-		 	&& startsWithAny(href, ['http:', 'https:', 'ftp:']))
+			&& href)
 		{
 			$(this).data('mbgce', true);
-			$(this).click(function(){
-				collect($(this).attr('href'));
-			});
-			if(!startsWithAny(href, ['https://' + madebits.constDomain, 'http://' + madebits.constDomain, 
-				'https://' + madebits.constDomain2, 'http://' + madebits.constDomain2])
-				&& !endsWithAny(href, ['.zip', '.tar', '.jar', '.deb', '.xpi', '.7z', '.msi', '.exe'])
-				&& !(href.indexOf('zipball') > 0)) {
-				$(this).attr('target', '_blank');
+			if(startsWithAny(href, ['http:', 'https:', 'ftp:'])) {
+				$(this).click(function(){
+					collect($(this).attr('href'));
+				});
+				if(!startsWithAny(href, ['https://' + madebits.constDomain, 'http://' + madebits.constDomain, 
+					'https://' + madebits.constDomain2, 'http://' + madebits.constDomain2])
+					&& !endsWithAny(href, ['.zip', '.tar', '.jar', '.deb', '.xpi', '.7z', '.msi', '.exe'])
+					&& !(href.indexOf('zipball') > 0)) {
+					$(this).attr('target', '_blank');
+				}
+			}
+			if(href.startsWith('@@@')) {
+				var h = window.location.hash;
+				if(h) {
+					var idx = h.lastIndexOf('/');
+					if(idx >= 0) {
+						h = h.substr(0, idx + 1);
+						href = h + href.substr(3);
+						_this.attr('href', href);
+					}
+				}
 			}
 		}
 	});
