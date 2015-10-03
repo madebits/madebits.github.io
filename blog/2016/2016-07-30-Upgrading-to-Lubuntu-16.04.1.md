@@ -14,6 +14,7 @@ I upgraded my machines at home from Lubuntu 14.04 LTS to 16.04.1 LTS. I waited u
 * `leafpad` seems to have a bug in this version. When saving `smb://` files you are left silently with empty files. SublimeText and `geany` both seem to work fine as replacements. `gedit` can also be used in Lubuntu in this release, as its dependencies to other Ubuntu stuff has been moved now to plugins.
 * KeePass has been updated to the safer KeePassX 2 and old files need to be imported and converted.
 * In one machine, I run into an `_apt` user permission [issue](https://bugs.launchpad.net/ubuntu/+source/aptitude/+bug/1543280) and had to use the workaround specified there.
+* As a user of `gnome-terminal` I had to [search](https://askubuntu.com/questions/613465/upgrade-to-15-04-what-happened-to-my-gnome-terminal-tabs) where open new tab option was gone.
 * I kept a copy of all configuration file diffs shown during install, and accepted all new versions. After install, I went through the diffs and took over any previous settings I still needed.
 * After installation, I updated the few ppa-s I use, and did an update.
 
