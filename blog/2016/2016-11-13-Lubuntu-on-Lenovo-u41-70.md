@@ -304,6 +304,13 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
   0.0.0.0 client-s.gateway.messenger.live.com 
   ```
 
+* I set a [Private](https://help.ubuntu.com/community/EncryptedPrivateDirectory) folder using:
+
+  ```
+  sudo apt-get install ecryptfs-utils
+  ecryptfs-setup-private
+  ```
+
 ##Final Thoughts
 
 Finding an ultrabook-like machine that is powerful enough, runs Ubuntu without many hacks, and is not very expensive - can be a challenge. With u41-70, I had to be flexible on some areas, such as, TFT screen quality, battery life, and WLAN reach. I am happy that there was no obstacle big enough to make me return it. The machine is powerful enough for all my needs at home and light enough to carry around.
