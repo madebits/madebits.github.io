@@ -62,7 +62,7 @@ Once the VM is started, use `ps aux | grep qemu` to find the exact command-line 
  │                 └─2*[{qemu-system-x86}]
 ```
 
-##Connecting and Host Keyboard Grab Key
+##Connecting to VM and Host Grab Key
 
 In `virt-manager` *Edit / Preferences* menu, *Console* tab, you can change the grab key. I usually use only right `Ctr` key, same as in Virtualbox. 
 
@@ -80,7 +80,7 @@ Or:
 remote-viewer $(virsh domdisplay win10) -f --hotkeys=toggle-fullscreen=shift+f11
 ```
 
-Another alternative is to use [RDP](https://wiki.archlinux.org/index.php/QEMU#Remote_Desktop_Protocol) (`sudo apt install freerdp-x11`), via (Ctrl+Alt+Enter toggles fullscreen). I am also sharing a folder:
+Another alternative is to use [RDP](https://wiki.archlinux.org/index.php/QEMU#Remote_Desktop_Protocol) (`sudo apt install freerdp-x11`), but performance is not as good as Spice. `Ctrl+Alt+Enter` toggles fullscreen. I am also sharing a folder:
 
 ```
 xfreerdp /bpp:32 /v:192.168.122.74 /u:userName /drive:home,$HOME/work-remote /sound /f /toggle-fullscreen +async-input +async-update +async-transport +async-channels +clipboard
@@ -106,7 +106,7 @@ To parse only the IP use this evolved line:
 $ virsh domifaddr win10 | tail -2 | head -1 | tr -s ' ' | cut -d ' ' -f 5 | cut -d '/' -f 1
 ```
 
-You can add it to `$HOME/.bashrc` as:
+You could add it to `$HOME/.bashrc` as:
 
 ```
 virship() {
@@ -252,7 +252,7 @@ For comparison, this is what I get for Windows 10, on latest [VirtualBox](http:/
 
 ###Folder Sharing
 
-Spice guest tools offer several other features, such as direct [folder sharing](https://www.spice-space.org/spice-user-manual.html#_folder_sharing):
+Spice guest tools offer several other features, such as direct [folder sharing](https://www.spice-space.org/spice-user-manual.html#_folder_sharing) via [WebDAV](https://en.wikipedia.org/wiki/WebDAV):
 
 * Install [spice-webdavd](https://www.spice-space.org/download/windows/spice-webdavd/) on Windows guest, and enable the *Spice webdav proxy* windows service (`sc start spice-webdavd`).
 * Add to VM as hardware a Channel of Spice Port with `org.spice-space.webdav.0`. 
@@ -272,6 +272,6 @@ Spice guest tools offer several other features, such as direct [folder sharing](
  "C:\Program Files (x86)\SPICE webdavd\map-drive.bat"
  ```
 
-This will add the mapped drive, as last free drive `Z:`, on Windows guest. [WebDAV](https://en.wikipedia.org/wiki/WebDAV) is not necessary better than SFTP.
+This will add the mapped drive, as last free drive `Z:`, on Windows guest.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-05-09-Ubuntu-Block-Application-Internet-Access.md'>Ubuntu Block Application Internet Access</a> <a rel='next' id='fnext' href='#blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md'>Cross Cutting Concerns Evolution</a></ins>
