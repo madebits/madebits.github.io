@@ -2,7 +2,7 @@ body, .mbg-label, .btn, .form-control, .panel-title { font-size: 20px; }
 
 h1, h2, h3, h4, .nfooter, .sidebar { text-transform: capitalize; }
 
-a, code { word-wrap: break-word; }
+a, code, em { word-wrap: break-word; }
 
 /* #31708f */
 h1, h2, h3, h4 { color: #1a1a1a; }

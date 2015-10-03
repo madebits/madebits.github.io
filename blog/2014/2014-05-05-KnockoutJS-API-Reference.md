@@ -11,7 +11,7 @@
 * applyBindingsToDescendants: function (viewModelOrBindingContext, rootNode)
 * applyBindingsToNode: function (node, bindings, viewModelOrBindingContext) - deprecated, use * applyBindingAccessorsToNode
 * bindingContext: function (dataItemOrAccessor, parentContext, dataItemAlias, extendCallback)
-* createChildContext: function (dataItemOrAccessor, dataItemAlias, extendCallback) - create a new child context usually from dataItemOrAccessor=bindingContext.$rawData
+* createChildContext: function (dataItemOrAccessor, dataItemAlias, extendCallback) - create a new child context usually from dataItemOrAccessor = bindingContext.$rawData
 	* extend: function (properties) - extend current context with new data
 	* $data: Object - viewmodel in current context (unwrapped viewmodel - note unwrap only works on top level)
 	* $parent: Object - the parent $data (if any)
@@ -121,10 +121,10 @@
 * exportSymbol: function (koPath, object) - inner usage
 * expressionRewriting: Object - internal use
 	* bindingRewriteValidators: Array[0]
-	* insertPropertyAccessorsIntoJson: function preProcessBindings(bindingsStringOrKeyValueArray, bindingOptions)
+	* insertPropertyAccessorsIntoJson: function preProcessBindings (bindingsStringOrKeyValueArray, bindingOptions)
 	* keyValueArrayContainsKey: function (keyValueArray, key)
-	* parseObjectLiteral: function parseObjectLiteral(objectLiteralString)
-	* preProcessBindings: function preProcessBindings(bindingsStringOrKeyValueArray, bindingOptions)
+	* parseObjectLiteral: function parseObjectLiteral (objectLiteralString)
+	* preProcessBindings: function preProcessBindings (bindingsStringOrKeyValueArray, bindingOptions)
 	* twoWayBindings: Object
 	* writeValueToProperty: function (property, allBindings, key, value, checkIfDifferent)
 * extenders: Object - return a modified observable, custom ones can be added
@@ -141,10 +141,10 @@
 * jqueryTmplTemplateEngine: function () - see setTemplateEngine
 * jsonExpressionRewriting: Object - same as expressionRewriting
 	* bindingRewriteValidators: Array[0]
-	* insertPropertyAccessorsIntoJson: function preProcessBindings(bindingsStringOrKeyValueArray, bindingOptions)
+	* insertPropertyAccessorsIntoJson: function preProcessBindings (bindingsStringOrKeyValueArray, bindingOptions)
 	* keyValueArrayContainsKey: function (keyValueArray, key)
-	* parseObjectLiteral: function parseObjectLiteral(objectLiteralString)
-	* preProcessBindings: function preProcessBindings(bindingsStringOrKeyValueArray, bindingOptions)
+	* parseObjectLiteral: function parseObjectLiteral (objectLiteralString)
+	* preProcessBindings: function preProcessBindings (bindingsStringOrKeyValueArray, bindingOptions)
 	* twoWayBindings: Object
 	* writeValueToProperty: function (property, allBindings, key, value, checkIfDifferent)
 * memoization: Object - internal use
@@ -155,7 +155,7 @@
 * nativeTemplateEngine: function () - see setTemplateEngine
 * observable: function (initialValue)
 	* fn: Function
-		* equalityComparer: function valuesArePrimitiveAndEqual(a, b)
+		* equalityComparer: function valuesArePrimitiveAndEqual (a, b)
 * observableArray: function (initialValues)
 	* fn: Object[0]
 		* destroy: function (valueOrPredicate)
@@ -182,7 +182,7 @@
 * storedBindingContextForNode: function (node, bindingContext) - internal use, use contextFor
 * subscribable: function ()
 	* fn: Function
-		* extend: function applyExtenders(requestedExtenders)
+		* extend: function applyExtenders (requestedExtenders)
 		* getSubscriptionsCount: function ()
 		* hasSubscriptionsForEvent: function (event)
 		* isDifferent: function (oldValue, newValue)
@@ -199,7 +199,7 @@
 	* anonymousTemplate: function (element) - uses ko.utils.domData to read / write text *associated* with the DOM element, without reading/writing the actual element text content (it will be overwritten with the rendered template output)
 	* domElement: function (element) - reads / writes the text content of an arbitrary DOM element
 * toJS: function (rootObject) - to javascript objects
-* toJSON: function (rootObject, replacer, space) - utils.stringifyJson(toJS(rootObject))
+* toJSON: function (rootObject, replacer, space) - utils.stringifyJson( toJS(rootObject))
 * unwrap: function (value) - same as utils.unwrapObservable
 * utils: Object
 	* addOrRemoveItem: function (array, value, included) - adds value if included=true (and not alerady in array), otherwise removes it (if present)
@@ -214,7 +214,7 @@
 	* arrayRemoveItem: function (array, itemToRemove) - removes itemToRemove if found via arrayIndexOf
 	* canSetPrototype: true - if __proto__ can be set, internal use
 	* cloneNodes: function (nodesArray, shouldCleanNodes) - clone nodes in a new arry, calling ko.cleanNode on each if shouldCleanNodes
-	* compareArrays: function compareArrays(oldArray, newArray, options)
+	* compareArrays: function compareArrays (oldArray, newArray, options)
 	* domData: Object
 		* clear: function (node)
 		* get: function (node, key)

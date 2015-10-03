@@ -16,7 +16,7 @@ To get Mac OS work in a virtual machine, I went through the steps listed in [sys
 
 5. Depending on how fast your hard disk is (SSD is recommended) the machine will start and guide you through initial setup (OS X is already installed only the initial setup will be run). You can select a user name and password and finally you can login.
 
-6. The first thing I had to do was to mount the *VMware Unlocker - Mac OS X Guest\VMware 8.x + 9.x + 10.x Series\Tools\darwin.iso* which is also part of OS_X_Mavericks_10.9_Retail_VMware_Image files. It will trigger the installation on VMware Player Tools in within the Mac OS virtual machine. Restart the virtual machine after that. Shared folders will then work.
+6. The first thing I had to do was to mount the *VMware Unlocker - Mac OS X Guest\VMware 8.x + 9.x + 10.x Series\Tools\darwin.iso* which is also part of *OS_X_Mavericks_10.9_Retail_VMware_Image* files. It will trigger the installation on VMware Player Tools in within the Mac OS virtual machine. Restart the virtual machine after that. Shared folders will then work.
 
 7. To fix the OS X screen resolution, I found a [trick](http://hints.macworld.com/article.php?story=20131030130206132) that helps list resolutions in the Display Settings (hold down the option key and click the "Scaled" radio button). This allowed me to select a proper resolution for my screen and be able to then run the machine in full screen mode.
 
