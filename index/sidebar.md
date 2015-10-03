@@ -1,3 +1,4 @@
+* [Checkpoint Security On Ubuntu](#blog/2017/2017-03-08-Checkpoint-Security-On-Ubuntu.md)
 * [Integrating GO.CD with Nexus](#blog/2017/2017-02-21-Integrating-GO.CD-with-Nexus.md)
 * [Embracing Team Practices Variability](#blog/2017/2017-01-19-Embracing-Team-Practices-Variability.md)
 * [Lubuntu on Dell Latitude E5570](#blog/2016/2016-12-30-Lubuntu-on-Dell-Latitude-E5570.md)
@@ -5,4 +6,3 @@
 * [Opera On Ubuntu](#blog/2016/2016-12-19-Opera-On-Ubuntu.md)
 * [From User Stories To Code](#blog/2016/2016-11-29-From-User-Stories-To-Code.md)
 * [Lubuntu on Lenovo u41 70](#blog/2016/2016-11-13-Lubuntu-on-Lenovo-u41-70.md)
-* [To Rule Your City Conquer World](#blog/2016/2016-10-30-To-Rule-Your-City-Conquer-World.md)
