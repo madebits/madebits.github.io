@@ -88,6 +88,11 @@ In my machine, this makes black text, in general, more readable. Similar effects
 ```
 #!/bin/bash
 
+if [ "$1" == "1" ]; then
+  xgamma -gamma 1
+  exit 0
+fi
+
 xgamma -gamma $(echo "$(xgamma 2>&1 | cut -d ' ' -f 4 | tr -d ',')${1}" | bc -l)
 ```
 
@@ -96,12 +101,17 @@ If saved as `gamma` this can used: `gamma +.1` or `gamma -.1` and combined with 
 ```xml
 <keybind key="W-g">
   <action name="Execute">
-    <command>/home/user/bin/gamma -0.1</command>
+    <command>~/bin/gamma -0.1</command>
   </action>
 </keybind>
 <keybind key="W-S-g">
   <action name="Execute">
-    <command>/home/user/bin/gamma +0.1</command>
+    <command>~/bin/gamma +0.1</command>
+  </action>
+</keybind>
+<keybind key="W-A-g">
+  <action name="Execute">
+    <command>~/bin/gamma 1</command>
   </action>
 </keybind>
 ```
