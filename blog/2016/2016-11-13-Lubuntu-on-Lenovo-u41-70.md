@@ -60,14 +60,13 @@ u41-70 comes with a full-hd [TFT](https://www.quora.com/What-is-the-difference-b
 
 ###GPU
 
-I experienced some sporadic [tearing](https://wiki.archlinux.org/index.php/intel_graphics#Tips_and_tricks) with display. Tearing was up and now in Chrome browser given its GPU usage, but also in sometimes VLC given it also uses hardware acceleration for video. It seems creating `/usr/share/X11/xorg.conf.d/20-intel.conf` with (ArchWiki writes that `   Option      "TearFree"    "true"` option should not be needed with DRI3):
+I experienced some sporadic [tearing](https://wiki.archlinux.org/index.php/intel_graphics#Tips_and_tricks) with display. Tearing was up and now in Chrome browser given its GPU usage. It helps creating `/usr/share/X11/xorg.conf.d/20-intel.conf` with:
 
 ```
 Section "Device"
    Identifier  "Intel Graphics"
    Driver      "intel"
-   Option      "AccelMethod"  "sna"
-   Option      "DRI"    "3"
+   Option      "AccelMethod"  "uxa"
 EndSection
 ```
 
