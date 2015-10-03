@@ -64,11 +64,11 @@ Once the VM is started, use `ps aux | grep qemu` to find the exact command-line 
 
 ##Connecting to VM and Host Grab Key
 
-In `virt-manager` *Edit / Preferences* menu, *Console* tab, you can change the grab key. I usually use only right `Ctr` key, same as in Virtualbox. 
+In `virt-manager` *Edit / Preferences* menu, *Console* tab, you can change the grab key. I used only right `Ctr` key, same as in Virtualbox. 
 
-The toolbar is not show for me in fullscreen due to some bug, so I use the grab key, and then `F11` key to exit the fullscreen, if I cannot find the invisible toolbar button blindly using the mouse (toolbar works if you use `virt-viewer`).  
+The toolbar is not show for me in fullscreen of `virt-manager` VM console due to some bug, so I use the grab key, and then `F11` key to exit the fullscreen, if I cannot find the invisible toolbar button blindly using the mouse (toolbar works if you use `virt-viewer`).  
 
-Apart of using `virt-manager` an alternative way to access the machine is to use virt-viewer directly:
+Apart of using `virt-manager` an alternative way to access the machine is to use `virt-viewer` directly:
 
 ```
 virt-viewer win10 -arf --hotkeys=toggle-fullscreen=shift+f11
