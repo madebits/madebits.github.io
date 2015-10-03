@@ -329,7 +329,7 @@ $(function() {
 			replaceText('\\', true);
 			break;
 			case "insertImage":
-			replaceText('![inline](url)');
+			replaceText('![@inline@](url)');
 			break;
 			case "insertLink":
 			replaceText('[{0}](url)', true);
