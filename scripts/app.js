@@ -746,7 +746,12 @@ var applyStyle = function(containerId) {
 }
 
 , markup = function(data) {
-	data = marked(data);
+	try {
+		data = marked(data);
+	} catch(e) {
+		console.error(e);
+		return null;
+	}
 	return data;
 }
 
@@ -1154,6 +1159,12 @@ var lastPage = null
 
 , setPageData = function(pageData, data) {
 	//pageData.container.html(data);
+	if((data === null) || (typeof data === 'undefined')) {
+		pageData.errorStatus = '431';
+		pageData.errorStatusText = 'Something went wrong!';
+		onPageError(pageData);
+		return;
+	}
 
 	pageData.container.fadeOut(function() {
 		pageData.container.html(data);
