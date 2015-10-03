@@ -126,10 +126,10 @@ GRunner tasks are non-blocking, but there is no direct *parallelism* involved. I
 ...
 let gspawn = require('gspawn');
 ...
-let extern = filePath => {
+let extern = (filePath, cmd) => {
     return cb => {
         gspawn({
-           cmd: 'node',
+           cmd: cmd || 'node',
            args: filePath,
            resolveCmd: true,
            logCall: true,
@@ -220,7 +220,7 @@ Here `g` represents a `GRunner` instance object.
         * `cb.onDone(streamOrPromise, [cbFn])` - described above. Example:
           ```javascript
           g.t('tt', cb => {
-            let s = gulp.src(...).pipe(g.throughPipe(...));
+            let s = gulp.src(...).pipe(g.pipeThrough(...));
             cb.onDone(s, () => {
               console.log('done');
               cb();
@@ -242,11 +242,11 @@ Here `g` represents a `GRunner` instance object.
 
 The following helper functions are also provided:
 
-* `g.startPipe([objectOrIterator])` - returns a starting object `Stream` from one or more objects. If an array or iterator is given as argument, then there will be an element in stream per each array or iterator element. For example:
+* `g.pipeStart([objectOrIterator])` - returns a starting object `Stream` from one or more objects. If an array or iterator is given as argument, then there will be an element in stream per each array or iterator element. For example:
    ```javascript
    g.t('tt', () => {
-   return g.startPipe(['a', 'b', 'c'])
-   .pipe(g.throughPipe(o, _cb) => {
+   return g.pipeStart(['a', 'b', 'c'])
+   .pipe(g.pipeThrough(o, _cb) => {
      console.log(o); // o is 'a' on first call
      _cb.push(o);
      _cb(); // or _cb(null, o);
@@ -255,7 +255,7 @@ The following helper functions are also provided:
   ```
 
 
-* `g.throughPipe([eachFn], [flushFn])` - this is a wrapper around [through2](https://www.npmjs.com/package/through2) object streams. `eachFn(o, cbFn)` is called for every stream object. `flushFn(cbFn)`, if specified, is called when the stream ends. The callback `cbFn` must be called within these function's code. For `eachFn`, the callback is `cbFn([error], [object])` and it can be used to return an optional `object` in the successive stream. For `flushFn`, the callback is `cbFn([error])`. Both `cnFn` functions have a `cbFn.push(object)` function property to introduce additional objects in successive stream. See `g.startPipe` above for an example.
+* `g.pipeThrough([eachFn], [flushFn])` - this is a wrapper around [through2](https://www.npmjs.com/package/through2) object streams. `eachFn(o, cbFn)` is called for every stream object. `flushFn(cbFn)`, if specified, is called when the stream ends. The callback `cbFn` must be called within these function's code. For `eachFn`, the callback is `cbFn([error], [object])` and it can be used to return an optional `object` in the successive stream. For `flushFn`, the callback is `cbFn([error])`. Both `cnFn` functions have a `cbFn.push(object)` function property to introduce additional objects in successive stream. See `g.pipeStart` above for an example.
 
 * `g.setProcessMaxLifeTime(timeInMinutes, [cb])` - if set to a `timeInMinutes > 0`, then the process will terminate when that time is reached. To reset the timer, call same function with a new value. `0` cancels any existing timer. The timer is per GRunner instance, but the process is killed, no matter what instance timer expires first. The optional callback `cb` is called if set, in place of `process.exit(1)`. The `--L` command-line option calls this function on global ` G` instance.
 
