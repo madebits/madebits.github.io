@@ -4,7 +4,7 @@
 
 <!--- tags: javascript -->
 
-[WebWorkers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) are a HTML5 JavaScript [API](https://html.spec.whatwg.org/multipage/workers.html) enabling multi-threaded client side code. Dedicated workers are created per page, whereas shared workers are shared across windows. Workers can be combined in different ways. Three representative communication patterns of communication between workers and the DOM window thread are shown next to help getting started chaining web workers in custom topologies.
+[WebWorkers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) are a HTML5 JavaScript [API](https://html.spec.whatwg.org/multipage/workers.html) enabling multi-threaded client side code. Dedicated workers are created per page, whereas shared workers are shared across windows. Workers can be combined in different ways. Three representative communication patterns of communication between workers and the DOM window thread are shown next to help with getting started chaining web workers in custom topologies.
 
 ##Dedicated Workers Pool
 
