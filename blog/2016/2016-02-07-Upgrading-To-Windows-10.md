@@ -21,7 +21,7 @@ I am not sure if it got any updates like this, but the UI progress reported it d
 
 ##Grub (kind of) Preserved
 
-When I had installed Windows 7, I made sure there was no recovery partition created, so I had only two partitions on the SSD (I am not using UEFI). I  never needed to do a Windows recovery and I see no value in a recovery partition. It seems Windows 10 does not work without a recovery partition and the installer created a 450MB one after the first. This may have drawbacks in case I need to re-size volumes. It also moved the Ubuntu partition one up, form `sda2` to `sda3`, resulting in a `grub` rescue prompt on next restart. Being a relatively late adopter has its benefits. The [question](https://askubuntu.com/questions/654316/windows-10-and-ubuntu-dual-boot/654994#654994) had been already asked. At the `grub` rescue prompt, I tested first where Ubuntu was and then temporary redirected `grub` to that
+When I had installed Windows 7, I made sure there was no recovery partition created, so I had only two partitions on the SSD (I am not using UEFI). I  never needed to do a Windows recovery and I see no value in a recovery partition. It seems Windows 10 does not work without a recovery partition and the installer created a 450MB one after the first. This may have drawbacks in case I need to re-size volumes. It also moved the Ubuntu partition one up, from `/dev/sda2` to `/dev/sda3`, resulting in a `grub` rescue prompt on next restart. Being a relatively late adopter has its benefits. The [question](https://askubuntu.com/questions/654316/windows-10-and-ubuntu-dual-boot/654994#654994) had been already asked. At the `grub` rescue prompt, I tested first where Ubuntu was and then temporary redirected `grub` to that
 location:
 
 ```
