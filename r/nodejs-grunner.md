@@ -262,7 +262,7 @@ The following helper functions are provided:
    ```javascript
    g.t('tt', () => {
    return g.pipeStart(['a', 'b', 'c'])
-   .pipe(g.pipeThrough(o, _cb) => {
+   .pipe(g.pipeThrough((o, _cb) => {
      console.log(o); // o is 'a' on first call
      _cb.push(o);
      _cb(); // or _cb(null, o);
