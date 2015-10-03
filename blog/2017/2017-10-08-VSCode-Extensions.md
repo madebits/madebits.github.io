@@ -10,7 +10,7 @@
 
 * [GitHub Clean White Theme](https://marketplace.visualstudio.com/items?itemName=saviorisdead.Theme-GitHubCleanWhite) - thought I use mostly Afterglow, sometimes a clear white theme is useful to keep around.
 
-* [vscode-icons](https://marketplace.visualstudio.com/items?itemName=robertohuertasm.vscode-icons) - needs no introduction. While I try some other icon theme up and now, I find myself always comming back to this icon theme.
+* [vscode-icons](https://marketplace.visualstudio.com/items?itemName=robertohuertasm.vscode-icons) - needs no introduction. While I try some other icon theme up and now, I find myself always coming back to this icon theme.
 
 ##Coding
 
