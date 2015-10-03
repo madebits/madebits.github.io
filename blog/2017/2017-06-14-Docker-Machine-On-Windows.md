@@ -67,7 +67,7 @@ When done with `docker`, we can stop VM using (`docker-machine` will list all [a
 $ docker-machine stop
 ```
 
-A common case for `docker` containers is to be able to access some service from outside of Docker Engine VM in Windows host ([port forwarding](https://stackoverflow.com/questions/36286305/how-do-i-forward-a-docker-machine-port-to-my-host-port-on-osx) in VM is needed to access as `localhost`). This is already handled by VM NAT (VM is accessible in the host), as the following [example](https://docs.docker.com/machine/get-started/#run-containers-and-experiment-with-machine-commands) from documentation shows:
+A common case for `docker` containers is to be able to access some service from outside of Docker Engine VM in Windows host ([port forwarding](https://stackoverflow.com/questions/36286305/how-do-i-forward-a-docker-machine-port-to-my-host-port-on-osx) in VM is needed to access ports outside the host or as `localhost`). This is already handled by VM NAT (VM is accessible in the host), as the following [example](https://docs.docker.com/machine/get-started/#run-containers-and-experiment-with-machine-commands) from documentation shows:
 
 ```
 $ docker run -d -p 8000:80 nginx
