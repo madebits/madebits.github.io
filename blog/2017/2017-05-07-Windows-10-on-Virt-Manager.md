@@ -66,6 +66,15 @@ Either use `virt-manager` UI to create the disk image, or create a *raw* image o
 
 This command creates [sparse](https://wiki.archlinux.org/index.php/sparse_file) files. `truncate` command can be used to extend the disk size if needed. Same effect can be achieved using: `qemu-img create -f raw -o size=128G win10.raw`. You can [switch](https://easyengine.io/tutorials/kvm/convert-qcow2-to-raw-format/) at any time to `qcow2` format. 
 
+To backup the [sparse](https://wiki.archlinux.org/index.php/sparse_file#Archiving_with_.60tar.27) disk image files in an external disk use:
+
+```bash
+# backup
+tar -Scf /media/backup/win10.tar /data/kvm/win10.raw
+# restore
+tar -C /data/kvm/ -xvf /media/backup/win10.tar
+```
+
 ###QEMU Process
 
 Once the VM is started, use `ps aux | grep qemu` to find the exact command-line used. Example, of my QEMU process with two vCPUs managed via KVM.
