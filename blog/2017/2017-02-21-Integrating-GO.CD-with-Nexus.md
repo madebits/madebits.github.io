@@ -126,6 +126,10 @@ The brute-force way to do this works nicely for our binary artifacts. We downloa
 
 RELEASES artifacts are persevered for a longer time. While we allow artifact overwrite in our Nexus, the timestamps in release artifacts allow us to have globally uniquely identifiable binaries.
 
+##Complete GO.CD Workflow
+
+![](blog/images/cd.png)
+
 ##Summary
 
 GO.CD is a great tool to manage continuous delivery pipelines. Templates guide creation and combination of pipelines and in our case invoke custom Node.js code that manages builds and deployments. Node.js code is parameterized via files found in Git repositories, so that builds and configurations are fully versioned and controlled. As part of the Node.js code actions, we store and consume binary artifact to and from Nexus, using each tool for what it does best. 
