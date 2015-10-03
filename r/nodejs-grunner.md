@@ -41,12 +41,12 @@ let G = require('grunner')
     , gulp = require('gulp');
 
 G.t('t1', () => {
-    return gulp.src('*.js').pipe(...); # gulp.src can be used if wished
+    return gulp.src('*.js').pipe(...);
     });
 
 G.t('t2', cb => {
-        console.log('Hello World!');
-        cb();
+    console.log('Hello World!');
+    cb();
     });
 
 G.t('default', ['t1', 't2']);
