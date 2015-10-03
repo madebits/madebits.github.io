@@ -6,9 +6,9 @@
 
 An idea goes through several documented steps to become a product.
 
-Marketings Requirements Definition (MDR)
+Marketings Requirements Definition (MRD)
 
-MDR explains reason d’etre for a product. What is problem that the product is trying to solve and what is the solution. MDR contains the market research and a business analysis of existing and related solutions. MDR addresses costs and expected rewards of the proposed solution. One MRD may result in one or more products.
+MRD contain the vision and explains reason d’etre for one more products. What is problem that we are trying to solve and what is the solution. MRD contains the market research and a business analysis of existing and related solutions. MRD addresses costs and expected rewards of the proposed solution. One MRD may result in one or more products.
 
 Product Requirements Definition (PRD)
 
