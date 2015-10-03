@@ -1,4 +1,4 @@
-#Upgrading To Windows-10
+#Upgrading To Windows 10
 
 <!--- tags: linux, windows -->
 
