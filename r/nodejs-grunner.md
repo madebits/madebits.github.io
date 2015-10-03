@@ -4,7 +4,7 @@
 
 <!--- tags: javascript nodejs -->
 
-**[GRunner](https://www.npmjs.com/package/grunner)** is a task runner for [Node.js](https://nodejs.org/), inspired by and compatible with [Gulp](http://gulpjs.com/). Most Gulp plugins and Gulp streams, such as, `gulp.src`, can be used as they are with GRunner. Gulp 3 has some task limitations that are addressed in [Gulp 4](https://github.com/gulpjs/gulp/tree/4.0). GRunner task scheduler is based on [async](https://github.com/caolan/async) and it is *subjectively* better :). If you ever felt like Gulp is somehow limited or difficult to handle some of the things you wanted, you are in the right place. GRunner uses some ES2015 features, so it needs a recent version of Node.js.
+**[GRunner](https://www.npmjs.com/package/grunner)** is a task runner for [Node.js](https://nodejs.org/), inspired by and compatible with [Gulp](http://gulpjs.com/). Most Gulp plugins and Gulp streams, such as, `gulp.src`, can be used as they are with GRunner. Gulp 3 has some task limitations that are addressed in [Gulp 4](https://github.com/gulpjs/gulp/tree/4.0). GRunner task scheduler is based on [async](https://github.com/caolan/async) and it is *subjectively* better :). If you ever found Gulp task handling somehow limiting, you are in the right place. GRunner uses some ES2015 features, so it needs a recent version of Node.js.
 
 ##Usage
 
@@ -122,6 +122,7 @@ let extern = filePath => {
            args: filePath,
            resolveCmd: true,
            logCall: true,
+           log: (txt, src) => G.log(txt, !(src % 2), cb.ctx.taskName),
            expectedExitCode: 0
         }, cb);
     };
@@ -130,12 +131,15 @@ let extern = filePath => {
 G.t('t1', extern('./t1.js'));
 ```
 
+The console output (`log`) of the external task in the example is redirected to be printed via `G.log` for consistent formating.
+
 ##Task API Reference
 
 Here `g` represents a `GRunner` instance object.
 
 * `GRunner([options])` - constructor, you can pass an optional `options` object. Options can be accessed also via `g.options`. Options can be changed at any time before calling `g.run()`. Options are:
-    * `log = fn(msg, isError)` - replaces the internal log function which logs in `console`.
+    * `log = fn(msg, isError, taskName)` - replaces the internal log function which logs in `console`.
+    * `name` - if set, instance name is used by default log function and printed in console.
     * `exec = fn(doneCb)` - gives an option to wrap each `taskFun` call. Basically, `fn` could be implemented as:
         ```javascript 
         if(!ctx.task.cb) { doneCb(); return; }
@@ -182,26 +186,13 @@ Here `g` represents a `GRunner` instance object.
         * `cb.onDone(streamOrPromise, [cbFn])` - described above. Example:
           ```javascript
           g.t('tt', cb => {
-            let s = gulp.src(...).pipe(cb.throughPipe(...));
+            let s = gulp.src(...).pipe(g.throughPipe(...));
             cb.onDone(s, () => {
               console.log('done');
               cb();
               });
             });
           ```
-        * `cb.startPipe([objectOrIterator])` - returns a starting object `Stream` from one or more objects. If an array or iterator is given as argument, then there will be an element in stream per each array or iterator element. For example:
-        
-          ```javascript
-          g.t('tt', cb => {
-            return cb.startPipe(['a', 'b', 'c'])
-            .pipe(cb.throughPipe(o, _cb) => {
-              console.log(o); // o is 'a' on first call
-              _cb.push(o);
-              _cb(); // or _cb(null, o);
-            }));
-          });
-          ``` 
-        * `cb.throughPipe([eachFn], [flushFn])` - this is a wrapper around [through2](https://www.npmjs.com/package/through2) object streams. `eachFn(o, cbFn)` is called for every stream object. `flushFn(cbFn)`, if specified, is called when the stream ends. The callback `cbFn` must be called within these function's code. For `eachFn`, the callback is `cbFn([error], [object])` and it can be used to return an optional `object` in the successive stream. For `flushFn`, the callback is `cbFn([error])`. Both `cnFn` functions have a `cbFn.push(object)` function property to introduce additional objects in successive stream. See `cb.startPipe` above for an example.
           
     * `userData` - can be any object, accessible via `cb.ctx.task.userData` within `taskFun`.
 
@@ -211,11 +202,26 @@ Here `g` represents a `GRunner` instance object.
 
 * `g.run(taskName, cb)` - is used to run a task. When used via command-line this function is called for you for each `--gtask` task. `g.run` does not block - use `cb(error)` to be notified when done. If a task has any dependencies, then those tasks will be run before (*recursively*). `g.run()` only reads options and tasks, so you can invoke `g.run()` more than once on same instance without waiting for previous invocation to finish (as long as you do not modify options and tasks in between).
 
-* `g.log(msg, isError)` - writes `msg` string in `console.log`, or if `isError=true` in `console.error`. You can replace this function with your own using `options.log`.
+* `g.log(msg, [isError], [taskName])` - writes `msg` string in `console.log`, or if `isError=true` in `console.error`. You can replace this function with your own using `g.options.log`. If `g.options.name` is set, the default logger print the name before each log statement. If you call `g.log` in your own tasks, it is a good idea to pass the `taskName` parameter, so that parallel tasks logs can be distinguished.
 
 * `g.dumpTasks([logger])` - dump the current list of tasks using `console.log` (can be changed by supplying your own `logger(str)` function).
 
 The following helper functions are also provided:
+
+* `g.startPipe([objectOrIterator])` - returns a starting object `Stream` from one or more objects. If an array or iterator is given as argument, then there will be an element in stream per each array or iterator element. For example:
+       
+   ```javascript
+   g.t('tt', cb => {
+   return g.startPipe(['a', 'b', 'c'])
+   .pipe(g.throughPipe(o, _cb) => {
+     console.log(o); // o is 'a' on first call
+     _cb.push(o);
+     _cb(); // or _cb(null, o);
+   }));
+   });
+   ``` 
+
+*`g.throughPipe([eachFn], [flushFn])` - this is a wrapper around [through2](https://www.npmjs.com/package/through2) object streams. `eachFn(o, cbFn)` is called for every stream object. `flushFn(cbFn)`, if specified, is called when the stream ends. The callback `cbFn` must be called within these function's code. For `eachFn`, the callback is `cbFn([error], [object])` and it can be used to return an optional `object` in the successive stream. For `flushFn`, the callback is `cbFn([error])`. Both `cnFn` functions have a `cbFn.push(object)` function property to introduce additional objects in successive stream. See `g.startPipe` above for an example.
 
 * `g.setProcessMaxLifeTime(timeInMinutes, [cb])` - if set to a `timeInMinutes > 0`, then the process will terminate when that time is reached. To reset the timer, call same function with a new value. `0` cancels any existing timer. The timer is per instance, but the process is killed, no matter what instance timer expires first. The optional callback `cb` is called if set, in place of `process.exit(1)`. The `--L` command-line option calls this function on global ` G` instance.
 
