@@ -4,7 +4,7 @@
 
 <!--- tags: csharp encryption -->
 
-Simple encryption code snippet in C# for `byte[]` and `string` to have around for AES in CBC mode either with authentication (HMACSHA256) (after encryption) or not. Different AES and MAC keys are generated from password (with different salt).
+Simple [encryption](https://en.wikipedia.org/wiki/Authenticated_encryption) code snippet in C# for `byte[]` and `string` to have around for AES in CBC mode either with authentication (HMACSHA256) (after encryption) or not. Different AES and MAC keys are generated from password (with different salt).
 
 ```cs
 using System;

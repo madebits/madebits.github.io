@@ -10,4 +10,4 @@ The solution is to [map](http://superuser.com/questions/644684/mapping-drive-let
 
 We can select to share drive `X:` in Remote Desktop options and this will expose only the `C:\Folder\Example` local folder to the remote machine.
 
-<ins class='nfooter'><a id='fnext' href='#blog/2016/2016-02-12-Using-Autofac-to-Organize-CSharp-Code.md'>Using Autofac to Organize CSharp Code</a></ins>
+<ins class='nfooter'><a id='fprev' href='#blog/2016/2016-02-24-Key-Derivation-Functions.md'>Key Derivation Functions</a> <a id='fnext' href='#blog/2016/2016-02-12-Using-Autofac-to-Organize-CSharp-Code.md'>Using Autofac to Organize CSharp Code</a></ins>
