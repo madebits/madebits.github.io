@@ -97,6 +97,10 @@ When you define a task (via `G.t`) you can pass optional task dependencies to be
 
 Circular task dependencies, such as, `G.t('t1', ['t2']); G.t('t2', ['t1']);`, direct or indirect, will result in failure.
 
+Dependency strings that evaluate to `false` are ignored. This can be convenient in some cases (if you fill in the dependencies array dynamically):
+
+* `G.t('t2', [null, 't1', [null, null], ''])` - `t1` will be run before `t2`.
+
 ##GRunner Instances
 
 When you use `let G = require('grunner');` you get *same* process wide singleton instance `G` of `GRunner` class. This instance `G` is used by default, by all `gfile.js` tasks. If you want to use the `grunner` command-line, you should only use this process wide singleton object to define your tasks. 
@@ -274,7 +278,13 @@ The following helper functions are provided:
 
 * `g.setProcessMaxLifeTime(timeInMinutes, [cb])` - if set to a `timeInMinutes > 0`, then the process will terminate when that time is reached. To reset the timer, call same function with a new value. `0` cancels any existing timer. The timer is per GRunner instance, but the process is killed, no matter what instance timer expires first. The optional callback `cb` is called if set, in place of `process.exit(1)`. The `--L` command-line option calls this function on global ` G` instance.
 
-* `g.env(key)` - returns `process.env[key]`. Additionally, this function knows to process nested environment variables in values using the special `[[KEY]]` syntax. For example, if `K1=V1` and `K2=V2[[K1]]`, then `g.env('K2')` will return `V2V1`. Environment variable nesting and replacement is platform specific (both syntax and behavior). This function offers a way to handle environment variable nesting using own platform agnostic syntax, if needed. Non found variables are replaced with empty values.
+* `g.env(key)` - returns `process.env[key]`. Additionally, this function knows to process nested environment variables in values using the special `[[KEY]]` syntax. For example, if `K1=V1` and `K2=V2[[K1]]`, then `g.env('K2')` will return `V2V1`. Environment variable nesting and replacement is platform specific (both syntax and behavior). This function offers a way to handle environment variable nesting using own platform agnostic syntax, if needed. Non found variables are replaced with empty values. You can call `g.env` inside task functions, or outside them:
+
+  ```javascript
+  # if DEBUG then debugTask will be run after 't1'
+  g.t('tt', ['t1', g.env('DEBUG') ? 'debugTask' : null]);
+  g.run('tt');
+  ```
 
 * `g.envValue(value)` - this is similar to `g.env(key)`, but operates on a `process.env[key]` returned value (and not `key` name). 
 
