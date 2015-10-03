@@ -8,6 +8,7 @@ h1 { font-size: 38px; font-weight: bold; }
 h2 { font-weight: 600; }
 
 .mbg-entry-background h2 { border-bottom: 0px; } 
+#entry { margin: 20px; }
 
 a[target="_blank"]:after {
     content: url(ext.png);
