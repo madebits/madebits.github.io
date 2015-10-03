@@ -14,7 +14,7 @@ KVM will work only if hardware visualization is [supported](https://wiki.archlin
 
 ###Group Membership
 
-Add current user to `libvirt-qemu` group (`virt-manager` will complain about group `libvirtd`, but the correct group to use in Ubuntu is `libvirt-qemu`).  
+Add current user to `libvirt-qemu` group (`virt-manager` will complain about group `libvirtd`, but the correct groups to use in Ubuntu are `libvirt` and `libvirt-qemu`).  
 
 ```
 $ sudo adduser `id -un` libvirt-qemu
