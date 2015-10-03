@@ -4,7 +4,7 @@
 
 <!--- tags: javascript nodejs -->
 
-**[GSpawn](https://www.npmjs.com/package/gspawn)** is a library to invoke external tools for Node.js. `gspawn` wraps Node.js `child_process.spawn` to make it easier to invoke external tools. `gspawn` is similar to `child_process.exec`, but without some of `child_process.exec` limitations.
+**[GSpawn](https://www.npmjs.com/package/gspawn)** is a small library to invoke external tools for Node.js. `gspawn` wraps Node.js `child_process.spawn` to make it easier to invoke external tools. `gspawn` is similar to `child_process.exec`, but without some of `child_process.exec` limitations.
 
 ##Usage
 
