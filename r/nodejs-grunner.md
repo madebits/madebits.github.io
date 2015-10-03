@@ -288,11 +288,11 @@ Some simple low level file manipulation functions are provided. You can either u
 
 * `g.fileReadJson(file, [throwErr])` - (synchronous) returns an object from a JSON file. Same semantics as `g.fileReadBin` for errors.
 
-* `g.fileWriteBin(file, data)` - (synchronous) write data to file. If the folder of file does not exist it is created.
+* `g.fileWriteBin(file, data)` - (synchronous) write data to file. If the folder of file does not exist, it is created.
 
-* `g.fileWriteTxt(file, data)` - (synchronous) write data to file as UTF8. If the folder of file does not exist it is created.
+* `g.fileWriteTxt(file, data)` - (synchronous) write data to file as UTF8. If the folder of file does not exist, it is created.
 
-* `g.fileWriteJson(file, data)` - (synchronous) write data object to file. If the folder of file does not exist it is created.
+* `g.fileWriteJson(file, data)` - (synchronous) write data object to file. If the folder of file does not exist, it is created.
 
 * `g.files(dir, [recursive], [filter])` - normally you would use `gulp.src` to get a stream of files, or the `glob` module. I have found `glob` module to be not very reliable with [UNC](https://en.wikipedia.org/wiki/Universal_Naming_Convention) paths, so `g.files` is provided as a simple alternative. `g.files` returns all files in a given folder specified by `dir` as an object stream. Details:
  
