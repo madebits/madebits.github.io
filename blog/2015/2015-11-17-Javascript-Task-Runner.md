@@ -11,7 +11,7 @@ I use syntax inspired by [run-sequence](https://www.npmjs.com/package/run-sequen
 The whole task runner logic is below:
 
 ```javascript
-__ = require('async');
+var __ = require('async');
 
 var runTask = function(task, cb) {
     var t = tasks[task];
@@ -48,10 +48,10 @@ There is not much error handling (todo on your own :), but it works and it will 
 ```javascript
 var tasks = {};
 
-task['t1'] = { cb: function(cb) { console.log('t1'); cb(); } };
-task['t2'] = { cb: function(cb) { console.log('t2'); cb(); } };
-task['t3'] = { dep: [ 't1', 't2' ] cb: function(cb) { console.log('t3'); cb(); } };
-task['t4'] = { dep: [ 't3', ['t2', 't1'], ['t1'] ] cb: function(cb) { console.log('t3'); cb(); } };
+tasks['t1'] = { cb: function(cb) { console.log('t1'); cb(); } };
+tasks['t2'] = { cb: function(cb) { console.log('t2'); cb(); } };
+tasks['t3'] = { dep: [ 't1', 't2' ], cb: function(cb) { console.log('t3'); cb(); } };
+tasks['t4'] = { dep: [ 't3', ['t2', 't1'], ['t1'] ], cb: function(cb) { console.log('t3'); cb(); } };
 
 // and this how we run them
 runTask('t4', function(err){ console.log('done'); })
