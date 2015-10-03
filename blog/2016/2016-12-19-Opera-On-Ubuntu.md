@@ -45,13 +45,13 @@ Categories=Network;WebBrowser;
 
 ##Startup Page and Extensions
 
-I have my own local startup page and do not need any of speed-dial functionality. I installed [Custom New Tab Page](https://addons.opera.com/en/extensions/details/custom-new-tab-page/) extension to get rid of it. Using [User-Agent Switcher](https://addons.opera.com/en/extensions/details/user-agent-switcher/), I made Opera look like Chrome. I also installed [Download Chrome Extension](https://addons.opera.com/en/extensions/details/download-chrome-extension-9/).
+I have my own local startup page and do not need any of speed-dial functionality. I installed [Custom New Tab Page](https://addons.opera.com/en/extensions/details/custom-new-tab-page/) extension to get rid of it. Using [User-Agent Switcher](https://addons.opera.com/en/extensions/details/user-agent-switcher/), I made Opera UA look like that of Chrome. I also installed [Download Chrome Extension](https://addons.opera.com/en/extensions/details/download-chrome-extension-9/). Using that, I installed [Vimium]()https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb).
 
 ##Search Engines
 
 While configuring Opera browser settings, I [discovered](http://superuser.com/questions/956087/opera-31-remove-default-search-engines) that it is not possible to disable, remove, or replace search engines. As my custom start page has a search box, I do not really need to search in address bar, and do not want to leak that typed URL information to any search engine. 
 
-The solution to this problem, turned out to be easy. I configured Opera to use as default search engine something I would never use, such as *DuckDuckGo.com*, and then edited my `/etc/hosts` to append:
+The solution to this problem turned out to be easy. I configured Opera to use as default search engine something I would never use, such as *DuckDuckGo.com*, and then edited my `/etc/hosts` to append:
 
 ```
 0.0.0.0 duckduckgo.com
