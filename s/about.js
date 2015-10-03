@@ -39,7 +39,7 @@
 				var la = r.find('Latitude').text();
 				var lo = r.find('Longitude').text();
 				if(la && lo) {
-					m += ' <a href="https://maps.google.com/maps?t=m&q=loc:' + la + '+' + lo + '" target="_blank">' + la + '&deg; ' + lo + '&deg;</a>';
+					m += ' <i class="fa fa-map-marker"></i> <a href="https://maps.google.com/maps?t=m&q=loc:' + la + '+' + lo + '" target="_blank">' + la + '&deg; ' + lo + '&deg;</a>';
 				}
   				if(m) addClientData('Location', m);
   			} catch(e){}
@@ -53,10 +53,11 @@
 		addClientData('Cpus', window.navigator.hardwareConcurrency);
 		addClientData('Resolution', 
 			'Screen: ' + screen.width + 'x' + screen.height
-			+ ', Color depth: ' + screen.colorDepth
 			+ ', Window: ' + $(window).width() + 'x' + $(window).height()
 			+ ', Dpi: ' + getDPI()
-			+ (window.devicePixelRatio ? ', Zoom: ' + (window.devicePixelRatio * 100) + '%' : ''));
+			+ (window.devicePixelRatio ? ', Zoom: ' + (window.devicePixelRatio * 100) + '%' : '')
+			+ ', Color depth: ' + screen.colorDepth
+			);
 		try {
 			var p = [];
 			var mt = navigator.mimeTypes;
