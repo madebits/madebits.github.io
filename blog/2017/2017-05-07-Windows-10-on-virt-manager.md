@@ -140,22 +140,24 @@ If you share a folder in the VM, you can access it using Samba in your Ubuntu fi
 Windows 10 guest works fine without any custom software installed. However, to get most of Spice and QEMU, such as to share clipboard, install [Spice guest tools](https://www.spice-space.org/download/binaries/spice-guest-tools/), in the Windows guest. Spice guest tool already contains the [Virtio Drivers](https://fedoraproject.org/wiki/Windows_Virtio_Drivers). 
 
 * I changed Windows VM [NIC](https://pve.proxmox.com/wiki/Paravirtualized_Network_Drivers_for_Windows) type from `rtl3189` to `virtio`.
-* To [change](https://pve.proxmox.com/wiki/Paravirtualized_Block_Drivers_for_Windows) the VM disk type from IDE to VirtIO SCSI, I used first *Add Hardware* button to a new *Controller* of Type: SCSI, Model: VirtIO SCSI and started the VM. The controller was shown in the Windows Device Manager. After that, I shut down the VM, and changed the Disk bus to SCSI. After starting the VM, I checked disk type was changed in the Device Manager. Disk [stats](https://superuser.com/questions/130143/how-to-measure-disk-performance-under-windows):
+* To [change](https://pve.proxmox.com/wiki/Paravirtualized_Block_Drivers_for_Windows) the VM disk type from IDE to VirtIO SCSI, I used first *Add Hardware* button to a new *Controller* of Type: SCSI, Model: VirtIO SCSI and started the VM. The controller was shown in the Windows Device Manager. After that, I shut down the VM, and changed the Disk bus to SCSI. After starting the VM, I checked disk type was changed in the Device Manager. 
+
+Hard disk access [stats](https://superuser.com/questions/130143/how-to-measure-disk-performance-under-windows) on VM (these number vary, but can give a rough idea):
+
  ```
  C:\Windows\system32>winsat disk -drive c
     Windows System Assessment Tool
     ...
-    > Disk  Random 16.0 Read                       655.16 MB/s          8.4
-    > Disk  Sequential 64.0 Read                   2802.32 MB/s          9.2
-    > Disk  Sequential 64.0 Write                  1803.94 MB/s          9.0
-    > Average Read Time with Sequential Writes     0.208 ms          8.6
-    > Latency: 95th Percentile                     0.513 ms          8.7
-    > Latency: Maximum                             2.781 ms          8.7
-    > Average Read Time with Random Writes         0.156 ms          8.9
-    > Total Run Time 00:00:05.77
+    > Disk  Random 16.0 Read                       603.31 MB/s          8.4
+    > Disk  Sequential 64.0 Read                   3102.16 MB/s          9.3
+    > Disk  Sequential 64.0 Write                  2862.25 MB/s          9.2
+    > Average Read Time with Sequential Writes     0.155 ms          8.7
+    > Latency: 95th Percentile                     0.495 ms          8.7
+    > Latency: Maximum                             4.372 ms          8.6
+    > Average Read Time with Random Writes         0.231 ms          8.8
  ```
 
- For comparison, this is what I get for Windows 10, on latest [VirtualBox](http://www.johnwillis.com/2014/03/virtualbox-speeding-up-guest-vm-lot.html) with SATA controller (without Host I/O cache) on same machine:
+For comparison, this is what I get for Windows 10, on latest [VirtualBox](http://www.johnwillis.com/2014/03/virtualbox-speeding-up-guest-vm-lot.html) with SATA controller (without Host I/O cache) on same machine:
 
  ```
     > Disk  Random 16.0 Read                       99.93 MB/s          7.1
@@ -202,7 +204,7 @@ Spice guest tools offer several other features, such as direct [folder sharing](
  ```
  virsh list
  virsh start win10
- virt-viewer -a win10
+ virt-viewer -af win10
  virsh shutdown win10
  ```
 
