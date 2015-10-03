@@ -67,7 +67,7 @@ Recommended **testing pyramid** for a software project looks as follows (the mor
 
 Without setting code coverage as goal, we want to maximize the number of automated unit tests we have and what they cover. The more automated unit tests we have, the less of other types of tests we need. If the number of (repeated) manual integration tests is large, we convert them to automated integration tests. Manual tests can be add hoc, but to maintain statistics often *test scripts* are used. Automated integration test are more costly to write and more fragile to maintain that unit tests, therefore if something can be tested with unit tests, they are preferable and cheaper that the other types of tests. The assumption here is that if something can be tested with unit tests (cheaper), there is no need to repetitively test it with other types of tests (more expensive) when the software is modified.
 
-For completes, one can imagine how the test pyramid may look like in a project with hard to maintain quality - it will be the reverse of the recommended pyramid above. In this example, there are mostly manual tests. The majority of automated tests are integration ones. We have very few or no unit tests.
+For completes, one can imagine how the test pyramid may look like in a project with hard to maintain quality - it will be the reverse of the recommended pyramid above. In this example, there are mostly manual tests. The majority of automated tests are integration ones. We have very few or no unit tests:
 
 ```
 *   (automated unit tests, U)
@@ -75,15 +75,13 @@ For completes, one can imagine how the test pyramid may look like in a project w
 *** (manual tests, M)
 ```
 
-As a third case, the testing pyramid can have more or less same coverage in all layers:
+As a third case, the testing pyramid can have more or less same coverage in all layers. This is an indication of lack of coordination between different testing teams and inefficient resource usage:
 
 ```
 *** (automated unit tests, U)
 *** (automated integration tests, I)
 *** (manual tests, M)
 ```
-
-This is an indication of lack of coordination between different testing teams and inefficient resource usage.
 
 ##Testing Pyramid as a Better Overall Quality Indicator
 
