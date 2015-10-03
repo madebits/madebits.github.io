@@ -98,7 +98,7 @@ Write you markdown text as normal, then select *Encrypt* button and provide the 
 
 ##External Markdown Preview
 
-MadeBits web site is a markdown previewer. You can preview markup documents from other allowed sites using something like `madebits.com/#http://somesite/path/doc.md` (use `.dx` documents for encrypted markdown). Due to *Content Security Policy* applied to MadeBits web pages, you can only use CORS content from publicly shared `dl.dropboxusercontent.com`.
+MadeBits web site is a markdown previewer. You can preview markup documents from other allowed sites using something like `madebits.com/#http://somesite/path/doc.md` (use `.dx` documents for encrypted markdown). If the remote document does not and in `.dx` or `.md`, you can add `:md:` or `:dx:` before the remove URL. Due to *Content Security Policy* applied to MadeBits web pages, you can only use CORS content from publicly shared `dl.dropboxusercontent.com` and `crossorigin.me`.
 
 ---
 
