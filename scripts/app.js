@@ -1108,7 +1108,7 @@ var lastPage = null
 		addKey(pass);
 	}
 
-	for(var keyIdx = 0; keyIdx < keys.length; i++) {
+	for(var keyIdx = 0; keyIdx < keys.length; keyIdx++) {
 		var pdata = mbSecret.encrypt(data, keys[keyIdx], false);
 		if(pdata) {
 			pdata = mbHtml.markup(pdata);
