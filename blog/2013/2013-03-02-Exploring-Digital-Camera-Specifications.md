@@ -154,7 +154,7 @@ Exposure value (EV) is a quantitative way to measure both aperture and exposure 
 $$
 EV = log\_2(\frac{F ^ 2} {t})
 $$
-Where t is the time in seconds. EV 0 corresponds to an exposure time of 1s and a relative aperture of f/1.0. If the EV is known, it can be used to select combinations of exposure time and f-number [19]. Usually cameras will allow you to control exposure around EV 0 (negative, or positive) and steps (stops) +/-1. Each +1 halves the exposure time or halving the aperture area, or a combination of such changes [19].
+Here $$$t$$$ is the time in seconds. EV 0 corresponds to an exposure time of 1s and a relative aperture of f/1.0. If the EV is known, it can be used to select combinations of exposure time and f-number [19]. Usually cameras will allow you to control exposure around EV 0 (negative, or positive) and steps (stops) +/-1. Each +1 halves the exposure time or halving the aperture area, or a combination of such changes [19].
 
 For my camera, the supported range is +/-3 EV, changeable in 1/3 EV steps.
 
