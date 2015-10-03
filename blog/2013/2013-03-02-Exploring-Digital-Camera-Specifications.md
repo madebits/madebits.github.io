@@ -162,7 +162,7 @@ Some cameras determine shutter speed automatically base on the user set aperture
 
 ##Over and Under Exposure
 
-Image areas can be classified into three classes based on amount of light brightness information they contain: shadows (low-light parts), middtones, and highlights (high-light parts). In middtones, there is usually to be found the neutral (middle) gray color (RGB=127,127,127 or RGB=128,128,128) (called also gray or white balance [34], known also as color temperature [37]). If the middle gray has a another RGB value, we have a color cast. The brightness range of values an image contains between its lightest and darkest parts is the dynamic range.
+Image areas can be classified into three classes based on amount of light brightness information they contain: shadows (low-light parts), middtones, and highlights (high-light parts). In middtones, there is usually to be found the neutral (middle) gray color (RGB=127,127,127 or RGB=128,128,128) (called also gray or white balance [34], based on color temperature [37]). If the middle gray has a another RGB value, we have a color cast. The brightness range of values an image contains between its lightest and darkest parts is the dynamic range.
 
 Over-exposure of an image causes loss of information in highlight detail - important bright parts of an image are "washed out" or effectively all white (blown out) [33]. There is more brightness information than needs to be.
 
