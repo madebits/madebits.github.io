@@ -132,7 +132,7 @@ Here `g` represents a `GRunner` instance object.
         * Return a JS *promise*. Any promise object that supports `then` is supported. In this case you should **not** call `cb()`.
         * Return a `Stream`, such as `return gulp.src(...).pipe(...);`. In this case you should **not** call `cb()`.
         * Emit an error in a returned stream. In this case, you should **not** call `cb()`.
-        * In a returned promise `throw` an error, or fail. In this case you should **not** call `cb()`.
+        * In a returned *promise* `throw` an error, or fail. In this case you should **not** call `cb()`.
         * `throw` a JS error. This works only directly within taskFun. If you `throw` in a `pipe`, or `setTimeout`, and similar async functions, node.js will stop execution. Use callbacks in such cases.
     * `userData` can be any object, accessible via `info.task.userData` within taskFun.
 
