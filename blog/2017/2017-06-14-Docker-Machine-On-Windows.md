@@ -12,7 +12,7 @@ curl -L https://github.com/docker/machine/releases/download/v0.12.0/docker-machi
 chmod +x "$HOME/bin/docker-machine.exe"
 ```
 
-This command will download and install Docker Machine in `$HOME/bin` folder (`$HOME` is by default, your Windows user folder). Docker Machine keeps its data files under `$HOME/.docker` folder.
+This command will download and install Docker Machine in `$HOME/bin` folder (`$HOME` is by default, your Windows user folder: `%HOMEPATH%`). You may want to append `$HOME/bin` to `$PATH`. Docker Machine keeps its data files under `$HOME/.docker` folder.
 
 After installation, to create Docker Engine VM, use:
 
