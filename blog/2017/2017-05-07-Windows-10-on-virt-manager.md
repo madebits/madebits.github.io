@@ -39,7 +39,7 @@ virsh edit win10
 
 ##Creating a Windows 10 VM
 
-Using `virt-manager` [UI](https://www.howtogeek.com/117635/how-to-install-kvm-and-create-virtual-machines-on-ubuntu/), create a new Windows 10 VM. I use mostly defaults including, IDE Disk and CDROM, NAT, Spice, and Video QXL. 
+Using `virt-manager` [UI](https://www.howtogeek.com/117635/how-to-install-kvm-and-create-virtual-machines-on-ubuntu/), create a new Windows 10 VM. I use mostly defaults including, IDE Disk and CDROM, NAT, Spice, and Video QXL. I found Sound device model `ich9`  to be working better for me with Windows 10. 
 
 ###Disk Image
 
