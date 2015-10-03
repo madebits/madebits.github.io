@@ -5,8 +5,7 @@ h1, h2, h3, h4, .nfooter, .sidebar { text-transform: capitalize; }
 a, code, em { word-wrap: break-word; }
 
 /* #31708f */
-h1 ,
-h2, h3, h4 { color: #1a1a1a; }
+h1, h2, h3, h4 { color: #1a1a1a; }
 h2 { border-bottom: 1px solid #dfdedc; padding-bottom: 9px; }
 h1 { font-size: 38px; font-weight: bold; }
 h2 { font-weight: 600; }
@@ -91,7 +90,7 @@ pre code.nohighlight { background-color: transparent; } /* color: #000; */
 }
 
 #mbg-nav {
-    border-top: 5px solid #000; /*rgb(87, 107, 87); */
+    border-top: 5px solid #1a1a1a; /*rgb(87, 107, 87); */
 }
 
 .navbar-default {
