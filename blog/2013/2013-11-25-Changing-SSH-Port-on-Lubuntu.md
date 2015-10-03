@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-Short guide on how to change the OpenSSH Port on (L)Ubuntu and configure access. OpenSSH (`sshd`) listens by default on port `22` (tcp only). To check listening services use: `sudo netstat -lnptu`:
+OpenSSH (`sshd`) listens by default on port `22` (tcp only). To check listening services use: `sudo netstat -lnptu`:
 
 ```
 ...
