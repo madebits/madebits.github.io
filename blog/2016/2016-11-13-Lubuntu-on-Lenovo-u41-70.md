@@ -67,7 +67,7 @@ My u41-70 model comes with Intel HD Graphics 5500 and a 1920x1080 TFT screen.
 
 ###Screen
 
-u41-70 has a full-hd [TFT](https://www.quora.com/What-is-the-difference-between-an-IPS-screen-and-a-TFT-screen) LCD, which is ok for its kind. Black was not rendered as I expected and given, I am using [redshift](http://jonls.dk/redshift/), I configured gamma to be 0.8 for day and night. This improves the readability of black and gray text.
+u41-70 has a full-hd [TN](https://www.quora.com/What-is-the-difference-between-an-IPS-screen-and-a-TFT-screen) [LCD](http://www.notebookcheck.net/Lenovo-U41-70-Notebook-Review.146824.0.html), which is ok for its kind. Black was not rendered as I expected and given, I am using [redshift](http://jonls.dk/redshift/), I configured gamma to be 0.8 for day and night. This improves the readability of black and gray text.
 
 ###GPU
 
