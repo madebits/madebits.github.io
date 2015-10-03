@@ -1,6 +1,6 @@
 (function(mbSecret, mbApp){
 "use strict";
-	$('#spam').click(function(event) {
+	$('.spam').click(function(event) {
 		var email = "contact@madebits.git.io"; //:)
 		window.prompt("Select and copy shown text",
 		mbSecret.encrypt("U2FsdGVkX19E9ehSFqnYIrah5svgMjjCxzcmpXWGKuO2KoTgCksovuhEEdiWzi+U", 
