@@ -169,6 +169,21 @@ Here `g` represents a `GRunner` instance object.
         * Emit an error in a returned `Stream`. In this case, you should **not** call `cb()`.
         * In a returned *promise* `throw` an error, or fail. In this case you should **not** call `cb()`.
         * `throw` a JS error. This works only directly within `taskFun`. If you `throw` inside a `pipe` stream, or `setTimeout`, and similar async functions, Node.js will stop execution. Use `try / catch` and callbacks to report errors in such cases.
+        
+        The `cb` contains the following properties:
+
+        * `cb.ctx` - described above.
+        * `cb.onDone(streamOrPromise, [cb])` - described above.
+        * `cb.startPipe([objectOrIterator])` - returns a starting object `Stream` from one or more objects. If an array or iterator is given as argument, then there will be an element in stream per each array or iterator element. For example:
+        
+          ```javascript
+          g.t('tt', cb => {
+          return cb.startPipe(['a', 'b', 'c']).pipe(through.obj((o, e, _cb) => {
+              console.log(o);
+              _cb();
+            }));
+          });
+          ``` 
     * `userData` - can be any object, accessible via `cb.ctx.task.userData` within `taskFun`.
 
 * `g.addTask` - this is a synonym for `g.t`.
