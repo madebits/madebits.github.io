@@ -31,4 +31,18 @@ Where `/home/user/bin/bingwallpaper.sh` is the executable file where you saved t
 
 **Update:** [Bing Image Gallery](http://www.bing.com/gallery/)
 
+**Update:** The content of Bing page has changed a bit, a new match is needed:
+
+```
+#!/bin/bash
+
+outPath="/home/d7/Pictures/bing.jpg";
+curl -s "http://www.bing.com$(curl -s http://www.bing.com/?cc=us | grep -h "/az/.*jpg" | sed -n '/.*\/az\/.*\.jpg\"/ s/.*\(\/az\/.*.\jpg\)\".*/\1/p')" -o ${1:-$outPath}
+if [ -f "$outPath" ];
+ then
+    echo $outPath
+    pcmanfm --set-wallpaper="$outPath"
+fi
+```
+
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-12-27-A-Look-at-UEFI-Boot.md'>A Look at UEFI Boot</a> <a rel='next' id='fnext' href='#blog/2013/2013-12-01-Emitting-Source-Code-Examples-From-PHP-Pages.md'>Emitting Source Code Examples From PHP Pages</a></ins>
