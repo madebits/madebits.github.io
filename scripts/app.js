@@ -1,5 +1,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 
+$.ajaxPrefilter(function( options, original_Options, jqXHR ) {
+    options.async = true;
+});
+
 window.onerror = function (msg, url, line, col, error) {
 	console.error(msg + ' ' + url + ' ' + line + ' ' + col);
 };
