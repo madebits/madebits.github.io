@@ -1,3 +1,4 @@
+* [Lubuntu Closing Chrome Downloads Bar](#blog/2016/2016-08-02-Lubuntu-Closing-Chrome-Downloads-Bar.md)
 * [Upgrading to Lubuntu 16.04.1](#blog/2016/2016-07-30-Upgrading-to-Lubuntu-16.04.1.md)
 * [Using keynav to move mouse pointer on Lubuntu](#blog/2016/2016-07-27-Using-keynav-to-move-mouse-pointer-on-Lubuntu.md)
 * [Getting Started With Spark Ml](#blog/2016/2016-07-26-Getting-Started-With-Spark-Ml.md)
@@ -5,4 +6,3 @@
 * [Agile Development Readings](#blog/2016/2016-06-27-Agile-Development-Readings.md)
 * [Gulp Karma Webpack](#blog/2016/2016-04-22-Gulp-Karma-Webpack.md)
 * [Statistical Learning Certification](#blog/2016/2016-04-09-Statistical-Learning-Certification.md)
-* [Background Sounds](#blog/2016/2016-04-07-Background-Sounds.md)

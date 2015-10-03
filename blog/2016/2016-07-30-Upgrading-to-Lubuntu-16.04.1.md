@@ -38,4 +38,4 @@ BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
 UBUNTU_CODENAME=xenial
 ```
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-07-27-Using-keynav-to-move-mouse-pointer-on-Lubuntu.md'>Using keynav to move mouse pointer on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-08-02-Lubuntu-Closing-Chrome-Downloads-Bar.md'>Lubuntu Closing Chrome Downloads Bar</a> <a rel='next' id='fnext' href='#blog/2016/2016-07-27-Using-keynav-to-move-mouse-pointer-on-Lubuntu.md'>Using keynav to move mouse pointer on Lubuntu</a></ins>
