@@ -12,8 +12,6 @@ Thanks to a *tip* from a friend, based on instruction [here](http://kenfallon.co
 sudo apt install libstdc++5:i386 libpam0g:i386 libx11-6:i386
 ```
 
-It could be the last is not needed, I installed it, but next time, I will try first without it.
-
 After installation, `/usr/bin/snx` becomes available, and a tunnel can be created by using: `snx -s remote.example.com -u user`. Run `snx --help` for a full list of options.
 
 Starting `snx`, creates a tunnel named `tunsnx` visible via `ifconfig`. To allow traffic to pass through, local firewall rules may need to be adapted:
@@ -32,7 +30,7 @@ xfreerdp /v:10.11.11.11 /u:user
 Or with some more [options](http://manpages.ubuntu.com/manpages/yakkety/man1/xfreerdp.1.html):
 
 ```
-xfreerdp /size:1920x1080 /compression +clipboard /v:10.11.11.11 /u:user /audio-mode:0 /drive:home,/home/user/work /client-hostname:remote /toggle-fullscreen
+xfreerdp /size:1920x1080 /compression +clipboard /v:10.11.11.11 /u:user /audio-mode:0 /drive:"home,/home/user/work" /client-hostname:remote /toggle-fullscreen
 ```
 
 To stop `snx` use:
