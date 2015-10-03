@@ -472,7 +472,7 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
   ```
   net.ipv6.conf.all.disable_ipv6 = 1
   net.ipv6.conf.default.disable_ipv6 = 1
-  net.ipv6.conf.lo.disable_ipv6 cat /proc/sys/net/ipv6/conf/all/disable_ipv6= 1
+  net.ipv6.conf.lo.disable_ipv6 = 1
   ```
   And to apply use `sudo sysctl -p`. Verify `cat /proc/sys/net/ipv6/conf/all/disable_ipv6` returns 1. A restart may be needed.
 
