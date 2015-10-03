@@ -1180,6 +1180,9 @@ var lastPage = null
 	pageData.pageDir = '';
 	var dirIdx = pageData.page.lastIndexOf('/');
 	if(dirIdx >= 0) pageData.pageDir = pageData.page.substr(0, dirIdx);
+	if(pageData.pageDir.startsWith('https://dl.dropboxusercontent.com/s/')) {
+		pageData.pageDir = 'https://dl.dropboxusercontent.com/s/';
+	}
 
 	if(page.endsWith('/') || page.endsWith('\\')) { 
 		window.location.replace(window.location.href + 'index.md');
