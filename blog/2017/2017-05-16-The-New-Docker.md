@@ -2,7 +2,7 @@
 
 2017-05-16
 
-<!--- tags: virtualization -->
+<!--- tags: virtualization docker -->
 
 Since [Docker](https://www.docker.com/) come out it was obvious that single containers without orchestration are limited in usability. It is groups of containers that make up applications. Docker is [evolving](https://docs.docker.com/get-started/) to have container orchestration build-in via `docker swarm` and ease deployments via `docker stack` and `docker deploy`.
 

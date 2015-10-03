@@ -2,7 +2,7 @@
 
 2014-04-10
 
-<!--- tags: linux docker -->
+<!--- tags: linux docker virtualization -->
 
 I created a minimal graphical [Docker](https://www.docker.io/) based Ubuntu installation based on [nuxeo blog](http://www.nuxeo.com/blog/development/2014/01/docker-containers-nuxeo-part-2-add-vnc-openbox/) instructions. You can find the final Dockerfile [here](#r/linux-docker-firefox.md).
 
