@@ -4,7 +4,7 @@
 
 <!--- tags: agile -->
 
-[Agile is Dead](https://youtu.be/a-BOSpxYJ9M) presentation explains agile software development as a self-regulating [cybernetic](https://en.wikipedia.org/wiki/Cybernetics)-like way of producing software. The basic *repetitive* steps to Agility, borrowed from the video are: *Find where you are*, *Take a small step towards your goal*, *Adjust your understanding based on what learn*, combined together with the wisdom that when *faced with similar alternatives choose the path that makes future change easier*. Basic wisdom aside, agile software development has grown to have its own vocabulary and [common](https://www.scrum.org/Resources/Scrum-and-Agile-Webcasts) techniques.
+[Agile is Dead](https://youtu.be/a-BOSpxYJ9M) presentation explains agile software development as a self-regulating [cybernetic](https://en.wikipedia.org/wiki/Cybernetics)-like way of producing software. The basic *repetitive* steps to Agility, borrowed from the video are: *Find where you are*, *Take a small step towards your goal*, *Adjust your understanding based on what learn*, combined together with the wisdom that when *faced with similar alternatives choose the path that makes future change easier*. Basic wisdom aside, agile software development has grown to have its own vocabulary and [common](https://www.scrum.org/Resources/Scrum-and-Agile-Webcasts) [techniques](http://www.collab.net/services/training/agile_e-learning).
 
 ##Learning Agile
 
