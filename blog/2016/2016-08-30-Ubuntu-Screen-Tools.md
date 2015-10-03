@@ -73,6 +73,8 @@ xcalib -c
 
 Both `xcalib` and the next tool `xgamma` may not work properly when `redshift` is active.
 
+For an updated alternative tool to handle invert see: https://github.com/zoltanp/xrandr-invert-colors
+
 ##xgamma
 
 `xgamma` comes with Ubuntu and can be used to configure [gamma](http://askubuntu.com/questions/9248/is-there-a-software-utility-to-adjust-screen-gamma-brightness-contrast) as a replacement for contrast if your screen is too bright. I have configured at startup at `~/.config/lxsession/Lubuntu/autostart` it as follows:
