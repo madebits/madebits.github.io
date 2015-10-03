@@ -574,7 +574,7 @@ var lastPage = null
 	$('#mbg-showComments').click(function(event) {
 		event.preventDefault();
 		$(this).hide();
-		$('#mbg-comments').html('<div id="mbg-dsq-loading"><small><span class="text-muted"><i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:17px;"></i> <i>Loading <em>DISQUS</em> comments ...</i></span></small></div>');
+		$('#mbg-comments').html('<div id="mbg-dsq-loading"><small><span class="text-muted"><i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:17px;"></i> <i>Loading <strong>DISQUS</strong> comments ...</i></span></small></div>');
 		loadDisq();
 		disqReset();
 	});
