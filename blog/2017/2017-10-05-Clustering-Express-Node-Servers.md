@@ -2,7 +2,7 @@
 
 2017-10-05
 
-<!--- tags: nodejs -->
+<!--- tags: nodejs express -->
 
 Following code, assembled from looking at various places, enables process clustering for Node.js [Express](https://expressjs.com/) applications. The actual Express server code is loaded via `require('./server')`. Rest of code is generic and can be reused with any server.
 
