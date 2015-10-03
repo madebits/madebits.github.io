@@ -4,7 +4,7 @@
 
 2016-04-07
 
-A few sites to generate [background](https://en.wikipedia.org/wiki/Background_noise) sounds and help with productivity in noisy offices:
+A few sites to generate [background](https://en.wikipedia.org/wiki/Background_noise) sounds and help with productivity in noisy offices. Work best combined with noise cancelling headphones.
 
 *  http://www.noisli.com/
  
