@@ -1,4 +1,4 @@
-#<i class="fa fa-rocket"></i>Apps
+#<i class="fa fa-rocket"></i> Web Apps
 
 <div class="mb-ulgroup"></div>
 
