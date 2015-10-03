@@ -353,9 +353,9 @@ systemctl status spice-webdavd.service
 
 ####Sharing via Filesystemshare
 
-To use [9p](https://askubuntu.com/questions/819773/is-there-something-like-virtualbox-guest-additions-for-qemu-kvm) shared folders, add a Filesystemshare to the VM, using *Mapped* mode and give it a target path [tag](https://www.kernel.org/doc/Documentation/filesystems/9p.txt), for example: `share` - this is just a tag, not a path. 
+To use [9p](https://askubuntu.com/questions/819773/is-there-something-like-virtualbox-guest-additions-for-qemu-kvm) shared folders, add a [Filesystemshare](http://wiki.qemu.org/Documentation/9psetup) to the VM, using *Mapped* mode and give it a target path [tag](https://www.kernel.org/doc/Documentation/filesystems/9p.txt), for example: `share` - this is just a tag, not a path. 
 
-Select a host folder to share, e.g. `/data/share`. VM runs as user `librivt-qemu` under group `kvm` - ensure this user and group has [access](https://unix.stackexchange.com/questions/257372/how-can-i-store-files-in-the-mounted-shared-folder), along with your own user to the host shared folder: 
+Select a host folder to share, e.g. `/data/share`. VM [runs](http://rabexc.org/posts/p9-setup-in-libvirt) as user `librivt-qemu` under group `kvm` - ensure this user and group has [access](https://unix.stackexchange.com/questions/257372/how-can-i-store-files-in-the-mounted-shared-folder), along with your own user to the host shared folder: 
 
 ```
 $ sudo setfacl -R -m u:libvirt-qemu:rwx /data/share
