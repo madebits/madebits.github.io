@@ -128,6 +128,8 @@ For Chromium, `pepperflashplugin-nonfree` is no more maintained - one has to use
 
 I am not a big user of touchpad, so I use [touchpad-indicator](https://launchpad.net/~atareao/+archive/ubuntu/atareao) to disable it when mouse is plugged in.
 
+I had to install `seahorse` and mark *Login* key ring as default, not to be asked for the password of shares by `pcmanfm` on every login.
+
 ##Final Thoughts
 
 Finding an ultrabook-like machine that is powerful enough, runs Ubuntu without many hacks, and is not very expensive - can be a challenge. With u41-70, I had to be flexible on some areas, such as, TFT screen quality, battery life, and wlan reach. I am happy there was no obstacle big enough to make me return it. The machine is powerful enough for all my needs at home for the near future and light enough to carry around.
