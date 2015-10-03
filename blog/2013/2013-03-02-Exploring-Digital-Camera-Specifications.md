@@ -184,7 +184,7 @@ Luminous flux or luminous power is the measure of the perceived power of light (
 
 Luminance is invariant in lens optics: the luminance at the output is the same as the input one [30]. The luminous power is concentrated into a image sensor smaller area, meaning that the illuminance is higher at the image that at source. The projected image can never be "brighter" than the source [30].
 
-Some common illuminance values of lux from [17] for surfaces being illuminated by: Direct sunlight: 32,000-130,000 lux, Sunrise or sunset on a clear day: 400 lux, Family living room lights: 50 lux, Full moon on a clear night: 0.27-1.0 lux. My camera supports on low light mode (shutter speed 1/25s) a minimum illumination of 9 lux.
+Some common illuminance values of lux from [17] for surfaces being illuminated by: Direct sunlight: 32,000-130,000 lux, Sunrise or sunset on a clear day: 400 lux, Family living room lights: 50 lux, Full moon on a clear night: 0.27-1.0 lux. My camera supports at low light mode (shutter speed 1/25s) a minimum illumination of 9 lux.
 
 In digital camera systems, an arbitrary relationship between exposure and sensor data values can be achieved by setting the signal gain of the sensor [20]. The sensor sensitivity to light is measured via ISO setting (called also ISO speed). ISO setting is an exposure index (EI) rating such that the sRGB image files produced by the camera will have a lightness similar to what would be obtained with film of the same EI rating at the same exposure [20].
 
