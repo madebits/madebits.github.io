@@ -56,6 +56,10 @@ While these extensions appear to be safe at the point I added them here, there i
  
  Hide selected portions of pages and remember choices. 
 
+* [Minimal Theme](https://chrome.google.com/webstore/detail/minimal-modern/hgcdmgdfnieebdpkopialjdofdjbdmcg?hl=en) 
+
+ Theme
+
 ##Firefox
 
 * [Hide Caption Titlebar Plus](https://addons.mozilla.org/en-US/firefox/addon/hide-caption-titlebar-plus-sma/)  
