@@ -361,9 +361,10 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
 
 * For Chromium, `pepperflashplugin-nonfree` is no more maintained - one has to use `adobe-flashplugin` now.
 
-* [touchpad-indicator](https://launchpad.net/~atareao/+archive/ubuntu/atareao) helps disable touchpad when mouse is plugged in.
+* `sudo apt install gpointing-device-settings` helps disable touchpad when mouse is plugged in.
 
 * I had to install `seahorse` and mark *Login* key ring as default, not to be asked for the password of shares by `pcmanfm` on every login. I also [installed](http://askubuntu.com/questions/666453/lubuntu-14-04-unlock-keyring-on-login) `sudo apt install libpam-gnome-keyring` and appended `auto_start` in `//etc/pam.d/common-password` to:
+
   ```
   password  optional  pam_gnome_keyring.so  auto_start
   ```   
