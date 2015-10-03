@@ -53,14 +53,13 @@ This command creates [sparse](https://wiki.archlinux.org/index.php/sparse_file) 
 
 ###QEMU Process
 
-Once the VM is started, use `ps aux | grep qemu` to find the exact command-line used. Example, of my QEMU process with two vCPUs managed via KVM. The two other threads are the QEMU process itself and the virtual machine IO.
+Once the VM is started, use `ps aux | grep qemu` to find the exact command-line used. Example, of my QEMU process with two vCPUs managed via KVM.
 
 ```
 ...
-  ├─qemu-system-x86─┬─{CPU 0/KVM}
-  │                 ├─{CPU 1/KVM}
-  │                 └─2*[{qemu-system-x86}]
-
+ ├─qemu-system-x86─┬─{CPU 0/KVM}
+ │                 ├─{CPU 1/KVM}
+ │                 └─2*[{qemu-system-x86}]
 ```
 
 ##Host Keyboard Grab Key
