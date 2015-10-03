@@ -45,10 +45,10 @@ After configuring the settings, I [discovered](http://superuser.com/questions/95
 
 To switch window [decorations](http://openbox.org/wiki/Help:Actions#ToggleDecorations), I have in `$HOME/.config/openbox`:
 
-```
-    <keybind key="W-S-d">
-      <action name="ToggleDecorations"/>
-    </keybind>
+```xml
+ <keybind key="W-S-d">
+  <action name="ToggleDecorations"/>
+ </keybind>
 ```
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-11-29-From-User-Stories-To-Code.md'>From User Stories To Code</a></ins>
