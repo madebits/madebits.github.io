@@ -28,6 +28,6 @@ Based on the project goal, we identify an actual project end target state $$$B$$
 
 Doing most of planning around the starting point $$$A$$$ may ignore new possibilities that could become available as we approach $$$B$$$. If we plan as needed while trying to reach the intermediate points $$$B_i$$$, we may be aware of new possibilities that we were not aware when in $$$A$$$.
 
-With agile methodologies moving towards $$$B_i$$$, we may become aware that our 2D world has indeed a third dimension and it may be possible to use the newest [warp drive](https://en.wikipedia.org/wiki/Warp_drive) to jump from $$$B_i$$$ to. Path optimization based on lean thinking events are more probable in an agile project as the meta-reflection happens more often.
+With agile methodologies moving towards $$$B_i$$$, we may become aware that our 2D world has indeed a third dimension and it may be possible to use the newest [warp drive](https://en.wikipedia.org/wiki/Warp_drive) to jump from $$$B_i$$$ to $$$C$$$. Path optimization based on lean thinking events are more probable in an agile project as the meta-reflection happens more often.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-06-27-Agile-Development-Readings.md'>Agile Development Readings</a></ins>
