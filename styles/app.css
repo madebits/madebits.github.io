@@ -42,7 +42,7 @@ pre {
     white-space: pre;
     border-left: 2px solid rgb(157, 187, 157);
     background-color: #f7f7f7;
-    font-size: 1.02em;
+    font-size: 0.8em;
 }
 pre code {
     overflow: auto;
