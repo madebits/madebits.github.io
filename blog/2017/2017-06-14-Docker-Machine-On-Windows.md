@@ -46,7 +46,7 @@ To connect to VM shell and use `docker` we can `ssh` to it using:
 $ docker-machine ssh
 ```
 
-Given Docker Machine `ssh` command supports `ssh` arguments, we can directly run `docker` commands. It is useful to define an alias (assuming `$HOME/bin` is part of `$PATH`):
+Given Docker Machine `ssh` command supports `ssh` arguments, we can directly run `docker` commands. It is useful to define a bash *alias* (assuming `$HOME/bin` is part of `$PATH`):
 
 ```
 $ alias docker='docker-machine ssh default docker'
