@@ -11,7 +11,7 @@ We can bootstrap manually in this case, but it would be preferable to reuse the 
 ```r
 X1 <- sin(1:1000)
 X2 <- cos(1:1000)
-Y <- 2 * X1 + X2 + rnorm(1000);
+Y <- 2 * X1 + X2 + rnorm(1000)
 data <- data.frame(X1, X2, Y)
 ```
 
@@ -21,7 +21,7 @@ These data are definitively intercorrelated (as we can see if do some plots). To
 (windows <- seq(1:10))
 
 indexToRange <- function(index) {
-  unlist(sapply(index, function(b){
+  unlist(sapply(index, function(b) {
     ((b - 1) * 100 + 1):(b * 100)  
   }, simplify = FALSE))
 }
@@ -35,7 +35,7 @@ library(boot)
 bf <- function(dummy, index) {
   rows <- indexToRange(index)
   d <- data[rows, ] #data is global
-  return(coef(lm(Y ~ X1 + X2, data=d)))
+  return(coef(lm(Y ~ X1 + X2, data = d)))
 }
 
 boot(windows, bf, 1000)
