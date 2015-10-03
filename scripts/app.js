@@ -185,6 +185,7 @@ var	goa = null
 					&& !endsWithAny(href, ['.zip', '.tar', '.jar', '.deb', '.xpi', '.7z', '.msi', '.exe'])
 					&& !(href.indexOf('zipball') > 0)) {
 					$(this).attr('target', '_blank');
+					$(this).attr('rel', 'noreferrer noopener');
 				}
 			}
 			if(href.startsWith('@@@')) {
