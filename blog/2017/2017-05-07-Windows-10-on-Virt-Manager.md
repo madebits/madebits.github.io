@@ -391,7 +391,7 @@ default:other::rwx
 In guest, mount the share by referring it by its tag `share` (create `/mnt/share` if not there):
 
 ```bash
-# mount -t 9p -o trans=virtio,version=9p2000.L,rw share /mnt/share
+sudo mount -t 9p -o trans=virtio,version=9p2000.L,rw share /mnt/share
 ```
 
 To [add](http://troglobit.github.io/blog/2013/07/05/file-system-pass-through-in-kvm-slash-qemu-slash-libvirt/) it to `/etc/fstab` use:
