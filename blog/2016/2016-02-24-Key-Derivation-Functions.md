@@ -2,6 +2,8 @@
 
 2016-02-24
 
+<!--- tags: encryption -->
+
 [Key derivation functions](https://en.wikipedia.org/wiki/Key_derivation_function) (**KDF**)s are used to generate one way *keys* from user provided passwords. KDFs are usually in form shown below and serve several related purposes:
 
 ```
