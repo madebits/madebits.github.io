@@ -4,7 +4,7 @@
 
 <!--- tags: r -->
 
-I took an online course ([1](s/stat/Certificate1.pdf), [2](s/stat/Certificate2.pdf), [3](s/stat/Certificate3.pdf)) to learn some R and these are some of my notes:
+I took an on-line course ([1](s/stat/Certificate1.pdf), [2](s/stat/Certificate2.pdf), [3](s/stat/Certificate3.pdf)) to learn some R and these are some of my notes:
 
 * [Part I: Basics](https://rawgit.com/madebits/r-stats/master/part1.html)
 * [Part II: Modeling](https://rawgit.com/madebits/r-stats/master/part2.html)
