@@ -23,6 +23,16 @@ A few sites to generate [background](https://en.wikipedia.org/wiki/Background_no
 
  Slow country music radio with very few interruptions, useful as an change when the above become boring.
 
+* https://brain.fm/
+ 
+ Music for various states of being.
 
+* http://somafm.com/
+
+ Ads free sound.
+
+* https://www.youtube.com/watch?v=rN3uYELX8iQ&list=RDrN3uYELX8iQ#t=1
+
+ YouTube channel.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-04-09-Statistical-Learning-Certification.md'>Statistical Learning Certification</a> <a rel='next' id='fnext' href='#blog/2016/2016-03-03-WebWorker-Patterns.md'>WebWorker Patterns</a></ins>
