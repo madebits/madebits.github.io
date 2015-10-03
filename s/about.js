@@ -26,7 +26,7 @@
 			clientTable.append('<tr><td><strong class="text-muted">{0}</strong></td><td>{1}</td></tr>'.format(key, t));
 		};
 		$.get("https://api.ipify.org?format=json", function(response) {
-			addClientData('Ip', response.ip + ' <img src="https://api.wipmania.com/myflag.png" width="10" height="10">');
+			addClientData('Ip', response.ip); // + ' <img src="https://api.wipmania.com/myflag.png" width="10" height="10">');
 		}, "json");
 		addClientData('Os', window.navigator.platform);
 		if(window.navigator.languages) addClientData('Languages', window.navigator.languages.join(', '));
