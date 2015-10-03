@@ -29,7 +29,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet"
 
 and run `sudo update-grub` to update grub. 
 
-I see some errors reported at startup, for which I have [found](https://access.redhat.com/articles/65378) [no](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1349740) valid answer yet:
+I see some errors reported at startup, for which I have [found](https://access.redhat.com/articles/65378) [no](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1349740) [valid](https://bbs.archlinux.org/viewtopic.php?id=196181) answer yet:
 
 ```
 $ dmesg | grep -i failed
