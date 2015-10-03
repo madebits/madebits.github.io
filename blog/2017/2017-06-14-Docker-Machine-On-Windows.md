@@ -99,4 +99,4 @@ A last example, we can run MongoDB as follows:
 $ docker run --rm --restart always -d -p 27017:27017 -v /opt/storage/mongo:/data/db --name my-mongo mongo -f /data/db/m.conf
 ```
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-05-16-The-New-Docker.md'>The New Docker</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-06-30-Low-Information-Density-User-Interfaces.md'>Low Information Density User Interfaces</a> <a rel='next' id='fnext' href='#blog/2017/2017-05-16-The-New-Docker.md'>The New Docker</a></ins>
