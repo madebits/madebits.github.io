@@ -49,7 +49,7 @@ virsh edit win10
 virsh dumpxml > win10.xml
 # import
 virsh create win10.xml # new
-virsh define win10.xml # existing
+virsh define win10.xml
 ```
 
 ##Creating a Windows 10 VM
