@@ -83,7 +83,7 @@ options iwlwifi bt_coex_active=0 11n_disable=1
 
 Bluetooth and wireless may have [coexistence](https://wiki.archlinux.org/index.php/Wireless_network_configuration) issues, so I tried [try](http://superuser.com/questions/924559/wifi-connection-troubles-solved-why-does-my-fix-work) `bt_coex_active=0`.
 
-I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. The trick is to configure a second wireless connection over NetworkManager manually for the same SSID and then select as Device the Hamma WLan USB (via its MAC). When I am in a room far away, I can plug the stick (via a short UBS cable to the machine for better signal reception and that it is convenient to move around freely) and then I just select that other WLAN connection. I might give network [bonding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future.
+I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. I configured a second wireless connection over NetworkManager manually for the same SSID and then selected as Device the Hamma WLan USB (via its MAC). I can plug the stick and select its WLAN connection. I might give network [bonding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future. **Update**: I added a WLAN repeater.
 
 ##Openbox Configurarion
 
