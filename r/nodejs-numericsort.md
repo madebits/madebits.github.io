@@ -19,8 +19,8 @@ To use:
 ```javascript
 var nsort = require('numericsort');
 
-console.log(['1', '10', '3'].sort(nsort)); // logs: ["1", "3", "10"] 
-console.log(['1', '10', '3'].sort());  // logs: ["1", "10", "3"] 
+console.log(['a1', 'a10', 'a3'].sort(nsort)); // logs: ["a1", "a3", "a10"] 
+console.log(['a1', 'a10', 'a3'].sort());  // logs: ["a1", "a10", "a3"] 
 ```
 
 #Details
