@@ -30,11 +30,12 @@ Tasks are coded in Javascript, in one or more files, the default task file name 
 let G = require('grunner')
     , gulp = require('gulp');
 
-G.t('t1', cb => {
-    return gulp.src('*.js')...;
+G.t('t1', () => {
+    return gulp.src('*.js').pipe(...);
     });
 
 G.t('t2', cb => {
+        console.log('Hello World!');
         cb();
     });
 
