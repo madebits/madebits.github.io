@@ -1087,6 +1087,10 @@ var lastPage = null
 	pageData.isExternal = (pageData.page.toLowerCase().startsWith('http://') || pageData.page.toLowerCase().startsWith('https://'));
 	pageData.isMarkdown = pageData.page.endsWith('.md') || pageData.page.endsWith('.mx');
 	pageData.isHtml = pageData.page.endsWith('.html')
+	if(pageData.page.startsWith(':md:')) {
+		pageData.isMarkdown = true;
+		pageData.page = pageData.page.substr(4);
+	}
 
 	pageData.pageDir = '';
 	var dirIdx = pageData.page.lastIndexOf('/');
