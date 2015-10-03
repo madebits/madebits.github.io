@@ -29,6 +29,12 @@ To access windows remote desktops, install `sudo apt install freerdp-x11` and us
 xfreerdp /v:10.11.11.11 /u:user
 ```
 
+Or with some more options:
+
+```
+xfreerdp /size:1920x1080 /compression +clipboard /v:10.11.11.11 /u:user /audio-mode:0 /drive:home,/home/user/work /client-hostname:remote /toggle-fullscreen
+```
+
 To stop `snx` use:
 
 ```
