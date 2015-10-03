@@ -10,7 +10,17 @@ I was looking for relatively portable and cheap laptop to use at home, and [Leno
 
 ##Ubuntu Installation
 
-I disabled UEFI and secure boot, and used the peculiar *novo* button to get the Lubuntu USB boot. Lubuntu install using a [bootable](https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows) USB was fast. I fully removed the previous disk contents (but did not wipe the drive, just formated it, so the former owner *p0rn* may be still there :).
+I disabled UEFI and secure boot, and used the peculiar *novo* button to get the Lubuntu USB boot. Lubuntu install using a [bootable](https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows) USB was fast: 
+
+```
+$ sudo hdparm -tT /dev/sda
+
+/dev/sda:
+ Timing cached reads:   10016 MB in  2.00 seconds = 5010.48 MB/sec
+ Timing buffered disk reads: 1468 MB in  3.00 seconds = 488.82 MB/sec
+```
+
+I fully removed the previous disk contents (but did not wipe the drive, just formated it, so the former owner *p0rn* may be still there :).
 
 ###Lubuntu 16.04
 
