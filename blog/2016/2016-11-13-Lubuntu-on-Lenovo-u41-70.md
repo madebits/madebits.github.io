@@ -381,12 +381,8 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
   0.0.0.0 client-s.gateway.messenger.live.com 
   ```
 
-* I set up a [Private](https://help.ubuntu.com/community/EncryptedPrivateDirectory) folder using:
+* Removed `indicator-sound` and `indicator-sound-gtk2` and added default LxPannel sound indicator.
 
-  ```
-  sudo apt install ecryptfs-utils
-  ecryptfs-setup-private
-  ```
 * `sudo apt install arandr` is better for multi-monitor setup than the Lubuntu default `lxrandr` tool.
 
 ##Final Thoughts
