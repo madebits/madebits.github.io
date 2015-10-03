@@ -1259,6 +1259,17 @@ $(function() {
 		}			
 	});
 
+	$(window).scroll(function(){
+        if($(window).scrollTop() != 0) {
+        	$('#mbg-fixed-top').show();
+        }
+        else $('#mbg-fixed-top').hide(); 
+    });
+	$('.mbg-top').click(function(event) { 
+		event.preventDefault();
+		window.scrollTo(0, 0);
+	});
+
 });
 
 return {

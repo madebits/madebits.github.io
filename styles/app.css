@@ -9,6 +9,15 @@ h2 { font-weight: 600; }
 
 .mbg-entry-background h2 { border-bottom: 0px; } 
 
+div#mbg-fixed-top {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    z-index: 9999;
+    font-size: 1.2em;
+    display: none;
+}
+
 a[target="_blank"]:after {
     content: url(ext.png);
     margin: 0 0 0 2px;  
