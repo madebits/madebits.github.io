@@ -91,7 +91,7 @@ sudo rfkill unblock 1 #id
 
 `+` and `-` keys are not working to move USB devices up in the BIOS boot list, as the keyboard lacks a numeric pad. To be able to press those, I attached an external keyboard.
 
-The new BIOS changed the official Lenovo standard logo for no good reason to an amateur-like one - Chinese minds work in ways I cannot understand.
+Latest BIOS changed for no good reason the official Lenovo standard logo to an amateur-like one - Chinese minds work in ways I cannot understand.
 
 ##Graphics
 
