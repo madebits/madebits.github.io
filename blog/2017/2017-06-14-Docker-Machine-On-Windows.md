@@ -4,7 +4,7 @@
 
 <!--- tags: virtualization -->
 
-[Docker Machine](https://docs.docker.com/machine/overview/) offers a way to run Docker under a VM in Windows. You can always create a Linux VM with `docker` on your own and use it without Docker Machine. However, Docker Machine makes some things easier, and is a handy tool to use with different drivers.
+[Docker Machine](https://docs.docker.com/machine/overview/) offers a way to run Docker under a VM in Windows. You can always create a Linux virtual machine (VM) with `docker` on your own and use it without Docker Machine. Docker Machine makes some things easier, and is a handy tool to use with different drivers.
 
 To [install](https://docs.docker.com/machine/install-machine/) Docker Machine in Windows is easy, assuming you have Git with Git bash and VirtualBox (5+) already installed. [Installation](https://docs.docker.com/machine/install-machine/) documentation lists the following command: 
 
@@ -16,7 +16,7 @@ chmod +x "$HOME/bin/docker-machine.exe"
 
 This command will download and install Docker Machine in `$HOME/bin` folder (`$HOME` is by default, your Windows user folder: `%HOMEPATH%`). You may want to append `$HOME/bin` to `$PATH`. Docker Machine keeps its data files under `$HOME/.docker` folder.
 
-After installation, to create Docker Engine virtual machine (VM), use:
+After installation, to create Docker Engine VM, use:
 
 ```
 $ docker-machine create --driver virtualbox default
