@@ -20,7 +20,7 @@ And install locally in your node project where the task file is:
 npm i grunner -D
 ```
 
-You put tasks in one or more files, default is `gfile.js`:
+Tasks are coded in Javascript, in one or more files, the default task file name is `gfile.js`:
 
 ```
 "use strict";
@@ -39,25 +39,25 @@ G.t('t2', cb => {
 G.t('default', ['t1', 't2']);
 ```
 
-You can then run the task via:
+Run a task via:
 
 ```
 grunner --gfile gfile.js --gtask default
 ```
 
-If `--gfile` and/or `--gtask` are missing defaults as shown above are used.
+If `--gfile` and / or `--gtask` are missing defaults with values as shown above are used.
 
 ##Command Line Reference
 
 Specifying task files:
 
-* `--gdir dirPath` - process all js files in dirPath as grunner files. 
+* `--gdir dirPath` - process all `*.js` files in dirPath as grunner files. 
 * `--gdirrec dirPath` - same as `--gdir` but recursively process sub folders too.
 * `--gfile filePath` - process specified file as grunner file. If not specified `gfile.js` is assumed.
 
-All these options can be repeated more than once to specify one or more files and folders. The options are processed in the order given, in groups: first group is `--gdirrec`, second is `--gdir`, and last processed group is `--gfile`. If a file is loaded once as part of a given group, it is not loaded anymore as part of the later groups. The last task with a given name that is processed wins.
+All these options can be repeated more than once to specify one or more files and folders. The options are processed in the order given, in groups: first group to process is `--gdirrec`, second is `--gdir`, and last processed group is `--gfile`. If a file is loaded once as part of a given group, it is not loaded anymore as part of the later groups. The last task with a given name that is processed wins.
 
-Specifying task:
+Specifying task to run:
 
 * `--gtask taskName` - task name to run. This option can be repeated as needed - all tasks are run (non-blocking!) in the given order. If not set, `default` task name is assumed.
 
