@@ -1,3 +1,4 @@
+* [Statistical Learning Certification](#blog/2016/2016-04-09-Statistical-Learning-Certification.md)
 * [Background Sounds](#blog/2016/2016-04-07-Background-Sounds.md)
 * [WebWorker Patterns](#blog/2016/2016-03-03-WebWorker-Patterns.md)
 * [Key Derivation Functions](#blog/2016/2016-02-24-Key-Derivation-Functions.md)
@@ -5,4 +6,3 @@
 * [Using Autofac to Organize CSharp Code](#blog/2016/2016-02-12-Using-Autofac-to-Organize-CSharp-Code.md)
 * [Upgrading To Windows 10](#blog/2016/2016-02-07-Upgrading-To-Windows-10.md)
 * [Bootstrapping Intercorrelated Data](#blog/2016/2016-02-03-Bootstrapping-Intercorrelated-Data.md)
-* [WebEx On Ubuntu](#blog/2015/2015-12-10-WebEx-On-Ubuntu.md)

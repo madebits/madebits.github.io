@@ -23,4 +23,4 @@ A few sites to generate [background](https://en.wikipedia.org/wiki/Background_no
 
  Slow country music radio with very few interruptions, useful as an change when the above become boring.
 
-<ins class='nfooter'><a id='fnext' href='#blog/2016/2016-03-03-WebWorker-Patterns.md'>WebWorker Patterns</a></ins>
+<ins class='nfooter'><a id='fprev' href='#blog/2016/2016-04-09-Statistical-Learning-Certification.md'>Statistical Learning Certification</a> <a id='fnext' href='#blog/2016/2016-03-03-WebWorker-Patterns.md'>WebWorker Patterns</a></ins>
