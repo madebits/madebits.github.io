@@ -202,7 +202,7 @@ Natural light is diffused reflected light. A lens system may diffuse even more t
 
 ##Image Post-Processing
 
-All digital cameras do some image signal post-processing in the camera (e.g., sharpening, noise reduction). The relationship between the sensor data values and the lightness of the finished image is arbitrary, depending on the parameters chosen for the interpretation of the sensor data into an image color space, such as sRGB [20].
+All digital cameras do some image signal post-processing in the camera (e.g., sampling, sharpening, noise reduction). The relationship between the sensor data values and the lightness of the finished image is arbitrary, depending on the parameters chosen for the interpretation of the sensor data into an image color space, such as sRGB [20].
 
 In some cameras it is possible to get the RAW image data produced by the digital image sensor and then remap them on your own as you like using your a camera profile. Usually a raw conversion profile (same or similar to the one built-in in the camera) is provider by the manufacturer of the camera, as the manufacturer knows best what the raw data are, and then various image parameters can be further adjusted via software.
 
