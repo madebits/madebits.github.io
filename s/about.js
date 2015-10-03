@@ -26,14 +26,17 @@
 			clientTable.append('<tr><td><strong class="text-muted">{0}</strong></td><td>{1}</td></tr>'.format(key, t));
 		};
 		$.get("https://api.ipify.org?format=json", function(response) {
-			addClientData('Ip', response.ip + ' <img src="https://api.wipmania.com/myflag.png" width="10" height="10" alt="inline">');
+			addClientData('Ip', response.ip + ' <img src="https://api.wipmania.com/myflag.png" width="10" height="10">');
 		}, "json");
 		addClientData('Os', window.navigator.platform);
 		if(window.navigator.languages) addClientData('Languages', window.navigator.languages.join(', '));
 		addClientData('Browser', window.navigator.userAgent);
+		if(window.navigator.vendor) addClientData('Vendor', window.navigator.vendor);
+		addClientData('Cookies', window.navigator.cookieEnabled ? 'Supported' : 'Not supported');
 		addClientData('Cpus', window.navigator.hardwareConcurrency);
 		addClientData('Resolution', 
 			'Screen: ' + screen.width + 'x' + screen.height
+			+ ', Color depth: ' + screen.colorDepth
 			+ ', Window: ' + $(window).width() + 'x' + $(window).height()
 			+ ', Dpi: ' + getDPI()
 			+ (window.devicePixelRatio ? ', Zoom: ' + (window.devicePixelRatio * 100) + '%' : ''));
@@ -59,6 +62,9 @@
 				addClientData('Plugins', p.join(', '));
 			}
 		} catch(e){}
+
+		addClientData('Java', window.navigator.javaEnabled() ? 'Supported' : 'Not supported');
+
 		try {
 			navigator.getBattery().then(function(b) {
 				try {
