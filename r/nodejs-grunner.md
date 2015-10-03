@@ -104,7 +104,7 @@ g1.run('t1'); // run t1 on g1
 g2.run('t1'); // run t1 on g2
 ```
 
-Instances do not share any state, same task name in two different instances can be used to mean two different things. The methods documented in *Task API Reference* section can be called on any `GRunner` instance. The `new G.GRunner()` can be called only on the process singleton instance. The `run` method does not block. When using the `grunner` in command-line `G.run` is called for you automatically.
+Instances do not share any state, same task name in two different instances can be used to mean two different things. The methods documented in *Task API Reference* section can be called on any `GRunner` instance. The `new G.GRunner()` can be called only on the process singleton instance. The `run` method does not block. When using the `grunner` in command-line, `G.run` is called for you automatically.
 
 ##Task API Reference
 
@@ -120,7 +120,7 @@ Here `g` represents a `GRunner` instance object.
     * `dryRun` - if `true`, same as `--D` command-line option.
     * `beforeTaskRun = fn(ctx)` - called before taskFun is run (see `g.t` for `ctx`). This method and the next are intended for extra logging and testing. For more advanced wrapping use the `exec` option.
     * `afterTaskRun = fn(ctx)` - called after `taskFun` is run (see `g.t` for `ctx`).
-    * `noLoopDetection` - same `--C` command-line option. Set to `true` if you do **not** want loop detection. 
+    * `noLoopDetection` - if `true`, same `--C` command-line option. 
 
 * `g.t(...)` - adds a task and has several forms:
 
@@ -131,7 +131,7 @@ Here `g` represents a `GRunner` instance object.
       g.t(taskName, taskFun, userData)
       g.t(taskName, taskDependecies, taskFun, userData)
     ```
-  Tasks are added as keys (`taskName`) to `g.tasks` object. Adding a task with same `taskName` a previous one, replaces it. While you can add tasks directly to `g.tasks` (and sometimes this can be useful), using `g.t` is recommended. The arguments of `g.t(...)` are:
+  Tasks are added as keys (`taskName`) to `g.tasks` object. Adding a task with same `taskName` as a previous one, replaces it. While you can add tasks directly to `g.tasks` (and sometimes this can be useful), using `g.t` is recommended. The arguments of `g.t(...)` are:
     * `taskName` - string (valid JS object key name).
     * `taskDependecies` - optional string, or array of strings of task names to be run before.
     * `taskFun(cb)` - optional body of the task. The optional `ct.ctx` object contains information about the task `ctx = {taskName, task, runner}`. Normally, `cb.ctx` should be treated as read-only information, but you can modify the custom `userData` passed to `g.t`. There are several valid ways to denote that you are done within `taskFun` code:
@@ -145,7 +145,7 @@ Here `g` represents a `GRunner` instance object.
         * Emit an error in a returned `Stream`. In this case, you should **not** call `cb()`.
         * In a returned *promise* `throw` an error, or fail. In this case you should **not** call `cb()`.
         * `throw` a JS error. This works only directly within `taskFun`. If you `throw` inside a `pipe` stream, or `setTimeout`, and similar async functions, Node.js will stop execution. Use `try / catch` and callbacks to report errors in such cases.
-    * `userData` - can be any object, accessible via `ctx.task.userData` within `taskFun`.
+    * `userData` - can be any object, accessible via `cb.ctx.task.userData` within `taskFun`.
 
 * `g.addTask` - this is a synonym for `g.t`.
 
