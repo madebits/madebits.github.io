@@ -128,14 +128,6 @@ let extern = filePath => {
 G.t('t1', extern('./t1.js'));
 ```
 
-##Reacting To Change
-
-GRunner does not have any build-in support to monitor any changes, but can be easy integrated with any other monitoring code. For example:
-
-* There are enough Node.js libraries to monitor files and directories. You can can directly call `G.run` with a task name if some file system event of interest happens.
-* Monitor some repository branch for changes and trigger `G.run` with some deployment tasks.
-* Monitor the state of some service and `G.run` with some recovery or load balancing task, and so on.
-
 ##Task API Reference
 
 Here `g` represents a `GRunner` instance object.
