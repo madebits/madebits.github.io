@@ -39,6 +39,9 @@ location-provider=manual
 temp-day=6500
 temp-night=3700
 
+gamma-day=0.8
+gamma-night=0.6
+
 ; frankfurt
 [manual]
 lat=50.1
@@ -78,6 +81,6 @@ Both `xcalib` and the next tool `xgamma` may not work properly when `redshift` i
 @xgamma -gamma 0.8
 ```
 
-In my machine, this makes black text, in general, more readable.
+In my machine, this makes black text, in general, more readable. Similar effects can be achieved by modifying gamma via `redshift`.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-10-02-xrandr-Panning-with-no-Tracking.md'>xrandr Panning with no Tracking</a> <a rel='next' id='fnext' href='#blog/2016/2016-08-02-Lubuntu-Closing-Chrome-Downloads-Bar.md'>Lubuntu Closing Chrome Downloads Bar</a></ins>
