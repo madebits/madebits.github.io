@@ -73,7 +73,7 @@ xcalib -c
 
 Both `xcalib` and the next tool `xgamma` may not work properly when `redshift` is active.
 
-For an updated alternative tool to handle invert see: https://github.com/zoltanp/xrandr-invert-colors
+For an alternative tool to handle invert see: https://github.com/zoltanp/xrandr-invert-colors
 
 ##xgamma
 
