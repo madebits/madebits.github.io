@@ -26,7 +26,7 @@
 
 ##JIRA Agile Essentials (2015)
 
-[![@left@](blog/images/book-ja.png)](https://www.packtpub.com/application-development/jira-agile-essentials) *JIRA Agile Essentials* is usually not a book to be listed on the same page as the others above, but I found it to be an extended handbook on JIRA Agile. Having software manage Scrum or Kanban removes the wallboard creativity that makes every agile team unique. Nevertheless, in many companies standard software helping with management of agile software development is indispensable for internal practices. Being familiar with common mainstream agile development software helping tools is essential for every agile coach. 
+[![@left@](blog/images/book-ja.png)](https://www.packtpub.com/application-development/jira-agile-essentials) *JIRA Agile Essentials* is usually not a book to be listed on the same page as the others above. It is an useful extended handbook on JIRA Agile. Having software manage Scrum, or Kanban removes the wallboard creativity that makes every agile team unique. Nevertheless, in many companies standard software helping with management of agile software development is indispensable for internal practices. Being familiar with common mainstream agile development software helping tools is essential for every agile coach. 
 
 <br clear="all">
 
