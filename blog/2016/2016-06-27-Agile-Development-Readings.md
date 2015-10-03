@@ -20,7 +20,7 @@
 
 ##Succeeding with Agile (2009)
 
-[![@left@](blog/images/book-sa.png)](https://www.mountaingoatsoftware.com/books/succeeding-with-agile-software-development-using-scrum) *Succeeding with Agile* is a book I still have to finish reading. I find it very interesting as it combines the theory with enough practical tips to get you started in the right direction. The book is especially useful for usage in corporation environment and shows how agile techniques fit to common project management tasks. This book is more practical than *Coaching Agile Teams*, though both are timeless books worth reading.
+[![@left@](blog/images/book-sa.png)](https://www.mountaingoatsoftware.com/books/succeeding-with-agile-software-development-using-scrum) *Succeeding with Agile* is a book I still have to finish reading. I find it very interesting as it combines the theory with enough practical tips to get you started in the right direction. The book is especially useful for usage in corporation environment and shows how agile techniques fit to common project management tasks. This book is more practical than *Coaching Agile Teams*, though both are timeless and worth reading.
 
 <br clear="all">
 
