@@ -60,7 +60,7 @@ Specifying task files:
 
 * `--gdir dirPath` - process all `*.js` files in dirPath as grunner files. 
 * `--gdirrec dirPath` - same as `--gdir` but recursively process sub folders too.
-* `--gfile filePath` - process specified file as grunner file. If not specified `gfile.js` is assumed.
+* `--gfile filePath` - process specified file as grunner file. If not specified `gfile.js` is assumed. At least one `--gfile` file must be present (default or another one).
 
 All these options can be repeated more than once to specify one or more files and folders. The options are processed in the order given, in groups: first group to process is `--gdirrec`, second is `--gdir`, and last processed group is `--gfile`. If a file is loaded once as part of a given group, it is not loaded anymore as part of the later groups. The last task with a given name that is processed wins.
 
