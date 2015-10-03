@@ -80,7 +80,7 @@ $ docker run -d -p 8000:80 nginx
 $ curl $(docker-machine ip):8000
 ```
 
-Docker machine mount root `/`` folder as `tmpfs` and the VM hard disk is in `/mnt/sda1/`:
+Docker machine mounts root `/` folder as `tmpfs` and the VM hard disk is in `/mnt/sda1/`. To keep permanent data in VM disk outside container store them at `/mnt/sda1/`.
 
 ```
 docker@default:~$ mount
@@ -91,8 +91,6 @@ tmpfs on / type tmpfs (rw,relatime,size=917692k)
 c/Users on /c/Users type vboxsf (rw,nodev,relatime)
 ...                                                    
 ```
-
-To keep permanent data in VM disk outside container store them at `/mnt/sda1/`.
 
 As another example, we can access the RabbitMQ web [management plugin](https://docs.docker.com/samples/rabbitmq/#management-plugin) from host as `http://192.168.99.100:15672` [using](https://hub.docker.com/r/library/rabbitmq/tags/) default *guest / guest* credentials:
 
