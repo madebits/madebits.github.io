@@ -98,7 +98,7 @@ For SublimeText 3 sidebar font size, I had to [overwrite](http://stackoverflow.c
 
 ##Battery
 
-I installed [tlp](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html) via `sudo apt install tlp` and activated its service (`sudo systemctl enable tlp`). The battery lasts normally for around 2.5 hours, but if I reduce the brightness and only browse and read, I can get up to 4 hours - more than enough for my usage and I am usually always near a power source.
+I installed [tlp](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html) via `sudo apt install tlp` and activated its service (`sudo systemctl enable tlp`). TLP [configuration](http://linrunner.de/en/tlp/docs/tlp-configuration.html) is in `/etc/default/tlp`. The battery lasts normally for around 2.5 hours, but if I reduce the brightness and only browse and read, I can get up to 4 hours - more than enough for my usage and I am usually always near a power source.
 
 ##Wireless
 
