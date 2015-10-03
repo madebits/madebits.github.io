@@ -66,4 +66,4 @@ Code takes care of a few common cases:
 
 The only weak point of clustering is when master dies. If master dies, there is nothing to do via Node.js itself. Restarting master process in such cases has to be handled externally.
 
-<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-10-08-VSCode-Extensions.md'>VSCode Extensions</a> <a rel='next' id='fnext' href='#blog/2017/2017-09-11-From-Requirements-To-Stories.md'>From Requirements To Stories</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-10-08-VSCode-Extensions.md'>VSCode Extensions</a> <a rel='next' id='fnext' href='#blog/2017/2017-10-03-iptables-for-OpenVpn.md'>iptables for OpenVpn</a></ins>
