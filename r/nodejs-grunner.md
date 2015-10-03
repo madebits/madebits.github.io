@@ -258,6 +258,7 @@ In the sections that follow `g` represents a `GRunner` instance object.
 The following helper functions are provided:
 
 * `g.pipeStart([objectOrIterator])` - returns a starting object `stream` from one or more objects. If an array or iterator is given as argument, then there will be an element in stream per each array or iterator element. For example:
+
    ```javascript
    g.t('tt', () => {
    return g.pipeStart(['a', 'b', 'c'])
