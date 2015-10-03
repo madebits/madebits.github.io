@@ -781,7 +781,7 @@ var applyStyle = function(containerId) {
 			if(tagLevel === 1) {
 				text = '<strong>' + text + '</strong>'
 			}
-			list.append('<li><span class="text-muted"><strong>{0}</strong></span> <a href="#{1}#{2}">{3}</a></li>'.format(Array(tagLevel).join('&rsaquo;'), page, id, text));
+			list.append('<li><span class="text-muted"><strong style="margin-left:{0}px;">{1}</strong></span> <a href="#{2}#{3}">{4}</a></li>'.format((tagLevel*15),Array(tagLevel).join('&rsaquo;'), page, id, text));
 		}
 	});
 }
