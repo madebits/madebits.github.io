@@ -20,7 +20,15 @@ To install locally in your node project where the task file is:
 npm i grunner -D
 ```
 
-If installed locally, you can run GRunner as `node node_modules/grunner/bin/grunner.js` appending any arguments.
+If installed locally, you can run GRunner as `npm run grunner` appending any arguments. If that does not work add the following to your `package.json`:
+
+```
+  "scripts": {
+    "grunner": "grunner"
+  }
+```
+
+And run it as `npm run grunner --`, appending any arguments after `--`.
 
 Tasks are coded in Javascript, in one or more files, the default task file name is `gfile.js`:
 
@@ -232,5 +240,24 @@ The following helper functions are also provided:
 
 * `g.envResolveValue(value)` - this is similar to `g.envResolve(key)`, but operates on a `process.env[key]` returned value (and not `key` name). 
 
- 
+##Watching for File Changes
 
+Example of using [npm-watch](https://www.npmjs.com/package/npm-watch) with GRunner. Modify your `package.json` to add:
+
+```
+  "watch": {
+    "mywatch": "app/*.js"
+  },
+  "scripts": {
+    "mywatch": "grunner --gfile gfile.js --gtask myWatchTask",
+    "watch": "npm-watch"
+  }
+```
+
+And start watching using:
+
+```
+npm run watch
+```
+
+See [npm-watch](https://www.npmjs.com/package/npm-watch) documentation for more information.
