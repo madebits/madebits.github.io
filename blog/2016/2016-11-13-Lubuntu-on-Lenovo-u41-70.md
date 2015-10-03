@@ -36,18 +36,23 @@ and run `sudo update-grub` to update grub.
 I see some errors reported at startup:
 
 ```
-$ dmesg | grep -i failed
-[    0.709627] acpi PNP0A08:00: _OSC failed (AE_ERROR); disabling ASPM
-[    2.026741] ACPI Error: Method parse/execution failed [\_TZ.FN00._ON] (Node ffffa2f1060f5438), AE_NOT_FOUND (20160422/psparse-542)
-[    2.026747] acpi PNP0C0B:00: Failed to change power state to D0
-[    2.026770] ACPI Error: Method parse/execution failed [\_TZ.FN00._ON] (Node ffffa2f1060f5438), AE_NOT_FOUND (20160422/psparse-542)
-[    2.026775] acpi PNP0C0B:00: Failed to set initial power state
-[    2.054619] ACPI Error: Method parse/execution failed [\_TZ.TZ00._TMP] (Node ffffa2f1060f5de8), AE_NOT_FOUND (20160422/psparse-542)
-[    2.054733] ACPI Error: Method parse/execution failed [\_TZ.TZ00._TMP] (Node ffffa2f1060f5de8), AE_NOT_FOUND (20160422/psparse-542)
-[    2.054787] ACPI Error: Method parse/execution failed [\_TZ.TZ01._TMP] (Node ffffa2f1060f5be0), AE_NOT_FOUND (20160422/psparse-542)
-[    2.054871] ACPI Error: Method parse/execution failed [\_TZ.TZ01._TMP] (Node ffffa2f1060f5be0), AE_NOT_FOUND (20160422/psparse-542)
-[    2.322787] [drm:intel_dp_start_link_train [i915]] *ERROR* failed to train DP, aborting
-[    2.369730] [drm:intel_dp_start_link_train [i915]] *ERROR* failed to train DP, aborting
+$ dmesg | grep -iE "failed|error"
+[    0.721575] acpi PNP0A08:00: _OSC failed (AE_ERROR); disabling ASPM
+[    2.045632] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECWT] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
+[    2.045636] ACPI Error: Method parse/execution failed [\_TZ.FN00._ON] (Node ffff8b00c60f51b8), AE_NOT_FOUND (20160422/psparse-542)
+[    2.045645] acpi PNP0C0B:00: Failed to change power state to D0
+[    2.045665] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECWT] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
+[    2.045668] ACPI Error: Method parse/execution failed [\_TZ.FN00._ON] (Node ffff8b00c60f51b8), AE_NOT_FOUND (20160422/psparse-542)
+[    2.045673] acpi PNP0C0B:00: Failed to set initial power state
+[    2.070404] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
+[    2.070408] ACPI Error: Method parse/execution failed [\_TZ.TZ00._TMP] (Node ffff8b00c60f57a8), AE_NOT_FOUND (20160422/psparse-542)
+[    2.070519] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
+[    2.070522] ACPI Error: Method parse/execution failed [\_TZ.TZ00._TMP] (Node ffff8b00c60f57a8), AE_NOT_FOUND (20160422/psparse-542)
+[    2.070573] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
+[    2.070575] ACPI Error: Method parse/execution failed [\_TZ.TZ01._TMP] (Node ffff8b00c60f5d20), AE_NOT_FOUND (20160422/psparse-542)
+[    2.070658] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
+[    2.070660] ACPI Error: Method parse/execution failed [\_TZ.TZ01._TMP] (Node ffff8b00c60f5d20), AE_NOT_FOUND (20160422/psparse-542)
+[    2.329683] [drm:intel_dp_start_link_train [i915]] *ERROR* failed to train DP, aborting
 ```
 
 It seems, [acpi](https://wiki.archlinux.org/index.php/ACPI_modules) information is [not](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1349740) correctly supplied by BIOS, not that it matters much in my case and this is not the first laptop to have this issue. Do not know what DP message is about, but external monitor (TV) over HDMI works fine.
