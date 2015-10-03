@@ -4,7 +4,7 @@
 
 <!--- tags: javascript nodejs -->
 
-**GRunner** is a task runner for [Node.js](https://nodejs.org/), inspired by [Gulp](http://gulpjs.com/). GRunner is mostly compatible with Gulp. Gulp plugins and Gulp streams like `gulp.src`, etc, can be used as they are with GRunner. Gulp 3 has some limitations that will be addressed in Gulp 4. GRunner task scheduler is based on [async](https://github.com/caolan/async) and it is *subjectively* better :) than Gulp's task scheduler (thought GRunner may need some more stack). GRunner uses some ES2015 features, so it needs a recent version of Node.js.
+**[GRunner](https://www.npmjs.com/package/grunner)** is a task runner for [Node.js](https://nodejs.org/), inspired by [Gulp](http://gulpjs.com/). GRunner is mostly compatible with Gulp. Gulp plugins and Gulp streams like `gulp.src`, etc, can be used as they are with GRunner. Gulp 3 has some limitations that will be addressed in Gulp 4. GRunner task scheduler is based on [async](https://github.com/caolan/async) and it is *subjectively* better :) than Gulp's task scheduler (thought GRunner may need some more stack). GRunner uses some ES2015 features, so it needs a recent version of Node.js.
 
 ##Usage
 
