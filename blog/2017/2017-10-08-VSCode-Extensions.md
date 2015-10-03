@@ -26,6 +26,9 @@ An incomplete list of useful [VSCode extensions](https://marketplace.visualstudi
 
 * [JS Refactorings](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor) - common refactoring for JavaScript.
 
+* [Prettier - JavaScript formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - improves Format Document when using `eslint`.
+
+
 ##Git
 
 * [Git Lens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) - I do not use Git via VSCode, but it is useful to see history of files within the VSCode.
@@ -97,7 +100,10 @@ VSCode is usable out of the box. Some customization is needed thought and here i
         "typescript",
         "typescriptreact",
         "yml"
-    ]
+    ],
+    "prettier.singleQuote": true,
+    "prettier.semi": false,
+    "prettier.eslintIntegration": true
 }
 ```
 
