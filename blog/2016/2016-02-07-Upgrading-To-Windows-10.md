@@ -17,7 +17,7 @@ net stop wuauserv
 net start wuauserv
 ```
 
-I am not sure if it got any updates like this, but the UI progress reported it did. I triggered a windows update after I installed Windows 10 to be sure I got latest patches.
+I am not sure if it got any updates like this, but the UI progress reported it did. I triggered a windows update after I installed Windows 10 to be sure I got all latest patches.
 
 ##Grub (kind of) Preserved
 
