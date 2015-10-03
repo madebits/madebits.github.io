@@ -111,7 +111,8 @@ onmessage = function(e) {
         case 'connect':
             parentPort = e.ports[0];
             parentPort.onmessage = function(event) {
-                // data from parent comes here, process and send back to parent
+                // data from parent comes here
+                // process and send back to parent
                 var res = event.data;
                 parentPort.postMessage(res);
             };
@@ -161,8 +162,9 @@ onmessage = function (e) {
                 // data from nested shared worker comes here
                 switch(event.data.cmd) {
                     case 'process':
+                        // send result back to window
                         var res = event.data;
-                        me.postMessage(res); // send result back to window 
+                        me.postMessage(res);  
                         break;
                     case 'broadcast':
                         // if needed
@@ -189,14 +191,16 @@ onconnect = function(e) {
     var parentPort = e.ports[0];
     parents.push(port);
     parentPort.onmessage = function(event) {
-        // data from parent comes here, process and send back to same parent
+        // data from parent comes here
+        // process and send back to same parent
         var res = event.data;
         parentPort.postMessage(res);
 
         //optional, we can broadcast to all parents too
         totalMessageCount++;
         parents.forEach(function(p) {
-            p.postMessage({cmd: 'broadcast', count: totalMessageCount}); 
+            p.postMessage({cmd: 'broadcast', 
+              count: totalMessageCount}); 
         });
     };
 };
