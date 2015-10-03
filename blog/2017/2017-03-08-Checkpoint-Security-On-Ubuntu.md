@@ -65,7 +65,7 @@ To stop `snx` use:
 snx -d
 ```
 
-I am usually, a left mouse user and RDP does not transfer the mouse settings. To easy swap the mouse buttons as I need them, I keep installed in the machines and pinned in taskbar via a shortcut a small [program](https://superuser.com/questions/205861/keyboard-shortcut-to-swap-mouse-buttons) based on this code:
+I am a left mouse user and RDP does not transfer mouse settings. To easy swap the mouse buttons, I keep installed in the machines and pinned in taskbar (via a shortcut) a small [program](https://superuser.com/questions/205861/keyboard-shortcut-to-swap-mouse-buttons) based on this code:
 
 ```cs
 // csc mouse-swap.cs /win32icon:mouse.ico
