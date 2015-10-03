@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-Two small useful tool for monitor and screen management in Ubuntu:
+Several small useful tool for monitor and screen management in Ubuntu:
 
 ##Disper
 
@@ -49,5 +49,26 @@ In Lubuntu, `redshift` can be auto-started (if you do not use `redshift-gtk`), b
 
 `redshift` supports [hooks](http://jonls.dk/2015/01/redshift-1-10-released/) to notify if something changes: `$1` is the period event, `$2` is previous value, `$3` is new value. There is a [script](https://wiki.archlinux.org/index.php/Redshift#Use_real_screen_brightness) to change brightness based on that. The events are fired only when `redshift` runs (not when started) and brightness is also controlled by the power manager, so I found the hooks not useful in practice.
 
+##xcalibr
+
+`xcalib` is a command line tool obtained via `sudo apt install xcalib`. It can be used among others to [invert](https://bbs.archlinux.org/viewtopic.php?id=89218) colors back and forth. It is useful to map it to `openbox` configuration as:
+
+```xml
+    <keybind key="W-i">
+      <action name="Execute">
+        <command>xcalib -invert -alter</command>
+      </action>
+    </keybind>
+```
+
+##xgamma
+
+`xgamma` comes with Ubuntu and can be used to configure [gamma](http://askubuntu.com/questions/9248/is-there-a-software-utility-to-adjust-screen-gamma-brightness-contrast) as a replacement for contrast if your screen is too bright. I have configured at startup at `~/.config/lxsession/Lubuntu/autostart` it as follows:
+
+```
+@xgamma -gamma 0.8
+```
+
+In my machine, this makes black text, in general, more readable.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-10-02-xrandr-Panning-with-no-Tracking.md'>xrandr Panning with no Tracking</a> <a rel='next' id='fnext' href='#blog/2016/2016-08-02-Lubuntu-Closing-Chrome-Downloads-Bar.md'>Lubuntu Closing Chrome Downloads Bar</a></ins>
