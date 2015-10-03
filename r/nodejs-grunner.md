@@ -47,6 +47,8 @@ grunner --gfile gfile.js --gtask default
 
 If `--gfile` and / or `--gtask` are missing defaults with values as shown above are used.
 
+GRunner does not use Gulp (other that for unit testing to check it can work with it). Using Gulp is not a requirement for using GRunner. GRunner can be used with own task logic that does not use anything from Gulp. And if you like to, you can use GRunner with most Gulp plugins, as well with `gulp.src`, and other Gulp stream based constructs similarly as you use them inside Gulp tasks. 
+
 ##Command Line Reference
 
 Specifying task files:
@@ -127,19 +129,21 @@ Here `g` represents a `GRunner` instance object.
   Tasks are added as keys to `g.tasks` object, so `taskName` must be a valid JS object key name. Adding a task with same name a previous one, replaces it. While you can add tasks directly to `g.tasks` (and sometimes this can be useful), using `g.t` is recommended. The arguments of `g.t(...)` are:
     * `taskName` - string (valid JS object key name).
     * `taskDependecies` - optional string, or array of strings of task names to be run before.
-    * `taskFun(cb, info)` - optional body of the task. The optional `info` object contains information about the task `{taskName, task, runner}`. Normally, this should be treated as read-only information, but you can modify any custom `userData` passed to `g.t`. There are several valid ways to denote that you are done within the taskFun:
+    * `taskFun(cb, info)` - optional body of the task. The optional `info` object contains information about the task `{taskName, task, runner}`. Normally, `info` should be treated as read-only information, but you can modify any custom `userData` passed to `g.t`. There are several valid ways to denote that you are done within `taskFun` code:
         * Call `cb();` on success, or `cb(error);` on error. If your code calls `cb`, it must be called once.
         * Return a JS *promise*. Any promise object that supports `then` is supported. In this case you should **not** call `cb()`.
         * Return a `Stream`, such as `return gulp.src(...).pipe(...);`. In this case you should **not** call `cb()`.
+
+        You can also exit a task using errors:
+
         * Emit an error in a returned stream. In this case, you should **not** call `cb()`.
         * In a returned *promise* `throw` an error, or fail. In this case you should **not** call `cb()`.
-        * `throw` a JS error. This works only directly within taskFun. If you `throw` in a `pipe`, or `setTimeout`, and similar async functions, node.js will stop execution. Use callbacks in such cases.
-    * `userData` - can be any object, accessible via `info.task.userData` within taskFun.
+        * `throw` a JS error. This works only directly within `taskFun`. If you `throw` inside a `pipe` stream, or `setTimeout`, and similar async functions, Node.js will stop execution. Use `try / catch` and callbacks to report errors in such cases.
+    * `userData` - can be any object, accessible via `info.task.userData` within `taskFun`.
 
 * `g.addTask` - this is a synonym for `g.t`.
 
-* `g.run(taskName, cb)` - is used to run a task. When used via command-line this function is called for you with `--gtask` tasks. This function does not block, use `cb(error)` to be notified when done. If a task has any dependencies, then those tasks will be run before (recursively). `g.run()` only reads options and tasks, so you can invoke `g.run()` more than once on same instance without waiting for previous invocation to finish (as long as you do not modify options in between).
+* `g.run(taskName, cb)` - is used to run a task. When used via command-line this function is called for you for each `--gtask` task. `g.run` does not block - use `cb(error)` to be notified when done. If a task has any dependencies, then those tasks will be run before (*recursively*). `g.run()` only reads options and tasks, so you can invoke `g.run()` more than once on same instance without waiting for previous invocation to finish (as long as you do not modify options and tasks in between).
 
-* `g.log(msg, isError)` - writes `msg` string in `console.log`, or if `isError=true` in `console.error`.
-
+* `g.log(msg, isError)` - writes `msg` string in `console.log`, or if `isError=true` in `console.error`. You can replace this function with your own using `options.log`.
 
