@@ -74,7 +74,7 @@ Section "Device"
 EndSection
 ```
 
-There are some more hints to try [here](http://askubuntu.com/questions/766725/annoying-flickering-in-16-04-lts-chrome). For Chrome I also tried force-enabling GPU rasterization for all layers, via `chrome://flags/#enable-gpu-rasterization`. 
+There are some more hints to try [here](http://askubuntu.com/questions/766725/annoying-flickering-in-16-04-lts-chrome). For Chrome, I also tried force-enabling GPU rasterization for all layers, via `chrome://flags/#enable-gpu-rasterization`, but with *uxa* it works fine without it. 
 
 ###High DPI
 
