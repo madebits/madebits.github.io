@@ -127,6 +127,6 @@ Spice guest tools offer several other features, such as direct [folder sharing](
  "C:\Program Files (x86)\SPICE webdavd\map-drive.bat"
  ```
 
-This will add the mapped drive, as last free drive `Z:`, on Windows guest.
+This will add the mapped drive, as last free drive `Z:`, on Windows guest. [WebDAV](https://en.wikipedia.org/wiki/WebDAV) is not necessary better than SFTP.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md'>Cross Cutting Concerns Evolution</a></ins>
