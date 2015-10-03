@@ -20,4 +20,4 @@ Users pay for the initial cognitive relief in long-term as they have to spend mo
 
 Low-information density UIs become debatable for power users if it is the only interface to a web site or application. Power users due to previous exposure to similar applications want more information at once from the very start to be able to quickly make used of that. If power users make a significant part of your business, e.g. in a dedicated expert application, it could be worth to address their needs and invest in user adaptable information density. In all other cases, users will be better served by low-information density interfaces.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-06-14-Docker-Machine-On-Windows.md'>Docker Machine On Windows</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-08-10-Product-Definition-Life-Cycle.md'>Product Definition Life Cycle</a> <a rel='next' id='fnext' href='#blog/2017/2017-06-14-Docker-Machine-On-Windows.md'>Docker Machine On Windows</a></ins>
