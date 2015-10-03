@@ -10,17 +10,25 @@ I use a Dell Latitude E5570 machine (i7-6820HQ at 2.7Gz and 16 GB RAM) with Wind
 
 Boot menu on this machine is accessible via `F12` key, and BIOS via `F2` key. I installed Lubuntu 16.10 in a *SanDisk Extreme* 64 GB USB stick connected to one of USB 3.0 ports. I was somehow unlucky with the install, as I run into two bugs []() and []() - the first was caused by the way I created the install USB. This made me spent more time that I though to install Lubuntu, as I had to figure out what was happening. After trial and error, finally Lubuntu run from the external USB. USB stick is quite fast:
 
-```
+```bash
 $ dd bs=2M count=512 if=/dev/zero of=test1 conv=fdatasync
 ...
 1073741824 bytes (1,1 GB, 1,0 GiB) copied, 5,97716 s, 180 MB/s
+```
+
+After I installed all core software I need, I still have plenty of space left:
+
+```bash
+$ df -h | grep -E "sdb|Avail"
+Filesystem         Size  Used Avail Use% Mounted on
+/dev/sdb1           58G   12G   46G  21% /
 ```
 
 ##Startup
 
 I get some issues reported at startup, which I had no time to loop up what they mean yet:
 
-```
+```bash
 u7@vm-l10:~/git/madebits.github.io$ dmesg | grep -iE "failed|error"
 [    1.864524] radeon 0000:01:00.0: failed VCE resume (-110).
 [   10.115169] EXT4-fs (sdb1): re-mounted. Opts: errors=remount-ro
@@ -41,7 +49,7 @@ Lubuntu seems to run ok and all the hardware is working. There is nothing that r
 
 TouchPad is [not](https://bugzilla.kernel.org/show_bug.cgi?id=121281) a Synaptic one:
 
-```
+```bash
 $ xinput list
 ⎡ Virtual core pointer                      id=2    [master pointer  (3)]
 ...
@@ -58,7 +66,7 @@ The basic functionality seems to work fine, but I am not a big user of touchpad,
 
 The device has both Intel and ATI graphics:
 
-```
+```bash
 $ lspci | grep -iE "vga|display"
 00:02.0 VGA compatible controller: Intel Corporation HD Graphics 530 (rev 06)
 01:00.0 Display controller: Advanced Micro Devices, Inc. [AMD/ATI] Mars [Radeon HD 8670A/8670M/8750M] (rev 81)
@@ -66,7 +74,7 @@ $ lspci | grep -iE "vga|display"
 
 It seems, the Intel GPU is used. There is sometimes video tearing on the top of the screen in fullscreen mode in Chrome browser, but given it is rate, at the moment, I can live with that.
 
-#Battery
+##Battery
 
 Battery lasts around 3 hours with [TLP](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html) active (with default settings). This is somehow more that the battery lasts on Windows 10, but this could be related to the different applications and the screen brightness.
 
