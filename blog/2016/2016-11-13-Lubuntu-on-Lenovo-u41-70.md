@@ -4,13 +4,13 @@
 
 <!--- tags: linux -->
 
-I was looking for relatively portable laptop to use in the evening at home, and [Lenovo u41-70](http://support.lenovo.com/us/en/products/laptops-and-netbooks/u-series/u41-70) with 1.6 kg of weight, an i5 CPU, 8GB of RAM, and 256 GB SSD looked like a good match. I bought it relatively cheap (a bit over 400 euro) as b-ware returned over Amazon service. The price was somehow uncommon for such a machine despite being sold from Amazon ware deals. The reason it was cheap was obvious to me after I received it. The machine had no more the original Levono Windows installation and the recovery partition of both Lenovo and Windows were not present. I goggled a bit around before I bough it, and found Ubuntu could run ok. Given my plan was to remove Windows anyway, it looked like a perfect deal.
+I was looking for relatively portable laptop to use in the evening at home, and [Lenovo u41-70](http://support.lenovo.com/us/en/products/laptops-and-netbooks/u-series/u41-70) with around 1.6 kg of weight, an i5 CPU, 8GB of RAM, and 256 GB SSD looked like a good match. I bought it relatively cheap (a bit over 400 euro) as b-ware returned over Amazon service. The price was somehow uncommon for such a machine despite being sold from Amazon ware deals. The reason it was cheap was obvious to me after I received it. The machine had no more the original Levono Windows installation and the recovery partition of both Lenovo and Windows were not present. I goggled a bit around before I bough it, and found Ubuntu could run ok. Given my plan was to remove Windows anyway, it looked like a perfect deal.
 
 ##Lubuntu 16.04
 
 I installed first Lubuntu 16.04 (kernel 4.4) on Lenovo u41-70, but decided to upgrade to 16.10 (kernenl 4.8) given some sporadic [freezes](http://askubuntu.com/questions/761706/ubuntu-15-10-and-16-04-keep-freezing-randomly) related to Lenovo models seem to have been fixed in 4.7+ kernels.
 
-I disabled UEFI and secure boot, and use the strange *novo* button to get the UBS boot. Lubuntu install over a [bootable](https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows) UBS was fast and I fully removed the previous disk contents (I did not wipe the drive, just formated it, so former owner *p0rn* may still be there :).
+I disabled UEFI and secure boot, and used the strange *novo* button to get the UBS boot. Lubuntu install over a [bootable](https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows) UBS was fast and I fully removed the previous disk contents (I did not wipe the drive, just formated it, so former owner *p0rn* may still be there :).
 
 ##Lubuntu 16.10
 
