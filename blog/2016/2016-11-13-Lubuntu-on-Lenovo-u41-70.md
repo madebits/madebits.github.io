@@ -116,9 +116,17 @@ I installed [tlp](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-manag
 
 ##Wireless
 
-u41-70 comes with [Intel Wireless 3160](https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi). It can handle both 2.4 Ghz and 5.8 Ghz and bluetooth. I found the card reach is a bit weak on large distances. It has full speed in rooms near the router, but the quality (`watch -n1 iwconfig`) falls down three rooms away. This means at some locations at home, the wlan is not very usable.
+u41-70 comes with [Intel Wireless 3160](https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi). It can handle both 2.4 Ghz and 5.8 Ghz and bluetooth. I found the card reach is a bit weak on large distances. It has full speed in rooms near the router, but the quality (`watch -n1 iwconfig`) falls down three rooms away. This means at some locations at home, the wlan is not very usable. 
 
-Fortunately, I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. The trick is to configure a second wireless connection over NetworkManager manually for the same SSID and then select as Device the Hamma WLan USB (via its MAC). When I am in a room far away, I can plug the stick (via a short UBS cable to the machine for better signal reception and that it is convenient to move around freely) and then I just select that other WLAN connection. I might give network [bonding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future.
+I tried to [disable](https://wiki.archlinux.org/index.php/Wireless_network_configuration) some of the [properties](http://askubuntu.com/questions/640178/no-connection-sporatic-connection-with-intel-3160-wireless-lenovo-y50-ubuntu), by appending to `/etc/modprobe.d/iwlwifi.conf`:
+
+```
+options iwlwifi bt_coex_active=1 swcrypto=1 11n_disable=1
+```
+
+An alternative, given bluetooth and wireless may have [coexistence](https://wiki.archlinux.org/index.php/Wireless_network_configuration) issues is to [try](http://superuser.com/questions/924559/wifi-connection-troubles-solved-why-does-my-fix-work) `bt_coex_active=0`.
+
+I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. The trick is to configure a second wireless connection over NetworkManager manually for the same SSID and then select as Device the Hamma WLan USB (via its MAC). When I am in a room far away, I can plug the stick (via a short UBS cable to the machine for better signal reception and that it is convenient to move around freely) and then I just select that other WLAN connection. I might give network [bonding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future.
 
 ##Other Applications
 
