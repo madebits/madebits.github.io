@@ -1328,14 +1328,18 @@ var lastPage = null
 
 	var query = getLoadPageOptions(pageData);
 	var onDone = function (data) {
-		if(pageData.isSecret) {
-			setPageDataEnc(pageData, data);
-			return;
+		try {
+			if(pageData.isSecret) {
+				setPageDataEnc(pageData, data);
+				return;
+			}
+			if(pageData.isMarkdown) {
+				data = mbHtml.markup(data);
+			}
+			setPageData(pageData, data);
+		} catch(e) {
+			console.error(e);
 		}
-		if(pageData.isMarkdown) {
-			data = mbHtml.markup(data);
-		}
-		setPageData(pageData, data);
 	};
 
 	$.ajax(query).done(onDone).fail(function() {
