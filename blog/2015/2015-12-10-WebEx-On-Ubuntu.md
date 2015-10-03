@@ -120,4 +120,4 @@ Your 64 bit system is still using Firefox 64 bit for any normal browsing, but wh
 
 You may notice that Firefox 32 bit complains when started (logs in console) about possible plugins in `/usr/lib/mozilla/plugins` folder. They are 64 bit plugins and Firefox 32 bit cannot load them. This warning should come only once, and then those plugins will not be used after that. More evolved approaches are possible (e.g., mounting tmpfs on `/usr/lib/mozilla/plugins`), but are more evolved and add no value in this particular case.
 
-<ins class='nfooter'><a id='fnext' href='#blog/2015/2015-11-17-Javascript-Task-Runner.md'>Javascript Task Runner</a></ins>
+<ins class='nfooter'><a id='fprev' href='#blog/2016/2016-02-03-Bootstrapping-Intercorrelated-Data.md'>Bootstrapping Intercorrelated Data</a> <a id='fnext' href='#blog/2015/2015-11-17-Javascript-Task-Runner.md'>Javascript Task Runner</a></ins>
