@@ -107,6 +107,15 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	```
 	The original `/tmp` content is now in `/mnt/root/tmp`. You can verify the `tmpfs` mounts using either `mount` or `df -T /tmp` commands.
 1. I configured `locate` command not to search in my `/home/user` folder, by editing `/etc/updatedb.conf`, and appending my home folder to `PRUNEPATHS` there (space separated) (can be verified with `updatedb -v`). (To disable locate completely, use `sudo chmod -x /etc/cron.daily/mlocate` and `sudo rm /var/lib/mlocate/mlocate.db`).
-
+2. To [clean](https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux) unused free disk space, make sure first that there is no reserved space:
+	```
+	sudo tune2fs -m 0 /dev/sda1
+	sudo tune2fs -l /dev/sda1 | grep 'Reserved block count'
+	```
+	Then run in a new folder once per disk partition:
+	```
+	while :; do cat /dev/zero > zero.$RANDOM; done
+	```  
+	Wait until complains that there is no disk space, press Ctrl+C to stop, and clean the created `zero.*` files.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-08-25-Fully-Remove-Installed-Packages-in-Lubuntu.md'>Fully Remove Installed Packages in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2012/2012-08-01-Change-Wallpaper-at-Startup-in-Lubuntu.md'>Change Wallpaper at Startup in Lubuntu</a></ins>
