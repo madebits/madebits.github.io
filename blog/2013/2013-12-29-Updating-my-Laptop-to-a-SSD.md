@@ -26,7 +26,7 @@ udisks --detach /dev/sdc
 
 Once I installed all Lubuntu software and used `bleachbit` to free the apt get space and the rest (I have to remember to remove also the older kernel version after the Software Update), I ran `sudo fstrim -v /` command to inform the SSD about the removed data.
 
-I did not measure the speed of my internal hard disk before I put the SSD :(. But I measured the speeds of the SSD and the external hard disk connected via USB port, as well as some other external disks I own. I used an example of dd command from https://romanrm.net/dd-benchmark, with 512MB data file: `dd bs=1M count=512 if=/dev/zero of=test conv=fdatasync`. The shown disk model data are from running `sudo hdparm -I [device]`.
+I did not measure the speed of my internal hard disk before I put the SSD :(. But I measured the speeds of the SSD and the external hard disk connected via USB port, as well as some other external disks I own. I used an example of dd command from https://romanrm.net/dd-benchmark, with 512MB data file: `dd bs=1M count=512 if=/dev/zero of=test conv=fdatasync`. The shown disk model data are from running `sudo hdparm -T [device]`.
 
 * Samsung SSD 840 EVO 250GB (ATA)
 		536870912 bytes (537 MB) copied, 2.38861 s, 225 MB/s
