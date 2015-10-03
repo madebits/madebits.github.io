@@ -4,9 +4,9 @@
 
 <!--- tags: ml r -->
 
-<a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)">Bootstrapping</a> cannot be used directly with series that have intercorrelated samples. Plain bootstrap does not know how to re-sample data in such cases. The `boot` library in **R** works best for data whose samples are not correlated. In case of intercorrelated samples, an adaptation of bootstrap is to use series windowing - re-sampling based on intervals and assuming the correlation between window intervals can be ignored. 
+<a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)">Bootstrapping</a> cannot be used directly with series that have intercorrelated samples. Plain bootstrap does not know how to re-sample data in such cases. In case of intercorrelated samples, an adaptation of bootstrap is to use series windowing - re-sampling based on intervals and assuming the correlation between window intervals can be ignored. 
 
-We can bootstrap manually in this case, but it would be preferable to reuse the `boot` library. The trick to use `boot` library with window re-sampling is not to give the original data series to `boot`, but the index of the windows, so that we do not use `data` in the boot function, only the `index`. Let our data be:
+We can bootstrap manually in this case, but it would be preferable to reuse the **R** `boot` library `boot` function. The trick to use `boot` function with window re-sampling is not to give the original data series to `boot`, but the index of the windows, so that we do not use `data` in the boot function, only the `index`. Let our data be:
 
 ```r
 X1 <- sin(1:1000)
