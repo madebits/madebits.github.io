@@ -290,7 +290,7 @@ I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu that I c
 
 **Update**: Added a WLAN repeater, so now WLAN works much better in all places.
 
-##Openbox Configurarion
+##Openbox Configuration
 
 My usual custom `openbox` configuration in `~/.config/openbox/lubuntu-rc.xml`:
 
@@ -391,6 +391,26 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
   NoDisplay=true
   Exec=sh -c 'xset m 20/10 10 r rate 500 30 b on;setxkbmap -option terminate:ctrl_alt_bksp;xmodmap -e "pointer = 3 2 1" -e "keycode 66 = Shift_L"'
   NotShowIn=GNOME;KDE;XFCE;
+  ```
+
+  Additionally, the following script allows me to switch mouse buttons and touchpad as needed:
+
+  ```bash
+  #!/bin/bash
+
+  mouseDevice="9"
+  touchDevice="SynPS/2 Synaptics TouchPad"
+
+  touchEnabled=$(xinput --list-props "${touchDevice}" | grep -i "Device Enabled" | cut -f 3)
+  if [ "$touchEnabled" = "0" ]; then
+    echo "right"
+    xinput enable "${touchDevice}"
+    xinput set-button-map "$mouseDevice" 1 2 3
+  else
+    echo "left"
+    xinput disable "${touchDevice}"
+    xinput set-button-map "$mouseDevice" 3 2 1
+  fi
   ```
 
 * Mandatory custom `/etc/hosts` entries:
