@@ -19,7 +19,7 @@ I like how the start script of `chromium-browser` on Arch Linux [expects](https:
     fi
 
     # Options to pass to chromium-browser
-    CHROMIUM_FLAGS=""
+    CHROMIUM_FLAGS="$USER_PARAMS"
     ```
 
 * **Method 2**: Another way to achieve same is to leave `/etc/chromium-browser/default` unchanged as is:
@@ -29,7 +29,7 @@ I like how the start script of `chromium-browser` on Arch Linux [expects](https:
     # /usr/bin/chromium-browser
 
     # Options to pass to chromium-browser
-    CHROMIUM_FLAGS="$USER_PARAMS"
+    CHROMIUM_FLAGS=""
     ```
 
  And instead, add a new file `/etc/chromium-browser/customizations/99-user`:
