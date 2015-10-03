@@ -53,6 +53,13 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	# Options to pass to chromium-browser
 	CHROMIUM_FLAGS="--disk-cache-dir=/dev/null --disk-cache-size=1 --incognito -start-maximized"
 	```
+	
+	My final settings for chromium, using [private](https://help.ubuntu.com/community/EncryptedPrivateDirectory) folder for settings:
+
+	```
+	CHROMIUM_FLAGS="--disk-cache-dir=/dev/null --disk-cache-size=1 --incognito --force-device-scale-factor=1.4 -start-maximized --no-first-run --user-data-dir=/home/$USER/Private/chromium"
+	```
+
 	I also deleted all search engines in Chromium and put as default `http://%s`. This disables search in the address bar.
 1. A nice trick for TrueCrypt in Lubuntu is to add a fake `nautilus` link so the pcmanfm opens on volume mount by creating a file `sudo leafpad /usr/bin/nautilus` with these data:
 	```
