@@ -4,7 +4,9 @@
 
 <!--- tags: linux -->
 
-[keynav](http://www.semicomplete.com/projects/keynav/) enables using keyboard to emulate mouse clicks. Default `vi`-like key binds are ok, but I also would like to use the arrow keys, so I created `~/.keynavrc` to augment default keys:
+[keynav](http://www.semicomplete.com/projects/keynav/) enables using keyboard to emulate mouse clicks. It can be installed in Ubuntu using `sudo apt-get install keynav`. 
+
+Default `vi`-like key binds are ok, but I also would like to use the arrow keys, so I created `~/.keynavrc` to augment default keys:
 
 ```
 daemonize
