@@ -1307,7 +1307,8 @@ var lastPage = null
 	}
 	mbHtml.preProcessPage(pageData);
 
-	$.ajax(getLoadPageOptions(pageData)).done(function(data) {
+	var query = getLoadPageOptions(pageData);
+	var onDone = function (data) {
 		if(pageData.isSecret) {
 			setPageDataEnc(pageData, data);
 			return;
@@ -1316,12 +1317,23 @@ var lastPage = null
 			data = mbHtml.markup(data);
 		}
 		setPageData(pageData, data);
+	};
+
+	$.ajax(query).done(function(data) {
+		onDone(data);
 	}).fail(function(jqXHR, textStatus, errorThrown) {
-		if(jqXHR) {
-			pageData.errorStatus = jqXHR.status;
-			pageData.errorStatusText = jqXHR.statusText;
-		}
-		onPageError(pageData);
+		//retry
+		setTimeout(function () {
+			$.ajax(query).done(function(data) {
+				onDone(data);
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+				if(jqXHR) {
+					pageData.errorStatus = jqXHR.status;
+					pageData.errorStatusText = jqXHR.statusText;
+				}
+				onPageError(pageData);
+			});
+		}, 2000);
 	});
 }
 
