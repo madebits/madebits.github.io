@@ -277,7 +277,7 @@ Spice guest tools offer several other features, such as direct [folder sharing](
 * Due to a [bug](https://bugzilla.redhat.com/show_bug.cgi?id=1444637) in `virt-manager`, you need to use `virt-viewer` to connect to the virtual machine:
 
  ```
- virsh list
+ virsh list --all
  virsh start win10
  virt-viewer -af win10
  virsh shutdown win10
@@ -322,5 +322,29 @@ Spice Options:
 ```
 
 For example, to share a folder via WebDAV append `--spice-shared-dir=$HOME/temp`.
+
+###Ubuntu Guests
+
+In Ubuntu guests, to install Spice guest tools use:
+
+```
+sudo apt install spice-vdagent spice-webdavd xserver-xorg-video-qxl
+```
+
+To access WebDAV shared folders use [gvfs](https://wiki.ubuntuusers.de/gvfs-mount/):
+
+```
+sudo apt install gvfs-bin
+gvfs-mount dav://127.0.0.1:9843/
+#umount
+gvfs-mount -u dav://127.0.0.1:9843/
+```
+
+The WebDAV port can be found using any of:
+
+```
+ps aux | grep webdavd
+systemctl status spice-webdavd.service
+```
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-05-09-Ubuntu-Block-Application-Internet-Access.md'>Ubuntu Block Application Internet Access</a> <a rel='next' id='fnext' href='#blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md'>Cross Cutting Concerns Evolution</a></ins>
