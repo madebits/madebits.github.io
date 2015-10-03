@@ -131,4 +131,5 @@ Possible bridge [usages](https://wiki.archlinux.org/index.php/QEMU#Tap_networkin
 * As isolated virtual LAN. Interfaces collect to a bridge can be manipulated as whole:
     * Bridge has no IP address and INPUT traffic is disabled via `iptables`. Bridge mastered virtual interfaces can speak to each other (`iptables -I FORWARD -m physdev --physdev-is-bridged -j ACCEPT`), but not outside. A DHCP server, if needed, has to run on one of virtual interfaces.
     * Bridge has an IP address and traffic to it is allowed, but not real network interface. Mastered virtual interfaces can speak to each other and host system. Using SNAT via `iptables -t nat ... -j MAQUERADE` enabled network access beyond host. A DHCP server outside bridge can give dymanic IPs to virtual interfaces.
-    * Bridge contains also one real interface (or `veth`), then virtual mastered interfaces are visible on external network.
+    * Bridge contains also one real interface (or `veth`), then virtual mastered interfaces are visible on external network.<ins class='nfooter'><a rel='next' id='fnext' href='#blog/temp/BN.md'>BN</a></ins>
+<ins class='nfooter'><a rel='next' id='fnext' href='#blog/temp/BN.md'>BN</a></ins>

@@ -2,6 +2,8 @@
 
 2017-05-16
 
+<!--- tags: virtualization -->
+
 Since [Docker](https://www.docker.com/) come out it was obvious that single containers without orchestration are limited in usability. It is groups of containers that make up applications. Docker is [evolving](https://docs.docker.com/get-started/) to have container orchestration build-in via `docker swarm` and ease deployments via `docker stack` and `docker deploy`.
 
 ##Swarms
@@ -67,4 +69,4 @@ While not directly connected to the above, you may need to read this book, in ca
 *(2016)*
 <br clear="all">
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-05-09-Ubuntu-Block-Application-Internet-Access.md'>Ubuntu Block Application Internet Access</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-06-14-Docker-Machine-On-Windows.md'>Docker Machine On Windows</a> <a rel='next' id='fnext' href='#blog/2017/2017-05-09-Ubuntu-Block-Application-Internet-Access.md'>Ubuntu Block Application Internet Access</a></ins>

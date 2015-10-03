@@ -76,4 +76,5 @@ vnet0    1 PVID Egress Untagged
 
 A *bridge is used to group TAP connections and [manage](https://wiki.archlinux.org/index.php/QEMU#Tap_networking_with_QEMU) their network traffic as a single virtual LAN (vlan).
 
-###
+###<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/temp/n.md'>n</a> <a rel='next' id='fnext' href='#blog/2017/2017-06-14-Docker-Machine-On-Windows.md'>Docker Machine On Windows</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/temp/n.md'>n</a> <a rel='next' id='fnext' href='#blog/2017/2017-06-14-Docker-Machine-On-Windows.md'>Docker Machine On Windows</a></ins>
