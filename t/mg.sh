@@ -1,5 +1,6 @@
 #!/bin/bash
 
+TOOLSDIR=$(dirname $0)
 INPUTDIR=.
 RESIZE=100%
 SUFFIX=".dx"
@@ -105,15 +106,15 @@ find "${INPUTDIR}" -maxdepth 1 -type f -iname "*.jpg" | sort | while read filePa
 	fi
 	echo -e "${count} / ${total} ${links}\n\n" >> "${OUTDIR}/${count}.md"
 
-	$(./menc.js "${OUTDIR}/${count}.md" "${PASS}" > "${OUTDIR}/${count}${SUFFIX}")
+	$(${TOOLSDIR}/menc.js "${OUTDIR}/${count}.md" "${PASS}" > "${OUTDIR}/${count}${SUFFIX}")
 	$(rm "${OUTDIR}/${count}.md")
 done
 
 echo -e "\n\n<i class='fa fa-picture-o'></i> #${total}\n" >> "${outFile}"
 
-$(./menc.js "${outFile}" "${PASS}" > "${OUTDIR}/index${SUFFIX}")
+$(${TOOLSDIR}/menc.js "${outFile}" "${PASS}" > "${OUTDIR}/index${SUFFIX}")
 $(rm "${outFile}")
 
 biggestFile=$(find ${OUTDIR} -maxdepth 1 -printf '%s %p\n' | sort -nr | head -1 | cut -d ' ' -f 2)
-echo "Biggest file (max 11M):"
+echo "Biggest file in ${OUTDIR} (max 11M):"
 du -h "${biggestFile}"

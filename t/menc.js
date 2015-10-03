@@ -2,6 +2,7 @@
 
 var vm = require('vm');
 var fs = require('fs');
+var path = require('path');
 var prefix = 'U2FsdGVkX1';
 
 if (typeof String.prototype.startsWith != 'function') {
@@ -23,7 +24,7 @@ var loadJs = function(path, ctx) {
   	return ctx;  
 };
 
-var CryptoJS = loadJs('./scripts/cryptojs/aes.js').CryptoJS;
+var CryptoJS = loadJs(path.join(__dirname, '../scripts/cryptojs/aes.js')).CryptoJS;
 
 var beautify = function(d) {
 	if(!d) return '';
