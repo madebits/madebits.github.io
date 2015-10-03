@@ -13,7 +13,6 @@ const express = require('express');
 const fs = require('fs');
 const util = require('util');
 const readdir = util.promisify(fs.readdir);
-const app = express();
 
 const patchRouterInstance = (router) => {
     if(!router) return null;
@@ -33,8 +32,9 @@ const patchRouterInstance = (router) => {
     return router;
 };
 
+const app = express();
 const router = patchRouterInstance(express.Router());
-	
+
 app.use('/', router);
 
 app.use(function(err, req, res, next) {
