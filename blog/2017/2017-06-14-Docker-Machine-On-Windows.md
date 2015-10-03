@@ -65,7 +65,7 @@ Once done with `docker` we can stop the machine using (`docker-machine` will lis
 $ docker-machine stop
 ```
 
-A common case for `docker` images is to be able to access them from outside of Docker Engine VM in Windows host. This is already handled by VM NAT (VM is accessible in the host), as the following example from documentation shows:
+A common case for `docker` images is to be able to access them from outside of Docker Engine VM in Windows host. This is already handled by VM NAT (VM is accessible in the host), as the following [example](https://docs.docker.com/machine/get-started/#run-containers-and-experiment-with-machine-commands) from documentation shows:
 
 ```
 $ docker run -d -p 8000:80 nginx
