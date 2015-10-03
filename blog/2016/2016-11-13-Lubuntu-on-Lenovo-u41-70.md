@@ -20,9 +20,9 @@ Lubuntu 16.10 [update](https://wiki.ubuntu.com/YakketyYak/ReleaseNotes) went ok.
 
 16.10 seems to handle better high DPI and several Qt applications, such as, `vlc` and `virtualbox` do look much better in 16.10 than in 16.04.
 
-I increased font size using default programms delivered with Lubuntu `lxappearance`, `obconf`, `lightdm-gtk-greeter-settings-pkexec`, and `pcmanfm --desktop-pref`.
+I increased font size using default programs delivered with Lubuntu `lxappearance`, `obconf`, `lightdm-gtk-greeter-settings-pkexec`, and `pcmanfm --desktop-pref`.
 
-High DPI is a problem with some [application](https://wiki.archlinux.org/index.php/HiDPI#Applications). The Qt settings via qtconfig are better to be avoided as they may break font rendering. I still had to handle `firefox`, `thunderbird`, and `chromium-browser` manually. For Libreoffice, I used *Tools / Options / View | User Interface | Scaling* and of course `libreoffice-style-sifr` package theme for icons.
+High DPI is a problem with some [applications](https://wiki.archlinux.org/index.php/HiDPI#Applications). The Qt settings via `qtconfig` are better to be avoided as they may break font rendering. I still had to handle `firefox`, `thunderbird`, and `chromium-browser` manually. For Libreoffice, I used *Tools / Options / View | User Interface | Scaling* and of course `libreoffice-style-sifr` package theme for icons.
 
 For SublimeText 3, sidebar font size, I had to (overwrite)[http://stackoverflow.com/questions/18288870/sublime-text-3-how-to-change-the-font-size-of-the-file-sidebar] the theme.
 
