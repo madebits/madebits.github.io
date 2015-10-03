@@ -304,7 +304,7 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
   0.0.0.0 client-s.gateway.messenger.live.com 
   ```
 
-* I set a [Private](https://help.ubuntu.com/community/EncryptedPrivateDirectory) folder using:
+* I set up a [Private](https://help.ubuntu.com/community/EncryptedPrivateDirectory) folder using:
 
   ```
   sudo apt-get install ecryptfs-utils
