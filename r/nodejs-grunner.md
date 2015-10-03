@@ -61,12 +61,13 @@ All these options can be repeated more than once to specify one or more files an
 
 Specifying task to run:
 
-* `--gtask taskName` - task name to run. This option can be repeated as needed - all tasks are run (*blocking*) in the given order. If not set, `default` task name is assumed.
+* `--gtask taskName` - task name to run. This option can be repeated as needed - all tasks are run by default blocking in the given order (if you like them to be started non-blocking use `--P`). If not set, `default` task name is assumed.
 
 Other options:
 
 * `--T` - list all tasks and exit.
 * `--D` - dry run, run tasks according to dependencies, but do not invoke task functions.
+* `--P` - by default `--gtask` tasks run blocking one after the other. If `--P` is specified they are started non-blocking.
 
 ##Task Dependencies
 
@@ -77,7 +78,7 @@ When you define a task (via `G.t`) you can pass optional task dependencies to be
 * `G.t('t3', ['t1', 't2'])` - sequential, t1 will be run first than t2, and then t3.
 * `G.t('t4', ['t1', ['t2', 't3'], 't1'])` - t1 will be run first, then t2 and t3 will both start in parallel, then t1 will run again after t2 and t3 are done, and then t4 will run.
 
-*Parallel* means execution will not block, *sequential* means the execution blocks until all tasks before finish. In general, if the task dependencies array is considered *level 0* and the first nested arrays as level 1, then the tasks in all *odd* levels of nested arrays are started in parallel and those if *even* levels sequentially. Tasks started in parallel have pipe symbol `|` listed in console before their name. Nesting level of tasks is shown in console with dots `.` before the task name.
+*Parallel* here means execution will not block, *sequential* means the execution blocks until all tasks before finish. In general, if the task dependencies array is considered *level 0* and the first nested arrays as level 1, then the tasks in all *odd* levels of nested arrays are started in parallel and those if *even* levels sequentially. Tasks started in parallel have pipe symbol `|` listed in console before their name. Nesting level of tasks is shown in console with dots `.` before the task name.
 
 Circular task dependencies, such as, `G.t('t1', ['t2']); G.t('t2', ['t1']);` direct or indirect, will result in failure.
 
