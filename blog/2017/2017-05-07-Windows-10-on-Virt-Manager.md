@@ -38,13 +38,18 @@ $ sudo adduser `id -un` libvirt-qemu
 
 ###Configuration Files
 
-Configuration of VMs is stored in `/etc/libvirt`. [Nested](https://docs.openstack.org/developer/devstack/guides/devstack-with-nested-kvm.html) virtualization is enabled by default in `/etc/modprobe.d/qemu-system-x86.conf`. To manually edit a VM configuration use:
+Configuration of VMs is stored in `/etc/libvirt`. [Nested](https://docs.openstack.org/developer/devstack/guides/devstack-with-nested-kvm.html) virtualization is enabled by default in `/etc/modprobe.d/qemu-system-x86.conf`. To manually [edit](https://www.centos.org/docs/5/html/5.2/Virtualization/chap-Virtualization-Managing_guests_with_virsh.html) a VM configuration use:
 
 ```
 # view
 virsh dumpxml win10
 # edit
 virsh edit win10
+# export
+virsh dumpxml > win10.xml
+# import
+virsh create win10.xml # new
+virsh define win10.xml # existing
 ```
 
 ##Creating a Windows 10 VM
@@ -81,7 +86,7 @@ The toolbar is not show for me in fullscreen of `virt-manager` VM console due to
 Apart of using `virt-manager` an alternative way to access the machine is to use `virt-viewer` directly:
 
 ```
-virt-viewer win10 -arf --hotkeys=toggle-fullscreen=shift+f11
+virt-viewer win10 -af --hotkeys=toggle-fullscreen=shift+f11
 ```
 
 Or, by using `remote-viewer` that comes with `virt-viewer` (it needs a URI, or a settings file):
