@@ -1,5 +1,6 @@
-#! /bin/bash +x
+#! /bin/bash -x
 
+if [[ ! $1 ]]; then exit 1; fi
 REPO=$1
 URL="https://github.com/madebits/${REPO}.git"
 git clone $URL
