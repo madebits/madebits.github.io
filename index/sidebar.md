@@ -1,3 +1,4 @@
+* [Ubuntu Chromium Flags Per User](#blog/2016/2016-12-24-Ubuntu-Chromium-Flags-Per-User.md)
 * [Opera On Ubuntu](#blog/2016/2016-12-19-Opera-On-Ubuntu.md)
 * [From User Stories To Code](#blog/2016/2016-11-29-From-User-Stories-To-Code.md)
 * [Lubuntu on Lenovo u41 70](#blog/2016/2016-11-13-Lubuntu-on-Lenovo-u41-70.md)
@@ -5,4 +6,3 @@
 * [Python Conference Munich](#blog/2016/2016-10-29-Python-Conference-Munich.md)
 * [Installing Jupyter Notebooks in Ubuntu](#blog/2016/2016-10-28-Installing-Jupyter-Notebooks-in-Ubuntu.md)
 * [Remote Retrospectives](#blog/2016/2016-10-27-Remote-Retrospectives.md)
-* [xrandr Panning with no Tracking](#blog/2016/2016-10-02-xrandr-Panning-with-no-Tracking.md)

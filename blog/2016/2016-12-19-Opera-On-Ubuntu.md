@@ -79,4 +79,4 @@ But for Opera, it makes sense to add its own [rule](http://openbox.org/wiki/Help
 
 With this change, Opera consumes same amount of screen space for tabs as Chromium.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-11-29-From-User-Stories-To-Code.md'>From User Stories To Code</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-12-24-Ubuntu-Chromium-Flags-Per-User.md'>Ubuntu Chromium Flags Per User</a> <a rel='next' id='fnext' href='#blog/2016/2016-11-29-From-User-Stories-To-Code.md'>From User Stories To Code</a></ins>
