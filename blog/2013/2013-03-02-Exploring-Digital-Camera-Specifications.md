@@ -136,7 +136,7 @@ When $$$s \approx f$$$ (called macro or close up photography) then $$$H$$$ is of
 $$
 DOF = 2 F \* CoC \* \frac{m + 1} {m ^ 2}
 $$
-The more complicated formulas based on thin lens such as these above look, the less accurate they are (thin lens are a mathematical abstraction for real physical lens).
+The more complicated formulas based on thin lens (such as these above) are, the less accurate they are (thin lens are a mathematical abstraction for real physical lens).
 
 My camera reports $$$DOF$$$ as the 'focusing area' (not to be confused with auto focus (AF) settings in the camera) with $$$D\_n-D\_f$$$ for normal photos: Wide 30 cm - infinity / Tele 200 cm - infinity, and $$$D\_n-D\_f$$$ for macro: Wide 1 cm - infinity / Tele 100cm - infinity. If I want to take a macro in low zoom, I can take it up to 1 cm near the object - at high zoom, I have to be 1 meter away. For normal photos, when I use the super-zoom, I have to be at least 2 meters far from the subject.
 
