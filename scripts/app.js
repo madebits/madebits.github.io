@@ -945,10 +945,12 @@ var applyStyle = function(containerId) {
 		window.scrollTo(0, 0);
 		return;
 	}
-	eid[0].scrollIntoView(true);
-	var top  = window.pageYOffset || document.documentElement.scrollTop;
-	var paddingTop = parseInt($('body').css('padding-top'));
-	window.scrollTo(0, top - paddingTop);
+	setTimeout(function() {
+		eid[0].scrollIntoView(true);
+		var top  = window.pageYOffset || document.documentElement.scrollTop;
+		var paddingTop = parseInt($('body').css('padding-top'));
+		if(paddingTop > 0) window.scrollTo(0, top - paddingTop);
+	}, 100);
 }
 ;
 
