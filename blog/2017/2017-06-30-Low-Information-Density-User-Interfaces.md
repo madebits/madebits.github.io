@@ -14,7 +14,7 @@ Users prefer low-information density interfaces as they often only show one thin
 
 ##Simple on Long-Term
 
-Users pay for the initial cognitive relief in long-term as they have to spend more total effort to access information. There is no warranty long-term users will ever tranced and be aware of wishing to switch to a higher information density interface. People get used to the habit energy of scrolling and clicking and may not be aware of the extended long-term effort. 
+Users pay for the initial cognitive relief in long-term as they have to spend more total effort to access information. There is no warranty long-term users will ever tranced and be aware of wishing to switch to a higher information density interface. People get used to the habit energy of scrolling and clicking and do not mind the extended long-term effort. 
 
 ##Invest in Choice Only When Really Needed
 
