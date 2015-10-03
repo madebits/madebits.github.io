@@ -18,6 +18,12 @@
 
 <br clear="all">
 
+##Succeeding with Agile
+
+[![@left@](blog/images/book-sa.png)](https://www.mountaingoatsoftware.com/books/succeeding-with-agile-software-development-using-scrum) *Succeeding with Agile* is a book I still have to finish reading. I find it very interesting as it combines the theory with enough practical tips to get you started in the right direction. The book is especially useful for usage in corporation environment and shows how agile techniques fit to common project management tasks. I would consider this one a more practical book than *Coaching Agile Teams*, though both are worth reading.
+
+<br clear="all">
+
 ##JIRA Agile Essentials
 
 [![@left@](blog/images/book-ja.png)](https://www.packtpub.com/application-development/jira-agile-essentials) *JIRA Agile Essentials* is usually not a book to be listed on the same page as the other two above, but I found it to be an extended handbook on JIRA Agile. Having software manage Scrum or Kanban removes the wallboard creativity that makes every agile team unique. Nevertheless, in many companies standard software helping with management of agile software development is indispensable for internal practices. Being familiar with common mainstream agile development software helping tools is essential for every agile coach. 
