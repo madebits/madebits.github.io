@@ -1369,8 +1369,10 @@ var lastPage = null
 }
 
 , hideMenu = function() {
-	//http://stackoverflow.com/questions/16680543/hide-twitter-bootstrap-nav-collapse-on-click
-	$('.navbar-toggle').click();
+	//http://stackoverflow.com/questions/18896591/make-bootstrap-3-0-navbar-content-always-collapsed
+	if ($(".navbar-collapse").is(":visible") && $(".navbar-toggle").is(":visible") ) {
+        $('.navbar-collapse').collapse('toggle');
+    }
 }
 ;
 
