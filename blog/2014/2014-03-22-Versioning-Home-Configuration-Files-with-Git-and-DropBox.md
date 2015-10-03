@@ -109,6 +109,6 @@ config commit -m "Add vimrc"
 config push
 ```
 
-The problem here is where to store the `alias`. The alternative with relative paths in `core.worktree` better for that.
+The problem here is where to store the `alias`. The alternative with relative paths in `core.worktree` could be better for that.
 
 <ins class='nfooter'><a id='fprev' href='#blog/2014/2014-03-26-Chrome-Browser-PDF-Viewer-Jump-to-Page.md'>Chrome Browser PDF Viewer Jump to Page</a> <a id='fnext' href='#blog/2014/2014-03-17-Custom-PcManFM-Context-Menu-Actions.md'>Custom PcManFM Context Menu Actions</a></ins>
