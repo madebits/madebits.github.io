@@ -29,6 +29,8 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet"
 
 and run `sudo update-grub` to update grub. 
 
+###Startup
+
 I see some errors reported at startup:
 
 ```
@@ -46,7 +48,7 @@ $ dmesg | grep -i failed
 [    2.369730] [drm:intel_dp_start_link_train [i915]] *ERROR* failed to train DP, aborting
 ```
 
-It seems, [acpi](https://wiki.archlinux.org/index.php/ACPI_modules) information is not correctly supplied by BIOS, not that it matters much.
+It seems, [acpi](https://wiki.archlinux.org/index.php/ACPI_modules) information is not correctly supplied by BIOS, not that it matters much in my case and this is not the first laptop to have this issue.
 
 ###ZRam
 
@@ -62,7 +64,7 @@ u41-70 comes with a full-hd [TFT](https://www.quora.com/What-is-the-difference-b
 
 ###GPU
 
-I experienced some sporadic [tearing](https://wiki.archlinux.org/index.php/intel_graphics#Tips_and_tricks) with display. Tearing was up and now in Chrome browser given its GPU usage. It helps creating `/usr/share/X11/xorg.conf.d/20-intel.conf` with:
+I experienced some sporadic [tearing](https://wiki.archlinux.org/index.php/intel_graphics#Tips_and_tricks) with display. Some form or tearing was visible up and now in Chrome browser given its GPU usage. After several tests with options, it helps creating `/usr/share/X11/xorg.conf.d/20-intel.conf` (with)[http://cynic.cc/blog/posts/sna_acceleration_vs_uxa/]:
 
 ```
 Section "Device"
@@ -94,7 +96,7 @@ I installed [tlp](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-manag
 
 u41-70 makes use of [Intel Wireless 3160](https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi). It can handle both 2.4 Ghz, 5.8 Ghz, and bluetooth. The card reach is a bit weak on large distances. It has full speed in rooms near the router, but the quality (`watch -n1 iwconfig`) falls down three rooms away. This means at some locations at home the wlan is not very usable. 
 
-I tried to [disable](https://wiki.archlinux.org/index.php/Wireless_network_configuration) some of the [properties](http://askubuntu.com/questions/640178/no-connection-sporatic-connection-with-intel-3160-wireless-lenovo-y50-ubuntu), by appending to `/etc/modprobe.d/iwlwifi.conf`:
+I tried [disabling](https://wiki.archlinux.org/index.php/Wireless_network_configuration) some of the [properties](http://askubuntu.com/questions/640178/no-connection-sporatic-connection-with-intel-3160-wireless-lenovo-y50-ubuntu), by appending to `/etc/modprobe.d/iwlwifi.conf`:
 
 ```
 options iwlwifi bt_coex_active=0 11n_disable=1
