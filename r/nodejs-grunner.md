@@ -287,7 +287,7 @@ Some simple low level file manipulation functions are provided. You can either u
 
   ```javascript
   g.t('tt', () => {
-    return g.files('./src', true, obj => obj.ext.toLowerCase() === '.js')
+    return g.files('./src', true, obj => (/^\.js$/i).test(obj.ext))
       .pipe(g.pipeThrough((o, _cb) => {
         _cb(null, new File({ base: '', cwd: '', path: o.file }));
       }))
