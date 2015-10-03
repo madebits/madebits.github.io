@@ -10,7 +10,7 @@ Still, having an updated copy of Windows running on real hardware (and not in a 
 
 ##Getting Window 10
 
-Let's now get back the to update details. I had not booted Windows 7 at home since last August and latest updates there were from last June. I used the [media creation tool](https://www.microsoft.com/en-in/software-download/windows10) to do the Windows 10 upgrade. The download went smooth, but the check for Windows 10 updates hanged. I had to restart windows update service several times:
+I had not booted Windows 7 at home since last August and latest updates there were from last June. I used the [media creation tool](https://www.microsoft.com/en-in/software-download/windows10) to do the Windows 10 upgrade. The download went smooth, but the check for Windows 10 updates hanged. I had to restart windows update service several times:
 
 ```
 net stop wuauserv
