@@ -107,7 +107,7 @@ Instances do not share any state, same task name in two different instances can 
 
 ##Invoking External Tools
 
-GRunner tasks are non-blocking, but there is no direct *parallelism* involved. If you invoke external tasks (tools), they will run in separate processes and achieve thus parallelism. Arbitrary Node.js code can run similarly in a different process using `node` as an external tool (you cannot (easy) share process memory, but normally build and deploy tasks process and share files). As an example, lets use [GSpawn](https://www.npmjs.com/package/gspawn) library to run some arbitrary JS code found in an external file in a separate process as part of a GRunner task function:
+GRunner tasks are non-blocking, but there is no direct *parallelism* involved. If you invoke external tasks (tools), they will run in separate processes and achieve thus parallelism. Arbitrary Node.js code can run similarly in a different process using `node` as an external tool (you cannot (easy) share process memory, but normally build and deploy tasks process and share files). As an example, lets use [GSpawn](https://www.npmjs.com/package/gspawn) library to run some arbitrary JS code found in an external file, in a separate process as part of a GRunner task function:
 
 ```
 ...
