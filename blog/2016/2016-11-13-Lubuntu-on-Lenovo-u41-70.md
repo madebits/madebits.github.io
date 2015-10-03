@@ -223,6 +223,28 @@ This was causing freeze on BAT. What worked is to disable TLP for PCI devices - 
 RUNTIME_PM_ALL=0
 ```
 
+This results in:
+
+```
+/sys/bus/pci/devices/0000:00:00.0/power/control = on   (0x060000, Host bridge, bdw_uncore)
+/sys/bus/pci/devices/0000:00:02.0/power/control = on   (0x030000, VGA compatible controller, i915)
+/sys/bus/pci/devices/0000:00:03.0/power/control = on   (0x040300, Audio device, snd_hda_intel)
+/sys/bus/pci/devices/0000:00:14.0/power/control = on   (0x0c0330, USB controller, xhci_hcd)
+/sys/bus/pci/devices/0000:00:16.0/power/control = on   (0x078000, Communication controller, mei_me)
+/sys/bus/pci/devices/0000:00:1b.0/power/control = on   (0x040300, Audio device, snd_hda_intel)
+/sys/bus/pci/devices/0000:00:1c.0/power/control = auto (0x060400, PCI bridge, pcieport)
+/sys/bus/pci/devices/0000:00:1c.2/power/control = auto (0x060400, PCI bridge, pcieport)
+/sys/bus/pci/devices/0000:00:1c.3/power/control = auto (0x060400, PCI bridge, pcieport)
+/sys/bus/pci/devices/0000:00:1d.0/power/control = on   (0x0c0320, USB controller, ehci-pci)
+/sys/bus/pci/devices/0000:00:1f.0/power/control = on   (0x060100, ISA bridge, no driver)
+/sys/bus/pci/devices/0000:00:1f.2/power/control = on   (0x010601, SATA controller, ahci)
+/sys/bus/pci/devices/0000:00:1f.3/power/control = on   (0x0c0500, SMBus, no driver)
+/sys/bus/pci/devices/0000:00:1f.6/power/control = on   (0x118000, Signal processing controller, intel_pch_thermal)
+/sys/bus/pci/devices/0000:02:00.0/power/control = on   (0x028000, Network controller, iwlwifi)
+/sys/bus/pci/devices/0000:03:00.0/power/control = on   (0x020000, Ethernet controller, r8169)
+
+```
+
 ###CPU Scaling 
 
 When battery is under 30%, CPU frequency drops to 500Mhz:
