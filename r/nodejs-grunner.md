@@ -104,7 +104,7 @@ Instances do not share any state, same task name in two different instances can 
 
 Here `g` represents a `GRunner` instance object.
 
-* `GRunner([options])` - constructor, you can pass an optional `options` object. the options can be accessed also via `g.options`. Options can be changed at any time before calling `g.run()`. Options you can use are:
+* `GRunner([options])` - constructor, you can pass an optional `options` object. Options can be accessed also via `g.options`. Options can be changed at any time before calling `g.run()`. Options you can use are:
     * `log = fn(msg, isError)` - replaces the internal log function which logs in `console`.
     * `exec = fn(doneCb, info)` - given you an option to wrap each `taskFun` call. Basically `fn` can be implemented as:
         ``` 
@@ -116,16 +116,16 @@ Here `g` represents a `GRunner` instance object.
     * `afterTaskRun = fn(info)` - called after taskFun is run (see g.t).
 
 * `g.t(taskName)` | `g.t(taskName, taskFun)` | `g.t(taskName, taskDependecies, taskFun)` |  `g.t(taskName, taskFun, userData)` | `g.t(taskName, taskDependecies, taskFun, userData)` - adds a task. Tasks are added as keys to `g.tasks` object, so `taskName` must be a valid JS object key name. Adding a task with same name a previous one, replaces it.
-    * `taskName` - string (valid JS object key name)
-    * `taskDependecies` - optional string, or array of strings of task names to be run before
+    * `taskName` - string (valid JS object key name).
+    * `taskDependecies` - optional string, or array of strings of task names to be run before.
     * `taskFun(cb, info)` - optional body of the task. The optional `info` object contains information about the task `{taskName, task, runner}`. Normally, this should be treated as read-only information, but you can modify any custom `userData` passed to `g.t`. There are several valid ways to denote that you are done within the taskFun:
-        * Call `cb();` on success, or `cb(error);` on error. If your code calls `cb` it must be called once.
-        * Return a JS promise. Any promise object that supports `then` is supported. In this case you should **not** call `cb()`.
+        * Call `cb();` on success, or `cb(error);` on error. If your code calls `cb`, it must be called once.
+        * Return a JS *promise*. Any promise object that supports `then` is supported. In this case you should **not** call `cb()`.
         * Return a `Stream`, such as `return gulp.src(...).pipe(...);`. In this case you should **not** call `cb()`.
-        * Emit an error is a returned stream. In this case you should **not** call `cb()`.
+        * Emit an error in a returned stream. In this case, you should **not** call `cb()`.
         * In a returned promise `throw` an error, or fail. In this case you should **not** call `cb()`.
-        * `throw` a JS error. This works only directly within taskFun. If you throw in a pipe, or setTimeout, and similar async functions, node.js will stop execution. Use callbacks in such cases.
-    * `userData` can be any object, accessible via info.task.userData within `taskFun`
+        * `throw` a JS error. This works only directly within taskFun. If you `throw` in a `pipe`, or `setTimeout`, and similar async functions, node.js will stop execution. Use callbacks in such cases.
+    * `userData` can be any object, accessible via `info.task.userData` within taskFun.
 
 * `g.addTask` - this is a synonym for `g.t`. While you can add tasks directly to `g.tasks`, using `g.t` is recommended.
 
