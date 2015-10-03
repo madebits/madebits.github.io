@@ -30,4 +30,4 @@
 
 <br clear="all">
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-04-22-Gulp-Karma-Webpack.md'>Gulp Karma Webpack</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-07-14-Agile-Iterations-As-Path-Search.md'>Agile Iterations As Path Search</a> <a rel='next' id='fnext' href='#blog/2016/2016-04-22-Gulp-Karma-Webpack.md'>Gulp Karma Webpack</a></ins>
