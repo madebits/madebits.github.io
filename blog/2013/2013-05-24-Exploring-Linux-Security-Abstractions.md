@@ -10,7 +10,7 @@ Several security related abstractions used in a Linux desktop (Ubuntu):
 
 * **ConsoleKit** - is a dbus daemon (`console-kit-daemon`) that creates and manages user security sessions. All applications in one session share user authentication and permissions. Usually the desktop GUI (session leader process) creates one ConsoleKit session for each PAM session. Each session gets a unique cookie (`echo $XDG_SESSION_COOKIE`). ConsoleKit distinguishes between remote (inactive) and local (active that control hardware) user sessions. ConsoleKit is used by login managers, system daemons, fast user switching, and polkit agents.
 
-* **logind (systemd-logind)** - is alternative (replacement) for ConsoleKit, part of `systemd`. Several `systemd-logind` operations are protected via `polkit` rights. It can do multi-seat management (ConsoleKit supports multi-seat not fully yet). `polkit` can be used either with `logind` or ConsoleKit. `systemd-logind` is not used currently in Ubuntu.
+* **logind (systemd-logind)** - is alternative (replacement) for ConsoleKit, part of `systemd`. Several `systemd-logind` operations are protected via `polkit` rights. It can do multi-seat management (ConsoleKit does not support multi-seat fully). `polkit` can be used either with `logind` or ConsoleKit. `systemd-logind` is not used currently in Ubuntu.
 
 * **polkit (Policy Kit) (polkit-1)** is a service (`polkitd`) that facilitates checking of application specific rights centrally. Rights are called 'MECHANISMS' and those are trying to access the rights are called 'SUBJECTS'. Common usage is to extend rights of limited users to run things they have normally no access to. All configuration files are processed ordered alphabetically by full path.
 
