@@ -50,7 +50,7 @@ Windows 10 upgrade lost my switched button settings for the mouse. The display d
 ##Minimizing Windows 10 Exposure
 
 After the installation, the Disk Cleanup tool removed around 30GB of data. The customary [Windows 10 configuration](
-https://www.reddit.com/r/Windows10/comments/3f38ed/guide_how_to_disable_data_logging_in_w10/) has to be done next, and I installed [Classic Shell](http://www.classicshell.net/) as a start menu replacement. Given I use no Microsoft account, the default Windows 10 Start menu implementation is limited in functionality for me.
+https://www.reddit.com/r/Windows10/comments/3f38ed/guide_how_to_disable_data_logging_in_w10/) has to be done next, and I installed [Classic Shell](http://www.classicshell.net/) as a start menu replacement. Given I use no Microsoft account, the default Windows 10 Start menu implementation is limited in functionality for me. Windows Start menu, Search, and PC settings search somehow do not work properly with Windows Search service disabled since Windows 8. The old Control Panel is still searchable with with Windows Search service disabled. The Classis Shell Start menu search is somehow lacking to say the least, but at moment it is the only option.
 
 ##References
 
@@ -65,5 +65,6 @@ https://www.reddit.com/r/Windows10/comments/3f38ed/guide_how_to_disable_data_log
 * http://www.guidingtech.com/54080/make-windows-10-secure/
 * https://technet.microsoft.com/en-us/library/mt577208.aspx
 * https://forums.spybot.info/showthread.php?72686-Spybot-Anti-Beacon-for-Windows-10
+* http://www.makeuseof.com/tag/6-hidden-windows-10-features/
 
 <ins class='nfooter'><a id='fnext' href='#blog/2016/2016-02-03-Bootstrapping-Intercorrelated-Data.md'>Bootstrapping Intercorrelated Data</a></ins>
