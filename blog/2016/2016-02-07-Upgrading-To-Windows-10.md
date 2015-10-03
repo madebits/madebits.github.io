@@ -34,6 +34,6 @@ After this I got the normal grub prompt for Ubuntu and for Windows 10.
 Windows 10 upgrade lost my switched button settings for the mouse. The display driver of my E6510 model was not found at first. It seems officially Dell does not support Windows 10 on this model. After installing Dell driver detect tool, my nVidia display driver was restored. My swapped mouse button setting was lost again after the display driver installation and I had to reconfigure it back. The free fall sensor of the machine did not work in Windows 10, but it is of no use to me given I have replaced the magnetic HDD with SSD. The Cisco VPN Client was not compatible and was removed. I have to check what would be a replaced for that.
 
 The customary [Windows 10 configuration](
-https://www.reddit.com/r/Windows10/comments/3f38ed/guide_how_to_disable_data_logging_in_w10/) has to be done next, and I installed [classic shell](http://www.classicshell.net/), start menu replacement.
+https://www.reddit.com/r/Windows10/comments/3f38ed/guide_how_to_disable_data_logging_in_w10/) has to be done next, and I installed [classic shell](http://www.classicshell.net/) as a start menu replacement.
 
 <ins class='nfooter'><a id='fnext' href='#blog/2016/2016-02-03-Bootstrapping-Intercorrelated-Data.md'>Bootstrapping Intercorrelated Data</a></ins>
