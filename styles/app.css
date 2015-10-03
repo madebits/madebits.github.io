@@ -39,7 +39,7 @@ pre {
     overflow: auto;
     word-wrap: normal;
     white-space: pre;
-    border-left: 2px solid rgb(157, 157, 157);
+    border-left: 2px solid rgb(157, 187, 157);
     background-color: #f7f7f7;
     font-size: 1.02em;
 }
@@ -90,7 +90,7 @@ pre code.nohighlight { background-color: transparent; color: #000; }
 }
 
 #mbg-nav {
-    border-top: 5px solid #1d9d74;
+    border-top: 5px solid rgb(157, 187, 157);
 }
 
 .navbar-default {
@@ -149,7 +149,7 @@ span.mbg-logo-left {
 span.mbg-logo-right {
     border-bottom-right-radius: 6px;
     border-top-right-radius: 6px;
-    background-color: #1d9d74;
+    background-color: rgb(157, 187, 157); /* #1d9d74; */
     color: #F0FFF0;
     padding-left: 3px;
     padding-right: 9px;
