@@ -798,7 +798,7 @@ var applyStyle = function(containerId) {
 	}
 
 	if(pageData.isExternal && !pageData.isSecret) {
-		pageData.container.prepend('<div class="hidden-print"><span class="label label-warning"><i class="fa fa-exclamation-triangle"></i> External content: ' + pageData.page + '</span></div><br>');
+		pageData.container.prepend('<div class="hidden-print"><span class="label label-warning"><i class="fa fa-exclamation-triangle"></i> External content: ' + pageData.page + '</span></div>');
 	}
 
 	addToc(pageData.containerId, pageData.page);
