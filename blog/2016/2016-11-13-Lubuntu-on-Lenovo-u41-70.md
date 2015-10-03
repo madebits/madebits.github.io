@@ -164,7 +164,30 @@ power source   = battery
 
 ```
 
-Battery lasts normally for around 2.5 hours, but if I reduce the screen brightness and only browse and read, I can get up to 3.5 hours - more than enough for my usage and I am usually always near a power source.
+Battery lasts normally for around 2.5 hours, but if I reduce the screen brightness and only browse and read, I can get up to 3.5 hours - more than enough for my usage and I am usually always near a power source. 
+
+When battery is under 30%, CPU frequency drops to 500Mhz:
+
+```
+$ upower -i $(upower -e | grep 'BAT') | grep -E "state|to\ full|percentage"
+    state:               discharging
+    percentage:          29%
+$ watch grep \"cpu MHz\" /proc/cpuinfo
+cpu MHz         : 499.252
+cpu MHz         : 500.000
+cpu MHz         : 500.000
+cpu MHz         : 500.000
+$ cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq
+2700000
+2700000
+2700000
+2700000
+$ cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq
+500000
+500000
+500000
+500000
+```
 
 ##Wireless
 
