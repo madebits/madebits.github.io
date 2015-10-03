@@ -315,4 +315,4 @@ It seems Arch does not support [anymore](https://wiki.archlinux.org/index.php/Ch
 
 Last one is a [workaround](https://code.google.com/p/chromium/issues/detail?id=456222) for mouse support.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-02-26-Useful-Browser-Extensions.md'>Useful Browser Extensions</a> <a id='fnext' href='#blog/2015/2015-01-15-Clustering-People.md'>Clustering People</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-02-26-Useful-Browser-Extensions.md'>Useful Browser Extensions</a> <a rel='next' id='fnext' href='#blog/2015/2015-01-15-Clustering-People.md'>Clustering People</a></ins>

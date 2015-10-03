@@ -29,4 +29,4 @@ sudo apt-get update
 sudo apt-get install faenza-icon-theme
 ```
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-01-02-Using-Git-with-TFS.md'>Using Git with TFS</a> <a id='fnext' href='#blog/2012/2012-09-29-Upgrading-Asus-Eee-PC-X101.md'>Upgrading Asus Eee PC X101</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-01-02-Using-Git-with-TFS.md'>Using Git with TFS</a> <a rel='next' id='fnext' href='#blog/2012/2012-09-29-Upgrading-Asus-Eee-PC-X101.md'>Upgrading Asus Eee PC X101</a></ins>

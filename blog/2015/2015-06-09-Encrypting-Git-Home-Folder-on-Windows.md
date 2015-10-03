@@ -21,4 +21,4 @@ That changes `.gitconfig` to contain:
 
 Now Git will keep the credentials in `.git-credentials` file in the `%HOME%` folder (`echo $HOME`). They are conveniently stored as plain text for the current user and as encrypted files for the rest. In the same way, the EFS protected `%HOME%` protects your `.bash_history`, vim, and other configuration files.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-06-19-Csharp-Simple-Encryption.md'>Csharp Simple Encryption</a> <a id='fnext' href='#blog/2015/2015-06-03-Naive-Bayes-in-R.md'>Naive Bayes in R</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-06-19-Csharp-Simple-Encryption.md'>Csharp Simple Encryption</a> <a rel='next' id='fnext' href='#blog/2015/2015-06-03-Naive-Bayes-in-R.md'>Naive Bayes in R</a></ins>

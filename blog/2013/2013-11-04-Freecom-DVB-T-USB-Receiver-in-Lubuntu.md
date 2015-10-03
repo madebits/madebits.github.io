@@ -42,4 +42,4 @@ Ubuntu will recommend to replace `ffmpeg` with `avconv` - the later is usually f
 Update: I installed the stick same in Lubuntu 13.10 64 bit in another machine. I installed only `linux-firmware-nonfree` and `vlc-plugin-zvbi` and created a shortcut to start `vlc wuerburg-2013-channels.conf` (using the previously generated channels file). It worked also fully ok. This is kind of funny as Freecom only offers 32 bit windows drivers for this stick :).
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-11-06-Disabling-ZRAM-in-Lubuntu.md'>Disabling ZRAM in Lubuntu</a> <a id='fnext' href='#blog/2013/2013-11-02-LibreOffice-Preview-Thumbnails-in-PCManFM.md'>LibreOffice Preview Thumbnails in PCManFM</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-11-06-Disabling-ZRAM-in-Lubuntu.md'>Disabling ZRAM in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-11-02-LibreOffice-Preview-Thumbnails-in-PCManFM.md'>LibreOffice Preview Thumbnails in PCManFM</a></ins>

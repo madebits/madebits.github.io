@@ -24,4 +24,4 @@ sudo cp -r ~/.themes/FlatStudioDark/* /root/.themes/Lubuntu-default
 This seems to work ok for gtk widgets and it is a great improvement to better distinguish the root application windows from the normal ones. This technique does not work for Openbox themes as they are X session wide.
 
 For the root specific GTK theme to work, you have to remember to start GUI application as root using `gksu` (or `gksudo`) and not `sudo`, because only `gksu` sets the home folder of the root GUI applications to the `/root` one.
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-03-17-Custom-PcManFM-Context-Menu-Actions.md'>Custom PcManFM Context Menu Actions</a> <a id='fnext' href='#blog/2014/2014-02-27-Shutting-Down-Lubuntu-from-TV-via-DLNA-using-MediaTomb.md'>Shutting Down Lubuntu from TV via DLNA using MediaTomb</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-03-17-Custom-PcManFM-Context-Menu-Actions.md'>Custom PcManFM Context Menu Actions</a> <a rel='next' id='fnext' href='#blog/2014/2014-02-27-Shutting-Down-Lubuntu-from-TV-via-DLNA-using-MediaTomb.md'>Shutting Down Lubuntu from TV via DLNA using MediaTomb</a></ins>

@@ -57,4 +57,4 @@ rm -f "routercookies.txt"
 At the moment this seems to work ok for me to reconnect Speedport w504v DSL router via command-line in Lubuntu. There are some HTTP 302 redirect codes printed on console, but apart of that, it works.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-08-14-MComix-on-Lubuntu.md'>MComix on Lubuntu</a> <a id='fnext' href='#blog/2013/2013-08-05-Skippy-XD-on-Lubuntu.md'>Skippy XD on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-08-14-MComix-on-Lubuntu.md'>MComix on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-08-05-Skippy-XD-on-Lubuntu.md'>Skippy XD on Lubuntu</a></ins>

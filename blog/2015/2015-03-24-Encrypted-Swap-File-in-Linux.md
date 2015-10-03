@@ -55,4 +55,4 @@ Restart the machine and verify the swap is active using `cat /proc/swaps` (`/dev
 
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-04-14-Evince-Fit-Keyboard-Shortcuts.md'>Evince Fit Keyboard Shortcuts</a> <a id='fnext' href='#blog/2015/2015-03-22-Installing-R-and-RStudio-in-Ubuntu-14.04.md'>Installing R and RStudio in Ubuntu 14.04</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-04-14-Evince-Fit-Keyboard-Shortcuts.md'>Evince Fit Keyboard Shortcuts</a> <a rel='next' id='fnext' href='#blog/2015/2015-03-22-Installing-R-and-RStudio-in-Ubuntu-14.04.md'>Installing R and RStudio in Ubuntu 14.04</a></ins>

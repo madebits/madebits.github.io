@@ -38,4 +38,4 @@ They have to be run with Administrator rights. Replace "My VPN 1" with the VPN c
 On Lubuntu (12.04) the OS seems (at the moment) not to cache DNS data (you may need to restart the browser thought). No additional action is needed on Lubuntu other that to connect to the VPN(s).
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-03-02-Exploring-Digital-Camera-Specifications.md'>Exploring Digital Camera Specifications</a> <a id='fnext' href='#blog/2013/2013-01-02-Using-Git-with-TFS.md'>Using Git with TFS</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-03-02-Exploring-Digital-Camera-Specifications.md'>Exploring Digital Camera Specifications</a> <a rel='next' id='fnext' href='#blog/2013/2013-01-02-Using-Git-with-TFS.md'>Using Git with TFS</a></ins>

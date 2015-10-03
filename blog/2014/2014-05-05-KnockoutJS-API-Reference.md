@@ -298,4 +298,4 @@ In a nutshell, to use Knockout:
 * A binding that controls DOM descendants binding on its own can extend its `bindingContext` (using `bindingContext.extend`) and apply the extended one via `ko.applyBindingAccessorsToNode`, or it can create a new child binding context, using bindingContext.createChildContext and apply it via `ko.applyBindingsToDescendants`.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-05-15-Disable-Send-Error-Reports-to-Canonical-in-Lubuntu.md'>Disable Send Error Reports to Canonical in Lubuntu</a> <a id='fnext' href='#blog/2014/2014-05-01-Disable-HTML5-Video-in-Chromium.md'>Disable HTML5 Video in Chromium</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-05-15-Disable-Send-Error-Reports-to-Canonical-in-Lubuntu.md'>Disable Send Error Reports to Canonical in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2014/2014-05-01-Disable-HTML5-Video-in-Chromium.md'>Disable HTML5 Video in Chromium</a></ins>

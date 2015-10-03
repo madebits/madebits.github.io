@@ -302,4 +302,4 @@ If you prepare a photo for printing, better upscale (or downscale) the photo usi
 37. http://en.wikipedia.org/wiki/Color_temperature
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-03-04-Google-Hangout-Share-both-Screen-and-Camera.md'>Google Hangout Share both Screen and Camera</a> <a id='fnext' href='#blog/2013/2013-03-01-DNS-Caching-and-VPN.md'>DNS Caching and VPN</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-03-04-Google-Hangout-Share-both-Screen-and-Camera.md'>Google Hangout Share both Screen and Camera</a> <a rel='next' id='fnext' href='#blog/2013/2013-03-01-DNS-Caching-and-VPN.md'>DNS Caching and VPN</a></ins>

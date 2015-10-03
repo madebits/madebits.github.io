@@ -21,4 +21,4 @@ CSP kind of works as specified on the browsers that support it, but it has curre
 
 Lesson learned: If you are about to offer some services over the web, make sure you document your CSP settings along with your API. If you want you API to work good with CSP do not use eval or data URLs. If you use a third-party service with unspecified CSP, then better do not use CSP at all, unless it is not so problematic for you, if the third-party service stops working at some point.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-01-07-ASP.NET-vNext-in-Ubuntu-14.04-LTS.md'>ASP.NET vNext in Ubuntu 14.04 LTS</a> <a id='fnext' href='#blog/2014/2014-12-16-Moving-From-EF5-Database-First-to-EF6-Code-First.md'>Moving From EF5 Database First to EF6 Code First</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-01-07-ASP.NET-vNext-in-Ubuntu-14.04-LTS.md'>ASP.NET vNext in Ubuntu 14.04 LTS</a> <a rel='next' id='fnext' href='#blog/2014/2014-12-16-Moving-From-EF5-Database-First-to-EF6-Code-First.md'>Moving From EF5 Database First to EF6 Code First</a></ins>

@@ -109,4 +109,4 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 1. I configured `locate` command not to search in my `/home/user` folder, by editing `/etc/updatedb.conf`, and appending my home folder to `PRUNEPATHS` there (space separated) (can be verified with `updatedb -v`). (To disable locate completely, use `sudo chmod -x /etc/cron.daily/mlocate` and `sudo rm /var/lib/mlocate/mlocate.db`).
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-08-25-Fully-Remove-Installed-Packages-in-Lubuntu.md'>Fully Remove Installed Packages in Lubuntu</a> <a id='fnext' href='#blog/2012/2012-08-01-Change-Wallpaper-at-Startup-in-Lubuntu.md'>Change Wallpaper at Startup in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-08-25-Fully-Remove-Installed-Packages-in-Lubuntu.md'>Fully Remove Installed Packages in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2012/2012-08-01-Change-Wallpaper-at-Startup-in-Lubuntu.md'>Change Wallpaper at Startup in Lubuntu</a></ins>

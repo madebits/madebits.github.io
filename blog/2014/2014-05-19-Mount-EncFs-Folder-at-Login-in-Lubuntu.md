@@ -116,4 +116,4 @@ I did a small change to [gnome-encfs](blog/images/gnome-encfs) (<= my copy) to a
 
 **Update2**: For a UI tool that automates most of these, use [Gnome Encfs Manager](http://www.libertyzero.com/GEncfsM/). It works ok in Lubuntu, apart of un-mount at logout that has to be done manually as shown above.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-05-22-Changing-Lubuntu-Logout-Window-Message.md'>Changing Lubuntu Logout Window Message</a> <a id='fnext' href='#blog/2014/2014-05-15-Disable-Send-Error-Reports-to-Canonical-in-Lubuntu.md'>Disable Send Error Reports to Canonical in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-05-22-Changing-Lubuntu-Logout-Window-Message.md'>Changing Lubuntu Logout Window Message</a> <a rel='next' id='fnext' href='#blog/2014/2014-05-15-Disable-Send-Error-Reports-to-Canonical-in-Lubuntu.md'>Disable Send Error Reports to Canonical in Lubuntu</a></ins>

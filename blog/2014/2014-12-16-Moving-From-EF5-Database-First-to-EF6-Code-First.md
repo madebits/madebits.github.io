@@ -42,4 +42,4 @@ One thing that changes with async code is the use of the Thread Local Storage (T
 If you use Oracle you are out of luck. Oracle .NET provider does not work at this time with EF6. The only choices you have is too wait until they fix it, or isolate the Oracle code with EF5 to run either is separate appdomain or as a WCF service - both are slower (as data needs to be serialized).
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-12-19-Content-Security-Policy.md'>Content Security Policy</a> <a id='fnext' href='#blog/2014/2014-12-12-Using-DNSCrypt-on-Ubuntu-14.04.md'>Using DNSCrypt on Ubuntu 14.04</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-12-19-Content-Security-Policy.md'>Content Security Policy</a> <a rel='next' id='fnext' href='#blog/2014/2014-12-12-Using-DNSCrypt-on-Ubuntu-14.04.md'>Using DNSCrypt on Ubuntu 14.04</a></ins>

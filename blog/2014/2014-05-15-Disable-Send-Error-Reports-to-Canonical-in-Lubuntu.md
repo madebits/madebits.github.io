@@ -10,4 +10,4 @@ To fully [disable](http://linuxg.net/how-to-disable-the-apport-error-reporting-o
 
 I usually want to get the error report dialog pop up, only I do not want to have to send the report data. In normal Ubuntu this can be configured from the Privacy Settings. In Lubuntu, you have to edit `/etc/default/whoopsie` file and set `report_crashes=false` (and use `sudo service whoopsie stop` to stop the service).
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-05-19-Mount-EncFs-Folder-at-Login-in-Lubuntu.md'>Mount EncFs Folder at Login in Lubuntu</a> <a id='fnext' href='#blog/2014/2014-05-05-KnockoutJS-API-Reference.md'>KnockoutJS API Reference</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-05-19-Mount-EncFs-Folder-at-Login-in-Lubuntu.md'>Mount EncFs Folder at Login in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2014/2014-05-05-KnockoutJS-API-Reference.md'>KnockoutJS API Reference</a></ins>

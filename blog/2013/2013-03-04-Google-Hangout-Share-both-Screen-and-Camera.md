@@ -9,4 +9,4 @@ In a Google hangout one can either share the screen or the camera, but not both 
 In VLC first use [Media / Open Capture Device] to capture the camera. This must be done before the Google+ hangout is started. Then select [Video / Always On Top], and then [View / Minimal View]. Like this you have both the camera and the shared screen (use Fullscreen share in the Hangout).
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-03-21-Viewing-PDF-Documents-in-Chromium-Browser.md'>Viewing PDF Documents in Chromium Browser</a> <a id='fnext' href='#blog/2013/2013-03-02-Exploring-Digital-Camera-Specifications.md'>Exploring Digital Camera Specifications</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-03-21-Viewing-PDF-Documents-in-Chromium-Browser.md'>Viewing PDF Documents in Chromium Browser</a> <a rel='next' id='fnext' href='#blog/2013/2013-03-02-Exploring-Digital-Camera-Specifications.md'>Exploring Digital Camera Specifications</a></ins>

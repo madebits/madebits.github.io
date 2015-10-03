@@ -33,4 +33,4 @@ HandleHibernateKey=ignore
 HandleLidSwitch=ignore
 ```
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-10-28-Starting-VirtualBox-VM-Directly.md'>Starting VirtualBox VM Directly</a> <a id='fnext' href='#blog/2013/2013-10-24-Exploring-Linux-Startup-of-LightDM-in-Lubuntu.md'>Exploring Linux Startup of LightDM in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-10-28-Starting-VirtualBox-VM-Directly.md'>Starting VirtualBox VM Directly</a> <a rel='next' id='fnext' href='#blog/2013/2013-10-24-Exploring-Linux-Startup-of-LightDM-in-Lubuntu.md'>Exploring Linux Startup of LightDM in Lubuntu</a></ins>

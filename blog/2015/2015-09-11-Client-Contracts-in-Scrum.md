@@ -26,4 +26,4 @@ A good scrum master and a capable product owner balance the need for the custome
 
 Having the customer be part of such discussions with the entire team and listening to their arguments optimizes the peer synergy effect. Architectural spikes on the open points help the team and customer to quickly evaluate technology alternatives. Customer learns trusting the team. The whole team turns customer's needs into a working product of value using agile principles and methods.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-09-29-Agile-Vocabulary.md'>Agile Vocabulary</a> <a id='fnext' href='#blog/2015/2015-09-08-Agile-Cooperation-in-Corporate-Environments.md'>Agile Cooperation in Corporate Environments</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-09-29-Agile-Vocabulary.md'>Agile Vocabulary</a> <a rel='next' id='fnext' href='#blog/2015/2015-09-08-Agile-Cooperation-in-Corporate-Environments.md'>Agile Cooperation in Corporate Environments</a></ins>

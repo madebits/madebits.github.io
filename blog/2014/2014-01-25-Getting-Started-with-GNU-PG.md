@@ -168,4 +168,4 @@ You may need to use `Ctrl+L` after you run these commands to refresh the `vim` s
 
 `2> /dev/null` skips the stderr data. If you remove those, to see any issues, then you have to delete the boilerplate stderr message lines of gpg on your own in vim.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-01-26-Shutdown-Ubuntu-Every-Night.md'>Shutdown Ubuntu Every Night</a> <a id='fnext' href='#blog/2014/2014-01-06-xdg-open-Failing-on-Folders-on-Lubuntu.md'>xdg open Failing on Folders on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-01-26-Shutdown-Ubuntu-Every-Night.md'>Shutdown Ubuntu Every Night</a> <a rel='next' id='fnext' href='#blog/2014/2014-01-06-xdg-open-Failing-on-Folders-on-Lubuntu.md'>xdg open Failing on Folders on Lubuntu</a></ins>

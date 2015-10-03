@@ -12,4 +12,4 @@ Page width settings are no kept when jumping to a page, and other Adobe Open PDF
 
 In short, use `Ctrl+L` to focus the address bar, type `#page=number` where you want to go, press `Enter` (nothing happens). Press `Ctrl+L` and `Enter` again, now you are at page. Tested with various local and remote PDF documents and it appears to work.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-03-29-Linux-Command-Line-like-Game-Bandit.md'>Linux Command Line like Game Bandit</a> <a id='fnext' href='#blog/2014/2014-03-22-Versioning-Home-Configuration-Files-with-Git-and-DropBox.md'>Versioning Home Configuration Files with Git and DropBox</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-03-29-Linux-Command-Line-like-Game-Bandit.md'>Linux Command Line like Game Bandit</a> <a rel='next' id='fnext' href='#blog/2014/2014-03-22-Versioning-Home-Configuration-Files-with-Git-and-DropBox.md'>Versioning Home Configuration Files with Git and DropBox</a></ins>

@@ -95,4 +95,4 @@ function(cb) {
 
 We wait for the `pipe` to finish, and call `cb` there. Similar code can be used to improve handling of any possible task `cb` return values in `runTask` code.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-12-10-WebEx-On-Ubuntu.md'>WebEx On Ubuntu</a> <a id='fnext' href='#blog/2015/2015-11-02-Lean-Process-Certified.md'>Lean Process Certified</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-12-10-WebEx-On-Ubuntu.md'>WebEx On Ubuntu</a> <a rel='next' id='fnext' href='#blog/2015/2015-11-02-Lean-Process-Certified.md'>Lean Process Certified</a></ins>

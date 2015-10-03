@@ -25,4 +25,4 @@ A few sites to generate [background](https://en.wikipedia.org/wiki/Background_no
 
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2016/2016-04-09-Statistical-Learning-Certification.md'>Statistical Learning Certification</a> <a id='fnext' href='#blog/2016/2016-03-03-WebWorker-Patterns.md'>WebWorker Patterns</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-04-09-Statistical-Learning-Certification.md'>Statistical Learning Certification</a> <a rel='next' id='fnext' href='#blog/2016/2016-03-03-WebWorker-Patterns.md'>WebWorker Patterns</a></ins>

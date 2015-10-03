@@ -67,4 +67,4 @@ In addition you can add the following key bindings to move windows from a monito
 Run in a terminal `openbox --reconfigure` for the changes made to local `menu.xml` or `lubuntu-rc.xml` file to be reflected.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-05-11-Editing-LXDE-Desktop-Files-via-Context-Menu.md'>Editing LXDE Desktop Files via Context Menu</a> <a id='fnext' href='#blog/2013/2013-05-04-Configuring-Wacom-Bambo-Pen-on-Lubuntu.md'>Configuring Wacom Bambo Pen on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-05-11-Editing-LXDE-Desktop-Files-via-Context-Menu.md'>Editing LXDE Desktop Files via Context Menu</a> <a rel='next' id='fnext' href='#blog/2013/2013-05-04-Configuring-Wacom-Bambo-Pen-on-Lubuntu.md'>Configuring Wacom Bambo Pen on Lubuntu</a></ins>

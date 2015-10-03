@@ -169,4 +169,4 @@ sudo systemctl restart NetworkManager.service
 
 After this check DNS works, and check DnsCrypt is active. If not fix any errors and re-try.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-12-16-Moving-From-EF5-Database-First-to-EF6-Code-First.md'>Moving From EF5 Database First to EF6 Code First</a> <a id='fnext' href='#blog/2014/2014-11-14-A-Minimal-GitHub-Static-Site.md'>A Minimal GitHub Static Site</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-12-16-Moving-From-EF5-Database-First-to-EF6-Code-First.md'>Moving From EF5 Database First to EF6 Code First</a> <a rel='next' id='fnext' href='#blog/2014/2014-11-14-A-Minimal-GitHub-Static-Site.md'>A Minimal GitHub Static Site</a></ins>

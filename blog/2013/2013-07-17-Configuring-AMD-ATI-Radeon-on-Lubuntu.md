@@ -55,4 +55,4 @@ sudo apt-get install xvba-va-driver libva-glx1 libva-egl1 vainfo
 AMD Catalyst Control Center works much better to configure multiple monitors with `/etcX11/xorg.conf` than `arandr` tool I was using before.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-07-25-Installing-Lubuntu-Alongside-Windows.md'>Installing Lubuntu Alongside Windows</a> <a id='fnext' href='#blog/2013/2013-06-22-Changing-DNS-Servers-in-Lubuntu.md'>Changing DNS Servers in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-07-25-Installing-Lubuntu-Alongside-Windows.md'>Installing Lubuntu Alongside Windows</a> <a rel='next' id='fnext' href='#blog/2013/2013-06-22-Changing-DNS-Servers-in-Lubuntu.md'>Changing DNS Servers in Lubuntu</a></ins>

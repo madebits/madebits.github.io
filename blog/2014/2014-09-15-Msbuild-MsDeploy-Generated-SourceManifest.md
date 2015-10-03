@@ -23,4 +23,4 @@ msdeploy -verb:sync -source:manifest=C:tempSomeWebProject.SourceManifest.xml -de
 ```
 `parameters.xml` file, I extracted from the original generated `SomeWebProject.zip`. The new file `SomeWebProject-modified.zip` can then be used to deploy directly with msdeploy applying any custom changes.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-11-08-Moving-Ubuntu-Hard-Disk-to-a-New-Machine.md'>Moving Ubuntu Hard Disk to a New Machine</a> <a id='fnext' href='#blog/2014/2014-06-19-Connecting-Acer-Iconia-One-7-on-Lubuntu.md'>Connecting Acer Iconia One 7 on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-11-08-Moving-Ubuntu-Hard-Disk-to-a-New-Machine.md'>Moving Ubuntu Hard Disk to a New Machine</a> <a rel='next' id='fnext' href='#blog/2014/2014-06-19-Connecting-Acer-Iconia-One-7-on-Lubuntu.md'>Connecting Acer Iconia One 7 on Lubuntu</a></ins>

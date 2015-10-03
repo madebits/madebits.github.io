@@ -29,4 +29,4 @@ I find this second option better, as Tab behaves as before, and `Ctrl-j` and `Ct
 
 **Update**: This works fine, but it breaks [SublimeREPL](https://github.com/wuub/SublimeREPL) for some reason (similar to [this bug](https://github.com/wuub/SublimeREPL/issues/322), but affects all REPL processes that use GNU readline). I have to choose between this or [SublimeREPL](https://github.com/wuub/SublimeREPL).
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-02-04-Using-i3wm-on-Lubuntu.md'>Using i3wm on Lubuntu</a> <a id='fnext' href='#blog/2014/2014-01-26-Shutdown-Ubuntu-Every-Night.md'>Shutdown Ubuntu Every Night</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-02-04-Using-i3wm-on-Lubuntu.md'>Using i3wm on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2014/2014-01-26-Shutdown-Ubuntu-Every-Night.md'>Shutdown Ubuntu Every Night</a></ins>

@@ -362,4 +362,4 @@ var d = Encryption.Transform(Encryption.Mode.Decrypt, e, "test");
 
 Now `d` is `abc` and `e` is Base64 encrypted text.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-06-21-Using-ProtonMail.md'>Using ProtonMail</a> <a id='fnext' href='#blog/2015/2015-06-09-Encrypting-Git-Home-Folder-on-Windows.md'>Encrypting Git Home Folder on Windows</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-06-21-Using-ProtonMail.md'>Using ProtonMail</a> <a rel='next' id='fnext' href='#blog/2015/2015-06-09-Encrypting-Git-Home-Folder-on-Windows.md'>Encrypting Git Home Folder on Windows</a></ins>

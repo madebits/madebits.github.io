@@ -122,4 +122,4 @@ A complex application contains more than WCF services. It may have also long-run
 
 We have now a WCF-independent thread context available application wide.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-06-02-Asus-EeePC-X101-as-Ebook-Reader.md'>Asus EeePC X101 as Ebook Reader</a> <a id='fnext' href='#blog/2011/2011-10-12-WCF-REST-Service.md'>WCF REST Service</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-06-02-Asus-EeePC-X101-as-Ebook-Reader.md'>Asus EeePC X101 as Ebook Reader</a> <a rel='next' id='fnext' href='#blog/2011/2011-10-12-WCF-REST-Service.md'>WCF REST Service</a></ins>

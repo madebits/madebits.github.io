@@ -35,4 +35,4 @@ ENDOFCODE
 ); ?>
 ```
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-12-03-Script-to-Download-Bing-Image.md'>Script to Download Bing Image</a> <a id='fnext' href='#blog/2013/2013-11-28-Getting-Started-with-Sublime-Text.md'>Getting Started with Sublime Text</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-12-03-Script-to-Download-Bing-Image.md'>Script to Download Bing Image</a> <a rel='next' id='fnext' href='#blog/2013/2013-11-28-Getting-Started-with-Sublime-Text.md'>Getting Started with Sublime Text</a></ins>

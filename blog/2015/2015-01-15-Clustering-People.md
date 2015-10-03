@@ -138,4 +138,4 @@ P 2
 
 The code works, but may be I have to see how to improve it further. The complexity in both time and space is `O(n^2)`, which is to be expected as I have to compare each pair for the distance. For the data I have, both `calc_distances` and `calc_distances2` are more or less same fast. Distance data is a triangular matrix with identity diagonal, but I fill all of it as it is used as input to `kmeans` function. `guess` is better given as input (or recalculated based on distortion), same process can be run iteratively on each result group. I use same weight for all parts, but it is easy to change this code to use a different weight for each data column.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-01-29-Arch-Linux-with-LXDE.md'>Arch Linux with LXDE</a> <a id='fnext' href='#blog/2015/2015-01-13-Mac-OS-on-VMWare-Player.md'>Mac OS on VMWare Player</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-01-29-Arch-Linux-with-LXDE.md'>Arch Linux with LXDE</a> <a rel='next' id='fnext' href='#blog/2015/2015-01-13-Mac-OS-on-VMWare-Player.md'>Mac OS on VMWare Player</a></ins>

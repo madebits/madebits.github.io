@@ -55,4 +55,4 @@ The rest is a trick to deal with search engines. They are stored in `Web Data` f
 
 I can use this file to start Chromium once a while - the config colder size goes down then from over 20MB to less than 2MB.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-04-28-Debugging-Plain-C-Programs-in-QtCreator-in-Ubuntu.md'>Debugging Plain C Programs in QtCreator in Ubuntu</a> <a id='fnext' href='#blog/2014/2014-04-18-Upgrading-Lubuntu-13.10-to-Lubuntu-14.04.md'>Upgrading Lubuntu 13.10 to Lubuntu 14.04</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-04-28-Debugging-Plain-C-Programs-in-QtCreator-in-Ubuntu.md'>Debugging Plain C Programs in QtCreator in Ubuntu</a> <a rel='next' id='fnext' href='#blog/2014/2014-04-18-Upgrading-Lubuntu-13.10-to-Lubuntu-14.04.md'>Upgrading Lubuntu 13.10 to Lubuntu 14.04</a></ins>

@@ -236,4 +236,4 @@ d3.selectAll('.sb')
 
 Basically the code iterates through the data ([1](https://solarsystem.nasa.gov/planets/) [2](http://www.universetoday.com/15462/how-far-are-the-planets-from-the-sun/)) and creates the SVG elements using d3.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-07-17-VirtualBox-Disk-Encryption.md'>VirtualBox Disk Encryption</a> <a id='fnext' href='#blog/2015/2015-06-21-Using-ProtonMail.md'>Using ProtonMail</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-07-17-VirtualBox-Disk-Encryption.md'>VirtualBox Disk Encryption</a> <a rel='next' id='fnext' href='#blog/2015/2015-06-21-Using-ProtonMail.md'>Using ProtonMail</a></ins>

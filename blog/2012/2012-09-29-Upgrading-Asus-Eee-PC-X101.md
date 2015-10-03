@@ -31,4 +31,4 @@ Run `sudo update-grub` again after these changes.
 
 Apart of small issues and the time spent re-installing stuff, in overall, I am quite happy with the upgrade.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-11-01-Back-to-Classic-Desktop.md'>Back to Classic Desktop</a> <a id='fnext' href='#blog/2012/2012-09-08-Lubuntu-Toggle-Desktop-Icons-on-Double-Click.md'>Lubuntu Toggle Desktop Icons on Double Click</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-11-01-Back-to-Classic-Desktop.md'>Back to Classic Desktop</a> <a rel='next' id='fnext' href='#blog/2012/2012-09-08-Lubuntu-Toggle-Desktop-Icons-on-Double-Click.md'>Lubuntu Toggle Desktop Icons on Double Click</a></ins>

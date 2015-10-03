@@ -66,4 +66,4 @@ grep "sshd" /var/log/auth.log | less
 ```
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-11-28-Getting-Started-with-Sublime-Text.md'>Getting Started with Sublime Text</a> <a id='fnext' href='#blog/2013/2013-11-14-Getting-Started-with-Qt-and-PySide-on-Ubuntu.md'>Getting Started with Qt and PySide on Ubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-11-28-Getting-Started-with-Sublime-Text.md'>Getting Started with Sublime Text</a> <a rel='next' id='fnext' href='#blog/2013/2013-11-14-Getting-Started-with-Qt-and-PySide-on-Ubuntu.md'>Getting Started with Qt and PySide on Ubuntu</a></ins>

@@ -66,4 +66,4 @@ A benefit of hosting pages to GitHub (if that works for you) is *Git*. With most
 * https://www.youtube.com/watch?v=-kVzV6m5_Qg
 * https://medium.com/@pierreda/understanding-git-for-real-by-exploring-the-git-directory-1e079c15b807
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-12-12-Using-DNSCrypt-on-Ubuntu-14.04.md'>Using DNSCrypt on Ubuntu 14.04</a> <a id='fnext' href='#blog/2014/2014-11-08-Moving-Ubuntu-Hard-Disk-to-a-New-Machine.md'>Moving Ubuntu Hard Disk to a New Machine</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-12-12-Using-DNSCrypt-on-Ubuntu-14.04.md'>Using DNSCrypt on Ubuntu 14.04</a> <a rel='next' id='fnext' href='#blog/2014/2014-11-08-Moving-Ubuntu-Hard-Disk-to-a-New-Machine.md'>Moving Ubuntu Hard Disk to a New Machine</a></ins>

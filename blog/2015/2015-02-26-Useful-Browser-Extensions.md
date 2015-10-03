@@ -102,4 +102,4 @@ While these extensions appear to be safe at the point I added them here, there i
     - `keyword.enabled: false` to disable search in URL bar
     - `network.http.speculative-parallel-limit` set to `0`
     
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-03-22-Installing-R-and-RStudio-in-Ubuntu-14.04.md'>Installing R and RStudio in Ubuntu 14.04</a> <a id='fnext' href='#blog/2015/2015-01-29-Arch-Linux-with-LXDE.md'>Arch Linux with LXDE</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-03-22-Installing-R-and-RStudio-in-Ubuntu-14.04.md'>Installing R and RStudio in Ubuntu 14.04</a> <a rel='next' id='fnext' href='#blog/2015/2015-01-29-Arch-Linux-with-LXDE.md'>Arch Linux with LXDE</a></ins>

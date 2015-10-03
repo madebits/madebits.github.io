@@ -34,4 +34,4 @@ Exec=sh -c 'env LD_PRELOAD=/usr/lib/i386-linux-gnu/libv4l/v4l2convert.so env PUL
 
 http://ubuntuforums.org/archive/index.php/t-1937857.html
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-01-06-xdg-open-Failing-on-Folders-on-Lubuntu.md'>xdg open Failing on Folders on Lubuntu</a> <a id='fnext' href='#blog/2013/2013-12-29-Updating-my-Laptop-to-a-SSD.md'>Updating my Laptop to a SSD</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-01-06-xdg-open-Failing-on-Folders-on-Lubuntu.md'>xdg open Failing on Folders on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-12-29-Updating-my-Laptop-to-a-SSD.md'>Updating my Laptop to a SSD</a></ins>

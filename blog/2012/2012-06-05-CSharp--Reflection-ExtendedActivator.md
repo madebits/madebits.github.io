@@ -86,4 +86,4 @@ namespace Utils
 }
 ```
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-06-06-Software-to-Install-on-Lubuntu.md'>Software to Install on Lubuntu</a> <a id='fnext' href='#blog/2012/2012-06-04-Lubuntu-on-Asus-EeePC-X101.md'>Lubuntu on Asus EeePC X101</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-06-06-Software-to-Install-on-Lubuntu.md'>Software to Install on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2012/2012-06-04-Lubuntu-on-Asus-EeePC-X101.md'>Lubuntu on Asus EeePC X101</a></ins>

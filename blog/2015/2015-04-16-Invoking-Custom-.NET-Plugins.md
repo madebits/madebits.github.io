@@ -139,4 +139,4 @@ The plugin assembly and the main assembly share some types like `PluginLoader`, 
 
 As long as we keep shared interfaces same, we can update shared code referenced by the plugin assembly without affecting the plugin (set link specific version false in visual studio). The right point of time to do this is before we create the plugin application domain. At this point, we can copy the latest shared assemblies (DLLs) from the main application to the plugin folder (has to be done thread safe). This ensures that the plugin and the host share always same version of the latest shared assemblies. Replacing shared assemblies works only when shared assemblies contain only backward compatible interfaces.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-04-21-Devops-and-Modern-Programming.md'>Devops and Modern Programming</a> <a id='fnext' href='#blog/2015/2015-04-15-Micro-Libraries.md'>Micro Libraries</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-04-21-Devops-and-Modern-Programming.md'>Devops and Modern Programming</a> <a rel='next' id='fnext' href='#blog/2015/2015-04-15-Micro-Libraries.md'>Micro Libraries</a></ins>

@@ -148,4 +148,4 @@ There is more to tmux. The [manual](http://manpages.ubuntu.com/manpages/precise/
 
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-09-29-Tilda-in-Lubuntu.md'>Tilda in Lubuntu</a> <a id='fnext' href='#blog/2013/2013-09-07-Encrypted-Containers-with-Cryptsetup.md'>Encrypted Containers with Cryptsetup</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-09-29-Tilda-in-Lubuntu.md'>Tilda in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-09-07-Encrypted-Containers-with-Cryptsetup.md'>Encrypted Containers with Cryptsetup</a></ins>

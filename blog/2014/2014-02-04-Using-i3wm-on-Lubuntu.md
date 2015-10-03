@@ -442,4 +442,4 @@ workspace 3 output HDMI-0
 ```
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-02-05-Adding-Custom-XML-to-app.config.md'>Adding Custom XML to app.config</a> <a id='fnext' href='#blog/2014/2014-01-30-Bash-Cycle-Through-Autocomplete-Options.md'>Bash Cycle Through Autocomplete Options</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-02-05-Adding-Custom-XML-to-app.config.md'>Adding Custom XML to app.config</a> <a rel='next' id='fnext' href='#blog/2014/2014-01-30-Bash-Cycle-Through-Autocomplete-Options.md'>Bash Cycle Through Autocomplete Options</a></ins>

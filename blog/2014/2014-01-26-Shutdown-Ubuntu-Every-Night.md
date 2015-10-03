@@ -14,4 +14,4 @@ This `/etc/crontab` command will run as root, so no explicit `sudo` permissions 
 
 Update: I got [surprised](http://unix.stackexchange.com/questions/9819/how-to-find-out-from-the-logs-what-caused-system-shutdown) (`last -x | less`) by this command one day while doing a git push at 01:00 AM :). It gives you no chance, the machine goes down almost immediately - but given it is a rare event for me to work so late, it is not worth to optimize it.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-01-30-Bash-Cycle-Through-Autocomplete-Options.md'>Bash Cycle Through Autocomplete Options</a> <a id='fnext' href='#blog/2014/2014-01-25-Getting-Started-with-GNU-PG.md'>Getting Started with GNU PG</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-01-30-Bash-Cycle-Through-Autocomplete-Options.md'>Bash Cycle Through Autocomplete Options</a> <a rel='next' id='fnext' href='#blog/2014/2014-01-25-Getting-Started-with-GNU-PG.md'>Getting Started with GNU PG</a></ins>

@@ -84,4 +84,4 @@ public class FixedVirtualListView : System.Windows.Forms.ListView
 }
 ```
 
-<ins class='nfooter'><a id='fprev' href='#blog/2010/2010-11-01-Finding-POIs-along-a-Route.md'>Finding POIs along a Route</a> <a id='fnext' href='#blog/2010/2010-09-20-Encrypting-IE-Temporary-Files-Folder.md'>Encrypting IE Temporary Files Folder</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2010/2010-11-01-Finding-POIs-along-a-Route.md'>Finding POIs along a Route</a> <a rel='next' id='fnext' href='#blog/2010/2010-09-20-Encrypting-IE-Temporary-Files-Folder.md'>Encrypting IE Temporary Files Folder</a></ins>

@@ -42,4 +42,4 @@ Store the script as executable file, e.g., `sortphotos.sh` and run it with the f
 sortphotos.sh /media/DCIM/101_PANA
 ```
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-09-07-Encrypted-Containers-with-Cryptsetup.md'>Encrypted Containers with Cryptsetup</a> <a id='fnext' href='#blog/2013/2013-08-14-MComix-on-Lubuntu.md'>MComix on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-09-07-Encrypted-Containers-with-Cryptsetup.md'>Encrypted Containers with Cryptsetup</a> <a rel='next' id='fnext' href='#blog/2013/2013-08-14-MComix-on-Lubuntu.md'>MComix on Lubuntu</a></ins>

@@ -21,4 +21,4 @@ To quickly scroll down a page to locate a region of interest use `Space` key, or
 
 This is built in Chrome, no need for third-party extenssions that need access to all data in all your web pages. There are more useful Chrome [shortcuts](http://browsers.about.com/od/windowsbro5/a/chromeshortcuts.htm).
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-02-25-Project-Management-Notes.md'>Project Management Notes</a> <a id='fnext' href='#blog/2014/2014-02-05-Adding-Custom-XML-to-app.config.md'>Adding Custom XML to app.config</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-02-25-Project-Management-Notes.md'>Project Management Notes</a> <a rel='next' id='fnext' href='#blog/2014/2014-02-05-Adding-Custom-XML-to-app.config.md'>Adding Custom XML to app.config</a></ins>

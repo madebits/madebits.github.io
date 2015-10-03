@@ -81,4 +81,4 @@ More `If`-like methods can be added as needed.
 
 Update: In C# 6.0, the new `nameof` operator can be used to achieve same.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-08-02-Pairing-Logitech-Touchpad-and-Mouse-on-Lubuntu.md'>Pairing Logitech Touchpad and Mouse on Lubuntu</a> <a id='fnext' href='#blog/2013/2013-07-27-Plustek-OpticSlim-2400-Scanner-in-Lubuntu.md'>Plustek OpticSlim 2400 Scanner in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-08-02-Pairing-Logitech-Touchpad-and-Mouse-on-Lubuntu.md'>Pairing Logitech Touchpad and Mouse on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-07-27-Plustek-OpticSlim-2400-Scanner-in-Lubuntu.md'>Plustek OpticSlim 2400 Scanner in Lubuntu</a></ins>

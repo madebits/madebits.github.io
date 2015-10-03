@@ -74,4 +74,4 @@ MimeType=text/plain;
 
 After a restart, this seems to work for text files. If you open a text file in a text editor, you may need to refresh (`F5`) PCManFM for the thumbnail to re-appear.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-11-04-Freecom-DVB-T-USB-Receiver-in-Lubuntu.md'>Freecom DVB T USB Receiver in Lubuntu</a> <a id='fnext' href='#blog/2013/2013-11-01-ArchiveMount-in-Lubuntu.md'>ArchiveMount in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-11-04-Freecom-DVB-T-USB-Receiver-in-Lubuntu.md'>Freecom DVB T USB Receiver in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-11-01-ArchiveMount-in-Lubuntu.md'>ArchiveMount in Lubuntu</a></ins>

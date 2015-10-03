@@ -50,4 +50,4 @@ To run the script, copy it somewhere in your home folder (e.g.: as `~/bin/switch
 The script will hide all `*.desktop` icons apart of the one pointing to it (it detects it based on the Exec line). So now you can hide/show the rest of `*.desktop` icons from desktop by double-clicking this file (do not double-click it too fast more than once, otherwise you may hide/show them twice).
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-09-29-Upgrading-Asus-Eee-PC-X101.md'>Upgrading Asus Eee PC X101</a> <a id='fnext' href='#blog/2012/2012-09-02-Fullscreen-Browsing-in-Google-Chrome.md'>Fullscreen Browsing in Google Chrome</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-09-29-Upgrading-Asus-Eee-PC-X101.md'>Upgrading Asus Eee PC X101</a> <a rel='next' id='fnext' href='#blog/2012/2012-09-02-Fullscreen-Browsing-in-Google-Chrome.md'>Fullscreen Browsing in Google Chrome</a></ins>

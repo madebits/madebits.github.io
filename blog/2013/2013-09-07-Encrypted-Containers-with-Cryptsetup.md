@@ -100,4 +100,4 @@ Repeat Mount and Disconnect commands.
 * http://rkd.zgib.net/wiki/DebianNotes/EncryptedLoopback
 * http://sleepyhead.de/howto/?href=cryptpart
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-09-28-Tmux-on-Lubuntu.md'>Tmux on Lubuntu</a> <a id='fnext' href='#blog/2013/2013-08-20-Sort-Photos-By-EXIF-Date.md'>Sort Photos By EXIF Date</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-09-28-Tmux-on-Lubuntu.md'>Tmux on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-08-20-Sort-Photos-By-EXIF-Date.md'>Sort Photos By EXIF Date</a></ins>

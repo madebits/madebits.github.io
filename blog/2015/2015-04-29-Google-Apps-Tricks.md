@@ -29,4 +29,4 @@ You need to clean Chrome browser cache and reopen Chrome for this to take effect
 
 Of course Chrome knows if you if you login to Google Apps (mail, etc), so it is advised you do the rest of browsing in another browser. 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-05-12-Using-SVD-to-Reduce-Images.md'>Using SVD to Reduce Images</a> <a id='fnext' href='#blog/2015/2015-04-23-Test-Code-Coverage-As-Quality-Metric.md'>Test Code Coverage As Quality Metric</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-05-12-Using-SVD-to-Reduce-Images.md'>Using SVD to Reduce Images</a> <a rel='next' id='fnext' href='#blog/2015/2015-04-23-Test-Code-Coverage-As-Quality-Metric.md'>Test Code Coverage As Quality Metric</a></ins>

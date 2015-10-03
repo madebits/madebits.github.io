@@ -29,4 +29,4 @@ Installed package files are also cached locally. They are not removed by the abo
 To remove packages installed using `GDebi`, look as above for last added packages and remove them using `sudo dpkg -P package`.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-08-30-Reading-a-Text-File-from-Command-line-in-Windows.md'>Reading a Text File from Command line in Windows</a> <a id='fnext' href='#blog/2012/2012-08-21-Disable-History-in-Lubuntu.md'>Disable History in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-08-30-Reading-a-Text-File-from-Command-line-in-Windows.md'>Reading a Text File from Command line in Windows</a> <a rel='next' id='fnext' href='#blog/2012/2012-08-21-Disable-History-in-Lubuntu.md'>Disable History in Lubuntu</a></ins>

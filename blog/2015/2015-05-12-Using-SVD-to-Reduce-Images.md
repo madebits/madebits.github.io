@@ -44,4 +44,4 @@ First row shows the first ~50 sigma values and the original image. Next three ro
 
 ![](blog/images/lenna.png)
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-06-03-Naive-Bayes-in-R.md'>Naive Bayes in R</a> <a id='fnext' href='#blog/2015/2015-04-29-Google-Apps-Tricks.md'>Google Apps Tricks</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-06-03-Naive-Bayes-in-R.md'>Naive Bayes in R</a> <a rel='next' id='fnext' href='#blog/2015/2015-04-29-Google-Apps-Tricks.md'>Google Apps Tricks</a></ins>

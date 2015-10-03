@@ -46,4 +46,4 @@ I verified it was set using get as above and tried it out in Gimp.
 
 These settings are lost on next start up. A possible way to deal with it is to make a shell script with above set command - and may be also gimp-2.8, and start Gimp via it if you want to use Gimp together with the tablet.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-05-04-Using-Two-Monitors-on-Lubuntu.md'>Using Two Monitors on Lubuntu</a> <a id='fnext' href='#blog/2013/2013-03-21-Viewing-PDF-Documents-in-Chromium-Browser.md'>Viewing PDF Documents in Chromium Browser</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-05-04-Using-Two-Monitors-on-Lubuntu.md'>Using Two Monitors on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-03-21-Viewing-PDF-Documents-in-Chromium-Browser.md'>Viewing PDF Documents in Chromium Browser</a></ins>

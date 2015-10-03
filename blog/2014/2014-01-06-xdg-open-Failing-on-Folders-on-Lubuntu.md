@@ -48,4 +48,4 @@ inode/directory=mcomix.desktop;
 Somehow despite it is written in `[Default Applications]`, it has to be in `[Added Associations]` instead.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-01-25-Getting-Started-with-GNU-PG.md'>Getting Started with GNU PG</a> <a id='fnext' href='#blog/2013/2013-12-31-Skype-Video-Flipped-Vertically-on-Asus-Laptop.md'>Skype Video Flipped Vertically on Asus Laptop</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-01-25-Getting-Started-with-GNU-PG.md'>Getting Started with GNU PG</a> <a rel='next' id='fnext' href='#blog/2013/2013-12-31-Skype-Video-Flipped-Vertically-on-Asus-Laptop.md'>Skype Video Flipped Vertically on Asus Laptop</a></ins>

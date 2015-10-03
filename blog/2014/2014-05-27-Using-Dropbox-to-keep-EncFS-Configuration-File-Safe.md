@@ -47,4 +47,4 @@ Here I assume the password of `edata.bin` and encfs folder is same and that it i
 $ encfsm.sh $HOME/Dropbox/Protected/ $HOME/DropboxSafe/ $HOME/Dropbox/Data/efile.bin /tmp/efile
 ```
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-05-29-Zenity-GUI-Script-For-TcPlay.md'>Zenity GUI Script For TcPlay</a> <a id='fnext' href='#blog/2014/2014-05-22-Changing-Lubuntu-Logout-Window-Message.md'>Changing Lubuntu Logout Window Message</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-05-29-Zenity-GUI-Script-For-TcPlay.md'>Zenity GUI Script For TcPlay</a> <a rel='next' id='fnext' href='#blog/2014/2014-05-22-Changing-Lubuntu-Logout-Window-Message.md'>Changing Lubuntu Logout Window Message</a></ins>

@@ -36,4 +36,4 @@ ap <- available.packages()
 rownames(ap)[grep("AB", rownames(ap))]
 ```
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-03-24-Encrypted-Swap-File-in-Linux.md'>Encrypted Swap File in Linux</a> <a id='fnext' href='#blog/2015/2015-02-26-Useful-Browser-Extensions.md'>Useful Browser Extensions</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-03-24-Encrypted-Swap-File-in-Linux.md'>Encrypted Swap File in Linux</a> <a rel='next' id='fnext' href='#blog/2015/2015-02-26-Useful-Browser-Extensions.md'>Useful Browser Extensions</a></ins>

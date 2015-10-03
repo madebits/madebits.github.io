@@ -22,4 +22,4 @@ sudo rngd -v -f -r /dev/urandom
 
 Now we can test the software fast. Press `Ctrl+C` when done to stop `rngd` in order to revert this temporary change.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-06-19-Connecting-Acer-Iconia-One-7-on-Lubuntu.md'>Connecting Acer Iconia One 7 on Lubuntu</a> <a id='fnext' href='#blog/2014/2014-05-29-Zenity-GUI-Script-For-TcPlay.md'>Zenity GUI Script For TcPlay</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-06-19-Connecting-Acer-Iconia-One-7-on-Lubuntu.md'>Connecting Acer Iconia One 7 on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2014/2014-05-29-Zenity-GUI-Script-For-TcPlay.md'>Zenity GUI Script For TcPlay</a></ins>

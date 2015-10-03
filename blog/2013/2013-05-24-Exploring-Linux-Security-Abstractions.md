@@ -43,4 +43,4 @@ Several security related abstractions used in a Linux desktop (Ubuntu):
 * http://ubuntuforums.org/showthread.php?t=1008906
 * http://www.redhat.com/magazine/003jan05/features/dbus/
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-05-25-Liberty-Manipulation-in-Gimp.md'>Liberty Manipulation in Gimp</a> <a id='fnext' href='#blog/2013/2013-05-23-Exploring-Linux-UDEV-in-Context.md'>Exploring Linux UDEV in Context</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-05-25-Liberty-Manipulation-in-Gimp.md'>Liberty Manipulation in Gimp</a> <a rel='next' id='fnext' href='#blog/2013/2013-05-23-Exploring-Linux-UDEV-in-Context.md'>Exploring Linux UDEV in Context</a></ins>

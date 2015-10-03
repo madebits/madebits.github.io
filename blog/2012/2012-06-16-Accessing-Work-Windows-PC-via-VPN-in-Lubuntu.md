@@ -55,4 +55,4 @@ xfreerdp -g 1920x1080 -u user --no-nla -z --plugin cliprdr --plugin rdpsnd --plu
 This command is more or less same as the `rdesktop` one above.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-06-17-Connecting-Lubuntu-and-Windows-Machines-at-Home-Network.md'>Connecting Lubuntu and Windows Machines at Home Network</a> <a id='fnext' href='#blog/2012/2012-06-09-Encrypted-Google-in-English.md'>Encrypted Google in English</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-06-17-Connecting-Lubuntu-and-Windows-Machines-at-Home-Network.md'>Connecting Lubuntu and Windows Machines at Home Network</a> <a rel='next' id='fnext' href='#blog/2012/2012-06-09-Encrypted-Google-in-English.md'>Encrypted Google in English</a></ins>

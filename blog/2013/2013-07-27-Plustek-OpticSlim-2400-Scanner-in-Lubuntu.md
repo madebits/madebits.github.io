@@ -13,4 +13,4 @@ Then I copied the scanner [firmware](https://plus.google.com/1023111528569144568
 
 After this both Simple Scan and `xsane` tools work.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-08-02-CSharp-Obtaining-Method-Parameter-Names.md'>CSharp Obtaining Method Parameter Names</a> <a id='fnext' href='#blog/2013/2013-07-26-Samsung-ML-1915-Printer-on-Lubuntu.md'>Samsung ML 1915 Printer on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-08-02-CSharp-Obtaining-Method-Parameter-Names.md'>CSharp Obtaining Method Parameter Names</a> <a rel='next' id='fnext' href='#blog/2013/2013-07-26-Samsung-ML-1915-Printer-on-Lubuntu.md'>Samsung ML 1915 Printer on Lubuntu</a></ins>

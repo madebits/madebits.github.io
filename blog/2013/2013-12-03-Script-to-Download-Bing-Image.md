@@ -31,4 +31,4 @@ Where `/home/user/bin/bingwallpaper.sh` is the executable file where you saved t
 
 **Update:** [Bing Image Gallery](http://www.bing.com/gallery/)
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-12-27-A-Look-at-UEFI-Boot.md'>A Look at UEFI Boot</a> <a id='fnext' href='#blog/2013/2013-12-01-Emitting-Source-Code-Examples-From-PHP-Pages.md'>Emitting Source Code Examples From PHP Pages</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-12-27-A-Look-at-UEFI-Boot.md'>A Look at UEFI Boot</a> <a rel='next' id='fnext' href='#blog/2013/2013-12-01-Emitting-Source-Code-Examples-From-PHP-Pages.md'>Emitting Source Code Examples From PHP Pages</a></ins>

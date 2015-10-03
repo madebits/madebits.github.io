@@ -64,4 +64,4 @@ Run `openbox --reconfigure` to apply the changes.
 
 `lxkeymap` is no more delivered. The preferred way now is to use `lxpanel` plugin. I have `lxkeymap` from 13.04 install and it still works, but I used `lxpanel` plugin also before, and the time I was not very sure why `lxkeymap` was there.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-10-22-Lubuntu-13.10-Radeon-Laptop-Screen-Black-After-Upgrade.md'>Lubuntu 13.10 Radeon Laptop Screen Black After Upgrade</a> <a id='fnext' href='#blog/2013/2013-10-05-Autostart-MediaTomb-in-Lubuntu.md'>Autostart MediaTomb in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-10-22-Lubuntu-13.10-Radeon-Laptop-Screen-Black-After-Upgrade.md'>Lubuntu 13.10 Radeon Laptop Screen Black After Upgrade</a> <a rel='next' id='fnext' href='#blog/2013/2013-10-05-Autostart-MediaTomb-in-Lubuntu.md'>Autostart MediaTomb in Lubuntu</a></ins>

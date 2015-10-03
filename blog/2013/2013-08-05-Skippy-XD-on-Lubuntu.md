@@ -43,4 +43,4 @@ If you use `skippy-xd-fix`, then change the `W-w`keybinding for openbox to:
 
 [skippy-xd-fix](blog/images/skippy-xd-fix) script is cool. It finds the minimized windows, remembers them, maximizes them, calls `skippy-xd` to show them, then minimizes the remembered windows again - brute force at work :). It runs acceptably fast on my laptop.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-08-09-Reconnect-External-IP-for-Speeport-w504v.md'>Reconnect External IP for Speeport w504v</a> <a id='fnext' href='#blog/2013/2013-08-02-Pairing-Logitech-Touchpad-and-Mouse-on-Lubuntu.md'>Pairing Logitech Touchpad and Mouse on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-08-09-Reconnect-External-IP-for-Speeport-w504v.md'>Reconnect External IP for Speeport w504v</a> <a rel='next' id='fnext' href='#blog/2013/2013-08-02-Pairing-Logitech-Touchpad-and-Mouse-on-Lubuntu.md'>Pairing Logitech Touchpad and Mouse on Lubuntu</a></ins>

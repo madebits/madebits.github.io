@@ -56,4 +56,4 @@ exit 0
 
 I am using here `sudo apt-get install i3lock` to lock the screen as I like `i3lock`, but you can use `xscreensaver` or something else. This is smaller, but you cannot add an image :).
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-05-27-Using-Dropbox-to-keep-EncFS-Configuration-File-Safe.md'>Using Dropbox to keep EncFS Configuration File Safe</a> <a id='fnext' href='#blog/2014/2014-05-19-Mount-EncFs-Folder-at-Login-in-Lubuntu.md'>Mount EncFs Folder at Login in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-05-27-Using-Dropbox-to-keep-EncFS-Configuration-File-Safe.md'>Using Dropbox to keep EncFS Configuration File Safe</a> <a rel='next' id='fnext' href='#blog/2014/2014-05-19-Mount-EncFs-Folder-at-Login-in-Lubuntu.md'>Mount EncFs Folder at Login in Lubuntu</a></ins>

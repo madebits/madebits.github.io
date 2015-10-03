@@ -95,4 +95,4 @@ List of common commands and software to access Lubuntu Linux and Windows machine
 * PcManFm can handle `sftp://`, `ftp://` and `smb://` URLs. To access Windows (and samba) shares, just browse to them, or enter the `smb://` address. To share folders with Windows machines install samba (and use the GUI to share locations):
 		sudo apt-get install samba samba-common system-config-samba
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-07-19-Changing-FAT32-SD-Card-Mount-Permissions.md'>Changing FAT32 SD Card Mount Permissions</a> <a id='fnext' href='#blog/2012/2012-06-16-Accessing-Work-Windows-PC-via-VPN-in-Lubuntu.md'>Accessing Work Windows PC via VPN in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-07-19-Changing-FAT32-SD-Card-Mount-Permissions.md'>Changing FAT32 SD Card Mount Permissions</a> <a rel='next' id='fnext' href='#blog/2012/2012-06-16-Accessing-Work-Windows-PC-via-VPN-in-Lubuntu.md'>Accessing Work Windows PC via VPN in Lubuntu</a></ins>

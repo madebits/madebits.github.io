@@ -89,4 +89,4 @@ The Gulp script assumes the application has the following structure:
 
 Source files are in `./app` and distribution destination is in `./dist`. In Gulp script `staticFiles` can contain files and folders to be copied verbatim. `*.js` files are run though Babel and then Broserify. The compile part normally fails on Babel errors. However, on *watch* case for continuous building on file save, I do not want to kill the Gulp build script, so I just print the Babel error in color and continue. Modify the script as needed for full projects.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-08-22-Strange-visudo-Error.md'>Strange visudo Error</a> <a id='fnext' href='#blog/2015/2015-07-21-Pure-UI-In-Javascript.md'>Pure UI In Javascript</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-08-22-Strange-visudo-Error.md'>Strange visudo Error</a> <a rel='next' id='fnext' href='#blog/2015/2015-07-21-Pure-UI-In-Javascript.md'>Pure UI In Javascript</a></ins>

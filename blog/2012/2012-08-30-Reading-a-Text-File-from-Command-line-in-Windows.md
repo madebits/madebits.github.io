@@ -13,4 +13,4 @@ C:\>type test.txt
 C:\>copy test.txt con
 ```
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-09-02-Fullscreen-Browsing-in-Google-Chrome.md'>Fullscreen Browsing in Google Chrome</a> <a id='fnext' href='#blog/2012/2012-08-25-Fully-Remove-Installed-Packages-in-Lubuntu.md'>Fully Remove Installed Packages in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-09-02-Fullscreen-Browsing-in-Google-Chrome.md'>Fullscreen Browsing in Google Chrome</a> <a rel='next' id='fnext' href='#blog/2012/2012-08-25-Fully-Remove-Installed-Packages-in-Lubuntu.md'>Fully Remove Installed Packages in Lubuntu</a></ins>

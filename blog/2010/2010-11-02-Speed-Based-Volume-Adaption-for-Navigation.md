@@ -14,4 +14,4 @@ A given time `T1`, the user sets device volume `V1`. At this moment we find the 
 
 An additional restriction can be defined as a delta value around user volume - so that real auto volume is always at some range around user volume `V1`. Delta threshold ensures that not matter how big or small speed becomes, real volume is not very much different from user set volume, and protects from having extreme volume values.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2011/2011-10-11-WCF-Authentication-Cookies.md'>WCF Authentication Cookies</a> <a id='fnext' href='#blog/2010/2010-11-01-Finding-POIs-along-a-Route.md'>Finding POIs along a Route</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2011/2011-10-11-WCF-Authentication-Cookies.md'>WCF Authentication Cookies</a> <a rel='next' id='fnext' href='#blog/2010/2010-11-01-Finding-POIs-along-a-Route.md'>Finding POIs along a Route</a></ins>

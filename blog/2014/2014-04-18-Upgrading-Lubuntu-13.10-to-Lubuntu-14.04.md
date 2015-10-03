@@ -64,4 +64,4 @@ As it is usual with Lubuntu, it really gets tested the first week after the rele
 
 For the last one I am using: `@light-locker --lock-after-screensaver=1 --no-lock-on-suspend --no-late-locking`.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-04-26-Restoring-Chromium-Configuration-Folder.md'>Restoring Chromium Configuration Folder</a> <a id='fnext' href='#blog/2014/2014-04-10-Minimal-Graphical-Ubuntu-Install-in-Docker.md'>Minimal Graphical Ubuntu Install in Docker</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-04-26-Restoring-Chromium-Configuration-Folder.md'>Restoring Chromium Configuration Folder</a> <a rel='next' id='fnext' href='#blog/2014/2014-04-10-Minimal-Graphical-Ubuntu-Install-in-Docker.md'>Minimal Graphical Ubuntu Install in Docker</a></ins>

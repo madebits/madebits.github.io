@@ -60,13 +60,13 @@ p_processLinks()
 		append=1
 		fileName=$(p_getFileName "$previous")
 		title=$(echo "$fileName" | cut -d "-" -f 4- | tr "-" " ")
-		data="${data}<a id='fprev' href='#${previous}'>${title}</a> "
+		data="${data}<a rel='prev' id='fprev' href='#${previous}'>${title}</a> "
 	fi
 	if [[ -n $next ]]; then
 		append=1
 		fileName=$(p_getFileName "$next")
 		title=$(echo "$fileName" | cut -d "-" -f 4- | tr "-" " ")
-		data="${data}<a id='fnext' href='#${next}'>${title}</a>"
+		data="${data}<a rel='next' id='fnext' href='#${next}'>${title}</a>"
 	fi
 	data="${data}</ins>"
 	if [[ append -eq 1 ]]; then

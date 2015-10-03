@@ -14,4 +14,4 @@ For bing.com the same can be done via https://www.bing.com?cc=us&rb=0.
 
 One more unrelated tip, to access gmail in basic html use: http://mail.google.com/mail/h/
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-06-16-Accessing-Work-Windows-PC-via-VPN-in-Lubuntu.md'>Accessing Work Windows PC via VPN in Lubuntu</a> <a id='fnext' href='#blog/2012/2012-06-06-Software-to-Install-on-Lubuntu.md'>Software to Install on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-06-16-Accessing-Work-Windows-PC-via-VPN-in-Lubuntu.md'>Accessing Work Windows PC via VPN in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2012/2012-06-06-Software-to-Install-on-Lubuntu.md'>Software to Install on Lubuntu</a></ins>

@@ -448,4 +448,4 @@ fi
 In the action, I create first a desktop file in Desktop folder named same as the file, and then I offer to edit it further via `lxshortcut`.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-03-22-Versioning-Home-Configuration-Files-with-Git-and-DropBox.md'>Versioning Home Configuration Files with Git and DropBox</a> <a id='fnext' href='#blog/2014/2014-03-16-Using-Different-GTK-Theme-for-Root-Applications.md'>Using Different GTK Theme for Root Applications</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-03-22-Versioning-Home-Configuration-Files-with-Git-and-DropBox.md'>Versioning Home Configuration Files with Git and DropBox</a> <a rel='next' id='fnext' href='#blog/2014/2014-03-16-Using-Different-GTK-Theme-for-Root-Applications.md'>Using Different GTK Theme for Root Applications</a></ins>

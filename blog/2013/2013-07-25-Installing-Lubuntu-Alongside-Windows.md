@@ -42,4 +42,4 @@ WINEARCH=win32 WINEPREFIX=~/.wine winecfg
 winetricks dotnet20
 ```
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-07-26-Samsung-ML-1915-Printer-on-Lubuntu.md'>Samsung ML 1915 Printer on Lubuntu</a> <a id='fnext' href='#blog/2013/2013-07-17-Configuring-AMD-ATI-Radeon-on-Lubuntu.md'>Configuring AMD ATI Radeon on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-07-26-Samsung-ML-1915-Printer-on-Lubuntu.md'>Samsung ML 1915 Printer on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-07-17-Configuring-AMD-ATI-Radeon-on-Lubuntu.md'>Configuring AMD ATI Radeon on Lubuntu</a></ins>

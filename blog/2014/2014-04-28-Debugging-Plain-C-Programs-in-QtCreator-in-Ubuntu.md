@@ -16,4 +16,4 @@ The change can be made permanent by editing `/etc/sysctl.d/10-ptrace.conf` to ch
 
 While qtcreator is somehow a big install (~200MB in Lubuntu), once you have it, it is a nice IDE for C/C++ in Ubuntu, even if you do not need to program Qt interfaces.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-05-01-Disable-HTML5-Video-in-Chromium.md'>Disable HTML5 Video in Chromium</a> <a id='fnext' href='#blog/2014/2014-04-26-Restoring-Chromium-Configuration-Folder.md'>Restoring Chromium Configuration Folder</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-05-01-Disable-HTML5-Video-in-Chromium.md'>Disable HTML5 Video in Chromium</a> <a rel='next' id='fnext' href='#blog/2014/2014-04-26-Restoring-Chromium-Configuration-Folder.md'>Restoring Chromium Configuration Folder</a></ins>

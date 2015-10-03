@@ -20,4 +20,4 @@ Here, I start `tmux` when tilda is started, you can omit `-c tmux`, or replace i
 
 To move the tilda window, keep `Alt` key pressed and drag one of the tilda window corners.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-10-05-Autostart-MediaTomb-in-Lubuntu.md'>Autostart MediaTomb in Lubuntu</a> <a id='fnext' href='#blog/2013/2013-09-28-Tmux-on-Lubuntu.md'>Tmux on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-10-05-Autostart-MediaTomb-in-Lubuntu.md'>Autostart MediaTomb in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-09-28-Tmux-on-Lubuntu.md'>Tmux on Lubuntu</a></ins>

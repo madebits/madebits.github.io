@@ -15,4 +15,4 @@ If you are using the document index side pane, some PDF document instruct Evince
 
 Finally a GNOME joke: [Accessibility in Evince](http://blogs.igalia.com/apuentes/2013/09/04/15/) describes a method to use the keyboard to do text movement and selection in Evince using the keyboard. The keyboard shortcut for this `F7` is not documented in Evince, and pressing `F7` in Evince opens a bar where you can select to activate this feature only using mouse. Even the `Esc` key does not work to hide that `F7` opened bar.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-04-15-Micro-Libraries.md'>Micro Libraries</a> <a id='fnext' href='#blog/2015/2015-03-24-Encrypted-Swap-File-in-Linux.md'>Encrypted Swap File in Linux</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-04-15-Micro-Libraries.md'>Micro Libraries</a> <a rel='next' id='fnext' href='#blog/2015/2015-03-24-Encrypted-Swap-File-in-Linux.md'>Encrypted Swap File in Linux</a></ins>

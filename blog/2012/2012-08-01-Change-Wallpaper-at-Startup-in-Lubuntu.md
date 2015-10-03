@@ -76,4 +76,4 @@ fi
 `shuf`(fle) does whatever I did above.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-08-21-Disable-History-in-Lubuntu.md'>Disable History in Lubuntu</a> <a id='fnext' href='#blog/2012/2012-07-21-Converting-Swap-Partition-to-a-Swap-File-in-Lubuntu.md'>Converting Swap Partition to a Swap File in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-08-21-Disable-History-in-Lubuntu.md'>Disable History in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2012/2012-07-21-Converting-Swap-Partition-to-a-Swap-File-in-Lubuntu.md'>Converting Swap Partition to a Swap File in Lubuntu</a></ins>

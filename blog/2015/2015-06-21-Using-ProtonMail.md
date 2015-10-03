@@ -33,4 +33,4 @@ The ProtoMail user can then respond again securely using same or another agreed 
 
 ProtonMail only protects the message body text, not the attachments, nor the subject, nor any other metadata. The maximum lifetime of such protected messages is four weeks.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-06-24-Sun-and-Planets.md'>Sun and Planets</a> <a id='fnext' href='#blog/2015/2015-06-19-Csharp-Simple-Encryption.md'>Csharp Simple Encryption</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-06-24-Sun-and-Planets.md'>Sun and Planets</a> <a rel='next' id='fnext' href='#blog/2015/2015-06-19-Csharp-Simple-Encryption.md'>Csharp Simple Encryption</a></ins>

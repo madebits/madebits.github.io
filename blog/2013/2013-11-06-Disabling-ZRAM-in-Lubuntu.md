@@ -12,4 +12,4 @@ I left `zram-config` run at first to see whether I liked it or not. If you do no
 
 **Update:** zram-config is fully ok. I was a bit suspicions of it at first, but it is running great. I will keep this post, as it has details on how zram-config works.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-11-13-German-Umlauts-on-US-Keyboard-on-Lubuntu.md'>German Umlauts on US Keyboard on Lubuntu</a> <a id='fnext' href='#blog/2013/2013-11-04-Freecom-DVB-T-USB-Receiver-in-Lubuntu.md'>Freecom DVB T USB Receiver in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-11-13-German-Umlauts-on-US-Keyboard-on-Lubuntu.md'>German Umlauts on US Keyboard on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-11-04-Freecom-DVB-T-USB-Receiver-in-Lubuntu.md'>Freecom DVB T USB Receiver in Lubuntu</a></ins>

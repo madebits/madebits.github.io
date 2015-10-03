@@ -81,4 +81,4 @@
 * http://www.jacknjoe.com/
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-06-09-Encrypted-Google-in-English.md'>Encrypted Google in English</a> <a id='fnext' href='#blog/2012/2012-06-05-CSharp--Reflection-ExtendedActivator.md'>CSharp  Reflection ExtendedActivator</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-06-09-Encrypted-Google-in-English.md'>Encrypted Google in English</a> <a rel='next' id='fnext' href='#blog/2012/2012-06-05-CSharp--Reflection-ExtendedActivator.md'>CSharp  Reflection ExtendedActivator</a></ins>

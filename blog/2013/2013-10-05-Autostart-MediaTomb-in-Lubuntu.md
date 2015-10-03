@@ -36,4 +36,4 @@ service mediatomb start
 exit 0
 ```
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-10-19-Upgrading-from-Lubuntu-13.04-to-Lubuntu-13.10.md'>Upgrading from Lubuntu 13.04 to Lubuntu 13.10</a> <a id='fnext' href='#blog/2013/2013-09-29-Tilda-in-Lubuntu.md'>Tilda in Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-10-19-Upgrading-from-Lubuntu-13.04-to-Lubuntu-13.10.md'>Upgrading from Lubuntu 13.04 to Lubuntu 13.10</a> <a rel='next' id='fnext' href='#blog/2013/2013-09-29-Tilda-in-Lubuntu.md'>Tilda in Lubuntu</a></ins>

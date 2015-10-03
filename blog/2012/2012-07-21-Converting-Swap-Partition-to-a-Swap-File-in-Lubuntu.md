@@ -46,4 +46,4 @@ Filesystem      Size  Used Avail Use% Mounted on
 ```
 I never remove the mini SD-Card from machine, but if I ever need to remove it, I can either to do it when the machine is off, or I must run first `sudo swapoff /media/EXTRA16MB/mnt/1024MiB.swap` (and `umount`) before remove, then s`wapon on` same file path once I insert the card back.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-08-01-Change-Wallpaper-at-Startup-in-Lubuntu.md'>Change Wallpaper at Startup in Lubuntu</a> <a id='fnext' href='#blog/2012/2012-07-19-Changing-FAT32-SD-Card-Mount-Permissions.md'>Changing FAT32 SD Card Mount Permissions</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-08-01-Change-Wallpaper-at-Startup-in-Lubuntu.md'>Change Wallpaper at Startup in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2012/2012-07-19-Changing-FAT32-SD-Card-Mount-Permissions.md'>Changing FAT32 SD Card Mount Permissions</a></ins>

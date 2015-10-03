@@ -25,4 +25,4 @@ In overall, despite my previous Scrum knowledge, I am happy I applied for the ce
     * End: Sprint Retrospective (Meeting): (Retrospective backlog review) : {SM, DT}
 * Artifacts: Product Backlog : {PO}, Sprint Backlog : {DT}, (optional) Retrospective backlog : {DT}
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-08-31-Agile-in-Regulated-Environments.md'>Agile in Regulated Environments</a> <a id='fnext' href='#blog/2015/2015-08-22-Strange-visudo-Error.md'>Strange visudo Error</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-08-31-Agile-in-Regulated-Environments.md'>Agile in Regulated Environments</a> <a rel='next' id='fnext' href='#blog/2015/2015-08-22-Strange-visudo-Error.md'>Strange visudo Error</a></ins>

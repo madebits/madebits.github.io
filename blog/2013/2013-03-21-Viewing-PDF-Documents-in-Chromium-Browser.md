@@ -14,4 +14,4 @@ It worked like a charm and it could open the problematic PDF without problems. I
 
 Firefox's built-in PDF preview has same rendering problems as Evince. Firefox PDF preview is more usable that Chrome one. It shows pages and table of contents. The Chrome one really lacks usability to move around PDF the document.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-05-04-Configuring-Wacom-Bambo-Pen-on-Lubuntu.md'>Configuring Wacom Bambo Pen on Lubuntu</a> <a id='fnext' href='#blog/2013/2013-03-04-Google-Hangout-Share-both-Screen-and-Camera.md'>Google Hangout Share both Screen and Camera</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-05-04-Configuring-Wacom-Bambo-Pen-on-Lubuntu.md'>Configuring Wacom Bambo Pen on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-03-04-Google-Hangout-Share-both-Screen-and-Camera.md'>Google Hangout Share both Screen and Camera</a></ins>

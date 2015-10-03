@@ -88,4 +88,4 @@ LightDM log is in `/var/log/lightdm/lightdm.log`. In same folder `/var/log/light
 * http://wiki.lxde.org/en/LXSession
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-10-26-Disable-Hibernate-in-Lubuntu.md'>Disable Hibernate in Lubuntu</a> <a id='fnext' href='#blog/2013/2013-10-22-Lubuntu-13.10-Radeon-Laptop-Screen-Black-After-Upgrade.md'>Lubuntu 13.10 Radeon Laptop Screen Black After Upgrade</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-10-26-Disable-Hibernate-in-Lubuntu.md'>Disable Hibernate in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-10-22-Lubuntu-13.10-Radeon-Laptop-Screen-Black-After-Upgrade.md'>Lubuntu 13.10 Radeon Laptop Screen Black After Upgrade</a></ins>

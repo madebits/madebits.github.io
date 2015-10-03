@@ -283,4 +283,4 @@ Basically, we get the authentication credentials and the existing cookie if any 
 In a similar fashion we can check more stuff in a centralized way, such as client id, or we can do something central to log and handle all errors inside `MethodRuner.Run` (not shown in examples). The technique is general and be used with minimal WCF specific code pollution. We are keeping here small chunks of state safely in client reliving the server from having to implement stateful WCF services only for this purpose. It works also across all the WCF service instances same client uses on same .NET app domain.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2011/2011-10-12-WCF-REST-Service.md'>WCF REST Service</a> <a id='fnext' href='#blog/2010/2010-11-02-Speed-Based-Volume-Adaption-for-Navigation.md'>Speed Based Volume Adaption for Navigation</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2011/2011-10-12-WCF-REST-Service.md'>WCF REST Service</a> <a rel='next' id='fnext' href='#blog/2010/2010-11-02-Speed-Based-Volume-Adaption-for-Navigation.md'>Speed Based Volume Adaption for Navigation</a></ins>

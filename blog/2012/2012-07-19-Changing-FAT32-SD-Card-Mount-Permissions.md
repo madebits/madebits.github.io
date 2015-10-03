@@ -20,4 +20,4 @@ sudo mkdir /media/EXTRA16MB
 At first, I mounted by UUID in `/etc/fstab` (using `blkid` to get it), but the mount point was listed twice in PCManFm. Based on details of [bug442130](https://bugs.launchpad.net/ubuntu/+source/gvfs/+bug/442130), I then changed `/etc/fstab` entry from UUID to the device path. The path is anyway same one all the time in *Asus Eee PC X101* and I use the SD-Card as permanent extra storage.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-07-21-Converting-Swap-Partition-to-a-Swap-File-in-Lubuntu.md'>Converting Swap Partition to a Swap File in Lubuntu</a> <a id='fnext' href='#blog/2012/2012-06-17-Connecting-Lubuntu-and-Windows-Machines-at-Home-Network.md'>Connecting Lubuntu and Windows Machines at Home Network</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-07-21-Converting-Swap-Partition-to-a-Swap-File-in-Lubuntu.md'>Converting Swap Partition to a Swap File in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2012/2012-06-17-Connecting-Lubuntu-and-Windows-Machines-at-Home-Network.md'>Connecting Lubuntu and Windows Machines at Home Network</a></ins>

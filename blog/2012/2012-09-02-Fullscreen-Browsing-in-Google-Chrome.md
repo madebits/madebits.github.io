@@ -73,4 +73,4 @@ function selectAll(){
 This custom `home.html` file can be also extended to contain also your most used links, and also submission forms for Bing and Google, as I have done.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-09-08-Lubuntu-Toggle-Desktop-Icons-on-Double-Click.md'>Lubuntu Toggle Desktop Icons on Double Click</a> <a id='fnext' href='#blog/2012/2012-08-30-Reading-a-Text-File-from-Command-line-in-Windows.md'>Reading a Text File from Command line in Windows</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-09-08-Lubuntu-Toggle-Desktop-Icons-on-Double-Click.md'>Lubuntu Toggle Desktop Icons on Double Click</a> <a rel='next' id='fnext' href='#blog/2012/2012-08-30-Reading-a-Text-File-from-Command-line-in-Windows.md'>Reading a Text File from Command line in Windows</a></ins>

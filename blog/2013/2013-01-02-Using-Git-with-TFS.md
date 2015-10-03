@@ -134,4 +134,4 @@ A Git-Tfs repository cannot be a `bare` repository as Git-Tfs needs to do merges
 If git-tfs repository is cloned (git clone, or manual copy) and want it to serve also as a git-tfs repository, run `git tfs bootstrap`.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-03-01-DNS-Caching-and-VPN.md'>DNS Caching and VPN</a> <a id='fnext' href='#blog/2012/2012-11-01-Back-to-Classic-Desktop.md'>Back to Classic Desktop</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-03-01-DNS-Caching-and-VPN.md'>DNS Caching and VPN</a> <a rel='next' id='fnext' href='#blog/2012/2012-11-01-Back-to-Classic-Desktop.md'>Back to Classic Desktop</a></ins>

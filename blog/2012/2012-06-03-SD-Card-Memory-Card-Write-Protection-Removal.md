@@ -13,4 +13,4 @@ Then I noticed something strange. I put the card in locked position put in the l
 Once this was clear, I put a plastic tape around the switch to stop it from moving. Use this method on your risk as the tape can be removed and remain inside the card-reader.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-06-04-Lubuntu-on-Asus-EeePC-X101.md'>Lubuntu on Asus EeePC X101</a> <a id='fnext' href='#blog/2012/2012-06-02-Asus-EeePC-X101-as-Ebook-Reader.md'>Asus EeePC X101 as Ebook Reader</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-06-04-Lubuntu-on-Asus-EeePC-X101.md'>Lubuntu on Asus EeePC X101</a> <a rel='next' id='fnext' href='#blog/2012/2012-06-02-Asus-EeePC-X101-as-Ebook-Reader.md'>Asus EeePC X101 as Ebook Reader</a></ins>

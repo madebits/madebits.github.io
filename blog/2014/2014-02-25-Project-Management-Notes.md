@@ -790,4 +790,4 @@ Maßnahmen zur Auflösung der Projektorganisation
 6. Auflösung von Arbeitsverträgen (gegebenenfalls)
 7. Arbeitszeugnisse
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-02-27-Shutting-Down-Lubuntu-from-TV-via-DLNA-using-MediaTomb.md'>Shutting Down Lubuntu from TV via DLNA using MediaTomb</a> <a id='fnext' href='#blog/2014/2014-02-06-Browsing-Using-Keyboard-in-Google-Chrome-Browser.md'>Browsing Using Keyboard in Google Chrome Browser</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-02-27-Shutting-Down-Lubuntu-from-TV-via-DLNA-using-MediaTomb.md'>Shutting Down Lubuntu from TV via DLNA using MediaTomb</a> <a rel='next' id='fnext' href='#blog/2014/2014-02-06-Browsing-Using-Keyboard-in-Google-Chrome-Browser.md'>Browsing Using Keyboard in Google Chrome Browser</a></ins>

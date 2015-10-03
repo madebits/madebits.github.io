@@ -45,4 +45,4 @@ var xmlString = (string)ConfigurationManager.GetSection("myXml");
 
 We can then do whatever we want with this raw chunk of XML text in code.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-02-06-Browsing-Using-Keyboard-in-Google-Chrome-Browser.md'>Browsing Using Keyboard in Google Chrome Browser</a> <a id='fnext' href='#blog/2014/2014-02-04-Using-i3wm-on-Lubuntu.md'>Using i3wm on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-02-06-Browsing-Using-Keyboard-in-Google-Chrome-Browser.md'>Browsing Using Keyboard in Google Chrome Browser</a> <a rel='next' id='fnext' href='#blog/2014/2014-02-04-Using-i3wm-on-Lubuntu.md'>Using i3wm on Lubuntu</a></ins>

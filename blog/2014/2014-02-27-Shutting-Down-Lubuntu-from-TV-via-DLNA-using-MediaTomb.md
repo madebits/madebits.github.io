@@ -78,4 +78,4 @@ With these modifications, when selecting `shutdown.sh` as video in your TV, the 
 
 You can run any `*.sh` file you add to MediaTomb media folders like this. If you find other interesting use cases, other that shutdown, let me know.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-03-16-Using-Different-GTK-Theme-for-Root-Applications.md'>Using Different GTK Theme for Root Applications</a> <a id='fnext' href='#blog/2014/2014-02-25-Project-Management-Notes.md'>Project Management Notes</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-03-16-Using-Different-GTK-Theme-for-Root-Applications.md'>Using Different GTK Theme for Root Applications</a> <a rel='next' id='fnext' href='#blog/2014/2014-02-25-Project-Management-Notes.md'>Project Management Notes</a></ins>

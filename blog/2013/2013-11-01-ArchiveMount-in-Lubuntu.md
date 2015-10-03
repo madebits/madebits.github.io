@@ -108,4 +108,4 @@ read[0] 131072 bytes from 0 flags: 0x8000
 
 This is not directly related to the archive entry file size, but I do not know the exact reason for this.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-11-02-LibreOffice-Preview-Thumbnails-in-PCManFM.md'>LibreOffice Preview Thumbnails in PCManFM</a> <a id='fnext' href='#blog/2013/2013-10-28-Starting-VirtualBox-VM-Directly.md'>Starting VirtualBox VM Directly</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-11-02-LibreOffice-Preview-Thumbnails-in-PCManFM.md'>LibreOffice Preview Thumbnails in PCManFM</a> <a rel='next' id='fnext' href='#blog/2013/2013-10-28-Starting-VirtualBox-VM-Directly.md'>Starting VirtualBox VM Directly</a></ins>

@@ -41,4 +41,4 @@ I did not measure the speed of my internal hard disk before I put the SSD :(. Bu
 * WDC WD5000YS-01MPB0 External 500GB (USB 2.0) (via USB 2.0 hub)
 		536870912 bytes (537 MB) copied, 26.4048 s, 20.3 MB/s
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-12-31-Skype-Video-Flipped-Vertically-on-Asus-Laptop.md'>Skype Video Flipped Vertically on Asus Laptop</a> <a id='fnext' href='#blog/2013/2013-12-27-A-Look-at-UEFI-Boot.md'>A Look at UEFI Boot</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-12-31-Skype-Video-Flipped-Vertically-on-Asus-Laptop.md'>Skype Video Flipped Vertically on Asus Laptop</a> <a rel='next' id='fnext' href='#blog/2013/2013-12-27-A-Look-at-UEFI-Boot.md'>A Look at UEFI Boot</a></ins>

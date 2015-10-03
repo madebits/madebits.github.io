@@ -15,4 +15,4 @@ After a further look, it turned out that I use `firejail chromium-browser` to st
 I have customized the `chromium-browser.profile` (in `~.config/firejail`) to add `blacklist /etc/sudoers`. But, I fail to see how this affects `visudo` in a separate terminal.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-08-23-Scrum-Master-Certification.md'>Scrum Master Certification</a> <a id='fnext' href='#blog/2015/2015-07-30-Gulp-Broserify-Babel.md'>Gulp Broserify Babel</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-08-23-Scrum-Master-Certification.md'>Scrum Master Certification</a> <a rel='next' id='fnext' href='#blog/2015/2015-07-30-Gulp-Broserify-Babel.md'>Gulp Broserify Babel</a></ins>

@@ -87,4 +87,4 @@ As a third case, the testing pyramid can have more or less same coverage in all 
 
 Relative cover ratio(s) between the types of tests if the testing pyramid of project can give a better indication of long term maintenance quality of the software. Actual ratio values can be project specific. Testing pyramid ratio metrics can be collected and compared against similar previous projects, and against same self metrics over project time.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-04-29-Google-Apps-Tricks.md'>Google Apps Tricks</a> <a id='fnext' href='#blog/2015/2015-04-21-Devops-and-Modern-Programming.md'>Devops and Modern Programming</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-04-29-Google-Apps-Tricks.md'>Google Apps Tricks</a> <a rel='next' id='fnext' href='#blog/2015/2015-04-21-Devops-and-Modern-Programming.md'>Devops and Modern Programming</a></ins>

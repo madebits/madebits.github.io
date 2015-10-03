@@ -36,4 +36,4 @@ If you can afford it, reprocess old encrypted data or stored `keys` regularly ov
 
 Offer users guidance to select long (and relatively random) passwords, for example by combining together different ways of password creation (words from a dictionary, file CSHs, user provided text, etc). Do not restrict maximum password length.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2016/2016-03-03-WebWorker-Patterns.md'>WebWorker Patterns</a> <a id='fnext' href='#blog/2016/2016-02-17-Sharing-Local-Folders-Over-Remote-Desktop.md'>Sharing Local Folders Over Remote Desktop</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-03-03-WebWorker-Patterns.md'>WebWorker Patterns</a> <a rel='next' id='fnext' href='#blog/2016/2016-02-17-Sharing-Local-Folders-Over-Remote-Desktop.md'>Sharing Local Folders Over Remote Desktop</a></ins>

@@ -85,4 +85,4 @@ echo "$1" | xclip -i -selection clipboard -t text/uri-list
 Then I added an another external command in MComix, called `CopyPath` as `/home/user/bin/copyfile.sh "%F"`. Like this, while I view a file in MComix, I can copy it and paste it somewhere else in PCManFm file manager.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-08-20-Sort-Photos-By-EXIF-Date.md'>Sort Photos By EXIF Date</a> <a id='fnext' href='#blog/2013/2013-08-09-Reconnect-External-IP-for-Speeport-w504v.md'>Reconnect External IP for Speeport w504v</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-08-20-Sort-Photos-By-EXIF-Date.md'>Sort Photos By EXIF Date</a> <a rel='next' id='fnext' href='#blog/2013/2013-08-09-Reconnect-External-IP-for-Speeport-w504v.md'>Reconnect External IP for Speeport w504v</a></ins>

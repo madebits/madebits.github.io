@@ -18,4 +18,4 @@ Despite changing the servers locally, your ISP may transparently capture your DN
 
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-07-17-Configuring-AMD-ATI-Radeon-on-Lubuntu.md'>Configuring AMD ATI Radeon on Lubuntu</a> <a id='fnext' href='#blog/2013/2013-06-10-Lubuntu-Unlock-Default-Keyring-at-Login.md'>Lubuntu Unlock Default Keyring at Login</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-07-17-Configuring-AMD-ATI-Radeon-on-Lubuntu.md'>Configuring AMD ATI Radeon on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-06-10-Lubuntu-Unlock-Default-Keyring-at-Login.md'>Lubuntu Unlock Default Keyring at Login</a></ins>

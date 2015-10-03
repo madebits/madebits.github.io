@@ -88,4 +88,4 @@ sudo cryptsetup remove foo
 ```
 When used as shown cryptsetup will find and free the loop device on its own.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-05-30-Making-dev-random-Temporary-Faster.md'>Making dev random Temporary Faster</a> <a id='fnext' href='#blog/2014/2014-05-27-Using-Dropbox-to-keep-EncFS-Configuration-File-Safe.md'>Using Dropbox to keep EncFS Configuration File Safe</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-05-30-Making-dev-random-Temporary-Faster.md'>Making dev random Temporary Faster</a> <a rel='next' id='fnext' href='#blog/2014/2014-05-27-Using-Dropbox-to-keep-EncFS-Configuration-File-Safe.md'>Using Dropbox to keep EncFS Configuration File Safe</a></ins>

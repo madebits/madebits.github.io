@@ -28,4 +28,4 @@ To get Mac OS work in a virtual machine, I went through the steps listed in [sys
 
 ![](blog/images/osx.png)
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-01-15-Clustering-People.md'>Clustering People</a> <a id='fnext' href='#blog/2015/2015-01-07-ASP.NET-vNext-in-Ubuntu-14.04-LTS.md'>ASP.NET vNext in Ubuntu 14.04 LTS</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-01-15-Clustering-People.md'>Clustering People</a> <a rel='next' id='fnext' href='#blog/2015/2015-01-07-ASP.NET-vNext-in-Ubuntu-14.04-LTS.md'>ASP.NET vNext in Ubuntu 14.04 LTS</a></ins>

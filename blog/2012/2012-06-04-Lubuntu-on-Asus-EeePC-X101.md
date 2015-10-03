@@ -135,4 +135,4 @@ xrandr --fb 1024x600 --output LVDS1 --scale 1x1 --panning 1024x600
 
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-06-05-CSharp--Reflection-ExtendedActivator.md'>CSharp  Reflection ExtendedActivator</a> <a id='fnext' href='#blog/2012/2012-06-03-SD-Card-Memory-Card-Write-Protection-Removal.md'>SD Card Memory Card Write Protection Removal</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-06-05-CSharp--Reflection-ExtendedActivator.md'>CSharp  Reflection ExtendedActivator</a> <a rel='next' id='fnext' href='#blog/2012/2012-06-03-SD-Card-Memory-Card-Write-Protection-Removal.md'>SD Card Memory Card Write Protection Removal</a></ins>

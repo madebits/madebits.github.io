@@ -50,4 +50,4 @@ MTP is somehow not working properly. I can create files only by using echo with 
 
 **Update**: MTP is definitely not working. I installed a free [SSH server](http://arachnoid.com/android/SSHelper/) on the device and that seems to be the best way to access and copy files conveniently over the network (next to using the SD Card).
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-09-15-Msbuild-MsDeploy-Generated-SourceManifest.md'>Msbuild MsDeploy Generated SourceManifest</a> <a id='fnext' href='#blog/2014/2014-05-30-Making-dev-random-Temporary-Faster.md'>Making dev random Temporary Faster</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-09-15-Msbuild-MsDeploy-Generated-SourceManifest.md'>Msbuild MsDeploy Generated SourceManifest</a> <a rel='next' id='fnext' href='#blog/2014/2014-05-30-Making-dev-random-Temporary-Faster.md'>Making dev random Temporary Faster</a></ins>

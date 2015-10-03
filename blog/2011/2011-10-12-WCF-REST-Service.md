@@ -187,4 +187,4 @@ public Stream GetXslt(string name)
 We built like this a self-hosted (no IIS) plain XML REST service based on WCF. We styled the pages with XSLT (XML to HTML) so that they show as web pages by default on a web browser.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2011/2011-10-13-WCF-Thread-Context.md'>WCF Thread Context</a> <a id='fnext' href='#blog/2011/2011-10-11-WCF-Authentication-Cookies.md'>WCF Authentication Cookies</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2011/2011-10-13-WCF-Thread-Context.md'>WCF Thread Context</a> <a rel='next' id='fnext' href='#blog/2011/2011-10-11-WCF-Authentication-Cookies.md'>WCF Authentication Cookies</a></ins>

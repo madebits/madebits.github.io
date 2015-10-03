@@ -377,4 +377,4 @@ We are now ready to share `psexample_1.0.0-1.deb` with other people (that trust 
 
 The next step is to read PySide and Qt documentation and get to know what widgets and framework helper classes are available and build a cool application :).
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-11-25-Changing-SSH-Port-on-Lubuntu.md'>Changing SSH Port on Lubuntu</a> <a id='fnext' href='#blog/2013/2013-11-13-German-Umlauts-on-US-Keyboard-on-Lubuntu.md'>German Umlauts on US Keyboard on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-11-25-Changing-SSH-Port-on-Lubuntu.md'>Changing SSH Port on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-11-13-German-Umlauts-on-US-Keyboard-on-Lubuntu.md'>German Umlauts on US Keyboard on Lubuntu</a></ins>

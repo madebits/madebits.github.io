@@ -17,4 +17,4 @@ sudo apt-get install solaar
 
 It shows up as a menu in Accessories and has a nice UI that guides to pair, or unpair devices and to see some of their properties, such as, battery usage level.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-08-05-Skippy-XD-on-Lubuntu.md'>Skippy XD on Lubuntu</a> <a id='fnext' href='#blog/2013/2013-08-02-CSharp-Obtaining-Method-Parameter-Names.md'>CSharp Obtaining Method Parameter Names</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-08-05-Skippy-XD-on-Lubuntu.md'>Skippy XD on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-08-02-CSharp-Obtaining-Method-Parameter-Names.md'>CSharp Obtaining Method Parameter Names</a></ins>

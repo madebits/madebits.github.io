@@ -36,4 +36,4 @@ I spent some time to figure out the sequence of events for udev usage in a Linux
 * http://www.freedesktop.org/wiki/Software/udisks/
 * http://www.freedesktop.org/software/systemd/gudev/
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-05-24-Exploring-Linux-Security-Abstractions.md'>Exploring Linux Security Abstractions</a> <a id='fnext' href='#blog/2013/2013-05-11-Editing-LXDE-Desktop-Files-via-Context-Menu.md'>Editing LXDE Desktop Files via Context Menu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-05-24-Exploring-Linux-Security-Abstractions.md'>Exploring Linux Security Abstractions</a> <a rel='next' id='fnext' href='#blog/2013/2013-05-11-Editing-LXDE-Desktop-Files-via-Context-Menu.md'>Editing LXDE Desktop Files via Context Menu</a></ins>

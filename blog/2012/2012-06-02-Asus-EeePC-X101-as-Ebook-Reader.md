@@ -16,4 +16,4 @@ X101 is in the entry level price segment, being on same price range as ebook rea
 
 A benefit of X101 being less capable than other models is its small weight and very thin size. It comes with 8GB SSD which is not much, but still enough to install a working copy of Linux with the software I need. To store data I bought an extra micro SD-Card of 16GB.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2012/2012-06-03-SD-Card-Memory-Card-Write-Protection-Removal.md'>SD Card Memory Card Write Protection Removal</a> <a id='fnext' href='#blog/2011/2011-10-13-WCF-Thread-Context.md'>WCF Thread Context</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-06-03-SD-Card-Memory-Card-Write-Protection-Removal.md'>SD Card Memory Card Write Protection Removal</a> <a rel='next' id='fnext' href='#blog/2011/2011-10-13-WCF-Thread-Context.md'>WCF Thread Context</a></ins>

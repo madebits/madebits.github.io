@@ -171,4 +171,4 @@ pred 1 2 3
 
 We see we have classified 1 correctly 3 times and incorrectly 2 times (once as 2 and once as 3) and so on, with an overall training set misclassification rate of 25% on these uniformly generated random data.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-06-09-Encrypting-Git-Home-Folder-on-Windows.md'>Encrypting Git Home Folder on Windows</a> <a id='fnext' href='#blog/2015/2015-05-12-Using-SVD-to-Reduce-Images.md'>Using SVD to Reduce Images</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-06-09-Encrypting-Git-Home-Folder-on-Windows.md'>Encrypting Git Home Folder on Windows</a> <a rel='next' id='fnext' href='#blog/2015/2015-05-12-Using-SVD-to-Reduce-Images.md'>Using SVD to Reduce Images</a></ins>

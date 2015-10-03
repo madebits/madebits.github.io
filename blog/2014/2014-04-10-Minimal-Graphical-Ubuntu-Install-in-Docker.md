@@ -242,4 +242,4 @@ Here, we see the docker.io daemon in Lubuntu 14.04, running the image generated 
 Docker is still in beta. Currently, image layers tree created as shown above cannot be [flattened](http://3ofcoins.net/2013/09/22/flat-docker-images/) and there is a [limit](https://github.com/dotcloud/docker/issues/332) on how many image layers can be created on top of each other, making Docker somehow limited for a long term vm replacement toy.
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2014/2014-04-18-Upgrading-Lubuntu-13.10-to-Lubuntu-14.04.md'>Upgrading Lubuntu 13.10 to Lubuntu 14.04</a> <a id='fnext' href='#blog/2014/2014-03-29-Linux-Command-Line-like-Game-Bandit.md'>Linux Command Line like Game Bandit</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-04-18-Upgrading-Lubuntu-13.10-to-Lubuntu-14.04.md'>Upgrading Lubuntu 13.10 to Lubuntu 14.04</a> <a rel='next' id='fnext' href='#blog/2014/2014-03-29-Linux-Command-Line-like-Game-Bandit.md'>Linux Command Line like Game Bandit</a></ins>

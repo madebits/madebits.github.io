@@ -94,4 +94,4 @@ ptouch() {
 ```
 
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-12-01-Emitting-Source-Code-Examples-From-PHP-Pages.md'>Emitting Source Code Examples From PHP Pages</a> <a id='fnext' href='#blog/2013/2013-11-25-Changing-SSH-Port-on-Lubuntu.md'>Changing SSH Port on Lubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-12-01-Emitting-Source-Code-Examples-From-PHP-Pages.md'>Emitting Source Code Examples From PHP Pages</a> <a rel='next' id='fnext' href='#blog/2013/2013-11-25-Changing-SSH-Port-on-Lubuntu.md'>Changing SSH Port on Lubuntu</a></ins>

@@ -31,4 +31,4 @@ Drawbacks of using UEFI:
 
 As summary, I see no benefit on using UEFI for any of my machines. If I you cannot avoid getting a machine without UEFI then (a) first create a recovery media for it (you never know what will happen), and then (b) disable UEFI and re-install the software (deleting all existing partitions) in legacy mode.
 
-<ins class='nfooter'><a id='fprev' href='#blog/2013/2013-12-29-Updating-my-Laptop-to-a-SSD.md'>Updating my Laptop to a SSD</a> <a id='fnext' href='#blog/2013/2013-12-03-Script-to-Download-Bing-Image.md'>Script to Download Bing Image</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-12-29-Updating-my-Laptop-to-a-SSD.md'>Updating my Laptop to a SSD</a> <a rel='next' id='fnext' href='#blog/2013/2013-12-03-Script-to-Download-Bing-Image.md'>Script to Download Bing Image</a></ins>
