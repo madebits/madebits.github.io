@@ -15,7 +15,7 @@ I attended a workshop on *Python for Mathematics, Science and Engineering* and t
 * http://www.dataschool.io/machine-learning-with-scikit-learn/
 * https://www.udacity.com/course/intro-to-machine-learning--ud120
 
-The conference was at LMU Institute of Computer Science, and the the food was fully ok and more that enough for everyone. With kind support from ProSieben, we had a really nice coffee team there. I could not drink enough of the cappuccino they instantly made, but still slept well, maybe I was too tired. Internet access at LMU was tricky to setup in Ubuntu, but I managed to get it work without running the script the offered, given I am not a fun of such ready made scripts.
+The conference was at LMU Institute of Computer Science, and the the food was fully ok and more that enough for everyone. With kind support from ProSieben, we had a really nice coffee team there. I could not drink enough of the cappuccino they instantly made, but still slept well, maybe I was too tired. Internet access at LMU was tricky to setup in Ubuntu, but I managed to get it work without running the script the offered, given I am not a fan of such ready made scripts.
 
 Several companies were represented and JetBrains was giving free PyCharm licenses. I got a T-Shirt and a nice yo-yo from them, my son is going to like. In overall, the conference was a nice place, with people being kind to each other, sharing ideas and having fun with Python.
 
