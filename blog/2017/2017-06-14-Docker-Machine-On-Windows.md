@@ -14,7 +14,7 @@ chmod +x "$HOME/bin/docker-machine.exe"
 
 This command will download and install Docker Machine in `$HOME/bin` folder (`$HOME` is by default, your Windows user folder: `%HOMEPATH%`). You may want to append `$HOME/bin` to `$PATH`. Docker Machine keeps its data files under `$HOME/.docker` folder.
 
-After installation, to create Docker Engine VM, use:
+After installation, to create Docker Engine virtual machine (VM), use:
 
 ```
 $ docker-machine create --driver virtualbox default
