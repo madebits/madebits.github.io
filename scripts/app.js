@@ -855,15 +855,28 @@ var applyStyle = function(containerId) {
 			}
 			, points: {show: true}
 			, grid: { horizontalLines: false }
-	    };			
-		var g = pageData.container.find('#fgraph').first();
-		madebits.defer([[null, 'Flotr']], function() {
-			Flotr.draw(g[0], [data, range], options);
-			$('.flotr-canvas').css('width', '100%');
-			$('.flotr-overlay').css('width', '100%')
-			$('.flotr-canvas').css('height', 'auto');
-			$('.flotr-overlay').css('height', 'auto');			
-		});
+	    };	
+
+	    var fn = function() {
+	    	try{
+				var g = pageData.container.find('#fgraph').first();
+				if(!g.length) return;
+				if(!g.is(":visible")) {
+					setTimeout(fn, 200);
+					return;
+				}
+				madebits.defer([[null, 'Flotr']], function() {
+					Flotr.draw(g[0], [data, range], options);
+					$('.flotr-canvas').css('width', '100%');
+					$('.flotr-overlay').css('width', '100%')
+					$('.flotr-canvas').css('height', 'auto');
+					$('.flotr-overlay').css('height', 'auto');			
+				});	   
+			} catch(e) {
+				console.error(e);
+			}	
+	    }
+	    setTimeout(fn, 0);
 	}
 }
 
