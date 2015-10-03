@@ -25,7 +25,7 @@ Opera has more or less same [command-line](http://peter.sh/experiments/chromium-
 $HOME/opt/opera/opera --disk-cache-dir=/dev/null --disk-cache-size=1 --private --start-maximized --no-first-run --user-data-dir=$HOME/Private/opera
 ```
 
-After start, I used `opera://plugins` can be used to disable the build in news feed reader and `opera://flags` to fine-tune some of the options.
+After start, I used `opera://plugins` can be used to disable the build in news feed reader and fine-tuned the options in `opera://settings` and `opera://flags`.
 
 ##Desktop Shortcut
 
