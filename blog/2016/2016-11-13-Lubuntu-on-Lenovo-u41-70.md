@@ -112,7 +112,7 @@ Card's reach is a bit weak on large distances. It has full speed in rooms near t
 I tried [disabling](https://wiki.archlinux.org/index.php/Wireless_network_configuration) [some](https://forum.ubuntuusers.de/topic/instabiles-wlan-mit-intel-ac-3160-in-neuem-tux/2/) of the [properties](http://askubuntu.com/questions/640178/no-connection-sporatic-connection-with-intel-3160-wireless-lenovo-y50-ubuntu), by appending to `/etc/modprobe.d/iwlwifi.conf`:
 
 ```
-options iwlwifi bt_coex_active=0 11n_disable=1
+options iwlwifi bt_coex_active=0 11n_disable=8
 ```
 
 Bluetooth and wireless may have [coexistence](https://wiki.archlinux.org/index.php/Wireless_network_configuration) issues, so I [tried](http://superuser.com/questions/924559/wifi-connection-troubles-solved-why-does-my-fix-work) `bt_coex_active=0`.
