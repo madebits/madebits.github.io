@@ -4,14 +4,14 @@
 
 <!--- tags: browser linux -->
 
-After downloading [Opera](http://www.opera.com/download) browser `opera-stable_*_amd64.deb` file, I user archive `file-roller` to extract `data.tar.xz` from that. Then from `data.tar.xz`, I extracted the `opera` folder from `./usr/lib/x86_64-linux-gnu/` location and copied it to `$HOME/opt/opera`. Then I deleted the following files:
+After downloading [Opera](http://www.opera.com/download) browser `opera-stable_*_amd64.deb` file, I used archive `file-roller` to extract `data.tar.xz` from that. From `data.tar.xz`, I extracted the `opera` folder from its `./usr/lib/x86_64-linux-gnu/` location and copied it to `$HOME/opt/opera`. I deleted the following files:
 
 ```
 rm $HOME/opt/opera/opera_autoupdate
 rm $HOME/opt/opera/opera_crashreporter
 ```
 
-Opera has more or less same command-line arguments as Chromium, apart of `--private` in place of `--incognito`. I create a `$HOME/opt/opera.sh` file:
+Opera has more or less same command-line arguments as Chromium, apart of `--private` in place of `--incognito`, so I created a `$HOME/opt/opera.sh` file:
 
 ```
 #!/bin/bash
@@ -19,7 +19,7 @@ Opera has more or less same command-line arguments as Chromium, apart of `--priv
 $HOME/opt/opera/opera --disk-cache-dir=/dev/null --disk-cache-size=1 --private --start-maximized --no-first-run --user-data-dir=$HOME/Private/opera
 ```
 
-Create also a startup `$HOME/opt/opera.desktop` file (if you want this to show in menu in Lubuntu, copy it in `$HOME/.local/share/applications`):
+Created also a startup `$HOME/opt/opera.desktop` file (if you want Opera to show in menu in Lubuntu, copy this file in `$HOME/.local/share/applications`):
 
 ```
 [Desktop Entry]
@@ -33,7 +33,7 @@ Icon=/home/user/opt/opera.png
 Categories=Network;WebBrowser;
 ```
 
-Then I used `opera://plugins` can be used to disable the build in news reader.
+I used `opera://plugins` can be used to disable the build in news reader.
 
 I have my own local startup page, and speed dial is of not much use. I installed [Custom New Tab Page](https://addons.opera.com/en/extensions/details/custom-new-tab-page/) extension to get rid of it. Using [User-Agent Switcher](https://addons.opera.com/en/extensions/details/user-agent-switcher/), I made Opera look like Chrome. And given, we are at extensions, I also installed [Download Chrome Extension](https://addons.opera.com/en/extensions/details/download-chrome-extension-9/).
 
