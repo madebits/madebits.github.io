@@ -198,12 +198,12 @@ Here `g` represents a `GRunner` instance object.
     * `taskFun(cb)` - optional body of the task. The optional `ct.ctx` object contains information about the task `ctx = {taskName, task, runner}` , where `runner` is the GRunner instance. Normally, `cb.ctx` should be treated as read-only information, but you can modify the custom `userData` passed to `g.t`. There are several valid ways to denote that you are done within `taskFun` code:
         * Call `cb();` on success, or `cb(error);` on error. If your code calls `cb`, it must be called once.
         * Return a JS *promise*. Any promise object that supports `then` is supported. In this case you should **not** call `cb()`.
-        * Return a `Stream`, such as `return gulp.src(...).pipe(...);`. In this case you should **not** call `cb()`.
+        * Return a `stream`, such as `return gulp.src(...).pipe(...);`. In this case you should **not** call `cb()`.
         * A bit more advanced, instead of returning a stream or promise, call `cb.onDone(streamOrPromise, [cbFn]);` on a stream or promise. You may never need this, but if you ever feel like you need it, it can come handy. In this case you should **not** call `cb()`. You should also **not** `return` anything in this case from `taskFun`. `cb.onDone(null);` is same as calling `cb();` directly. The optional `[cbFn]` parameter enables wrapping the `taskFun` `cb()` call in your own function. If you do that, call `cb()` on your own within it.
 
         You can also exit a task using errors:
 
-        * Emit an error in a returned `Stream`. In this case, you should **not** call `cb()`.
+        * Emit an error in a returned `stream`. In this case, you should **not** call `cb()`.
         * In a returned *promise* `throw` an error, or fail. In this case you should **not** call `cb()`.
         * `throw` a JS error. This works only directly within `taskFun`. If you `throw` inside a `pipe` stream, or `setTimeout`, and similar async functions, Node.js will stop execution. Use `try / catch` and callbacks to report errors in such cases.
         
@@ -242,7 +242,7 @@ Here `g` represents a `GRunner` instance object.
 
 The following helper functions are also provided:
 
-* `g.pipeStart([objectOrIterator])` - returns a starting object `Stream` from one or more objects. If an array or iterator is given as argument, then there will be an element in stream per each array or iterator element. For example:
+* `g.pipeStart([objectOrIterator])` - returns a starting object `stream` from one or more objects. If an array or iterator is given as argument, then there will be an element in stream per each array or iterator element. For example:
    ```javascript
    g.t('tt', () => {
    return g.pipeStart(['a', 'b', 'c'])
