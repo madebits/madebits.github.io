@@ -43,7 +43,7 @@ lon=8.6
 
 In Lubuntu, `redshift` can be auto-started (if you do not use `redshift-gtk`), by adding an entry in `~/.config/lxsession/Lubuntu/autostart` (add any command-line arguments that you need to it) `@redshift`, or use `@redshift-gtk` for the UI. 6500K means no change. To monitor usage run `redshift -v`. To temporary disable / enable use `pkill -USR1 redshift`. 
 
-`redshift` supports [hooks](http://jonls.dk/2015/01/redshift-1-10-released/) to notify if something changes: `$1` is the period event, `$2` is previous value, `$3` is new value, and there is a [script](https://wiki.archlinux.org/index.php/Redshift#Use_real_screen_brightness) to change brightness based on that. The events are fired only when `redshift` runs (not when started) and brightness is also controlled by the power manager, so I found the hooks not useful in practice.
+`redshift` supports [hooks](http://jonls.dk/2015/01/redshift-1-10-released/) to notify if something changes: `$1` is the period event, `$2` is previous value, `$3` is new value. There is a [script](https://wiki.archlinux.org/index.php/Redshift#Use_real_screen_brightness) to change brightness based on that. The events are fired only when `redshift` runs (not when started) and brightness is also controlled by the power manager, so I found the hooks not useful in practice.
 
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-08-02-Lubuntu-Closing-Chrome-Downloads-Bar.md'>Lubuntu Closing Chrome Downloads Bar</a></ins>
