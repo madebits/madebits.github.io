@@ -9,7 +9,7 @@
 * No external dependencies
 * No limit on the size and number of numeric parts compared
 * Locale aware
-* Directly usable with `array.prototype.sort`
+* Directly usable with `Array.prototype.sort`
 
 ##Usage
 
