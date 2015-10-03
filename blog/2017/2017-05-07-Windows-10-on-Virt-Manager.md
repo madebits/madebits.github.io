@@ -62,7 +62,7 @@ Once the VM is started, use `ps aux | grep qemu` to find the exact command-line 
  │                 └─2*[{qemu-system-x86}]
 ```
 
-##Connecting to VM and Host Grab Key
+##Connecting to VM
 
 In `virt-manager` *Edit / Preferences* menu, *Console* tab, you can change the grab key. I used only right `Ctr` key, same as in Virtualbox. 
 
