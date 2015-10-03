@@ -128,13 +128,29 @@ An alternative, given bluetooth and wireless may have [coexistence](https://wiki
 
 I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. The trick is to configure a second wireless connection over NetworkManager manually for the same SSID and then select as Device the Hamma WLan USB (via its MAC). When I am in a room far away, I can plug the stick (via a short UBS cable to the machine for better signal reception and that it is convenient to move around freely) and then I just select that other WLAN connection. I might give network [bonding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future.
 
+##Graphics
+
+I experienced some [tearing](https://wiki.archlinux.org/index.php/intel_graphics#Tips_and_tricks) with display and it seems creating `/usr/share/X11/xorg.conf.d/20-intel.conf` with (though ArchWiki writes that `TearFree` ... option should not be needed with DRI3 enabled, I can confirm that this works for me):
+
+```
+Section "Device"
+   Identifier  "Intel Graphics"
+   Driver      "intel"
+   Option      "AccelMethod"  "sna"
+   Option      "TearFree"    "true"
+   Option      "DRI"    "3"
+EndSection
+```
+
+The issue is visible up and now in Chrome browser given its GPU usage, but also in sometimes VLC, given it also uses hardware acceleration for video. There are some more hints to try [here](http://askubuntu.com/questions/766725/annoying-flickering-in-16-04-lts-chrome). For Chrome, force-enabling GPU rasterization for all layers, via `chrome://flags/#enable-gpu-rasterization`, seems to fix the issue for me in 16.10. 
+
 ##Other Applications
 
 I had to use `dbus-launch ~/.dropbox-dist/dropboxd` to [start](http://askubuntu.com/questions/732967/dropbox-icon-is-not-working-xubuntu-14-04-lts-64) Dropbox, so that icon is visible.
 
-For Chromium, `pepperflashplugin-nonfree` is no more maintained - one has to use `adobe-flashplugin` now. I had also to disable hardware acceleration, to get smoother rendering, which fixes the issue, but it is not nice. There are some more hints to try [here](http://askubuntu.com/questions/766725/annoying-flickering-in-16-04-lts-chrome). Force-enabling GPU rasterization for all layers, via `chrome://flags/#enable-gpu-rasterization`, seems to fix the issue for me in 16.10.
+For Chromium, `pepperflashplugin-nonfree` is no more maintained - one has to use `adobe-flashplugin` now.
 
-I am not a big user of touchpad, so I use [touchpad-indicator](https://launchpad.net/~atareao/+archive/ubuntu/atareao) to disable it when mouse is plugged in.
+I use [touchpad-indicator](https://launchpad.net/~atareao/+archive/ubuntu/atareao) to disable touchpad when mouse is plugged in.
 
 I had to install `seahorse` and mark *Login* key ring as default, not to be asked for the password of shares by `pcmanfm` on every login.
 
