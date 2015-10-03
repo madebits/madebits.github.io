@@ -780,7 +780,7 @@ Given the existing application used a lot of `bower` libraries, I supported modu
 
 Running tests with Karma is nice for build server, but during development, I configured unit tests to be run as separate entry point in the hot reload web server (`npm run start` has to entry points one for the application and one `test.html` for the unit tests via [Jasmine](http://jasmine.github.io/) in browser). The `static/test.html` template makes use of a static copy of Jasmine intended for direct browser usage:
 
-```
+```html
 <!doctype html>
 <html ng-app="app" lang="en">
 <head>
