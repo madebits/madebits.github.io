@@ -569,6 +569,7 @@ var lastPage = null
 
 , showComments = function(pageData) {
 	lastPage = pageData.page;
+	if($('#mbg-comments').length) return;
 	if(!pageData.isBlogContent){
 			$('#mbg-comments').hide();
 			$('#mbg-comments').empty();
