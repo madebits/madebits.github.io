@@ -1,3 +1,4 @@
+* [To Rule Your City Conquer World](#blog/2016/2016-10-30-To-Rule-Your-City-Conquer-World.md)
 * [Python Conference Munich](#blog/2016/2016-10-29-Python-Conference-Munich.md)
 * [Installing Jupyter Notebooks in Ubuntu](#blog/2016/2016-10-28-Installing-Jupyter-Notebooks-in-Ubuntu.md)
 * [Remote Retrospectives](#blog/2016/2016-10-27-Remote-Retrospectives.md)
@@ -5,4 +6,3 @@
 * [Ubuntu Screen Tools](#blog/2016/2016-08-30-Ubuntu-Screen-Tools.md)
 * [Lubuntu Closing Chrome Downloads Bar](#blog/2016/2016-08-02-Lubuntu-Closing-Chrome-Downloads-Bar.md)
 * [Machine Learning with Spark Readings](#blog/2016/2016-08-01-Machine-Learning-with-Spark-Readings.md)
-* [Upgrading to Lubuntu 16.04.1](#blog/2016/2016-07-30-Upgrading-to-Lubuntu-16.04.1.md)

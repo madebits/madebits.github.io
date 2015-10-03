@@ -16,4 +16,4 @@ The conference was at LMU Institute of Computer Science, and the the food was fu
 
 Several companies were represented and JetBrains was giving free PyCharm licenses. I got a T-Shirt and a nice yo-yo from them, my son is going to like. In overall, the conference was a nice place, with people being kind to each other, sharing ideas and having fun with Python.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-10-28-Installing-Jupyter-Notebooks-in-Ubuntu.md'>Installing Jupyter Notebooks in Ubuntu</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-10-30-To-Rule-Your-City-Conquer-World.md'>To Rule Your City Conquer World</a> <a rel='next' id='fnext' href='#blog/2016/2016-10-28-Installing-Jupyter-Notebooks-in-Ubuntu.md'>Installing Jupyter Notebooks in Ubuntu</a></ins>

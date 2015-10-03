@@ -1,1 +1,1 @@
-var homeUrl='blog/2016/2016-10-29-Python-Conference-Munich.md';
+var homeUrl='blog/2016/2016-10-30-To-Rule-Your-City-Conquer-World.md';
