@@ -4,7 +4,7 @@
 
 <!--- tags: nodejs -->
 
-Following code assembled from looking at various places enables process cluseting for Node.js Express applications. The actual Express server code is loaded via `require('./server')`. Rest of code is generic and can be reused with any server.
+Following code, assembled from looking at various places, enables process cluseting for Node.js Express applications. The actual Express server code is loaded via `require('./server')`. Rest of code is generic and can be reused with any server.
 
 ```javascript
 'use strict';
