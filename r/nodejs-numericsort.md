@@ -25,7 +25,9 @@ console.log(['1', '10', '3'].sort());  // logs: ["1", "10", "3"]
 
 #Details
 
-**numericsort** package exports a single function: `numericsort(s1, s2, [zeroesFirst])`:
+**numericsort** package exports a single function
+
+`numericsort(s1, s2, [zeroesFirst])`:
 
 * `s1`: first string to compare.
 * `s2`: second string to compare.
