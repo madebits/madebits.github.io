@@ -4,6 +4,10 @@
 
 <!--- tags: javascript deployment nodejs -->
 
+**Update:** There is node.js module [grunner](#r/nodejs-grunner.md), I wrote based on this idea. This post is bit outdated.
+
+---
+
 This is a take on [Gulp](http://gulpjs.com/). The code below shows how you can implement the Gulp task runner fully on your. Gulp 3 does not support serial tasks, only parallel ones and serial ones will be only available on Gulp 4. The task runner shown here supports both serial and parallel tasks. 
 
 I use syntax inspired by [run-sequence](https://www.npmjs.com/package/run-sequence) for dependencies (but a bit different). For the task runner below task dependencies are specified as an array where flat nested arrays denote tasks that can be run in parallel (further nested arrays make no sense as we specify dependencies on each task, not globally - but the code may work on these too - not tested). 
