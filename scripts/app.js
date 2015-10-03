@@ -722,10 +722,22 @@ var applyStyle = function(containerId) {
 			var aWrapper = $('<br><div class="hidden-print pull-right"><nav><ul class="pager"><li class="previous"><a download="image' + idx +'.' + suffix + '"><i class="fa fa-arrow-circle-o-down"></i> Save</a></li></ul></nav></div>');
 			//var aWrapper = $('<br><div class="hidden-print pull-right"><a class="btn btn-default" download="image' + idx +'.' + suffix + '"><i class="fa fa-arrow-circle-o-down"></i> Save</a></div>');
 			var a = aWrapper.find('a').first();
-			if (typeof a[0].download !== 'undefined') { // browser check
+			if ((typeof a[0].download !== 'undefined') && (typeof URL !== 'undefined') && !!URL.createObjectURL) { // browser check
 				//a.attr('href', m.attr('src'));
-				a.on('click', function(e) { 
-					a.attr('href', m.attr('src'));
+				a.on('click', function(e) {
+					if(!a.attr('href')) {
+						var arr = m.attr('src').split(','), mime = arr[0].match(/:(.*?);/)[1];
+						var byteString = atob(arr[1]);
+
+						var ab = new ArrayBuffer(byteString.length);
+	  					var ia = new Uint8Array(ab);
+	  					for (var i = 0; i < byteString.length; i++) {
+	      					ia[i] = byteString.charCodeAt(i);
+	  					}
+
+	    				var blob = new Blob([ia], { type: mime }); 
+						a.attr('href', URL.createObjectURL(blob));
+					}
 				});
 
 				var parentTag = m.parent().get(0).tagName;
