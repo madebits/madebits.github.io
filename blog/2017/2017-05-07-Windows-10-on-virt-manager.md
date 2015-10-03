@@ -55,19 +55,9 @@ $ ifconfig
 ...
 virbr0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.122.1  netmask 255.255.255.0  broadcast 192.168.122.255
-        ether 52:54:00:20:98:3a  txqueuelen 1000  (Ethernet)
-        RX packets 372432  bytes 21546101 (21.5 MB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 599273  bytes 825467468 (825.4 MB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
+...
 vnet0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet6 fe80::fc54:ff:fe12:a474  prefixlen 64  scopeid 0x20<link>
-        ether fe:54:00:12:a4:74  txqueuelen 1000  (Ethernet)
-        RX packets 372179  bytes 26734186 (26.7 MB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 600633  bytes 825539983 (825.5 MB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ...
 ```
 
