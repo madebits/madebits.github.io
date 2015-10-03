@@ -144,6 +144,10 @@ For SublimeText 3 sidebar font size, I had to [overwrite](http://stackoverflow.c
 
 ##Battery
 
+Battery lasts normally for around 2.5 hours, but if I reduce the screen brightness and only browse and read, I can get up to 3.5 hours - more than enough for my usage and I am usually always near a power source.
+
+###TLP
+
 I installed [TLP](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-management.html) via `sudo apt install tlp` and activated its service (`sudo systemctl enable tlp`). 
 
 ```
@@ -164,13 +168,41 @@ power source   = battery
 
 ```
 
-TLP [configuration](http://linrunner.de/en/tlp/docs/tlp-configuration.html) is in `/etc/default/tlp`. I blacklisted *Intel Corporation Broadwell-U Host Bridge*:
+I normally do not [configure](http://linrunner.de/en/tlp/docs/tlp-troubleshooting.html) TLP, but given the system started to freeze on battery with TLP, I had a look at PCI devices. Without TLP on both AC / BAT the machine defaults are:
 
 ```
-RUNTIME_PM_BLACKLIST="00:00.0"
+/sys/bus/pci/devices/0000:00:00.0/power/control = on   (0x060000, Host bridge, bdw_uncore)
+/sys/bus/pci/devices/0000:00:02.0/power/control = on   (0x030000, VGA compatible controller, i915)
+/sys/bus/pci/devices/0000:00:03.0/power/control = on   (0x040300, Audio device, snd_hda_intel)
+/sys/bus/pci/devices/0000:00:14.0/power/control = on   (0x0c0330, USB controller, xhci_hcd)
+/sys/bus/pci/devices/0000:00:16.0/power/control = on   (0x078000, Communication controller, mei_me)
+/sys/bus/pci/devices/0000:00:1b.0/power/control = on   (0x040300, Audio device, snd_hda_intel)
+/sys/bus/pci/devices/0000:00:1c.0/power/control = auto (0x060400, PCI bridge, pcieport)
+/sys/bus/pci/devices/0000:00:1c.2/power/control = auto (0x060400, PCI bridge, pcieport)
+/sys/bus/pci/devices/0000:00:1c.3/power/control = auto (0x060400, PCI bridge, pcieport)
+/sys/bus/pci/devices/0000:00:1d.0/power/control = on   (0x0c0320, USB controller, ehci-pci)
+/sys/bus/pci/devices/0000:00:1f.0/power/control = on   (0x060100, ISA bridge, lpc_ich)
+/sys/bus/pci/devices/0000:00:1f.2/power/control = on   (0x010601, SATA controller, ahci)
+/sys/bus/pci/devices/0000:00:1f.3/power/control = on   (0x0c0500, SMBus, no driver)
+/sys/bus/pci/devices/0000:00:1f.6/power/control = on   (0x118000, Signal processing controller, intel_pch_thermal)
+/sys/bus/pci/devices/0000:02:00.0/power/control = on   (0x028000, Network controller, iwlwifi)
+/sys/bus/pci/devices/0000:03:00.0/power/control = on   (0x020000, Ethernet controller, r8169)
 ```
 
-Battery lasts normally for around 2.5 hours, but if I reduce the screen brightness and only browse and read, I can get up to 3.5 hours - more than enough for my usage and I am usually always near a power source. 
+TLP [configuration](http://linrunner.de/en/tlp/docs/tlp-configuration.html) is in `/etc/default/tlp`. With TLP defaults on AC all PCI devices are *on* and *auto* on BAT:
+
+```
+RUNTIME_PM_ON_AC=on
+RUNTIME_PM_ON_BAT=auto
+```
+
+This was causing freeze on BAT. I decided to leave default *auto* devices to *auto* by blacklisting them, and disabled power management for <a href="https://en.wikipedia.org/wiki/Northbridge_(computing)">northbridge</a> and VGA controller, as while on PCI bus, they are still part of CPU:
+
+```
+RUNTIME_PM_BLACKLIST="00:1c.0 00:1c.2 00:1c.3 00:00.0 00:02.0"
+```
+
+###CPU Scaling 
 
 When battery is under 30%, CPU frequency drops to 500Mhz:
 
@@ -194,6 +226,8 @@ $ cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq
 500000
 500000
 ```
+
+This is ok, I did not change that.
 
 ##Wireless
 
