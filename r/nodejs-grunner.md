@@ -8,13 +8,19 @@
 
 ##Usage
 
-Install:
+Install globally for comfort:
 
 ```
 npm install grunner -g
 ```
 
-You put tasks in one or files, default is `gfile.js`:
+And install locally in you node project where the task file is:
+
+```
+npm i grunner -D
+```
+
+You put tasks in one or more files, default is `gfile.js`:
 
 ```
 "use strict";
@@ -75,13 +81,13 @@ Circular task dependencies, such as `G.t('t1', ['t2']); G.t('t2', ['t1'])`, dire
 
 ##GRunner Instances
 
-When you use `let G = require('grunner');` you get a per process singleton instance `G` of `GRunner` class. This instance `G` is used by default, by all `gfile.js` tasks. If you want to use the grunner command-line, you should only use this process singleton object to define your tasks. 
+When you use `let G = require('grunner');` you get *same* per process singleton instance `G` of `GRunner` class. This instance `G` is used by default, by all `gfile.js` tasks. If you want to use the `grunner` command-line, you should only use this process singleton object to define your tasks. 
 
 For more advanced scenarios, you can create as many `GRunner` instances as needed using code like:
 
 ```
 let G = require('grunner');
-G.t('t1'); // G is process singleton instance normally used
+G.t('t1'); // G is the per process singleton instance
 
 let g1 = new G.GRunner(); // new instance
 let g2 = new G.GRunner(); // another new instance
