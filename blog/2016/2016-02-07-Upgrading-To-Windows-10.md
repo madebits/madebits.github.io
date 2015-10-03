@@ -32,7 +32,7 @@ insmod normal
 normal
 ```
 
-I had to repeat this a few times until Windows 10 installation was finished. Then I booted in Ubuntu and it made the `grub` change permanent by running:
+I had to repeat this a few times until Windows 10 installation was finished. Then I booted to Ubuntu and made the `grub` change permanent by running:
 
 ```
 sudo grub-install /dev/sda
