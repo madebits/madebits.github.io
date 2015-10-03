@@ -4,11 +4,17 @@
 
 <!--- tags: virtualization encryption -->
 
-[VirtualBox](https://www.virtualbox.org/) 5.0 comes with built-in block encryption for virtual machine images. There is a new **Encryption** tab in the **General** settings of a Virtual machine. It works in both directions without problems, but nerveless consider making a copy of `.vdi` file before trying it out.
+[VirtualBox](https://www.virtualbox.org/) 5.0 comes with built-in block encryption for virtual machine images. There is a new **Encryption** tab in the **General** settings of a Virtual machine. It works in both directions without problems. Consider making a backup copy of your `.vdi` file before trying it out.
 
-If you have an existing virtual machine, enabling encryption and specifying a password will encrypt the `.vid` file once you confirm settings via *Ok* button. VirtualBox will then ask for that password every time you start the virtual machine immediately after the VirtualBox fake BIOS screen. It seems there is a small bug after you enter the password. The virtual machine seems to remain paused. Use the *[Machine / Paused]* menu to resume (or its keyboard shortcut (default) `CTRL+P`). VirtualBox will not re-ask for the password if you restart your machine from within its OS.
+##Encryption
+
+If you have an existing virtual machine, enabling encryption and specifying a password will encrypt the `.vid` file once you confirm settings via *Ok* button. VirtualBox will then ask for that password every time you start the virtual machine immediately after the VirtualBox fake BIOS screen. There is a small bug after you enter the password: the virtual machine seems to remain paused. Use the *[Machine / Paused]* menu to resume (or its keyboard shortcut (default) `CTRL+P`) (update: this has been now fixed). VirtualBox will not re-ask for the password if you restart your machine from within its OS.
+
+##Decryption
 
 If you have an existing virtual machine using an encrypted image, then disabling encryption in **General** settings section, will ask you for the password and decrypt the `.vdi` file in place. The process in both directions is relatively fast (tested on a SSD), so if you change your mind, you can always go back and forth between encrypted and non-encrypted `.vdi` files. This process could come also handy to change the password. First decrypt with current password, and then encrypt with a new one.
+
+##Encryption Details
 
 Information about encryption (XTS DEK) is saved in the `.vbox` XML file for the virtual machine in the `HardDisk` element. 
 
@@ -27,7 +33,9 @@ If you ever want to move the encrypted `.vdi` file to a new virtual machine, you
 
 The first line in `CRYPT/KeyStore` value is the algorithm used, the rest are encryption data. They are not dependent on `uuid` (I tested that by changing the `uuid` of the `.vdi` file and importing it to a new VM). It seems same password in different VMs will generate different XTS DEKs (some random salt is used stored in `CRYPT/KeyStore`). Just knowing the password and the `.vdi` will not help recover the data. You need a copy of `CRYPT/KeyStore` value.
 
-You have to careful if you use VirtualBox disk encryption or you may lose data. I run into a problem with `--compact` and encryption and reported a [bug](https://www.virtualbox.org/ticket/14496). First `vboxmanage --compact` cannot compact an encrypted volume. It will work without errors, but it will not compact. Compact work only with unencrypted disk images. The problem is if you ever compact a `.vdi` file, you cannot encrypt it. I [compacted](https://superuser.com/questions/529149/how-to-compact-virtualboxs-vdi-file-size) first my `.vdi` file, and then tried to encrypt it I got the following error:
+##Remember To Backup
+
+You have to be careful if you use VirtualBox disk encryption or you may lose data. I run into a problem with `--compact` and encryption and reported a [bug](https://www.virtualbox.org/ticket/14496). First `vboxmanage --compact` cannot compact an encrypted volume. It will work without errors, but it will not compact. Compact work only with unencrypted disk images. The problem is if you ever compact a `.vdi` file, you cannot encrypt it. I [compacted](https://superuser.com/questions/529149/how-to-compact-virtualboxs-vdi-file-size) first my `.vdi` file, and then tried to encrypt it I got the following error:
 
 ```
 Could not prepare disk images for encryption (VERR_VD_BLOCK_FREE): (VERR_VD_BLOCK_FREE).
@@ -39,7 +47,7 @@ Interface:
 IMedium {4afe423b-43e0-e9d0-82e8-ceb307940dda}
 ```
 
-After this the `.vdi` file was corrupted and could not be booted anymore. Attaching it to another VM showed it as being unallocated and I reported this as a [bug](https://www.virtualbox.org/ticket/14496). If you play with these features make sure you make a backup of `.vdi` file before.
+After this the `.vdi` file was corrupted and could not be booted anymore. Attaching it to another VM showed it as being unallocated and I reported this as a [bug](https://www.virtualbox.org/ticket/14496), which is now fixed. If you play with these features make sure you make a backup of `.vdi` file before.
 
 ##Ubuntu 14.04 Host Installation
 
