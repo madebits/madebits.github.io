@@ -1,4 +1,4 @@
-#Low Information Density User Interfaces
+#Low-Information Density User Interfaces
 
 2017-06-29
 
