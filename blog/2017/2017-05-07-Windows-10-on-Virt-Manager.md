@@ -68,17 +68,19 @@ In `virt-manager` *Edit / Preferences* menu, *Console* tab, you can change the g
 
 The toolbar is not show for me in fullscreen due to some bug, so I use the grab key, and then `F11` key to exit the fullscreen, if I cannot find the invisible toolbar button blindly using the mouse (toolbar works if you use `virt-viewer`).  
 
-Alternative way to access the machine:
+Apart of using `virt-manager` an alternative way to access the machine is to use virt-viewer directly:
 
 ```
-virt-viewer win10
+virt-viewer win10 -arf --hotkeys=toggle-fullscreen=shift+f11
 ```
 
-Or:
+Or, by using `remote-viewer` that comes with `virt-viewer` (it needs a URI, or a settings file):
 
 ```
 remote-viewer $(virsh domdisplay win10) -f --hotkeys=toggle-fullscreen=shift+f11
 ```
+
+Some `virt-viewer` settings (documented in `man remote-viewer`) can be configured in `$XDG_CONFIG_HOME/virt-viewer/settings` file (such files can be also used with `remote-viewer` in place of URI). Most of settings are global. The ones that are per machine need the machine UUID, that can be found via: `virsh domuuid win10`.
 
 Another alternative is to use [RDP](https://wiki.archlinux.org/index.php/QEMU#Remote_Desktop_Protocol) (`sudo apt install freerdp-x11`), but performance is not as good as Spice. `Ctrl+Alt+Enter` toggles fullscreen. I am also sharing a folder:
 
