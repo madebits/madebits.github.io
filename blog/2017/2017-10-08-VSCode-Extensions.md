@@ -92,4 +92,4 @@ VSCode is usable out of the box. Some customization is needed thought and here i
 }
 ```
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-10-05-Clustering-Express-Node-Servers.md'>Clustering Express Node Servers</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-10-13-Blocking-BlockAdBlock.md'>Blocking BlockAdBlock</a> <a rel='next' id='fnext' href='#blog/2017/2017-10-05-Clustering-Express-Node-Servers.md'>Clustering Express Node Servers</a></ins>
