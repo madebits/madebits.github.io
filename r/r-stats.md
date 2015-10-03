@@ -10,6 +10,7 @@ I took an online course ([1](s/stat/Certificate1.pdf), [2](s/stat/Certificate2.p
 * [Part II: Modeling](https://rawgit.com/madebits/r-stats/master/part2.html)
 * [Part III: High-Throughput Data](https://rawgit.com/madebits/r-stats/master/part3.html)
 * [Part IV: Appendix: Probability](https://rawgit.com/madebits/r-stats/master/part4.html)
+* [Part V: Appendix: ISLR Labs](https://rawgit.com/madebits/r-stats/master/islr.html)
 
 
 
