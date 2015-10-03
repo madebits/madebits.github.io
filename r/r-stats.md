@@ -13,6 +13,7 @@ I took some on-line courses ([1](s/stat/Certificate1.pdf), [2](s/stat/Certificat
 * [Part V: Appendix: ISLR Labs](https://rawgit.com/madebits/r-stats/master/islr.html)
 * [Part VI: Appendix: ISLR Labs 2](https://rawgit.com/madebits/r-stats/master/islr2.html)
 * [Part VII: Appendix: R Quirks](https://rawgit.com/madebits/r-stats/master/RLang.html)
+* Extra reading: [R for Data Science](http://r4ds.had.co.nz/)
 
 
 
