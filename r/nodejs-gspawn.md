@@ -16,7 +16,7 @@ npm install gspawn --save
 
 Usage example:
 
-```
+```javascript
 var gspawn = require('gspawn');
 
 gspawn({
@@ -78,7 +78,7 @@ A summary of available `gspawn` `options` follows (*boolean* options are all by 
 
 * Bash
 
-    ```
+    ```javascript
     gspawn({
         cmd: 'bash',
         args: ['-c', 'ls -l'],
@@ -91,7 +91,7 @@ A summary of available `gspawn` `options` follows (*boolean* options are all by 
 
 * Node.js
 
-    ```
+    ```javascript
     gspawn({
         cmd: 'node',
         args: ['./test.js'],
@@ -104,7 +104,7 @@ A summary of available `gspawn` `options` follows (*boolean* options are all by 
 
 * npm run script:
 
-    ```
+    ```javascript
     gspawn({
         cmd: 'npm',
         args: ['run', 'testCmd'],

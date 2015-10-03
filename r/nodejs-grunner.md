@@ -24,7 +24,7 @@ If installed locally, you can run GRunner as `node node_modules/grunner/bin/grun
 
 Tasks are coded in Javascript, in one or more files, the default task file name is `gfile.js`:
 
-```
+```javascript
 "use strict";
 
 let G = require('grunner')
@@ -90,7 +90,7 @@ When you use `let G = require('grunner');` you get *same* process wide singleton
 
 For more advanced scenarios, you can create as many `GRunner` instances as needed using code such as:
 
-```
+```javascript
 let G = require('grunner');
 G.t('t1'); // G is the per process singleton instance
 
@@ -109,7 +109,7 @@ Instances do not share any state, same task name in two different instances can 
 
 GRunner tasks are non-blocking, but there is no direct *parallelism* involved. If you invoke external tools in the tasks, they will run in separate processes and achieve thus parallelism. Arbitrary Node.js code can be run similarly in a different process if wished by using `node` as an external tool (you cannot easy share process memory, but normally build and deploy tasks process and share files). As an example, lets use [GSpawn](https://www.npmjs.com/package/gspawn) library to run some arbitrary JS code found in an external file, in a separate process as part of a GRunner task function:
 
-```
+```javascript
 ...
 let gspawn = require('gspawn');
 ...
@@ -143,7 +143,7 @@ Here `g` represents a `GRunner` instance object.
 * `GRunner([options])` - constructor, you can pass an optional `options` object. Options can be accessed also via `g.options`. Options can be changed at any time before calling `g.run()`. Options are:
     * `log = fn(msg, isError)` - replaces the internal log function which logs in `console`.
     * `exec = fn(doneCb)` - gives an option to wrap each `taskFun` call. Basically, `fn` could be implemented as:
-        ``` 
+        ```javascript 
         if(!ctx.task.cb) { doneCb(); return; }
         return ctx.task.cb(doneCb);
         ```
@@ -154,7 +154,7 @@ Here `g` represents a `GRunner` instance object.
 
 * `g.t(...)` - adds a task and has several forms:
 
-    ```
+    ```javascript
       g.t(taskName) 
       g.t(taskName, taskFun)
       g.t(taskName, taskDependecies, taskFun)
