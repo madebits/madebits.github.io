@@ -65,6 +65,7 @@ VSCode is usable out of the box. Some customization is needed thought and here i
     "editor.fontLigatures": false,
     "terminal.integrated.fontFamily": "'Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'",
     "window.restoreWindows": "none",
+    "workbench.editor.closeOnFileDelete": false,
     "workbench.colorCustomizations": {
         "statusBar.background" : "#353434",
         "statusBar.noFolderBackground" : "#212121",
