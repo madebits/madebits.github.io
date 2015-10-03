@@ -22,7 +22,7 @@ To install locally in your node project where the task file is:
 npm i grunner -D
 ```
 
-If installed locally, you can run GRunner as `npm run grunner` appending any arguments. If that does not work add the following to your `package.json`:
+If installed locally, you can run GRunner as `npm run grunner` appending any arguments. If that does not work, add the following to your `package.json`:
 
 ```
   "scripts": {
@@ -62,7 +62,7 @@ grunner --gfile gfile.js --gtask default
 
 If `--gfile` and / or `--gtask` are missing defaults with values as shown above are used.
 
-GRunner does not use Gulp (other that for unit testing to check it can work with it). Using Gulp is not a requirement for using GRunner. GRunner can be used with own task logic that does not need anything from Gulp. And if you like to, you can use GRunner with most Gulp plugins, as well with `gulp.src`, and other Gulp stream based constructs, similarly, as you would use them inside Gulp tasks. 
+Using Gulp is not a requirement for using GRunner. GRunner can be used with own task logic that does not need anything from Gulp. If you like to, you can use GRunner with most Gulp plugins, as well with `gulp.src`, and other Gulp stream based constructs, similarly, as you would use them inside Gulp tasks. 
 
 ##Command Line Reference
 
