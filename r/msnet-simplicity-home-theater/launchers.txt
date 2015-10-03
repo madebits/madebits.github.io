@@ -1,0 +1,54 @@
+#sample launchers
+#paths may need modifications to work on your system
+
+#variables
+$pf0=C:\windows\
+$pf1=C:\Program Files\
+
+#helper viewer requires ffmpeg.exe
+app=$simplicityMediaPreview.exe
+text=Media Preview
+args=/fullscreen /ffmpeg "C:\ffmpeg\ffmpeg.exe" ":f:"
+
+# start powerdvd with current file in fullscreen
+app=$pf1CyberLink\PowerDVD10\PowerDVD10.exe
+text=PowerDVD
+args=/fullscreen ":f:"
+filter=?
+
+# start media player clasic with a file or folder - if a folder then all files there played one by one
+app=C:\MPC-HomeCinema.1.5.0.2827.x64\MPC-HomeCinema.1.5.0.2827.x64\mpc-hc64.exe
+text=MPC HC
+args=":f:" /play /fullscreen /close
+
+# start videolan media player
+app=$pf1VideoLAN\VLC\vlc.exe
+text=VideoLAN
+args=":f:" --fullscreen --play-and-exit
+filter=?
+
+# start media player
+app=$pf1Windows Media Player\wmplayer.exe
+text=Windows Media Player
+args=/fullscreen ":f:"
+filter=?
+
+# search current file or folder name in google, using default browser
+app=*
+icon=$pf1Internet Explorer\iexplore.exe
+text=Search in Google
+args="https://encrypted.google.com/search?&q=:n:"
+
+# nero media home is a DLNA server
+app=$pf1Nero\Nero MediaHome 4\NeroMediaHome.exe
+text=Nero MediaHome
+
+#remove usb devices
+app=$pf0system32\RUNDLL32.EXE
+args=SHELL32.DLL,Control_RunDLL HotPlug.dll
+text=Safely Remove Hardware
+
+# windows explorer
+app=$pf0explorer.exe
+text=Windows Explorer
+args=/e,/select,":f:"

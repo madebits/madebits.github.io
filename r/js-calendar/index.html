@@ -1,0 +1,19 @@
+<h1><a href="#r/js-calendar.md">JavaScript Calendar</a></h1>
+
+<form name="calendar">
+<table class="nodecoration" id="head" border="0" bgcolor="#f1f1f1" cellpadding="2" width="100%"><tr><td>
+<p>Enter a year: <input type="text" size="4" maxlength="4" name="year" value="">&nbsp;<input type="button" value="View Calendar" name="view" onClick="generateCal();">&nbsp;&nbsp;
+<input type="button" value="<<" onClick="next(0)">&nbsp;<input type="button" value="[o]" onClick="setYear();generateCal();">&nbsp;<input type="button" value=">>" onClick="next(1)">
+</td>
+</tr><tr>
+<td>
+<font size="-2">[ <a href="#"; onClick="printContentPage(); return false;">Print</a> ]</font>
+</td></tr></table>
+</form>
+<center>
+<iframe FRAMEBORDER="0" name="show_f" src="" width=600 height="800" scrolling="no"></iframe></center>
+
+<script src="r/js-calendar/calendar.js"></script>
+<script src="r/js-calendar/input.js"></script>
+<script>generateCal();</script>
+

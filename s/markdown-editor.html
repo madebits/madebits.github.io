@@ -1,0 +1,90 @@
+<div class="hidden-print">
+<div class="pull-right  text-muted"><small><i class="fa fa-info-circle"></i> Syntax help: <a href="http://daringfireball.net/projects/markdown/syntax">H1</a> | <a href="https://help.github.com/articles/markdown-basics/">H2</a></small></div>
+<h1><i class="fa fa-pencil-square-o"></i> Markdown Editor</h1>
+<p></p>
+<form role="form">
+	<div class="form-group">
+		<div class="btn-group" role="group">
+			<span class="btn btn-default btn-file inbutton">
+				<i class="fa fa-upload"></i> Open File <input id="textfile" type="file" />
+			</span>
+			<button type="button" id="reload" class="btn btn-default" title="Reload file (changes, if any, will be discarded)"><i class="fa fa-refresh"></i></button>
+		</div>
+		<button type="button" id="savefile" class="btn btn-default"><i class="fa fa-floppy-o"></i> Save As ...</button>
+		<div class="btn-group" role="group">
+
+			<button type="button" id="encrypt" class="btn btn-default"><span class="text-warning"><i class="fa fa-lock"></i></span> Encrypt</button>
+			<button type="button" id="decrypt" class="btn btn-default"><span class="text-warning"><i class="fa fa-unlock"></i></span> Decrypt</button>
+		</div>
+
+		<div class="btn-group" id="editButton">
+		<button id="editButtonInner" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		<i class="fa fa-pencil"></i> Insert <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<li><a class="insertAction" id="insertH1">Head 1 #</a></li>
+			<li><a class="insertAction" id="insertH2">Head 2 ##</a></li>
+			<li><a class="insertAction" id="insertH3">Head 3 ###</a></li>
+			<li class="divider"></li>
+			<li><a class="insertAction" id="insertStrongEmp">Strong Emphasis **</a></li>
+			<li><a class="insertAction" id="insertEmp">Emphasis *</a></li>
+			<li class="divider"></li>
+			<li><a class="insertAction" id="insertList">List Item *</a></li>
+			<li><a class="insertAction" id="insertNumList">Numbered List Item 1.</a></li>
+			<li class="divider"></li>
+			<li><a class="insertAction" id="insertInlineCode">Inline Code ``</a></li>
+			<li><a class="insertAction" id="insertCode">Code Block ```</a></li>
+			<li><a class="insertAction" id="insertLink">Link []()</a></li>
+			<li><a class="insertAction" id="insertImage">Image ![]()</a></li>
+			<li><a class="insertAction" id="insertTable">Table |-|-|</a></li>
+			<li><a class="insertAction" id="insertLine">Horizontal Rule ---</a></li>
+			<li class="divider"></li>
+			<li><a class="insertAction" id="insertDate">Date YYYY-MM-DD</a></li>
+			<li><a class="insertAction" id="insertEsc">Escape Char \</a></li>
+			<li><a class="insertAction" id="insertRemoveLines">Remove Empty Lines \n\n</a></li>
+		</ul>
+		</div>
+
+		<div class="btn-group" id="editButtonMath">
+		<button id="editButtonInnerMath" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		<i class="fa fa-leaf"></i> Math <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<li><a class="insertAction" id="insertMathBlock">Block $$</a></li>
+			<li><a class="insertAction" id="insertMathInline">Inline $$$</a></li>
+			<li><a class="insertAction" id="insertMathInline2">Inline \ (  \) </a></li>
+			<li class="divider"></li>
+			<li><a class="insertAction" id="insertMathSum">Sum \sum</a></li>
+			<li><a class="insertAction" id="insertMathProd">Production \prod</a></li>
+			<li><a class="insertAction" id="insertMathFraction">Fraction \frac</a></li>
+			<li><a class="insertAction" id="insertMathPower">Power ^</a></li>
+			<li><a class="insertAction" id="insertMathSub">Subscript _</a></li>
+			<li><a class="insertAction" id="insertMathHat">Hat \hat</a></li>
+		</ul>
+		</div>
+
+		<div class="btn-group" role="group">
+		<button type="button" id="print" class="btn btn-default" title="Print"><i class="fa fa-print"></i></button>
+		<button type="button" id="hideshow" class="btn btn-default" title="Hide / Show Editor"><i class="fa fa-eye-slash"></i></button>
+		</div>
+		
+	</div>
+	<span id="fileName" style="overflow:hidden;" class="text-muted"></span>
+	<div class="form-group">
+		<textarea id="text" class="form-control" rows="12" autofocus></textarea>
+	</div>
+</form>
+<hr>
+</div>
+<div id="preview" style="overflow: auto;"></div>
+<div class="hidden-print">
+<hr>
+	<div class="pull-right form-group">
+			<div class="btn-group" role="group">
+			<button type="button" id="reload2" class="btn btn-default" title="Reload file (changes, if any, will be discarded)"><i class="fa fa-refresh"></i></button>
+			<button type="button" id="goTop" class="btn btn-default" title="Go to top of page"><i class="fa fa-chevron-up"></i></button>
+			</div>
+	</div>
+<div class="text-muted" style="margin-right: 5px;"><small>Powered by: <a href="https://github.com/chjj/marked">marked</a>. Read <a href="#s/markdown-editor-help.md">Markdown Editor Help</a> for more non-obvious tips and hints.</small></div>
+<script src="s/markdown-editor.js"></script>
+</div>

@@ -1,0 +1,59 @@
+<h1>GitHub Repositories</h1>
+<div id="repolist">
+<table>
+<thead>
+	<tr><th>Git</th><th>Details</th></tr>
+</thead>
+<tbody id="repos">
+</tbody>
+</table>
+</div>
+
+<div class="pull-right text-muted"><small><em>Most of code I have written is neither open, nor in GitHub :)</em></small></div>
+<div><button id="rconfigtoggle" class="btn btn-default btn-xs" title="Toggle git config details"><i class="fa fa-wrench"></i></button></div>
+<div id="rconfig" style="display: none;">
+
+<h2>Configuration</h2>
+
+<p>User:</p>
+
+<pre>
+git config user.name madebits
+git config user.email madebits@no-email.com	
+</pre>
+
+<p>Cache credentials:</p>
+
+<pre>
+git config --global credential.helper cache
+git config --global credential.helper 'cache --timeout=3600'
+git credential-cache exit
+</pre>
+
+<p>Git over socks5:</p>	
+
+<pre>
+git config --global http.proxy 'socks5://127.0.0.1:9150'
+git config --global https.proxy 'socks5://127.0.0.1:9150'
+
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+</pre>
+
+<h2>Removing History</h2>
+
+<pre>
+rm -rf .git
+git init
+git config user.name madebits
+git config user.email madebits@no-email.com
+git add .
+git commit -m "Initial commit"
+#GIT_AUTHOR_DATE="Sat, 3 Oct 2015 12:00:00 +0000" GIT_COMMITTER_DATE="Sat, 3 Oct 2015 12:00:00 +0000" git commit --date="Sat, 3 Oct 2015 12:00:00 +0000" -m "Initial commit"
+git remote add origin https://github.com/madebits/madebits.github.io.git
+git push -u --force origin master
+</pre>
+
+</div>
+
+<script src="s/repositories-github.js"></script>

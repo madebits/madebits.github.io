@@ -1,0 +1,100 @@
+#Pure User Interfaces In Javascript
+
+2015-07-21
+
+<!--- tags: javascript functional architecture -->
+
+[Pure functions](http://www.sitepoint.com/functional-programming-pure-functions/) are functions without state or side-effects whose output for same input is always same. Pure functions combined with immutable data help manage complexity in a software system.
+
+##Side Note: Understanding Code
+
+We can understand what a pure function does based only on its arguments. It is easier to write a new application than to debug and maintain an existing one, because during maintenance we have to build *conditional* probability models mentally on what the application might be doing:
+
+$$
+\mathcal{p}(V^\*|M^\*) \propto \mathcal{p}(M^\*|V^\*) \mathcal{p}(V^\*)
+$$  
+
+We try to understand views $$$V^\*$$$ in terms of models $$$M^\*$$$ ($$$\mathcal{p}$$$ is some uncertainty probability function(s) we cannot measure). Pure functions help dealing with simpler maintenance mental models for the *likelihood* part.
+
+##Pure Systems
+
+A system does not need to be pure to be described by a pure function. For example, in a [feedback system](https://en.wikipedia.org/wiki/Feedback) the state depends on the previous output. Using some transformation $$$\mathcal{F}$$$, one can transform the system function to some pure function $$$\mathcal{P}$$$. We can then reason about the system in terms of pure function and then convert back the results to the system using some reverse transformation $$$\mathcal{F}^{-1}$$$.
+
+##User Interfaces
+
+In context of user interfaces, it is attractive to be able to express at least the most complex part of the system, the **view** $$$V$$$ as a pure function. User interface views are a complex part of an application whose state change incrementally over time, based on both system data **model** $$$M$$$, and on user interaction $$$I$$$ with the view. View $$$V$$$ is a function $$$F$$$ of the model $$$M$$$, and the model $$$M$$$ is a function of data $$$D()$$$ and user interaction, or **intention**, $$$I()$$$:
+
+$$
+V = F(M(D(), I()))
+$$
+
+To simplify the system, we would prefer to re-create the view $$$V$$$ completely when the model $$$M$$$ changes. The function $$$F$$$ is, however, generally *impure*. This holds true also for HTML interfaces. [DOM](http://www.w3.org/DOM/) rendering on browser screen is made up of stateful elements whose run-time presentation is connected to OS GUI resources (brushes, handles, etc). It is prohibitive to re-create and re-render the whole DOM preserving most of its state every time the model changes. 
+
+##UI Decomposition
+
+To benefit from pure function logic, we can decompose the function $$$F$$$ above in two functions $$$U$$$ and $$$P$$$: 
+
+$$
+F(x) = (U \circ P)(x) = U(P(x))
+$$
+
+Function $$$P$$$ is a pure function. It generates (outputs) an intermediate view representation, which we will call a *virtual* view $$$\mathcal{V} = P(M)$$$ based on the model $$$M$$$. In terms of HTML, $$$\mathcal{V}$$$ is called [Virtual-DOM](https://facebook.github.io/react/docs/glossary.html) or **V-DOM** for short. $$$\mathcal{V}$$$ is not the final rendered view $$$V=U(\mathcal{V})$$$. $$$\mathcal{V}$$$ is a in-memory representation of the whole view $$$V$$$. $$$\mathcal{V}$$$ is generated in-memory (as plain Javascript objects) and has no real connection to OS GUI resources. $$$\mathcal{V}$$$ can therefore be regenerated efficiently completely newly by $$$P$$$ each time model $$$M$$$ changes.
+
+Function $$$V=U(\mathcal{V})$$$ is much more tricky ($$$U$$$ is the reverse system transformation $$$\mathcal{F}^{-1}$$$). It must adapt the existing actual DOM to reflect the new V-DOM. Basically, $$$U$$$ has to compute a difference $$$\Delta = VDOM - DOM$$$ between existing DOM and the new V-DOM, having as constrain that $$$\Delta$$$ should require minimum changes to be applied to current DOM: $$$DOM\_{new} = DOM\_{old} + \Delta\_{min}$$$. Implementing $$$U$$$ optimally is therefore difficult. The good news is that $$$U$$$ can be implemented generically (in $$$\mathcal{O}(n)$$$ time) for DOM to work for every $$$\mathcal{V}$$$.
+
+##Working with Pure Views
+
+Once we have function $$$U$$$ (implemented by some library, such as [React](https://facebook.github.io/react/)), developers can focus to implement user interface views in terms of $$$P$$$, making the reasoning about system user interface much easier. We always create $$$\mathcal{V}$$$ completely based on the model $$$M$$$ and do not need to deal directly with its currently rendered state. It has been common to render user interfaces fully based on in-memory models. Low-level GUI programming, OpenGL, ray-tracing systems operate similarly. V-DOM applies this pattern to web application user interfaces.
+
+##Unidirectional Data Flow
+
+To maximally benefit from V-DOM we have to put in place a **unidirectional** data flow in a web application. V-DOM view $$$\mathcal{V}$$$ is not only a complete view generated by a pure function $$$P$$$, it is also a *perfect* view in terms of [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) - it is a view that contains no code. In traditional web application frameworks developers work with *imperfect* views that contain some form of code used to trigger **bidirectional** data-binding between the view(s) and the model(s). If the traditional views speak to more than one model, as it is often the case, we have a **multidirectional** data flow, making it hard to reason about the overall state of the system at a given point of time. A possible unidirectional architecture that we know to work for low-level GUI programming is having an **event-loop** (where $$$\cdots$$$ close the loop):
+
+$$
+\cdots A^\* \to \mathcal{D} \to S^\* \to \mathcal{V}^\* \to V \to A^\* \cdots
+$$
+
+*View-components* generate **action** events $$$A^\*$$$ (I am using \* to mean one or more instances), sent to a central event-loop **dispatcher** $$$\mathcal{D}$$$, that distributes the action events to model data **stores** $$$S^\*$$$. Stores decide which views $$$\mathcal{V}^\*$$$ to update. Actions correspond to user intentions in views, or to other external events, such as, data received from a remote server. A **view-component** is a component containing the view $$$\mathcal{V}$$$ generating function $$$P$$$, and a mapping between user intents (such as, mouse clicks or keyboard events) associated with view elements and the corresponding actions $$$A^\*$$$ to be sent to the dispatcher $$$\mathcal{D}$$$. This is known as [Flux](https://facebook.github.io/flux/) (web) application architecture.
+
+There are different ways to implement Flux. Applying the low-level event-loop GUI pattern to a high-level UI, unfortunately brings with it also all drawbacks of this old GUI pattern with it. Stores have to deal with event switch loops. Events (actions) have to be identified by constant symbols shared by both view-components and stores. Stores may need access other stores, and may need to postpone action handing waiting for other actions. One possibility to avoid writing waiting logic, implemented in [redux](https://github.com/gaearon/redux), is to postpone view updates until all stores are done processing the events. While benefiting from a unidirectional data flow in Flux, we have to resolve old problems newly.
+
+##Monadic Data Flow
+
+[Reactive programming](http://reactivex.io/) can help address issues with Flux event-loop like architectures. Instead of actively operating on data, reactive programming reacts on data stream events. Reactive programming manipulates event streams. Events contain, optimally, immutable data, that are processed to create new events containing new or old data. 
+* One of the benefits of Javascript is to be able to extend an object of the fly with new properties, and it is often very convenient to do so. Replaying reactive events on mutable data (e.g., to log events for debugging) may have side effects. In complex applications data should be cloned and treated treated as **immutable**.
+* Reactive streams are difficult to debug. Often a complex event processing pipeline-tree is created.
+
+We can model all components of unidirectional data architecture flow using reactive streams $$$R$^\*$$$ resulting in what I will call a coding **singularity**. We can model user intentions, and any other external events, as reactive event streams $$$I$^\*$$$. We can also represent data as reactive streams $$$D$^\*$$$. Models are functions that operate on intentions and data to produce new reactive streams $$$M$^\*$$$, that are consumed by view building functions $$$P^\*$$$:
+
+$$
+\mathcal{V} = P(M(D$^\*, I$^\*))
+$$
+
+Where:
+
+$$
+M$^\* = M(D$^\*, I$^\*)
+$$
+
+##User Function
+
+In reactive streams model, end-user is an external function $$$H$$$ producing the data for the intention streams $$$I$^\* = H(V)$$$. **User function** $$$H$$$ closes the unidirectional data loop (*cycle*). If we think of $$$H$$$ as a remote function (service) then $$$\mathcal{V}$$$ is the *request* sent to user and $$$I$^\*$$$ is the *response*. This is the approach taken by [@cycle](http://cycle.js.org/) library, where functions such as $$$H$$$ are named *drivers* (given they interface with the components outside the application):
+
+$$
+I$^\* = H(U(P(M(D$^\*, I$^\*))))
+$$
+
+##Reactive Singularity
+
+Entire application in [@cycle](http://cycle.js.org/) is a set of functions operating on reactive streams, hence the *singularity*. Application state is in the reactive data streams. Most of the functions in the application code ($$$P$$$ included) will be *pure* ones. This is a fully *functional reactive programming model*. We have objects, but they have only data (no methods). Objects keep the reactive streams events data, and as needed the streams themselves. The rest is (*pure*) functions on the reactive data streams. We can partition $$$P$$$, $$$M$$$ in any sub-function we like. The terms model and intention are just guidelines.
+
+* There must be a request/response mapping $$$\mathcal{M}(\mathcal{V} \bigcap I$^\*)$$$ for the loop to work, so that views and intentions can coordinate their actions.In Flux, mapping is handled by action constants. In @cycle, mapping is handled via DOM element class and id names. Mapping $$$\mathcal{M}$$$ is a symbolic contract by convention (we share symbols not types). A driver $$$H$$$ has to support some way to enable symbolic mapping $$$\mathcal{M}$$$.
+* We need write code to hook $$$I$^\*$$$ on response, *before* we can provide a request $$$\mathcal{V}$$$. Drivers $$$H$$$ operate on observables. @cycle creates proxy requests and calls drivers to get (proxy) responses (to solve the initial chicken-egg problem of what comes first). As part of request/response mapping $$$\mathcal{M}$$$, we can have a set of symbolic names (object properties with same name by convention in @cycle) that connect request and response observables.
+* Synchronization is handled by reactive event streams.
+
+##Top-Down Componentization
+
+Similar to low-level GUI controls, we can apply flux/reactive architectures not only to the whole application, but also to GUI components (**controls**) $$$C^\*$$$ used to sub-space the application. Each component $$$\mathcal{V} = C(I$^\*)$$$ encapsulates its whole flux/reactive loop, and exposes its own custom events to its container components. Application is a component made of sub-components $$$C=\bigcup C_{sub}^\*$$$, and so on - components can be nested as needed. In @cycle, an UI component returns $$$\mathcal{V}$$$ and possible component specific events $$$E^\*$$$, and receives as input response the component properties $$$\hat{p}^\*$$$ additionally to the drivers responses: $$$\\{\mathcal{V}, E^\*\\} = C(I$^\*, \hat{p}^\*)$$$. For the top component (the application) $$$E$$$, $$$\hat{p}$$$ are not used.
+
+
+<ins class='nfooter'><a id='fprev' href='#blog/2015/2015-07-30-Gulp-Broserify-Babel.md'>Gulp Broserify Babel</a> <a id='fnext' href='#blog/2015/2015-07-17-VirtualBox-Disk-Encryption.md'>VirtualBox Disk Encryption</a></ins>
