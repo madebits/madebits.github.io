@@ -14,7 +14,7 @@ Apache [Spark](http://spark.apache.org/) is an open framework to manipulate big 
 IPYTHON=1 IPYTHON_OPTS="--matplotlib" $HOME/opt/spark/bin/pyspark
 ```
 
-I [updated](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-jupyter-notebook-to-run-ipython-on-ubuntu-16-04) `pip` using `sudo -H pip install --upgrade pip`. and to get latest [version](http://blog.jupyter.org/2016/07/08/ipython-5-0-released/) of `ipython` with `prompt_toolkit` I used `pip install ipython --upgrade` (use `pip3` for `ipython3`). I also added `$HOME/opt/spark` where I installed spark (`$SPARK_HOME`) to my `$PATH` variable.
+I [updated](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-jupyter-notebook-to-run-ipython-on-ubuntu-16-04) `pip` using `sudo -H pip install --upgrade pip` and to get latest [version](http://blog.jupyter.org/2016/07/08/ipython-5-0-released/) of `ipython` with `prompt_toolkit` I used `pip install ipython --upgrade` (use `pip3` for `ipython3`). I also added `$HOME/opt/spark` where I installed spark (`$SPARK_HOME`) to my `$PATH` variable.
 
 <br clear="all">
 
