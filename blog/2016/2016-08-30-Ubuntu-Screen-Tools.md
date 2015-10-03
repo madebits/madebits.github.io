@@ -16,11 +16,15 @@ Two small useful tool for monitor and screen management in Ubuntu:
 * `disper -e` extend displays
 * `disper -d auto -e` extend all displays
 
-`disper` is mainly for nVidia cards, but it works same good for `randr`. In Lubuntu, the `disper` commands can be mapped to keyboard using `openbox` configuration. A useful command to cycle via different configurations is 
-`disper -C`, assuming we have set in ` ~/.config/disper/config` the following line:
+`disper` is mainly for nVidia cards, but it works same good for `randr`. In Lubuntu, the `disper` commands can be mapped to keyboard using `openbox` configuration (`~/.config/openbox/lubuntu-rc.xml`). The following command cycles via different configurations:
 
-```
---cycle-stages='-c:-e:-S:-s'
+```xml
+...
+    <keybind key="W-s">
+      <action name="Execute">
+        <command>disper --cycle-stages='-c:-e:-S:-s' --cycle</command>
+      </action>
+    </keybind>
 ```
 
 ##Redshift
