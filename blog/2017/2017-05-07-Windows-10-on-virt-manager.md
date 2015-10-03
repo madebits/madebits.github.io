@@ -179,4 +179,4 @@ Spice guest tools offer several other features, such as direct [folder sharing](
 
 This will add the mapped drive, as last free drive `Z:`, on Windows guest. [WebDAV](https://en.wikipedia.org/wiki/WebDAV) is not necessary better than SFTP.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md'>Cross Cutting Concerns Evolution</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-05-09-Ubuntu-Block-Application-Internet-Access.md'>Ubuntu Block Application Internet Access</a> <a rel='next' id='fnext' href='#blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md'>Cross Cutting Concerns Evolution</a></ins>
