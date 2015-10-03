@@ -14,6 +14,12 @@ if [[ -n "$3" ]]; then
 	resize="$3"
 fi
 
+suffix=".dx"
+
+if [[ -n "$4" ]]; then
+	suffix="$4"
+fi
+
 urlPrefix="@@@"
 outDir="mb-gallery"
 outFile="${outDir}/index.md"
@@ -33,31 +39,31 @@ find "${folder}" -maxdepth 1 -type f -iname "*.jpg" | sort | while read filePath
 	fileData=$(convert -resize ${resize}% "$filePath" jpeg:- | base64 -w 0)
 	fileDataThumb=$(convert -resize 100x100 "$filePath" jpeg:- | base64 -w 0)
 	
-	echo -e "[![@nosave@@inline@](data:image/jpeg;base64,${fileDataThumb})](${urlPrefix}${count}.dx) " >> "${outFile}"
+	echo -e "[![@nosave@@inline@](data:image/jpeg;base64,${fileDataThumb})](${urlPrefix}${count}${suffix}) " >> "${outFile}"
 
-	links="[<i class='fa fa-th'></i>](${urlPrefix}index.dx)"
+	links="[<i class='fa fa-th'></i>](${urlPrefix}index${suffix})"
 	prevCount=$((count-1))
 	nextCount=$((count+1))
 	if [[ $prevCount -ge 1 ]]; then
-		links="[<i class='fa fa-chevron-circle-left'></i>](${urlPrefix}${prevCount}.dx) ${links}"
+		links="[<i class='fa fa-chevron-circle-left'></i>](${urlPrefix}${prevCount}${suffix}) ${links}"
 	fi
 	if [[ $nextCount -le $total ]]; then
-		links="${links} [<i class='fa fa-chevron-circle-right'></i>](${urlPrefix}${nextCount}.dx)"
+		links="${links} [<i class='fa fa-chevron-circle-right'></i>](${urlPrefix}${nextCount}${suffix})"
 	fi
 
 	echo -e "${count} / ${total} ${links}\n\n" >> "${outDir}/${count}.md"
 	if [[ $nextCount -le $total ]]; then
-		echo -e "[![@nosave@@responsive@](data:image/jpeg;base64,${fileData})](${urlPrefix}${nextCount}.dx)\n\n" >> "${outDir}/${count}.md"
+		echo -e "[![@nosave@@responsive@](data:image/jpeg;base64,${fileData})](${urlPrefix}${nextCount}${suffix})\n\n" >> "${outDir}/${count}.md"
 	else
 		echo -e "![@nosave@](data:image/jpeg;base64,${fileData})\n\n" >> "${outDir}/${count}.md"
 	fi
 	echo -e "${count} / ${total} ${links}\n\n" >> "${outDir}/${count}.md"
 
-	$(./menc.js "${outDir}/${count}.md" "${pass}" > "${outDir}/${count}.dx")
+	$(./menc.js "${outDir}/${count}.md" "${pass}" > "${outDir}/${count}${suffix}")
 	$(rm "${outDir}/${count}.md")
 done
 
 echo -e "\n\n**#${total}**\n" >> "${outFile}"
 
-$(./menc.js "${outFile}" "${pass}" > "${outDir}/index.dx")
+$(./menc.js "${outFile}" "${pass}" > "${outDir}/index${suffix}")
 $(rm "${outFile}")

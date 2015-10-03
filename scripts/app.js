@@ -1064,6 +1064,11 @@ var lastPage = null
 			pageData.page = pageData.page.substr(0, ai);
 		}
 		pageData.isSecret = pageData.page.endsWith('.dx');
+		if(pageData.page.startsWith(':dx:')) {
+			pageData.isSecret = true;
+			pageData.page = pageData.page.substr(4);
+		}
+
 		pageData.isEntryPage = (pageData.page === entryPage);
 		pageData.isRepoPage = (pageData.page.startsWith('r/')
 			&& pageData.page.endsWith('.md') 
