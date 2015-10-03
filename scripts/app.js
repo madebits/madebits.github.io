@@ -1073,8 +1073,13 @@ var lastPage = null
 }
 
 , setPageData = function(pageData, data) {
-	pageData.container.html(data);
-	mbHtml.postProcessPage(pageData);
+	//pageData.container.html(data);
+
+	pageData.container.fadeOut(function() {
+		pageData.container.html(data);
+		mbHtml.postProcessPage(pageData);
+		pageData.container.fadeIn("fast");
+	});
 }
 
 , setPageDataEnc = function(pageData, data) {
