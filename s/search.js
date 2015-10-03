@@ -28,7 +28,7 @@ var cache = { }
 }
 
 , load = function() {
-	$.ajax({url: 'noscript.html', cache: true, dataType: 'text' }).done( function(htmlData) {
+	var onDone = function(htmlData) {
 		var temp = [];
 		$(htmlData).find('a').each(function(i, e) {
 			var a = $(this);
@@ -66,8 +66,19 @@ var cache = { }
 		});
 		cache.data = temp;
 		cache.tagsIndex = createTagsIndex();
-		showTags();
-	});
+		showTags();		
+	};
+	var query = {url: 'noscript.html', cache: true, dataType: 'text' };
+
+	$.ajax(query).done(onDone).fail(function() {
+		//retry
+		setTimeout(function () {
+			$.ajax(query).done(onDone).fail(function(jqXHR, textStatus, errorThrown) {
+				cache.data = [];
+				cache.tagsIndex = createTagsIndex();
+			});
+		}, 2000);
+	});;
 }
 
 , createTagsIndex = function() {

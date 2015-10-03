@@ -1319,14 +1319,10 @@ var lastPage = null
 		setPageData(pageData, data);
 	};
 
-	$.ajax(query).done(function(data) {
-		onDone(data);
-	}).fail(function(jqXHR, textStatus, errorThrown) {
+	$.ajax(query).done(onDone).fail(function() {
 		//retry
 		setTimeout(function () {
-			$.ajax(query).done(function(data) {
-				onDone(data);
-			}).fail(function(jqXHR, textStatus, errorThrown) {
+			$.ajax(query).done(onDone).fail(function(jqXHR, textStatus, errorThrown) {
 				if(jqXHR) {
 					pageData.errorStatus = jqXHR.status;
 					pageData.errorStatusText = jqXHR.statusText;
