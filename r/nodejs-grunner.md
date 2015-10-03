@@ -83,7 +83,7 @@ Other options:
 
 ##Task Dependencies
 
-When you define a task (via `G.t`) you can pass optional task dependencies to be run before it as second argument. Dependencies can be one task as string, or a array of strings. *Nested* arrays are supported and have special meaning.
+When you define a task (via `G.t`) you can pass optional task dependencies to be run before it as second argument. Dependencies can be a task name as string, or a array of task name strings. *Nested* arrays are supported and have special meaning.
 
 * `G.t('t1')` - no dependencies.
 * `G.t('t2', 't1')` - `t1` will be run before `t2`.
