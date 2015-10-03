@@ -138,7 +138,7 @@ Here `g` represents a `GRunner` instance object.
 
 * `g.addTask` - this is a synonym for `g.t`. While you can add tasks directly to `g.tasks`, using `g.t` is recommended.
 
-* `g.run(taskName, cb)` - is used to run a task. When used via command-line this function is called for you with `--gtask` tasks. This function does not block, use `cb(error)` to be notified when done. If a task has any dependencies, then those task will be run before (recursively). `g.run()` only reads options and tasks, so you can invoke `g.run()` more than once on same instance without waiting for previous invocation to finish (as long as you do not modify options in between).
+* `g.run(taskName, cb)` - is used to run a task. When used via command-line this function is called for you with `--gtask` tasks. This function does not block, use `cb(error)` to be notified when done. If a task has any dependencies, then those tasks will be run before (recursively). `g.run()` only reads options and tasks, so you can invoke `g.run()` more than once on same instance without waiting for previous invocation to finish (as long as you do not modify options in between).
 
 * `g.log(msg, isError)` - writes `msg` string in `console.log`, or if `isError=true` in `console.error`.
 
