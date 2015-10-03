@@ -4,7 +4,7 @@
 
 <!--- tags: javascript nodejs -->
 
-[*numericsort*](https://www.npmjs.com/package/numericsort) enables sorting string numerically in Node.js. It is a port of [some C#](r/msnet-numeric-sort.md) code.
+[**numericsort**](https://www.npmjs.com/package/numericsort) enables sorting strings numerically in Node.js. It is a port of [some C#](r/msnet-numeric-sort.md) code. `numericsort` is lightweight Node.js package with no external dependencies.
 
 ##Usage
 
@@ -16,8 +16,8 @@ npm install numericsort --save
 
 To use:
 
-```
-var nsort = require('numsort');
+```javascript
+var nsort = require('numericsort');
 
 console.log(['1', '10', '3'].sort(nsort)); // logs: ["1", "3", "10"] 
 console.log(['1', '10', '3'].sort());  // logs: ["1", "10", "3"] 
