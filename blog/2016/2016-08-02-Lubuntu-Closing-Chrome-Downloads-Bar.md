@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-Chromium browser download bar is kind of [pain](https://superuser.com/questions/111675/google-chrome-auto-close-download-bar/325787) to close unless you install some extension (which needs then access to all pages you visit). To close download bar manually one has to use `ctrl+j` and `ctrl+w`. The problem is that especially `ctrl+j` is hard to reach in the keyboard.
+Chromium browser download bar is kind of [hassle](https://superuser.com/questions/111675/google-chrome-auto-close-download-bar/325787) to close unless you install some extension (which needs then access to all pages you visit). To close download bar manually one has to use `ctrl+j` and `ctrl+w`. The problem is that especially `ctrl+j` is hard to reach in the keyboard.
 
 I tried first running `xdotool` in a loop:
 
