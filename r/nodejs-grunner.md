@@ -79,7 +79,7 @@ Other options:
 * `--T` - list all tasks and exit.
 * `--D` - dry run tasks according to dependencies, but do not invoke task functions.
 * `--P` - by default `--gtask` tasks run blocking one after the other. If `--P` is specified they are started non-blocking.
-* `--C` - GRunner does circular dependency loop detection as it runs the tasks by default. If you do **not** need that functionality, turn it off by specifying this option.
+* `--C` - GRunner does circular dependency loop detection as it runs the tasks by default. If you ever do **not** need that functionality, turn it *off* by specifying this option.
 * `--L timeInMinutes` - if set, the process will self terminate when the time in minutes is reached.
 * `--env.KEY=VALUE` - this is a convenience option to set environment variables. It is same as calling `export KEY=VALUE` in `bash` shell, before calling `grunner`. This option helps to set environment variables without the need for some platform specific surrounding script (see also `g.env` API function). It can be repeated as needed.
 
