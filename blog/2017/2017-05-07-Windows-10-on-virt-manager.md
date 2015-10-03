@@ -157,7 +157,9 @@ Hard disk access [stats](https://superuser.com/questions/130143/how-to-measure-d
     > Average Read Time with Random Writes         0.231 ms          8.8
  ```
 
-For comparison, this is what I get for Windows 10, on latest [VirtualBox](http://www.johnwillis.com/2014/03/virtualbox-speeding-up-guest-vm-lot.html) with SATA controller (without Host I/O cache) on same machine:
+For comparison, this is what I get for Windows 10, on latest [VirtualBox](http://www.johnwillis.com/2014/03/virtualbox-speeding-up-guest-vm-lot.html):
+
+* VirtualBox with SATA controller (without Host I/O cache) on same machine:
 
  ```
     > Disk  Random 16.0 Read                       99.93 MB/s          7.1
@@ -169,7 +171,7 @@ For comparison, this is what I get for Windows 10, on latest [VirtualBox](http:/
     > Average Read Time with Random Writes         1.194 ms          8.2
  ```
 
-And VirtualBox with Host I/O cache enabled:
+* VirtualBox with SATA controller Host I/O cache enabled:
  
  ```
     > Disk  Random 16.0 Read                       167.61 MB/s          7.5
@@ -181,7 +183,7 @@ And VirtualBox with Host I/O cache enabled:
     > Average Read Time with Random Writes         0.320 ms          8.8
  ```
 
-And VirtualBox with SAS controller with Host I/O cache (SCSI is not recognized by Windows 10, so I cannot test with that, but SAS should be faster than SCSI):
+* VirtualBox with SAS controller with Host I/O cache (SCSI is not recognized by Windows 10, so I cannot test with that, but SAS should be faster than SCSI):
 
  ```
     > Disk  Random 16.0 Read                       176.90 MB/s          7.6
