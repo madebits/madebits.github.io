@@ -12,7 +12,7 @@ $ sudo apt install qemu-kvm libvirt-bin bridge-utils virt-manager
 
 KVM will work only if hardware visualization is [supported](https://wiki.archlinux.org/index.php/KVM) by CPU and enabled in BIOS.
 
-Optional related tools can be installed via:
+Optional related tools to help with VM disks can be installed via:
 
 ```
 sudo apt install libguestfs-tools
