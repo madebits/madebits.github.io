@@ -4,7 +4,7 @@
 
 <!--- tags: ml r -->
 
-<a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)">Bootstrapping</a> cannot be used directly with series that have intercorrelated samples. Plain bootstrap does not know how to re-sample data in such cases. The `boot` library in **R** works best for data whose samples are not correlated. In case of intercorrelated samples, an adaptation of bootstrap is to use series windowing - by re-sampling based on intervals, assuming the correlation between window intervals can be ignored. 
+<a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)">Bootstrapping</a> cannot be used directly with series that have intercorrelated samples. Plain bootstrap does not know how to re-sample data in such cases. The `boot` library in **R** works best for data whose samples are not correlated. In case of intercorrelated samples, an adaptation of bootstrap is to use series windowing - re-sampling based on intervals and assuming the correlation between window intervals can be ignored. 
 
 We can bootstrap manually in this case, but it would be preferable to reuse the `boot` library. The trick to use `boot` library with window re-sampling is not to give the original data series to `boot`, but the index of the windows, so that we do not use `data` in the boot function, only the `index`. Let our data be:
 
@@ -15,7 +15,7 @@ Y <- 2 * X1 + X2 + rnorm(1000);
 data <- data.frame(X1, X2, Y)
 ```
 
-These data are definitively intercorrelated (as we can see if do some plots). To bootstrap linear regression standard error for such data, we can split them in intervals having `1/10` of data each. We define also a function `indexToRange` to map the window index to the data index:
+These data are definitively intercorrelated (as we can see if do some plots). To bootstrap standard error of linear regression coefficients for these data, we split them in intervals having `1/10` of data each and define a function `indexToRange` to map the window index to the data index:
 
 ```r
 (windows <- seq(1:10))
@@ -27,7 +27,7 @@ indexToRange <- function(index) {
 }
 ```
 
-Now we can use `boot` library, to re-sample windows:
+Now, we can use `boot` library, to re-sample windows:
 
 ```r
 library(boot)
