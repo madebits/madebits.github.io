@@ -82,7 +82,7 @@ $ docker run -d --hostname my-rabbit \
  -p 5672:5672 -p 15672:15672 \ 
  -v /opt/test:/var/lib/rabbitmq/mnesia/ \
  rabbit\@my-rabbit --name my-rabbit rabbitmq:management
-$ docker-machine.exe ip
+$ docker-machine ip
 192.168.99.100
 ```
 
