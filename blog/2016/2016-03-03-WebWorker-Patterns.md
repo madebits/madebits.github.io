@@ -149,7 +149,7 @@ var idx = Math.floor(Math.random() * workersPoolMax);
 workers[idx].w.postMessage({cmd: 'process'});
 ```
 
-The code passes the port of the shared worker to its parent worker, whose  `worker.js` is shown next. The nested shared worker `n` handles data `process` message same as before. Additionally, the shared worker also `broadcast`s some event of interest to all parents if needed.
+The code passes the port of the shared worker to its parent worker, whose  `worker.js` is shown next. The nested shared worker `n` handles data `process` message same as before. Additionally, the shared worker also broadcasts some event of interest to all parents if needed.
 
 ```javascript
 var nestedPort;
