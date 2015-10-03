@@ -5,9 +5,10 @@ RESIZE=100%
 SUFFIX=".dx"
 OUTDIR="./mb-gallery"
 THUMBSIZE=100
+TITLE="Gallery"
 
 if [[ $# -eq 0 ]] ; then
-    echo 'Usage: -i inputDir -p password [-r resize] [-s suffix] [-o outputDir] [-t thumbSize]'
+    echo 'Usage: -i inputDir -p password [-r resize] [-s suffix] [-o outputDir] [-t thumbSize] [-h headerTitle]'
     exit 1
 fi
 
@@ -38,6 +39,10 @@ case $key in
     ;;
     -t|--thumbsize)
     THUMBSIZE="$2"
+    shift
+    ;;
+    -h|--header)
+    TITLE="$2"
     shift
     ;;
 
@@ -71,7 +76,7 @@ if [[ $total -eq 0 ]]; then
 fi
 mkdir -p "${OUTDIR}"
 
-echo -e "#<i class='fa fa-th'></i> Gallery\n\n" >> "${outFile}"
+echo -e "#<i class='fa fa-th'></i> ${TITLE}\n\n" >> "${outFile}"
 
 find "${INPUTDIR}" -maxdepth 1 -type f -iname "*.jpg" | sort | while read filePath; do
 	count=$((count+1))	
