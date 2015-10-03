@@ -291,16 +291,20 @@ Some simple low level file manipulation functions are provided. You can either u
 
 * `g.fileWriteJson(file, data)` - (synchronous) write data object to file. If the folder of file does not exist it is created.
 
-* `g.files(dir, [recursive], [filter])` - normally you would use `gulp.src` to get a stream of files, or the `glob` module. I have found `glob` module to be not very reliable with [UNC](https://en.wikipedia.org/wiki/Universal_Naming_Convention) paths, so this function offers a simple alternative. It will return all files in a given folder specified by `dir`. `dir` can also be an array of folders to scan. If `recursive` is `true` then all files in all subfolder are returned. `filter` is an optional function of form `fn(fileObject)` that can be used to filter which files are included by returning `true` (or `false` not to include them). The `fileObject` is of form: `{dir, path, name, ext, size}` - where `dir` is the path passed to `g.files`, `path` is the absolute path of file, `name` is the filename with extension and `ext` is the file extension together with the dot, and `size` the file size in bytes. `g.files` returns *immediately* a `stream` of `fileObject`s. There is no warranty on the order of files returned. Assuming you have imported `gulp` `File` class, you can interface the file data provided by the `g.files` stream to the `gulp` one, by using code similar to the following:
+* `g.files(dir, [recursive], [filter])` - normally you would use `gulp.src` to get a stream of files, or the `glob` module. I have found `glob` module to be not very reliable with [UNC](https://en.wikipedia.org/wiki/Universal_Naming_Convention) paths, so this function offers a simple alternative. `g.files` returns all files in a given folder specified by `dir` (`dir` can also be an array of folders to scan). Details:
 
-  ```javascript
-  g.t('tt', () => {
-    return g.files(['./app', './src'], true, o => (/^\.js$/i).test(o.ext))
-      .pipe(g.pipeThrough((o, _cb) => {
-        _cb(null, new File({ base: '', cwd: '', path: o.path }));
-      }))
-      .pipe(gulp.dest(...));  
-  });
+  * If `recursive` is `true` then all files in all sub-folders of `dir` are returned. 
+  * `filter` is an optional function of form `fn(fileObject)` that can be used to filter which files are included by returning `true` (or `false` not to include them). The `fileObject` is of form: `{dir, path, name, ext, size}` - where `dir` is the path passed to `g.files`, `path` is the absolute path of file, `name` is the filename with extension, `ext` is the file extension together with the dot, and `size` the file size in bytes.
+  * `g.files` returns *immediately* a `stream` of `fileObject`s. There is no warranty on the order of files returned. Assuming you have imported `gulp` `File` class, you can interface the file data provided by the `g.files` stream to the `gulp` one, by using code similar to the following:
+
+    ```javascript
+    g.t('tt', () => {
+      return g.files(['./app', './src'], true, o => (/^\.js$/i).test(o.ext))
+        .pipe(g.pipeThrough((o, _cb) => {
+          _cb(null, new File({ base: '', cwd: '', path: o.path }));
+        }))
+        .pipe(gulp.dest(...));  
+    });
   ```
 * `g.rm(dirOrFile)` - (synchronous) will delete `dirOrFile` completely if it exists or do nothing if it does not exist. This function retries internally several times on folders to avoid possible timing issues before giving up.
 
