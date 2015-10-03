@@ -22,7 +22,7 @@ After installation, to create Docker Engine VM, use:
 $ docker-machine create --driver virtualbox default
 ```
 
-This will create a VM named `default` with default parameters (~20GB dynamic disk and 1GB RAM). Check [documentation](https://docs.docker.com/machine/drivers/virtualbox/) if you like to fine-tune disk size and other VM parameters. Several Docker Machine commands expect `default` as default VM name, so it is good idea to keep it like that.
+This will create a VM named `default` with default parameters (~20GB dynamic disk and 1GB RAM) based on [boot2docker](https://stackoverflow.com/questions/28733940/how-to-install-nano-on-boot2docker) image. Check [documentation](https://docs.docker.com/machine/drivers/virtualbox/) to fine-tune disk size and other VM parameters. Several Docker Machine commands expect `default` as default VM name, so it is good idea to keep it like that.
 
 For `docker-machine` to be able to communicate with the VM, some environment variables have to be set (they can be unset using `docker-machine env -u`).
 
