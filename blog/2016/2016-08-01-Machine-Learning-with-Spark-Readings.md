@@ -38,7 +38,7 @@ I [updated](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-jup
 
 ##SciPy Lecture Notes
 
-[Scipy Lecture Notes](http://www.scipy-lectures.org/) - is an open on-line book to get started with [SciPy](https://www.scipy.org/). Though I have used some of SciPy, I found it useful to remind myself of some of the main features. SciPy and the associated Python toolset and libraries are useful if you code for Spark using Python, as some local data manipulation can be done with SciPy.
+[Scipy Lecture Notes](http://www.scipy-lectures.org/) - is an open on-line book to get started with [SciPy](https://www.scipy.org/). Though I have used some of SciPy, I found it useful to remind myself details of some of the main features. SciPy and the associated Python toolset and libraries are useful if you code for Spark using Python, as some local data manipulation can be done with SciPy.
 
 <br clear="all">
 
