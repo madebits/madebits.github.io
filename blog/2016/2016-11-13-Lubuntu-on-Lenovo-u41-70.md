@@ -468,6 +468,14 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
 
 * `sudo apt install arandr` is better for multi-monitor setup than the Lubuntu default `lxrandr` tool.
 
+* Disable IPv6 stack, by setting in `/etc/sysctl.conf`:
+  ```
+  net.ipv6.conf.all.disable_ipv6 = 1
+  net.ipv6.conf.default.disable_ipv6 = 1
+  net.ipv6.conf.lo.disable_ipv6 cat /proc/sys/net/ipv6/conf/all/disable_ipv6= 1
+  ```
+  And to apply use `sudo sysctl -p`. Verify `cat /proc/sys/net/ipv6/conf/all/disable_ipv6` returns 1. A restart may be needed.
+
 ##Final Thoughts
 
 Finding an ultrabook-like machine that is powerful enough, runs Ubuntu without many hacks, and is not very expensive - can be a challenge. With u41-70, I had to be flexible on some areas such as screen quality, battery life, and WLAN reach. I am happy that there was no obstacle big enough to make me return it. The machine is powerful enough for all my needs at home and light enough to carry around.
