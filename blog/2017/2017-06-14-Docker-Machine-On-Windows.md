@@ -78,7 +78,8 @@ As another example, we can access the RabbitMQ web [management plugin](https://d
 
 ```
 $ docker pull rabbitmq:management
-$ docker run -d --hostname my-rabbit \
+$ docker run --restart always -d \
+ --hostname my-rabbit \
  -p 5672:5672 -p 15672:15672 \ 
  -v /opt/test:/var/lib/rabbitmq/mnesia/rabbit\@my-rabbit \
  --name my-rabbit rabbitmq:management
