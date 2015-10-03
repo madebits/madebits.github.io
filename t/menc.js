@@ -13,15 +13,15 @@ if (typeof String.prototype.startsWith != 'function') {
 
 var readFileText = function(path) {
 	var data = fs.readFileSync(path, { encoding: 'utf8' });
-    data.replace(/^\uFEFF/, '');
-    return data;
+	data.replace(/^\uFEFF/, '');
+	return data;
 };
 
 var loadJs = function(path, ctx) {
 	ctx = ctx || {};
 	var data = readFileText(path);
-  	vm.runInNewContext(data, ctx, path);
-  	return ctx;  
+	vm.runInNewContext(data, ctx, path);
+	return ctx;  
 };
 
 var CryptoJS = loadJs(path.join(__dirname, '../scripts/cryptojs/aes.js')).CryptoJS;
