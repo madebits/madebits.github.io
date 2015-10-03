@@ -28,7 +28,8 @@ for(var i = 0; i < workersPoolMax; i++) {
 
 // ...
 var idx = Math.floor(Math.random() * workersPoolMax);
-workers[idx].w.postMessage({cmd: 'process'}); // input from application 
+// input from application 
+workers[idx].w.postMessage({cmd: 'process'});
 ```
 
 Worker `worker.js` code:
@@ -70,7 +71,7 @@ for(var i = 0; i < workersPoolMax; i++) {
 }
 
 var idx = Math.floor(Math.random() * workersPoolMax);
-workers[idx].w.postMessage({cmd: 'process'}); // input from application 
+workers[idx].w.postMessage({cmd: 'process'}); 
 ```
 
 We can use `MessageChannel` to establish a bidirectional communication pipe through workers. Currently, `MessageChannel` does [not](https://bugs.chromium.org/p/chromium/issues/detail?id=334408) support transferable types in Chrome, which can be a drawback for this kind of topology, depending on the data you have. However, understanding how this is done is still useful. The updated code of the `worker.js` is shown next. Using `cmd` as shown is just a convention. You can use any convention of choice to manage your data flow protocol.
@@ -91,8 +92,9 @@ onmessage = function (e) {
             break;
         case 'process':
             // process and forward data to nested worker
+            // no transferables in Chrome :( atm
             var res = data;
-            nestedPort.postMessage(res); // no transferables in Chrome :( atm 
+            nestedPort.postMessage(res); 
             break;
     }
 };
@@ -142,7 +144,7 @@ for(var i = 0; i < workersPoolMax; i++) {
 }
 
 var idx = Math.floor(Math.random() * workersPoolMax);
-workers[idx].w.postMessage({cmd: 'process'}); // input from application
+workers[idx].w.postMessage({cmd: 'process'});
 ```
 
 The code passes the port of the shared worker to its parent worker, whose  `worker.js` is shown next. The nested shared worker `n` handles data `process` message same as before. Additionally, the shared worker also `broadcast`s some event of interest to all parents if needed.
@@ -171,7 +173,7 @@ onmessage = function (e) {
         case 'process':
             // process and forward data to nested worker
             var res = data;
-            nestedPort.postMessage(res); // no transferables in Chrome :( atm 
+            nestedPort.postMessage(res); 
             break;
     }
 };
