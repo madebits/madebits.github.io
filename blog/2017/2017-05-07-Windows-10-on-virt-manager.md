@@ -36,11 +36,11 @@ Either use `virt-manager` UI to create the disk image, or create a *raw* image o
 # truncate -s 128G win10.raw
 ```
 
-This command creates [sparse](https://wiki.archlinux.org/index.php/sparse_file) files. Same command can be used to extend the disk size if needed.
+This command creates [sparse](https://wiki.archlinux.org/index.php/sparse_file) files. Same command can be used to extend the disk size if needed. Same effect can be achieved using: `qemu-img create -f raw -o size=128G win10.raw`.
 
 ###QEMU Process
 
-Once the VM is started, use `ps aux | grep qemu` to find the exact command-line used. Example, of my QEMU process with two vCPUs managed via KVM. The two other threads are the QEMU process itself and the virtual IO.
+Once the VM is started, use `ps aux | grep qemu` to find the exact command-line used. Example, of my QEMU process with two vCPUs managed via KVM. The two other threads are the QEMU process itself and the virtual machine IO.
 
 ```
 ...
