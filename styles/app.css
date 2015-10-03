@@ -20,9 +20,14 @@ div#mbg-fixed-top {
 }
 
 a[target="_blank"]:after {
-    content: url(ext.png);
-    margin: 0 0 0 2px;  
+    content: "";
+    display: inline-block;
+    background: url("ext.png") no-repeat top right;
+    width: 10px;
+    height: 10px;
 }
+
+/* content: url(ext.png); margin: 0 0 0 2px; */
 
 code { padding-bottom: 0px; padding-top: 1px; padding-left: 2px; padding-right: 2px; background-color: #f7f7f7; color: #333333; font-size: 1.01em; }
 
