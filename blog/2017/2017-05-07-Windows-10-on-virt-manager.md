@@ -81,14 +81,25 @@ vnet0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 ...
 ```
 
-This is convenient, but you may need to allow traffic via firewall:
+This is convenient, and `iptables` has been modified:
 
 ```
-$ sudo iptables -A INPUT  -i virbr0  -j ACCEPT
-$ sudo iptables -A OUTPUT -o virbr0  -j ACCEPT
+$ sudo iptables -S | grep vir
+-A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT
+-A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT
+-A INPUT -i virbr0 -p udp -m udp --dport 67 -j ACCEPT
+-A INPUT -i virbr0 -p tcp -m tcp --dport 67 -j ACCEPT
+-A INPUT -i virbr0 -p tcp -m tcp --dport 80 -j ACCEPT
+-A FORWARD -d 192.168.122.0/24 -o virbr0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -s 192.168.122.0/24 -i virbr0 -j ACCEPT
+-A FORWARD -i virbr0 -o virbr0 -j ACCEPT
+-A FORWARD -o virbr0 -j REJECT --reject-with icmp-port-unreachable
+-A FORWARD -i virbr0 -j REJECT --reject-with icmp-port-unreachable
+-A OUTPUT -o virbr0 -p udp -m udp --dport 68 -j ACCEPT
+-A OUTPUT -o virbr0 -p udp -m udp --dport 68 -j ACCEPT
+-A OUTPUT -o virbr0 -p udp -m udp --dport 53 -j ACCEPT
+-A OUTPUT -o virbr0 -p tcp -m tcp --dport 53 -j ACCEPT
 ```
-
-To make firewall rules permanent if needed use: `sudo netfilter-persistent save`.
 
 To find the IP of the guest VM from outside use:
 
