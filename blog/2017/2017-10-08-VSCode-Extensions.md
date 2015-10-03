@@ -22,6 +22,10 @@ An incomplete list of useful [VSCode extensions](https://marketplace.visualstudi
 
 * [Jumpy](https://marketplace.visualstudio.com/items?itemName=wmaurer.vscode-jumpy) - or the better one [MetaGo](https://marketplace.visualstudio.com/items?itemName=metaseed.metago) enables jumping around viewport text using keyboard.
 
+##Git
+
+* [Git Lens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) - I do not use Git via VSCode, but it is useful to see history of files within the VSCode.
+
 ##Useful
 
 * [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) - comming from SublimeText where spell check is build in, I find this extension indispensable, especially when I used VSCode as a text editor. It is not as good as SublimeText, but still usable. It would be nice VSCode had this support built in.
