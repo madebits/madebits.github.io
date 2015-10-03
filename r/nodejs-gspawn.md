@@ -57,13 +57,13 @@ A summary of available `gspawn` `options` follows (*boolean* options are all by 
 * `expectedExitCode`: if set and `gspawn` process exit code is different, then an error is reported in `gspawn` callback. 
 
 * `log`: by default, the `gspawn` logs any process console output in *stdout* / *stderr*, using `console.log` / `console.error`. You can customize logging, by passing a function to `log`. The `log` function has the form `fn(data, source, defaultLogFunction)`:
-    * `data` - are the text data to log coming from process OR from `gspwan` call
-    * `source` - can have one of these values: `1` data comes from stdout, `2` data comes from stderr, `3` data comes `gspwan` call printing `cmd` invocation (see `logCall` option), `4` data comes `gspawn` printing any possible `cmd` error.
-    * `defaultLogFunction`: this the default log function used by `gspawn`. You can process `data` for example to remove any sensitive information (such as passwords) and then call `defaultLogFunction(data, source)` to continue printing.
+    * `data` - are the text data to log coming from process OR from `gspwan` call (see `source`).
+    * `source` - can have one of these values: `1` data comes from stdout, `2` data comes from stderr, `3` data comes `gspwan` call printing `cmd` invocation (see `logCall` option), `4` data comes `gspawn` printing any possible `cmd` error  (see `logCall` option).
+    * `defaultLogFunction`: this the default log function used by `gspawn`. You could process `data`, for example, to remove any sensitive information (such as possible *passwords*) and then call `defaultLogFunction(data, source)` to continue printing in console.
 
-* `logCall`: if set to `true`, then the command invocation (tool and arguments) and any errors will be also logged. See also `log` if you want to customize any of this further.
+* `logCall`: if set to `true`, then the command invocation (tool and arguments) and any errors will be also logged. See also `log` if you want to customize this further.
 
-* `collectStdout`: if set to true, *stdout* output is collected into an array and delivered as string in `gspwan` callback `cb` when process ends. There is no limit on how many text is collected, so be careful. Using `log` option is a better way to look for pattern in longer text. If `false` (default), then in `gspwan` callback `cb` you get an empty or null string.
+* `collectStdout`: if set to true, *stdout* output is collected into an array and delivered as string in `gspwan` callback `cb` when process ends. There is no limit on how many text is collected, so be careful. Using `log` option is a better way to look for patterns in longer text. If `false` (default), then in `gspwan` callback `cb` you get an empty or null string.
 
 * `collectStderr`: same as `collectStdout`, but for *stderr*. 
 
