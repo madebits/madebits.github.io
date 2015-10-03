@@ -55,4 +55,4 @@ t2*  2.00913025 -0.002625029  0.04097508
 t3*  0.98991915  0.000419581  0.04186725
 ```
 
-<ins class='nfooter'><a id='fnext' href='#blog/2015/2015-12-10-WebEx-On-Ubuntu.md'>WebEx On Ubuntu</a></ins>
+<ins class='nfooter'><a id='fprev' href='#blog/2016/2016-02-07-Upgrading-To-Windows-10.md'>Upgrading To Windows 10</a> <a id='fnext' href='#blog/2015/2015-12-10-WebEx-On-Ubuntu.md'>WebEx On Ubuntu</a></ins>

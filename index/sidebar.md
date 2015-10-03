@@ -1,3 +1,4 @@
+* [Upgrading To Windows 10](#blog/2016/2016-02-07-Upgrading-To-Windows-10.md)
 * [Bootstrapping Intercorrelated Data](#blog/2016/2016-02-03-Bootstrapping-Intercorrelated-Data.md)
 * [WebEx On Ubuntu](#blog/2015/2015-12-10-WebEx-On-Ubuntu.md)
 * [Javascript Task Runner](#blog/2015/2015-11-17-Javascript-Task-Runner.md)
@@ -5,4 +6,3 @@
 * [Agile Vocabulary](#blog/2015/2015-09-29-Agile-Vocabulary.md)
 * [Client Contracts in Scrum](#blog/2015/2015-09-11-Client-Contracts-in-Scrum.md)
 * [Agile Cooperation in Corporate Environments](#blog/2015/2015-09-08-Agile-Cooperation-in-Corporate-Environments.md)
-* [Learning in Scrum](#blog/2015/2015-09-04-Learning-in-Scrum.md)
