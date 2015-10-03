@@ -986,6 +986,7 @@ var applyStyle = function(containerId) {
 			fprev.wrap('<li class="previous"></li>');	
 			fprev.attr('title', 'Previous');
 			var fhref = fprev.attr('href');
+			fprev.hide();
 			nav = '<li><a href="{0}" title="{1}"><i class="fa fa-chevron-left"></i></a></li>'.format(fhref, fprev.text()) + nav;
 		}
 		if(fnext.length) {
@@ -993,6 +994,7 @@ var applyStyle = function(containerId) {
 			fnext.wrap('<li class="next"></li>');
 			fnext.attr('title', 'Next');
 			var fhref = fnext.attr('href');
+			fnext.hide();
 			nav += '<li><a href="{0}"" title="{1}"><i class="fa fa-chevron-right"></i></a></li>'.format(fhref, fnext.text())
 		}
 		var h1 = $('h1:first');
@@ -1204,11 +1206,11 @@ var lastPage = null
 		return;
 	}
 
-	pageData.container.fadeOut(function() {
+	//pageData.container.fadeOut(function() {
 		pageData.container.html(data);
 		mbHtml.postProcessPage(pageData);
-		pageData.container.fadeIn("fast");
-	});
+		//pageData.container.fadeIn("fast");
+	//});
 }
 
 , setPageDataEnc = function(pageData, data) {
