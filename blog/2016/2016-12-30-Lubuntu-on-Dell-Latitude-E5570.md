@@ -61,7 +61,7 @@ The basic functionality seems to work fine, but I am not a big user of touchpad,
 @xinput disable 'ImPS/2 BYD TouchPad'
 ```
 
-*Update*: With latest Ubuntu updates the touchpad type is now properly recognized:
+**Update**: With latest Ubuntu updates the touchpad type is now properly recognized:
 
 ```bash
 $ xinput
