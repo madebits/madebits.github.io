@@ -4,7 +4,7 @@
 
 <!--- tags: javascript nodejs -->
 
-**[GSpawn](https://www.npmjs.com/package/gspawn)** is a small library to invoke external tools for [Node.js](https://nodejs.org/). `gspawn` wraps Node.js `child_process.spawn` to make it easier to invoke external tools. `gspawn` is similar to `child_process.exec`, but without some of `child_process.exec` limitations.
+**[GSpawn](https://www.npmjs.com/package/gspawn)** is a small library to invoke external tools from [Node.js](https://nodejs.org/). `gspawn` wraps Node.js `child_process.spawn` to make it easier to invoke external tools. `gspawn` is similar to `child_process.exec`, but without some of `child_process.exec` limitations.
 
 ##Usage
 
@@ -36,7 +36,7 @@ gspawn({
     
 * `error` - not null in case of errors
 * `exitCode` - exit code of spawned process (if known)
-* `signal` - if known, signal use to close the process (may not be set)
+* `signal` - if known, signal used to close the process (may not be set)
 * `stdoutTxt` - default null or empty, see `options.collectStdout`.
 * `stderrTxt` - default null or empty, see `options.collectStderr`.
 
@@ -44,11 +44,11 @@ A summary of available `gspawn` `options` follows (*boolean* options are all by 
 
 * `cmd`: the command to run. This can be a full system path, or a relative path if the command is inside same the node package, or a command name (see `resolveCmd` option).
 
-* `args`: optional command line arguments for `cmd`. This can be null, a string, or an array of string (one arry element per each option) (passed to `child_process.spawn` after checks).
+* `args`: optional command line arguments for `cmd`. This can be null, a string, or an array of strings (one array element per each option) (passed to `child_process.spawn` after checks).
 
 * `resolveCmd`: if the `cmd` is a system program, such as, `bash`, specifying `resolveCmd: true` uses [which](https://github.com/npm/node-which) library to find the whole path of the `cmd` in the system.
 
-* `options`: if set, are passed as are to `child_process.spawn`. See `child_process.spawn` documentation to specify `options.options.env`, and `options.options.cwd`.
+* `options`: if set, are passed as are to `child_process.spawn`. See `child_process.spawn` documentation on how to specify `options.options.env`, and `options.options.cwd`.
 
 * `autoCwd`: if set to `true`, then `options.options.cwd` is set to folder of `cmd` executable.
 
@@ -66,7 +66,7 @@ A summary of available `gspawn` `options` follows (*boolean* options are all by 
 
 * `collectStdout`: if set to true, *stdout* output is collected into an array and delivered as string in `gspwan` callback `cb` when process ends. There is no limit on how many text is collected by default, so be careful. Using `log` option is a better way to look for patterns in longer text. If `false` (default), then in `gspwan` callback `cb` you get an empty or null string.
 
-* `collectStdoutMax`: if set `> 0` and `collectStdout: true then stop collecting output text if total length is bigger than the one given. The amount of collected text can be approximate to the next line for the value given.
+* `collectStdoutMax`: if set `> 0` and `collectStdout: true` then stop collecting output text if total length is bigger than the one given. The amount of collected text can be approximate to the next line for the value given.
 
 * `collectStderr`: same as `collectStdout`, but for *stderr*. 
 
