@@ -134,7 +134,7 @@ Here `g` represents a `GRunner` instance object.
         * Call `cb();` on success, or `cb(error);` on error. If your code calls `cb`, it must be called once.
         * Return a JS *promise*. Any promise object that supports `then` is supported. In this case you should **not** call `cb()`.
         * Return a `Stream`, such as `return gulp.src(...).pipe(...);`. In this case you should **not** call `cb()`.
-        * A bit more advanced, instead of returning a stream or promise, call `ctx.onDone(streamOrPromise, cb);`. You may never need this, but if feel you need it, it can come handy.
+        * A bit more advanced, instead of returning a stream or promise, call `ctx.onDone(streamOrPromise, cb);` on a stream or promise. You may never need this, but if you ever feel like you need it, it can come handy. In this case you should **not** call `cb()`.
 
         You can also exit a task using errors:
 
