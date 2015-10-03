@@ -34,6 +34,6 @@ Most KDF implementations and code examples use defaults for `options` that are o
 
 If you can afford it, reprocess old encrypted data or stored `keys` regularly over time to using bigger costs. This is of use only for data you are sure no one else has already a copy. One way to re-process massive encrypted data, it to use the KDF `key` to encrypt another random *key* you use for the actual encryption. Then only the encryption key of the data needed to be re-encrypted during reprocessing.
 
-Offer users guidance to select long (and relatively random) passwords, for example by combining together different ways of password creation (words from a dictionary, file CSHs, user provided text, biometry, etc).
+Offer users guidance to select long (and relatively random) passwords, for example by combining together different ways of password creation (words from a dictionary, file CSHs, user provided text, biometry, etc). Do not restrict maximum password length.
 
 <ins class='nfooter'><a id='fnext' href='#blog/2016/2016-02-17-Sharing-Local-Folders-Over-Remote-Desktop.md'>Sharing Local Folders Over Remote Desktop</a></ins>
