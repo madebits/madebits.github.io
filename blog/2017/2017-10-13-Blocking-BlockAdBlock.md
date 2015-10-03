@@ -46,4 +46,4 @@ script.parentNode.removeChild(script);
 
 Save the above code as `BlockBlockAdBlock.user.js` and install as extension on Chrome.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-10-08-VSCode-Extensions.md'>VSCode Extensions</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-10-20-Patching-Node-Express-For-Async-Wait.md'>Patching Node Express For Async Wait</a> <a rel='next' id='fnext' href='#blog/2017/2017-10-08-VSCode-Extensions.md'>VSCode Extensions</a></ins>
