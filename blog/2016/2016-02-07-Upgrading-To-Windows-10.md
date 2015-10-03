@@ -2,7 +2,7 @@
 
 2016-02-07
 
-I decided to upgrade my dual boot machine with Windows 7 and Ubuntu to Windows 10. I had not booted Windows 7 at home since last August and latest updates there were from last June. I used the media creation tool to do the Windows 10 upgrade. The download went smooth, but the check for updates hanged. I had to restart windows update service several times:
+I decided to upgrade my dual boot machine with Windows 7 and Ubuntu to Windows 10. I had not booted Windows 7 at home since last August and latest updates there were from last June. I used the [media creation tool](https://www.microsoft.com/en-in/software-download/windows10) to do the Windows 10 upgrade. The download went smooth, but the check for Windows 10 updates hanged. I had to restart windows update service several times:
 
 ```
 net stop wuauserv
