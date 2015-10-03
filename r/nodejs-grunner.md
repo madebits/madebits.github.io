@@ -70,6 +70,8 @@ Other options:
 * `--D` - dry run tasks according to dependencies, but do not invoke task functions.
 * `--P` - by default `--gtask` tasks run blocking one after the other. If `--P` is specified they are started non-blocking.
 * `--C` - GRunner does circular dependency loop detection as it runs the tasks by default. If you do **not** need that functionality, turn it off by specifying this option.
+* `--L timeInMinutes` - if set, the process will self terminate when the time in minutes is reached.
+* `--env.KEY=VALUE` - this is a convenience option to set environment variables. It is same as setting `export KEY=VALUE` before calling `grunner`. This option helps to set environment variables without the need for some surrounding script (see also `envResolve` API function). It can be repeated as needed.
 
 ##Task Dependencies
 
@@ -179,4 +181,13 @@ Here `g` represents a `GRunner` instance object.
 
 * `g.dumpTasks([logger])` - dump the current list of tasks using `console.log` (can be changed by supplying your own `logger(str)` function).
 
+The following helper functions are also provided:
+
+* `g.setProcessMaxLifeTime(timeInMinutes, [cb])` - if set to a timeInMinutes > 0, then the process will terminate when that time is reached. To reset the timer, call same function with a new value. `0` cancels any existing timer. The timer is per instance, but the process is killed, no matter waht instance timer expires first. The option callback `cb` is called if set, in place of `process.exit(1)`. The `--L` command-line option calls this function on global ` G` instance.
+
+* `g.envResolve(key)` - calls `process.env[key]`. Additionally, this function knows to process nested environment variables in values using the special `[[KEY]]` syntax. For example, if `K1=V1` and `K2=V2[[K1]]`, then `g.envResolve('K2')` will return `V2V1`. Environment variable nesting and replacement is platform specific (both syntax and behavior). This function offers a way to handle variable nesting using own platform agnostic syntax, if needed.
+
+* `g.envResolveValue(value)` - this is same as `g.envResolve(key)` but operates on process.env[key] value (and not `key` name). 
+
+ 
 
