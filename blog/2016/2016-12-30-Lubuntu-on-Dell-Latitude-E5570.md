@@ -61,6 +61,20 @@ The basic functionality seems to work fine, but I am not a big user of touchpad,
 @xinput disable 'ImPS/2 BYD TouchPad'
 ```
 
+*Update*: With latest Ubuntu updates the touchpad type is now properly recognized:
+
+```bash
+$ xinput
+⎡ Virtual core pointer                      id=2    [master pointer  (3)]
+...
+⎜   ↳ AlpsPS/2 ALPS DualPoint Stick             id=14   [slave  pointer  (2)]
+⎜   ↳ AlpsPS/2 ALPS DualPoint TouchPad          id=13   [slave  pointer  (2)]
+...
+
+$ xinput disable 'AlpsPS/2 ALPS DualPoint TouchPad'
+$ xinput disable 'AlpsPS/2 ALPS DualPoint Stick'
+```
+
 ##Graphics
 
 The device has both Intel and ATI graphics:
