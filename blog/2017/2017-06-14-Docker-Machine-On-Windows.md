@@ -14,7 +14,9 @@ curl -L https://github.com/docker/machine/releases/download/v0.12.0/docker-machi
 chmod +x "$HOME/bin/docker-machine.exe"
 ```
 
-This command will download and install Docker Machine in `$HOME/bin` folder (`$HOME` is by default, your Windows user folder: `%HOMEPATH%`). You may want to append `$HOME/bin` to `$PATH`. Docker Machine keeps its data files under `$HOME/.docker` folder. The parent folder of $HOME (i.e., `C:\Users`) is shared read/write in VM as `/c/Users`. In theory, this folder could be used with persistent `docker -v` volumes, but due to `vboxsf` issues not all software may work with it. To disable automatic bug reports run:
+This command will download and install Docker Machine in `$HOME/bin` folder (`$HOME` is by default, your Windows user folder: `%HOMEPATH%`). You may want to append `$HOME/bin` to `$PATH`. If you have Windows firewall active, allow network access to `docker-machine.exe`.
+
+Docker Machine keeps its data files under `$HOME/.docker` folder. The parent folder of $HOME (i.e., `C:\Users`) is shared read/write in VM as `/c/Users`. In theory, this folder could be used with persistent `docker -v` volumes, but due to `vboxsf` issues not all software may work with it. To disable automatic bug reports run:
 
 ```
 mkdir -p ~/.docker/machine && touch ~/.docker/machine/no-error-report
