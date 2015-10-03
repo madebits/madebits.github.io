@@ -202,7 +202,7 @@ Here `g` represents a `GRunner` instance object.
 
 * `g.addTask` - this is a synonym for `g.t`.
 
-* `g.tasks` - array of tasks. Use `g.t` to add tasks to `g.tasks`. The minimal task object is `{dep: [], cb: null, userData: null}`. You can modify `g.tasks` as needed in advanced scenarios. `dep` is a JS array so it is easy to manipulate.
+* `g.tasks` - array of tasks. Use `g.t` to add tasks to `g.tasks`. The minimal task object is `{dep: [], cb: null, userData: null}`. You can modify `g.tasks` as needed in advanced scenarios. `dep` is a javascript array and it is easy to manipulate.
 
 * `g.run(taskName, cb)` - is used to run a task. When used via command-line this function is called for you for each `--gtask` task. `g.run` does not block - use `cb(error)` to be notified when done. If a task has any dependencies, then those tasks will be run before (*recursively*). `g.run()` only reads options and tasks, so you can invoke `g.run()` more than once on same instance without waiting for previous invocation to finish (as long as you do not modify options and tasks in between).
 
