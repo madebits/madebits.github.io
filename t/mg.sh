@@ -1,5 +1,6 @@
 #!/bin/bash
 
+TOKEN=""
 TOOLSDIR=$(dirname $0)
 INPUTDIR=.
 RESIZE=100%
@@ -9,7 +10,7 @@ THUMBSIZE=100
 TITLE="Gallery"
 
 if [[ $# -eq 0 ]] ; then
-    echo 'Usage: -i inputDir -p password [-r resize] [-s suffix] [-o outputDir] [-t thumbSize] [-h headerTitle]'
+    echo 'Usage: -i inputDir -p password [-r resize] [-s suffix] [-o outputDir] [-t thumbSize] [-h headerTitle] [-d randomLen]'
     exit 1
 fi
 
@@ -35,7 +36,7 @@ case $key in
     shift
     ;;
     -o|--output)
-    OUTDIR="$2/gallery"
+    OUTDIR="${2}/mb-gallery"
     shift
     ;;
     -t|--thumbsize)
@@ -46,7 +47,10 @@ case $key in
     TITLE="$2"
     shift
     ;;
-
+    -d|--random)
+    TOKEN="?$(tr -dc "[:alpha:]" < /dev/urandom | head -c ${2})"
+    shift
+    ;;
     #--default)
     #DEFAULT=YES
     #;;
@@ -85,32 +89,32 @@ find "${INPUTDIR}" -maxdepth 1 -type f -iname "*.jpg" | sort | while read filePa
 	fileData=$(convert -resize ${RESIZE} "$filePath" jpeg:- | base64 -w 0)
 	fileDataThumb=$(convert -resize ${THUMBSIZE}x${THUMBSIZE} "$filePath" jpeg:- | base64 -w 0)
 	
-	echo -e "[![@nosave@@inline@](data:image/jpeg;base64,${fileDataThumb})](${URLPREFIX}${count}${SUFFIX}) " >> "${outFile}"
+	echo -e "[![@inline@@thumb@](data:image/jpeg;base64,${fileDataThumb})](${URLPREFIX}${count}${SUFFIX}${TOKEN}) " >> "${outFile}"
 
-	links="[<i class='fa fa-th'></i>](${URLPREFIX}index${SUFFIX})"
+	links="[<i class='fa fa-th'></i>](${URLPREFIX}index${SUFFIX}${TOKEN})"
 	prevCount=$((count-1))
 	nextCount=$((count+1))
 	if [[ $prevCount -ge 1 ]]; then
-		links="[<i class='fa fa-chevron-circle-left'></i>](${URLPREFIX}${prevCount}${SUFFIX}) ${links}"
+		links="[<i class='fa fa-chevron-circle-left'></i>](${URLPREFIX}${prevCount}${SUFFIX}${TOKEN}) &nbsp; ${links}"
 	fi
 	if [[ $nextCount -le $total ]]; then
-		links="${links} [<i class='fa fa-chevron-circle-right'></i>](${URLPREFIX}${nextCount}${SUFFIX})"
+		links="${links} &nbsp; [<i class='fa fa-chevron-circle-right'></i>](${URLPREFIX}${nextCount}${SUFFIX}${TOKEN})"
 	fi
 
 	#echo -e "${count} / ${total} ${links}\n\n" >> "${OUTDIR}/${count}.md"
-	echo -e "<br>" >> "${OUTDIR}/${count}.md"
+	echo -e "<style>img.img-responsive { margin-top: 10px; }</style>\n" >> "${OUTDIR}/${count}.md"
 	if [[ $nextCount -le $total ]]; then
-		echo -e "[![@nosave@@responsive@](data:image/jpeg;base64,${fileData})](${URLPREFIX}${nextCount}${SUFFIX})\n\n" >> "${OUTDIR}/${count}.md"
+		echo -e "[![@save${count}@](data:image/jpeg;base64,${fileData})](${URLPREFIX}${nextCount}${SUFFIX}${TOKEN})\n\n" >> "${OUTDIR}/${count}.md"
 	else
-		echo -e "[![@nosave@@responsive@](data:image/jpeg;base64,${fileData})](${URLPREFIX}1${SUFFIX})\n\n" >> "${OUTDIR}/${count}.md"
+		echo -e "[![@save${count}@](data:image/jpeg;base64,${fileData})](${URLPREFIX}1${SUFFIX}${TOKEN})\n\n" >> "${OUTDIR}/${count}.md"
 	fi
-	echo -e "${count} / ${total} ${links}\n\n" >> "${OUTDIR}/${count}.md"
+	echo -e "#${links} &nbsp; ${count}/${total}\n\n" >> "${OUTDIR}/${count}.md"
 
 	$(${TOOLSDIR}/menc.js "${OUTDIR}/${count}.md" "${PASS}" > "${OUTDIR}/${count}${SUFFIX}")
 	$(rm "${OUTDIR}/${count}.md")
 done
 
-echo -e "\n\n<i class='fa fa-picture-o'></i> #${total}\n" >> "${outFile}"
+echo -e "\n\n<i class='fa fa-camera'></i> #${total}\n" >> "${outFile}"
 
 $(${TOOLSDIR}/menc.js "${outFile}" "${PASS}" > "${OUTDIR}/index${SUFFIX}")
 $(rm "${outFile}")
@@ -118,3 +122,4 @@ $(rm "${outFile}")
 biggestFile=$(find ${OUTDIR} -maxdepth 1 -printf '%s %p\n' | sort -nr | head -1 | cut -d ' ' -f 2)
 echo "Biggest file in ${OUTDIR} (max 11M):"
 du -h "${biggestFile}"
+echo "Entry: :dx:index${SUFFIX}${TOKEN}"

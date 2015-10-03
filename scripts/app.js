@@ -663,38 +663,63 @@ var applyStyle = function(containerId) {
 	MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 })
 
+, dataImgSaveCount = 0
+
 , handleImage = function(m, dataUriSupported, i) {
-	m.addClass('img-rounded');
-	var alt = m.attr('alt') || '';
+	var alt = m.attr('alt');
+	if(alt && (alt.indexOf('@thumb@') >= 0)) {
+		m.addClass('img-thumbnail');
+	}
+	else {
+		m.addClass('img-rounded');
+	}
+
 	if(!alt || (alt && !(alt.endsWith('inline') || (alt.indexOf('@inline@') >= 0) ))) {
+		m.addClass('img-responsive center-block');
 		// data links
-		var parentTag = m.parent().get( 0 ).tagName;
-		if((parentTag.toLowerCase() !== 'a') || (alt.indexOf('@responsive@') >= 0) ) {
-			m.addClass('img-responsive');
-			var src = m.attr('src');
-			var processed = m.data('dimg') || false;
-			if(src.startsWith('data:') && !processed) {
-				m.data('dimg', true);
-				if(m.hasClass('nosave') || alt.endsWith('nosave') || (alt.indexOf('@nosave@') >=0) ) {
-					return;
-				}
-				if(!dataUriSupported) {
-					m.replaceWith('<div class="text-danger hidden-print"><i class="fa fa-picture-o"></i> Not supported in your browser!</div>');
-					return;
-				}
-				var suffix = 'jpg';
-				if(src.indexOf('image/png') > 0) suffix = 'png';
-				else if(src.indexOf('image/gif') > 0) suffix = 'gif';
-				var idx = i + 1;
-				idx = ((idx < 10 ? '0' : '') + idx).toString();
-				if(!alt) m.attr('alt', idx);
-				var aWrapper = $('<nav><ul class="pager"><li class="previous"><a download="image' + idx +'.' + suffix + '"><i class="fa fa-arrow-circle-o-down"></i> Save ' + idx + '</a></li></ul></nav>');
-				var a = aWrapper.find('a').first();
-				if (typeof a[0].download !== 'undefined') { // browser check
-					a.attr('href', m.attr('src'));
-					m.after(aWrapper);
-				}
+		var src = m.attr('src');
+		var processed = m.data('dimg') || false;
+		if(src.startsWith('data:') && !processed) {
+			if(!alt) alt = '';
+			m.data('dimg', true);
+			if(!dataUriSupported) {
+				m.replaceWith('<div class="text-danger hidden-print"><i class="fa fa-picture-o"></i> Not supported in your browser!</div>');
+				return;
 			}
+
+			var saveMatch = alt.match(/@save((.)*)@/);
+			if(!(m.hasClass('save') || saveMatch)) {
+				return;
+			}
+
+			var suffix = 'jpg';
+			if(src.indexOf('image/png') > 0) suffix = 'png';
+			else if(src.indexOf('image/gif') > 0) suffix = 'gif';
+
+			dataImgSaveCount++;
+			var idx = '';
+			if(saveMatch[1]) idx = saveMatch[1];
+			else {
+				idx =  dataImgSaveCount;
+				var pad = '';
+				if(dataImgSaveCount < 10) pad = '000';
+				else if(dataImgSaveCount < 100) pad = '00';
+				else if(dataImgSaveCount < 1000) pad = '0';
+				idx = pad + idx;
+			}
+
+			if(!alt) m.attr('alt', idx);
+			var aWrapper = $('<br><div class="hidden-print pull-right"><nav><ul class="pager"><li class="previous"><a download="image' + idx +'.' + suffix + '"><i class="fa fa-arrow-circle-o-down"></i> Save</a></li></ul></nav></div>');
+			//var aWrapper = $('<br><div class="hidden-print pull-right"><a class="btn btn-default" download="image' + idx +'.' + suffix + '"><i class="fa fa-arrow-circle-o-down"></i> Save</a></div>');
+			var a = aWrapper.find('a').first();
+			if (typeof a[0].download !== 'undefined') { // browser check
+				a.attr('href', m.attr('src'));
+				var parentTag = m.parent().get(0).tagName;
+				if(parentTag.toLowerCase() === 'a') {
+					m.parent().after(aWrapper);
+				}
+				else m.after(aWrapper);
+			}			
 		}
 	}
 }

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+rm -rf "./mb-gallery"
 TOOLSDIR=$(dirname $0)
 
 git status
