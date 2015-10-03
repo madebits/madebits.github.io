@@ -1,5 +1,5 @@
 
-[ip](http://baturin.org/docs/iproute2/).
+[ip](http://baturin.org/docs/iproute2/) and [networking commands](https://dougvitale.wordpress.com/2011/12/21/deprecated-linux-networking-commands-and-their-replacements/).
 
 ## Dummy Interface
 
@@ -117,11 +117,11 @@ dummy1 (2)
 
 If NICs are added to bridge without flushing their IPs (`ip addr flush dev dummy0`), they are still reachable via the IP.
 
-If bridge has no IP, its mastered interfaces are visible to host. If bridge gets an IP, then its managed interfaces still see each-other, but are not visible from host.
-
 ```
-sudo ip addr add 192.168.10.1/24 dev br0
-
+$ sudo ip addr flush dev enp0s3
+$ sudo ip addr add 192.168.10.1/24 dev br0
+$ ip link set br0 up
+$ ip route add default via 192.168.0.1 dev br0
 ```
 
 
