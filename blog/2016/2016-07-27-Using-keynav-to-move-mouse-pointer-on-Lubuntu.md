@@ -22,10 +22,12 @@ shift+Up move-up
 shift+Right move-right
 ```
 
-To start `keynav` automatically, I added to `~/.config/lxsession/Lubuntu`:
+To start `keynav` automatically, I added to `~/.config/lxsession/Lubuntu/autostart` file:
 
 ```
 @keynav
 ```
+
+Along with *daemonize* option in the configuration, this enables running `keynav` in background automatically.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-07-26-Getting-Started-With-Spark-Ml.md'>Getting Started With Spark Ml</a></ins>
