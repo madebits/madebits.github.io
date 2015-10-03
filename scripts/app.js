@@ -797,8 +797,8 @@ var applyStyle = function(containerId) {
 		processRepoPage(fileName, pageData.container);
 	}
 
-	if(pageData.isExternal) {
-		//pageData.container.prepend('<div class="hidden-print"><span class="label label-warning"><i class="fa fa-exclamation-triangle"></i> External content: ' + pageData.page + '</span> <a href="#index"><span class="label label-info">MadeBits</span></a></div><br>');
+	if(pageData.isExternal && !pageData.isSecret) {
+		pageData.container.prepend('<div class="hidden-print"><span class="label label-warning"><i class="fa fa-exclamation-triangle"></i> External content: ' + pageData.page + '</span></div><br>');
 	}
 
 	addToc(pageData.containerId, pageData.page);
@@ -1084,13 +1084,13 @@ var lastPage = null
 			pageData.navIsAbout = true;
 		}		
 	}
-	pageData.isExternal = (pageData.page.toLowerCase().startsWith('http://') || pageData.page.toLowerCase().startsWith('https://'));
 	pageData.isMarkdown = pageData.page.endsWith('.md') || pageData.page.endsWith('.mx');
 	pageData.isHtml = pageData.page.endsWith('.html')
 	if(pageData.page.startsWith(':md:')) {
 		pageData.isMarkdown = true;
 		pageData.page = pageData.page.substr(4);
 	}
+	pageData.isExternal = (pageData.page.toLowerCase().startsWith('http://') || pageData.page.toLowerCase().startsWith('https://'));
 
 	pageData.pageDir = '';
 	var dirIdx = pageData.page.lastIndexOf('/');
