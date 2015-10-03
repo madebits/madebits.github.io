@@ -64,7 +64,7 @@ u41-70 has a full-hd [TFT](https://www.quora.com/What-is-the-difference-between-
 
 ###GPU
 
-I experienced some sporadic [tearing](https://wiki.archlinux.org/index.php/intel_graphics#Tips_and_tricks) with display. Some form or tearing was visible up and now in Chrome browser given its GPU usage. After several tests with options, it [helps](https://www.reddit.com/r/archlinux/comments/4cojj9/it_is_probably_time_to_ditch_xf86videointel/) creating `/usr/share/X11/xorg.conf.d/20-intel.conf` (with)[http://cynic.cc/blog/posts/sna_acceleration_vs_uxa/]:
+I experienced some sporadic [tearing](https://wiki.archlinux.org/index.php/intel_graphics#Tips_and_tricks) with display. Some form or tearing was visible up and now in Chrome browser given its GPU usage. After several tests with options, it [helps](https://www.reddit.com/r/archlinux/comments/4cojj9/it_is_probably_time_to_ditch_xf86videointel/) creating `/usr/share/X11/xorg.conf.d/20-intel.conf` [with](http://cynic.cc/blog/posts/sna_acceleration_vs_uxa/):
 
 ```
 Section "Device"
