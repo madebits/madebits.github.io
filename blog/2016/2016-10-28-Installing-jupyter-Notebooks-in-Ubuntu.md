@@ -80,4 +80,4 @@ IRkernel::installspec()
 
 This will download, build, and install the Jupyter R kernel.
 
-<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-10-29-Python-Conference-Munich.md'>Python Conference Munich</a> <a rel='next' id='fnext' href='#blog/2016/2016-10-02-xrandr-Panning-with-no-Tracking.md'>xrandr Panning with no Tracking</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-10-29-Python-Conference-Munich.md'>Python Conference Munich</a> <a rel='next' id='fnext' href='#blog/2016/2016-10-27-Remote-Retrospectives.md'>Remote Retrospectives</a></ins>

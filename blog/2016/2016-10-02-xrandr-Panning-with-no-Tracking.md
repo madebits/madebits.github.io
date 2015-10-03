@@ -22,4 +22,4 @@ To undo the change:
 xrandr --fb 1366x768 --output LVDS1 --scale 1x1 --panning 1366x768
 ```
 
-<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-10-28-Installing-jupyter-Notebooks-in-Ubuntu.md'>Installing jupyter Notebooks in Ubuntu</a> <a rel='next' id='fnext' href='#blog/2016/2016-08-30-Ubuntu-Screen-Tools.md'>Ubuntu Screen Tools</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-10-27-Remote-Retrospectives.md'>Remote Retrospectives</a> <a rel='next' id='fnext' href='#blog/2016/2016-08-30-Ubuntu-Screen-Tools.md'>Ubuntu Screen Tools</a></ins>
