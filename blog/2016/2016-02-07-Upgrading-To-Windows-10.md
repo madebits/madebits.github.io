@@ -45,7 +45,7 @@ After that, I got the normal grub prompt for Ubuntu and for Windows 10.
 
 ##E6510 Peculiarities
 
-Windows 10 upgrade lost my switched button settings for the mouse. The display driver of my E6510 model was not found at first. It seems officially Dell does not support Windows 10 on this model. After installing Dell driver detect tool, my nVidia display driver was restored. My swapped mouse button setting was lost again after the display driver installation and I had to reconfigure it back. The free fall sensor of the machine did not work in Windows 10, but it is of no use to me given I have replaced the magnetic HDD with a SSD. The Cisco VPN Client was not compatible and was removed. I have to check what would be a replacement for that.
+Windows 10 upgrade lost my switched button settings for the mouse. The display driver of my E6510 model was not found at first. It seems officially Dell does not support Windows 10 on this model. After installing Dell driver detect tool, my nVidia display driver was restored. My swapped mouse button setting was lost again after the display driver installation and I had to reconfigure it back. The free fall sensor of the machine did not work in Windows 10, but it is of no use to me, given I have replaced the magnetic HDD with a SSD. The Cisco VPN Client was not compatible and was removed. I have to check what would be a replacement for that.
 
 ##Minimizing Windows 10 Exposure
 
