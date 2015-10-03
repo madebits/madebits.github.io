@@ -1,9 +1,9 @@
 
 [ip](http://baturin.org/docs/iproute2/).
 
-## Testing with Dummy Interface
+## Dummy Interface
 
-[Dummy](http://wiki.networksecuritytoolkit.org/index.php/Dummy_Interface) network interface is useful for testing. Lets try some free address:
+[Dummy](http://wiki.networksecuritytoolkit.org/index.php/Dummy_Interface) network interface is a local [loopback](http://www.tldp.org/LDP/nag/node72.html) interface useful for local testing. Lets try some free address:
 
 ```
 $ ping -c1 192.168.2.1
@@ -82,9 +82,15 @@ broadcast 192.168.2.255 dev dummy0 proto kernel scope link src 192.168.2.1
 
 ##Bridge
 
+[Bridge](http://www.tldp.org/HOWTO/BRIDGE-STP-HOWTO/index.html).
+
+Interfaces added to a bridge are connected on bridge [ports](https://superuser.com/questions/694661/losing-internet-access-when-creating-ethernet-bridge-for-openvpn). Bridge is the NIC.
+
 ```
 $ sudo ip addr add 192.168.2.1/24 dev dummy0
 $ sudo ip addr add 192.168.3.1/24 dev dummy1
+$ sudo ip link set dev dummy0 up
+$ sudo ip link set dev dummy1 up
 $ sudo ip link add name br0 type bridge
 $ sudo ip link set dev br0 up
 $ sudo ip link set dev dummy0 master br0
@@ -93,10 +99,31 @@ $ brctl show br0
 bridge name bridge id       STP enabled interfaces
 br0     8000.46c0f49644c2   no      dummy0
                             dummy1
-$ bridge link show | grep dummy
+$ bridge link show | grep dummytp
 19: dummy0 state UNKNOWN : <BROADCAST,NOARP,UP,LOWER_UP> mtu 1500 master br0 state forwarding priority 32 cost 100 
 20: dummy1 state DOWN : <BROADCAST,NOARP> mtu 1500 master br0 state disabled priority 32 cost 100
+
+$ brctl showstp br0
+br0
+ bridge id      8000.46c0f49644c2
+... 
+dummy0 (1)
+ port id        8001            state            forwarding
+...
+dummy1 (2)
+ port id        8002            state            forwarding
+...
 ```
+
+If NICs are added to bridge without flushing their IPs (`ip addr flush dev dummy0`), they are still reachable via the IP.
+
+If bridge has no IP, its mastered interfaces are visible to host. If bridge gets an IP, then its managed interfaces still see each-other, but are not visible from host.
+
+```
+sudo ip addr add 192.168.10.1/24 dev br0
+
+```
+
 
 Possible bridge [usages](https://wiki.archlinux.org/index.php/QEMU#Tap_networking_with_QEMU), in combination with `iptables` configuration:
 
