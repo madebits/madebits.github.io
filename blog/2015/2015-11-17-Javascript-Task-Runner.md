@@ -4,7 +4,7 @@
 
 <!--- tags: javascript deployment nodejs -->
 
-**Update:** There is a node.js module [grunner](#r/nodejs-grunner.md), I wrote based on this idea. This post is bit outdated.
+**Update:** There is a node.js module [grunner](#r/nodejs-grunner.md), I wrote based on this idea. This post is a bit outdated.
 
 ---
 
