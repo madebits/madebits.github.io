@@ -154,3 +154,6 @@ Here `g` represents a `GRunner` instance object.
 
 * `g.log(msg, isError)` - writes `msg` string in `console.log`, or if `isError=true` in `console.error`. You can replace this function with your own using `options.log`.
 
+* `g.dumpTasks([logger])` - dump the current list of tasks using `console.log` (can be changed by supplying your own `logger(str)` function).
+
+
