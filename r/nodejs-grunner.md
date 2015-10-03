@@ -61,7 +61,7 @@ All these options can be repeated more than once to specify one or more files an
 
 Specifying task to run:
 
-* `--gtask taskName` - task name to run. This option can be repeated as needed - all tasks are run (non-blocking!) in the given order. If not set, `default` task name is assumed.
+* `--gtask taskName` - task name to run. This option can be repeated as needed - all tasks are run (*blocking*) in the given order. If not set, `default` task name is assumed.
 
 Other options:
 
