@@ -18,6 +18,6 @@ It is preferable to have an agreement per team and per project on best followed 
 
 ##Improving with Experience Exchange 
 
-Experience exchange within and across teams, using planned presentation or internal and public, is the key to improvement and convergence in best software development practices across all teams - a limit to strive for, but never reach. Allow room for experimentation within each team and project and move each time a bit forward.
+Experience exchange within and across teams, using internal and public media, is the key to improvement and convergence in best software development practices across all teams - a limit to strive for, but never reach. Allow room for experimentation within each team and project and move each time a bit forward.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-12-30-Lubuntu-on-Dell-Latitude-E5570.md'>Lubuntu on Dell Latitude E5570</a></ins>
