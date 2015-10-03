@@ -40,7 +40,7 @@ This command creates [sparse](https://wiki.archlinux.org/index.php/sparse_file) 
 
 ###QEMU Process
 
-Once the VM is started, use `ps aux | grep qemu` to find the exact command-line used. Example, of my QEMU process with two vCPUs managed via KVM.
+Once the VM is started, use `ps aux | grep qemu` to find the exact command-line used. Example, of my QEMU process with two vCPUs managed via KVM. The two other threads are the QEMU process itself and the virtual IO.
 
 ```
 ...
