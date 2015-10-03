@@ -11,15 +11,17 @@ Default `vi`-like key binds are ok, but I also would like to use the arrow keys,
 ```
 daemonize
 
+ctrl+shift+Right start
+ctrl+shift+Left end
 Left cut-left
 Down cut-down
 Up cut-up
 Right cut-right
 Return warp,click 1,end
-shift+Left move-left
-shift+Down move-down
-shift+Up move-up
-shift+Right move-right
+ctrl+Left move-left
+ctrl+Down move-down
+ctrl+Up move-up
+ctrl+Right move-right
 ```
 
 To start `keynav` automatically, I added to `~/.config/lxsession/Lubuntu/autostart` file:
