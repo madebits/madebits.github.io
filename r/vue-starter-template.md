@@ -17,6 +17,7 @@ I may add more features to the sample application in the future, but at the mome
 * [vue-i18n](http://kazupon.github.io/vue-i18n/en/) internationalization fully integrated.
 * Sample starter code to help with Ajax (via [axios](https://github.com/axios/axios)), logging, authentication, timers.
 * ES2015+ via Babel with `async` / `await`.
+* Unit tests with Karma and jasmine in chrome headless with code coverage
 
 ##Getting Started
 
