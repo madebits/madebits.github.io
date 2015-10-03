@@ -39,7 +39,7 @@ sudo grub-install /dev/sda
 sudo update-grub
 ```
 
-After this I got the normal grub prompt for Ubuntu and for Windows 10.
+After that, I got the normal grub prompt for Ubuntu and for Windows 10.
 
 ##E6510 Peculiarities
 
