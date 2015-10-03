@@ -155,7 +155,7 @@ Windows 10 guest works fine without any custom software installed. However, to g
     > Total Run Time 00:00:05.77
  ```
 
- For comparison, this is what I get for Windows 10, on latest VirtualBox with SATA controller (without Host I/O cache) on same machine:
+ For comparison, this is what I get for Windows 10, on latest [VirtualBox](http://www.johnwillis.com/2014/03/virtualbox-speeding-up-guest-vm-lot.html) with SATA controller (without Host I/O cache) on same machine:
 
  ```
     > Disk  Random 16.0 Read                       99.93 MB/s          7.1
@@ -167,7 +167,7 @@ Windows 10 guest works fine without any custom software installed. However, to g
     > Average Read Time with Random Writes         1.194 ms          8.2
  ```
 
-And with Host I/O cache enabled:
+And VirtualBox with Host I/O cache enabled:
  
  ```
     > Disk  Random 16.0 Read                       167.61 MB/s          7.5
@@ -177,6 +177,18 @@ And with Host I/O cache enabled:
     > Latency: 95th Percentile                     1.492 ms          8.0
     > Latency: Maximum                             93.018 ms          7.7
     > Average Read Time with Random Writes         0.320 ms          8.8
+ ```
+
+And VirtualBox with SAS controller with Host I/O cache (SCSI is not recognized by Windows 10, so I cannot test with that, but SAS should be faster than SCSI):
+
+ ```
+    > Disk  Random 16.0 Read                       176.90 MB/s          7.6
+    > Disk  Sequential 64.0 Read                   433.18 MB/s          8.0
+    > Disk  Sequential 64.0 Write                  452.66 MB/s          8.1
+    > Average Read Time with Sequential Writes     0.118 ms          8.8
+    > Latency: 95th Percentile                     0.247 ms          8.8
+    > Latency: Maximum                             2.666 ms          8.7
+    > Average Read Time with Random Writes         0.133 ms          8.9
  ```
 
 ###Folder Sharing
