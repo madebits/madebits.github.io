@@ -45,5 +45,6 @@ https://www.reddit.com/r/Windows10/comments/3f38ed/guide_how_to_disable_data_log
 * http://www.classicshell.net/
 * https://github.com/crazy-max/HostsWindowsBlocker
 * http://tinywall.pados.hu/
+* http://www.hwinfo.com/misc/RemoveW10Bloat.htm
 
 <ins class='nfooter'><a id='fnext' href='#blog/2016/2016-02-03-Bootstrapping-Intercorrelated-Data.md'>Bootstrapping Intercorrelated Data</a></ins>
