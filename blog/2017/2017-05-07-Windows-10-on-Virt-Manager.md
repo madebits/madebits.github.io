@@ -369,6 +369,8 @@ user:libvirt-qemu:rwx
 group::rwx
 mask::rwx
 other::rwx
+# sometimes a permission fix is needed for new files
+$ sudo setfacl -R -m u:user:rwx /data/share
 ```
 
 In guest, mount the share by referring it by its tag `share` (create `/mnt/share` if not there):
