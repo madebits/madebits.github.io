@@ -130,6 +130,15 @@ I am not a big user of touchpad, so I use [touchpad-indicator](https://launchpad
 
 I had to install `seahorse` and mark *Login* key ring as default, not to be asked for the password of shares by `pcmanfm` on every login.
 
+To enable my bluetooth headset connect I [run](http://askubuntu.com/questions/801404/bluetooth-connection-failed-blueman-bluez-errors-dbusfailederror-protocol-no):
+
+```
+sudo apt-get install pulseaudio-module-bluetooth
+pactl load-module module-bluetooth-discover
+```
+
+The module is added to `/etc/pulse/default.pa`.
+
 ##Final Thoughts
 
 Finding an ultrabook-like machine that is powerful enough, runs Ubuntu without many hacks, and is not very expensive - can be a challenge. With u41-70, I had to be flexible on some areas, such as, TFT screen quality, battery life, and wlan reach. I am happy there was no obstacle big enough to make me return it. The machine is powerful enough for all my needs at home for the near future and light enough to carry around.
