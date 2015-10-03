@@ -476,6 +476,13 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
   ```
   And to apply use `sudo sysctl -p`. Verify `cat /proc/sys/net/ipv6/conf/all/disable_ipv6` returns 1. A restart may be needed.
 
+##Look and Feel
+
+* [Flatabulous](https://github.com/anmoljagetia/Flatabulous) is nice OpenBox theme.
+* `apt install faenza-icon-theme` for icons.
+* [FlatBedCursors](https://gitlab.com/limitland/flatbedcursors) provide a nice orange mouse cursors theme.
+* Clocl format `%R`.
+
 ##Final Thoughts
 
 Finding an ultrabook-like machine that is powerful enough, runs Ubuntu without many hacks, and is not very expensive - can be a challenge. With u41-70, I had to be flexible on some areas such as screen quality, battery life, and WLAN reach. I am happy that there was no obstacle big enough to make me return it. The machine is powerful enough for all my needs at home and light enough to carry around.
