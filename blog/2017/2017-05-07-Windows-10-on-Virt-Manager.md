@@ -162,7 +162,7 @@ $ route -n | grep vir
 
 ```
 
-This is convenient, and `iptables` has been modified:
+This is convenient, and `iptables` has been [modified](https://jamielinux.com/docs/libvirt-networking-handbook/appendix/example-of-iptables-nat.html):
 
 ```
 $ sudo iptables -S | grep vir
