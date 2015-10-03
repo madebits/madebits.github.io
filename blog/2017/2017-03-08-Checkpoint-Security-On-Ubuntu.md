@@ -57,7 +57,7 @@ Or with some more [options](http://manpages.ubuntu.com/manpages/yakkety/man1/xfr
 xfreerdp /size:1920x1080 /compression +clipboard /v:10.11.11.11 /u:user /sound /drive:"home,/home/user/work" /client-hostname:remote /toggle-fullscreen
 ```
 
-And with options optimized for performance:
+And with options optimized for performance (note `+cmd` is same as `/cmd`):
 
 ```
 xfreerdp /size:1920x1080 /compression +clipboard /v:10.11.11.11 /u:user /sound /client-hostname:remote /toggle-fullscreen /bpp:8 +async-input +async-update +async-transport +async-channels -wallpaper -themes
