@@ -1,3 +1,4 @@
+* [Installing jupyter Notebooks in Ubuntu](#blog/2016/2016-10-28-Installing-jupyter-Notebooks-in-Ubuntu.md)
 * [xrandr Panning with no Tracking](#blog/2016/2016-10-02-xrandr-Panning-with-no-Tracking.md)
 * [Ubuntu Screen Tools](#blog/2016/2016-08-30-Ubuntu-Screen-Tools.md)
 * [Lubuntu Closing Chrome Downloads Bar](#blog/2016/2016-08-02-Lubuntu-Closing-Chrome-Downloads-Bar.md)
@@ -5,4 +6,3 @@
 * [Upgrading to Lubuntu 16.04.1](#blog/2016/2016-07-30-Upgrading-to-Lubuntu-16.04.1.md)
 * [Using keynav to move mouse pointer on Lubuntu](#blog/2016/2016-07-27-Using-keynav-to-move-mouse-pointer-on-Lubuntu.md)
 * [Getting Started With Spark Ml](#blog/2016/2016-07-26-Getting-Started-With-Spark-Ml.md)
-* [Agile Iterations As Path Search](#blog/2016/2016-07-14-Agile-Iterations-As-Path-Search.md)
