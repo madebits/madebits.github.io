@@ -86,7 +86,7 @@ Circular task dependencies, such as, `G.t('t1', ['t2']); G.t('t2', ['t1']);` dir
 
 ##GRunner Instances
 
-When you use `let G = require('grunner');` you get *same* per process singleton instance `G` of `GRunner` class. This instance `G` is used by default, by all `gfile.js` tasks. If you want to use the `grunner` command-line, you should only use this process singleton object to define your tasks. 
+When you use `let G = require('grunner');` you get *same* process wide singleton instance `G` of `GRunner` class. This instance `G` is used by default, by all `gfile.js` tasks. If you want to use the `grunner` command-line, you should only use this process wide singleton object to define your tasks. 
 
 For more advanced scenarios, you can create as many `GRunner` instances as needed using code such as:
 
