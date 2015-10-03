@@ -4,7 +4,7 @@
 
 <!--- tags: architecture agile deployment -->
 
-There is nothing to suggest that **unit test** code coverage metric is related in any way to software quality, thought some people may tend believe there is a positive correlation. Code coverage should not be used as a software quality metric.
+Often unit test code coverage is used as a quality metric, the higher, the better. However, there is nothing to suggest that **unit test** code coverage metric is related to software quality. Code coverage is an indication, how much of the software code is unit tested, but the effort to achieve 100% unit test code coverage, is not linear to achieving better software quality.
 
 ##A Counter Example
 
@@ -41,11 +41,13 @@ If coverage metric is used as quality goal, developers will routinely stop at an
 * Someone took *'xx% test code coverage'* too seriously and mistakenly thought it mean better software quality and made it a development goal.
 * Project cost was very likely increased to achieve *'xx% test code coverage'*, without any indication on how the test code coverage number really improves product quality.
 * As any metric, code coverage reduces reality to a single number, leaving out most of the context details, and it is more misleading than useful if reported outside development scope.
-* Code coverage is of use mainly to the developers to check some test they write whether it covers what they think it does. It is a compromise, done by the developer(s) on a case by case basis, between having unit tests and spending a lot of time in a unit tests just per se.
+
+Code coverage is an absolute content independent metric. It is useful for developers how much code is tested. The value of code coverage metric that is useful for a given module is, however, context depended. 100% code coverage may make sense for some generic purpose utility library or framework, but most applications everything over 70% is quite good. Code coverage is compromise, done by the developer(s) on a case by case basis, between having unit tests and spending a lot of time in a unit tests just to please some metric.
+ 
 
 ##Unit Tests are Useful not the Code Coverage Metric
 
-Why do we then write unit tests when we cannot rely on their popular metric of code coverage to deduce anything meaningful to report to the management about them:
+Why do we then write unit tests when we cannot rely on their popular metric of code coverage to deduce anything meaningful to report to the management about product quality:
 
 * Unit tests test as least one code path. This is better than nothing. They do not tell anything quality of the software, but they tell us that at least some code path works as developer thought it would.
 * Unit tests help understand what code does. They are a form of compiler checked documentation. Comments in code may get out of sync with what the code does. Unit tests on the other side, have to maintained if the affected code changes.
@@ -78,20 +80,5 @@ We have mostly manual tests. The majority of automated tests are integration one
 ##Testing Pyramid as a Better Quality Metric
 
 The relative ratio(s) between the types of tests if the testing pyramid of project can give a better indication of long term maintenance quality of the software. Of course, the actual ratio values can be project specific. Testing pyramid ratio metrics can be collected and compared against similar previous projects, and against same self metrics over project time.
-
-```
-T = U + I + M
-
-RUT = U / T
-RIT = I / T
-RMT = M / T
-
-RUO = U / (I + M)
-RIO = I / (U + M)
-RMO = M / (U / M)
-
-(U / M) > (U / I) > (I / M)
-```
-
 
 <ins class='nfooter'><a id='fprev' href='#blog/2015/2015-04-29-Google-Apps-Tricks.md'>Google Apps Tricks</a> <a id='fnext' href='#blog/2015/2015-04-21-Devops-and-Modern-Programming.md'>Devops and Modern Programming</a></ins>
