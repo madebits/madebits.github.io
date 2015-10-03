@@ -1,3 +1,4 @@
+* [Agile Development Readings](#blog/2016/2016-06-27-Agile-Development-Readings.md)
 * [Gulp Karma Webpack](#blog/2016/2016-04-22-Gulp-Karma-Webpack.md)
 * [Statistical Learning Certification](#blog/2016/2016-04-09-Statistical-Learning-Certification.md)
 * [Background Sounds](#blog/2016/2016-04-07-Background-Sounds.md)
@@ -5,4 +6,3 @@
 * [Key Derivation Functions](#blog/2016/2016-02-24-Key-Derivation-Functions.md)
 * [Sharing Local Folders Over Remote Desktop](#blog/2016/2016-02-17-Sharing-Local-Folders-Over-Remote-Desktop.md)
 * [Using Autofac to Organize CSharp Code](#blog/2016/2016-02-12-Using-Autofac-to-Organize-CSharp-Code.md)
-* [Upgrading To Windows 10](#blog/2016/2016-02-07-Upgrading-To-Windows-10.md)

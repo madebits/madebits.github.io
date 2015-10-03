@@ -678,6 +678,11 @@ var applyStyle = function(containerId) {
 
 , handleImage = function(m, dataUriSupported, i) {
 	var alt = m.attr('alt');
+
+	if(alt && (alt.indexOf('@left@') >= 0)) {
+		m.addClass('pull-left padded');
+	}
+
 	if(alt && (alt.indexOf('@thumb@') >= 0)) {
 		m.addClass('img-thumbnail');
 	}

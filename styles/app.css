@@ -180,3 +180,5 @@ a.nounderline:link
         display:block !important;
     }
 }
+
+.padded { margin: 10px; }

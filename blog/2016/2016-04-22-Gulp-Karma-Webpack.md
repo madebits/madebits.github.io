@@ -809,4 +809,4 @@ This configuration enables developers to conveniently switch back and forth betw
 * https://medium.com/@dtothefp/why-can-t-anyone-write-a-simple-webpack-tutorial-d0b075db35ed#.kn2vgewtn
 * https://github.com/mvader/react-es6-webpack-karma-boilerplate
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-04-09-Statistical-Learning-Certification.md'>Statistical Learning Certification</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-06-27-Agile-Development-Readings.md'>Agile Development Readings</a> <a rel='next' id='fnext' href='#blog/2016/2016-04-09-Statistical-Learning-Certification.md'>Statistical Learning Certification</a></ins>
