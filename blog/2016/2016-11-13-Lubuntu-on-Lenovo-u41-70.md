@@ -196,7 +196,7 @@ RUNTIME_PM_ON_AC=on
 RUNTIME_PM_ON_BAT=auto
 ```
 
-This was causing freeze on BAT. I decided to leave default southbridge *auto* devices to *auto* by blacklisting them, and disabled power management for <a href="https://en.wikipedia.org/wiki/Northbridge_(computing)">northbridge</a> and VGA controller, as while on PCI bus, they are still part of CPU:
+This was causing freeze on BAT. I decided to leave default southbridge *auto* devices to *auto* all the time by blacklisting them, and disabled power management for <a href="https://en.wikipedia.org/wiki/Northbridge_(computing)">northbridge</a> and VGA controller, as while on PCI bus, they are still part of CPU:
 
 ```
 RUNTIME_PM_BLACKLIST="00:1c.0 00:1c.2 00:1c.3 00:00.0 00:02.0"
