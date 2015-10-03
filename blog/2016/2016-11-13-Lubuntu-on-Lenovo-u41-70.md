@@ -227,35 +227,47 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
 
 ##Other Applications
 
-Using `dbus-launch ~/.dropbox-dist/dropboxd` to [start](http://askubuntu.com/questions/732967/dropbox-icon-is-not-working-xubuntu-14-04-lts-64) Dropbox helps tray icon be visible.
+* Using `dbus-launch ~/.dropbox-dist/dropboxd` to [start](http://askubuntu.com/questions/732967/dropbox-icon-is-not-working-xubuntu-14-04-lts-64) Dropbox helps tray icon be visible.
 
-For Chromium, `pepperflashplugin-nonfree` is no more maintained - one has to use `adobe-flashplugin` now.
+* For Chromium, `pepperflashplugin-nonfree` is no more maintained - one has to use `adobe-flashplugin` now.
 
-[touchpad-indicator](https://launchpad.net/~atareao/+archive/ubuntu/atareao) helps disable touchpad when mouse is plugged in.
+* [touchpad-indicator](https://launchpad.net/~atareao/+archive/ubuntu/atareao) helps disable touchpad when mouse is plugged in.
 
-I had to install `seahorse` and mark *Login* key ring as default, not to be asked for the password of shares by `pcmanfm` on every login.
+* I had to install `seahorse` and mark *Login* key ring as default, not to be asked for the password of shares by `pcmanfm` on every login.
 
-To enable my bluetooth headset, I [installed](http://askubuntu.com/questions/801404/bluetooth-connection-failed-blueman-bluez-errors-dbusfailederror-protocol-no):
+* To enable my bluetooth headset, I [installed](http://askubuntu.com/questions/801404/bluetooth-connection-failed-blueman-bluez-errors-dbusfailederror-protocol-no):
 
-```
-sudo apt-get install pulseaudio-module-bluetooth
-pactl load-module module-bluetooth-discover
-```
+  ```
+  sudo apt-get install pulseaudio-module-bluetooth
+  pactl load-module module-bluetooth-discover
+  ```
 
-The module is added to `/etc/pulse/default.pa`. To autostart `blueman-manager` I added to `/home/u7/.config/lxsession/Lubuntu/autostart`:
+ The module is added to `/etc/pulse/default.pa`. To autostart `blueman-manager` I added to `/home/u7/.config/lxsession/Lubuntu/autostart`:
 
-```
-@blueman-applet
-```
+  ```
+  @blueman-applet
+  ```
 
-Mandatory custom `/etc/hosts` entries:
+* LXDE *Keyboard and Mouse* settings are saved in `~/.config/.config/autostart/LXinput-setup.desktop`. I reversed my mouse buttons via UI (`lxinput`) and then manually modified the file to map *Caps* key to *Shift* and enable *Ctrl+Alt+Backspace* for x11 (`xset` below has defaults, rest are my modified values):
 
-```
-0.0.0.0 google-analytics.com
-0.0.0.0 www.google-analytics.com
-0.0.0.0 ssl.google-analytics.com
-0.0.0.0 client-s.gateway.messenger.live.com 
-```
+  ```
+  [Desktop Entry]
+  Type=Application
+  Name=LXInput autostart
+  Comment=Setup keyboard and mouse using settings done in LXInput
+  NoDisplay=true
+  Exec=sh -c 'xset m 20/10 10 r rate 500 30 b on;setxkbmap -option terminate:ctrl_alt_bksp;xmodmap -e "pointer = 3 2 1" -e "keycode 66 = Shift_L"'
+  NotShowIn=GNOME;KDE;XFCE;
+  ```
+
+* Mandatory custom `/etc/hosts` entries:
+
+  ```
+  0.0.0.0 google-analytics.com
+  0.0.0.0 www.google-analytics.com
+  0.0.0.0 ssl.google-analytics.com
+  0.0.0.0 client-s.gateway.messenger.live.com 
+  ```
 
 ##Final Thoughts
 
