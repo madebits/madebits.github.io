@@ -52,7 +52,7 @@ It seems, [acpi](https://wiki.archlinux.org/index.php/ACPI_modules) information 
 
 ###ZRam
 
-My u41-70 model has 8GB of RAM, more than enough for Lubuntu, but still I installed `zram-config` and enabled and started the its service (`sudo systemctl enable zram-config`). `zram` is lightweight for the i5 CPU and practically gives you 60% of more RAM for free (if you ever need it for virtual machines or so). I do not use any swap memory in Lubuntu, but have still to see the day I am using all of RAM.
+8GB of RAM is more than enough for Lubuntu, but still I installed `zram-config` and enabled and started the its service (`sudo systemctl enable zram-config`). `zram` is lightweight for the i5 CPU and practically gives you 60% of more RAM for free (if you ever need it for virtual machines or so). I do not use any swap memory in Lubuntu, but have still to see the day I am using all of RAM.
 
 ##Graphics
 
@@ -60,7 +60,7 @@ My u41-70 model comes with Intel HD Graphics 5500 and a 1920x1080 TFT screen.
 
 ###Screen
 
-u41-70 comes with a full-hd [TFT](https://www.quora.com/What-is-the-difference-between-an-IPS-screen-and-a-TFT-screen) LCD, which is ok for its kind. Black was not rendered as I expected and given, I am using [redshift](http://jonls.dk/redshift/), I configured gamma to be 0.8 for day and night. This improves the readability of black and gray text.
+u41-70 has a full-hd [TFT](https://www.quora.com/What-is-the-difference-between-an-IPS-screen-and-a-TFT-screen) LCD, which is ok for its kind. Black was not rendered as I expected and given, I am using [redshift](http://jonls.dk/redshift/), I configured gamma to be 0.8 for day and night. This improves the readability of black and gray text.
 
 ###GPU
 
@@ -94,7 +94,7 @@ I installed [tlp](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-manag
 
 ##Wireless
 
-u41-70 makes use of [Intel Wireless 3160](https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi). It can handle both 2.4 Ghz, 5.8 Ghz, and bluetooth. The card reach is a bit weak on large distances. It has full speed in rooms near the router, but the quality (`watch -n1 iwconfig`) falls down three rooms away. This means at some locations at home the wlan is not very usable. 
+u41-70 makes use of [Intel Wireless 3160](https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi). It can handle both 2.4 Ghz, 5.8 Ghz, and bluetooth. The card reach is a bit weak on large distances. It has full speed in rooms near the router, but the quality (`watch -n1 iwconfig`) falls down three rooms away. This means at some locations at home WLAN is not stable. 
 
 I tried [disabling](https://wiki.archlinux.org/index.php/Wireless_network_configuration) some of the [properties](http://askubuntu.com/questions/640178/no-connection-sporatic-connection-with-intel-3160-wireless-lenovo-y50-ubuntu), by appending to `/etc/modprobe.d/iwlwifi.conf`:
 
