@@ -15,7 +15,7 @@ It can be useful to know where the applications write their data. As a shortcut,
 alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT %p %l\n"'
 ```
 
-1. Disable recently use files list:
+1. Disable recently use files list (has to be done for both current user and `root`):
 	```
 	rm -f ~/.local/share/recently-used.xbel 
 	touch ~/.local/share/recently-used.xbel
@@ -126,7 +126,55 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 
 	Check using `df` command that *Avail*able disk space is 4 or smaller. If not, run the two commands above (while ... and sync ...) again. Repeat until `df` command reports that *Avail*able disk space is 4 or smaller.
 
-	Finally, clean the created `rm zero.*` files.
+	Finally, clean the created `rm zero.*` files. 
+
+	As disk cleanup commands are boring to manually type all the time, I set up a small script:
+
+	```
+	#!/bin/bash
+
+	#has to be done before once:
+	#sudo tune2fs -m 0 /dev/sda1
+	#sudo tune2fs -l /dev/sda1 | grep 'Reserved block count'
+
+	dir=$1
+	if [ -z "$dir" ]; then
+		dir="$HOME/temp"
+	fi
+
+	dir="${dir}/zero"
+	mkdir -p "${dir}" || exit 1
+
+	function cleanUp {
+		if [ -d "$dir" ]; then
+			echo -e "\nRemoving ${dir}"
+			rm -rf "${dir}"
+		fi
+		echo "Done"
+		exit
+	}
+
+	trap cleanUp SIGHUP SIGINT SIGTERM
+
+	partition=$(df -P "$dir" | tail -1 | tr -s ' ' | cut -d ' ' -f 1)
+	echo -e "Creating ${dir}\nOverwriting free partition space in ${partition} (may take some time):"
+	available=$(df -P "$dir" | tail -1 | tr -s ' ' | cut -d ' ' -f 4)
+	echo -n "($available)"
+
+	while : ; do
+		cat /dev/zero > "${dir}/zero.$RANDOM" 2>/dev/null
+		if [ $? -ne 0 ] ; then
+			sync
+			available=$(df -P "$dir" | tail -1 | tr -s ' ' | cut -d ' ' -f 4)
+			echo -n "($available)"
+			if [[ $available -lt 5 ]] ; then
+				break;
+			fi
+		fi
+	done
+	sleep 60 ; sync
+	cleanUp
+	```
 	
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-08-25-Fully-Remove-Installed-Packages-in-Lubuntu.md'>Fully Remove Installed Packages in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2012/2012-08-01-Change-Wallpaper-at-Startup-in-Lubuntu.md'>Change Wallpaper at Startup in Lubuntu</a></ins>
