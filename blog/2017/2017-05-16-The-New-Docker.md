@@ -40,6 +40,6 @@ Swarm nodes can be deployed on any data-center, to any infrastructure. Docker of
 
 Docker Inc. is working to expand on Docker Swarm and make it comparable to the more mature solutions such as [Kubernetes](https://kubernetes.io/). Recent [features](https://sreeninet.wordpress.com/2017/01/27/docker-1-13-experimental-features/), such as, orchestration of service logs, and node metrics compatibility with [Prometheus](https://prometheus.io/) enable re-using third-party Kubernetes tooling also for Docker Swarm.
 
-What I miss in Docker Swarm (as well as in Kubernetes) is service dependency management - something like a distributed `systemd` is missing. You can specify node affinity, but full-fledged abstract dependency management has to handled currently [outside](https://www.docker.com/use-cases/cicd) in [CI/CD](https://en.wikipedia.org/wiki/CI/CD) level.
+What I miss in Docker Swarm (as well as in Kubernetes) is service dependency management - something like a distributed `systemd` is missing. You can specify node affinity, but full-fledged abstract dependency management has be to handled currently on your [own](https://www.docker.com/use-cases/cicd) in [CI/CD](https://en.wikipedia.org/wiki/CI/CD) level.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-05-09-Ubuntu-Block-Application-Internet-Access.md'>Ubuntu Block Application Internet Access</a></ins>
