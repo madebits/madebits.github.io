@@ -50,7 +50,7 @@ $ dmesg | grep -i failed
 [    2.369730] [drm:intel_dp_start_link_train [i915]] *ERROR* failed to train DP, aborting
 ```
 
-It seems, [acpi](https://wiki.archlinux.org/index.php/ACPI_modules) information is not correctly supplied by BIOS, not that it matters much in my case and this is not the first laptop to have this issue. Do not know what DP message is about, but external monitor (TV) over HDMI works fine.
+It seems, [acpi](https://wiki.archlinux.org/index.php/ACPI_modules) information is [not](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1349740) correctly supplied by BIOS, not that it matters much in my case and this is not the first laptop to have this issue. Do not know what DP message is about, but external monitor (TV) over HDMI works fine.
 
 ###ZRam
 
