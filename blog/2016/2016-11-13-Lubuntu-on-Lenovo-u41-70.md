@@ -92,7 +92,7 @@ sudo rfkill unblock 1 #id
 
 ##Graphics
 
-My u41-70 model comes with Intel HD Graphics 5500 and a 1920x1080 TFT screen.
+My u41-70 model comes with Intel HD Graphics 5500 and a 1920x1080 TN screen.
 
 ###Screen
 
