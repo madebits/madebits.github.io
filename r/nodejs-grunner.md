@@ -131,6 +131,6 @@ Here `g` represents a `GRunner` instance object.
 
 * `g.run(taskName, cb)` - is used to run a task. When used via command-line this function is called for you with `--gtask` tasks. This function does not block, use `cb(error)` to be notified when done. If a task has any dependencies, then those task will be run before (recursively).
 
-* `g.log(msg, isEror)` - writes `msg` string in `console.log`, or if `isError=true` in `console.error`.
+* `g.log(msg, isError)` - writes `msg` string in `console.log`, or if `isError=true` in `console.error`.
 
 
