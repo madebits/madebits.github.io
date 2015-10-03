@@ -16,7 +16,7 @@ Two small useful tool for monitor and screen management in Ubuntu:
 * `disper -e` extend displays
 * `disper -d auto -e` extend all displays
 
-`disper` is mainly for nVidia cards, but it works same good for `randr`. In Lubuntu, the `disper` commands can be mapped to keyboard using `openbox` configuration (`~/.config/openbox/lubuntu-rc.xml`). The following command cycles via the different configurations:
+`disper` is mainly for nVidia cards, but it works same good for `randr`. In Lubuntu, the `disper` commands can be mapped to keyboard using `openbox` configuration (`~/.config/openbox/lubuntu-rc.xml`). The following command cycles via different configurations:
 
 ```xml
 ...
