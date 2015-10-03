@@ -357,7 +357,7 @@ To use [9p](https://askubuntu.com/questions/819773/is-there-something-like-virtu
 
 Select a host folder to share, e.g. `/data/share`. VM [runs](http://rabexc.org/posts/p9-setup-in-libvirt) as user `librivt-qemu` under group `kvm` (configurable in `/etc/libvirt/qemu.conf`) - ensure this user and group has [access](https://unix.stackexchange.com/questions/257372/how-can-i-store-files-in-the-mounted-shared-folder), along with your own user to the host shared folder.
 
-Normally, the following setting should be enough, but they do not work:
+New files are in guest are created as non-shareable with the group. Normally, the following setting should be enough, but they do not work:
 
 ```bash
 chown -R libvirt-qemu:kvm /data/share
@@ -366,7 +366,7 @@ sudo setfacl -m default:u::rwx,default:g::rwx /data/share
 sudo setfacl -m default:m::rwx /data/share
 ```
 
-New files are in guest are created as non-shareable with the group. The above does not work as somehow default and mask ACL is ignored for new files. A permission fix is need in host after creation of new files guest:
+The above does not work as somehow default and mask ACL is ignored for new files. A permission fix is need in host after creation of new files guest:
 
 ```bash
 $ sudo setfacl -R -m u:libvirt-qemu:rwx,u:$(id -un):rwx /data/share
