@@ -131,11 +131,11 @@ Of course, if you do not need to use different processes, using Node.js `require
 
 ##Reacting To Change
 
-There are different types of task that can trigger automatic running of tasks. GRunner does not have any build-in support to monitor anything, but you can easy integrate GRunner will any kind of monitoring events you care about:
+There are different types of events that may wish to trigger running of GRunner tasks. GRunner does not have any build-in support to monitor anything, but you can easy integrate GRunner will any kind of monitoring events you care about:
 
 * There are enough Node.js libraries to monitor files and directories. You can can directly call `G.run` with a task name if some event of interest happens.
-* You can monitor some repository branch for changes and trigger `G.run` with some deployment tasks.
-* Similarly, you can monitor the state of some service and `G.run` with some recovery or load balancing task.
+* Monitor some repository branch for changes and trigger `G.run` with some deployment tasks.
+* Similarly, monitor the state of some service and `G.run` with some recovery or load balancing task, and so on.
 
 ##Task API Reference
 
