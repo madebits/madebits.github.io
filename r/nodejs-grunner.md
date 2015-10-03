@@ -20,6 +20,8 @@ To install locally in your node project where the task file is:
 npm i grunner -D
 ```
 
+If installed locally, you can run GRunner as `node node_modules/grunner/bin/grunner.js` appending any arguments.
+
 Tasks are coded in Javascript, in one or more files, the default task file name is `gfile.js`:
 
 ```
