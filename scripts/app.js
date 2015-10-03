@@ -234,7 +234,7 @@ var user = madebits.constName
 		if(data && data.length) {
 			cb(data, false);
 			repos = repos.concat(data);
-			getPage(cb, page + 1);
+			setTimeout(function() { getPage(cb, page + 1); }, 0);
 		}
 		else {	
 			mbStorage.set('repos', repos);
