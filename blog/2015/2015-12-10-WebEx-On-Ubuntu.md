@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-[WebEx](http://www.webex.com/) runs ok on Ubuntu 64 bit in Firefox 64 bit, but the integrated audio support requires 32 bit version of the Java plugin (and 32 bit Firefox). I tried the following in Ubuntu 14.04 64 bit based on some [post](http://gazelle.ihe.net/content/using-webex-under-linux) and a Ubuntu [question](https://askubuntu.com/questions/111947/running-32-bit-firefox-with-sun-jre-in-64-bit-ubuntu/202415#202415).
+[WebEx](http://www.webex.com/) runs ok on Ubuntu 64 bit in Firefox 64 bit, but the integrated audio support requires 32 bit version of the Java plugin (and 32 bit Firefox). I tried the following in Ubuntu 14.04 64 bit based on some [post](http://gazelle.ihe.net/content/using-webex-under-linux) and a Ubuntu [question](https://askubuntu.com/questions/111947/running-32-bit-firefox-with-sun-jre-in-64-bit-ubuntu/202415#202415). To test one can use [https://www.webex.com/test-meeting.html](https://www.webex.com/test-meeting.html), or start a real meeting in another device.
 
 ##WebEx on Firefox 64 bit
 
@@ -53,7 +53,7 @@ At this point restarting Firefox and joining some WebEx meeting should also supp
 
 ##WebEx with Integrated Audio
 
-WebEx integrated audio will not work in Firefox 64 bit. We need to use the 32 bit version of Firefox. The steps above for Firefox 64 bit have to be done, before you continue (using 64 bit Firefox as shown above, no need to repeat them for Firefox 32 bit). Look at version of Firefox you have (at this time I have 42.0 build 2) and download from Mozilla [directly](https://ftp.mozilla.org/pub/firefox/releases/) the binaries of this version for Linux 32 bit, and place them in some folder `~/32` (you can use any name):
+WebEx integrated audio will not work in Firefox 64 bit. We need to use the 32 bit version of Firefox. The steps above for Firefox 64 bit have to be done, before you continue (by using 64 bit Firefox as shown above, no need to repeat them for Firefox 32 bit). Look at version of Firefox you have (at this time I have 42.0 build 2) and download from Mozilla [directly](https://ftp.mozilla.org/pub/firefox/releases/) the binaries of this version for Linux 32 bit, and place them in some folder, e.g.: `~/32` (you can use any name):
 
 ```
 cd
@@ -84,7 +84,7 @@ touch f32.sh
 chmod +x f32.sh
 ```
 
-We created also an executable file `f32.sh`. Open `f32.sh` in your favorite text editor and put in the following text: 
+I created also an executable shell file `f32.sh` above. Open `f32.sh` in your favorite text editor and put in the following text: 
 
 ```
 #!/bin/bash
@@ -101,14 +101,14 @@ The folder structure in `~/32` should look as follows (it is around 300MB in siz
 └── jre/
 ```
 
-We are almost done. The Firefox 32 bit we have will not run in the default 64 bit system because it needs additional library dependencies. The best way to get them is to be bold :) and run these commands:
+We are almost done. Firefox 32 bit we have will not run in the default 64 bit system because it needs additional library dependencies. The best way to get them is to be bold :) and run these commands:
 
 ```
 sudo apt-get install firefox:i386
 sudo apt-get install firefox
 ```
 
-The first command will remove Firefox 64 bit from your system and install Firefox 32 bit with its required libraries. The second command will then remove Firefox 32 bit from your system, and install back Firefox 64 bit. The libraries needed to run Firefox 32 bit will, however, remain. After you do this, you can run your copy of Firefox 32 bit found in the `~/32` folder using:
+The first command will remove Firefox 64 bit from your system and install Firefox 32 bit with its required libraries. The second command will then remove Firefox 32 bit from your system, and install back Firefox 64 bit. The libraries needed to run Firefox 32 bit will, however, remain. Now, you can run your copy of Firefox 32 bit found in the `~/32` folder using:
 
 ```
 ~/32/f32.sh &
@@ -118,6 +118,6 @@ You may also consider putting `f32.sh` in `~/bin` folder to be able to run it wi
 
 Your 64 bit system is still using Firefox 64 bit for any normal browsing, but when you use the above command a 32 bit Firefox instance will be run, with the 32 bit Java plugin. Use that 32 bit Firefox instance (only) for WebEx. If you join a WebEx meeting in the 32 bit instance, the integrated audio will also work. You can update Firefox and JRE in `~/32` folder as needed in the future (download, uncompress, put to same location).
 
-You may notice that Firefox 32 bit complains when started (logs in console) about possible plugins in `/usr/lib/mozilla/plugins` folder. They are 64 bit plugins and Firefox 32 bit cannot load them. This warning should come only once, and then those plugins will not be used after that. More evolved approaches are possible (e.g., mounting tmpfs on `/usr/lib/mozilla/plugins`), but are more evolved and add no value in this particular case.
+You may notice that Firefox 32 bit complains when started (logs in console) about possible plugins in `/usr/lib/mozilla/plugins` folder. They are 64 bit plugins and Firefox 32 bit cannot load them. This warning should come only once, and then those plugins will not be used after that. More evolved approaches are possible (e.g., mounting tmpfs on `/usr/lib/mozilla/plugins`), but they add no value in this particular case.
 
 <ins class='nfooter'><a id='fprev' href='#blog/2016/2016-02-03-Bootstrapping-Intercorrelated-Data.md'>Bootstrapping Intercorrelated Data</a> <a id='fnext' href='#blog/2015/2015-11-17-Javascript-Task-Runner.md'>Javascript Task Runner</a></ins>
