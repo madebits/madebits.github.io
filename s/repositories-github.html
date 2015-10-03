@@ -40,6 +40,12 @@ git config --global --unset http.proxy
 git config --global --unset https.proxy
 </pre>
 
+<h2>Full File History</h2>
+
+<pre>
+git log --graph --follow --all -p -m --pretty=format:"%h %d %ad %an - %<(128,trunc)%s" --date=short -- path/to/file
+</pre>
+
 <h2>Removing History</h2>
 
 <pre>
