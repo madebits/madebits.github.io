@@ -333,6 +333,8 @@ sudo apt install spice-vdagent spice-webdavd xserver-xorg-video-qxl linux-image-
 
 The last one `linux-image-extra-virtual` is need to use `9p` shared folders.
 
+####Sharing via WebDAV
+
 To access WebDAV shared folders use [gvfs](https://wiki.ubuntuusers.de/gvfs-mount/):
 
 ```
@@ -349,7 +351,7 @@ ps aux | grep webdavd
 systemctl status spice-webdavd.service
 ```
 
-####Using Filesystemshare
+####Sharing via Filesystemshare
 
 To use [9p](https://askubuntu.com/questions/819773/is-there-something-like-virtualbox-guest-additions-for-qemu-kvm) shared folders, add a Filesystemshare to the VM, using *Mapped* mode and give it a target path [tag](https://www.kernel.org/doc/Documentation/filesystems/9p.txt), for example: `share` - this is just a tag, not a path. 
 
