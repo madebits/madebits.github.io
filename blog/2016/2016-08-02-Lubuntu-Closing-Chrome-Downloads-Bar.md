@@ -12,7 +12,7 @@ I tried first running `xdotool` in a loop:
 xdotool search --all --onlyvisible --class chromium-browser keyup --window %@ ctrl+j ctrl+w
 ```
 
-This kind of works, as Chromium can detect the key is synthetic and ignores the `ctrl` modifier, making the above command useless (this works for `ctrl+r` thought). 
+This does not work as intended, as Chromium detects the key is synthetic and ignores the `ctrl` modifier, making the above command useless (it works for `ctrl+r` thought). 
 
 If used [without](https://unix.stackexchange.com/questions/214909/xdotool-does-not-send-keys) a window id, `xdotool` sends keys differently and Chromium cannot detect that. The only drawback is that unlike the script above, it has to be triggered manually. To do this, I added a key binding to `~/.config/openbox/lubuntu-rc.xml`:
 
