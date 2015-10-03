@@ -26,7 +26,7 @@ With Google being one of main Mozilla sponsors, Google often uses Firefox as pla
 
 Similarly, in Chrome 55 using [chrome://plugins](chrome://plugins) one can enable Flash, and then use some third-party [extension](https://chrome.google.com/webstore/detail/flashcontrol/mfidmkgnfgnkihnjeklbekckimkipmoe) to achieve 'same' level of control as before, but this will be less secure than using the browser itself to block plugins.
 
-##The Flash Killer That Gives New Live to Flash
+##Flash Killer That Gives New Live to Flash
 
 Flash will not go away by this change (and why should Google [decide](https://docs.google.com/presentation/d/106_KLNJfwb9L-1hVVa4i29aw1YXUy9qFX-Ye4kvJj-4/present?ueb=true&slide=id.p) on that?). On the contrary, by this change, Flash will gain popularity as a tool for exploration of security holes, tracking, and advertising. People will just feel safer. Sites that have Flash will benefit, as once Flash is enabled, they can use it not only for the things the user wants. This move is sold under HTML5 promotion, but what it actually achieves is making web browsing less secure and ensures Flash will be still around for years to come.
 
