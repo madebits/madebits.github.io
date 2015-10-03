@@ -1,3 +1,4 @@
+* [The New Docker](#blog/2017/2017-05-16-The-New-Docker.md)
 * [Ubuntu Block Application Internet Access](#blog/2017/2017-05-09-Ubuntu-Block-Application-Internet-Access.md)
 * [Windows 10 on virt manager](#blog/2017/2017-05-07-Windows-10-on-virt-manager.md)
 * [Cross Cutting Concerns Evolution](#blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md)
@@ -5,4 +6,3 @@
 * [Checkpoint Security On Ubuntu](#blog/2017/2017-03-08-Checkpoint-Security-On-Ubuntu.md)
 * [Integrating GO.CD with Nexus](#blog/2017/2017-02-21-Integrating-GO.CD-with-Nexus.md)
 * [Embracing Team Practices Variability](#blog/2017/2017-01-19-Embracing-Team-Practices-Variability.md)
-* [Lubuntu on Dell Latitude E5570](#blog/2016/2016-12-30-Lubuntu-on-Dell-Latitude-E5570.md)
