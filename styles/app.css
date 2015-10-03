@@ -89,10 +89,9 @@ pre code.nohighlight { background-color: transparent; color: #000; }
     font-size: 63px;
 }
 
-#mbg-nav {
-    border-top: 5px solid #1d9d74;
+#mbg-container {
+    border-bottom: 5px solid #1d9d74;   
 }
-
 
 .mbg-navtoggle {
     padding: 1px 9px 1px 9px;
