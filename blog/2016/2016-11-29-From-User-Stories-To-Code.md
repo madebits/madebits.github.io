@@ -22,7 +22,7 @@ Using behavior-driven development to analyses stories top-down helps the agile t
 * BDD helps team keep the focus and work on the story. It is easy for people to get lost in tasks that are very interesting in short term and not contribute to finishing a story in time. BDD view of the work to be done for a story guides the team to have their daily tasks match the BDD structure. Individuals can then not only better know where their own work fits in, but can also ask better other team members what their work is contributing.
 * BDD helps with the traceability of code and test to stories and acceptance criteria. As code is added and tested it is organized to fit in the BDD hierarchy, so it is easier to go bottom up and trace code to the requirements.
 
-##BDD as Task Planning
+##Task Planning
 
 BDD belongs to best-development practices and it is crucial in keeping an agile team focused and delivering quality work that matches the story criteria. High-level BDD review of stories is part of task planning for the team. As a rule of thumb, to parallelize team work, one or two members can be responsible to break down a story into BDD criteria, explain it to the team, and then have all team together review it, and decide on the next individuals task that result from BDD.
 
