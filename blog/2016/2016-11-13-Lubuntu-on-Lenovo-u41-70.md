@@ -62,8 +62,6 @@ It seems, [acpi](https://wiki.archlinux.org/index.php/ACPI_modules) information 
 
 8GB of RAM is more than enough for Lubuntu, but still I installed `zram-config` and enabled and started the its service (`sudo systemctl enable zram-config`). `zram` is lightweight for the i5 CPU and practically gives you 60% of more RAM for free (if you ever need it for virtual machines or so). I do not use any swap memory in Lubuntu, but have still to see the day I am using all of RAM.
 
-network-manager network-manager-gnome network-manager-openvpn  network-manager-openvpn-gnome network-manager-pptp network-manager-vpnc  resolvconf ubuntu-minimal
-
 ##Bios
 
 Bios can be reached either via the *novo* button, or via `Fn-F2`. Machine had an old BIOS version BDCN31WW. Lenovo already offers a newer version BDCN71WW. There is no BIOS updater provided for DOS, so I could not use FreeDOS (I already removed Windows :). I used [WinToUsb](http://www.easyuefi.com/wintousb/) to create a *Windows To Go* USB (Win10 64bit, MBR, VHD, 64GB) and used that to update the BIOS (there is no need to activate Windows if you use it only for this purpose). After the BIOS update, Bluetooth was not working:
