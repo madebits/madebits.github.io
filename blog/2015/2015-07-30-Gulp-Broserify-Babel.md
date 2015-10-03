@@ -27,7 +27,7 @@ function compile(watch) {
     gulp.src(staticFiles)
     .pipe(gulp.dest(path.dst));
 
-    var b = browserify(path.s('app.js'))
+    var b = browserify(path.s('app.js'), { debug: watch })
     .transform(babelify)
     .bundle();
 
