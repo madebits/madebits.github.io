@@ -387,6 +387,7 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
   sudo apt install ecryptfs-utils
   ecryptfs-setup-private
   ```
+* `sudo apt install arandr` is better for multi-monitor setup than the Lubuntu default `lxrandr` tool.
 
 ##Final Thoughts
 
