@@ -39,6 +39,4 @@ To stop `snx` use:
 snx -d
 ```
 
-This removes the added network interface and stops `snx`.
-
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-02-21-Integrating-GO.CD-with-Nexus.md'>Integrating GO.CD with Nexus</a></ins>
