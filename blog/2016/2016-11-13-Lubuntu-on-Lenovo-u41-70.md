@@ -468,7 +468,7 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
 
 * `sudo apt install arandr` is better for multi-monitor setup than the Lubuntu default `lxrandr` tool.
 
-* Disable IPv6 stack, by setting in `/etc/sysctl.conf`:
+* Disable IPv6 stack by setting in `/etc/sysctl.conf`:
   ```
   net.ipv6.conf.all.disable_ipv6 = 1
   net.ipv6.conf.default.disable_ipv6 = 1
