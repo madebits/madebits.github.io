@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-[WebEx](http://www.webex.com/) runs ok on Ubuntu 64 bit in Firefox 64 bit, but the integrated audio support requires a 32 bit version of the Java plugin (and 32 bit Firefox). I tried the following in Ubuntu 14.04 64 bit based on some [post](http://gazelle.ihe.net/content/using-webex-under-linux) and a Ubuntu [question](https://askubuntu.com/questions/111947/running-32-bit-firefox-with-sun-jre-in-64-bit-ubuntu/202415#202415).
+[WebEx](http://www.webex.com/) runs ok on Ubuntu 64 bit in Firefox 64 bit, but the integrated audio support requires 32 bit version of the Java plugin (and 32 bit Firefox). I tried the following in Ubuntu 14.04 64 bit based on some [post](http://gazelle.ihe.net/content/using-webex-under-linux) and a Ubuntu [question](https://askubuntu.com/questions/111947/running-32-bit-firefox-with-sun-jre-in-64-bit-ubuntu/202415#202415).
 
 ##WebEx on Firefox 64 bit
 
