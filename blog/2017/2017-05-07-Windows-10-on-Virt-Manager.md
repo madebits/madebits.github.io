@@ -46,7 +46,7 @@ virsh dumpxml win10
 # edit
 virsh edit win10
 # export
-virsh dumpxml > win10.xml
+virsh dumpxml win10 > win10.xml
 # import
 virsh create win10.xml # new
 virsh define win10.xml
