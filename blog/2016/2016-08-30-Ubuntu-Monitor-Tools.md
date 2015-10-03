@@ -20,7 +20,7 @@ Two small useful tool for monitor and screen management in Ubuntu:
 `disper -C`, assuming we have set in ` ~/.config/disper/config` the following line:
 
 ```
- --cycle-stages='-e:-c:-s'
+--cycle-stages='-c:-e:-S:-s'
 ```
 
 ##Redshift
