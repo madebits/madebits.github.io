@@ -26,7 +26,23 @@ High DPI is a problem with some [applications](https://wiki.archlinux.org/index.
 
 For SublimeText 3 sidebar font size, I had to [overwrite](http://stackoverflow.com/questions/18288870/sublime-text-3-how-to-change-the-font-size-of-the-file-sidebar) the theme.
 
-##Monitor Screen
+##Graphics
+
+I experienced some [tearing](https://wiki.archlinux.org/index.php/intel_graphics#Tips_and_tricks) with display and it seems creating `/usr/share/X11/xorg.conf.d/20-intel.conf` with (though ArchWiki writes that `TearFree` ... option should not be needed with DRI3 enabled, I can confirm that this works for me):
+
+```
+Section "Device"
+   Identifier  "Intel Graphics"
+   Driver      "intel"
+   Option      "AccelMethod"  "sna"
+   Option      "TearFree"    "true"
+   Option      "DRI"    "3"
+EndSection
+```
+
+The issue is visible up and now in Chrome browser given its GPU usage, but also in sometimes VLC, given it also uses hardware acceleration for video. There are some more hints to try [here](http://askubuntu.com/questions/766725/annoying-flickering-in-16-04-lts-chrome). For Chrome, force-enabling GPU rasterization for all layers, via `chrome://flags/#enable-gpu-rasterization`, seems to fix the issue for me in 16.10. 
+
+##Screen
 
 u41-70 comes with a full-hd [TFT](https://www.quora.com/What-is-the-difference-between-an-IPS-screen-and-a-TFT-screen) LCD, which is ok for its kind. I found black was not properly rendered as I expected. Given, I am using [redshift](http://jonls.dk/redshift/), I configured gamma to be 0.8 for day and 0.7 for night. This improves the readability of black and gray text.
 
@@ -121,28 +137,12 @@ u41-70 comes with [Intel Wireless 3160](https://wireless.wiki.kernel.org/en/user
 I tried to [disable](https://wiki.archlinux.org/index.php/Wireless_network_configuration) some of the [properties](http://askubuntu.com/questions/640178/no-connection-sporatic-connection-with-intel-3160-wireless-lenovo-y50-ubuntu), by appending to `/etc/modprobe.d/iwlwifi.conf`:
 
 ```
-options iwlwifi bt_coex_active=1 swcrypto=1 11n_disable=1
+options iwlwifi bt_coex_active=0 11n_disable=1
 ```
 
 An alternative, given bluetooth and wireless may have [coexistence](https://wiki.archlinux.org/index.php/Wireless_network_configuration) issues is to [try](http://superuser.com/questions/924559/wifi-connection-troubles-solved-why-does-my-fix-work) `bt_coex_active=0`.
 
 I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. The trick is to configure a second wireless connection over NetworkManager manually for the same SSID and then select as Device the Hamma WLan USB (via its MAC). When I am in a room far away, I can plug the stick (via a short UBS cable to the machine for better signal reception and that it is convenient to move around freely) and then I just select that other WLAN connection. I might give network [bonding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future.
-
-##Graphics
-
-I experienced some [tearing](https://wiki.archlinux.org/index.php/intel_graphics#Tips_and_tricks) with display and it seems creating `/usr/share/X11/xorg.conf.d/20-intel.conf` with (though ArchWiki writes that `TearFree` ... option should not be needed with DRI3 enabled, I can confirm that this works for me):
-
-```
-Section "Device"
-   Identifier  "Intel Graphics"
-   Driver      "intel"
-   Option      "AccelMethod"  "sna"
-   Option      "TearFree"    "true"
-   Option      "DRI"    "3"
-EndSection
-```
-
-The issue is visible up and now in Chrome browser given its GPU usage, but also in sometimes VLC, given it also uses hardware acceleration for video. There are some more hints to try [here](http://askubuntu.com/questions/766725/annoying-flickering-in-16-04-lts-chrome). For Chrome, force-enabling GPU rasterization for all layers, via `chrome://flags/#enable-gpu-rasterization`, seems to fix the issue for me in 16.10. 
 
 ##Other Applications
 
