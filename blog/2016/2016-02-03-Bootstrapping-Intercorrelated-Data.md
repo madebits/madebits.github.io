@@ -39,7 +39,7 @@ library(boot)
 bf <- function(dummy, index) {
   rows <- indexToRange(index)
   d <- data[rows, ] #data is global
-  return(coef(lm(Y ~ X1 + X2, data = d)))
+  coef(lm(Y ~ X1 + X2, data = d))
 }
 
 boot(windows, bf, 1000)
