@@ -119,7 +119,8 @@ let externalCode = (filePath) => {
            cmd: 'node',
            args: filePath,
            resolveCmd: true,
-           logCall: true
+           logCall: true,
+           expectedExitCode: 0
         }, cb);
     };
 };
