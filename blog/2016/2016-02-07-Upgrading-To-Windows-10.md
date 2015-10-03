@@ -70,5 +70,6 @@ https://www.reddit.com/r/Windows10/comments/3f38ed/guide_how_to_disable_data_log
 * http://www.howtogeek.com/224616/30-ways-windows-10-phones-home/
 * http://computerstepbystep.com/windows_event_log_service.html
 * http://www.ghacks.net/2016/02/16/how-to-make-any-program-the-default-on-windows-10/
+* http://www.ghacks.net/2016/07/26/you-will-use-cortana-says-microsoft/
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-02-12-Using-Autofac-to-Organize-CSharp-Code.md'>Using Autofac to Organize CSharp Code</a> <a rel='next' id='fnext' href='#blog/2016/2016-02-03-Bootstrapping-Intercorrelated-Data.md'>Bootstrapping Intercorrelated Data</a></ins>
