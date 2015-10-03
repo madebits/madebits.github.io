@@ -4,7 +4,7 @@
 
 <!--- tags: javascript nodejs -->
 
-**[GRunner](https://www.npmjs.com/package/grunner)** is a task runner for [Node.js](https://nodejs.org/), inspired by [Gulp](http://gulpjs.com/). GRunner is mostly compatible with Gulp. Gulp plugins and Gulp streams like `gulp.src`, etc, can be used as they are with GRunner. Gulp 3 has some limitations that will be addressed in Gulp 4. GRunner task scheduler is based on [async](https://github.com/caolan/async) and it is *subjectively* better :) than Gulp's task scheduler (thought GRunner may need some more stack). GRunner uses some ES2015 features, so it needs a recent version of Node.js.
+**[GRunner](https://www.npmjs.com/package/grunner)** is a task runner for [Node.js](https://nodejs.org/), inspired by [Gulp](http://gulpjs.com/). GRunner is compatible with Gulp. Most Gulp plugins and Gulp streams like `gulp.src`, etc, can be used as they are with GRunner. Gulp 3 has some task limitations that are addressed in Gulp 4. GRunner task scheduler is based on [async](https://github.com/caolan/async) and it is *subjectively* better :) than Gulp's task scheduler (thought GRunner may need some more stack). GRunner uses some ES2015 features, so it needs a recent version of Node.js.
 
 ##Usage
 
@@ -100,7 +100,7 @@ g2.run('t1'); // run t1 on g2
 
 Instances do not share any state, same task name in two different instances can be used to mean different things. The methods documented in *Code Reference* section can be called on any `GRunner` instance. The `new G.GRunner()` can be called only on the process singleton instance. The `run` method does not block. When use the grunner command-line `G.run` is called for you automatically.
 
-##Code Reference
+##Task API Reference
 
 Here `g` represents a `GRunner` instance object.
 
@@ -123,13 +123,13 @@ Here `g` represents a `GRunner` instance object.
         * Return a JS promise. Any promise object that supports `then` is supported. In this case you should **not** call `cb()`.
         * Return a `Stream`, such as `return gulp.src(...).pipe(...);`. In this case you should **not** call `cb()`.
         * Emit an error is a returned stream. In this case you should **not** call `cb()`.
-        * Raise and error, or fail in a returned promise. In this case you should **not** call `cb()`.
-        * Throw a JS error. This works only directly within taskFun. If you throw in a pipe, or setTimeout, and similar async functions, node.js will stop execution. Use callbacks in such cases.
+        * In a returned promise `throw` an error, or fail. In this case you should **not** call `cb()`.
+        * `throw` a JS error. This works only directly within taskFun. If you throw in a pipe, or setTimeout, and similar async functions, node.js will stop execution. Use callbacks in such cases.
     * `userData` can be any object, accessible via info.task.userData within `taskFun`
 
 * `g.addTask` - this is a synonym for `g.t`. While you can add tasks directly to `g.tasks`, using `g.t` is recommended.
 
-* `g.run(taskName, cb)` - is used to run a task. When used via command-line this function is called for you with `--gtask` tasks. This function does not block, use `cb(error)` to be notified when done. If a task has any dependencies, then those task will be run before (recursively).
+* `g.run(taskName, cb)` - is used to run a task. When used via command-line this function is called for you with `--gtask` tasks. This function does not block, use `cb(error)` to be notified when done. If a task has any dependencies, then those task will be run before (recursively). `g.run()` only reads options and tasks, so you can invoke `g.run()` more than once on same instance without waiting for previous invocation to finish (as long as you do not modify options in between).
 
 * `g.log(msg, isError)` - writes `msg` string in `console.log`, or if `isError=true` in `console.error`.
 
