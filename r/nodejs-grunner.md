@@ -116,11 +116,11 @@ g2.run('t1'); // run t1 on g2
 
 Instances do not share any state, same task name in two different instances can be used to mean two different things. Methods documented in *Task API Reference* section can be called on any `GRunner` instance. The `new G.GRunner()` can be called only on the process singleton instance. The `run` method does not block. 
 
-When using the `grunner` command-line tool, `G.run` is called for you automatically. Using `grunner` command-line tool is just a convenience. You can also use `.js` task files (that include others via `require`) that call `G.run` explicitly, and run those task files directly via `node`. For example, to debug your `gfile.js` you can start with something like:
+When using the `grunner` command-line tool, `G.run` is called for you automatically. Using `grunner` command-line tool is just a convenience. You can also use `.js` task files (that include others via `require`) that call `G.run` explicitly, and run those task files directly via `node`. For example, to debug your `gfile.js` you can start with something like this:
 
 ```javascript
 let G = require('grunner');
-require('./gfile');
+require('./gfile.js');
 G.run('default', err => {
   console.log('done');
 });
