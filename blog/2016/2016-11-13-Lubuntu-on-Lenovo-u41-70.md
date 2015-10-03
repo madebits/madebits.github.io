@@ -72,6 +72,26 @@ $ dmesg | grep -iE "failed|error"
 
 It seems, [acpi](https://wiki.archlinux.org/index.php/ACPI_modules) information is [not](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1349740) correctly [supplied](http://askubuntu.com/questions/86499/error-about-acpi-osc-request-failed-ae-not-found) by BIOS. That does matter much in my case and this is not the first laptop to have this issue. Do not know what DP message is about, but external monitor (TV) over HDMI works fine.
 
+**Update**: With 17.04 and kernel 4.10.0, I get only ACPI messages:
+
+```
+[    0.826416] acpi PNP0A08:00: _OSC failed (AE_ERROR); disabling ASPM
+[    2.012547] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECWT] Namespace lookup failure, AE_NOT_FOUND (20160930/psargs-359)
+[    2.013970] ACPI Error: Method parse/execution failed [\_TZ.FN00._ON] (Node ffff91b30e0fca50), AE_NOT_FOUND (20160930/psparse-543)
+[    2.015633] acpi PNP0C0B:00: Failed to change power state to D0
+[    2.015658] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECWT] Namespace lookup failure, AE_NOT_FOUND (20160930/psargs-359)
+[    2.017072] ACPI Error: Method parse/execution failed [\_TZ.FN00._ON] (Node ffff91b30e0fca50), AE_NOT_FOUND (20160930/psparse-543)
+[    2.018719] acpi PNP0C0B:00: Failed to set initial power state
+[    2.043429] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160930/psargs-359)
+[    2.044846] ACPI Error: Method parse/execution failed [\_TZ.TZ00._TMP] (Node ffff91b30e0fcf28), AE_NOT_FOUND (20160930/psparse-543)
+[    2.046606] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160930/psargs-359)
+[    2.048021] ACPI Error: Method parse/execution failed [\_TZ.TZ00._TMP] (Node ffff91b30e0fcf28), AE_NOT_FOUND (20160930/psparse-543)
+[    2.049716] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160930/psargs-359)
+[    2.051134] ACPI Error: Method parse/execution failed [\_TZ.TZ01._TMP] (Node ffff91b30e0fcde8), AE_NOT_FOUND (20160930/psparse-543)
+[    2.052859] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160930/psargs-359)
+[    2.054277] ACPI Error: Method parse/execution failed [\_TZ.TZ01._TMP] (Node ffff91b30e0fcde8), AE_NOT_FOUND (20160930/psparse-543)
+```
+
 ###ZRam
 
 8GB of RAM is more than enough for Lubuntu, but still I installed `zram-config` and enabled and started the its service (`sudo systemctl enable zram-config`). `zram` is lightweight for the i5 CPU and practically gives you 60% of more RAM for free (if you ever need it for virtual machines or so). I do not use any swap memory in Lubuntu, but have still to see the day I am using all of RAM.
