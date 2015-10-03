@@ -30,4 +30,5 @@ Similarly, in Chrome 55 using [chrome://plugins](chrome://plugins) one can enabl
 
 Flash will not go away by this change (and why should Google [decide](https://docs.google.com/presentation/d/106_KLNJfwb9L-1hVVa4i29aw1YXUy9qFX-Ye4kvJj-4/present?ueb=true&slide=id.p) on that?). On the contrary, by this change, Flash will gain popularity as a tool for exploration of security holes, tracking, and advertising. People will just feel safer. Sites that have Flash will benefit, as once Flash is enabled, they can use it not only for the things the user wants. This move is sold under HTML5 promotion, but what it actually achieves is making web browsing less secure and ensures Flash will be still around for years to come.
 
+
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-11-29-From-User-Stories-To-Code.md'>From User Stories To Code</a></ins>
