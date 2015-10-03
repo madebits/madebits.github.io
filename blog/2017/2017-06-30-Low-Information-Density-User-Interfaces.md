@@ -10,7 +10,7 @@ There is a trend in contemporary web and application design to use a lot of spac
 
 ##Simple by Default
 
-Users prefer low information density interfaces as they often only show one thing at a time and remove initial usage stress. For same reason mobile users prefer apps to (mobile) web sites. Low information density UI is the key to attract a massive user base and have people like your web site or application from the very start. Ideally, a good low information density interface is self-guiding and does not need any extensive dedicated help. 
+Users prefer low-information density interfaces as they often only show one thing at a time and remove initial usage stress. For same reason mobile users prefer apps to (mobile) web sites. Low-information density UI is the key to attract a massive user base and have people like your web site or application from the very start. Ideally, a good low-information density interface is self-guiding and does not need any extensive dedicated help. 
 
 ##Simple on Long-Term
 
@@ -18,6 +18,6 @@ Users pay for the initial cognitive relief in long-term as they have to spend mo
 
 ##Invest in Choice Only When Really Needed
 
-Low information density UIs become debatable for power users if it is the only interface to a web site or application. Power users due to previous exposure to similar applications want more information at once from the very start to be able to quickly make used of that. If power users make a significant part of your business, e.g. in an dedicated expert application, it could be worth to address their needs and invest in user adaptable information density. In all other cases, users will be better served by low information density interfaces.
+Low-information density UIs become debatable for power users if it is the only interface to a web site or application. Power users due to previous exposure to similar applications want more information at once from the very start to be able to quickly make used of that. If power users make a significant part of your business, e.g. in an dedicated expert application, it could be worth to address their needs and invest in user adaptable information density. In all other cases, users will be better served by low-information density interfaces.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-06-14-Docker-Machine-On-Windows.md'>Docker Machine On Windows</a></ins>
