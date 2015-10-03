@@ -772,7 +772,7 @@ var applyStyle = function(containerId) {
 	if(!toc.length) return;
 	toc.empty();
 	toc.addClass('hidden-print');
-	var list = toc.append('<div class="panel panel-default"><div class="panel-heading"><strong><span class="text-muted"><i class="fa fa-files-o"></i> Contents</span></strong></div><div class="panel-body"><ul></ul></div></div>').find('ul');
+	var list = toc.append('<div class="panel panel-default"><div class="panel-heading"><strong><i class="fa fa-bookmark"></i> Contents</strong></div><div class="panel-body"><ul></ul></div></div>').find('ul');
 	$(':header').each(function(i, e) {
 		var id = $(this).attr('id');
 		var tagLevel = parseInt($(this).prop("tagName").substr(1));
