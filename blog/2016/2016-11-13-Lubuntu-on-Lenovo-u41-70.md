@@ -124,7 +124,7 @@ Fortunately, I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ub
 
 I had to use `dbus-launch ~/.dropbox-dist/dropboxd` to [start](http://askubuntu.com/questions/732967/dropbox-icon-is-not-working-xubuntu-14-04-lts-64) Dropbox, so that icon is visible.
 
-For Chromium, `pepperflashplugin-nonfree` is no more maintained - one has to use `adobe-flashplugin` now.
+For Chromium, `pepperflashplugin-nonfree` is no more maintained - one has to use `adobe-flashplugin` now. I had also to disable hardware acceleration, to get smoother rendering.
 
 I am not a big user of touchpad, so I use [touchpad-indicator](https://launchpad.net/~atareao/+archive/ubuntu/atareao) to disable it when mouse is plugged in.
 
