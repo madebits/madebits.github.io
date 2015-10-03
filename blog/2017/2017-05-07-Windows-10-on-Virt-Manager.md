@@ -309,7 +309,7 @@ This will add the mapped drive, as last free drive `Z:`, on Windows guest.
 
 ### Spice Viewer Options
 
-Both `virt-viewer` and `remote-viewer` that comes with it, [contain](https://www.spice-space.org/spice-user-manual.html#_client_2) a somehow hidden option `--help-spice` that lists Spice specific available options. For example, to share a folder via WebDAV append `--spice-shared-dir=$HOME/temp`.
+Both `virt-viewer` and `remote-viewer` that comes with it, [accept](https://www.spice-space.org/spice-user-manual.html#_client_2) `--help-spice` to lists Spice specific available options. For example, to share a folder via WebDAV append `--spice-shared-dir=$HOME/temp`.
 
 ###Ubuntu Guests
 
