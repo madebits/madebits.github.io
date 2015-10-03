@@ -30,8 +30,10 @@ Two small useful tool for monitor and screen management in Ubuntu:
 The automatic location detection works ok, but if your exit IP does not match you country of location, it is better you configure an approximate location in `~/.config/redshift.conf` (or via command-line `-l 50.1:8.6`):
 
 ```
-# frankfurt
+[redshift]
 location-provider=manual
+
+# frankfurt
 [manual]
 lat=50.1
 lon=8.6
