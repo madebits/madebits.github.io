@@ -785,7 +785,7 @@ var applyStyle = function(containerId) {
 	}
 
 	if(pageData.isExternal) {
-		pageData.container.prepend('<div class="hidden-print"><span class="label label-warning"><i class="fa fa-exclamation-triangle"></i> External content: ' + pageData.page + '</span> <a href="#index"><span class="label label-info">MadeBits</span></a></div><br>');
+		//pageData.container.prepend('<div class="hidden-print"><span class="label label-warning"><i class="fa fa-exclamation-triangle"></i> External content: ' + pageData.page + '</span> <a href="#index"><span class="label label-info">MadeBits</span></a></div><br>');
 	}
 
 	addToc(pageData.containerId, pageData.page);
