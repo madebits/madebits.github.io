@@ -120,7 +120,7 @@ Bluetooth and wireless may have [coexistence](https://wiki.archlinux.org/index.p
 
 I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. I configured a second wireless connection over NetworkManager manually for the same SSID and then selected as Device the Hamma WLan USB (via its MAC). I can plug the stick and select its WLAN connection. I might give network [bonding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future. 
 
-**Update**: I added a WLAN repeater.
+**Update**: Added a WLAN repeater, so now WLAN works much better in all places.
 
 ##Openbox Configurarion
 
