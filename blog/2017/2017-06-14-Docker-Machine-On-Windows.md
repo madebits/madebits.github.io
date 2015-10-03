@@ -16,7 +16,7 @@ chmod +x "$HOME/bin/docker-machine.exe"
 
 This command will download and install Docker Machine in `$HOME/bin` folder (`$HOME` is by default, your Windows user folder: `%HOMEPATH%`). You may want to append `$HOME/bin` to `$PATH`. If you have Windows firewall active, allow network access to `docker-machine.exe`.
 
-Docker Machine keeps its data files under `$HOME/.docker` folder. The parent folder of $HOME (i.e., `C:\Users`) is shared read/write in VM as `/c/Users`. In theory, this folder could be used with persistent `docker -v` volumes, but due to `vboxsf` issues not all software may work with it. To disable automatic bug reports run:
+Docker Machine keeps its data files under `$HOME/.docker` folder. The files location can be [changed](https://stackoverflow.com/questions/33933107/change-docker-machine-location-windows) via `MACHINE_STORAGE_PATH` environment variable. The parent folder of $HOME (i.e., `C:\Users`) is shared read/write in VM as `/c/Users`. In theory, this folder could be used with persistent `docker -v` volumes, but due to `vboxsf` issues not all software may work with it. To disable automatic bug reports run:
 
 ```
 mkdir -p ~/.docker/machine && touch ~/.docker/machine/no-error-report
