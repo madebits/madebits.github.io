@@ -18,7 +18,7 @@ sudo apt-get install samsungmfp-driver samsungmfp-data
 ```
 Start CUPS: `sudo /etc/init.d/cups start`
 
-You can check whether CUPS is running by visiting `http://localhost:631/` in your browser.
+You can check whether CUPS is running by visiting http://localhost:631/ in your browser.
 
 Turn on the printer connect it via USB.
 
