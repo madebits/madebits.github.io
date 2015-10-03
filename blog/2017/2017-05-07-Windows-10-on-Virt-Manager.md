@@ -94,7 +94,7 @@ To find the IP of the guest VM from outside use:
 $ virsh domifaddr win10
 ```
 
-Or the more evolved:
+Or, by using the more evolved:
 
 ```
 $ virsh net-list
@@ -102,7 +102,7 @@ $ virsh net-list
 $ virsh net-dhcp-leases default
 ```
 
-To parse only the IP use this evolved line:
+To parse out only the IP use this complex line:
 
 ```
 $ virsh domifaddr win10 | tail -2 | head -1 | tr -s ' ' | cut -d ' ' -f 5 | cut -d '/' -f 1
