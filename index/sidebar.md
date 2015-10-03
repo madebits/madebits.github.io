@@ -1,3 +1,4 @@
+* [User Driven Password Policy](#blog/2017/2017-03-22-User-Driven-Password-Policy.md)
 * [Checkpoint Security On Ubuntu](#blog/2017/2017-03-08-Checkpoint-Security-On-Ubuntu.md)
 * [Integrating GO.CD with Nexus](#blog/2017/2017-02-21-Integrating-GO.CD-with-Nexus.md)
 * [Embracing Team Practices Variability](#blog/2017/2017-01-19-Embracing-Team-Practices-Variability.md)
@@ -5,4 +6,3 @@
 * [Ubuntu Chromium Flags Per User](#blog/2016/2016-12-24-Ubuntu-Chromium-Flags-Per-User.md)
 * [Opera On Ubuntu](#blog/2016/2016-12-19-Opera-On-Ubuntu.md)
 * [From User Stories To Code](#blog/2016/2016-11-29-From-User-Stories-To-Code.md)
-* [Lubuntu on Lenovo u41 70](#blog/2016/2016-11-13-Lubuntu-on-Lenovo-u41-70.md)

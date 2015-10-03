@@ -45,7 +45,7 @@ Then we can run only `snx`. Full list of options for `~/.snxrc` file from docume
    - proxy_user      username for proxy authentication
 ```
 
-To access windows remote desktops, install `sudo apt install freerdp-x11` and use something like:
+To access windows remote desktops, install `sudo apt install freerdp-x11` and use something like (machine name works also in place of IP, but name resolution may take some time, IPs are faster):
 
 ```
 xfreerdp /v:10.11.11.11 /u:user
@@ -65,4 +65,29 @@ To stop `snx` use:
 snx -d
 ```
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-02-21-Integrating-GO.CD-with-Nexus.md'>Integrating GO.CD with Nexus</a></ins>
+I am usually, a left mouse user and RDP does not transfer the mouse settings. To easy swap the mouse buttons as I need them, I keep installed in the machines and pinned in taskbar via a shortcut a small [program](https://superuser.com/questions/205861/keyboard-shortcut-to-swap-mouse-buttons) based on this code:
+
+```cs
+// csc mouse-swap.cs /win32icon:mouse.ico
+// https://superuser.com/questions/205861/keyboard-shortcut-to-swap-mouse-buttons
+using System.Runtime.InteropServices;
+using System;
+
+class SwapMouse
+{
+    [DllImport("user32.dll")]
+    public static extern Int32 SwapMouseButton(Int32 bSwap);
+
+    static void Main(string[] args)
+    {
+        int rightButtonIsAlreadyPrimary = SwapMouseButton(1);
+        if (rightButtonIsAlreadyPrimary != 0)
+        {
+            SwapMouseButton(0);  // Make the left mousebutton primary
+        }
+    }
+}
+```
+
+
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-03-22-User-Driven-Password-Policy.md'>User Driven Password Policy</a> <a rel='next' id='fnext' href='#blog/2017/2017-02-21-Integrating-GO.CD-with-Nexus.md'>Integrating GO.CD with Nexus</a></ins>

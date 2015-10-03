@@ -1,1 +1,1 @@
-var homeUrl='blog/2017/2017-03-08-Checkpoint-Security-On-Ubuntu.md';
+var homeUrl='blog/2017/2017-03-22-User-Driven-Password-Policy.md';
