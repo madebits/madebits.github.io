@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-I upgraded my machines at home from Lubuntu 14.04 LTS to 16.04.1 LTS. I waited until the new versions was offered via the *Software Updater* tool. The update process went mostly quite well:
+I upgraded my machines at home from Lubuntu 14.04 LTS to 16.04.1 LTS. I waited until the new version was offered via the *Software Updater* tool. The update process went mostly quite well:
 
 * I was left without network access after install. I had played once with `dnscrypt-proxy` and `dnsmasq` and they were activated as services by `systemd`. I had to remove them both and restart to be able to use my current network configuration.
 * Pulseaudio did not work and volume settings were unreachable. I happen to have run to this [issue](https://askubuntu.com/questions/23018/revert-audio-configuration-to-defaults) before (when installing 15.10 in a virtual machine), so I knew I had to clean `~/.config/pulse` folder. I had also to [restart](https://askubuntu.com/questions/15223/how-can-i-restart-pulseaudio-without-logout) pulseaudio using `pulseaudio -k`.
