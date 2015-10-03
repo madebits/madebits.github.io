@@ -40,7 +40,7 @@ $ sudo adduser `id -un` libvirt-qemu
 
 Configuration of VMs is stored in `/etc/libvirt`. [Nested](https://docs.openstack.org/developer/devstack/guides/devstack-with-nested-kvm.html) virtualization is enabled by default in `/etc/modprobe.d/qemu-system-x86.conf`. To [manually](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Virtualization/chap-Virtualization-Managing_guests_with_virsh.html) [edit](https://www.centos.org/docs/5/html/5.2/Virtualization/chap-Virtualization-Managing_guests_with_virsh.html) a VM configuration use:
 
-```
+```bash
 # view
 virsh dumpxml win10
 # edit
@@ -100,7 +100,7 @@ virt-viewer win10 -af --hotkeys=toggle-fullscreen=shift+f11
 
 Or, by using `remote-viewer` that comes with `virt-viewer` (it needs a URI, or a settings file):
 
-```
+```bash
 remote-viewer $(virsh domdisplay win10) -f --hotkeys=toggle-fullscreen=shift+f11
 ```
 
@@ -110,7 +110,7 @@ Some `virt-viewer` settings (documented in `man remote-viewer`) can be configure
 
 Another alternative is to use [RDP](https://wiki.archlinux.org/index.php/QEMU#Remote_Desktop_Protocol) (`sudo apt install freerdp-x11`), but performance is not as good as Spice. `Ctrl+Alt+Enter` toggles fullscreen. I am also sharing a folder - this is the simplest way to share a folder:
 
-```
+```bash
 xfreerdp /bpp:32 /v:192.168.122.74 /u:userName /drive:home,$HOME/work-remote /sound /f /toggle-fullscreen +async-input +async-update +async-transport +async-channels +clipboard
 ```
 
@@ -124,7 +124,7 @@ $ virsh domifaddr win10
 
 Or, by using the more evolved:
 
-```
+```bash
 $ virsh net-list
 # ... default
 $ virsh net-dhcp-leases default
@@ -132,13 +132,13 @@ $ virsh net-dhcp-leases default
 
 To parse out only the IP use this complex line:
 
-```
+```bash
 $ virsh domifaddr win10 | tail -2 | head -1 | tr -s ' ' | cut -d ' ' -f 5 | cut -d '/' -f 1
 ```
 
 You could add it to `$HOME/.bashrc` as:
 
-```
+```bash
 virship() {
 virsh domifaddr "$1" | tail -2 | head -1 | tr -s ' ' | cut -d ' ' -f 5 | cut -d '/' -f 1
 }
@@ -146,7 +146,7 @@ virsh domifaddr "$1" | tail -2 | head -1 | tr -s ' ' | cut -d ' ' -f 5 | cut -d 
 
 And use it as:
 
-```
+```bash
 virship win10
 ```
 
@@ -155,7 +155,7 @@ virship win10
 
 A `virbr0` bridge will be created during install, along with a NAT [tap](http://www.innervoice.in/blogs/2013/12/08/tap-interfaces-linux-bridge/) when VM runs:
 
-```
+```bash
 $ ip addr show
 ...
 4: virbr0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
@@ -173,7 +173,7 @@ $ route -n | grep vir
 
 This is convenient, and `iptables` has been [modified](https://jamielinux.com/docs/libvirt-networking-handbook/appendix/example-of-iptables-nat.html):
 
-```
+```bash
 $ sudo cat /proc/net/ip_tables_names
 $ sudo iptables -S | grep vir
 -A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT
@@ -215,7 +215,7 @@ $ sudo iptables -S -t mangle
 
 If you share a folder in the VM, you can access it using Samba in your Ubuntu file manager of choice using `smb://IP/share` (where IP is the guest IP address). Similarly, host network services, if you have SSH (SCP), or Samba shared folders, are visible on the Windows guest via the host IP. Use [WinScp](https://winscp.net/eng/download.php) from guest for host SSH/SCP. To access host SSH/SCP, host firewall need to adapted:
 
-```
+```bash
 $ sudo iptables -A INPUT  -i virbr0  -j ACCEPT
 $ sudo iptables -A OUTPUT -o virbr0 -m state --state ESTABLISHED,RELATED -j ACCEPT
 $ sudo iptables -A OUTPUT -o virbr0 -p tcp --sport 22 -j ACCEPT
@@ -411,7 +411,7 @@ sudo mount -t 9p -o trans=virtio,version=9p2000.L,rw share /mnt/share
 
 To [add](http://troglobit.github.io/blog/2013/07/05/file-system-pass-through-in-kvm-slash-qemu-slash-libvirt/) it to `/etc/fstab` use:
 
-```
+```bash
 share /mnt/share  9p  trans=virtio,version=9p2000.L,rw  0 0
 ```
 
