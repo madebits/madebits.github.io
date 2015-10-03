@@ -1,3 +1,4 @@
+* [Using keynav to move mouse pointer on Lubuntu](#blog/2016/2016-07-27-Using-keynav-to-move-mouse-pointer-on-Lubuntu.md)
 * [Getting Started With Spark Ml](#blog/2016/2016-07-26-Getting-Started-With-Spark-Ml.md)
 * [Agile Iterations As Path Search](#blog/2016/2016-07-14-Agile-Iterations-As-Path-Search.md)
 * [Agile Development Readings](#blog/2016/2016-06-27-Agile-Development-Readings.md)
@@ -5,4 +6,3 @@
 * [Statistical Learning Certification](#blog/2016/2016-04-09-Statistical-Learning-Certification.md)
 * [Background Sounds](#blog/2016/2016-04-07-Background-Sounds.md)
 * [WebWorker Patterns](#blog/2016/2016-03-03-WebWorker-Patterns.md)
-* [Key Derivation Functions](#blog/2016/2016-02-24-Key-Derivation-Functions.md)

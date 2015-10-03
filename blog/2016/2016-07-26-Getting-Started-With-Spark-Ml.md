@@ -69,4 +69,4 @@ object ScalaApp {
 
 I have set some of the sc context configuration parameters explicitly. You may choose to set no parameters here, if you want to set them later via `spark-submit`.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-07-14-Agile-Iterations-As-Path-Search.md'>Agile Iterations As Path Search</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-07-27-Using-keynav-to-move-mouse-pointer-on-Lubuntu.md'>Using keynav to move mouse pointer on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2016/2016-07-14-Agile-Iterations-As-Path-Search.md'>Agile Iterations As Path Search</a></ins>
