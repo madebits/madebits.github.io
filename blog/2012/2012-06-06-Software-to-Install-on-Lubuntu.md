@@ -75,4 +75,10 @@
 * youtube-dl - watch youtube videos offline
 * zim - Desktop Wiki to keep notes
 
+##Links
+
+* http://community.linuxmint.com/software
+* http://www.jacknjoe.com/
+
+
 <ins class='nfooter'><a id='fprev' href='#blog/2012/2012-06-09-Encrypted-Google-in-English.md'>Encrypted Google in English</a> <a id='fnext' href='#blog/2012/2012-06-05-CSharp--Reflection-ExtendedActivator.md'>CSharp  Reflection ExtendedActivator</a></ins>
