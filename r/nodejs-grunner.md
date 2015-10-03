@@ -24,7 +24,7 @@ npm i grunner -D
 
 If installed locally, you can run GRunner as `npm run grunner` appending any arguments. If that does not work, add the following to your `package.json`:
 
-```
+```json
   "scripts": {
     "grunner": "grunner"
   }
@@ -159,7 +159,7 @@ The console output (`log`) of the external task in the example is redirected to 
 
 Example of using [npm-watch](https://www.npmjs.com/package/npm-watch) with GRunner. Modify your `package.json` to add:
 
-```
+```json
   "watch": {
     "mywatch": "app/*.js"
   },
