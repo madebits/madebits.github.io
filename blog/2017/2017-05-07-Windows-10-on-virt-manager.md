@@ -106,7 +106,20 @@ If you share a folder in the VM, you can access it using Samba in your Ubuntu fi
 Windows 10 guest works fine without any custom software installed. However, to get most of Spice and QEMU, such as to share clipboard, install [Spice guest tools](https://www.spice-space.org/download/binaries/spice-guest-tools/), in the Windows guest. Spice guest tool already contains the [Virtio Drivers](https://fedoraproject.org/wiki/Windows_Virtio_Drivers). 
 
 * I changed Windows VM [NIC](https://pve.proxmox.com/wiki/Paravirtualized_Network_Drivers_for_Windows) type from rtl3189 to virtio.
-* To [change](https://pve.proxmox.com/wiki/Paravirtualized_Block_Drivers_for_Windows) the VM disk type from IDE to VirtIO SCSI, I used first *Add Hardware* button to a new *Controller* of Type: SCSI, Model: VirtIO SCSI and started the VM. The controller was shown in the Windows Device Manager. After that, I shut down the VM, and changed the Disk bus to SCSI. After starting the VM, I checked disk type was changed in the Device Manager.
+* To [change](https://pve.proxmox.com/wiki/Paravirtualized_Block_Drivers_for_Windows) the VM disk type from IDE to VirtIO SCSI, I used first *Add Hardware* button to a new *Controller* of Type: SCSI, Model: VirtIO SCSI and started the VM. The controller was shown in the Windows Device Manager. After that, I shut down the VM, and changed the Disk bus to SCSI. After starting the VM, I checked disk type was changed in the Device Manager. Disk [stats](https://superuser.com/questions/130143/how-to-measure-disk-performance-under-windows):
+ ```
+ C:\Windows\system32>winsat disk -drive c
+    Windows System Assessment Tool
+    ...
+    > Disk  Random 16.0 Read                       655.16 MB/s          8.4
+    > Disk  Sequential 64.0 Read                   2802.32 MB/s          9.2
+    > Disk  Sequential 64.0 Write                  1803.94 MB/s          9.0
+    > Average Read Time with Sequential Writes     0.208 ms          8.6
+    > Latency: 95th Percentile                     0.513 ms          8.7
+    > Latency: Maximum                             2.781 ms          8.7
+    > Average Read Time with Random Writes         0.156 ms          8.9
+    > Total Run Time 00:00:05.77
+ ```
 
 ###Folder Sharing
 
