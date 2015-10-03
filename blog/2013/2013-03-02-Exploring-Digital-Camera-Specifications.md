@@ -208,7 +208,7 @@ In some cameras it is possible to get the RAW image data produced by the digital
 
 Raw data processing can help, for example, get various exposures on your own from the same photo, but is also a time consuming process. For most use cases, relying on the built-in automatic camera processing that engineers have put in is faster and good enough or even better (a camera can have several built-in raw conversion profiles and select the best of them for the given image as needed) that what you can come up with on your own using the raw data. Do not discard camera JPEG images, rather use raw files to help enhance or fix parts of them.
 
-Taking several shots of the same scene at different exposures (called 'bracketing') helps gather a higher dynamic range of light information as different images that can then combined as needed into a single one using software. My digital camera offers a automatic bracketing feature that records three images at different exposures for every shot - a tripod helps avoiding centering and registering the three different images later.
+Taking several shots of the same scene at different exposures (called 'bracketing') helps gather a higher dynamic range of light information as different images, which can then combined as needed into a single one using software. My digital camera offers a automatic bracketing feature that records three images at different exposures for every shot - a tripod helps avoiding centering and registering the three different images later.
 
 ##Automatic Mode
 
