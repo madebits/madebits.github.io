@@ -220,8 +220,8 @@ While it is good to know how to set up a camera to take a manual shot, always fu
 
 For printed images to look good around 300 dpi (dots per inch) are needed or approximately 118 dots per centimeter. For low quality printing you can go also with 150dpi ( ~ 59 dots per centimeter). There are two image shooting factors that affect printing quality, both the higher the better:
 
-* Resolution. To find the optional print size divide resolution by the above constants. E.g.: `6MP => 3280 x 2048 pixels => 3280 / 118 x 2048 / 118 ~= 28 x 17 cm `. This is the optimal size. As a rule of thumb you can go 2 to 3 times digital zoom this size and still look acceptable.
-* Encoding quality (in case of JPEG format). Most cameras have a large quality setting that should be normally preferred. The bigger the quality is, the better digital zoom looks like (and more color information the photo contains). JPEG files with better quality are bigger in size for same resolution.
+* Resolution. To find the optimal print size divide image resolution by the above constants. E.g.: `6MP => 3280 x 2048 pixels => 3280 / 118 x 2048 / 118 ~= 28 x 17 cm `. This is the optimal printing paper size. As a rule of thumb, you can go 2 to 3 times this size (digital zoom) and the photo will still look acceptable.
+* Encoding quality (in case of JPEG format). Most digital cameras have a large encoding quality setting (L) that should be normally preferred. The bigger the quality is, the better digital zoom looks like (and more color information the photo contains). JPEG files with better quality are bigger in size for same resolution.
 
 If you prepare a photo for printing, better upscale (or downscale) the photo using software to the correct printing size with the correct DPI, rather than allow the printer handle it.
 
