@@ -112,8 +112,8 @@ Here `g` represents a `GRunner` instance object.
         return info.task.cb(doneCb)
         ```
     * `dryRun` - if true, same as `--D` command-line option.
-    * `beforeTaskRun = fn(info)` - called before taskFun is run (see g.t).
-    * `afterTaskRun = fn(info)` - called after taskFun is run (see g.t).
+    * `beforeTaskRun = fn(info)` - called before taskFun is run (see `g.t`).
+    * `afterTaskRun = fn(info)` - called after taskFun is run (see `g.t`).
 
 * `g.t(taskName)` | `g.t(taskName, taskFun)` | `g.t(taskName, taskDependecies, taskFun)` |  `g.t(taskName, taskFun, userData)` | `g.t(taskName, taskDependecies, taskFun, userData)` - adds a task. Tasks are added as keys to `g.tasks` object, so `taskName` must be a valid JS object key name. Adding a task with same name a previous one, replaces it.
     * `taskName` - string (valid JS object key name).
