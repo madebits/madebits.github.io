@@ -81,14 +81,19 @@ var refreshPreview = function() {
 	enableButtons();
 };
 
-var encrypt = function(encrypt) {
+var encrypt = function(enc) {
 	mbSecret.getPass().then(function(pass) {
 		var txt = $('#text');
 		var data = txt.val();
-		data = mbSecret.encrypt(data, pass, encrypt);
+		data = mbSecret.encrypt(data, pass, enc);
 		if(data) {
 			txt.val(data);
 			refreshPreview();
+		}
+		else {
+			setTimeout(function() {
+				encrypt(enc);
+			}, 0);
 		}
 		txt.focus();
 	}, function() {

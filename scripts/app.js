@@ -436,7 +436,9 @@ var getPass = function () {
 	var onOk = function() {
 		var pass = $('#pass').val().trim();
 		dialog.modal('hide');
-		setTimeout(function(){ deferred.resolve(pass); }, 1);
+		setTimeout(function() {
+			deferred.resolve(pass); 
+		}, 0);
 	};
 	var options = {
 		show: false,
@@ -1102,7 +1104,9 @@ var lastPage = null
 		var pdata = mbSecret.encrypt(data, pass, false);
 		if(!pdata) {
 			// some rec
-			setPageDataEnc(pageData, data);
+			setTimeout(function(){
+				setPageDataEnc(pageData, data);
+			}, 0);
 			return;
 		} 
 		pdata = mbHtml.markup(pdata);
