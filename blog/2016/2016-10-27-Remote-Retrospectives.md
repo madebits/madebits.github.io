@@ -12,7 +12,7 @@ On recommendation from our external agile coach, we follow a [five-step](http://
 
 ##Shared Collaboration Board
 
-Steps in [plans-for-retrospectives](http://plans-for-retrospectives.com) are more effective if associated with a local visual board. To remedy that, I create upfront a shared Google Document with 2D structure with tables conforming as much as possible to the [plans-for-retrospectives](http://plans-for-retrospectives.com) steps. The document contains the theme, the main points, the five steps and depending on the actual action cards - the needed empty tables to be filled by team members during the meeting. 
+Steps in [plans-for-retrospectives](http://plans-for-retrospectives.com) are more effective if associated with a local visual board. To remedy that, I create upfront a shared Google Document conforming as much as possible to the [plans-for-retrospectives](http://plans-for-retrospectives.com) steps. The document contains the theme, the main points, the five steps, and depending on the actual action cards - the needed empty tables to be filled by team members during the meeting.
 
 ```
 Retrospective: Theme
