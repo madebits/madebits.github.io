@@ -4,7 +4,7 @@
 
 2016-04-07
 
-A few sites to generate [background](https://en.wikipedia.org/wiki/Background_noise) sounds and help with productivity in noisy offices. Work best combined with noise cancelling headphones.
+A few sites to generate [background](https://en.wikipedia.org/wiki/Background_noise) sounds and help with productivity in noisy offices. Work best combined with noise canceling headphones. The ones that generate random like patterns works best against repeated sounds, but on my experience are not so good against not so random noise such as human conversations. Music classical or slow pop is better for that.
 
 *  http://www.noisli.com/
  
@@ -22,5 +22,7 @@ A few sites to generate [background](https://en.wikipedia.org/wiki/Background_no
 *  http://www.country108.com/ 
 
  Slow country music radio with very few interruptions, useful as an change when the above become boring.
+
+
 
 <ins class='nfooter'><a id='fprev' href='#blog/2016/2016-04-09-Statistical-Learning-Certification.md'>Statistical Learning Certification</a> <a id='fnext' href='#blog/2016/2016-03-03-WebWorker-Patterns.md'>WebWorker Patterns</a></ins>
