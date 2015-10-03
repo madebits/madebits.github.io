@@ -20,7 +20,28 @@ fi
 CHROMIUM_FLAGS="$USER_PARAMS"
 ```
 
-Now per user arguments can be defined one per line in `~/.config/chromium-flags.conf`, for example:
+Another way to achieve same is `/etc/chromium-browser/default` as is:
+
+```
+# Default settings for chromium-browser. This file is sourced by /bin/sh from
+# /usr/bin/chromium-browser
+
+# Options to pass to chromium-browser
+CHROMIUM_FLAGS="$USER_PARAMS"
+```
+
+And instead, add a new file `/etc/chromium-browser/customizations/99-user`:
+
+```
+USER_PARAMS=""
+USER_FILE=$XDG_CONFIG_HOME/chromium-flags.conf
+if [ -f "$USER_FILE" ]; then
+    USER_PARAMS=`grep -v '^#' "$USER_FILE" | tr '\n' ' '`
+    CHROMIUM_FLAGS="${CHROMIUM_FLAGS} ${USER_PARAMS}"
+fi
+```
+
+Now, using any of the above, per user arguments can be defined one per line in `~/.config/chromium-flags.conf`, for example:
 
 ```
 --disk-cache-dir=/dev/null
