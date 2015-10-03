@@ -94,9 +94,22 @@ I installed [tlp](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-manag
 
 ##Wireless
 
-u41-70 makes use of [Intel Wireless 3160](https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi). It can handle both 2.4 Ghz, 5.8 Ghz, and bluetooth. The card reach is a bit weak on large distances. It has full speed in rooms near the router, but the quality (`watch -n1 iwconfig`) falls down three rooms away. This means at some locations at home WLAN is not stable. 
+u41-70 makes use of [Intel](http://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/tree/) [Wireless 3160](https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi). It can [handle](https://forum.ubuntuusers.de/topic/kein-wlan-ohne-kernelupdate/#post-7996788) both 2.4 Ghz, 5.8 Ghz, and bluetooth:
 
-I tried [disabling](https://wiki.archlinux.org/index.php/Wireless_network_configuration) some of the [properties](http://askubuntu.com/questions/640178/no-connection-sporatic-connection-with-intel-3160-wireless-lenovo-y50-ubuntu), by appending to `/etc/modprobe.d/iwlwifi.conf`:
+```
+$ modinfo -F firmware iwlwifi | grep 3160
+iwlwifi-3160-17.ucode
+
+$ lspci -nnk | grep -i net -A2
+02:00.0 Network controller [0280]: Intel Corporation Wireless 3160 [8086:08b4] (rev 93)
+  Subsystem: Intel Corporation Dual Band Wireless AC 3160 [8086:8270]
+  Kernel driver in use: iwlwifi
+
+```
+
+The card reach is a bit weak on large distances. It has full speed in rooms near the router, but the quality (`watch -n1 iwconfig`) falls down three rooms away. This means at some locations at home WLAN is not stable. 
+
+I tried [disabling](https://wiki.archlinux.org/index.php/Wireless_network_configuration) [some](https://forum.ubuntuusers.de/topic/instabiles-wlan-mit-intel-ac-3160-in-neuem-tux/2/) of the [properties](http://askubuntu.com/questions/640178/no-connection-sporatic-connection-with-intel-3160-wireless-lenovo-y50-ubuntu), by appending to `/etc/modprobe.d/iwlwifi.conf`:
 
 ```
 options iwlwifi bt_coex_active=0 11n_disable=1
