@@ -26,7 +26,7 @@ Configuration of VMs is stored in `/etc/libvirt`. [Nested](https://docs.openstac
 
 ##Creating a Windows 10 VM
 
-Using `virt-manager` [UI](https://www.howtogeek.com/117635/how-to-install-kvm-and-create-virtual-machines-on-ubuntu/), create a new Windows 10 VM. I use mostly defaults, including, NAT, Spice and Video QXL. 
+Using `virt-manager` [UI](https://www.howtogeek.com/117635/how-to-install-kvm-and-create-virtual-machines-on-ubuntu/), create a new Windows 10 VM. I use mostly defaults including, IDE Disk and CDROM, NAT, Spice, and Video QXL. 
 
 ###Disk Image
 
