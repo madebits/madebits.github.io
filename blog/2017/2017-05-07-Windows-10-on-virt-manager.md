@@ -71,14 +71,19 @@ In `virt-manager` *Edit / Preferences* menu, *Console* tab, you can change the g
 A `virbr0` bridge will be created during install, along with a NAT [tap](http://www.innervoice.in/blogs/2013/12/08/tap-interfaces-linux-bridge/) when VM runs:
 
 ```
-$ ifconfig
+$ ip addr show
 ...
-virbr0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 192.168.122.1  netmask 255.255.255.0  broadcast 192.168.122.255
+4: virbr0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
 ...
-vnet0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet6 fe80::fc54:ff:fe12:a474  prefixlen 64  scopeid 0x20<link>
+5: virbr0-nic: <BROADCAST,MULTICAST> mtu 1500 qdisc pfifo_fast master virbr0 state DOWN group default qlen 1000
 ...
+7: vnet0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast master virbr0 state UNKNOWN group default qlen 1000
+...
+
+$ route -n | grep vir
+192.168.122.0   0.0.0.0         255.255.255.0   U     0      0        0 virbr0
+
 ```
 
 This is convenient, and `iptables` has been modified:
