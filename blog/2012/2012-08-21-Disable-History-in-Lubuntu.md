@@ -123,7 +123,7 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	sync ; sleep 60 ; sync
 	```
 
-	Check using `df` command that *Avail*able disk space is 4 or smaller. If not, run the two commands above again. Repeat until `df` command that Available disk space is 4 or smaller.
+	Check using `df` command that *Avail*able disk space is 4 or smaller. If not, run the two commands above again. Repeat until `df` command reports that *Avail*able disk space is 4 or smaller.
 
 	Finally, clean the created `zero.*` files.
 
