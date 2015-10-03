@@ -13,7 +13,7 @@ xrandr --fb 1920x1080 --output LVDS1 --panning 1920x1080+0+0/1366x768+0+0/0/0/0/
 It can be combined with `chromium-browser` using:
 
 ```
-chromium --force-device-scale-factor=1.4
+chromium-browser --force-device-scale-factor=1.4
 ```
 
 To undo the change:
