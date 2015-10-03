@@ -62,9 +62,35 @@ Once the VM is started, use `ps aux | grep qemu` to find the exact command-line 
  │                 └─2*[{qemu-system-x86}]
 ```
 
-##Host Keyboard Grab Key
+##Connecting and Host Keyboard Grab Key
 
-In `virt-manager` *Edit / Preferences* menu, *Console* tab, you can change the grab key. I usually use only right `Ctr` key, same as in Virtualbox. The toolbar is not show for me in fullscreen due to some bug, so I use the grab key, and then `F11` key to exit the fullscreen, if I cannot find the invisible toolbar button blindly using the mouse (toolbar works if you use `virt-viewer`).
+In `virt-manager` *Edit / Preferences* menu, *Console* tab, you can change the grab key. I usually use only right `Ctr` key, same as in Virtualbox. The toolbar is not show for me in fullscreen due to some bug, so I use the grab key, and then `F11` key to exit the fullscreen, if I cannot find the invisible toolbar button blindly using the mouse (toolbar works if you use `virt-viewer`).  
+
+Alternative way to access the machine:
+
+```
+virt-viewer win10
+```
+
+Or:
+
+```
+remote-viewer $(virsh domdisplay win10) -f --hotkeys=toggle-fullscreen=shift+f11
+```
+
+Another alternative is to use RDP (`sudo apt install freerdp-x11`), via (Ctrl+Alt+Enter toggles fullscreen). I am also sharing a folder:
+
+```
+xfreerdp /v:192.168.122.74 /u:userName /drive:home,$HOME/work-remote /sound /f /toggle-fullscreen +async-input +async-update +async-transport +async-channels +clipboard
+```
+
+To find the IP of the guest VM from outside use:
+
+```
+$ virsh net-list
+# ... default
+$ virsh net-dhcp-leases default
+```
 
 ##Basic Networking
 
@@ -125,15 +151,13 @@ $ sudo iptables -S -t mangle
 -A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill
 ```
 
-To find the IP of the guest VM from outside use:
+If you share a folder in the VM, you can access it using Samba in your Ubuntu file manager of choice using `smb://IP/share`. Similarly, host network services, if you have SSH (SCP) (use [WinScp](https://winscp.net/eng/download.php) from guest), or Samba shared folders, are visible on the Windows guest via the host IP. To access host SSH, firewall need to adapted:
 
 ```
-$ virsh net-list
-# ... default
-$ virsh net-dhcp-leases default
+$ sudo iptables -A INPUT  -i virbr0  -j ACCEPT
+$ sudo iptables -A OUTPUT -o virbr0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+$ sudo iptables -A OUTPUT -o virbr0 -p tcp --sport 22 -j ACCEPT
 ```
-
-If you share a folder in the VM, you can access it using Samba in your Ubuntu file manager of choice using `smb://IP/share`. Similarly, host network services, if you have SSH (SCP) (use [WinScp](https://winscp.net/eng/download.php) from guest), or Samba shared folders, are visible on the Windows guest via the host IP.
 
 ##Spice Guest Tools
 
