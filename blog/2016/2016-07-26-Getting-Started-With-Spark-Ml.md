@@ -1,4 +1,4 @@
-#Getting Started With Spark Ml
+#Getting Started With Spark ML
 
 2016-07-26
 
