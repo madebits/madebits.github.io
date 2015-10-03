@@ -38,7 +38,7 @@ Either use `virt-manager` UI to create the disk image, or create a *raw* image o
 
 This command creates [sparse](https://wiki.archlinux.org/index.php/sparse_file) files. Same command can be used to extend the disk size if needed.
 
-###Qemu Process
+###QEMU Process
 
 Once the VM is started, use `ps aux | grep qemu` to find the exact command-line used.
 
