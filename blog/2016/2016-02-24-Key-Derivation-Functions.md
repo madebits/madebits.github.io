@@ -16,7 +16,7 @@ key = KDF(password, salt, options)
 
 ##KDF Calculation Cost
 
-Cost in computing is measured in terms of **time** and **memory** spent (needed). KDFs, such as, [PBKDF2](https://en.wikipedia.org/wiki/PBKDF2) use computation time as cost, by producing a sequence of intermediate results. To calculate `key` from `password` all the sequence of operations (usually a CSH) has to be carried out. KDF `options` in this case take the form of *iteration count*, the bigger the more expensive the calculation is. [scrypt](https://en.wikipedia.org/wiki/Scrypt) and recent alternatives, such as, [Argon2](https://en.wikipedia.org/wiki/Argon2) explore both time and memory and their `options` can configure both of them.
+Cost in computing is measured in terms of **time** and **memory** (space) spent (needed). KDFs, such as, [PBKDF2](https://en.wikipedia.org/wiki/PBKDF2) use computation time as cost, by producing a sequence of intermediate results. To calculate `key` from `password` all the sequence of operations (usually a CSH) has to be carried out. KDF `options` in this case take the form of *iteration count*, the bigger the more expensive the calculation is. [scrypt](https://en.wikipedia.org/wiki/Scrypt) and recent alternatives, such as, [Argon2](https://en.wikipedia.org/wiki/Argon2) explore both time and memory and their `options` can configure both of them.
 
 ##The Achilles Heel of KDFs
 
