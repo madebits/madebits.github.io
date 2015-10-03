@@ -56,16 +56,16 @@ var madebits = {
 	, onPageLoad: function() {
 		if(parent.frames.length > 0) { parent.location.href = self.location.href; }
 	}
-	, toDeferred: function(conditionObjects, func, timeOut, maxTries) {
+	, toDeferred: function(conditionObjects, func, timeOut, maxTries, funFail) {
 		_self = this;
 		return function() {
 			_arguments = arguments;
 			_self.defer(conditionObjects, function() {
 				func(_arguments);
-			}, timeOut, maxTries);
+			}, timeOut, maxTries, 0, funFail);
 		}
 	} 
-	, defer: function(conditionObjects, func, timeOut, maxTries, currentTries) {
+	, defer: function(conditionObjects, func, timeOut, maxTries, currentTries, funFail) {
 		_self = this;
 		try	{
 			if(!conditionObjects || (conditionObjects.length <= 0)) {
@@ -74,16 +74,17 @@ var madebits = {
 			}
 			if(!func) return;
 			timeOut = timeOut || 1000;
-			maxTries = maxTries || 1800;
+			maxTries = maxTries || 120;
 			currentTries = (currentTries || 0) + 1;
 			if((maxTries > 0) && (currentTries > maxTries)) {
-				console.log('defer gave up: ' + conditionObjects);
+				if(funFail) funFail();
+				else console.log('defer gave up: ' + conditionObjects);
 				return;
 			}
 			for(var i = 0; i < conditionObjects.length; i++) {
 				var obj = conditionObjects[i][0] || window;
 				if(typeof obj[conditionObjects[i][1]] === 'undefined') {
-					setTimeout(function() { _self.defer(conditionObjects, func, timeOut, maxTries, currentTries); }, timeOut);
+					setTimeout(function() { _self.defer(conditionObjects, func, timeOut, maxTries, currentTries, funFail); }, timeOut);
 					return;
 				}
 			}
@@ -573,6 +574,7 @@ var lastPage = null
 	$('#mbg-showComments').click(function(event) {
 		event.preventDefault();
 		$(this).hide();
+		$('#mbg-comments').html('<div><small><span class="text-muted"><i class="fa fa-spinner fa-spin fa-3x fa-fw" style="font-size:17px;"></i> <i>Loading <em>DISQUS</em> comments ...</i></span></small></div>');
 		loadDisq();
 		disqReset();
 	});
@@ -605,7 +607,9 @@ var lastPage = null
 		$('#mbg-comments').hide();
 		console.error(e);
 	}
-}, 2000)
+}, 2000, 10, function() {
+	$('#mbg-comments').html('<div><small><span class="text-muted"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> <i>Failed to load <em>DISQUS</em> comments.</i></span></small></div>');
+})
 ;
 
 return {
