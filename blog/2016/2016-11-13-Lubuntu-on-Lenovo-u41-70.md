@@ -14,9 +14,7 @@ I disabled UEFI and secure boot, and used the strange *novo* button to get the U
 
 ##Lubuntu 16.10
 
-Lubuntu 16.10 [update](https://wiki.ubuntu.com/YakketyYak/ReleaseNotes) went ok. For the u41-70 machine, 16.10 seems to work better and there no freezes. 
-
-I was affected by a [dns bug](https://bugs.launchpad.net/ubuntu/+source/network-manager/+bug/1633912) and commented out `#dns=dnsmasq` in `/etc/NetworkManager/NetworkManager.conf`. DNS is handled now by `systemd-resolve`.
+Lubuntu 16.10 [update](https://wiki.ubuntu.com/YakketyYak/ReleaseNotes) went ok. For the u41-70 machine, 16.10 seems to work better and there are no freezes. I was affected by a [dns bug](https://bugs.launchpad.net/ubuntu/+source/network-manager/+bug/1633912) and commented out `#dns=dnsmasq` in `/etc/NetworkManager/NetworkManager.conf`. DNS is handled now by `systemd-resolve`.
 
 ##High DPI
 
