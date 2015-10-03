@@ -165,6 +165,7 @@ $ route -n | grep vir
 This is convenient, and `iptables` has been [modified](https://jamielinux.com/docs/libvirt-networking-handbook/appendix/example-of-iptables-nat.html):
 
 ```
+$ sudo cat /proc/net/ip_tables_names
 $ sudo iptables -S | grep vir
 -A INPUT -i virbr0 -p udp -m udp --dport 53 -j ACCEPT
 -A INPUT -i virbr0 -p tcp -m tcp --dport 53 -j ACCEPT
