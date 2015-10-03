@@ -22,4 +22,4 @@ Not relying a central body to place strict guidelines on best practices add resp
 
 Experience exchange within and across teams, using internal and public media, is the key to improvement and convergence in best software development practices across all teams - a limit to strive for, but never reach. Allow room for experimentation within each team and project and move each time a bit forward. There could be a centralized policy or entity in the organization that without placing guidelines, understands and encourages the flow of contemporary knowledge exchanges between project teams.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-12-30-Lubuntu-on-Dell-Latitude-E5570.md'>Lubuntu on Dell Latitude E5570</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-02-21-Integrating-GO.CD-with-Nexus.md'>Integrating GO.CD with Nexus</a> <a rel='next' id='fnext' href='#blog/2016/2016-12-30-Lubuntu-on-Dell-Latitude-E5570.md'>Lubuntu on Dell Latitude E5570</a></ins>

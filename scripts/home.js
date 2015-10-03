@@ -1,1 +1,1 @@
-var homeUrl='blog/2017/2017-01-19-Embracing-Team-Practices-Variability.md';
+var homeUrl='blog/2017/2017-02-21-Integrating-GO.CD-with-Nexus.md';
