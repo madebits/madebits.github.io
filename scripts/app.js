@@ -1343,7 +1343,6 @@ var lastPage = null
 		}
 	};
 
-	console.log(query);
 	$.ajax(query).done(onDone).fail(function() {
 		//retry
 		setTimeout(function () {
