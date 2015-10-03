@@ -75,7 +75,7 @@ When you define a task (via `G.t`) you can pass optional task dependencies to be
 * `G.t('t3', ['t1', 't2'])` - sequential t1 will be run first than t2, and then t3.
 * `G.t('t4', ['t1', ['t2', 't3'], 't1'])` - t1 will be run first, then t2 and t3 will both start in parallel, then t1 will run again after t2 and t3 are done, and then t4 will run.
 
-*Parallel* means execution will not block, *sequential* means the execution blocks until all before finish. In general, if the dependencies array is considered *level 0* and the first nested arrays as level 1, then the tasks in all *odd* level nested arrays are started in parallel and those if *even* levels sequentially. Task started in parallel have pipe symbol `|` listed in console before their name. Nesting level of tasks is shown in console with dots `.` before the task name.
+*Parallel* means execution will not block, *sequential* means the execution blocks until all before finish. In general, if the dependencies array is considered *level 0* and the first nested arrays as level 1, then the tasks in all *odd* levels of nested arrays are started in parallel and those if *even* levels sequentially. Task started in parallel have pipe symbol `|` listed in console before their name. Nesting level of tasks is shown in console with dots `.` before the task name.
 
 Circular task dependencies, such as `G.t('t1', ['t2']); G.t('t2', ['t1'])`, direct or indirect will result in failure.
 
