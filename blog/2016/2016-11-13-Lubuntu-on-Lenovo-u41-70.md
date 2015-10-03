@@ -118,7 +118,7 @@ power source   = battery
 
 ```
 
-The battery lasts normally for around 2.5 hours, but if I reduce the screen brightness and only browse and read, I can get up to 4 hours - more than enough for my usage and I am usually always near a power source.
+Battery lasts normally for around 2.5 hours, but if I reduce the screen brightness and only browse and read, I can get up to 4 hours - more than enough for my usage and I am usually always near a power source.
 
 ##Wireless
 
