@@ -46,7 +46,7 @@ To build the project use `sbt clean compile`, to run it use `sbt run` and to pac
 
 `ExampleApp.scala` need to wrap the example in a Scala object with a main method:
 
-```
+```scala
 import org.apache.spark.SparkContext
 import org.apache.spark.SparkContext._
 
