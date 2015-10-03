@@ -1,8 +1,14 @@
-#Windows 10 on virt-manager in Ubuntu
+#Windows 10 on Virt-Manager in Ubuntu
 
 2017-05-07
 
 <!--- tags: linux virtualization -->
+
+Setting up a Windows machine in Ubuntu with KVM via [virt-manager](https://virt-manager.org/) is easy, but some peculiarities have to be mastered. 
+
+<div id='toc'></div>
+
+##Installation
 
 To install [virt-manager](https://virt-manager.org/) with QEMU/[KVM](https://help.ubuntu.com/community/KVM/Installation) support on Ubuntu (tested on 17.04) use:
 
@@ -10,12 +16,16 @@ To install [virt-manager](https://virt-manager.org/) with QEMU/[KVM](https://hel
 $ sudo apt install qemu-kvm libvirt-bin bridge-utils virt-manager
 ```
 
-KVM will work only if hardware visualization is [supported](https://wiki.archlinux.org/index.php/KVM) by CPU and enabled in BIOS.
+KVM will work only if hardware visualization is [supported](https://wiki.archlinux.org/index.php/KVM) by CPU and enabled in BIOS. The result of this command should be > 0:
+
+```
+$ grep -ciE 'vmx|svm' /proc/cpuinfo
+```
 
 Optional tools to help with VM disks can be installed via:
 
 ```
-sudo apt install libguestfs-tools
+$ sudo apt install libguestfs-tools
 ```
 
 ###Group Membership
@@ -39,7 +49,7 @@ virsh edit win10
 
 ##Creating a Windows 10 VM
 
-Using `virt-manager` [UI](https://www.howtogeek.com/117635/how-to-install-kvm-and-create-virtual-machines-on-ubuntu/), create a new Windows 10 VM. I use mostly defaults including, IDE Disk and CDROM, NAT, Spice, and Video QXL. I found Sound device model `ich9`  to be working better for me with Windows 10. I run into some small [bug](https://bugzilla.redhat.com/show_bug.cgi?id=1377155#c12) with HID device.
+Using `virt-manager` [UI](https://www.howtogeek.com/117635/how-to-install-kvm-and-create-virtual-machines-on-ubuntu/), create a new Windows 10 VM. I used mostly defaults including, IDE Disk and CDROM, NAT, Spice, and Video QXL, and I choose to [copy](https://fedoraproject.org/wiki/How_to_enable_nested_virtualization_in_KVM) host CPU information. Sound device model `ich9` seems to be working better for me with Windows 10. I run into some small [bug](https://bugzilla.redhat.com/show_bug.cgi?id=1377155#c12) with HID device and applied the suggested fix.
 
 ###Disk Image
 
@@ -82,11 +92,15 @@ remote-viewer $(virsh domdisplay win10) -f --hotkeys=toggle-fullscreen=shift+f11
 
 Some `virt-viewer` settings (documented in `man remote-viewer`) can be configured in `$XDG_CONFIG_HOME/virt-viewer/settings` file (such files can be also used with `remote-viewer` in place of URI). Most of settings are global. The ones that are per machine need the machine UUID, that can be found via: `virsh domuuid win10`.
 
-Another alternative is to use [RDP](https://wiki.archlinux.org/index.php/QEMU#Remote_Desktop_Protocol) (`sudo apt install freerdp-x11`), but performance is not as good as Spice. `Ctrl+Alt+Enter` toggles fullscreen. I am also sharing a folder:
+###RDP
+
+Another alternative is to use [RDP](https://wiki.archlinux.org/index.php/QEMU#Remote_Desktop_Protocol) (`sudo apt install freerdp-x11`), but performance is not as good as Spice. `Ctrl+Alt+Enter` toggles fullscreen. I am also sharing a folder - this is the simplest way to share a folder:
 
 ```
 xfreerdp /bpp:32 /v:192.168.122.74 /u:userName /drive:home,$HOME/work-remote /sound /f /toggle-fullscreen +async-input +async-update +async-transport +async-channels +clipboard
 ```
+
+###Finding Guest IP
 
 To find the IP of the guest VM from outside use:
 
@@ -182,7 +196,9 @@ $ sudo iptables -S -t mangle
 -A POSTROUTING -o virbr0 -p udp -m udp --dport 68 -j CHECKSUM --checksum-fill
 ```
 
-If you share a folder in the VM, you can access it using Samba in your Ubuntu file manager of choice using `smb://IP/share`. Similarly, host network services, if you have SSH (SCP) (use [WinScp](https://winscp.net/eng/download.php) from guest), or Samba shared folders, are visible on the Windows guest via the host IP. To access host SSH, firewall need to adapted:
+###Network Shared Folders
+
+If you share a folder in the VM, you can access it using Samba in your Ubuntu file manager of choice using `smb://IP/share` (where IP is the guest IP address). Similarly, host network services, if you have SSH (SCP), or Samba shared folders, are visible on the Windows guest via the host IP. Use [WinScp](https://winscp.net/eng/download.php) from guest for host SSH/SCP. To access host SSH/SCP, host firewall need to adapted:
 
 ```
 $ sudo iptables -A INPUT  -i virbr0  -j ACCEPT
