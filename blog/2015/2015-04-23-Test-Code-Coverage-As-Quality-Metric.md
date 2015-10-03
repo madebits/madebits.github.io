@@ -39,7 +39,7 @@ Why do we then write unit tests when we cannot rely on their popular metric of c
 
 * Unit tests test as least one code path. This is better than nothing. They do not tell anything quality of the software, but they tell us that at least some code path works as developer thought it would.
 * Unit tests help understand what code does. They are a form of compiler checked documentation. Comments in code may get out of sync with what the code does. Unit tests on the other side, have to maintained if the affected code changes.
-* Unit tests save debugging time during initial development, as well as during code changes or re-factorizations. Unit help reduce possible side-effect bugs as we change code. The time to verify unit test run is shorter than re-debug  the affected code.
+* Unit tests save debugging time during initial development, as well as during code changes or re-factorizations. Unit help reduce possible side-effect bugs as we change code. The time required to verify unit test run is shorter than to re-debug  the affected code. Unit test are automated debugging.
 * Unit tests can be part work done, as part of project specific quality planning (but code coverage cannot be used as quality metric).
 
 <ins class='nfooter'><a id='fprev' href='#blog/2015/2015-04-29-Google-Apps-Tricks.md'>Google Apps Tricks</a> <a id='fnext' href='#blog/2015/2015-04-21-Devops-and-Modern-Programming.md'>Devops and Modern Programming</a></ins>
