@@ -93,7 +93,7 @@ sudo rfkill unblock 1 #id
 
 This is because I did not reset BIOS to defaults before doing the update.
 
-`+` and `-` keys are not working to move USB devices up in the BIOS boot list, as the keyboard lacks a numeric pad. To be able to press those, I had to attach an external keyboard.
+`+` and `-` keys are not working to move USB devices up in the BIOS boot list, as the keyboard lacks a numeric pad. To be able to press those, I attached an external keyboard.
 
 ##Graphics
 
