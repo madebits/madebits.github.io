@@ -39,7 +39,7 @@ The function returns:
 * `-1` if `s1 < s2`
 * `1` if `s1 > s2`. 
 
-`s1` and `s2` are converted to strings using `toString()` method if they are not string. Internally, `String.prototype.localeCompare` is used for comparing strings.
+`s1` and `s2` are converted to strings using `toString()` method if they are not strings. Internally, `String.prototype.localeCompare` is used.
 
 
 
