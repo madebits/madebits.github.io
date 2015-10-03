@@ -10,7 +10,7 @@
 
 To have the best of both worlds one can combine continuous delivery guided by GO.CD with artifact storage in Nexus. 
 
-##Nexus as Central Repository
+##Nexus Central Repository
 
 Several types of build artifacts, such as Nuget or Npm packages, are naturally and directly handled by Nexus. During GO.CD builds, one can publish Nuget and Npm packaged components directly in Nexus repositories and consume them from there. Not all build artifact are so structured to fit in any of the existing Nexus repositories. Binaries, documentation, and build artifacts of several technologies, such as Microsoft .NET, do not fit directly in Nexus structure. 
 
