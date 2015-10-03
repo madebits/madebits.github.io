@@ -25,7 +25,7 @@ If installed locally, you can run GRunner as `node node_modules/grunner/bin/grun
 Tasks are coded in Javascript, in one or more files, the default task file name is `gfile.js`:
 
 ```javascript
-"use strict";
+'use strict';
 
 let G = require('grunner')
     , gulp = require('gulp');
