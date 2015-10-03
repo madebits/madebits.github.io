@@ -56,7 +56,7 @@ git config --global alias.vlog 'log --graph --pretty=format:"%h%x09%an%x09%ad%x0
 
 ##Creating the Repository
 
-There is more than one [way](https://www.digitalocean.com/community/articles/how-to-use-git-to-manage-your-user-configuration-files-on-a-linux-vps) to set up a git repository for the home folder. I do not like to use symbolic links, so I decided to have the git repository in my DropBox folder, but move the repository working tree root to my home holder one.
+There is more than one [way](https://www.digitalocean.com/community/articles/how-to-use-git-to-manage-your-user-configuration-files-on-a-linux-vps) to set up a git repository for the home folder. I do not like to use symbolic links, so I decided to have the git repository in my DropBox folder, but move the repository working tree root to my home folder.
 ```
 mkdir -p ~/DropBox/git/home
 cd ~/DropBox/git/home
@@ -95,5 +95,20 @@ git add -f .gnupg/
 
 We have now a `git` repository on home folder that only tracks files and folders we want and ignores the rest. Because the repository is in the DropBox folder is it synchronized automatically across machines. We just need to create the `.git` and `.gitignore` files on each other machine.
 
+**Update:** I found a slight [alternative](https://news.ycombinator.com/item?id=11070797) based on same idea. Instead of using git config `core.worktree` to specify the working directly an alias is used, and instead of using gitignore with '*', `status.showUntrackedFiles` is used:
+
+```
+git init --bare $HOME/.myconf --shared=everybody
+alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
+config config status.showUntrackedFiles no
+
+# usage
+config status
+config add .vimrc
+config commit -m "Add vimrc"
+config push
+```
+
+The problem here is where to store the `alias`. The alternative with relative paths in `core.worktree` better for that.
 
 <ins class='nfooter'><a id='fprev' href='#blog/2014/2014-03-26-Chrome-Browser-PDF-Viewer-Jump-to-Page.md'>Chrome Browser PDF Viewer Jump to Page</a> <a id='fnext' href='#blog/2014/2014-03-17-Custom-PcManFM-Context-Menu-Actions.md'>Custom PcManFM Context Menu Actions</a></ins>
