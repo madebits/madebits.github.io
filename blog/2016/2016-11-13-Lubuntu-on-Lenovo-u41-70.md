@@ -64,17 +64,18 @@ u41-70 has a full-hd [TFT](https://www.quora.com/What-is-the-difference-between-
 
 ###GPU
 
-I experienced some sporadic [tearing](https://wiki.archlinux.org/index.php/intel_graphics#Tips_and_tricks) with display. Some form or tearing was visible up and now in Chrome browser given its GPU usage. After several tests with options, it [helps](https://www.reddit.com/r/archlinux/comments/4cojj9/it_is_probably_time_to_ditch_xf86videointel/) creating `/usr/share/X11/xorg.conf.d/20-intel.conf` [with](http://cynic.cc/blog/posts/sna_acceleration_vs_uxa/):
+I experienced some sporadic [tearing](https://wiki.archlinux.org/index.php/intel_graphics#Tips_and_tricks) with display while scrolling up and now in Chrome browser given its GPU usage. After several tests with various options, it [helps](https://www.reddit.com/r/archlinux/comments/4cojj9/it_is_probably_time_to_ditch_xf86videointel/) creating `/usr/share/X11/xorg.conf.d/20-intel.conf` [with](http://cynic.cc/blog/posts/sna_acceleration_vs_uxa/):
 
 ```
 Section "Device"
    Identifier  "Intel Graphics"
    Driver      "intel"
+   Option      "TearFree" "true"
    Option      "AccelMethod"  "uxa"
 EndSection
 ```
 
-There are some more hints to try [here](http://askubuntu.com/questions/766725/annoying-flickering-in-16-04-lts-chrome). For Chrome, I also tried force-enabling GPU rasterization for all layers, via `chrome://flags/#enable-gpu-rasterization`, but with *uxa* it works fine without it. 
+There are some more hints to try [here](http://askubuntu.com/questions/766725/annoying-flickering-in-16-04-lts-chrome). 
 
 ###High DPI
 
@@ -117,7 +118,9 @@ options iwlwifi bt_coex_active=0 11n_disable=1
 
 Bluetooth and wireless may have [coexistence](https://wiki.archlinux.org/index.php/Wireless_network_configuration) issues, so I [tried](http://superuser.com/questions/924559/wifi-connection-troubles-solved-why-does-my-fix-work) `bt_coex_active=0`.
 
-I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. I configured a second wireless connection over NetworkManager manually for the same SSID and then selected as Device the Hamma WLan USB (via its MAC). I can plug the stick and select its WLAN connection. I might give network [bonding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future. **Update**: I added a WLAN repeater.
+I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. I configured a second wireless connection over NetworkManager manually for the same SSID and then selected as Device the Hamma WLan USB (via its MAC). I can plug the stick and select its WLAN connection. I might give network [bonding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future. 
+
+**Update**: I added a WLAN repeater.
 
 ##Openbox Configurarion
 
