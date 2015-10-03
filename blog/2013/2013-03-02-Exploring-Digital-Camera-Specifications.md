@@ -194,7 +194,7 @@ For my camera, the ISO ranges from 100 to 3200 with a high sensitivity mode with
 
 ##Lens Distortion
 
-Optical lens have various kinds of light distortion and aberration [28] (mostly because real lens have infinite layers of different nodal-points). The most visible ones are: barrel distortion where straight lines in a scene do not remain straight in an image [27] - especially on the sides; and chromatic aberration where the colors get slightly shifted as they are reflected at lightly different angles - mostly visible on object edges.
+Optical lens have various kinds of light distortion and aberration [28] (mostly because real lens have infinite layers of different nodal-points). The most visible ones are: barrel distortion where straight lines in a scene do not remain straight in an image [27] - especially on the sides; and chromatic aberration where the colors get slightly shifted as they are reflected at slightly different angles - mostly visible on object edges.
 
 In most digital cameras with built-in lens, the angle of coverage (the part of lens aperture applied to the image sensor) is usually smaller than the physically visible lens diameter to compensate for the distortion. Also the image sensor is usually a square, while lens form a circle, so only a part of the light coming through the circle gets into the square image sensor.
 
