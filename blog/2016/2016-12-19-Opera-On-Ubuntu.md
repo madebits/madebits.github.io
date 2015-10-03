@@ -43,7 +43,7 @@ After configuring the settings, I [discovered](http://superuser.com/questions/95
 0.0.0.0 duckduckgo.com
 ``` 
 
-To switch window [decorations](http://openbox.org/wiki/Help:Actions#ToggleDecorations), I have in `$HOME/.config/openbox`:
+To switch window [decorations](http://openbox.org/wiki/Help:Actions#ToggleDecorations), I have in `$HOME/.config/openbox/lubuntu-rc.xml`:
 
 ```xml
  <keybind key="W-S-d">
