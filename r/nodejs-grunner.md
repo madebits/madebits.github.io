@@ -173,7 +173,7 @@ And start watching using:
 npm run watch
 ```
 
-See [npm-watch](https://www.npmjs.com/package/npm-watch) documentation for more information.
+Check [npm-watch](https://www.npmjs.com/package/npm-watch) for more information.
 
 ##Task API Reference
 
