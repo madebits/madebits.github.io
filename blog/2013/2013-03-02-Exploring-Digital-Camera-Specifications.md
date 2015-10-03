@@ -170,13 +170,13 @@ Under-exposure of an image causes loss of information in shadow detail - importa
 
 If you have no choice and are unsure, better under-expose a bit, rather than risk over-exposure.
 
-Digital cameras have built-in sensors to do light metering and determine the right exposure automatically. A light meter is a device used to measure the amount of light, to determine the proper exposure for a photograph [25]. Based on light amount, the aperture, shutter speed, etc, can be selected (automatically or manually) in camera. Cameras measure usually reflected light:
+Digital cameras have built-in sensors to do light metering and determine the right exposure automatically. A light meter is a device used to measure the amount of light, to determine the proper exposure for a photograph [25]. Based on light amount, the aperture, shutter speed, etc, can be selected (automatically or manually) in camera. Cameras measure usually the reflected light:
 $$
 \frac{F^2}{t} = \frac{L * S} {K}
 $$
 Where $$$F$$$ is the F-number, $$$t$$$ the exposure time in seconds (shutter speed), $$$L$$$ the average luminance, $$$S$$$ the ISO sensitivity, and $$$K$$$ is a camera specific calibration constant.
 
-My camera supports several light metering options: Intelligent Multiple / Center Weighted / Spot. These are basically different methods to measure light. Spot measures light in focus (center) spot, center weighted prefers the center but also considers the edges (the far the less), and intelligent multiple has to be some more clever way to consider lights from many interesting points at once.
+My camera supports several light metering options: Intelligent Multiple / Center Weighted / Spot. These are basically different methods to measure light. Spot measures light in focus (center) spot, center weighted prefers the center but also considers the edges (the farer, the less considered), and intelligent multiple has to be some more clever way to consider lights from many interesting points at once.
 
 ##Image Sensor Light Sensitivity
 
