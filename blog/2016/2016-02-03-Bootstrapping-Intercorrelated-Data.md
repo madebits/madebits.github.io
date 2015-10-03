@@ -9,6 +9,7 @@
 We can bootstrap manually in this case, but it would be preferable to reuse the **R** `boot` library `boot` function. The trick to use `boot` function with window re-sampling is not to give the original data series to `boot`, but the index of the windows, so that we do not use `data` in the boot function, only the `index`. Let our data be:
 
 ```r
+set.seed(1)
 dataLen <- 1000
 X1 <- sin(1:dataLen)
 X2 <- cos(1:dataLen)
@@ -49,9 +50,9 @@ Obtaining the needed results:
 ```
 Bootstrap Statistics :
       original        bias    std. error
-t1* 0.08037169 -0.0005199964  0.02894703
-t2* 2.05123115  0.0007082852  0.03296834
-t3* 0.99092124 -0.0018817800  0.04644636
+t1* -0.01165015  0.001034892  0.02490686
+t2*  2.00913025 -0.002625029  0.04097508
+t3*  0.98991915  0.000419581  0.04186725
 ```
 
 <ins class='nfooter'><a id='fnext' href='#blog/2015/2015-12-10-WebEx-On-Ubuntu.md'>WebEx On Ubuntu</a></ins>
