@@ -104,14 +104,14 @@ Instances do not share any state, same task name in two different instances can 
 
 Here `g` represents a `GRunner` instance object.
 
-* `GRunner([options])` - constructor, you can pass an optional `options` object. Options can be accessed also via `g.options`. Options can be changed at any time before calling `g.run()`. Options you can use are:
+* `GRunner([options])` - constructor, you can pass an optional `options` object. Options can be accessed also via `g.options`. Options can be changed at any time before calling `g.run()`. Options are:
     * `log = fn(msg, isError)` - replaces the internal log function which logs in `console`.
-    * `exec = fn(doneCb, info)` - given you an option to wrap each `taskFun` call. Basically `fn` can be implemented as:
+    * `exec = fn(doneCb, info)` - gives an option to wrap each `taskFun` call. Basically `fn` can be implemented as:
         ``` 
         if(!info.task.cb) { doneCb(); return; }
-        return info.task.cb(doneCb)
+        return info.task.cb(doneCb);
         ```
-    * `dryRun` - if true, same as `--D` command-line option.
+    * `dryRun` - if `true`, same as `--D` command-line option.
     * `beforeTaskRun = fn(info)` - called before taskFun is run (see `g.t`).
     * `afterTaskRun = fn(info)` - called after taskFun is run (see `g.t`).
 
@@ -134,7 +134,7 @@ Here `g` represents a `GRunner` instance object.
         * Emit an error in a returned stream. In this case, you should **not** call `cb()`.
         * In a returned *promise* `throw` an error, or fail. In this case you should **not** call `cb()`.
         * `throw` a JS error. This works only directly within taskFun. If you `throw` in a `pipe`, or `setTimeout`, and similar async functions, node.js will stop execution. Use callbacks in such cases.
-    * `userData` can be any object, accessible via `info.task.userData` within taskFun.
+    * `userData` - can be any object, accessible via `info.task.userData` within taskFun.
 
 * `g.addTask` - this is a synonym for `g.t`. While you can add tasks directly to `g.tasks`, using `g.t` is recommended.
 
