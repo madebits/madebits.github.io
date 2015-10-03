@@ -274,4 +274,35 @@ Spice guest tools offer several other features, such as direct [folder sharing](
 
 This will add the mapped drive, as last free drive `Z:`, on Windows guest.
 
+### Spice Viewer Options
+
+Both `virt-viewer` and `remote-viewer` that comes with it, [contain](https://www.spice-space.org/spice-user-manual.html#_client_2) a somehow hidden option `--help-spice` that lists Spice specific available options:
+
+```
+$ virt-viewer --help-spice
+$ remote-viewer --help-spice
+...
+Spice Options:
+  --spice-secure-channels=<main,display,inputs,...,all>                    Force the specified channels to be secured
+  --spice-disable-effects=<wallpaper,font-smooth,animation,all>            Disable guest display effects
+  --spice-color-depth=<16,32>                                              Guest display color depth
+  --spice-ca-file=<file>                                                   Truststore file for secure connections
+  --spice-host-subject=<host-subject>                                      Subject of the host certificate (field=value pairs separated by commas)
+  --spice-disable-audio                                                    Disable audio support
+  --spice-smartcard                                                        Enable smartcard support
+  --spice-smartcard-certificates=<certificates>                            Certificates to use for software smartcards (field=values separated by commas)
+  --spice-smartcard-db=<certificate-db>                                    Path to the local certificate database to use for software smartcard certificates
+  --spice-disable-usbredir                                                 Disable USB redirection support
+  --spice-usbredir-auto-redirect-filter=<filter-string>                    Filter selecting USB devices to be auto-redirected when plugged in
+  --spice-usbredir-redirect-on-connect=<filter-string>                     Filter selecting USB devices to redirect on connect
+  --spice-cache-size=<bytes>                                               Image cache size
+  --spice-glz-window-size=<bytes>                                          Glz compression history size
+  --spice-shared-dir=<dir>                                                 Shared directory
+  --spice-preferred-compression=<auto-glz,auto-lz,quic,glz,lz,lz4,off>     Preferred image compression algorithm
+  --spice-debug                                                            Enable Spice-GTK debugging
+  --spice-gtk-version                                                      Display Spice-GTK version information
+```
+
+For example, to share a folder via WEBDEV append `--spice-shared-dir=$HOME/temp`.
+
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-05-09-Ubuntu-Block-Application-Internet-Access.md'>Ubuntu Block Application Internet Access</a> <a rel='next' id='fnext' href='#blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md'>Cross Cutting Concerns Evolution</a></ins>
