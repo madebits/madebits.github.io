@@ -4,44 +4,46 @@
 
 <!--- tags: linux browser -->
 
-I like how the start script of `chromium-browser` on Arch Linux [expects](https://wiki.archlinux.org/index.php/Chromium_tweaks#Making_Flags_Persistent) per user Chromium flags to be added in `$XDG_CONFIG_HOME/chromium-flags.conf`. Same effect can be achieved in Ubuntu by modifying as root `/etc/chromium-browser/default` to look as follows:
+I like how the start script of `chromium-browser` on Arch Linux [expects](https://wiki.archlinux.org/index.php/Chromium_tweaks#Making_Flags_Persistent) per user Chromium flags to be added in `$XDG_CONFIG_HOME/chromium-flags.conf`. Same effect can be achieved in Ubuntu:
 
-```bash
-# Default settings for chromium-browser. This file is sourced by /bin/sh from
-# /usr/bin/chromium-browser
+1. **Method 1**: Modifying as root `/etc/chromium-browser/default` to look as follows:
 
-USER_PARAMS=""
-USER_FILE=$XDG_CONFIG_HOME/chromium-flags.conf
-if [ -f "$USER_FILE" ]; then
-    USER_PARAMS=`grep -v '^#' "$USER_FILE" | tr '\n' ' '`
-fi
+    ```bash
+    # Default settings for chromium-browser. This file is sourced by /bin/sh from
+    # /usr/bin/chromium-browser
 
-# Options to pass to chromium-browser
-CHROMIUM_FLAGS="$USER_PARAMS"
-```
+    USER_PARAMS=""
+    USER_FILE=$XDG_CONFIG_HOME/chromium-flags.conf
+    if [ -f "$USER_FILE" ]; then
+        USER_PARAMS=`grep -v '^#' "$USER_FILE" | tr '\n' ' '`
+    fi
 
-Another way to achieve same is `/etc/chromium-browser/default` as is:
+    # Options to pass to chromium-browser
+    CHROMIUM_FLAGS="$USER_PARAMS"
+    ```
 
-```
-# Default settings for chromium-browser. This file is sourced by /bin/sh from
-# /usr/bin/chromium-browser
+2. **Method 2**: Another way to achieve same is to leave `/etc/chromium-browser/default` unchanged as is:
 
-# Options to pass to chromium-browser
-CHROMIUM_FLAGS="$USER_PARAMS"
-```
+    ```
+    # Default settings for chromium-browser. This file is sourced by /bin/sh from
+    # /usr/bin/chromium-browser
 
-And instead, add a new file `/etc/chromium-browser/customizations/99-user`:
+    # Options to pass to chromium-browser
+    CHROMIUM_FLAGS="$USER_PARAMS"
+    ```
 
-```
-USER_PARAMS=""
-USER_FILE=$XDG_CONFIG_HOME/chromium-flags.conf
-if [ -f "$USER_FILE" ]; then
-    USER_PARAMS=`grep -v '^#' "$USER_FILE" | tr '\n' ' '`
-    CHROMIUM_FLAGS="${CHROMIUM_FLAGS} ${USER_PARAMS}"
-fi
-```
+ And instead, add a new file `/etc/chromium-browser/customizations/99-user`:
 
-Now, using any of the above, per user arguments can be defined one per line in `~/.config/chromium-flags.conf`, for example:
+    ```
+    USER_PARAMS=""
+    USER_FILE=$XDG_CONFIG_HOME/chromium-flags.conf
+    if [ -f "$USER_FILE" ]; then
+        USER_PARAMS=`grep -v '^#' "$USER_FILE" | tr '\n' ' '`
+        CHROMIUM_FLAGS="${CHROMIUM_FLAGS} ${USER_PARAMS}"
+    fi
+    ```
+
+Now, using any of the above methods, per user arguments can be defined one per line in `~/.config/chromium-flags.conf`, for example:
 
 ```
 --disk-cache-dir=/dev/null
