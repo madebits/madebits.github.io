@@ -114,7 +114,7 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	sudo apt-get install ecryptfs-utils
 	ecryptfs-setup-private
 	```
-	We can copy here the `chromium-browser` profile folder (location can be found via `chrome://version`) and use the following command-line argument `--user-data-dir=/home/user/Private/chromium` to specify it when starting `chromium-browser`. Similarly, both `firefox` and `thunderbird` can be started with `-profilemanager` option, to create a new profile that points to a copy of their profiles put in the `~/Private` folder.
+	We can copy then inside the `~/Private` folder the `chromium-browser` profile folder (location can be found via `chrome://version`) and use the following command-line argument `--user-data-dir=/home/user/Private/chromium` to specify it when starting `chromium-browser`. Similarly, both `firefox` and `thunderbird` can be started with `-profilemanager` option, to create a new profile that points to a copy of their profiles put in the `~/Private` folder.
 1. To [clean](https://superuser.com/questions/19326/how-to-wipe-free-disk-space-in-linux) unused free disk space, make sure first that there is no reserved space:
 	```
 	sudo tune2fs -m 0 /dev/sda1
