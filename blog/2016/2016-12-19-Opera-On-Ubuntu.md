@@ -45,7 +45,7 @@ Categories=Network;WebBrowser;
 
 ##Startup Page and Extensions
 
-I have my own local startup page and do not need any of speed-dial functionality. I installed [Custom New Tab Page](https://addons.opera.com/en/extensions/details/custom-new-tab-page/) extension to get rid of it. Using [User-Agent Switcher](https://addons.opera.com/en/extensions/details/user-agent-switcher/), I made Opera UA look like that of Chrome. I also installed [Download Chrome Extension](https://addons.opera.com/en/extensions/details/download-chrome-extension-9/). Using that, I installed [Vimium]()https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb).
+I have my own local startup page and do not need any of speed-dial functionality. I installed [Custom New Tab Page](https://addons.opera.com/en/extensions/details/custom-new-tab-page/) extension to get rid of it. Using [User-Agent Switcher](https://addons.opera.com/en/extensions/details/user-agent-switcher/), I made Opera UA look like that of Chrome. I also installed [Download Chrome Extension](https://addons.opera.com/en/extensions/details/download-chrome-extension-9/). Using that, I installed [Vimium](https://chrome.google.com/webstore/detail/vimium/dbepggeogbaibhgnhhndojpepiihcmeb).
 
 ##Search Engines
 
