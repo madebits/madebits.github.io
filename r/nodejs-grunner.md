@@ -206,9 +206,9 @@ Here `g` represents a `GRunner` instance object.
 
 * `g.run(taskName, cb)` - is used to run a task. When used via command-line this function is called for you for each `--gtask` task. `g.run` does not block - use `cb(error)` to be notified when done. If a task has any dependencies, then those tasks will be run before (*recursively*). `g.run()` only reads options and tasks, so you can invoke `g.run()` more than once on same instance without waiting for previous invocation to finish (as long as you do not modify options and tasks in between).
 
-* `g.log(msg, [isError], [taskName])` - writes `msg` string in `console.log`, or if `isError=true` in `console.error`. You can replace this function with your own using `g.options.log`. If `g.options.name` is set, the default logger print the name before each log statement. If you call `g.log` in your own tasks, it is a good idea to pass the `taskName` parameter, so that parallel tasks logs can be distinguished.
+* `g.log(msg, [isError], [taskName])` - writes `msg` string in `console.log`, or if `isError=true` in `console.error`. You can replace this function with your own, by using `g.options.log`. If `g.options.name` is set, the default logger prints the name before each log statement. If you call `g.log` in your own tasks, it is a good idea to pass the `taskName` parameter, so that parallel tasks logs can be distinguished.
 
-* `g.dumpTasks([logger])` - dump the current list of tasks using `console.log` (can be changed by supplying your own `logger(str)` function).
+* `g.dumpTasks([logger])` - dump the current list of tasks using `console.log` (can be changed by supplying your own `logger(str)` function). Used by `--T` command-line option.
 
 The following helper functions are also provided:
 
@@ -226,7 +226,7 @@ The following helper functions are also provided:
 
 * `g.throughPipe([eachFn], [flushFn])` - this is a wrapper around [through2](https://www.npmjs.com/package/through2) object streams. `eachFn(o, cbFn)` is called for every stream object. `flushFn(cbFn)`, if specified, is called when the stream ends. The callback `cbFn` must be called within these function's code. For `eachFn`, the callback is `cbFn([error], [object])` and it can be used to return an optional `object` in the successive stream. For `flushFn`, the callback is `cbFn([error])`. Both `cnFn` functions have a `cbFn.push(object)` function property to introduce additional objects in successive stream. See `g.startPipe` above for an example.
 
-* `g.setProcessMaxLifeTime(timeInMinutes, [cb])` - if set to a `timeInMinutes > 0`, then the process will terminate when that time is reached. To reset the timer, call same function with a new value. `0` cancels any existing timer. The timer is per instance, but the process is killed, no matter what instance timer expires first. The optional callback `cb` is called if set, in place of `process.exit(1)`. The `--L` command-line option calls this function on global ` G` instance.
+* `g.setProcessMaxLifeTime(timeInMinutes, [cb])` - if set to a `timeInMinutes > 0`, then the process will terminate when that time is reached. To reset the timer, call same function with a new value. `0` cancels any existing timer. The timer is per GRunner instance, but the process is killed, no matter what instance timer expires first. The optional callback `cb` is called if set, in place of `process.exit(1)`. The `--L` command-line option calls this function on global ` G` instance.
 
 * `g.envResolve(key)` - returns `process.env[key]`. Additionally, this function knows to process nested environment variables in values using the special `[[KEY]]` syntax. For example, if `K1=V1` and `K2=V2[[K1]]`, then `g.envResolve('K2')` will return `V2V1`. Environment variable nesting and replacement is platform specific (both syntax and behavior). This function offers a way to handle environment variable nesting using own platform agnostic syntax, if needed. Non found variables are replaced with empty values.
 
