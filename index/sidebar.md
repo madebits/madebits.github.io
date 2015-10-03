@@ -1,4 +1,4 @@
-* [xrandr Panning with no Tracing](#blog/2016/2016-10-02-xrandr-Panning-with-no-Tracing.md)
+* [xrandr Panning with no Tracking](#blog/2016/2016-10-02-xrandr-Panning-with-no-Tracking.md)
 * [Ubuntu Screen Tools](#blog/2016/2016-08-30-Ubuntu-Screen-Tools.md)
 * [Lubuntu Closing Chrome Downloads Bar](#blog/2016/2016-08-02-Lubuntu-Closing-Chrome-Downloads-Bar.md)
 * [Machine Learning with Spark Readings](#blog/2016/2016-08-01-Machine-Learning-with-Spark-Readings.md)
