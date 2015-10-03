@@ -108,13 +108,12 @@ There is no direct support to run a task refereed more than once in the dependen
 ```javascript
 const once = (ucb) => {
     return cb => {
-        if(cb.ctx.task.once) {
-            cb();
-            return;
+        if(!cb.ctx.task.once) {
+            cb.ctx.task.once = true;
+            cb.ctx.runner.log('@once', false, cb.ctx.taskName);
+            return ucb(cb);
         }
-        cb.ctx.task.once = true;
-        cb.ctx.runner.log('@once', false, cb.ctx.taskName);
-        return ucb(cb);
+        cb();
     };
 };
 
