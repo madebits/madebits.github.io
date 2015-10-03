@@ -38,4 +38,11 @@ Windows 10 upgrade lost my switched button settings for the mouse. The display d
 The customary [Windows 10 configuration](
 https://www.reddit.com/r/Windows10/comments/3f38ed/guide_how_to_disable_data_logging_in_w10/) has to be done next, and I installed [classic shell](http://www.classicshell.net/) as a start menu replacement.
 
+##References
+
+* https://www.microsoft.com/en-in/software-download/windows10
+* https://www.reddit.com/r/Windows10/comments/3f38ed/guide_how_to_disable_data_logging_in_w10/
+* http://www.classicshell.net/
+* https://github.com/crazy-max/HostsWindowsBlocker
+
 <ins class='nfooter'><a id='fnext' href='#blog/2016/2016-02-03-Bootstrapping-Intercorrelated-Data.md'>Bootstrapping Intercorrelated Data</a></ins>
