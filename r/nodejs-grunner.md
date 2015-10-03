@@ -72,18 +72,18 @@ When you define a task (via `G.t`) you can pass optional task dependencies to be
 
 * `G.t('t1')` - no dependencies.
 * `G.t('t2', 't1')` - t1 will be run before t2.
-* `G.t('t3', ['t1', 't2'])` - sequential t1 will be run first than t2, and then t3.
+* `G.t('t3', ['t1', 't2'])` - sequential, t1 will be run first than t2, and then t3.
 * `G.t('t4', ['t1', ['t2', 't3'], 't1'])` - t1 will be run first, then t2 and t3 will both start in parallel, then t1 will run again after t2 and t3 are done, and then t4 will run.
 
-*Parallel* means execution will not block, *sequential* means the execution blocks until all before finish. In general, if the dependencies array is considered *level 0* and the first nested arrays as level 1, then the tasks in all *odd* levels of nested arrays are started in parallel and those if *even* levels sequentially. Tasks started in parallel have pipe symbol `|` listed in console before their name. Nesting level of tasks is shown in console with dots `.` before the task name.
+*Parallel* means execution will not block, *sequential* means the execution blocks until all tasks before finish. In general, if the task dependencies array is considered *level 0* and the first nested arrays as level 1, then the tasks in all *odd* levels of nested arrays are started in parallel and those if *even* levels sequentially. Tasks started in parallel have pipe symbol `|` listed in console before their name. Nesting level of tasks is shown in console with dots `.` before the task name.
 
-Circular task dependencies, such as, `G.t('t1', ['t2']); G.t('t2', ['t1']);` direct or indirect will result in failure.
+Circular task dependencies, such as, `G.t('t1', ['t2']); G.t('t2', ['t1']);` direct or indirect, will result in failure.
 
 ##GRunner Instances
 
 When you use `let G = require('grunner');` you get *same* per process singleton instance `G` of `GRunner` class. This instance `G` is used by default, by all `gfile.js` tasks. If you want to use the `grunner` command-line, you should only use this process singleton object to define your tasks. 
 
-For more advanced scenarios, you can create as many `GRunner` instances as needed using code like:
+For more advanced scenarios, you can create as many `GRunner` instances as needed using code such as:
 
 ```
 let G = require('grunner');
@@ -98,7 +98,7 @@ g1.run('t1'); // run t1 on g1
 g2.run('t1'); // run t1 on g2
 ```
 
-Instances do not share any state, same task name in two different instances can be used to mean different things. The methods documented in *Task API Reference* section can be called on any `GRunner` instance. The `new G.GRunner()` can be called only on the process singleton instance. The `run` method does not block. When using the grunner in command-line `G.run` is called for you automatically.
+Instances do not share any state, same task name in two different instances can be used to mean two different things. The methods documented in *Task API Reference* section can be called on any `GRunner` instance. The `new G.GRunner()` can be called only on the process singleton instance. The `run` method does not block. When using the `grunner` in command-line `G.run` is called for you automatically.
 
 ##Task API Reference
 
@@ -112,8 +112,8 @@ Here `g` represents a `GRunner` instance object.
         return info.task.cb(doneCb);
         ```
     * `dryRun` - if `true`, same as `--D` command-line option.
-    * `beforeTaskRun = fn(info)` - called before taskFun is run (see `g.t`).
-    * `afterTaskRun = fn(info)` - called after taskFun is run (see `g.t`).
+    * `beforeTaskRun = fn(info)` - called before taskFun is run (see `g.t`). This method and the next are intended for extra logging and testing. For more advanced wrapping use the `exec` option.
+    * `afterTaskRun = fn(info)` - called after `taskFun` is run (see `g.t`).
 
 * `g.t(...)` - adds a task and has several forms:
 
@@ -124,7 +124,7 @@ Here `g` represents a `GRunner` instance object.
       g.t(taskName, taskFun, userData)
       g.t(taskName, taskDependecies, taskFun, userData)
     ```
-  Tasks are added as keys to `g.tasks` object, so `taskName` must be a valid JS object key name. Adding a task with same name a previous one, replaces it.
+  Tasks are added as keys to `g.tasks` object, so `taskName` must be a valid JS object key name. Adding a task with same name a previous one, replaces it. While you can add tasks directly to `g.tasks` (and sometimes this can be useful), using `g.t` is recommended. The arguments of `g.t(...)` are:
     * `taskName` - string (valid JS object key name).
     * `taskDependecies` - optional string, or array of strings of task names to be run before.
     * `taskFun(cb, info)` - optional body of the task. The optional `info` object contains information about the task `{taskName, task, runner}`. Normally, this should be treated as read-only information, but you can modify any custom `userData` passed to `g.t`. There are several valid ways to denote that you are done within the taskFun:
@@ -136,7 +136,7 @@ Here `g` represents a `GRunner` instance object.
         * `throw` a JS error. This works only directly within taskFun. If you `throw` in a `pipe`, or `setTimeout`, and similar async functions, node.js will stop execution. Use callbacks in such cases.
     * `userData` - can be any object, accessible via `info.task.userData` within taskFun.
 
-* `g.addTask` - this is a synonym for `g.t`. While you can add tasks directly to `g.tasks`, using `g.t` is recommended.
+* `g.addTask` - this is a synonym for `g.t`.
 
 * `g.run(taskName, cb)` - is used to run a task. When used via command-line this function is called for you with `--gtask` tasks. This function does not block, use `cb(error)` to be notified when done. If a task has any dependencies, then those tasks will be run before (recursively). `g.run()` only reads options and tasks, so you can invoke `g.run()` more than once on same instance without waiting for previous invocation to finish (as long as you do not modify options in between).
 
