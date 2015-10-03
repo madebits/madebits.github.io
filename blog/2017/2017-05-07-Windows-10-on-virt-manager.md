@@ -155,6 +155,18 @@ Windows 10 guest works fine without any custom software installed. However, to g
     > Total Run Time 00:00:05.77
  ```
 
+For comparison, this is what I get for Windows 10, on latest VirtualBox with SATA controller on same machine:
+
+```
+> Disk  Random 16.0 Read                       99.93 MB/s          7.1
+> Disk  Sequential 64.0 Read                   255.00 MB/s          7.5
+> Disk  Sequential 64.0 Write                  175.51 MB/s          7.2
+> Average Read Time with Sequential Writes     1.139 ms          7.5
+> Latency: 95th Percentile                     3.850 ms          6.8
+> Latency: Maximum                             7.045 ms          8.3
+> Average Read Time with Random Writes         1.194 ms          8.2
+```
+
 ###Folder Sharing
 
 Spice guest tools offer several other features, such as direct [folder sharing](https://www.spice-space.org/spice-user-manual.html#_folder_sharing):
