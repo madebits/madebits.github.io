@@ -42,4 +42,29 @@ Docker Inc. is working to expand on Docker Swarm and make it comparable to the m
 
 What I would like to see in Docker Swarm (as well as in Kubernetes) is some form of service dependency management - something like a distributed [systemd](https://en.wikipedia.org/wiki/Systemd). You can specify node affinity, but full-fledged abstract dependency management has be to handled currently on your [own](https://www.docker.com/use-cases/cicd) in [CI/CD](https://en.wikipedia.org/wiki/CI/CD) level.
 
+##Books
+
+I found the following material useful on the topic:
+
+[![@left@](blog/images/bco/db1.jpg)](https://www.packtpub.com/virtualization-and-cloud/docker-orchestration) **Docker Orchestration** 
+
+Good introduction covering various aspects of Docker, Docker Swarm, and Kubernetes.
+
+*(2017)*
+<br clear="all">
+
+[![@left@](blog/images/bco/db2.jpg)](https://www.packtpub.com/virtualization-and-cloud/getting-started-kubernetes)  **Getting Started with Kubernetes** 
+
+Useful to get you started, but I had to also to read other sources to get a idea how K8i really works.
+
+*(2015)*
+<br clear="all">
+
+[![@left@](blog/images/bco/db3.jpg)](https://www.packtpub.com/networking-and-servers/mastering-kvm-virtualization) **Mastering KVM Virtualization**
+
+While not directly connected to the above, you may need to read this book, in case you need to setup your own local cluster for experimenting.
+
+*(2016)*
+<br clear="all">
+
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-05-09-Ubuntu-Block-Application-Internet-Access.md'>Ubuntu Block Application Internet Access</a></ins>
