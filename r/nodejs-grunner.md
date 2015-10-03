@@ -114,7 +114,7 @@ Here `g` represents a `GRunner` instance object.
 
 * `GRunner([options])` - constructor, you can pass an optional `options` object. Options can be accessed also via `g.options`. Options can be changed at any time before calling `g.run()`. Options are:
     * `log = fn(msg, isError)` - replaces the internal log function which logs in `console`.
-    * `exec = fn(doneCb)` - gives an option to wrap each `taskFun` call. Basically `fn` can be implemented as:
+    * `exec = fn(doneCb)` - gives an option to wrap each `taskFun` call. Basically, `fn` could be implemented as:
         ``` 
         if(!ctx.task.cb) { doneCb(); return; }
         return ctx.task.cb(doneCb);
