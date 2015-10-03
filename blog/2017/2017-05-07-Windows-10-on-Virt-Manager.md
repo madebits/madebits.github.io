@@ -276,7 +276,7 @@ Spice guest tools offer several other features, such as direct [folder sharing](
 * Add to VM as hardware a Channel of Spice Port with `org.spice-space.webdav.0`. 
 * Due to a [bug](https://bugzilla.redhat.com/show_bug.cgi?id=1444637) in `virt-manager`, you need to use `virt-viewer` to connect to the virtual machine:
 
- ```
+ ```bash
  virsh list --all
  virsh start win10
  virt-viewer -af win10
@@ -337,7 +337,7 @@ The last one `linux-image-extra-virtual` is need to use `9p` shared folders.
 
 To access WebDAV shared folders use [gvfs](https://wiki.ubuntuusers.de/gvfs-mount/):
 
-```
+```bash
 sudo apt install gvfs-bin
 gvfs-mount dav://127.0.0.1:9843/
 #umount
@@ -346,7 +346,7 @@ gvfs-mount -u dav://127.0.0.1:9843/
 
 WebDAV port can be found using any of:
 
-```
+```bash
 ps aux | grep webdavd
 systemctl status spice-webdavd.service
 ```
@@ -357,10 +357,9 @@ To use [9p](https://askubuntu.com/questions/819773/is-there-something-like-virtu
 
 Select a host folder to share, e.g. `/data/share`. VM [runs](http://rabexc.org/posts/p9-setup-in-libvirt) as user `librivt-qemu` under group `kvm` (configurable in `/etc/libvirt/qemu.conf`) - ensure this user and group has [access](https://unix.stackexchange.com/questions/257372/how-can-i-store-files-in-the-mounted-shared-folder), along with your own user to the host shared folder.
 
-Normally the following setting should be enough, but they do not work:
+Normally, the following setting should be enough, but they do not work:
 
-```
-#
+```bash
 chown -R libvirt-qemu:kvm /data/share
 sudo setfacl -R -m u:$(id -un):rwx,g:(id -gn):rwx /data/share
 sudo setfacl -m default:u::rwx,default:g::rwx /data/share
@@ -369,7 +368,7 @@ sudo setfacl -m default:m::rwx /data/share
 
 New files are in guest are created as not-shareable with the group. The above does not work as somehow default and mask ACL is ignored for new files. A permission fix is need in host after creation of new files guest:
 
-```
+```bash
 $ sudo setfacl -R -m u:libvirt-qemu:rwx,u:$(id -un):rwx /data/share
 $ getfacl share
 # file: share
@@ -391,7 +390,7 @@ default:other::rwx
 
 In guest, mount the share by referring it by its tag `share` (create `/mnt/share` if not there):
 
-```
+```bash
 # mount -t 9p -o trans=virtio,version=9p2000.L,rw share /mnt/share
 ```
 
