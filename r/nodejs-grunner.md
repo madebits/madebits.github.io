@@ -84,14 +84,6 @@ When you define a task (via `G.t`) you can pass optional task dependencies to be
 
 Circular task dependencies, such as, `G.t('t1', ['t2']); G.t('t2', ['t1']);` direct or indirect, will result in failure.
 
-##Reacting To Change
-
-There different types of task that can trigger automatic running of tasks. GRunner does not have any build-in support to monitor anything, but you can easy integrate GRunner will any kind of monitoring events you care about:
-
-* There are enough Node.js libraries to monitor files and directories. You can can directly call `G.run` with a task name if some event of interest happens.
-* You can monitor some repository branch for changes and trigger `G.run` with some deployment tasks.
-* Similarly, you can monitor the state of some service and `G.run` with some recovery or load balancing task.
-
 ##GRunner Instances
 
 When you use `let G = require('grunner');` you get *same* process wide singleton instance `G` of `GRunner` class. This instance `G` is used by default, by all `gfile.js` tasks. If you want to use the `grunner` command-line, you should only use this process wide singleton object to define your tasks. 
@@ -138,6 +130,14 @@ G.t('t1', dependencies, externalCode('./t1.js'));
 ```
 
 Of course, if you do not need different processes, using Node.js `require` with GRunner task files works as well.
+
+##Reacting To Change
+
+There are different types of task that can trigger automatic running of tasks. GRunner does not have any build-in support to monitor anything, but you can easy integrate GRunner will any kind of monitoring events you care about:
+
+* There are enough Node.js libraries to monitor files and directories. You can can directly call `G.run` with a task name if some event of interest happens.
+* You can monitor some repository branch for changes and trigger `G.run` with some deployment tasks.
+* Similarly, you can monitor the state of some service and `G.run` with some recovery or load balancing task.
 
 ##Task API Reference
 
