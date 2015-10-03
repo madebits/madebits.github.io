@@ -24,7 +24,7 @@ I like how the start script of `chromium-browser` on Arch Linux [expects](https:
 
 * **Method 2**: Another way to achieve same is to leave `/etc/chromium-browser/default` unchanged as is:
 
-    ```
+    ```bash
     # Default settings for chromium-browser. This file is sourced by /bin/sh from
     # /usr/bin/chromium-browser
 
@@ -34,7 +34,7 @@ I like how the start script of `chromium-browser` on Arch Linux [expects](https:
 
  And instead, add a new file `/etc/chromium-browser/customizations/99-user`:
 
-    ```
+    ```bash
     USER_PARAMS=""
     USER_FILE=$XDG_CONFIG_HOME/chromium-flags.conf
     if [ -f "$USER_FILE" ]; then
