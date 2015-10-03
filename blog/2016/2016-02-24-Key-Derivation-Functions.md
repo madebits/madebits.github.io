@@ -20,7 +20,7 @@ Cost in computing is measured in terms of **time** and **memory** (space) spent 
 
 ##The Achilles Heel of KDFs
 
-The main weakness of KDFs are the cost `options`, because the cost varies with passing of time. The cost should be set to the *maximum* amount (of time and / or memory) that user is willing to wait for each KDF call in the slowest system. As hardware development advances over time so does the affordable maximum cost. An acceptable cost for today (either time and / or memory) is too few for tomorrow. KDFs are good to protect data today. Old (encrypted) data become more and more vulnerable as the time goes on (this is why it makes sense to store adversary old encrypted data indefinitely). So, while KDFs are good and modern cryptography cannot be imagined without them, nothing is in long term as safe as a long random `password`.
+The main weakness of KDFs are the cost `options`, because the cost varies with passing of time. The cost should be set to the *maximum* amount (of time and / or memory) that user is willing to wait for each KDF call in the slowest system. As hardware development advances over time so does the affordable maximum cost. An acceptable cost for today (either time and / or memory) is too few for tomorrow. KDFs are good to protect data today. Old (encrypted) data become more vulnerable as the time goes on (this is why it makes sense to store adversary old encrypted data indefinitely). So, while KDFs are good and modern cryptography cannot be imagined without them, nothing is in long term as safe as a long random `password`.
 
 ##Prefer Long Random Passwords
 
