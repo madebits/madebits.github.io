@@ -195,7 +195,7 @@ My usual custom `openbox` configuration in `~/.config/openbox/lubuntu-rc.xml`:
     </keybind>
     <keybind key="W-l">
       <action name="Execute">
-        <command>i3lock -i /home/u7/bin/i3lock.png</command>
+        <command>i3lock -i /home/user/bin/i3lock.png</command>
       </action>
     </keybind>
     <keybind key="W-i">
@@ -242,7 +242,7 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
   pactl load-module module-bluetooth-discover
   ```
 
- The module is added to `/etc/pulse/default.pa`. To autostart `blueman-manager` I added to `/home/u7/.config/lxsession/Lubuntu/autostart`:
+ The module is added to `/etc/pulse/default.pa`. To autostart `blueman-manager` I added to `~/.config/lxsession/Lubuntu/autostart`:
 
   ```
   @blueman-applet
