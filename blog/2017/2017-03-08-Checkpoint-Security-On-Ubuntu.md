@@ -36,9 +36,9 @@ xfreerdp /size:1920x1080 /compression +clipboard /v:10.11.11.11 /u:user /audio-m
 To stop `snx` use:
 
 ```
-sudo ifonfig tunsnx down; sudo pkill snx
+snx -d
 ```
 
-This removes the added network interface and kills `snx`.
+This removes the added network interface and stops `snx`.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-02-21-Integrating-GO.CD-with-Nexus.md'>Integrating GO.CD with Nexus</a></ins>
