@@ -9,20 +9,23 @@
 We can bootstrap manually in this case, but it would be preferable to reuse the **R** `boot` library `boot` function. The trick to use `boot` function with window re-sampling is not to give the original data series to `boot`, but the index of the windows, so that we do not use `data` in the boot function, only the `index`. Let our data be:
 
 ```r
-X1 <- sin(1:1000)
-X2 <- cos(1:1000)
-Y <- 2 * X1 + X2 + rnorm(1000)
+dataLen <- 1000
+X1 <- sin(1:dataLen)
+X2 <- cos(1:dataLen)
+Y <- 2 * X1 + X2 + rnorm(dataLen)
 data <- data.frame(X1, X2, Y)
 ```
 
 These data are definitively intercorrelated (as we can see if do some plots). To bootstrap standard error of linear regression coefficients for these data, we split them in intervals having `1/10` of data each and define a function `indexToRange` to map the window index to the data index:
 
 ```r
-(windows <- seq(1:10))
+windowsCount <- 10
+(windows <- seq(1:windowsCount))
+windowLen <- dataLen / windowsCount
 
 indexToRange <- function(index) {
   unlist(sapply(index, function(b) {
-    ((b - 1) * 100 + 1):(b * 100)  
+    ((b - 1) * windowLen + 1):(b * windowLen)  
   }, simplify = FALSE))
 }
 ```
