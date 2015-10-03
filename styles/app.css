@@ -91,7 +91,7 @@ pre code.nohighlight { background-color: transparent; } /* color: #000; */
 }
 
 #mbg-nav {
-    border-top: 5px solid rgb(87, 107, 87);
+    border-top: 5px solid #000; /*rgb(87, 107, 87); */
 }
 
 .navbar-default {
