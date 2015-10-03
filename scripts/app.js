@@ -1022,6 +1022,7 @@ var applyStyle = function(containerId) {
 			
 			p1.addClass('text-muted');
 			p1.wrapInner('<small></small>');
+			p1.prepend('<i class="fa fa-calendar"></i> ');
 		}
 	}	
 }
