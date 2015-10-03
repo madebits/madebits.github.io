@@ -4,7 +4,7 @@
 
 <!--- tags: architecture agile deployment -->
 
-Often unit test code coverage is used as a quality metric, the higher, the better. However, there is nothing to suggest that **unit test** code coverage metric is related to software quality. Code coverage is an indication, how much of the software code is unit tested, but the effort to achieve 100% unit test code coverage, is not linear to achieving better software quality.
+Often unit test code coverage is used as a quality metric, the higher, the better. However, there is nothing to suggest that **unit test** code coverage metric is related to software quality. Code coverage is an indication, how much of the software code is unit tested, but the effort to achieve 100% unit test code coverage, is not linear to achieving comparable high software quality.
 
 ##A Counter Example
 
@@ -32,17 +32,17 @@ We do have 100% test code coverage. But what does this mean about the `foo` qual
 * May be the semantics of `foo` are wrong, and so is the unit test (we may be wanted integer division only, and `foo` will return floating point too).
 * We have no metric that tells us how good the `test_foo` is, other than it covers the code 100%.
 
-We could write additional unit tests to address some of these questions. In practice, the number of unit tests needed to properly cover the semantics of even the most simple function is big and unfeasible to write (some unit tests can be generated automatically).
+We could write additional unit tests to address some of these questions. The number of unit tests needed to properly cover all the semantics of even the most simple function is big and unfeasible to write (some unit tests can be generated automatically). Important to node is that we got 100% code coverage and we still cannot say anything about the quality of the code.
 
 ##Code Coverage Is the Wrong Metric for a Quality Goal
 
-If coverage metric is used as quality goal, developers will routinely stop at and only target the code coverage metric goal. A report like *'xx% test code coverage'* tells nothing about the software quality:
+If coverage metric is used as a quality goal, developers will routinely stop at and only target the code coverage metric goal. Reports like *'xx% test code coverage'* tell nothing about the software quality:
 
 * Someone took *'xx% test code coverage'* too seriously and mistakenly thought it mean better software quality and made it a development goal.
-* Project cost was very likely increased to achieve *'xx% test code coverage'*, without any indication on how the test code coverage number really improves product quality.
+* Project cost was very likely increased to achieve *'xx% test code coverage'*, without any indication on how the test code coverage number really improved product quality.
 * As any metric, code coverage reduces reality to a single number, leaving out most of the context details, and it is more misleading than useful if reported outside development scope.
 
-Code coverage is an absolute content independent metric. It is useful for developers how much code is tested. The value of code coverage metric that is useful for a given module is, however, context depended. 100% code coverage may make sense for some generic purpose utility library or framework, but most applications everything over 70% is quite good. Code coverage is compromise, done by the developer(s) on a case by case basis, between having unit tests and spending a lot of time in a unit tests just to please some metric.
+Code coverage is an absolute context independent metric. It is useful for developers to know how much code is tested in specific modules. The value of code coverage metric that is useful for a given module is context depended. 100% code coverage may make sense for some generic purpose utility library or framework, but most applications everything over 70% is quite good. Code coverage is a compromise, done by the developer(s) on a case by case basis, between having unit tests and spending a lot of time in a unit tests just to please some metric. It is an indication of the amount of unit testing for a module and not a quality indicator.
  
 
 ##Unit Tests are Useful not the Code Coverage Metric
