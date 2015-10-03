@@ -41,7 +41,26 @@ Ubuntu will recommend to replace `ffmpeg` with `avconv` - the later is usually f
 
 Update: I installed the stick same in Lubuntu 13.10 64 bit in another machine. I installed only `linux-firmware-nonfree` and `vlc-plugin-zvbi` and created a shortcut to start `vlc wuerburg-2013-channels.conf` (using the previously generated channels file). It worked also fully ok. This is kind of funny as Freecom only offers 32 bit windows drivers for this stick :).
 
-**Update:** It seems `linux-firmware-nonfree` is no more distributed as of Ubuntu 16.04, due to some [conflicts](https://launchpad.net/ubuntu/xenial/amd64/linux-firmware-nonfree/1.16) with `linux-firmware`. The needed firmware for my stick, [dvb-usb-wt220u-zl0353-01.fw](blog/images/dvb-usb-wt220u-zl0353-01.fw) is not problematic. I extracted it from the [deb](http://launchpadlibrarian.net/182181877/linux-firmware-nonfree_1.16_all.deb) file and copied it manually to `/lib/firmware`. Additionally, it seems the [legacy](https://ubuntuforums.org/showthread.php?t=2290209) files have to be used for: `scan /usr/share/dvb/dvb-legacy/dvb-t/de-Bayern > wuerburg-2016-channels.conf`.
+**Update:** It seems `linux-firmware-nonfree` is no more distributed as of Ubuntu 16.04, due to some [conflicts](https://launchpad.net/ubuntu/xenial/amd64/linux-firmware-nonfree/1.16) with `linux-firmware`. The needed firmware for my stick, [dvb-usb-wt220u-zl0353-01.fw](blog/images/dvb-usb-wt220u-zl0353-01.fw) is not problematic. I extracted it from the [deb](http://launchpadlibrarian.net/182181877/linux-firmware-nonfree_1.16_all.deb) file and copied it manually to `/lib/firmware`. Additionally, it seems the [legacy](https://ubuntuforums.org/showthread.php?t=2290209) files have to be used for: `scan /usr/share/dvb/dvb-legacy/dvb-t/de-Bayern > wuerburg-2016-channels.conf`. My updated list of channels for 2016 is:
+
+```
+ZDF:506000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_1_2:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:545:546:514
+3sat:506000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_1_2:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:561:562:515
+ZDFinfo:506000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_1_2:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:577:578:516
+neo/KiKA:506000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_1_2:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:593:594:517
+arte:594000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_1_2:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:33:34:2
+Phoenix:594000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_1_2:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:49:50:3
+ONE:594000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_1_2:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:97:98:6
+Das Erste:594000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_1_2:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:513:514:32
+BR Fernsehen Nord:666000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_AUTO:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:529:530:33
+ARD-alpha:666000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_AUTO:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:561:562:35
+hr-fernsehen:666000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_AUTO:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:1041:1042:65
+MDR Thüringen:666000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_AUTO:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:1585:1586:99
+BR Fernsehen Nord:674000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_AUTO:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:529:530:33
+ARD-alpha:674000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_AUTO:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:561:562:35
+hr-fernsehen:674000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_AUTO:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:1041:1042:65
+MDR Thüringen:674000000:INVERSION_AUTO:BANDWIDTH_8_MHZ:FEC_2_3:FEC_AUTO:QAM_16:TRANSMISSION_MODE_8K:GUARD_INTERVAL_1_4:HIERARCHY_NONE:1585:1586:99
+```
 
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-11-06-Disabling-ZRAM-in-Lubuntu.md'>Disabling ZRAM in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-11-02-LibreOffice-Preview-Thumbnails-in-PCManFM.md'>LibreOffice Preview Thumbnails in PCManFM</a></ins>
