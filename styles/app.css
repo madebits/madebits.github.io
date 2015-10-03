@@ -10,7 +10,8 @@ h2 { border-bottom: 1px solid #dfdedc; padding-bottom: 9px; }
 h1 { font-size: 38px; font-weight: bold; }
 h2 { font-weight: 600; }
 
-.mbg-entry-background h2 { border-bottom: 0px; } 
+.mbg-entry-background h1 { border-bottom: 0px; font-size: 10vh; } 
+.mbg-entry-background h2 { border-bottom: 0px; font-size: 8vh; } 
 
 .mbg-search-container { padding: 10px 10px 0px 0px; }
 
