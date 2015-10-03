@@ -97,7 +97,7 @@ When you define a task (via `G.t`) you can pass optional task dependencies to be
 
 Circular task dependencies, such as, `G.t('t1', ['t2']); G.t('t2', ['t1']);`, direct or indirect, will result in failure.
 
-Dependency strings that evaluate to `false` are ignored. This can be convenient in some cases (if you fill in the dependencies array dynamically):
+Dependency strings that evaluate to `false` are ignored. This can be convenient in some cases (when filling in the dependencies array dynamically without having to rely on too evolved code checks):
 
 * `G.t('t2', [null, 't1', [null, null], ''])` - `t1` will be run before `t2`.
 
