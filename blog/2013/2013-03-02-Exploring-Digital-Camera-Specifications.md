@@ -186,7 +186,7 @@ Luminance is invariant in lens optics: the luminance at the output is the same a
 
 Some common illuminance values of lux from [17] for surfaces being illuminated by: Direct sunlight: 32,000-130,000 lux, Sunrise or sunset on a clear day: 400 lux, Family living room lights: 50 lux, Full moon on a clear night: 0.27-1.0 lux. My camera supports at low light mode (shutter speed 1/25s) a minimum illumination of 9 lux.
 
-In digital camera systems, an arbitrary relationship between exposure and image sensor data values can be achieved by setting the signal gain of the sensor [20]. The sensor sensitivity to light is measured via ISO setting (called also ISO speed). ISO setting is an exposure index (EI) rating such that the sRGB image files produced by the camera will have a lightness similar to what would be obtained with film of the same EI rating at the same exposure [20].
+In digital camera systems, an arbitrary relationship between exposure and image sensor data values can be achieved by controlling the signal gain of the sensor [20]. The sensor sensitivity to light is measured via ISO setting (called also ISO speed). ISO setting is an exposure index (EI) rating such that the sRGB image files produced by the camera will have a lightness similar to what would be obtained with film of the same EI rating at the same exposure [20].
 
 The lowest ISO setting (the least sensitive) is 100. From there, each ISO setting, or stop, doubles in sensitivity and in number: 200, 400, 800, and so on [32]. The bigger the ISO the more sensitive the sensor is (the bigger the gain) for both signal and noise. The actual noise level on each ISO setting depends also on the camera sensor quality.
 
