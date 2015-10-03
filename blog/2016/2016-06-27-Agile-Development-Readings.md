@@ -8,19 +8,19 @@
 
 ##Learning Agile (2014)
 
-[![@left@](blog/images/book-la.png)](http://shop.oreilly.com/product/0636920025849.do) *Learning Agile* summarizes and goes into details of common agile software methodologies and best practices, such as Scrum, eXtreme Programming, Lean, and Kanban. Authors share their experiences, mainly on Scrum, and explain how they understand common practices. I found sometimes the authors' understandings are not completely shared by other practitioners in the field, but in overall, the book provides a good introduction from people that have spend some time in management of agile software development teams.
+[![@left@](blog/images/book-la.png)](http://shop.oreilly.com/product/0636920025849.do) *Learning Agile* summarizes and goes into details of common agile software methodologies and best practices, such as Scrum, eXtreme Programming, Lean, and Kanban. Authors share their experience mainly on Scrum, and explain how they understand common practices. I found sometimes the authors' understandings are not completely shared by other practitioners in the field, but in overall, the book provides a good introduction from people that have spend some time in management of agile software development teams.
 
 <br clear="all">
 
 ##Coaching Agile Teams (2010)
 
-[![@left@](blog/images/book-ca.png)](https://www.amazon.com/Coaching-Agile-Teams-ScrumMasters-Addison-Wesley/dp/0321637704) *Coaching Agile Teams* teaches that coaching starts and ends with you - the coach. In between, there is a whole of wisdom to master. This book has been very influential to a whole generation of scrum masters and it has made the martial arts term [Shu-Ha-Ri](http://martinfowler.com/bliki/ShuHaRi.html), known to all agile software development practitioners. I found reading the book informative and filled with common sense. I am not sure how much of it will remain with me for a long time, but it is the kind of spiritual book you always want to have a copy with you.
+[![@left@](blog/images/book-ca.png)](https://www.amazon.com/Coaching-Agile-Teams-ScrumMasters-Addison-Wesley/dp/0321637704) *Coaching Agile Teams* teaches that coaching starts and ends with you - the coach. In between, there is a whole of wisdom to master. This book has been very influential to a whole generation of scrum masters and it has made the martial arts term [Shu-Ha-Ri](http://martinfowler.com/bliki/ShuHaRi.html) known to all agile software development practitioners. I found reading the book informative and filled with common sense. I am not sure how much of it will remain with me for a long time, but it is the kind of spiritual book you always want to have a copy with you.
 
 <br clear="all">
 
 ##Succeeding with Agile (2009)
 
-[![@left@](blog/images/book-sa.png)](https://www.mountaingoatsoftware.com/books/succeeding-with-agile-software-development-using-scrum) *Succeeding with Agile* is a book I still have to finish reading. I find it very interesting as it combines the theory with enough practical tips to get you started in the right direction. The book is especially useful for usage in corporation environment and shows how agile techniques fit to common project management tasks. This book is more practical than *Coaching Agile Teams*, though both are timeless and worth reading.
+[![@left@](blog/images/book-sa.png)](https://www.mountaingoatsoftware.com/books/succeeding-with-agile-software-development-using-scrum) *Succeeding with Agile* is a book I still have to finish reading. It combines quite accurately the theory with enough practical tips to get you started in the right direction. The book is especially useful for usage in a corporation environment, demonstrating how agile techniques fit to common project management tasks. It is more practical than *Coaching Agile Teams*, though both are timeless and worth reading.
 
 <br clear="all">
 
