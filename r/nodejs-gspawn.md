@@ -46,7 +46,7 @@ A summary of available `gspawn` `options` follows (*boolean* options are all by 
 
 * `args`: optional command line arguments for `cmd`. This can be null, a string, or an array of string (one arry element per each option) (passed to `child_process.spawn` after checks).
 
-* `resolveCmd`: if the `cmd` is a system program, such as, `bash`, specifying `resolveCmd: true` uses [which](https://github.com/npm/node-which) library to find the whole path of the `cmd`.
+* `resolveCmd`: if the `cmd` is a system program, such as, `bash`, specifying `resolveCmd: true` uses [which](https://github.com/npm/node-which) library to find the whole path of the `cmd` in the system.
 
 * `options`: if set, are passed as are to `child_process.spawn`. See `child_process.spawn` documentation, to specify `options.options.env`, and `options.options.cwd`.
 
