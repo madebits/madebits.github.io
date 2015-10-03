@@ -127,7 +127,7 @@ Here `g` represents a `GRunner` instance object.
       g.t(taskName, taskFun, userData)
       g.t(taskName, taskDependecies, taskFun, userData)
     ```
-  Tasks are added as keys to `g.tasks` object, so `taskName` must be a valid JS object key name. Adding a task with same name a previous one, replaces it. While you can add tasks directly to `g.tasks` (and sometimes this can be useful), using `g.t` is recommended. The arguments of `g.t(...)` are:
+  Tasks are added as keys (`taskName`) to `g.tasks` object. Adding a task with same `taskName` a previous one, replaces it. While you can add tasks directly to `g.tasks` (and sometimes this can be useful), using `g.t` is recommended. The arguments of `g.t(...)` are:
     * `taskName` - string (valid JS object key name).
     * `taskDependecies` - optional string, or array of strings of task names to be run before.
     * `taskFun(cb, info)` - optional body of the task. The optional `info` object contains information about the task `{taskName, task, runner}`. Normally, `info` should be treated as read-only information, but you can modify any custom `userData` passed to `g.t`. There are several valid ways to denote that you are done within `taskFun` code:
