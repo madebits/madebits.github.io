@@ -290,7 +290,7 @@ The following helper functions are provided:
 
 ###API: Files
 
-Some simple low level file manipulation functions are provided. You can either use these (you can call them on any GRunner instance), or `gulp.src` / `dest`, or other similar libraries.
+Some simple low level file manipulation function wrappers are provided. You can either use these (you can call them on any GRunner instance), or `gulp.src` / `dest`, or other similar libraries.
 
 * `g.fileReadBin(file, [throwErr])` - (synchronous) reads a file as a buffer. By default if file is not found or in case of error `null` is returned. Passing `true` for `throwErr` will raise an error instead of retuning `null`.
 
