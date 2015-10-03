@@ -26,7 +26,7 @@ I [updated](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-jup
 
 ##Programming Scala (2014)
 
-[![@left@](blog/images/book-lsc.png)](http://shop.oreilly.com/product/0636920030287.do) *Learning Scala* - is somehow a bad book, partly because Scala itself is a too evolved language with a lot of corner cases (not as bad as Haskel thought :), and partly that while the authors do knows Scala they do a bad job of systematically introducing stuff. After I read first five chapters and the introduction was not finished, I decided to find another book and only skipped later on though the rest of this book content. [Learning Scala](http://shop.oreilly.com/product/0636920030287.do) is a better book, if you want to go with O'Reilly.
+[![@left@](blog/images/book-lsc.png)](http://shop.oreilly.com/product/0636920030287.do) *Learning Scala* - is somehow a bad book, partly because Scala itself is a too evolved language with a lot of corner cases (not as bad as Haskell, thought :), and partly that while the authors do knows Scala they do a bad job of systematically introducing stuff. After I read first five chapters and the introduction was not finished, I decided to find another book and only skipped later on though the rest of this book content. [Learning Scala](http://shop.oreilly.com/product/0636920030287.do) is a better book, if you want to go with O'Reilly.
 
 <br clear="all">
 
