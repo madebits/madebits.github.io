@@ -75,7 +75,7 @@ var idx = Math.floor(Math.random() * workersPoolMax);
 workers[idx].w.postMessage({cmd: 'process'}); 
 ```
 
-We can use `MessageChannel` to establish a bidirectional communication pipe through workers. Currently, `MessageChannel` does [not](https://bugs.chromium.org/p/chromium/issues/detail?id=334408) support transferable types in Chrome, which can be a drawback for this kind of topology, depending on the data you have. However, understanding how this is done is still useful. The updated code of the `worker.js` is shown next. Using `cmd` as shown is just a convention. You can use any convention of choice to manage your data flow protocol.
+We can use `MessageChannel` to establish a bidirectional communication pipe through workers. Currently, `MessageChannel` does [not](https://bugs.chromium.org/p/chromium/issues/detail?id=334408) support transferable types in Chrome, which can be a drawback for this kind of topology, depending on the data you have. However, understanding how this is done is still useful (given data copy is done on a worker this is still not affecting the window thread). The updated code of the `worker.js` is shown next. Using `cmd` as shown is just a convention. You can use any convention of choice to manage your data flow protocol.
 
 ```javascript
 var nestedPort;
