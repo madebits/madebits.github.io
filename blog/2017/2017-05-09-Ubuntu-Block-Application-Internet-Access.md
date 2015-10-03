@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-This post is based on an `iptables` [trick](https://ubuntuforums.org/archive/index.php/t-1188099.html) to disable Internet access for some specific application. Create a new group (e.g: named `no-internet`) and filter out traffic based on that group. Start applications with blocked Internet access as that group (via `sg`):
+This TIL (today I learned) post is based on an `iptables` [trick](https://ubuntuforums.org/archive/index.php/t-1188099.html) to disable Internet access for some specific application. Create a new group (e.g: named `no-internet`) and filter out traffic based on that group. Start applications with blocked Internet access as that group (via `sg`):
 
 ```
 sudo groupadd -g 1999 no-internet
