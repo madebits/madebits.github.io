@@ -4,7 +4,7 @@
 
 <!--- tags: windows -->
 
-*Remote Desktop Connection* application in Windows (`mstsc.exe`) [supports](https://support.microsoft.com/en-us/kb/313292) sharing local drives with the remote machine (via `drivestoredirect` setting in a `.rdp` file). Some RDP clients support sharing also folders, but with `mstsc.exe` only local drives can be shared. Sharing a whole existing local drive is relatively risky. It is preferable to share only a specific local folder.
+*Remote Desktop Connection* application in Windows (`mstsc.exe`) [supports](https://support.microsoft.com/en-us/kb/313292) sharing local drives with the remote machine (via `drivestoredirect` setting in a `.rdp` file). Some RDP clients support sharing folders, but with `mstsc.exe` only local drives can be shared. Sharing a whole existing local drive is relatively risky. It is preferable to share only a specific local folder.
 
 The solution is to [map](http://superuser.com/questions/644684/mapping-drive-letters-to-local-folders) a local *folder* as a local *drive*, best, by permanently mapping it in Window Registry. In *HKEY_LOCAL_MACHINE \ SYSTEM \ CurrentControlSet \ Control \ Session Manager \ DOS Devices* create a string (REG_SZ) value named with the desired drive name, for example `X:`, and with value pointing to the local folder: `\DosDevices\C:\Folder\Example`. A restart is required for the drive to show up in the Windows Explorer.
 
