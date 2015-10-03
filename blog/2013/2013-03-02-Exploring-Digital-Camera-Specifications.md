@@ -61,7 +61,7 @@ For my camera, the `d` is approximately 7.8mm, so the angle of view `FOV` varies
 
 Human eye field of view with both eyes is around 130 degrees [8], but we can focus only on a much smaller range.
 
-Angle of view range describes a camera same good as its 35mm equivalent focal length range, because both takes the size of the camera image sensor into account.
+Angle of view range describes a camera same good as its 35mm equivalent focal length range, because both take the size of the camera image sensor into account.
 
 FOV can be used to roughly classify the lens. Wide-angle (W) lens are those with focal length <= 35mm. Telephoto (T) lens have focal length >=85mm. The in-between ones are the middle-range lens. Sometimes the middle-range 50mm lens are referred as *normal lens*.
 
