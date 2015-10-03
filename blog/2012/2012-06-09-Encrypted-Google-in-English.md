@@ -10,7 +10,7 @@ To make it start with and search the international English version, I used now h
 
 Alternatively, https://encrypted.google.com/?gl=us (or both https://encrypted.google.com/?hl=en&gl=us) can be used to get USA results.
 
-For bing.com the same can be done via http://www.bing.com?cc=us.
+For bing.com the same can be done via http://www.bing.com?cc=us&rb=0.
 
 One more unrelated tip, to access gmail in basic html use: http://mail.google.com/mail/h/
 
