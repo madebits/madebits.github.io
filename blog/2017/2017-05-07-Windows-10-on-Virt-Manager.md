@@ -303,6 +303,6 @@ Spice Options:
   --spice-gtk-version                                                      Display Spice-GTK version information
 ```
 
-For example, to share a folder via WEBDEV append `--spice-shared-dir=$HOME/temp`.
+For example, to share a folder via WebDAV append `--spice-shared-dir=$HOME/temp`.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-05-09-Ubuntu-Block-Application-Internet-Access.md'>Ubuntu Block Application Internet Access</a> <a rel='next' id='fnext' href='#blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md'>Cross Cutting Concerns Evolution</a></ins>
