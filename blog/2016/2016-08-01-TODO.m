@@ -6,15 +6,15 @@
 
 ##Learning Spark (2015)
 
-[![@left@](blog/images/book-ls.png)](http://shop.oreilly.com/product/0636920028512.do) *Learning Spark* This is the book to start learning Spark. It introduces the concept of the directed graph of transformations over RDDs and has enough examples to get you started. Spark is a fast moving ecosystem and no book can keep up with that, but you get an idea of the basics and then refer to Spark [documentation](http://spark.apache.org/documentation.html). It is easy to run Spark locally (it need your /tmp folder to be executable) and I run several python examples to get my self used to the details. I found it useful to add script to start `ipython`:
+[![@left@](blog/images/book-ls.png)](http://shop.oreilly.com/product/0636920028512.do) *Learning Spark* This is the book to start learning Spark. It introduces the concept of the directed graph of transformations over RDDs and has enough examples to get you started. Spark is a fast moving ecosystem and no book can keep up with that, but you get an idea of the basics and then refer to Spark [documentation](http://spark.apache.org/documentation.html). It is easy to run Spark locally (it need your /tmp folder to be executable) and I run several python examples to get my self used to the details. I found it useful to create a script to start `ipython`:
 
 ```bash
 #!/bin/bash
 
-IPYTHON=1 IPYTHON_OPTS="--pylab" $HOME/opt/spark/bin/pyspark
+IPYTHON=1 IPYTHON_OPTS="--matplotlib" $HOME/opt/spark/bin/pyspark
 ```
 
-and to add `$HOME/opt/spark` where I installed spark (`$SPARK_HOME`) to my `$PATH` variable.
+I also added `$HOME/opt/spark` where I installed spark (`$SPARK_HOME`) to my `$PATH` variable. To get latest [version](http://blog.jupyter.org/2016/07/08/ipython-5-0-released/) of `ipython` with `prompt_toolkit` I used `pip install ipython --upgrade` (use `pip3` for `ipython3`).
 
 <br clear="all">
 
