@@ -37,22 +37,23 @@ I see some errors reported at startup:
 
 ```
 $ dmesg | grep -iE "failed|error"
-[    0.721575] acpi PNP0A08:00: _OSC failed (AE_ERROR); disabling ASPM
-[    2.045632] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECWT] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
-[    2.045636] ACPI Error: Method parse/execution failed [\_TZ.FN00._ON] (Node ffff8b00c60f51b8), AE_NOT_FOUND (20160422/psparse-542)
-[    2.045645] acpi PNP0C0B:00: Failed to change power state to D0
-[    2.045665] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECWT] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
-[    2.045668] ACPI Error: Method parse/execution failed [\_TZ.FN00._ON] (Node ffff8b00c60f51b8), AE_NOT_FOUND (20160422/psparse-542)
-[    2.045673] acpi PNP0C0B:00: Failed to set initial power state
-[    2.070404] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
-[    2.070408] ACPI Error: Method parse/execution failed [\_TZ.TZ00._TMP] (Node ffff8b00c60f57a8), AE_NOT_FOUND (20160422/psparse-542)
-[    2.070519] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
-[    2.070522] ACPI Error: Method parse/execution failed [\_TZ.TZ00._TMP] (Node ffff8b00c60f57a8), AE_NOT_FOUND (20160422/psparse-542)
-[    2.070573] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
-[    2.070575] ACPI Error: Method parse/execution failed [\_TZ.TZ01._TMP] (Node ffff8b00c60f5d20), AE_NOT_FOUND (20160422/psparse-542)
-[    2.070658] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
-[    2.070660] ACPI Error: Method parse/execution failed [\_TZ.TZ01._TMP] (Node ffff8b00c60f5d20), AE_NOT_FOUND (20160422/psparse-542)
-[    2.329683] [drm:intel_dp_start_link_train [i915]] *ERROR* failed to train DP, aborting
+[    0.711376] acpi PNP0A08:00: _OSC failed (AE_ERROR); disabling ASPM
+[    2.028037] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECWT] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
+[    2.028044] ACPI Error: Method parse/execution failed [\_TZ.FN00._ON] (Node ffff8ce14e0f6a50), AE_NOT_FOUND (20160422/psparse-542)
+[    2.028050] acpi PNP0C0B:00: Failed to change power state to D0
+[    2.028073] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECWT] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
+[    2.028075] ACPI Error: Method parse/execution failed [\_TZ.FN00._ON] (Node ffff8ce14e0f6a50), AE_NOT_FOUND (20160422/psparse-542)
+[    2.028080] acpi PNP0C0B:00: Failed to set initial power state
+[    2.051872] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
+[    2.051876] ACPI Error: Method parse/execution failed [\_TZ.TZ00._TMP] (Node ffff8ce14e0f6960), AE_NOT_FOUND (20160422/psparse-542)
+[    2.051992] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
+[    2.051995] ACPI Error: Method parse/execution failed [\_TZ.TZ00._TMP] (Node ffff8ce14e0f6960), AE_NOT_FOUND (20160422/psparse-542)
+[    2.052048] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
+[    2.052050] ACPI Error: Method parse/execution failed [\_TZ.TZ01._TMP] (Node ffff8ce14e0f62a8), AE_NOT_FOUND (20160422/psparse-542)
+[    2.052135] ACPI Error: [\_SB_.PCI0.LPCB.H_EC.ECRD] Namespace lookup failure, AE_NOT_FOUND (20160422/psargs-359)
+[    2.052137] ACPI Error: Method parse/execution failed [\_TZ.TZ01._TMP] (Node ffff8ce14e0f62a8), AE_NOT_FOUND (20160422/psparse-542)
+[    2.313189] [drm:intel_dp_start_link_train [i915]] *ERROR* failed to train DP, aborting
+[    2.360396] [drm:intel_dp_start_link_train [i915]] *ERROR* failed to train DP, aborting
 ```
 
 It seems, [acpi](https://wiki.archlinux.org/index.php/ACPI_modules) information is [not](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1349740) correctly supplied by BIOS, not that it matters much in my case and this is not the first laptop to have this issue. Do not know what DP message is about, but external monitor (TV) over HDMI works fine.
