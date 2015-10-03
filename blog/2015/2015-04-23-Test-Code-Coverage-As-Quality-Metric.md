@@ -79,6 +79,6 @@ We have mostly manual tests. The majority of automated tests are integration one
 
 ##Testing Pyramid as a Better Quality Metric
 
-The relative ratio(s) between the types of tests if the testing pyramid of project can give a better indication of long term maintenance quality of the software. Of course, the actual ratio values can be project specific. Testing pyramid ratio metrics can be collected and compared against similar previous projects, and against same self metrics over project time.
+Relative ratio(s) between the types of tests if the testing pyramid of project can give a better indication of long term maintenance quality of the software. Actual ratio values can be project specific. Testing pyramid ratio metrics can be collected and compared against similar previous projects, and against same self metrics over project time.
 
 <ins class='nfooter'><a id='fprev' href='#blog/2015/2015-04-29-Google-Apps-Tricks.md'>Google Apps Tricks</a> <a id='fnext' href='#blog/2015/2015-04-21-Devops-and-Modern-Programming.md'>Devops and Modern Programming</a></ins>
