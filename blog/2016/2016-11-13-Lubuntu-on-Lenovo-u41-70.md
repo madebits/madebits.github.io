@@ -189,7 +189,7 @@ Normally, I do not [configure](http://linrunner.de/en/tlp/docs/tlp-troubleshooti
 /sys/bus/pci/devices/0000:03:00.0/power/control = on   (0x020000, Ethernet controller, r8169)
 ```
 
-TLP [configuration](http://linrunner.de/en/tlp/docs/tlp-configuration.html) is in `/etc/default/tlp`. With TLP defaults on AC all PCI devices are *on* and *auto* on BAT:
+TLP [configuration](http://linrunner.de/en/tlp/docs/tlp-configuration.html) is in `/etc/default/tlp`. With TLP defaults, all PCI devices are on AC / BAT either *on* or *auto*:
 
 ```
 RUNTIME_PM_ON_AC=on
