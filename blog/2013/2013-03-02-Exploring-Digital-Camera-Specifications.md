@@ -87,7 +87,7 @@ An object with height $$$H\_1$$$ at distance $$$S\_1$$$ from the lens is project
 
 As both the image sensor and the distant object position does not change, we have to control (increase) $$$S\_2$$$ to a new value $$$S\_{21}$$$ to zoom in ($$$S\_1$$$ decreases when $$$S\_2$$$ in increased in focal length formula. $$$\frac{S\_{21}} {S\_2}$$$ is the **optical zoom** of the lens used to obtain the **actual zoom** $$$\frac{H\_1} { H\_{11}}$$$.
 
-Difference between the optical zoom and the actual zoom depends on $$$S\_1$$$. If $$$S\_1$$$ is too big (the object is too far away) then $$$\frac{1} {S\_1}$$$ can be approximated to zero, so that $$$S\_2 = f$$$. If $$$S\_1$$$ is small, comparable to $$$S\_2$$$, then $$$S\_2 = 2f$$$. To zoom near objects same as distant ones we need a bigger $$$S\_2$$$. This means that for same $$$f$$ range near objects have a smaller actual zoom.
+Difference between the optical zoom and the actual zoom depends on $$$S\_1$$$. If $$$S\_1$$$ is too big (the object is too far away) then $$$\frac{1} {S\_1}$$$ can be approximated to zero, so that $$$S\_2 = f$$$. If $$$S\_1$$$ is small, comparable to $$$S\_2$$$, then $$$S\_2 = 2f$$$. To zoom near objects same as distant ones we need a bigger $$$S\_2$$$. This means that for same $$$f$$$ range near objects have a smaller actual zoom.
 
 The smaller a distant object is, the less actual zoom we can get for it, when using a given focal range lens.
 
