@@ -20,7 +20,7 @@ As a power user, *click to play* for plugins was really useful. Even if I want t
 
 Such fine Flash control, seems still be there in Chrome 55 in Windows, if you had click to play for plugins configured before. I suspect this is a bug, they may remove that in some future version - it did not work like that for me with current Chrome canary (57) on Linux.
 
-##Firefox Leaded The Way
+##Firefox Leads The Way
 
 With Google being one of main Mozilla sponsors, Google often uses Firefox as playground for (sometimes unpopular) ideas, or to soft-*buy* votes for W3C *standards*. Firefox introduced a similar way of handling Flash some time ago. There are ways, in Firefox to undo that behavior via flags and add-ons, but they are not as safe as browser detecting and blocking Flash. Firefox therefore become a *yes* | *no* switch for Flash, with no safe way in between.
 
