@@ -23,6 +23,6 @@ In overall, despite my previous Scrum knowledge, I am happy I applied for the ce
     * Some Day: Product Backlog Review (Meeting) ("Done" Increment) : { DT, PO, SM optional }
     * End: Sprint Review (Meeting, Demo) : {PO, SM, DT, stakeholders as needed }
     * End: Sprint Retrospective (Meeting): (Retrospective backlog review) : {SM, DT}
-* Artifacts: Product Backlog, Sprint Backlog, (optional) Retrospective backlog
+* Artifacts: Product Backlog : {PO}, Sprint Backlog : {DT}, (optional) Retrospective backlog : {DT}
 
 <ins class='nfooter'><a id='fprev' href='#blog/2015/2015-08-31-Agile-in-Regulated-Environments.md'>Agile in Regulated Environments</a> <a id='fnext' href='#blog/2015/2015-08-22-Strange-visudo-Error.md'>Strange visudo Error</a></ins>
