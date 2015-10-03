@@ -29,7 +29,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet"
 
 and run `sudo update-grub` to update grub. 
 
-I see some errors reported at startup, for which I have [found](https://access.redhat.com/articles/65378) [no](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1349740) [valid](https://bbs.archlinux.org/viewtopic.php?id=196181) answer yet:
+I see some errors reported at startup:
 
 ```
 $ dmesg | grep -i failed
@@ -45,6 +45,8 @@ $ dmesg | grep -i failed
 [    2.322787] [drm:intel_dp_start_link_train [i915]] *ERROR* failed to train DP, aborting
 [    2.369730] [drm:intel_dp_start_link_train [i915]] *ERROR* failed to train DP, aborting
 ```
+
+It seems, [acpi](https://wiki.archlinux.org/index.php/ACPI_modules) information is not correctly supplied by BIOS, not that it matters much.
 
 ###ZRam
 
