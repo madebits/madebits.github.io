@@ -68,5 +68,6 @@ https://www.reddit.com/r/Windows10/comments/3f38ed/guide_how_to_disable_data_log
 * http://www.makeuseof.com/tag/6-hidden-windows-10-features/
 * http://www.howtogeek.com/219936/how-to-disable-quick-access-in-file-explorer-on-windows-10/
 * http://www.howtogeek.com/224616/30-ways-windows-10-phones-home/
+* http://computerstepbystep.com/windows_event_log_service.html
 
 <ins class='nfooter'><a id='fprev' href='#blog/2016/2016-02-12-Using-Autofac-to-Organize-CSharp-Code.md'>Using Autofac to Organize CSharp Code</a> <a id='fnext' href='#blog/2016/2016-02-03-Bootstrapping-Intercorrelated-Data.md'>Bootstrapping Intercorrelated Data</a></ins>
