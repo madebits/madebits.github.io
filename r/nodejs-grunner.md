@@ -68,6 +68,7 @@ Other options:
 * `--T` - list all tasks and exit.
 * `--D` - dry run, run tasks according to dependencies, but do not invoke task functions.
 * `--P` - by default `--gtask` tasks run blocking one after the other. If `--P` is specified they are started non-blocking.
+* `--C` - GRunner does circular dependency loop detection as it runs the tasks. If you do not need that functionality, turn it off by specifying this option.
 
 ##Task Dependencies
 
@@ -117,7 +118,7 @@ Here `g` represents a `GRunner` instance object.
     * `dryRun` - if `true`, same as `--D` command-line option.
     * `beforeTaskRun = fn(ctx)` - called before taskFun is run (see `g.t` for `ctx`). This method and the next are intended for extra logging and testing. For more advanced wrapping use the `exec` option.
     * `afterTaskRun = fn(ctx)` - called after `taskFun` is run (see `g.t` for `ctx`).
-    * `noLoopDetection` - GRunner does circular dependency loop detection as it runs the tasks. If you do not need that functionality, turn it off by setting this option `true`. 
+    * `noLoopDetection` - same `--C` command-line option. Set to `true` if you do **not** want loop detection. 
 
 * `g.t(...)` - adds a task and has several forms:
 
