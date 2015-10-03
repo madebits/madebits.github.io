@@ -56,5 +56,6 @@ AppStarter comes with a dual-license that should be suitable for all kinds of ap
 * [GPL](http://www.gnu.org/licenses/gpl.html)
 * [Royalty Free](https://en.wikipedia.org/wiki/Royalty-free) - please [contact](#s/about.html#contact) me for license fee.
 
+---
 
 [AppStarter](#r/msnet-appstarter.md) | [Details](#r/msnet-appstarter/details.md) | [Server Configuration](#r/msnet-appstarter/server.md) | [Client Configuration](#r/msnet-appstarter/client.md) | [Tips & Hints](#r/msnet-appstarter/tips.md) | [Tools](#r/msnet-appstarter/tools.md)
