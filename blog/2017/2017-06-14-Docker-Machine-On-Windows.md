@@ -80,15 +80,26 @@ $ docker run -d -p 8000:80 nginx
 $ curl $(docker-machine ip):8000
 ```
 
+Docker machine mount root `/`` folder as `tmpfs` and the VM hard disk is in `/mnt/sda1/`:
+
+```
+docker@default:~$ mount
+tmpfs on / type tmpfs (rw,relatime,size=917692k)
+...
+/dev/sda1 on /mnt/sda1 type ext4 (rw,relatime,data=ordered)  
+...
+c/Users on /c/Users type vboxsf (rw,nodev,relatime)
+...                                                    
+```
+
+To keep permanent data in VM disk outside container store them at `/mnt/sda1/`.
+
 As another example, we can access the RabbitMQ web [management plugin](https://docs.docker.com/samples/rabbitmq/#management-plugin) from host as `http://192.168.99.100:15672` [using](https://hub.docker.com/r/library/rabbitmq/tags/) default *guest / guest* credentials:
 
 ```
 $ docker pull rabbitmq:management
-$ docker run --restart always -d \
- --hostname my-rabbit \
- -p 5672:5672 -p 15672:15672 \ 
- -v /opt/storage/rabbitmq:/var/lib/rabbitmq/mnesia/rabbit\@my-rabbit \
- --name my-rabbit rabbitmq:management
+$ docker run --restart always -d --hostname my-rabbit -p 5672:5672 -p 15672:15672 -v /mnt/sda1/data/rabbitmq:/var/lib/rabbitmq/mnesia/rabbit\@my-rabbit --name my-rabbit rabbitmq:management
+
 $ docker-machine ip
 192.168.99.100
 ```
@@ -96,7 +107,9 @@ $ docker-machine ip
 A last example, we can run MongoDB as follows:
 
 ```
-$ docker run --rm --restart always -d -p 27017:27017 -v /opt/storage/mongo:/data/db --name my-mongo mongo -f /data/db/m.conf
+$ sudo mkdir -p /mnt/sda1/data/mongo/
+$ sudo touch /mnt/sda1/data/mongo/m.conf
+$ docker run --rm --restart always -d -p 27017:27017 -v /mnt/sda1/data/mongo:/data/db --name my-mongo mongo -f /data/db/m.conf
 ```
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2017/2017-06-30-Low-Information-Density-User-Interfaces.md'>Low Information Density User Interfaces</a> <a rel='next' id='fnext' href='#blog/2017/2017-05-16-The-New-Docker.md'>The New Docker</a></ins>
