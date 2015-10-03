@@ -340,7 +340,7 @@ gvfs-mount dav://127.0.0.1:9843/
 gvfs-mount -u dav://127.0.0.1:9843/
 ```
 
-The WebDAV port can be found using any of:
+WebDAV port can be found using any of:
 
 ```
 ps aux | grep webdavd
