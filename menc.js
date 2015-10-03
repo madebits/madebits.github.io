@@ -14,7 +14,7 @@ var readFileText = function(path) {
 	var data = fs.readFileSync(path, { encoding: 'utf8' });
     data.replace(/^\uFEFF/, '');
     return data;
-}
+};
 
 var loadJs = function(path, ctx) {
 	ctx = ctx || {};
