@@ -168,7 +168,7 @@ power source   = battery
 
 ```
 
-I normally do not [configure](http://linrunner.de/en/tlp/docs/tlp-troubleshooting.html) TLP, but given the system started to freeze on battery with TLP, I had a look at PCI devices. Without TLP on both AC / BAT the machine defaults are:
+Normally, I do not [configure](http://linrunner.de/en/tlp/docs/tlp-troubleshooting.html) TLP, but given the system started to freeze on battery with TLP, I had a look at PCI devices. Without TLP, on both AC / BAT the machine defaults are:
 
 ```
 /sys/bus/pci/devices/0000:00:00.0/power/control = on   (0x060000, Host bridge, bdw_uncore)
