@@ -61,5 +61,6 @@ https://www.reddit.com/r/Windows10/comments/3f38ed/guide_how_to_disable_data_log
 * https://www.oo-software.com/en/shutup10
 * https://github.com/WindowsLies/BlockWindows
 * http://www.guidingtech.com/54080/make-windows-10-secure/
+* https://technet.microsoft.com/en-us/library/mt577208.aspx
 
 <ins class='nfooter'><a id='fnext' href='#blog/2016/2016-02-03-Bootstrapping-Intercorrelated-Data.md'>Bootstrapping Intercorrelated Data</a></ins>
