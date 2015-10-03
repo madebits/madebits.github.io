@@ -22,6 +22,8 @@ An incomplete list of useful [VSCode extensions](https://marketplace.visualstudi
 
 * [Jumpy](https://marketplace.visualstudio.com/items?itemName=wmaurer.vscode-jumpy) - or the better one [MetaGo](https://marketplace.visualstudio.com/items?itemName=metaseed.metago) enables jumping around viewport text using keyboard.
 
+* [Document This](https://marketplace.visualstudio.com/items?itemName=joelday.docthis) - help document JavaScript code.
+
 ##Git
 
 * [Git Lens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) - I do not use Git via VSCode, but it is useful to see history of files within the VSCode.
