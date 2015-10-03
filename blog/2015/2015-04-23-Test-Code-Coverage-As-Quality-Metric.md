@@ -2,7 +2,7 @@
 
 2015-04-23
 
-<!--- tags: architecture deployment -->
+<!--- tags: architecture agile deployment -->
 
 There is nothing to suggest that **unit test** code coverage metric is related in any way to software quality, thought some people may tend believe there is a positive correlation. Code coverage should not be used as a software quality metric.
 
