@@ -26,4 +26,4 @@ Using behavior-driven development to analyses stories top-down helps the agile t
 
 BDD belongs to best-development practices and it is crucial in keeping an agile team focused and delivering quality work that matches the story criteria. High-level BDD review of stories is part of task planning for the team. As a rule of thumb, to parallelize team work, one or two members can be responsible to break down a story into BDD criteria, explain it to the team, and then have all team together review it, and decide on the next individuals task that result from BDD.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-11-13-Lubuntu-on-Lenovo-u41-70.md'>Lubuntu on Lenovo u41 70</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-12-09-Chrome-55-Moves-To-Less-Secure-Flash-Handling.md'>Chrome 55 Moves To Less Secure Flash Handling</a> <a rel='next' id='fnext' href='#blog/2016/2016-11-13-Lubuntu-on-Lenovo-u41-70.md'>Lubuntu on Lenovo u41 70</a></ins>
