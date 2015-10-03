@@ -102,7 +102,7 @@ I installed [tlp](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-manag
 
 ##Wireless
 
-u41-70 makes use of [Intel](http://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/tree/) [Wireless 3160](https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi). It can [handle](https://forum.ubuntuusers.de/topic/kein-wlan-ohne-kernelupdate/#post-7996788) both 2.4 Ghz, 5.8 Ghz, and bluetooth:
+u41-70 makes use of [Intel](http://git.kernel.org/cgit/linux/kernel/git/firmware/linux-firmware.git/tree/) [Wireless 3160](https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi). It can [handle](https://forum.ubuntuusers.de/topic/kein-wlan-ohne-kernelupdate/#post-7996788) both 2.4 Ghz, 5.8 Ghz, and Bluetooth:
 
 ```
 $ modinfo -F firmware iwlwifi | grep 3160
@@ -117,15 +117,26 @@ $ lspci -nnk | grep -i net -A2
 
 Card's reach is a bit weak on large distances. It has full speed in rooms near the router, but the quality (`watch -n1 iwconfig`) falls down three rooms away. This means at some locations at home WLAN is not stable. 
 
-I tried [disabling](https://wiki.archlinux.org/index.php/Wireless_network_configuration) [some](https://forum.ubuntuusers.de/topic/instabiles-wlan-mit-intel-ac-3160-in-neuem-tux/2/) of the properties, by appending to `/etc/modprobe.d/iwlwifi.conf`:
+I tried [changing](https://wiki.archlinux.org/index.php/Wireless_network_configuration) [some](https://forum.ubuntuusers.de/topic/instabiles-wlan-mit-intel-ac-3160-in-neuem-tux/2/) of the properties, by appending to `/etc/modprobe.d/iwlwifi.conf`:
 
 ```
 options iwlwifi bt_coex_active=0 11n_disable=8
 ```
 
-Bluetooth and wireless could have [coexistence](https://wiki.archlinux.org/index.php/Wireless_network_configuration) issues, so I [tried](http://superuser.com/questions/924559/wifi-connection-troubles-solved-why-does-my-fix-work) `bt_coex_active=0`.
+Bluetooth and wireless could have [coexistence](https://wiki.archlinux.org/index.php/Wireless_network_configuration) issues, so I [tried](http://superuser.com/questions/924559/wifi-connection-troubles-solved-why-does-my-fix-work) `bt_coex_active=0`. To view all supported parameters use:
 
-I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. I configured a second wireless connection over NetworkManager manually for the same SSID and then selected as Device the Hamma WLan USB (via its MAC). I can plug the stick and select its WLAN connection. I might give network [bonding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future. 
+```
+modinfo -F parm iwlwifi
+```
+
+To view current used parameters, try [any](http://serverfault.com/questions/62316/how-do-i-list-loaded-linux-module-parameter-values) of:
+
+```
+systool -vm iwlwifi # part of sysfsutils
+grep '' /sys/module/iwlwifi*/parameters/*
+```
+
+I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu that I configured as a second wireless connection over NetworkManager manually for the same SSID and then selected as Device the Hamma WLan USB (via its MAC). I can plug the stick and select its WLAN connection (might give network [bonding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future. 
 
 **Update**: Added a WLAN repeater, so now WLAN works much better in all places.
 
