@@ -10,7 +10,7 @@ You can directly write markdown text in the editor, or you can *Open* a local fi
 
 ##Images
 
-Markdown documents rendered in this site, use special CSS styles, so care must be taken to specify what is needed. Images whose *alt* text ends with inline, e.g., `![*inline](url)` are put inline, and the rest are styled as full line responsive images. Images using `data:` URLs that are not inline or whose *alt* text does not end with `![*nosave](url)`, get a *Save As* button by default.
+Markdown documents rendered in this site, use special CSS styles, so care must be taken to specify what is needed. Images whose *alt* text contains  `@inline@`, e.g., `![@inline@](url)` are put inline, and the rest are styled as full line responsive images. Images using `data:` URLs that are not inline or whose *alt* text does not contain `@nosave@` (e.g., `![@nosave@](url)`), get a *Save As* button by default.
 
 ##Table of Contents
 

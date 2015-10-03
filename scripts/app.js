@@ -641,8 +641,8 @@ var applyStyle = function(containerId) {
 
 , handleImage = function(m, dataUriSupported, i) {
 	m.addClass('img-rounded');
-	var alt = m.attr('alt');
-	if(!alt || (alt && !alt.endsWith('inline'))) {
+	var alt = m.attr('alt') || '';
+	if(!alt || (alt && !(alt.endsWith('inline') || (alt.indexOf('@inline@') >= 0) ))) {
 		// data links
 		var parentTag = m.parent().get( 0 ).tagName;
 		if(parentTag.toLowerCase() !== 'a') {
@@ -651,7 +651,7 @@ var applyStyle = function(containerId) {
 			var processed = m.data('dimg') || false;
 			if(src.startsWith('data:') && !processed) {
 				m.data('dimg', true);
-				if(m.hasClass('nosave') || alt.endsWith('nosave')) {
+				if(m.hasClass('nosave') || alt.endsWith('nosave') || (alt.indexOf('@nosave@') >=0) ) {
 					return;
 				}
 				if(!dataUriSupported) {
