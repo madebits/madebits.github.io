@@ -28,6 +28,10 @@ While these extensions appear to be safe at the point I added them here, there i
 
  Undoes all inventions added to the new tab page.
 
+* [New Tab Redirect](https://chrome.google.com/webstore/detail/new-tab-redirect/icpgjfneehieebagbmdbhnlpiopdcmna) 
+
+ Configure new tab page to something else.
+
 * [One Tab](https://chrome.google.com/webstore/detail/onetab/chphlpgkkbolifaimnlloiipkdnihall)
 
  Can be occasionally useful if you have too many tabs open and do not really want to close them.
