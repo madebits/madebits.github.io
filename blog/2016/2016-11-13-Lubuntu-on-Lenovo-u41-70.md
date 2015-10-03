@@ -8,7 +8,7 @@ I was looking for relatively portable laptop to use in the evening at home, and 
 
 ##Ubuntu Installation
 
-I disabled UEFI and secure boot, and used the peculiar *novo* button to get the Lubuntu USB boot. Lubuntu install using a [bootable](https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows) UBS was fast. I fully removed the previous disk contents (but did not wipe the drive, just formated it, so former owner *p0rn* may be still there :).
+I disabled UEFI and secure boot, and used the peculiar *novo* button to get the Lubuntu USB boot. Lubuntu install using a [bootable](https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows) UBS was fast. I fully removed the previous disk contents (but did not wipe the drive, just formated it, so the former owner *p0rn* may be still there :).
 
 ###Lubuntu 16.04
 
