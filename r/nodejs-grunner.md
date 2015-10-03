@@ -162,7 +162,7 @@ Here `g` represents a `GRunner` instance object.
         * Call `cb();` on success, or `cb(error);` on error. If your code calls `cb`, it must be called once.
         * Return a JS *promise*. Any promise object that supports `then` is supported. In this case you should **not** call `cb()`.
         * Return a `Stream`, such as `return gulp.src(...).pipe(...);`. In this case you should **not** call `cb()`.
-        * A bit more advanced, instead of returning a stream or promise, call `cb.onDone(streamOrPromise, [cb]);` on a stream or promise. You may never need this, but if you ever feel like you need it, it can come handy. In this case you should **not** call `cb()`. You should also **not** `return` anything in this case from `taskFun`. `cb.onDone(null);` is same as calling `cb();` directly. The optional `[cb]` parameter enables wrapping the `cb()` call in your own function. If you do that, call `cb()` on your own within it.
+        * A bit more advanced, instead of returning a stream or promise, call `cb.onDone(streamOrPromise, [cbFn]);` on a stream or promise. You may never need this, but if you ever feel like you need it, it can come handy. In this case you should **not** call `cb()`. You should also **not** `return` anything in this case from `taskFun`. `cb.onDone(null);` is same as calling `cb();` directly. The optional `[cbFn]` parameter enables wrapping the `taskFun` `cb()` call in your own function. If you do that, call `cb()` on your own within it.
 
         You can also exit a task using errors:
 
@@ -170,22 +170,39 @@ Here `g` represents a `GRunner` instance object.
         * In a returned *promise* `throw` an error, or fail. In this case you should **not** call `cb()`.
         * `throw` a JS error. This works only directly within `taskFun`. If you `throw` inside a `pipe` stream, or `setTimeout`, and similar async functions, Node.js will stop execution. Use `try / catch` and callbacks to report errors in such cases.
         
-        The `cb` contains the following properties:
+        The `taskFun` callback `cb` contains the following properties:
 
-        * `cb.ctx` - described above.
-        * `cb.onDone(streamOrPromise, [cb])` - described above.
+        * `cb.ctx` - described above. Example:
+           ```javascript
+          g.t('tt', cb => {
+            console.log(cb.ctx.task.userData);
+            cb();
+            });
+          ```
+        * `cb.onDone(streamOrPromise, [cbFn])` - described above. Example:
+          ```javascript
+          g.t('tt', cb => {
+            let s = gulp.src(...).pipe(cb.throughPipe(...));
+            cb.onDone(s, () => {
+              console.log('done');
+              cb();
+              });
+            });
+          ```
         * `cb.startPipe([objectOrIterator])` - returns a starting object `Stream` from one or more objects. If an array or iterator is given as argument, then there will be an element in stream per each array or iterator element. For example:
         
           ```javascript
-          let through = require('through2');
-          
           g.t('tt', cb => {
-          return cb.startPipe(['a', 'b', 'c']).pipe(through.obj((o, e, _cb) => {
-              console.log(o);
-              _cb();
+            return cb.startPipe(['a', 'b', 'c'])
+            .pipe(cb.throughPipe(o, _cb) => {
+              console.log(o); // o is 'a' on first call
+              _cb.push(o);
+              _cb(); // or _cb(null, o);
             }));
           });
           ``` 
+        * `cb.throughPipe([eachFn], [flushFn])` - this is a wrapper around [through2](https://www.npmjs.com/package/through2) object streams. `eachFn(o, cbFn)` is called for every stream object. `flushFn(cbFn)`, if specified, is called when the stream ends. The callback `cbFn` must be called within these function's code. For `eachFn`, the callback is `cbFn([error], [object])` and it can be used to return an optional `object` in the successive stream. For `flushFn`, the callback is `cbFn([error])`. Both `cnFn` functions have a `cbFn.push(object)` function property to introduce additional objects in successive stream. See `cb.startPipe` above for an example.
+          
     * `userData` - can be any object, accessible via `cb.ctx.task.userData` within `taskFun`.
 
 * `g.addTask` - this is a synonym for `g.t`.
