@@ -63,7 +63,9 @@ There are some more hints to try [here](http://askubuntu.com/questions/766725/an
 
 I increased font size using default programs delivered with Lubuntu `lxappearance`, `obconf`, `lightdm-gtk-greeter-settings-pkexec`, and `pcmanfm --desktop-pref`.
 
-High DPI is a problem with some [applications](https://wiki.archlinux.org/index.php/HiDPI#Applications). The Qt settings via `qtconfig` are better to be avoided as they may break font rendering. I still had to handle `firefox`, `thunderbird`, and `chromium-browser` manually. For Libreoffice, I used *Tools / Options / View | User Interface | Scaling* and of course `libreoffice-style-sifr` package theme for icons.
+High DPI is a problem with some [applications](https://wiki.archlinux.org/index.php/HiDPI#Applications). The Qt settings via `qtconfig` are better to be avoided as they may break font rendering. I still had to handle `firefox`, `thunderbird` (via `layout.css.devPixelsPerPx`), and `chromium-browser` manually. In `/etc/chromium-browser/default`, I appended ` --force-device-scale-factor=1.3` to the browser parameters. 
+
+For Libreoffice, I used *Tools / Options / View | User Interface | Scaling* and of course `libreoffice-style-sifr` package theme for icons.
 
 For SublimeText 3 sidebar font size, I had to [overwrite](http://stackoverflow.com/questions/18288870/sublime-text-3-how-to-change-the-font-size-of-the-file-sidebar) the theme.
 
