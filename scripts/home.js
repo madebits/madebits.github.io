@@ -1,1 +1,1 @@
-var homeUrl='blog/2016/2016-03-03-WebWorker-Patterns.md';
+var homeUrl='blog/2016/2016-04-07-Web-Noise.md';
