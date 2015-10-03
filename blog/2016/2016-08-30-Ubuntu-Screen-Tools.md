@@ -39,7 +39,7 @@ location-provider=manual
 temp-day=6500
 temp-night=3700
 
-# frankfurt
+; frankfurt
 [manual]
 lat=50.1
 lon=8.6
