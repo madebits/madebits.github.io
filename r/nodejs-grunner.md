@@ -70,7 +70,7 @@ Other options:
 * `--T` - list all tasks and exit.
 * `--D` - dry run, run tasks according to dependencies, but do not invoke task functions.
 * `--P` - by default `--gtask` tasks run blocking one after the other. If `--P` is specified they are started non-blocking.
-* `--C` - GRunner does circular dependency loop detection as it runs the tasks. If you do not need that functionality, turn it off by specifying this option.
+* `--C` - GRunner does circular dependency loop detection as it runs the tasks by default. If you do **not** need that functionality, turn it off by specifying this option.
 
 ##Task Dependencies
 
