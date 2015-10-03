@@ -1367,9 +1367,19 @@ var lastPage = null
 	$('#mbg-search').blur();
 	window.location.replace('#s/search.html#' + searchText);
 }
+
+, hideMenu = function() {
+	//http://stackoverflow.com/questions/16680543/hide-twitter-bootstrap-nav-collapse-on-click
+	$('.navbar-toggle').click();
+}
 ;
 
 $(function() {
+
+	$('.nav a').on('click', function(){
+    	hideMenu();
+	});
+
 	$(contentContainerId).empty();
 	if ((window.location.host.startsWith(madebits.constDomain) || window.location.host.startsWith(madebits.constDomain2)) 
 		&& (window.location.protocol != 'https:')) {
@@ -1389,6 +1399,7 @@ $(function() {
 	$('#mbg-psearch').click(function(event) {
 		event.preventDefault();
 		triggerSearch();
+		hideMenu();
 		return false;
 	});
 	$('#mbg-search').on('keydown', function(event){
@@ -1396,6 +1407,7 @@ $(function() {
 		switch(keyCode) {
 			case 13:
 				triggerSearch();
+				hideMenu();
 				break;
 		}			
 	});
