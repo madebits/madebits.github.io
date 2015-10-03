@@ -17,4 +17,4 @@ The best strategy for common code modules to be re-used in your company, is the 
 * If you can, build a community.
     > Well, there is no point in feeling guilty if people complain. You complain about stuff from others too. Enable people to contribute, and plan for some time to look at that as long as it is on your benefit. If you abandon maintenance because your company project moves on, state it clear. Communities start on common needs, but survive on common ideals. Every piece of legacy software could live a second life in the community.
     
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-10-29-Python-Conference-Munich.md'>Python Conference Munich</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-11-13-Lubuntu-on-Lenovo-u41-70.md'>Lubuntu on Lenovo u41 70</a> <a rel='next' id='fnext' href='#blog/2016/2016-10-29-Python-Conference-Munich.md'>Python Conference Munich</a></ins>
