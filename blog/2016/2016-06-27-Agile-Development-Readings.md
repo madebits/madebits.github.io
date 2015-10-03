@@ -14,7 +14,7 @@
 
 ##Coaching Agile Teams (2010)
 
-[![@left@](blog/images/book-ca.png)](https://www.amazon.com/Coaching-Agile-Teams-ScrumMasters-Addison-Wesley/dp/0321637704) *Coaching Agile Teams* teaches that coaching starts and ends with you - the coach - that every one is looking for. In between, there is a whole of wisdom to master. This book has been very influential to a whole generation of scrum masters and it has made the martial arts term [Shu-Ha-Ri](http://martinfowler.com/bliki/ShuHaRi.html), known to all agile software development practitioners. I found reading the book informative and filled with common sense. I am not sure how much of it will remain with me for a long time, but it is the kind of spiritual book you always want to have a copy with you.
+[![@left@](blog/images/book-ca.png)](https://www.amazon.com/Coaching-Agile-Teams-ScrumMasters-Addison-Wesley/dp/0321637704) *Coaching Agile Teams* teaches that coaching starts and ends with you - the coach. In between, there is a whole of wisdom to master. This book has been very influential to a whole generation of scrum masters and it has made the martial arts term [Shu-Ha-Ri](http://martinfowler.com/bliki/ShuHaRi.html), known to all agile software development practitioners. I found reading the book informative and filled with common sense. I am not sure how much of it will remain with me for a long time, but it is the kind of spiritual book you always want to have a copy with you.
 
 <br clear="all">
 
