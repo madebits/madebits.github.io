@@ -48,7 +48,7 @@ While these extensions appear to be safe at the point I added them here, there i
 
  Stop image animations
 
-* [WebRTC Leak Prevent](https://chrome.google.com/webstore/detail/webrtc-leak-prevent/eiadekoaikejlgdbkbdfeijglgfdalml/related)
+* [WebRTC Leak Prevent](https://chrome.google.com/webstore/detail/webrtc-leak-prevent/eiadekoaikejlgdbkbdfeijglgfdalml/related) | [Official](https://chrome.google.com/webstore/detail/webrtc-network-limiter/npeicpdbkakmehahjeeohfdhnlpdklia/reviews)
   
  Stop WebRTC [IP Leaks](https://diafygi.github.io/webrtc-ips/)  
 
