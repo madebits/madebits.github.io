@@ -25,9 +25,26 @@
 			if(!t) return;
 			clientTable.append('<tr><td><strong class="text-muted">{0}</strong></td><td>{1}</td></tr>'.format(key, t));
 		};
-		$.get("https://api.ipify.org?format=json", function(response) {
-			addClientData('Ip', response.ip); // + ' <img src="https://api.wipmania.com/myflag.png" width="10" height="10">');
-		}, "json");
+		// $.get("//api.ipify.org?format=json", function(response) {
+		// 	addClientData('Ip', response.ip); // + ' <img src="https://api.wipmania.com/myflag.png" width="10" height="10">');
+		// }, "json");
+		$.get('//freegeoip.net/xml/', null, function(response) {
+			try {
+				var r = $(response);
+				var m = '';
+				var ip = r.find('IP').text();
+				if(ip) m += 'IP: ' + ip;
+				var c = r.find('CountryName').text();
+				if(c) m+= ' ' + c;
+				var la = r.find('Latitude').text();
+				var lo = r.find('Longitude').text();
+				if(la && lo) {
+					m += ' <a href="https://maps.google.com/maps?t=m&q=loc:' + la + '+' + lo + '" target="_blank">' + la + '&deg; ' + lo + '&deg;</a>';
+				}
+  				if(m) addClientData('Location', m);
+  			} catch(e){}
+		}, 'xml');
+
 		addClientData('Os', window.navigator.platform);
 		if(window.navigator.languages) addClientData('Languages', window.navigator.languages.join(', '));
 		addClientData('Browser', window.navigator.userAgent);
