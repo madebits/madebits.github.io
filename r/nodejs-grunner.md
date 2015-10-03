@@ -4,7 +4,7 @@
 
 <!--- tags: javascript nodejs -->
 
-**[GRunner](https://www.npmjs.com/package/grunner)** is a task runner for [Node.js](https://nodejs.org/), inspired by and compatible with [Gulp](http://gulpjs.com/). Most Gulp plugins and Gulp streams, such as, `gulp.src`, can be used as they are with GRunner. Gulp 3 has some task limitations that are addressed in [Gulp 4](https://github.com/gulpjs/gulp/tree/4.0). GRunner task scheduler is based on [async](https://github.com/caolan/async) and it is *subjectively* better :). If you ever found Gulp task handling somehow limiting, you are at the right place. GRunner uses some [ES2015](http://www.ecma-international.org/ecma-262/6.0/) features, so it needs a recent version of Node.js. GRunner is handy if you enjoy automating things by writing Node.js code.
+**[GRunner](https://www.npmjs.com/package/grunner)** is a task runner for [Node.js](https://nodejs.org/), inspired by and compatible with [Gulp](http://gulpjs.com/). Most Gulp plugins and Gulp streams, such as, `gulp.src`, can be used as they are with GRunner. Gulp 3 has some task limitations that are addressed in [Gulp 4](https://github.com/gulpjs/gulp/tree/4.0). GRunner task scheduler is based on [async](https://github.com/caolan/async) and it is *subjectively* better :). If you ever found Gulp task handling somehow limiting, you are at the right place. GRunner uses some ES2015 features, so it needs a recent version of Node.js. GRunner is useful if you enjoy automating continuous integration and delivery of software that goes beyond single Javascript projects by writing Node.js code.
 
 <div id='toc'></div>
 
