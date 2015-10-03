@@ -58,20 +58,16 @@ GRunner does not use Gulp (other that for unit testing to check it can work with
 
 Specifying task files:
 
-* `--gdir dirPath` - process all `*.js` files in dirPath as grunner files. 
-* `--gdirrec dirPath` - same as `--gdir` but recursively process sub folders too.
-* `--gfile filePath` - process specified file as grunner file. If not specified `gfile.js` is assumed. At least one `--gfile` file must be present (default or another one).
+* `--gfile fileOrDiretoryPath` - process specified file as a `grunner` tasks file. If nothing is specified `gfile.js` is assumed. If a folder is specified, all JS files there are loaded (using `require`) recursively including sub folders. `--gfile` can be repeated more than once to specify one or more files and folders. Each file is loaded only once. The last task with a given name that is processed wins.
 
-All these options can be repeated more than once to specify one or more files and folders. The options are processed in the order given, in groups: first group to process is `--gdirrec`, second is `--gdir`, and last processed group is `--gfile`. If a file is loaded once as part of a given group, it is not loaded anymore as part of the later groups. The last task with a given name that is processed wins.
+Specifying tasks to run:
 
-Specifying task to run:
-
-* `--gtask taskName` - task name to run. This option can be repeated as needed - all tasks are run by default blocking in the given order (if you like them to be started non-blocking use `--P`). If not set, `default` task name is assumed.
+* `--gtask taskName` - task name to run. If not set, `default` task name is assumed. `--gtask` can be repeated as needed - all tasks are run by default blocking in the given order (if you like them to be started non-blocking use `--P`).
 
 Other options:
 
 * `--T` - list all tasks and exit.
-* `--D` - dry run, run tasks according to dependencies, but do not invoke task functions.
+* `--D` - dry run tasks according to dependencies, but do not invoke task functions.
 * `--P` - by default `--gtask` tasks run blocking one after the other. If `--P` is specified they are started non-blocking.
 * `--C` - GRunner does circular dependency loop detection as it runs the tasks by default. If you do **not** need that functionality, turn it off by specifying this option.
 
