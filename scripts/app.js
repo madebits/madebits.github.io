@@ -1194,6 +1194,7 @@ var lastPage = null
 }
 
 , onPageError = function(pageData) {
+	$('#mbg-comments').hide();
 	pageData.container.html('<br><div class="well"><h1 style="text-transform: none;"><span class="text-danger"><i class="fa fa-exclamation-circle"></i></span> Page Load Error</h1><p class="text-danger">' 
 		+ (pageData.errorStatus ? pageData.errorStatus : ''	) + ' '
 		+ (pageData.errorStatusText ? pageData.errorStatusText : 'Nothing found')
