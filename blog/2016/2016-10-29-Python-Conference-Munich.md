@@ -2,7 +2,7 @@
 
 2016-10-29
 
-<!--- tags: linux python -->
+<!--- tags: python -->
 
 [![@left@](blog/images/pyconde.jpg)](http://pycon.de) I have been attending for three days, [PyCon.de](http://www.pymunich.com/) in Munich. With one day of sprints, two days of talks, along with workshops in parallel, PyCon.de is a relatively small conference one can attend over a weekend.
 
