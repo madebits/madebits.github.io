@@ -125,7 +125,7 @@ The acceptable CoC (or acceptable sharpness) value for an image (what we perceiv
 $$
 H = \frac{f^2}{ F * CoC}
 $$
-Where $$$f$$$ is focal length, $$$F$$$$ is the aperture, and $$$CoC$$$ is the acceptable $$$CoC$$$ value. A lens focused at $$$H$$$ will hold a depth of field from $$$\frac{H}{2}$$$ to infinity [24]. If $$$s$$$ is the distance where the camera is focused (subject distance), then for $$$s < H$$$:
+Where $$$f$$$ is focal length, $$$F$$$ is the aperture, and $$$CoC$$$ is the acceptable $$$CoC$$$ value. A lens focused at $$$H$$$ will hold a depth of field from $$$\frac{H}{2}$$$ to infinity [24]. If $$$s$$$ is the distance where the camera is focused (subject distance), then for $$$s < H$$$:
 $$
 DOF = \frac{2 H s ^ 2} {H ^ 2 - s ^ 2}
 $$
