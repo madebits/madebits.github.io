@@ -8,16 +8,16 @@ Custom-made [Webpack](https://webpack.js.org/) template for [Vue.js](https://vue
 
 ![](r/vue-starter-template/app.png)
 
-I may add more features to the sample application in the future, but at the moment, it helps starting with following features:
+The template helps starting with following features:
 
 * UI uses [Bootstrap 4](http://getbootstrap.com/) (via SASS) and [Font Awesome](http://fontawesome.io/icons/) icons.
-* JSX support.
+* Vue render JSX support.
 * [Vuex](https://vuex.vuejs.org/en/) is fully integrated along with persistence on client. Example actions are provided.
 * [vue-router](https://router.vuejs.org/en/) is used to handle routing. Nested routes are demonstrated.
 * [vue-i18n](http://kazupon.github.io/vue-i18n/en/) internationalization fully integrated.
 * Sample starter code to help with Ajax (via [axios](https://github.com/axios/axios)), logging, authentication, timers.
 * ES2015+ via Babel with `async` / `await`.
-* Unit tests with Karma and jasmine in chrome headless with code coverage
+* Unit tests with Karma and jasmine in chrome headless with code coverage.
 
 ##Getting Started
 
