@@ -93,7 +93,7 @@ The smaller a distant object is, the less actual zoom we can get for it, when us
 
 ##Aperture
 
-Aperture is a an opening through which light travels [14]. For a camera the aperture can be measured physically by the diameter of the lens (the diameter of the lens entrance pupil is called aperture). Usually the aperture is measured as an `F-number` [15] which is the relative aperture:
+Aperture is an opening through which light travels [14]. For a camera the aperture can be measured physically by the diameter of the lens (the diameter of the lens entrance pupil is called aperture). Usually the aperture is measured as an `F-number` [15] which is the relative aperture:
 $$
 F = \frac{f}{D}
 $$
