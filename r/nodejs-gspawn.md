@@ -64,9 +64,15 @@ A summary of available `gspawn` `options` follows (*boolean* options are all by 
 
 * `logCall`: if set to `true`, then the command invocation (tool and arguments) and any errors will be also logged. See also `log` if you want to customize this further.
 
-* `collectStdout`: if set to true, *stdout* output is collected into an array and delivered as string in `gspwan` callback `cb` when process ends. There is no limit on how many text is collected, so be careful. Using `log` option is a better way to look for patterns in longer text (or to stop the text collection set `options.collectStdout` to false at any point within `log` function). If `false` (default), then in `gspwan` callback `cb` you get an empty or null string.
+* `collectStdout`: if set to true, *stdout* output is collected into an array and delivered as string in `gspwan` callback `cb` when process ends. There is no limit on how many text is collected by default, so be careful. Using `log` option is a better way to look for patterns in longer text. If `false` (default), then in `gspwan` callback `cb` you get an empty or null string.
+
+* `collectStdoutMax`: if set `> 0` and `collectStdout: true then stop collecting output text if total length is bigger than the one given. The amount of collected text can be approximate to the next line for the value given.
 
 * `collectStderr`: same as `collectStdout`, but for *stderr*. 
+
+* `collectStderrMax`: same as `collectStdoutMax`, but for `collectStderr`.
+
+* `enc`: text encoding of *stdout* and *stderr*, default is `'utf8'`.
 
 ##Examples
 
