@@ -15,11 +15,11 @@ Most teams that start with agile will follow an ad hoc based **simple workflow**
 Simple workflow is easy to get started as it matches the normal ad hoc way of working and requires not too much upfront thinking. Simple work
 is prone to some risks to be aware of:
 
-*Team may implement more details than are needed. It is hard to prevent unimportant features from being implemented.
-*Global view is harder to keep in mind. Team may implement first the less relevant parts in very details and leave few to no time for more important things.
-*Code may need to be re-implement more often when team figures out they do not work as though first, resulting in increased overall development and testing time.
-*More regression testing is needed.
-*Forecasts are hard to impossible. Teams only stop something, when something more urgent comes in.
+* Team may implement more details than are needed. It is hard to prevent unimportant features from being implemented. People may work first on things that are more interesting.
+* Global view is harder to keep in mind. Team may implement first the less relevant parts in very details and leave few to no time for more important things.
+* Code may need to be re-implement more often when team figures out they do not work as though first, resulting in increased overall development and testing time.
+* More regression testing is needed.
+* Forecasts are hard to impossible. Teams only stop something, when something more urgent comes in.
 
 
 #Complete Workflow
