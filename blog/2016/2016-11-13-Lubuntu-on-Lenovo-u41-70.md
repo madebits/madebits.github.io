@@ -6,6 +6,8 @@
 
 I was looking for relatively portable and cheap laptop to use at home, and [Lenovo u41-70](https://filedownload.lenovo.com/supportdata/product.html?id=Laptops-and-netbooks/u-series/u41-70) with around 1.6 kg of weight, an i5 CPU, 8GB of RAM, and 256 GB SSD looked like a good match. It was relatively cheap (a bit over 450 euro) as b-ware returned over Amazon service. The price was somehow uncommon for such a machine despite being sold from Amazon ware deals. The reason it was cheap was obvious to me after I received it. The machine had no more the original Levono Windows installation and the recovery partition of both Lenovo and Windows were not present. After goggling a bit around, I found Ubuntu could run ok. Given my plan was to remove Windows anyway, it looked like a perfect deal.
 
+<div id='toc'></div>
+
 ##Ubuntu Installation
 
 I disabled UEFI and secure boot, and used the peculiar *novo* button to get the Lubuntu USB boot. Lubuntu install using a [bootable](https://www.ubuntu.com/download/desktop/create-a-usb-stick-on-windows) USB was fast. I fully removed the previous disk contents (but did not wipe the drive, just formated it, so the former owner *p0rn* may be still there :).
