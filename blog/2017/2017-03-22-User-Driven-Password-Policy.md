@@ -23,7 +23,7 @@ Once user has provided feedback on the value of the digital resource, we can com
 
 ![](blog/images/pass.png)
 
-Length is the most important factor of password quality, but not the only one. Additional feedback help to the user can be the anti-entropy of the password string as the user types it in a similar red, orange, green scale, where green corresponds to the maximum anti-entropy.
+Length is the most important factor of password quality, but not the only one. Additional feedback help to the user can be the entropy of the password string as the user types it in a similar red, orange, green scale, where green corresponds to the maximum entropy.
 
 In this model, the user has the control to decide what kind of password strength is needed and gets feedback on the quality of the actual password used.
 
