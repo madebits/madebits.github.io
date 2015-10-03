@@ -393,7 +393,7 @@ I installed `pavucontrol` and `pulseaudio`, I so had to modify the commands mapp
   NotShowIn=GNOME;KDE;XFCE;
   ```
 
-  Additionally, the following script allows me to switch mouse buttons and touchpad as needed:
+  Additionally, the following small script allows me to switch mouse buttons and touchpad as needed:
 
   ```bash
   #!/bin/bash
