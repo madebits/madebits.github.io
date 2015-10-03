@@ -156,4 +156,4 @@ The module is added to `/etc/pulse/default.pa`. To start `blueman-manager` I add
 Finding an ultrabook-like machine that is powerful enough, runs Ubuntu without many hacks, and is not very expensive - can be a challenge. With u41-70, I had to be flexible on some areas, such as, TFT screen quality, battery life, and wlan reach. I am happy there was no obstacle big enough to make me return it. The machine is powerful enough for all my needs at home for the near future and light enough to carry around.
 
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2016/2016-10-30-To-Rule-Your-City-Conquer-World.md'>To Rule Your City Conquer World</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-11-29-From-User-Stories-To-Code.md'>From User Stories To Code</a> <a rel='next' id='fnext' href='#blog/2016/2016-10-30-To-Rule-Your-City-Conquer-World.md'>To Rule Your City Conquer World</a></ins>

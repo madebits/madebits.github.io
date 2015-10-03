@@ -1,3 +1,4 @@
+* [From User Stories To Code](#blog/2016/2016-11-29-From-User-Stories-To-Code.md)
 * [Lubuntu on Lenovo u41 70](#blog/2016/2016-11-13-Lubuntu-on-Lenovo-u41-70.md)
 * [To Rule Your City Conquer World](#blog/2016/2016-10-30-To-Rule-Your-City-Conquer-World.md)
 * [Python Conference Munich](#blog/2016/2016-10-29-Python-Conference-Munich.md)
@@ -5,4 +6,3 @@
 * [Remote Retrospectives](#blog/2016/2016-10-27-Remote-Retrospectives.md)
 * [xrandr Panning with no Tracking](#blog/2016/2016-10-02-xrandr-Panning-with-no-Tracking.md)
 * [Ubuntu Screen Tools](#blog/2016/2016-08-30-Ubuntu-Screen-Tools.md)
-* [Lubuntu Closing Chrome Downloads Bar](#blog/2016/2016-08-02-Lubuntu-Closing-Chrome-Downloads-Bar.md)
