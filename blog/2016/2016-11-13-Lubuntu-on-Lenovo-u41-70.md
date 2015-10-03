@@ -118,7 +118,7 @@ I installed [tlp](http://linrunner.de/en/tlp/docs/tlp-linux-advanced-power-manag
 
 u41-70 comes with [Intel Wireless 3160](https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi). It can handle both 2.4 Ghz and 5.8 Ghz and bluetooth. I found the card reach is a bit weak on large distances. It has full speed in rooms near the router, but the quality (`watch -n1 iwconfig`) falls down three rooms away. This means at some locations at home, the wlan is not very usable.
 
-Fortunately, I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. The trick is to configure a second wireless connection over NetworkManager manually for the same SSID and then select as Device the Hamma WLan USB (via its MAC). When I am in a room far away, I can plug the stick (via a short UBS cable to the machine for better signal reception and that it is convenient to move around freely) and then I just select that other WLAN connection. I might give network [bounding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future.
+Fortunately, I have a spare *Hama 300 Mbps WLAN USB* stick that runs ok under Ubuntu. The trick is to configure a second wireless connection over NetworkManager manually for the same SSID and then select as Device the Hamma WLan USB (via its MAC). When I am in a room far away, I can plug the stick (via a short UBS cable to the machine for better signal reception and that it is convenient to move around freely) and then I just select that other WLAN connection. I might give network [bonding](https://www.howtoforge.com/network_bonding_ubuntu_6.10) a try in the future.
 
 ##Other Applications
 
@@ -130,14 +130,18 @@ I am not a big user of touchpad, so I use [touchpad-indicator](https://launchpad
 
 I had to install `seahorse` and mark *Login* key ring as default, not to be asked for the password of shares by `pcmanfm` on every login.
 
-To enable my bluetooth headset connect I [run](http://askubuntu.com/questions/801404/bluetooth-connection-failed-blueman-bluez-errors-dbusfailederror-protocol-no):
+To enable my bluetooth headset connect, I [run](http://askubuntu.com/questions/801404/bluetooth-connection-failed-blueman-bluez-errors-dbusfailederror-protocol-no):
 
 ```
 sudo apt-get install pulseaudio-module-bluetooth
 pactl load-module module-bluetooth-discover
 ```
 
-The module is added to `/etc/pulse/default.pa`.
+The module is added to `/etc/pulse/default.pa`. To start `blueman-manager` I added to `/home/u7/.config/lxsession/Lubuntu/autostart`:
+
+```
+@blueman-applet
+```
 
 ##Final Thoughts
 
