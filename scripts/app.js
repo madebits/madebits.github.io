@@ -773,21 +773,28 @@ var applyStyle = function(containerId) {
 	if(!containerId || !page) return;
 	var container = $(containerId.toCssId());
 	var toc = container.find('#toc');
-	if(!toc.length) return;
-	toc.empty();
-	toc.addClass('hidden-print');
-	var list = toc.append('<div class="panel panel-default"><div class="panel-heading"><strong><i class="fa fa-bookmark"></i> Contents</strong></div><div class="panel-body"><ul></ul></div></div>').find('ul');
-	$(':header').each(function(i, e) {
-		var id = $(this).attr('id');
-		var tagLevel = parseInt($(this).prop("tagName").substr(1));
-		if(id) {
-			var text = $(this).text();
-			if(tagLevel === 1) {
-				text = '<strong>' + text + '</strong>'
+	if(toc.length){
+		toc.empty();
+		toc.addClass('hidden-print');
+		var list = toc.append('<div class="panel panel-default"><div class="panel-heading"><strong><i class="fa fa-bookmark"></i> Contents</strong></div><div class="panel-body"><ul></ul></div></div>').find('ul');
+		$(':header').each(function(i, e) {
+			var id = $(this).attr('id');
+			var tagLevel = parseInt($(this).prop("tagName").substr(1));
+			if(id) {
+				var text = $(this).text();
+				if(tagLevel === 1) {
+					text = '<strong>' + text + '</strong>'
+				}
+				list.append('<li><span class="text-muted"><strong style="margin-left:{0}px;">{1}</strong></span> <a href="#{2}#{3}">{4}</a></li>'.format((tagLevel*15),Array(tagLevel).join('&rsaquo;'), page, id, text));
 			}
-			list.append('<li><span class="text-muted"><strong style="margin-left:{0}px;">{1}</strong></span> <a href="#{2}#{3}">{4}</a></li>'.format((tagLevel*15),Array(tagLevel).join('&rsaquo;'), page, id, text));
-		}
-	});
+		});
+	}
+	var bg = container.find('#mbg-background');
+	var bgUrl = null;
+	if(bg.length) {
+		bgUrl = bg.data('url');
+	}
+	$('body').css('background', 'url(' + bgUrl + ') no-repeat center center fixed').css('background-size', 'cover');
 }
 
 , markup = function(data) {
