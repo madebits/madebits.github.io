@@ -103,7 +103,9 @@ If you share a folder in the VM, you can access it using Samba in your Ubuntu fi
 
 ##Spice Guest Tools
 
-Windows 10 guest works fine without any custom software installed. However, to get most of Spice, such as to share clipboard, install [Spice guest tools](https://www.spice-space.org/download/binaries/spice-guest-tools/), in the Windows guest. Spice guest tool already contains the [Virtio Drivers](https://fedoraproject.org/wiki/Windows_Virtio_Drivers).
+Windows 10 guest works fine without any custom software installed. However, to get most of Spice, such as to share clipboard, install [Spice guest tools](https://www.spice-space.org/download/binaries/spice-guest-tools/), in the Windows guest. 
+
+Spice guest tool already contains the [Virtio Drivers](https://fedoraproject.org/wiki/Windows_Virtio_Drivers). You may wish to change Windows VM [NIC](https://pve.proxmox.com/wiki/Paravirtualized_Network_Drivers_for_Windows) type from rtl3189 to virtio. 
 
 ###Folder Sharing
 
