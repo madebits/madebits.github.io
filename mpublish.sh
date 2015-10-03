@@ -16,15 +16,15 @@ p_cleanUp()
 	echo "#Blog | [Latest](#blog)" >> "$contents"
 	echo "" >> "$contents"
 	echo "<div class='bloglinks'>" >> "$contents"
-cat <<- EOF > "$feed"
-<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../styles/atom.xsl"?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-	<id>${baseUrl}</id>
-	<title>MadeBits</title>
-	<updated>$(date +"%Y-%m-%d")T12:00:00Z</updated>
-	<link href="${baseUrl}"/>
-EOF
+#cat <<- EOF > "$feed"
+#<?xml version="1.0" encoding="utf-8"?>
+#<?xml-stylesheet type="text/xsl" href="../styles/atom.xsl"?>
+#<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+#	<id>${baseUrl}</id>
+#	<title>MadeBits</title>
+#	<updated>$(date +"%Y-%m-%d")T12:00:00Z</updated>
+#	<link href="${baseUrl}"/>
+#EOF
 }
 
 p_getFileName()
@@ -151,9 +151,9 @@ done
 
 echo "</div>" >> "$contents"
 
-cat <<- EOF >> "$feed"
-</feed>
-EOF
+#cat <<- EOF >> "$feed"
+#</feed>
+#EOF
 
 echo "<h1>MadeBits - No JavaScript - Site Index</h1>" >> $noscriptIndex
 echo "<p>JavaScript is required to view <a href=\"index.html\">contents</a> of this web site.</p><ul>" >> $noscriptIndex
