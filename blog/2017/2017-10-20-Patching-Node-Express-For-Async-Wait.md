@@ -21,12 +21,8 @@ const patchRouterInstance = (router) => {
     const wrap = fn => (req, res, next) => isAsync(fn) 
         ? fn(req, res, next).catch(next)
         : fn(req, res, next);
-    const applyWrap = (original, path, ...args) => {
-        const temp = [...args]; 
-        return original.call(router, 
-            path, ...temp.slice(0, -1), 
-            wrap(temp.slice(-1)[0]));
-    };
+    const applyWrap = (original, path, ...args) =>
+        original.call(router, path, ...([...args].map(_ => wrap(_))));
     router.get = (path, ...args) => applyWrap(Router.get, path, ...args);
     router.post = (path, ...args) => applyWrap(Router.post, path, ...args);
     return router;
