@@ -116,7 +116,16 @@ g2.run('t1'); // run t1 on g2
 
 Instances do not share any state, same task name in two different instances can be used to mean two different things. Methods documented in *Task API Reference* section can be called on any `GRunner` instance. The `new G.GRunner()` can be called only on the process singleton instance. The `run` method does not block. 
 
-When using the `grunner` command-line tool, `G.run` is called for you automatically. Using `grunner` command-line tool is just a convenience. You can also use `.js` task files (that include others via `require`) that call `G.Run`explicitly, and run those task files directly via `node`.
+When using the `grunner` command-line tool, `G.run` is called for you automatically. Using `grunner` command-line tool is just a convenience. You can also use `.js` task files (that include others via `require`) that call `G.run` explicitly, and run those task files directly via `node`. For example, to debug your `gfile.js` you can start with something like:
+
+```javascript
+let G = require('grunner');
+require('./gfile');
+G.run('default', err => {
+  console.log('done');
+});
+```
+
 
 ##Invoking External Tools
 
@@ -257,7 +266,6 @@ The following helper functions are provided:
    }));
    });
   ```
-
 
 * `g.pipeThrough([eachFn], [flushFn])` - this is a wrapper around [through2](https://www.npmjs.com/package/through2) object streams. `eachFn(o, cbFn)` is called for every stream object. `flushFn(cbFn)`, if specified, is called when the stream ends. The callback `cbFn` must be called within these function's code. For `eachFn`, the callback is `cbFn([error], [object])` and it can be used to return an optional `object` in the successive stream. For `flushFn`, the callback is `cbFn([error])`. Both `cnFn` functions have a `cbFn.push(object)` function property to introduce additional objects in successive stream. See `g.pipeStart` above for an example.
 
