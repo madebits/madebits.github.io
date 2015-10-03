@@ -91,6 +91,8 @@ sudo rfkill list all
 sudo rfkill unblock 1 #id
 ```
 
+This is because, I did not reset BIOS to defaults before doing the update.
+
 ##Graphics
 
 My u41-70 model comes with Intel HD Graphics 5500 and a 1920x1080 TN screen.
