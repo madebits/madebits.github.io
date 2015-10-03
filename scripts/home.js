@@ -1,1 +1,1 @@
-var homeUrl='blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md';
+var homeUrl='blog/2017/2017-05-07-Windows-10-on-virt-manager.md';
