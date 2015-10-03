@@ -98,7 +98,7 @@ g1.run('t1'); // run t1 on g1
 g2.run('t1'); // run t1 on g2
 ```
 
-Instances do not share any state, same task name in two different instances can be used to mean different things. The methods documented in *Code Reference* section can be called on any `GRunner` instance. The `new G.GRunner()` can be called only on the process singleton instance. The `run` method does not block. When use the grunner command-line `G.run` is called for you automatically.
+Instances do not share any state, same task name in two different instances can be used to mean different things. The methods documented in *Task API Reference* section can be called on any `GRunner` instance. The `new G.GRunner()` can be called only on the process singleton instance. The `run` method does not block. When using the grunner in command-line `G.run` is called for you automatically.
 
 ##Task API Reference
 
