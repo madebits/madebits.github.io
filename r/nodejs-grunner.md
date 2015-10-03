@@ -135,7 +135,7 @@ G.run('default', err => {
 
 ##Invoking External Tools
 
-GRunner tasks are non-blocking, but there is no direct *parallelism* involved. If you invoke external tools in the tasks, they will run in separate processes and achieve thus parallelism. Arbitrary Node.js code can be run similarly in a different process, if wished, by using `node` as an external tool (you cannot easy share process memory, but normally build and deploy tasks share disk files). As an example, lets use [GSpawn](https://www.npmjs.com/package/gspawn) library to run some arbitrary JS code found in an external file, in a separate process as part of a GRunner task function:
+GRunner tasks are non-blocking, but there is no direct *parallelism* involved. If you invoke external tools in the tasks, they will run in separate processes and achieve thus parallelism. Arbitrary Node.js code can be run similarly in a different process, if wished, by using `node` as an external tool (you cannot easy share process memory, but build and deploy tasks usually share disk files). As an example, lets use [GSpawn](https://www.npmjs.com/package/gspawn) library to run some arbitrary JS code found in an external file, in a separate process as part of a GRunner task function:
 
 ```javascript
 ...
