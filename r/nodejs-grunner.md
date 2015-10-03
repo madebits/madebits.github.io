@@ -187,7 +187,7 @@ The following helper functions are also provided:
 
 * `g.envResolve(key)` - returns `process.env[key]`. Additionally, this function knows to process nested environment variables in values using the special `[[KEY]]` syntax. For example, if `K1=V1` and `K2=V2[[K1]]`, then `g.envResolve('K2')` will return `V2V1`. Environment variable nesting and replacement is platform specific (both syntax and behavior). This function offers a way to handle environment variable nesting using own platform agnostic syntax, if needed. Non found variables are replaced with empty values.
 
-* `g.envResolveValue(value)` - this is same as `g.envResolve(key)` but operates on a `process.env[key]` returned value (and not `key` name). 
+* `g.envResolveValue(value)` - this is similar to `g.envResolve(key)`, but operates on a `process.env[key]` returned value (and not `key` name). 
 
  
 
