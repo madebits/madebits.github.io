@@ -25,7 +25,7 @@
 * [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) - comming from SublimeText where spell check is build in, I find this extension indispensable, especially when I used VSCode as a text editor. It is not as good as SublimeText, but still usable. It would be nice VSCode had this support built in.
 
 
-* [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced) - Ctrl+Shift+M and you have a much better preview for markdown documents that the built in one (which is also not bad).
+* [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced) - Ctrl+Shift+M and you have a much better preview for markdown documents that the [built in](https://code.visualstudio.com/docs/languages/markdown) one (which is also not bad).
 
 ##Optional
 
