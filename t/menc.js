@@ -35,37 +35,63 @@ var beautify = function(d) {
 	return temp;
 };
 
-var encrypt = function (path, pass) {
-	var data = readFileText(path);
-	var res = CryptoJS.AES.encrypt(data, pass).toString();
+// http://stackoverflow.com/questions/29432506/how-to-get-digest-representation-of-cryptojs-hmacsha256-in-js
+var toInput = function(buffer) {
+	if(!buffer) return null;
+	var words = [];
+	for(var i = 0; i < buffer.length; i++) {
+		words[i >>> 2] |= (buffer[i] & 0xff) << (24 - (i % 4) * 8);
+	}
+	return CryptoJS.lib.WordArray.create(words, buffer.length);
+};
+
+var toOutput = function(wordArray) {
+	var words = wordArray.words;
+    var len = +wordArray.sigBytes;
+    var buffer = new Buffer(len);
+    for (var i = 0; i < len; i++) {
+        var byte = (words[i >>> 2] >>> (24 - (i % 4) * 8)) & 0xff;
+        buffer[i]=byte;
+    }
+    return buffer;
+};
+	
+var encrypt = function (path, outPath, pass) {
+	//var data = readFileText(path);
+	var data = toInput(fs.readFileSync(path));
+	var wa = CryptoJS.AES.encrypt(data, pass);
+	var res = wa.toString();
 	if(res.startsWith(prefix)) {
 		res = res.substr(prefix.length);
 	}
-	console.log(beautify(res));
+	//console.log(beautify(res));
+	fs.writeFileSync(outPath, beautify(res));
 };
 
-var decrypt = function (path, pass) {
+var decrypt = function (path, outPath, pass) {
 	var data = readFileText(path);
 	data = data.replace(/[\t\s\r\n]/g, '');
 	if(!data.startsWith(prefix)) {
 		data = prefix + data;
 	}
 	var decrypted = CryptoJS.AES.decrypt(data, pass);
-	res = decrypted.toString(CryptoJS.enc.Utf8);
-	console.log(res);
+	//res = decrypted.toString(CryptoJS.enc.Utf8);
+	//console.log(res);
+	fs.writeFileSync(outPath, toOutput(decrypted));
 };
 
 ///////////////////////////////////////////
 
-var file = process.argv[2];
-var pass = process.argv[3];
-var d = process.argv[4] && (process.argv[4] == 'd');
+var fileIn = process.argv[2];
+var fileOut = process.argv[3];
+var pass = process.argv[4];
+var d = process.argv[5] && (process.argv[5] == 'd');
 
-if(file && pass) {
+if(fileIn && fileOut && pass) {
 	if(d) {
-		decrypt(file, pass);
+		decrypt(fileIn, fileOut, pass);
 	}
 	else { 
-		encrypt(file, pass);
+		encrypt(fileIn, fileOut, pass);
 	}
 }
