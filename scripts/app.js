@@ -713,7 +713,11 @@ var applyStyle = function(containerId) {
 			//var aWrapper = $('<br><div class="hidden-print pull-right"><a class="btn btn-default" download="image' + idx +'.' + suffix + '"><i class="fa fa-arrow-circle-o-down"></i> Save</a></div>');
 			var a = aWrapper.find('a').first();
 			if (typeof a[0].download !== 'undefined') { // browser check
-				a.attr('href', m.attr('src'));
+				//a.attr('href', m.attr('src'));
+				a.on('click', function(e) { 
+					a.attr('href', m.attr('src'));
+				});
+
 				var parentTag = m.parent().get(0).tagName;
 				if(parentTag.toLowerCase() === 'a') {
 					m.parent().after(aWrapper);
