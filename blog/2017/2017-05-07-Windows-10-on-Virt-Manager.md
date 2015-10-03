@@ -369,7 +369,7 @@ user:libvirt-qemu:rwx
 group::rwx
 mask::rwx
 other::rwx
-# sometimes a permission fix is needed for new files
+# permission fix is needed for new files
 $ sudo setfacl -R -m u:user:rwx /data/share
 ```
 
