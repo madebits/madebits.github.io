@@ -115,6 +115,7 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 
 	Then run in a new folder once per disk partition:
 	```
+	dd if=/dev/zero of=zero.small.file bs=1024 count=102400
 	while :; do cat /dev/zero > zero.$RANDOM; done
 	```  
 
@@ -123,7 +124,7 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	sync ; sleep 60 ; sync
 	```
 
-	Check using `df` command that *Avail*able disk space is 4 or smaller. If not, run the two commands above again. Repeat until `df` command reports that *Avail*able disk space is 4 or smaller.
+	Check using `df` command that *Avail*able disk space is 4 or smaller. If not, run the two commands above (while ... and sync ...) again. Repeat until `df` command reports that *Avail*able disk space is 4 or smaller.
 
 	Finally, clean the created `zero.*` files.
 
