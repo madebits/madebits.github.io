@@ -71,14 +71,14 @@ vnet0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 ...
 ```
 
-This is convenient, but you may need to allow them via firewall:
+This is convenient, but you may need to allow traffic via firewall:
 
 ```
 $ sudo iptables -A INPUT  -i virbr0  -j ACCEPT
 $ sudo iptables -A OUTPUT -o virbr0  -j ACCEPT
 ```
 
-And make those permanent if needed using: `sudo netfilter-persistent save`.
+To make firewall rules permanent if needed use: `sudo netfilter-persistent save`.
 
 To find the IP of the guest VM from outside use:
 
