@@ -8,7 +8,7 @@
 
 ![@left@](r/book-aesd/aesd-book-cover.gif) *An outdated, but still interesting [book](http://www.bookbutler.com/search?isbn=978-3836410168) on Attribute Enabled Software Development methodology*.
 
-Attribute Enabled Programming (AEP) is a technique that uses attributes to decorate existing code entities. AEP is supported in several general purpose languages, such as, .NET and Java, and by modeling languages, such as, MOF / UML.
+Attribute Enabled Programming (AEP) is a technique that uses attributes to decorate existing code entities. AEP is supported in several general purpose languages such as .NET and Java, and by modeling languages such as MOF / UML.
 
 Attribute annotations may fail to scale. Attribute dependencies complicate the interpretation and add-hoc solutions are difficult to maintain. A well defined development methodology that covers all the steps of Attribute Enabled Software Development (AESD) needs to be applied.
 
