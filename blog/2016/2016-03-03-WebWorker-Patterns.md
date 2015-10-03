@@ -156,7 +156,7 @@ onmessage = function(e) {
 
 ##Nested Dedicated Workers
 
-Nesting workers is interesting for sharing work between worker threads without having the main window deal with cross worker communication. There are some places in the Internet that will tell you that workers can be created within workers. In my understanding, creating workers within workers is not part of workers scope API and Chrome, where I tried these examples out, conforms to that. We need to create all workers in the window thread, but we can chain their messaging channels so that they still communicate directly without going through the window.
+Nesting workers is interesting for sharing work between worker threads without having the main window deal with cross worker communication. There are some places in the Internet that will tell you that workers can be created within workers. In my understanding, creating workers within workers is not part of workers scope API and Chrome, where I tried these examples out, conforms to that. We need to create all workers in the window thread, but we can chain their messaging channels so that workers communicate directly without going through the window.
 
 <br>
 <svg version="1.2" baseProfile="tiny" width="129.41mm" height="73.59mm" viewBox="6611 5088 12941 7359" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xml:space="preserve">
@@ -336,7 +336,7 @@ var idx = Math.floor(Math.random() * workersPoolMax);
 workers[idx].w.postMessage({cmd: 'process'}); // input from application 
 ```
 
-To establish a bidirectional communication pipe thought the workers we can use `MessageChannel`. Currently, `MessageChannel` does [not](https://bugs.chromium.org/p/chromium/issues/detail?id=334408) support transferable types in Chrome, which can be a drawback for this kind of topology, depending on the data you have. However, understanding how this is done is still useful. The updated code of the `worker.js` is shown next. Using `cmd` as shown is just a convention. You can use any convention of choice to manage your data flow protocol.
+We can use `MessageChannel` to establish a bidirectional communication pipe through workers. Currently, `MessageChannel` does [not](https://bugs.chromium.org/p/chromium/issues/detail?id=334408) support transferable types in Chrome, which can be a drawback for this kind of topology, depending on the data you have. However, understanding how this is done is still useful. The updated code of the `worker.js` is shown next. Using `cmd` as shown is just a convention. You can use any convention of choice to manage your data flow protocol.
 
 ```javascript
 var nestedPort;
