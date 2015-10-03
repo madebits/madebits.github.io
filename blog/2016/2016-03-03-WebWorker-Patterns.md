@@ -38,8 +38,9 @@ Worker `worker.js` code:
 onmessage = function(e) {
     switch(e.data.cmd) {
         case 'process':
+            // send result back to window
             var res = data;
-            self.postMessage(res); // send result back to window
+            self.postMessage(res);
             break;
     }
 };
