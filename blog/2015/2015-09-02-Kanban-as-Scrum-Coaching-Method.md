@@ -6,7 +6,7 @@
 
 One of the [Kanban](https://en.wikipedia.org/wiki/Kanban) founding principles is respecting of current team roles and responsibilities. Without demanding any change in the current process, Kanban helps visualize the current work flow as is, in a (digital or physical) board by using time and other project specific task categorization. 
 
-##Kanban as a Soft Start
+##A Soft Start
 
 Kanban can be used to more that model a Scrum Sprint board or personal activities of team members. It can also be used to coach an existing non-Scrum team towards a Scrum process. Different actors in a existing team having roles that match the waterfall development approach may resist the almost role-less Scrum development team approach. People are often not sure on what role they will fit in a Scrum team. Kanban can be used as a technique to help a team self-organize towards a Scrum team.
 
