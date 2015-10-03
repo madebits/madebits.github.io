@@ -61,6 +61,13 @@ In Lubuntu, `redshift` can be auto-started (if you do not use `redshift-gtk`), b
     </keybind>
 ```
 
+If you play with the other options, such as `-co` for contrast, [append](https://bugzilla.redhat.com/show_bug.cgi?id=783562) `-a` in order for the command to work, for example, to set contrast 80% and then clear back the settings use:
+
+```
+xcalib -co 80 -a
+xcalib -c
+```
+
 ##xgamma
 
 `xgamma` comes with Ubuntu and can be used to configure [gamma](http://askubuntu.com/questions/9248/is-there-a-software-utility-to-adjust-screen-gamma-brightness-contrast) as a replacement for contrast if your screen is too bright. I have configured at startup at `~/.config/lxsession/Lubuntu/autostart` it as follows:
