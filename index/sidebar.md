@@ -1,5 +1,5 @@
 * [Python Conference Munich](#blog/2016/2016-10-29-Python-Conference-Munich.md)
-* [Installing jupyter Notebooks in Ubuntu](#blog/2016/2016-10-28-Installing-jupyter-Notebooks-in-Ubuntu.md)
+* [Installing Jupyter Notebooks in Ubuntu](#blog/2016/2016-10-28-Installing-Jupyter-Notebooks-in-Ubuntu.md)
 * [Remote Retrospectives](#blog/2016/2016-10-27-Remote-Retrospectives.md)
 * [xrandr Panning with no Tracking](#blog/2016/2016-10-02-xrandr-Panning-with-no-Tracking.md)
 * [Ubuntu Screen Tools](#blog/2016/2016-08-30-Ubuntu-Screen-Tools.md)

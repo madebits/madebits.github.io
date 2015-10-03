@@ -31,4 +31,4 @@ Retrospective: Theme
 During the actual meeting, the team members uses their laptops to contribute on each step via the shared document on real time, along with common audio conference and screen sharing of my view of the browser. The entire team can contribute alone or in pairs in parallel and collaborate on common brought up ideas.
 
 
-<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-10-28-Installing-jupyter-Notebooks-in-Ubuntu.md'>Installing jupyter Notebooks in Ubuntu</a> <a rel='next' id='fnext' href='#blog/2016/2016-10-02-xrandr-Panning-with-no-Tracking.md'>xrandr Panning with no Tracking</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2016/2016-10-28-Installing-Jupyter-Notebooks-in-Ubuntu.md'>Installing Jupyter Notebooks in Ubuntu</a> <a rel='next' id='fnext' href='#blog/2016/2016-10-02-xrandr-Panning-with-no-Tracking.md'>xrandr Panning with no Tracking</a></ins>
