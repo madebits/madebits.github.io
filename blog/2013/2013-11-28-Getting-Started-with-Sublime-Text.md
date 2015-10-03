@@ -2,7 +2,7 @@
 
 2013-11-28
 
-<!--- tags: linux -->
+<!--- tags: editor, linux -->
 
 [Sublime Text](http://www.sublimetext.com/) is a programmer friendly cross-platform text editor. It is a bit like a modern-time Vim. You can configure it at will, and even extend it as wished using Python. Unlike Vim, Sublime Text is neither free, nor open source. This being said, you can use it unregistered as long as you like, or even crack it if you feel it is your right do to that.
 
