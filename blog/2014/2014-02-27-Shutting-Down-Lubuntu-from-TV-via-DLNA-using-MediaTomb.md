@@ -6,7 +6,7 @@
 
 I use my Lubuntu installation to stream movies over wireless LAN to my TV via [DLNA](http://www.dlna.org/) using [MediaTomb](http://mediatomb.cc/). Given my Lubuntu machine is another room, I sometimes forget or am too lazy to go and shut it down in the evening. I have a cron job that shutdowns it at night, but it would be great if I could shut it down directly from the TV, using the TV remote. It turns out this can be easy done in MediaTomb (miss)using a *transcoder*.
 
-The following method allows anyone in your home LAN to shutdown the the Lubuntu PC via DLNA capable client (such as a TV, or VideoLanClient), so it is kind of security risk. For my home LAN usage this risk is acceptable.
+The following method allows anyone in your home LAN to shutdown the the Lubuntu PC via a DLNA capable client (such as a TV, or VideoLanClient), so it is kind of security risk. For my home LAN usage this risk is acceptable.
 
 First configure (as root) `/etc/mediatomb/config.xml` file to define a transcoder. Add the following lines to the shown sections in `config.xml` file (`...` means other existing content in the file):
 
