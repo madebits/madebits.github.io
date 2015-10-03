@@ -195,6 +195,17 @@ var	goa = null
 					}
 				}
 			}
+			else if(href.startsWith('#')) {
+				if(document.getElementById(href.substr(1))) {
+					var h = window.location.hash;
+					if(h) {
+						var idx = h.indexOf('#', 1);
+						if(idx > 0) h = h.substr(0, idx);
+						href = h + href;
+						_this.attr('href', href);	
+					}
+				}
+			}
 		}
 	});
 }
