@@ -1034,7 +1034,7 @@ var applyStyle = function(containerId) {
 			madebits.constName, repo, mbTitle.formatPageTitle(repo)));
 		container.append('<br>');
 		container.append(relsWrapper);
-		container.append('<div class="hidden-print"><nav><ul class="pager"><li class="previous"><a href="#s/repositories.html"><i class="fa fa-chevron-left"></i> Repositories</a></li></ul></nav></div>');
+		//container.append('<div class="hidden-print"><nav><ul class="pager"><li class="previous"><a href="#s/repositories.html"><i class="fa fa-chevron-left"></i> Repositories</a></li></ul></nav></div>');
 		applyStyle('#pageReleases');
 	});
 }
