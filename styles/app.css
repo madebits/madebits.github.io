@@ -85,10 +85,6 @@ pre code.nohighlight { background-color: transparent; color: #000; }
     cursor: pointer;
 }
 
-.mbg-entry-background h1 {
-    font-size: 63px;
-}
-
 #mbg-nav {
     border-top: 5px solid #1d9d74;
 }
