@@ -177,6 +177,8 @@ Here `g` represents a `GRunner` instance object.
         * `cb.startPipe([objectOrIterator])` - returns a starting object `Stream` from one or more objects. If an array or iterator is given as argument, then there will be an element in stream per each array or iterator element. For example:
         
           ```javascript
+          let through = require('through2');
+          
           g.t('tt', cb => {
           return cb.startPipe(['a', 'b', 'c']).pipe(through.obj((o, e, _cb) => {
               console.log(o);
