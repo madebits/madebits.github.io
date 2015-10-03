@@ -24,6 +24,8 @@ An incomplete list of useful [VSCode extensions](https://marketplace.visualstudi
 
 * [Document This](https://marketplace.visualstudio.com/items?itemName=joelday.docthis) - help document JavaScript code.
 
+* [JS Refactorings](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor) - common refactoring for JavaScript.
+
 ##Git
 
 * [Git Lens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) - I do not use Git via VSCode, but it is useful to see history of files within the VSCode.
