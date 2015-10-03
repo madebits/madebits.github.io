@@ -27,7 +27,24 @@ Lubuntu starts very fast on SSD machines, but as of personal preference disablin
 GRUB_CMDLINE_LINUX_DEFAULT="quiet"
 ```
 
-and run `sudo update-grub` to update grub.
+and run `sudo update-grub` to update grub. 
+
+I see some errors reported at startup, for which I have found no valid answer yet:
+
+```
+$ dmesg | grep -i failed
+[    0.709627] acpi PNP0A08:00: _OSC failed (AE_ERROR); disabling ASPM
+[    2.026741] ACPI Error: Method parse/execution failed [\_TZ.FN00._ON] (Node ffffa2f1060f5438), AE_NOT_FOUND (20160422/psparse-542)
+[    2.026747] acpi PNP0C0B:00: Failed to change power state to D0
+[    2.026770] ACPI Error: Method parse/execution failed [\_TZ.FN00._ON] (Node ffffa2f1060f5438), AE_NOT_FOUND (20160422/psparse-542)
+[    2.026775] acpi PNP0C0B:00: Failed to set initial power state
+[    2.054619] ACPI Error: Method parse/execution failed [\_TZ.TZ00._TMP] (Node ffffa2f1060f5de8), AE_NOT_FOUND (20160422/psparse-542)
+[    2.054733] ACPI Error: Method parse/execution failed [\_TZ.TZ00._TMP] (Node ffffa2f1060f5de8), AE_NOT_FOUND (20160422/psparse-542)
+[    2.054787] ACPI Error: Method parse/execution failed [\_TZ.TZ01._TMP] (Node ffffa2f1060f5be0), AE_NOT_FOUND (20160422/psparse-542)
+[    2.054871] ACPI Error: Method parse/execution failed [\_TZ.TZ01._TMP] (Node ffffa2f1060f5be0), AE_NOT_FOUND (20160422/psparse-542)
+[    2.322787] [drm:intel_dp_start_link_train [i915]] *ERROR* failed to train DP, aborting
+[    2.369730] [drm:intel_dp_start_link_train [i915]] *ERROR* failed to train DP, aborting
+```
 
 ###ZRam
 
