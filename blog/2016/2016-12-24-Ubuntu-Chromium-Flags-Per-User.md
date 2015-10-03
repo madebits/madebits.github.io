@@ -6,7 +6,7 @@
 
 I like how the start script of `chromium-browser` on Arch Linux [expects](https://wiki.archlinux.org/index.php/Chromium_tweaks#Making_Flags_Persistent) per user Chromium flags to be added in `$XDG_CONFIG_HOME/chromium-flags.conf`. Same effect can be achieved in Ubuntu:
 
-1. **Method 1**: Modifying as root `/etc/chromium-browser/default` to look as follows:
+* **Method 1**: Modifying as root `/etc/chromium-browser/default` to look as follows:
 
     ```bash
     # Default settings for chromium-browser. This file is sourced by /bin/sh from
@@ -22,7 +22,7 @@ I like how the start script of `chromium-browser` on Arch Linux [expects](https:
     CHROMIUM_FLAGS="$USER_PARAMS"
     ```
 
-2. **Method 2**: Another way to achieve same is to leave `/etc/chromium-browser/default` unchanged as is:
+* **Method 2**: Another way to achieve same is to leave `/etc/chromium-browser/default` unchanged as is:
 
     ```
     # Default settings for chromium-browser. This file is sourced by /bin/sh from
