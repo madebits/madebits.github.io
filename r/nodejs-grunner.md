@@ -151,7 +151,7 @@ let extern = (filePath, cmd) => {
 G.t('t1', extern('./t1.js'));
 ```
 
-The console output (`log`) of the external task in the example is redirected to be printed via `G.log` for consistent formating.
+The console output (`log`) of the external task in the example is redirected to be printed via `G.log` for consistent formating (with timestamps).
 
 ##Watching for File Changes
 
