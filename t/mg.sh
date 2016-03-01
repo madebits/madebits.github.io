@@ -1,7 +1,7 @@
 #!/bin/bash
 
+toolsDir=$(dirname $0)
 TOKEN=""
-TOOLSDIR=$(dirname $0)
 INPUTDIR=.
 RESIZE=100%
 SUFFIX=".dx"
@@ -111,14 +111,14 @@ find "${INPUTDIR}" -maxdepth 1 -type f -iname "*.jpg" | sort | while read filePa
 	echo -e "#${links} &nbsp; ${count}/${total}\n\n" >> "${OUTDIR}/${count}.md"
 
 	#$(${TOOLSDIR}/menc.js "${OUTDIR}/${count}.md" "${PASS}" > "${OUTDIR}/${count}${SUFFIX}")
-    $(${TOOLSDIR}/menc.js "${OUTDIR}/${count}.md" "${OUTDIR}/${count}${SUFFIX}" "${PASS}")
+    $(${toolsDir}/menc.js "${OUTDIR}/${count}.md" "${OUTDIR}/${count}${SUFFIX}" "${PASS}")
 	$(rm "${OUTDIR}/${count}.md")
 done
 
 echo -e "\n\n<i class='fa fa-camera'></i> #${total}\n" >> "${outFile}"
 
 #$(${TOOLSDIR}/menc.js "${outFile}" "${PASS}" > "${OUTDIR}/index${SUFFIX}")
-$(${TOOLSDIR}/menc.js "${outFile}" "${OUTDIR}/index${SUFFIX}" "${PASS}")
+$(${toolsDir}/menc.js "${outFile}" "${OUTDIR}/index${SUFFIX}" "${PASS}")
 $(rm "${outFile}")
 
 biggestFile=$(find ${OUTDIR} -maxdepth 1 -printf '%s %p\n' | sort -nr | head -1 | cut -d ' ' -f 2)

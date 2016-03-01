@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TOOLSDIR=$(dirname $0)
+toolsDir=$(dirname $0)
 sidebar="index/sidebar.md"
 contents="index/contents.md"
 feed="index/atom.xml"
@@ -173,5 +173,5 @@ echo "</ul>" >> $noscriptIndex
 
 if [[ $1 == "push" ]]; then
 	echo "Publishing ..."
-	${TOOLSDIR}/mserverpush.sh
+	${toolsDir}/mserverpush.sh
 fi 
