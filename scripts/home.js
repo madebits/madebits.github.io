@@ -1,1 +1,1 @@
-var homeUrl='blog/2017/2017-08-10-Product-Definition-Life-Cycle.md';
+var homeUrl='blog/2017/2017-09-11-From-Requirements-To-Stories.md';

@@ -1,3 +1,4 @@
+* [From Requirements To Stories](#blog/2017/2017-09-11-From-Requirements-To-Stories.md)
 * [Product Definition Life Cycle](#blog/2017/2017-08-10-Product-Definition-Life-Cycle.md)
 * [Low Information Density User Interfaces](#blog/2017/2017-06-30-Low-Information-Density-User-Interfaces.md)
 * [Docker Machine On Windows](#blog/2017/2017-06-14-Docker-Machine-On-Windows.md)
@@ -5,4 +6,3 @@
 * [Ubuntu Block Application Internet Access](#blog/2017/2017-05-09-Ubuntu-Block-Application-Internet-Access.md)
 * [Windows 10 on Virt Manager](#blog/2017/2017-05-07-Windows-10-on-Virt-Manager.md)
 * [Cross Cutting Concerns Evolution](#blog/2017/2017-04-27-Cross-Cutting-Concerns-Evolution.md)
-* [User Driven Password Policy](#blog/2017/2017-03-22-User-Driven-Password-Policy.md)
