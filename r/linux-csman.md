@@ -212,7 +212,7 @@ You are asked by default to specify **key files** before entering the password. 
 
 If you do not want to be asked about key files use `-k` option. Key files can be specified also in command-line using one or more `-kf keyFile` options. Even if you use `-kf keyFile`, you will be still asked in command-line for any additional ones, unless you specify `-k`.
 
-##### Using Sessions
+##### Sessions
 
 It is possible to store passwords (but not key files) in a **session** for current logged user. Session makes use of named *@slots* to write and read passwords. To store a password that you are about to enter in slot `foo` use `-apo @foo` in command-line of `cskey.sh`. You can specify later the stored password by using `-ap @foo`. If combined with `-k and -kf` then no passwords are asked (apart of optional session password).
 
@@ -229,7 +229,7 @@ sudo cskey.sh enc secret.bin -su -apo @foo
 sudo cskey.sh dec secret.bin -ap @foo | base64 -w 0
 ```
 
-##### Password Hashing
+##### Hashing
 
 It is possible to overwrite default options used for `argon2` tool using ` -h -p 8 -m 14 -t 1000 -` (note `-` in the end is required). All options have to be specified and are passed verbatim to `argon2`. The defaults used, if not specified, are shown in command-line help when you run `sudo cskey.sh`.
 
