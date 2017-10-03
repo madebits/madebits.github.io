@@ -247,7 +247,7 @@ The unique tracking machine id is kept in `/var/lib/snapd/state.json` in `{"data
 
 The device-serial in `/var/lib/snapd/state.json` looks as follows: `d1360083-b6e6-40f1-a248-3470767daa9d`. It can be changed to any of these *more unique* values `00000000-0000-0000-0000-000000000000` or `00000000-0000-0000-0000-000000000001`. A machine restart is needed immediately after this change, before a snap refresh happens.
 
-The device-serial ID and list of installed snaps and their usage data are sent to store on every refresh, which happens automatically and periodically. Refresh period can be controlled using [refresh.hold](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--refresh-hold).
+The device-serial ID and list of installed snaps and their usage data are sent to store on every refresh, which happens automatically and periodically. Refresh period can be controlled using [refresh.hold](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--refresh-hold), and postponed up to 2 months.
 
 ## Summary
 
@@ -257,7 +257,7 @@ Ubuntu snap is an interesting concept, with impressive achievements and with sev
 * https://snapcraft.io/store is scarce on snap details. Some people write a link to their *yaml* definition in read-me there, some not. The store itself gives no details on permissions needed by a snap, during install, use, and removal. The only way to know what is inside, is to download and examine files on your own.
 * Avoid *Ubuntu Software Center* `snap-store` as it may not be clear what it installs. Look carefully to `deb` packages and they may be transitional *snap* installs. Better install directly via `snap install` after own evaluation.
 * Creating a snap is a complex process, and the build process is transparent about code and dependencies used and can be reproduced. This is good, but due to complexity, things may land to a snap that are not obvious, or end up being in non-maintained versions within the snap.
-* Snap services (systemd snap.*.service units) are good for Canonical. `snap install docker` is maybe the only snap service needed. Rest can be installed and controlled better via `docker`. In most servers, if you use snap services, you would need to set [refresh.hold](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--refresh-hold).
+* Snap services (systemd snap.*.service units) are not usable in servers due to forced updates. `snap install docker` is maybe the only snap service needed. Rest can be installed and controlled better via `docker`.
 
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-11-13-ETL-Solutions.md'>ETL Solutions</a></ins>
