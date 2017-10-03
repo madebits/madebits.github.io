@@ -223,7 +223,7 @@ env | grep SNAP
 
 Snap store (tracks)[https://snapcraft.io/docs/snap-store-metrics] snap installs and usage. 
 
-The unique tracking machine id is kept in `/var/lib/snapd/state.json` in `{"data": { "device": { "serial": "ID" } }}`. You may need to edit `/var/lib/snapd/state.json` manually in case of snap issues and restart `snapd`.
+The unique tracking machine id is kept in `/var/lib/snapd/state.json` in `{"data": { "device": { "serial": "ID" } }}`. You may need to edit `/var/lib/snapd/state.json` manually in case of snap issues.
 
 The device-serial ID and list of installed snaps and their usage data are sent to store on every refresh, which happens automatically and periodically. Refresh period can be controlled using [refresh.hold](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--refresh-hold).
 
