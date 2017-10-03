@@ -540,27 +540,27 @@ function showHelp()
 {
 	logError "Usage: $(basename "$0") [enc | dec | ses | rnd] file [options]"
 	logError "Options:"
-	logError " -i inputMode : used for password"
+	logError " -i inputMode : (enc|dec|ses) used for password"
 	logError "    Password input modes:"
 	logError "     0 read from console, no echo (default)"
 	logError "     1|e read from console with echo"
 	logError "     2|c read from 'xclip -o -selection clipboard'"
 	logError "     3|u read from 'zenity --password'"
 	logError "     4 read from 'zenity --text'"
-	logError " -c encryptMode : use 1 for aes tool, 0 or any other value uses ccrypt"
-	logError " -p passFile : (enc) read pass from first line in passFile"
-	logError " -ap file : session: read pass from encrypted file (see -aop), other pass input options are ignored"
-	logError " -k : (enc) do not ask for keyfiles"
-	logError " -kf keyFile : (enc) use keyFile (combine with -k)"
+	logError " -c encryptMode : (enc|dec|ses) use 1 for aes tool, 0 or any other value uses ccrypt"
+	logError " -p passFile : (enc|dec|ses) read pass from first line in passFile"
+	logError " -ap file : (enc|dec) session: read pass from encrypted file (see -aop), other pass input options are ignored"
+	logError " -k : (enc|dec) do not ask for keyfiles"
+	logError " -kf keyFile : (enc|dec) use keyFile (combine with -k)"
 	logError " -b count : (enc) generate file.count backup copies"
 	logError " -bs : (enc) generate a new secret for each -b file"
-	logError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
+	logError " -h hashToolOptions -- : (enc|dec) default -h ${cskHashToolOptions[@]} --"
 	logError " -s file : (enc) read secret data as 'base64 -w 0' from file"
 	logError " -as file : (enc) session : read secret data from a session file (see -aos)"
 	logError " -aos outFile : (dec) session: write secret data to a encrypted file"
 	logError " -aop outFile : (dec) session: write password data to a encrypted file"
-	logError " -ar file : session: use file data as part of session key, will be created if not exists"
-	logError " -aa : session: do not ask for session encryption password (use default)"
+	logError " -ar file : (enc|dec|ses) session: use file data as part of session key, will be created if not exists"
+	logError " -aa : (enc|dec|ses) session: do not ask for session encryption password (use default)"
 	logError " -r length : (rnd) length of random bytes (default 64)"
 	logError " -rb count : (rnd) generate file.count files"
 	logError " -d : dump password and secret on stderr for debug"
@@ -681,14 +681,16 @@ function main()
 		shift
 	done
 		
-	loadSessionPass "${apf}"
-	loadSessionSecret "${asf}"
 
 	case "$cskCmd" in
 		enc|e)
+			loadSessionPass "${apf}"
+			loadSessionSecret "${asf}"
 			encryptFile "$cskFile"
 		;;
 		dec|d)
+			loadSessionPass "${apf}"
+			loadSessionSecret "${asf}"
 			decryptFile "$cskFile"
 		;;
 		ses|s)
