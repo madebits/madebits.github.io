@@ -107,6 +107,7 @@ Common edit commands (in *command-mode*):
 * `I` insert beginning of line, `A` append at end of line.
 * `o` insert in new line after current, `O` insert in new line before current.
 
+---
 
 * `r` replace char under cursor; `s` is similar to `r` but remains in insert mode afterwards.
     * `R` replaces more than one char at a time. `S` replaces whole line and remains in insert mode. 
@@ -116,17 +117,20 @@ Common edit commands (in *command-mode*):
 * `J` join current line with next one.
 * `Ctrl+a` increment, `Ctrl+x` decrement.
 
+---
 
 * `y` copy (yank) *motion* (using any motion command from above: `y5w`). (`"*y` to copy to *X11* clipboard, same for paste `"*p`, where `"*` means register `*` the clipboard).
 * `yy` copy current line.
 * `p` paste (put) text after cursor; `P` paste before cursor. These commands can be combined, e.g.: `ddp` to swap lines.
 
+---
 
 * `x` delete char under cursor; `X` delete char before cursor.
 * `d` delete (cut) *motion* (using any motion command from above: `d5w`).
 * `dd` delete (cut) current line (`ddp` swap two lines).
 * `D` delete (cut) to end of line.
 
+---
 
 * `u` undo; `Ctrl+r` redo, `U` undo whole line changes.
 * `.` repeat last action sequence (`number.` repeat last command sequence *number* times).
