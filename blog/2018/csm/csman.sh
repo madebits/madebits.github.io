@@ -764,7 +764,7 @@ function createContainer()
     processOptions "$@"
     
     if [ "${csmCreateOverwriteOnly}" = "1" ]; then
-        echo "# create container only"
+        echo "# mode: overwrite only"
     fi
     
     if [ "$writeContainer" = "1" ]; then
@@ -774,7 +774,7 @@ function createContainer()
             echo "Overwriting block device: ${container} ..."
             #hmm, we have to ingore errors here
             echo "# script will go on in case of errors here, read the output and decide if all ok ..."
-            echo "# when done, it is ok to see: dd: error writing '...': No space left on device"
+            echo "# when done, it is ok to see: dd: error writing '${container}': No space left on device"
             set +e
             time rndDataSource | dd iflag=fullblock of="$container" bs=1M status=progress
             set -e
@@ -802,7 +802,7 @@ function createContainer()
     fi
     
     if [ "${csmCreateOverwriteOnly}" = "1" ]; then
-        echo "# create container only: done"
+        echo "# mode: overwrite only: done"
         return
     fi
     
