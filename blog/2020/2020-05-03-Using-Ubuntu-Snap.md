@@ -253,11 +253,13 @@ The unique tracking machine id is kept in `/var/lib/snapd/state.json` in `{"data
 
 The device-serial in `/var/lib/snapd/state.json` looks as follows: `d1360083-b6e6-40f1-a248-3470767daa9d`. It can be changed to any of these *more unique* values `00000000-0000-0000-0000-000000000000` or `00000000-0000-0000-0000-000000000001`. A machine restart is needed immediately after this change, before a snap refresh happens.
 
-The device-serial ID and list of installed snaps and their usage data are sent to store on every refresh, which happens automatically and periodically. Refresh period can be controlled using [refresh.hold](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--refresh-hold), and postponed up to 2 months. To pause them for [longer](https://askubuntu.com/questions/930593/how-to-disable-autorefresh-in-snap) and in `/etc/hosts` (need to remove when `snap install`):
+The device-serial ID and list of installed snaps and their usage data are sent to store on every refresh, which happens automatically and periodically. Refresh period can be controlled using [refresh.hold](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--refresh-hold), and postponed up to 2 months. To pause them for [longer](https://askubuntu.com/questions/930593/how-to-disable-autorefresh-in-snap) add in `/etc/hosts` (need to be removed when `snap install` or `snap refresh`):
 
 ```
 0.0.0.0 api.snapcraft.io
 ```
+
+Given Ubuntu wants to distribute parts of desktop via snap for them disable of refresh means they cannot deliver software updates. However, to get updates, you agree for them to connect data on you in a more invasive way than via `apt` and system updates.
 
 ## Summary
 
