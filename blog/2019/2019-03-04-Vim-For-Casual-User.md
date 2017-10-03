@@ -10,6 +10,8 @@ If you learn Vim, learn it without any customizations. In your own machine, you 
 
 Anecdotally, a friend following this advice found once himself once a broken Linux server having only `ed` command available and no network. The advice is still sound, thought the level you need to apply it may vary.
 
+<div id='toc'></div>
+
 ## Starting and Stopping
 
 To start Vim without any customizations use:
@@ -34,11 +36,11 @@ A file path can be used after Vim command-line options to edit it. To open a fil
 
 If you panic after starting `vim`, press *Esc* key one more times (so that Vim enters *command-mode*) and then press `:q!`. This will quit Vim without saving your changes. By chance, the reverse `q:` is the *raise panic level* command; it re-shows your panic keys. If `:q!` does not work to exit, then `:qa!` will.
 
-## Pre-Basics
+## Edit and Save
 
-I write here Vim commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). `Ctrl+d` and `Tab` can be used to auto-complete commands after `:`. I write control combinations using lowercase key as in `Ctrl+d` (and not `Ctrl+D` as they are written in Vim documentation).
+I write Vim editor commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). `Ctrl+d` and `Tab` can be used to auto-complete commands after `:`. I write control combinations using lowercase key as in `Ctrl+d` (and not `Ctrl+D` as they are written in Vim documentation).
 
-If you started Vim without a filename, you can open a file from within Vim using `:edit filename` (or `:e`). *Tab* key can be used for auto-completion on file names.
+If you started Vim without a file path, you can open a file from within Vim using `:edit filename` (or `:e`). *Tab* key can be used for auto-completion on file names.
 
 The fastest way to produce text in Vim is to write it in some other editor and save it as some file `text.txt`. Start `vim` and use `:r text.txt` to read it and put its text under the cursor position. File name completion should work after `:r` same as in shell using *Tab* key. This is also the best way to bring some existing pieces of text within a file in Vim (if you have no clipboard).
 
