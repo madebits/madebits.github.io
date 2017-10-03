@@ -357,6 +357,7 @@ function getSecret()
         if [ "${cskUseURandom}" = "1" ]; then
             logError "# secret: generating new (-su)"
             # https://security.stackexchange.com/questions/3936/is-a-rand-from-dev-urandom-secure-for-a-login-key
+            # https://www.2uo.de/myths-about-urandom/
             # dmesg | grep random:
             secret=$(head -c 512 /dev/urandom | base64 -w 0)
         else
