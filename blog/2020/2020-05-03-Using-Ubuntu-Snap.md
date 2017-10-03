@@ -119,7 +119,7 @@ gimp                  2.10.18                        265   latest/edge      snap
 $ sudo snap remove gimp --revision 262
 ```
 
-One can make a bash [script](https://www.linuxuprising.com/2019/04/how-to-remove-old-snap-versions-to-free.html) to automate this given the lost people who created snap *forgot* to make that an option:
+One can make a bash [script](https://www.linuxuprising.com/2019/04/how-to-remove-old-snap-versions-to-free.html) to automate this given the lost people who created snap *forgot* to make that an option (need to be run with `sudo`):
 
 ```bash
 #!/bin/bash
@@ -133,7 +133,7 @@ LANG=en_US.UTF-8 snap list --all | awk '/disabled/{print $1, $3}' |
     done
 ```
 
-Ideally, snaps should not be running when running above script, but that is now hard in Ubuntu, so a system restart may be needed after running the above script (need to be run with `sudo`).
+Ideally, snaps should not be running when running above script, but that is now hard in Ubuntu, so a system restart may be needed after running the above script.
 
 ## Connections: Interfaces = Plugs and Slots
 
