@@ -273,7 +273,9 @@ sudo csman.sh chp secret.bin new-secret.bin -ck -i e ---
 Two copy file commands are provided. They can be run without `sudo`. First uses `tar` and `pv` and second invokes `rsync` with some parameters (removing training slashes from input directories):
 
 ```bash
+# faster
 csman.sh cp src dst
+# a bit slower, but can be resumed
 csman.sh rsync src dst
 ```
 
