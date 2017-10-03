@@ -1,8 +1,8 @@
 2019
 
-#CSMan
+# CSMan
 
-<!--- tags: linux -->
+<!--- tags: linux encryption -->
 
 **CSMan** is a *bash* script around `cryptsetup` for Ubuntu.
 
