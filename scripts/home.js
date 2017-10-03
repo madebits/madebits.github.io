@@ -1,1 +1,1 @@
-var homeUrl='blog/2018/2018-04-26-Lubuntu-18.04-Disable-initfsram-Resume.md';
+var homeUrl='blog/2018/2018-12-16-Cryptsetup-with-Plain-Mode.md';
