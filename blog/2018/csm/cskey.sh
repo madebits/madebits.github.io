@@ -209,6 +209,9 @@ function readPass()
 function readNewPass()
 {
 	local pass=$(readPass)
+	if [ -z "$pass" ]; then
+		exit 1
+	fi
 	if [ -z "$CS_ECHO" ] || [ "$CS_ECHO" -le "0" ] ; then
 		(>&2 echo)
 		if [ -t 0 ] ; then
@@ -220,10 +223,6 @@ function readNewPass()
 			fi
 		fi
     fi
-	if [ -z "$pass" ]; then
-		(>&2 echo "! no password")
-		exit 1
-	fi
 	echo "$pass"
 }
 
