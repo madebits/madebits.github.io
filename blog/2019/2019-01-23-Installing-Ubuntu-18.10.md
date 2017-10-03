@@ -94,7 +94,7 @@ sudo apt install chromium-browser
 # --incognito --enable-dom-distiller
 ```
 
-I can go on with rest of my specific configuration.
+I can go on with the rest of my system specific configuration.
 
 ##Ah, Snap :(
 
