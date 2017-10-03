@@ -642,6 +642,9 @@ function cleanUp()
     echo
     closeContainer "$lastName"
     resetTime
+    #set +e
+    #systemctl restart systemd-timesyncd
+    #set -e
     exit 0
 }
 
@@ -676,6 +679,7 @@ function showHelp()
     logError "    bySize should end in M or G"
     logError " $bn touch|t fileOrDir [time]"
     logError "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\""
+    logError " $bn synctime|st"
     logError " $bn chp inFile [outFile] [ openCreateOptions ] : only -ck -cko are used"
     logError " $bn -k ... : invoke $kn ..."
     logError "Where [ openCreateOptions ]:"
@@ -821,6 +825,11 @@ function main()
         ;;
         touch|t)
             touchDiskFile "$@"
+        ;;
+        synctime|st)
+            systemctl restart systemd-timesyncd
+            sleep 1
+            date
         ;;
         chp)
             changePassword "$@"
