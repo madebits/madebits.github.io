@@ -52,7 +52,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 When `csman.sh` starts without arguments, it prints prefix hashes of these files, if present:
 
 ```
-d613bd605  /usr/local/bin/csman.sh
+e37f63bfe  /usr/local/bin/csman.sh
 fcf2f56d6  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
