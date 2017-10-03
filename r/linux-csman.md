@@ -339,7 +339,7 @@ The `-ck` is used to pass option to `cskey.sh` to decrypt the file and `-cko` is
 By default, *secret.bin* is modified in place, which can be risky. To create a new copy use:
 
 ```bash
-sudo csman.sh chp secret.bin new-secret.bin -ck -i e ---
+sudo csman.sh chp secret.bin -out new-secret.bin -ck -i e ---
 ```
 
 If you have more than one secret file using same password, you can make use of sessions to change password of several files at once unattended. I assume here there are no key files used (if key files are used, pass them using `-kf keyfile`):
@@ -351,7 +351,7 @@ sudo cskey.sh ses @old -i e -aa -k
 sudo cskey.sh ses @new -i e -aa -k
 
 # go over all key files and replace pass
-sudo bash -c 'for f in *.bin; do csman.sh chp "${f}" "$new-{f}" -ck -ap @old -aa -k --- -cko -ap @new -aa -k ---; done'
+sudo bash -c 'for f in *.bin; do csman.sh chp "${f}" -out "$new-{f}" -ck -ap @old -aa -k --- -cko -ap @new -aa -k ---; done'
 
 # remove session data explicitly
 sudo cskey.sh x
