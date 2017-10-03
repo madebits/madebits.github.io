@@ -128,9 +128,7 @@ Use `aes -?` to view help.
 
 By default AES with 256 bit key, 128 bit block is used. A random IV of 128 bits is used, and a random salt same as AES key length. AES key is generated from password using PBKDF2 with HMAC-SHA256.
 
-The authenticated encryption (AE) is over IV and plain text data using HMAC-SHA256. AE initial key is generated from password using PBKDF2 same as for encryption with a random salt of 256 bits. The AE salt, and AE final HMAC-SHA256 hash are encrypted as part of CBC data. AE is checked only after whole decryption of data. The AE can be turned off with `-a` option, which also removes the `-x` option if set.
-
-If `-x` option is used, the tool uses an *extension* to CBC mode - *G-CBC*, where plaintext data are chained before encryption (more details below).
+The authenticated encryption (AE) is over IV and plain text data using HMAC-SHA256. AE initial key is generated from password using PBKDF2 same as for encryption with a random salt of 256 bits. The AE salt, and AE final HMAC-SHA256 hash are encrypted as part of CBC data. AE is checked only after whole decryption of data. The AE can be turned off with `-a` option.
 
 ### Encrypted File format
 
@@ -148,15 +146,13 @@ Inside *CBC encrypted data*, the authenticated encryption (AE) information is st
 ```
 CBC encrypted data =
    ae salt (32 bytes),
-   plain text data padded (-x G-CBC mode),
+   plain text data padded,
    ae hmac of plain text data padded (32 bytes)
 ```
 
 If `-a` option is used  *CBC encrypted data* does not contain AE data.
 
-### Global CBC Mode (G-CBC)
-
-Normally, CBC mode works like this, where `in` is plaintext and `out` is ciphertext:
+<!--
 
 ```
 Encrypt:
@@ -173,10 +169,6 @@ repeat:
    in = iv (x) DEC(out)
    | iv = out
 ```
-
-That is decryption is local, it only depends on key and previous visible encrypted block. Data can be restored if one block is corrupted.
-
-The Global CBC mode (**G-CBC**) used in `aes` tool if `-x` option is set works as follows and is applied to CBC of data only (not to AE encrypted CBC blocks):
 
 ```
 Encrypt:
@@ -200,4 +192,4 @@ repeat:
    | c = c (x) in
 ```
 
-G-CBC mode removes the locality of decryption by encrypting accumulated XOR-ed plaintext. The half of AE key (which is not stored and whose salt is stored CBC encrypted), is used as initial global CBC mode extension block. Data cannot be decrypted in parallel and cannot be restored if one block is corrupted. G-CBC mode does not affect CBC, it is applied to plaintext before it is encrypted using CBC mode. The CBC mode operation remains same.
+ -->
