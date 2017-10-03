@@ -134,12 +134,12 @@ Using file explorer:
 Using tabs:
 
 * `:tabnew` create new tab
-* `:tabedit` file open file to edit in a new tab
-* `:tabclose` close current tab; `:tabclose` number close tab number
+* `:tabedit file` open *file* to edit in a new tab
+* `:tabclose` close current tab; `:tabclose number` close tab *number*
 * `:tabonly` close all other tabs
-* `:tabs` list tabs, number start from 1
+* `:tabs` list tabs, tabs numbers start from *1*
 * `gt`, `gT` go to next, previous tab (or `:tabn`, `:tabp`)
-* `numbergt` go to tab number
+* `numbergt` go to tab *number*
 
 Using external commands to filter buffer text:
 
