@@ -85,7 +85,7 @@ LANG=en_US.UTF-8 snap list --all | awk '/disabled/{print $1, $3}' |
 
 ## Connections: Interfaces = Plugs and Slots
 
-A plug in snap can connect to a slot in another [snap](https://snapcraft.io/docs/snapcraft-interfaces).
+A plug in snap can [connect](https://snapcraft.io/docs/interface-managements) to a slot in another [snap](https://snapcraft.io/docs/snapcraft-interfaces).
 
 ```bash
 $ sudo snap connections | grep gimp
