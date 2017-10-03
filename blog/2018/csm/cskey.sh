@@ -23,15 +23,16 @@ cskPassFile=""
 cskKeyFiles=()
 cskNoKeyFiles="0"
 cskSecret=""
-cskSessionPassFile=""
-cskSessionPass=""
-cskSessionSecretFile=""
-cskSessionAutoPass="0"
-cskSessionSaveDecodePassFile=""
+cskSessionKey=""
+cskSessionAutoKey="0"
+cskSessionAutoKeyFile=""
 cskSessionSaltFile=""
+cskSessionLocation="$HOME/mnt/tmpcsm"
+cskSessionPassFile=""
+cskSessionSecretFile=""
+cskSessionSaveDecodePassFile=""
 cskRndLen="64"
 cskRndBatch="0"
-cskSessionLocation="$HOME/mnt/tmpcsm"
 
 user="${SUDO_USER:-$(whoami)}"
 currentScriptPid=$$
@@ -189,7 +190,7 @@ function decodeSecret()
 		touchFile "$file"
 		if [ -n "$cskSessionSecretFile" ]; then
 			readSessionPass
-			echo -n "$data" | base64 -d | decryptAes "$hash" | encryptAes "$cskSessionPass" > "$cskSessionSecretFile"
+			echo -n "$data" | base64 -d | decryptAes "$hash" | encryptAes "$cskSessionKey" > "$cskSessionSecretFile"
 			debugData "secret" "$(echo -n "$data" | base64 -d | decryptAes "$hash" | base64 -w 0)"
 			logError "# session: stored secret in: ${cskSessionSecretFile}"
 			debugData "$(cat ${cskSessionSecretFile} | base64 -w 0)"
@@ -254,6 +255,7 @@ function computeKeyFilesHash()
 function readPassFromFile()
 {
 	if [ -e "$1" ] || [ "$1" = "-" ]; then
+		logError "# reading: $1"
 		head -n 1 "$1" | tr -d '\n'
 		if [ "$?" != "0" ]; then
 			onFailed "cannot read file: ${1}"
@@ -404,7 +406,7 @@ function createSessionStore()
 
 function readSessionPass()
 {
-	if [ -z "$cskSessionPass" ]; then
+	if [ -z "$cskSessionKey" ]; then
 		# session specific
 		local sData0=""
 		if [ -z "$cskSessionSaltFile" ]; then
@@ -426,13 +428,13 @@ function readSessionPass()
 		#local sData2="$(ps ax | grep -E '/systemd --user|/cron|/udisks' | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | tr -d '\n')"
 		local sessionData="${user}${sData0}${sData1}"
 		local sSecret="${sessionData}"
-		local rsp=""
-		if [ "$cskSessionAutoPass" = "0" ]; then
+		local rsp="${cskSessionAutoKeyFile}"
+		if [ -z "rsp" ] && [ "$cskSessionAutoKey" = "0" ]; then
 			logError
 			if [ "$cskInputMode" = "1" ] || [ "$cskInputMode" = "e" ]; then
-				read -p "Session password (or Enter for default): " rsp
+				read -p "Session key (or Enter for default): " rsp
 			else
-				read -p "Session password (or Enter for default): " -s rsp
+				read -p "Session key (or Enter for default): " -s rsp
 			fi
 		fi
 		logError
@@ -440,8 +442,8 @@ function readSessionPass()
 			logError "# session: default (see -ar ${cskSessionSaltFile})"
 		fi
 		sSecret="${sessionData}${rsp}"
-		cskSessionPass="$(echo -n "${sSecret}" | sha256sum | cut -d ' ' -f 1)"
-		debugData "${sSecret}" "${cskSessionPass}"
+		cskSessionKey="$(echo -n "${sSecret}" | sha256sum | cut -d ' ' -f 1)"
+		debugData "${sSecret}" "${cskSessionKey}"
 	fi
 }
 
@@ -450,14 +452,14 @@ function readSessionPassFromFile()
 {
 	logError "# session: reading password from: $1"
 	if [ -e "$1" ] || [ "$1" = "-" ]; then
-		if [ -z "$cskSessionPass" ]; then
-			onFailed "no session password"
+		if [ -z "$cskSessionKey" ]; then
+			onFailed "no session key"
 		fi
 		local p=$(cat "$1" | base64 -w 0)
 		if [ -z "$p" ]; then
 			onFailed "cannot read session password from: ${1}"
 		fi
-		echo -n "$p" | base64 -d | decryptAes "$cskSessionPass"
+		echo -n "$p" | base64 -d | decryptAes "$cskSessionKey"
 	else
 		onFailed "cannot read from: ${1}"
 	fi
@@ -493,10 +495,10 @@ function createSessionPass()
 		pass=$(readPass)
 	fi
 	readSessionPass
-	debugData "${cskSessionPass}" "${pass}"
+	debugData "${cskSessionKey}" "${pass}"
 
 	# add a token to pass
-	echo -n "${pass}CSKEY" | encryptAes "$cskSessionPass" > "${file}"
+	echo -n "${pass}CSKEY" | encryptAes "$cskSessionKey" > "${file}"
 	#ownFile "$file"
 	logError
 	logError "# session: stored password in: ${file}"
@@ -533,7 +535,7 @@ function loadSessionSecret()
 	fi
 	readSessionPass
 	logError "# session: reading secret from: ${file}"
-	cskSecret="$(cat ${file} | decryptAes "$cskSessionPass" | base64 -w 0)"
+	cskSecret="$(cat ${file} | decryptAes "$cskSessionKey" | base64 -w 0)"
 	if [ -z "$cskSecret" ]; then
 		onFailed "cannot read session secret from: ${file}"
 	fi
@@ -586,7 +588,8 @@ function showHelp()
 	logError " -aso outFile : (dec) session: write secret data to a encrypted file"
 	logError " -apo outFile : (dec) session: write password data to a encrypted file"
 	logError " -ar file : (enc|dec|ses) session: use file data as part of session seed, created if not exists ($cskSessionLocation)"
-	logError " -aa : (enc|dec|ses) session: do not ask for session encryption password (use default)"
+	logError " -aa : (enc|dec|ses) session: do not ask for session key (use default)"
+	logError " -ak file : (enc|dec|ses) session: read session key from file"
 	logError " -r length : (rnd) length of random bytes (default 64)"
 	logError " -rb count : (rnd) generate file.count files"
 	logError " -d : dump password and secret on stderr for debug"
@@ -638,12 +641,17 @@ function main()
 			;;
 			-p)
 				local passFile="${2:?"! -p passFile"}"
-				cskPassFile=$(readPassFromFile "$passFile")
+				cskPassFile=$(readPassFromFile "${passFile}")
 				shift
 			;;
 			-aa)
 				createSessionStore
-				cskSessionAutoPass="1"
+				cskSessionAutoKey="1"
+			;;
+			-ak)
+				local sKeyFile="${2:?"! -ak file"}"
+				cskSessionAutoKeyFile=$(readPassFromFile "${sKeyFile}")
+				shift
 			;;
 			-ar)
 				createSessionStore
