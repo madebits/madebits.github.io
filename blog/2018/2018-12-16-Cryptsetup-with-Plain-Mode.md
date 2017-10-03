@@ -156,7 +156,7 @@ cryptsetup --key-file=key.bin -c aes-xts-plain64 -s 512 -o 111 open --type plain
 
 ###Chain Encryption
 
-We can nest multiple `cryptsetup open` calls with over a previous `/dev/mapper/*` device. This enables using multiple layers of encryption:
+We can nest multiple `cryptsetup open` calls with a previous `/dev/mapper/*` device. This enables multiple layers of encryption:
 
 ```bash
 # first layer, we open a file or a losetup device, created /dev/mapper/layer1
@@ -174,7 +174,7 @@ cryptsetup close layer1
 
 ### Shared Blob
 
-We can use `--offset (-o)` and `--size` option (both in number of 512 byte sectors) to have several encrypted containers on same binary file. We can even open several of the at once by adding `--shared` option to `cryptsetup open`.
+We can use `--offset (-o)` and `--size` option (both defined as number of 512 byte sectors) to have several encrypted containers on same binary file. We can even open several of the at once by adding `--shared` option to `cryptsetup open`:
 
 ```bash
 cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 open --type plain -o 100 --size 1000 container.bin container1
