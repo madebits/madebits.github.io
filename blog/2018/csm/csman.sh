@@ -380,7 +380,10 @@ function listContainer()
         time=$(stat -c %z "$dev")
         echo -e "Open:\t${time}"
         cipher="$(cryptsetup status "$name" | grep cipher: | cut -d ' ' -f 5)"
-        echo -e "Device:\t${dev}\t${cipher}"
+        set +e
+        local label="$(e2label "$dev" 2> /dev/null)"
+        set -e
+        echo -e "Device:\t${dev}\t${cipher}\t${label}"
         if [ "$csmListShowKey" = "1" ]; then
             local k=$(dmsetup table --target crypt --showkey "${dev}" | cut -d ' ' -f 5)
             echo -e "RawKey:\t$k"
@@ -389,7 +392,10 @@ function listContainer()
     dev="$(getDevice "$name" "1")"
     if [ -e "$dev" ]; then
         cipher="$(cryptsetup status "$dev" | grep cipher: | cut -d ' ' -f 5)"
-        echo -e "Device:\t${dev}\t${cipher}"
+        set +e
+        local label="$(e2label "$dev" 2> /dev/null)"
+        set -e
+        echo -e "Device:\t${dev}\t${cipher}\t${label}"
         if [ "$csmListShowKey" = "1" ]; then
             local k=$(dmsetup table --target crypt --showkey "${dev}" | cut -d ' ' -f 5)
             echo -e "RawKey:\t$k"
@@ -415,6 +421,13 @@ function listContainer()
 }
 
 ########################################################################
+
+function getVolumeDefaultLabel()
+{
+    if [ -f "${1:-}" ]; then
+        echo -n "$(basename -- "$1")" | tr -s [:space:] | tr [:space:] '_'
+    fi
+}
 
 function umountDevice()
 {
@@ -446,6 +459,7 @@ function openContainerByName()
     echo "Opening ${dev} ..."
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared $cro "${csOptions[@]}" open "${device}" "${name}" -
     cryptsetup status "${dev}"
+    local lastDev="${dev}"
     
     if [ "$csmChain" = "1" ]; then
         local name1="$(innerName "$name")"
@@ -459,6 +473,20 @@ function openContainerByName()
         fi
         set -e
         cryptsetup status "${dev1}"
+        lastDev="${dev1}"
+    fi
+    
+    # set default label if volume has no label, may fail if no FS
+    if [ -n "$lastDev" ]; then
+        local label="$(e2label "$lastDev" 2> /dev/null)"
+        if [ -z "$label" ] && [ -f "$device" ]; then
+            label=$(getVolumeDefaultLabel "$device")
+            if [ -n "$label" ]; then
+                set +e
+                e2label "$lastDev" "$label" 2> /dev/null
+                set -e
+            fi
+        fi
     fi
 }
 
