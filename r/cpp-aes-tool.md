@@ -9,7 +9,7 @@ AES tool is a free command-line tool that encrypts / decrypts one file at a time
 * Self-contained, only dependant on standard C library.
 * Cross-platform. C source code available (GPL). Easy to compile on your own on any platform.
 * Secure by design:
-   * AES 256 bit in CBC mode. CBC encryption is a time-proven secure mode in this context. Most threats against disk-based or SSL-based CBC do not apply if you encrypt few files fully one at at a time.
+   * AES 256 bit in CBC mode. CBC encryption is a time-proven secure mode in this context. Most threats against disk-based or SSL-based CBC do not apply if you encrypt few files fully one at a time.
    * Additional authenticated encryption (AE) with HMAC-SHA256 around data CBC stream. Stream speed is not an issue in this use case. Both AE salt (used with PBKDF2 to generate initial HMAC block) and final HMAC hash are also encrypted as part of CBC stream.
    * Key generation is based on PBKDF2 with HMAC-SHA256 with a *sensible* default iteration count of 1.000.000 (configurable), which is ok for encrypting few files.
    * PBKDF2, HMAC-SHA256, AES implementations are from http://xyssl.org/. I only wrote the glue code.
