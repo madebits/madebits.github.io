@@ -146,6 +146,7 @@
 ### Europe
 
 [Handelsblatt](https://www.handelsblatt.com/)
+[FAZ](https://www.faz.net/aktuell/)
 [EuroNews](https://www.euronews.com/european-affairs/european-news)
 [France 24](https://www.france24.com/en/)
 [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
