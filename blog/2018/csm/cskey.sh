@@ -87,9 +87,9 @@ function touchFile()
 {
 	local file="$1"
 	if [ -f "$file" ]; then
-		local md=$(stat -c %z "$file")
+		local md=$(stat -c %z -- "$file")
 		set +e
-		touch -d "$md" "$file" 2> /dev/null
+		touch -d "$md" -- "$file" 2> /dev/null
 		set -e
 	fi
 }
@@ -98,7 +98,7 @@ function touchFile()
 function ownFile()
 {
 	if [ -f "$1" ]; then
-		chown $(id -un "$user"):$(id -gn "$user") "$1"
+		chown $(id -un "$user"):$(id -gn "$user") -- "$1"
 	fi
 }
 
