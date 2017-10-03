@@ -584,7 +584,7 @@ function showHelp()
 	logError " -as file : (enc) session : read secret data from a session file (see -aso)"
 	logError " -aso outFile : (dec) session: write secret data to a encrypted file"
 	logError " -apo outFile : (dec) session: write password data to a encrypted file"
-	logError " -ar file : (enc|dec|ses) session: use file data as part of session key, will be created if not exists ($cskSessionLocation)"
+	logError " -ar file : (enc|dec|ses) session: use file data as part of session key, created if not exists ($cskSessionLocation)"
 	logError " -aa : (enc|dec|ses) session: do not ask for session encryption password (use default)"
 	logError " -r length : (rnd) length of random bytes (default 64)"
 	logError " -rb count : (rnd) generate file.count files"
