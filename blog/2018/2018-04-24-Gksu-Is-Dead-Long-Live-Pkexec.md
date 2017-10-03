@@ -107,17 +107,11 @@ We can use the idea above to create a final poor man's `gksu.sh` replacement scr
 sentinel="##@@##"
 if [[ $(id -u) != "0" ]]; then
     absScriptPath="$( cd "$(dirname "$0")" ; pwd -P )/$(basename "$0")"
-    pkexec "$absScriptPath" "$sentinel" "$DISPLAY" "$XAUTHORITY" "$DBUS_SESSION_BUS_ADDRESS" "$@"
+    pkexec env DISPLAY="$DISPLAY" XAUTHORITY="$XAUTHORITY" DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" "$absScriptPath" "$sentinel" "$@"
     exit 0
 fi
 # root here
 if [[ "$1" == "$sentinel" ]]; then
-    shift
-    export DISPLAY="$1"
-    shift
-    export XAUTHORITY="$1"
-    shift
-    export DBUS_SESSION_BUS_ADDRESS="$1"
     shift
 fi
 
@@ -131,5 +125,68 @@ This script can be used as follows:
 ```
 
 More environment variables can be passed as needed in same fashion.
+
+##Supporting Non-Root Users
+
+The script above works for `root` user, as root user has [access](https://serverfault.com/questions/51005/how-to-use-xauth-to-run-graphical-application-via-other-user-on-linux) to `$XAUTHORITY` file of all users. To support running scripts as other users, a more evolved version of the script is needed:
+
+```bash
+#!/bin/bash
+
+sentinel="##@@##"
+prompt=true
+targetUser=""
+targetUserId=0
+procesArgs=true
+
+while [[ "$procesArgs" == "true" ]]; do
+    key="$1"
+    case $key in
+        "$sentinel")
+        prompt=false
+        procesArgs=false
+        ;;
+        -u|--user)
+        shift
+        targetUser="--user $1"
+        targetUserId="$(id -u "$1")"
+        shift
+        ;;
+        *)
+        procesArgs=false
+        ;;  
+    esac        
+done
+
+if [[ "$prompt" == "true" ]]; then
+    if [[ $(id -u) != "$targetUserId" ]]; then
+        cookie=$(xauth list $DISPLAY | grep `uname -n` | head -n 1 | cut -d ' ' -f 5)
+        absScriptPath="$( cd "$(dirname "$0")" ; pwd -P )/$(basename "$0")"
+        pkexec $targetUser env DISPLAY="$DISPLAY" GKSU_MIT_COOKIE="$cookie" DBUS_SESSION_BUS_ADDRESS="$DBUS_SESSION_BUS_ADDRESS" "$absScriptPath" "$sentinel" "$@"
+        exit 0
+    fi
+fi
+
+# root here
+
+if [[ "$1" == "$sentinel" ]]; then
+    shift
+    export XAUTHORITY=~/.Xauthority
+    touch $XAUTHORITY
+    xauth add $DISPLAY . "$GKSU_MIT_COOKIE"
+fi
+
+$@
+
+```
+
+
+This script works same as the one above, but additionally, supports specifying users other than root:
+
+This script can be used as follows:
+
+```
+./gksu.sh -u user2 leafpad /etc/fstab
+```
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2018/2018-04-25-OpenVPN-In-Azure.md'>OpenVPN In Azure</a> <a rel='next' id='fnext' href='#blog/2018/2018-01-27-Dirac-Notation-Cheatsheet.md'>Dirac Notation Cheatsheet</a></ins>
