@@ -70,7 +70,8 @@ To test the configuration, we can use:
 
 ```bash
 sftp -vvv sftpuser001@localhost
-ssh -vvv sftpuser001@localhost 
+ssh -vvv sftpuser001@localhost
+ssh -o FingerprintHash=md5 -v sftpuser001@localhost
 tail -f /var/log/auth.log
 tail f- /var/log/syslog
 ```
@@ -116,5 +117,12 @@ ssh-keyscan localhost 2>/dev/null | ssh-keygen -E md5 -lf -
 ```
 
 When clients connect first time they will be asked to verify the server fingerprint and we can share the shown server SSH fingerprints with users upfront.
+
+From client side, it is possible to see server host fingerprint at any time using one of these commands:
+
+```
+sftp -o FingerprintHash=md5 -v sftpuser001@localhost
+ssh -o FingerprintHash=md5 -v sftpuser001@localhost
+```
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-03-25-MongoDb-with-SSL.md'>MongoDb with SSL</a></ins>
