@@ -59,10 +59,21 @@ virtual_interfaces=(
 virtual_interfaces_count=${#virtual_interfaces[@]}
 
 #VPN Servers
-servers=(
-8.8.8.8 # replace with real ones
-9.9.9.9
-)
+# replace with real ones
+
+serverIps=$(cut -d " " -f 2 <<SERVERS
+remote 8.8.8.8 443
+remote 9.9.9.9 443
+SERVERS)
+
+servers=($serverIps)
+
+# or, list as plain IPs
+#servers=(
+#8.8.8.8
+#9.9.9.9
+#)
+
 servers_count=${#servers[@]}
 
 #---------------------------------------------------------------
@@ -168,9 +179,10 @@ done
 #iptables -A logging -m limit --limit 2/min -j LOG --log-prefix "IPTables general: " --log-level 7
 #iptables -A logging -j DROP
 ```
+
 After this script is run, to make it persistent in Ubuntu run:
 
-```
+```bash
 sudo apt install iptables-persistent netfilter-persistent
 #sudo dpkg-reconfigure iptables-persistent
 sudo netfilter-persistent save
