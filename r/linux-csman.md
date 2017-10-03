@@ -206,7 +206,7 @@ sudo csman create /dev/sdc1 secret.bin -c -ck -ap @foo -i e -k ---
 
 In this example, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-c` option clears the terminal screen after password entry (after `cskey.sh` invocation).
 
-Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you can pass other `cryptsetup` options via `-co ... ---` (outer layer) and `-ci ... ---` (inner layer). The `-s` option tells `csman.sh` to only use one (outer AES) encryption layer.
+The `-s` option tells `csman.sh` to only use one (outer AES) encryption layer. Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you can pass other `cryptsetup` options, such an offset (`-o 111`) via `-co ... ---` (outer layer) and `-ci ... ---` (inner layer).
 
 ### Using Containers
 
