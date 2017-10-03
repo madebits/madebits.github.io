@@ -45,7 +45,7 @@ sudo csman.sh list
 Change password:
 
 ```bash
-sudo csman.sh chp container.bin -ck -slot 1 -- -out container.bin -cko -slot 1 --
+sudo csman.sh chp container.bin -ck -i e --
 ```
 
 ## Introduction
@@ -104,7 +104,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 When `csman.sh` is started without arguments, it prints prefix hashes of these files, if present:
 
 ```
-14a6a95cb  /usr/local/bin/csman.sh
+2b0cf4743  /usr/local/bin/csman.sh
 c2d9e378d  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
@@ -428,7 +428,8 @@ Changing the password of a secret file can be done via:
 sudo csman.sh chp secret.bin -out new-secret.bin -ck -i e --
 ```
 
-The `-ck` is used to pass option to `cskey.sh` to decrypt the file and `-cko` is used (if needed) to pass options to `cskey.sh` to encrypt the new output file.
+* If `-out` is not specified *secret.bin* is modified in place.
+* The `-ck` is used to pass option to `cskey.sh` to decrypt the file and `-cko` is used (if needed) to pass options to `cskey.sh` to encrypt the new output file.
 
 If you have more than one secret file using same password, you can make use of sessions to change password of several files at once unattended. I assume here there are no key files used (if key files are used, pass them using `-kf keyfile`):
 
