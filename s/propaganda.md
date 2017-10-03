@@ -132,6 +132,7 @@
 [YouTube World News](https://www.youtube.com/channel/UCvAvFl2OGsuDSoOo93Kd0nA)
 [BuzzfeedNews](https://www.buzzfeednews.com/)
 [The Antlantic](https://www.theatlantic.com/world/)
+[RealClearDefense](https://www.realcleardefense.com/)
 [Pbs](https://www.pbs.org/wgbh/frontline/)
 [The Onion](https://www.theonion.com/)
 
