@@ -91,11 +91,13 @@
 [Hanselman Blog](https://www.hanselman.com/blog/)
 [TechieDelight](https://www.techiedelight.com/)
 [GeeksForGeeks](https://www.geeksforgeeks.org/fundamentals-of-algorithms/)
+[GeeksForGeeksPuzzles](https://www.geeksforgeeks.org/tag/programming-puzzle/)
 [CSS Tricks](https://css-tricks.com/)
 [R-Bloggers](https://www.r-bloggers.com/)
 [InfoQ](https://www.infoq.com/)
 [Hiltmon](https://hiltmon.com/)
-
+[CrazyForCode](http://www.crazyforcode.com)
+[ProjectEuler](https://projecteuler.net/archives)
 
 ### Science
 
