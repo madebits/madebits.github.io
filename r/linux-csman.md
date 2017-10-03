@@ -15,7 +15,7 @@ Create a new container file (`-i e` makes password entry visible):
 ```bash
 sudo csman.sh new container.bin 1M -s secret.bin -ck -i e ---
 
-# if needed backup or delete encrypted secret file, it is embedded already in container after creation
+# if needed, backup or delete encrypted secret file, it is embedded already in container after creation
 rm secret.bin
 ```
 
