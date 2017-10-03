@@ -16,7 +16,7 @@ fi
 echo $@
 ```
 
-Ideally,using `pkexec` would same as easy:
+Ideally, using `pkexec` as replacement would be same as easy:
 
 ```bash
 if [[ $(id -u) != "0" ]]; then
@@ -35,7 +35,7 @@ If you run the above from a `test.sh` script you get:
 Error executing ./t.sh: No such file or directory
 ```
 
-It seems `pkexec` works reliably only with absolute paths. One (way)[https://stackoverflow.com/questions/4774054/reliable-way-for-a-bash-script-to-get-the-full-path-to-itself] to do that:
+It seems `pkexec` works reliably only with absolute paths. One [way](https://stackoverflow.com/questions/4774054/reliable-way-for-a-bash-script-to-get-the-full-path-to-itself) to achieve that:
 
 ```
 if [[ $(id -u) != "0" ]]; then
