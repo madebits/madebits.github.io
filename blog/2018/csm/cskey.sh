@@ -420,11 +420,7 @@ function main()
 		exit 1
 	fi
 	shift
-	cskFile="${1:-}"
-	if [ -z "$cskFile" ]; then
-		dumpError "! required file"
-		exit 1
-	fi
+	cskFile="${1:?"! file"}"
 	shift
 	
 	while [ -n "${1:-}" ]; do
@@ -434,19 +430,11 @@ function main()
 				cskDebug="1"
 			;;
 			-i)
-				cskInputMode="${2:-}"
-				if [ -z "$cskInputMode" ]; then
-					dumpError "! required -i inputMode"
-					exit 1
-				fi
+				cskInputMode="${2:?"! -i inputMode"}"
 				shift
 			;;
 			-b)
-				cskBackup="${2:-}"
-				if [ -z "$cskBackup" ]; then
-					dumpError "! required -b backupCount"
-					exit 1
-				fi
+				cskBackup="${2:?"! -b backupCount"}"
 				checkNumber "$cskBackup"
 				shift
 			;;
@@ -479,29 +467,17 @@ function main()
 				cskSameHashToolOptions="1"
 			;;
 			-p)
-				local passFile="${2:-}"
-				if [ -z "$cskHashToolOptions2" ]; then
-					dumpError "! required -p passFile"
-					exit 1
-				fi
+				local passFile="${2:?"! -p passFile"}"
 				cskPassFile=$(readPassFromFile "$passFile")
 				shift
 			;;
 			-pn)
-				local passFile="${2:-}"
-				if [ -z "$cskHashToolOptions2" ]; then
-					dumpError "! required -pn passFile"
-					exit 1
-				fi
+				local passFile="${2:?"! -pn passFile"}"
 				cskPassFile2=$(readPassFromFile "$passFile")
 				shift
 			;;
 			-fn)
-				cskFile2="${2:-}"
-				if [ -z "$cskFile2" ]; then
-					dumpError "! required -fn file"
-					exit 1
-				fi
+				cskFile2="${2:?"! -fn file"}"
 				shift
 			;;
 			-k)
@@ -511,46 +487,26 @@ function main()
 				csmNoKeyFiles2="1"
 			;;
 			-kf)
-				local kf="${2:-}"
-				if [ -z "$kf" ]; then
-					dumpError "! required -kf file"
-					exit 1
-				fi
+				local kf="${2:?"! -kf file"}"
 				csmKeyFiles+=( "$(keyFileHash "$kf")" )
 				shift
 			;;
 			-kfn)
-				local kfn="${2:-}"
-				if [ -z "$kfn" ]; then
-					dumpError "! required -kfn file"
-					exit 1
-				fi
+				local kfn="${2:?"! -kfn file"}"
 				csmKeyFiles2+=( "$(keyFileHash "$kfn")" )
 				shift
 			;;
 			-key)
-				local kk="${2:-}"
-				if [ -z "$kk" ]; then
-					dumpError "! required -key file"
-					exit 1
-				fi
+				local kk="${2:?"! -key file"}"
 				cskKey=$(cat "$kk")
 				shift
 			;;
 			-c)
-				useAes="${2:-}"
-				if [ -z "$useAes" ]; then
-					dumpError "! required -c encryptMode"
-					exit 1
-				fi
+				useAes="${2:?"! -c encryptMode"}"
 				shift
 			;;
 			-o)
-				cskChpFile="${2:-}"
-				if [ -z "$cskChpFile" ]; then
-					dumpError "! required -o outFile"
-					exit 1
-				fi
+				cskChpFile="${2:?"! -o outFile"}"
 				shift
 			;;
 			*)
