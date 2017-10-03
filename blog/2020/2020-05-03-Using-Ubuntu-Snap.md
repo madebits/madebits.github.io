@@ -8,7 +8,7 @@
 
 ## Snap Files
 
-Snap uses `snap` package [files](https://snapcraft.io/docs/snap-format), which are [SquashFS](https://en.wikipedia.org/wiki/SquashFS) package files, using a low-overhead read-only compressed file [system](https://tldp.org/HOWTO/SquashFS-HOWTO/index.html). Snap application files (obtained via `snap install gimp`) are stored in `/var/lib/snapd/snaps/`, which seems [cannot](https://askubuntu.com/questions/1029562/move-snap-packages-to-another-location-directory) be easy changed. They are managed by `snapd` service (`systemctl status snapd.service`) that connects their snap defined interfaces and enforces security.
+Snap uses `snap` package [files](https://snapcraft.io/docs/snap-format), which are [SquashFS](https://en.wikipedia.org/wiki/SquashFS) package files, using a low-overhead read-only compressed file [system](https://tldp.org/HOWTO/SquashFS-HOWTO/index.html). Snap application files (obtained via `snap install gimp`) are stored in `/var/lib/snapd/snaps/`, which seems [cannot](https://askubuntu.com/questions/1029562/move-snap-packages-to-another-location-directory) be easy changed. They are managed by `snapd` service (`systemctl status snapd.service`) that connects their snap defined interfaces and enforces [security](https://snapcraft.io/docs/snap-confinement).
 
 ## Snap Mounts
 
@@ -59,7 +59,7 @@ drwxr-xr-x 2 root root     50 Apr 28 15:16 hooks
 
 ## Removing Old Revisions
 
-To remove an old revision, one can use:
+To remove an old [revision](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--controlling-updates), one can use:
 
 ```bash
 $ snap list --all | grep gimp
@@ -132,7 +132,7 @@ System versions of these also exit for root snap packaged services (`sudo snap s
 * `SNAP_DATA=/var/snap/gimp/current`
 * `SNAP_COMMON=/var/snap/gimp/common`
 
-It seems `snap remove` saves the snap data as snapshot automatically, same as `snap save`. To view saved data snapshots, use `snap saved`. It list snapshot `id` is in the first *Set* column. To remove a snapshot use `snap forget id`.
+It seems `snap remove` saves the snap data as [snapshot](https://snapcraft.io/docs/snapshots) automatically, same as `snap save` (in `/var/lib/snapd/snapshots` folder). To view saved data snapshots, use `snap saved`. It list snapshot `id` is in the first *Set* column. To remove a snapshot use `snap forget id`.
 
 ### Application Configuration
 
