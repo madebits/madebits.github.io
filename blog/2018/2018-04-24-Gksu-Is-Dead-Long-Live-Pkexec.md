@@ -9,7 +9,7 @@
 
 ##Replacing gksu
 
-With `gksu`, one could used code similar to the following to re-run as *root* a script that contained UI commands started from a *non-root* user: 
+With `gksu`, one could use code similar to the following, to re-run as *root* a script that contained UI commands started from a *non-root* user: 
 
 ```bash
 #!/bin/bash
