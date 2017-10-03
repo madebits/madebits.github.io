@@ -124,6 +124,66 @@ function readKeyFiles()
 	echo "$hash"
 }
 
+function dumpKbLine()
+{
+	(>&2 echo "$1")
+}
+
+# experimental
+function readPassMapping()
+{
+	alpha=( a b c d e f g h i j k l m n o p q r s t u v w x y z 
+	A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
+    \< \> \[ \] \( \) \{ \} / \\ \$ \? ! \| \~ \& % . , : \; + - _ \# = 
+    0 1 2 3 4 5 6 7 8 9 )
+	coded=( $(shuf -e "${alpha[@]}") )
+
+	dumpKbLine "# Password keymap (chars after # or not in map are taken as they are): "
+	dumpKbLine ""
+	dumpKbLine "$(echo "${alpha[@]}" | fold -w 52 | head -n 1 )"
+	dumpKbLine "$(echo "${coded[@]}" | fold -w 52 | head -n 1 )"
+	dumpKbLine "$(echo --- )"
+	dumpKbLine "$(echo "${alpha[@]}" | fold -w 52 | head -n 2 | tail -n 1 )"
+	dumpKbLine "$(echo "${coded[@]}" | fold -w 52 | head -n 2 | tail -n 1 )"
+	dumpKbLine "$(echo --- )"
+	dumpKbLine "$(echo "${alpha[@]}" | fold -w 52 | head -n 3 | tail -n 1 )"
+	dumpKbLine "$(echo "${coded[@]}" | fold -w 52 | head -n 3 | tail -n 1 )"
+	dumpKbLine "$(echo --- )"
+	dumpKbLine "$(echo "${alpha[@]}" | fold -w 52 | head -n 4 | tail -n 1 )"
+	dumpKbLine "$(echo "${coded[@]}" | fold -w 52 | head -n 4 | tail -n 1 )"
+	
+	read -p "Password: " pass
+	passLen=${#pass}
+	decoded=""
+	for (( i=0; i<${passLen}; i++ )); do
+		p="${pass:$i:1}"
+		if [ "$p" = "#" ]; then
+			i=$((i+1))
+			if [ "$i" -ge "${passLen}" ]; then
+				exit 1
+			fi
+			p="${pass:$i:1}"
+			decoded="${decoded}${p}"
+		else
+			found="0"
+			for j in "${!coded[@]}"; do
+				c="${coded[j]}"
+				if [ "$c" = "$p" ]; then
+					found="1"
+					a="${alpha[j]}"
+					decoded="${decoded}${a}"
+					break
+				fi
+			done
+			if [ "$found" = "0" ]; then
+				decoded="${decoded}${p}"
+			fi
+		fi
+	done
+	
+	echo "$decoded"
+}
+
 function readPass()
 {
 	local hash=$(readKeyFiles)
@@ -133,6 +193,8 @@ function readPass()
 		pass=$(zenity --password --title="Password" 2> /dev/null)
 	elif [ "$CS_ECHO" = "3" ]; then
 		pass=$(zenity --entry --title="Password" --text="Password (visible):"  2> /dev/null)
+	elif [ "$CS_ECHO" = "4" ]; then
+		pass=$(readPassMapping)
 	else
 		read -p "Password: " -s pass
 	fi
@@ -147,7 +209,7 @@ function readPass()
 function readNewPass()
 {
 	local pass=$(readPass)
-	if [ -z "$CS_ECHO" ]; then
+	if [ -z "$CS_ECHO" ] || [ "$CS_ECHO" -le "0" ] ; then
 		(>&2 echo)
 		if [ -t 0 ] ; then
 			read -p "Renter password: " -s pass2
@@ -190,11 +252,11 @@ function main()
             decodeKey "$file" "$pass"
         ;;
         chp)
-			(>&2 echo "Current:")
+			(>&2 echo "# Current")
 			pass1=$(readPass)
             (>&2 echo)
             key=$(decodeKey "$file" "$pass1" | base64 -w 0)
-            (>&2 echo "New:")
+            (>&2 echo "# New")
             pass=$(readNewPass)
             if [ "$CS_ECHO_KEY" = "1" ]; then
 				(>&2 echo)
