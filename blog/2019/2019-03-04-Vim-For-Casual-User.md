@@ -63,8 +63,9 @@ Common movement commands (in *command-mode*):
 * `/text` - find *text*. `n` moves to next occurrence, `N` to previous one. Use `set hls` to highlight matches and `:noh` to temporary disable search highlight. `?text` is same, but searches backward.
 * `*` and `#` find next and previous occurrence of word under cursor (`n` and `N` and highlight work same as for `/`).
 * `Ctrl+i` - jump to previous location, `Ctrl+o` jump back
-* `M` move to middle of screen, `L` move to bottom of screen; `Ctrl+D` - move half-page down, `Ctrl+U` move half-page up; `Ctrl+F` move down a page, `Ctrl+B` move up a page.
-* `zz` (not `ZZ`) will center cursor line on screen.  `Ctrl+y` scroll one line down, `Ctrl+e` scroll one line up, while keeping cursor in current line.
+* `H` move to top, `M` move to middle, `L` move to bottom of screen
+* `Ctrl+D` - move half-page down, `Ctrl+U` move half-page up; `Ctrl+F` move down a page, `Ctrl+B` move up a page.
+* `zz` (not `ZZ`) will center cursor line on screen. `Ctrl+y` scroll one line down, `Ctrl+e` scroll one line up, while keeping cursor in current line.
 * `:number` or `numberG`- go to line number, `:+number` - go number lines down, `:-number` go number lines up.
   * It may help to run `:set number` (or `:set nu`) before to show line numbers. For extra Zen use `:set rnu` (or `:set relativenumber`) for relative numbers. Using both also works. Using `no` before removes them (e.g. `:set nonumber`).
 * `gg` - got top of file, `GG` go end of file.
