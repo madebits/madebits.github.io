@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-I gave Ubuntu 18.10 a try in VirtualBox and 18.04 in a machine and here is a summary of some of the things I had to do, for own reference.
+I gave [Ubuntu](https://blog.ubuntu.com/) 18.10 a try in VirtualBox and 18.04 in a machine and here is a summary of some of the things I had to do, for own reference.
 
 <div id='toc'></div>
 
