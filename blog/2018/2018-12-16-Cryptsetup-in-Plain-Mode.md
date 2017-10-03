@@ -37,6 +37,10 @@ cryptsetup close enc
 
 ##Resizing Containers
 
+Container size can be incremented either when container is mounted or not, whereas to decrease size container needs to be open, but not mounted.
+
+###Increasing Size
+
 To increase size of the container file, we can use use again `dd` with *seek* parameter to skip it size in *bs* size blocks:
 
 ```bash
@@ -44,28 +48,31 @@ To increase size of the container file, we can use use again `dd` with *seek* pa
 dd iflag=fullblock if=/dev/urandom of=container.bin bs=1G count=10 seek=30
 ```
 
-The command above will work for both open and closed containers.
+The command above will work for both open, mounted, and closed containers.
 
 If the container is not open, you can `cryptsetup open` it and run:
 
 ```bash
+sudo e2fsck -f /dev/mapper/enc
 sudo resize2fs /dev/mapper/enc
 ```
 
-If the container was already open before `dd`, to resize it live run:
+If the container was already open and mounted before `dd`, to resize it live run:
 
 ```bash
 sudo cryptsetup resize enc
 sudo resize2fs /dev/mapper/enc
 ```
+###Decreasing Size
 
-If container is open, but unmounted, to check its file system use:
+To shrink a container file `cryptsetup open` it, but do not mount:
 
 ```bash
+# e.g shrink to 20G total size
 sudo e2fsck -f /dev/mapper/enc
+sudo resize2fs /dev/mapper/enc 20G
+truncate -s 20G container.bin
 ```
-
-To shrink a container file `cryptsetup open` it, but do not mount. Then after `resize2fs /dev/mapper/enc 20G`, use `truncate -s 20G` tool on container file.
 
 ##Better Plain Mode Passwords
 

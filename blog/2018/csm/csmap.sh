@@ -86,7 +86,9 @@ function umountContainer()
     fuser -km "$mntDir1"
     set -e
     sleep 2
+    set +e
     umount "$mntDir1" && rmdir "$mntDir1"
+    set -e
 }
 
 # name
@@ -300,7 +302,7 @@ function resizeContainer()
     resize2fs "/dev/mapper/$name"
 }
 
-# olny works for full G/M blocks
+# only works for full G/M blocks
 function increaseContainer()
 {
     local name=$(validName "$1")
