@@ -46,6 +46,12 @@ $ ls -l /snap/bin | grep gimp
 lrwxrwxrwx 1 root root 13 Mai  1 13:08 gimp -> /usr/bin/snap
 ```
 
+To view commands of a snap use:
+
+```bash
+$ snap info gimp
+```
+
 All commands link to `/usr/bin/snap` which uses a common trick to figure out what command is, based on link invocation information. The `./snap` folder contains details how the snap package was built:
 
 ```bash
@@ -55,6 +61,15 @@ drwxr-xr-x 2 root root     61 Apr 28 15:16 command-chain
 drwxr-xr-x 2 root root     50 Apr 28 15:16 hooks
 -rw-r--r-- 1 root root 206882 Apr 28 15:16 manifest.yaml
 -rwxr-xr-x 1 root root  18564 Apr 28 14:30 snapcraft.yaml
+```
+
+## Snap Configuration
+
+To get configuration options of a snap use (*set/unset* option can be used to set/clear them):
+
+```bash
+$ sudo snap get -d gimp
+$ sudo snap get -d core # system
 ```
 
 ## Removing Old Revisions
