@@ -629,6 +629,9 @@ function createContainer()
             echo "# sync disk data, this may take a while if other write operations are running ..."
             sync
         else
+            if [ "$sizeNum" -le 0 ]; then
+                onFailed "Invalid size: ${sizeNum}"
+            fi
             echo "Creating ${container} with ${sizeNum}${size: -1} ..."
             if [ "${size: -1}" = "G" ]; then
                 ddContainer "$container" "1G" "$sizeNum"

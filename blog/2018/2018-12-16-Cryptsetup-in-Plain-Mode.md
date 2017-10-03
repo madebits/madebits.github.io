@@ -19,7 +19,7 @@ dd iflag=fullblock if=/dev/urandom of=container.bin bs=1G count=30
 # note adding some offset -o 111 for extra secrecy, we can use --size too
 cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain container.bin enc
 
-# only on creation
+# only on creation, other options can include -N inodes
 mkfs -m 0 -t ext4 /dev/mapper/enc
 # to set a label use either -L label with mkfs or later:
 # sudo e2label /dev/mapper/enc label
