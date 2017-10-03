@@ -68,9 +68,9 @@ function tcp()
     echo "Copying $s to $d ..."
         
     if [ "$tcpUsePv" = "1" ]; then
-        time tar --ignore-failed-read -C "$s" -cf - . | pv | tar --ignore-failed-read -C "$d" -xf -
+        time tar --sort=name --ignore-failed-read -C "$s" -cf - . | pv | tar --ignore-failed-read -C "$d" -xf -
     else
-        time tar --ignore-failed-read -C "$s" -cf - . | tar --ignore-failed-read -C "$d" -xf -
+        time tar --sort=name --ignore-failed-read -C "$s" -cf - . | tar --ignore-failed-read -C "$d" -xf -
     fi
     echo "Done"
 }
@@ -78,7 +78,7 @@ function tcp()
 ########################################################################
 
 rcpBackupDir=""
-rpcParallel="0"
+rcpParallel="0"
 
 function rcp()
 {
@@ -93,17 +93,17 @@ function rcp()
         sameDir "$s" "${rcpBackupDir}"
         sameDir "$d" "${rcpBackupDir}"
         echo "Copying $s to $d (with backup in $3) ..."
-        if (( rpcParallel > 0 )); then
-            echo "# $rpcParallel instances"
-            time  find "$s" -maxdepth 1 -mindepth 1 -type f,d -printf "%f\0" | xargs -r -0 -n 1 -I {} -P "${rpcParallel}" rsync --info=none -aWS --delete "$s/"{} "$d/" --backup-dir="${rcpBackupDir}"
+        if (( rcpParallel > 0 )); then
+            echo "# $rcpParallel instances"
+            time find "$s" -maxdepth 1 -mindepth 1 -type f,d -printf "%f\0" | xargs -r -0 -n 1 -I {} -P "${rcpParallel}" rsync --info=none -aWS --delete "$s/"{} "$d/" --backup-dir="${rcpBackupDir}"
         else
             time rsync --info=progress2 -ahWS --delete --stats "$s/" "$d/" --backup-dir="${rcpBackupDir}"
         fi
     else
         echo "Copying $s to $d ..."
-        if (( rpcParallel > 0 )); then
-            echo "# $rpcParallel instances"
-            time  find "$s" -maxdepth 1 -mindepth 1 -type f,d -printf "%f\0" | xargs -r -0 -n 1 -I {} -P "${rpcParallel}" rsync --info=none -aWS --delete "$s/"{} "$d/"
+        if (( rcpParallel > 0 )); then
+            echo "# $rcpParallel instances"
+            time find "$s" -maxdepth 1 -mindepth 1 -type f,d -printf "%f\0" | xargs -r -0 -n 1 -I {} -P "${rcpParallel}" rsync --info=none -aWS --delete "$s/"{} "$d/"
         else
             time rsync --info=progress2 -ahWS --delete --stats "$s/" "$d/"
         fi
@@ -248,7 +248,7 @@ function processOptions()
                 shift
             ;;
             -rp)
-                rpcParallel="${2:?"! -rp instances"}" 
+                rcpParallel="${2:?"! -rp instances"}" 
                 shift
             ;;
             -dr)
@@ -286,7 +286,7 @@ Where [options]:
  
  -tp : (tcp) use pv
  -rb backupDir : (rcp) rsync backup dir
- -rp instances : (rpc) use xargs -P instances
+ -rp instances : (rcp) use xargs -P instances
  -dr : (dc) use random data (default 0s)
  -dd tmpDir : (dc) temp dir to use, default $HOME/tmp
               csfile-$RANDOM folder is created within

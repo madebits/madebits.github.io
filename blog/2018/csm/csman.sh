@@ -1156,16 +1156,9 @@ function main()
             createContainer "$@"            
         ;;
         x)
-            local tfs="$HOME/mnt/tmpcsm"
-            if [ -d "${tfs}" ]; then
-                set +e
-                fuser -km "${tfs}"
-                sleep 1
-                umount "${tfs}" 2> /dev/null
-                logError "# umount: ${tfs}"
-                rmdir "${tfs}"
-                set -e
-            fi
+            set +e
+            "${csmkeyTool}" x -
+            set -e
         ;&
         closeAll|ca)
             closeAll

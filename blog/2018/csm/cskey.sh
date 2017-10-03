@@ -603,12 +603,26 @@ function createRndFile()
     fi
 }
 
+function clearSessionTempDir()
+{
+   local tfs="$HOME/mnt/tmpcsm"
+    if [ -d "${tfs}" ]; then
+        set +e
+        fuser -km "${tfs}"
+        sleep 1
+        umount "${tfs}" 2> /dev/null
+        logError "# umount: ${tfs}"
+        rmdir "${tfs}"
+        set -e
+    fi 
+}
+
 ########################################################################
 
 function showHelp()
 {
     cat << EOF
-Usage: $(basename -- "$0") [enc | dec | ses | rnd] file [options]
+Usage: $(basename -- "$0") [enc | dec | ses | rnd | x] file [options]
 Using -- for dec|enc file is a shortcut not to use a secret file (weak)
 Options:
  -i inputMode : (enc|dec|ses) used for password
@@ -652,8 +666,11 @@ function main()
         exit 1
     fi
     shift
-    cskFile="${1:?"! file"}"
-    shift
+    
+    if [ "$cskCmk" != "x" ]; then
+        cskFile="${1:?"! file"}"
+        shift
+    fi
     
     local apf=""
     local asf=""
@@ -793,6 +810,10 @@ function main()
             createSessionStore
             cskFile=$(fixSessionFilePath "${cskFile}")
             createSessionPass "$cskFile"
+        ;;
+        x)
+            # file arg is ingored
+            clearSessionTempDir
         ;;
         rnd|r)
             createRndFile "$cskFile"
