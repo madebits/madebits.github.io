@@ -1120,6 +1120,9 @@ function main()
     shift
 
     case "$mode" in
+        olr)
+            cmsMountReadOnly="1"
+        ;&
         ol)
             csmLive="1"
             csmCleanScreen="1"
