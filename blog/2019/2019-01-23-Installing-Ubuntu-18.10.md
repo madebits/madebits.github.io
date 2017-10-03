@@ -117,11 +117,8 @@ On Firefox, installed [GNOME Shell Integration](https://addons.mozilla.org/en-US
 
 ###Minimal Selection of GNome Extensions
 
-I can live with this one only:
-
 * Dash to Panel https://extensions.gnome.org/extension/1160/dash-to-panel/
-
-I added also some CPU load indicator (first one I found that looked ok):
+    I can live with this one only
 
 * SysPeek-GS https://extensions.gnome.org/extension/1409/syspeek-gs/
 
@@ -131,11 +128,7 @@ I added also some CPU load indicator (first one I found that looked ok):
     sudo cp /var/lib/snapd/desktop/applications/gnome-system-monitor_gnome-system-monitor.desktop /usr/share/applications/gnome-system-monitor.desktop
     ```
 
-A well-done menu:
-
 * Gno-Menu https://extensions.gnome.org/extension/608/gnomenu/
-
-To move notifications to corner:
 
 * Panel-OSD https://extensions.gnome.org/extension/708/panel-osd/
 
