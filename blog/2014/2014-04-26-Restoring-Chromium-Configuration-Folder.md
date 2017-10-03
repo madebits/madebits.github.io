@@ -4,7 +4,7 @@
 
 <!--- tags: linux browser -->
 
-I always start Chromium web browser in incognito mode in Ubuntu using by default command-line arguments similar to the following (my .cache and tmp and var are in tmpfs and I have no swap):
+I start Chromium web browser in incognito mode in Ubuntu using command-line arguments similar to the following:
 
 ```
 --disk-cache-dir=/dev/null --disk-cache-size=1 --incognito -start-maximized --no-first-run --user-data-dir=/home/$USER/Private/chromium
