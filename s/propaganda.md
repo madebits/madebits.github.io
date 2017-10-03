@@ -48,6 +48,8 @@
 [ItsFoss](https://itsfoss.com/)
 [Linuxize](https://linuxize.com/)
 [LinuxSlashDot](https://linux.slashdot.org/)
+[StackExchangeUnix](https://unix.stackexchange.com/questions)
+[AskUbuntu](https://askubuntu.com/questions)
 
 ## USA
 
