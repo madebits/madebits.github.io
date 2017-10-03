@@ -10,7 +10,7 @@
 
 ## Quick Start
 
-Create a new container file (`-i e` make password entry visible):
+Create a new container file (`-i e` makes password entry visible):
 
 ```bash
 sudo csman.sh new container.bin 1M -s secret.bin -ck -i e ---
@@ -22,10 +22,10 @@ rm secret.bin
 Open a container, it gets a random name and is mounted under `$HOME/mnt/csm-*` (or append `-n name`):
 
 ```bash
-sudo csman.sh open container.bin -s secret.bin -ck -i e --- -n one
+sudo csman.sh open container.bin -ck -i e --- -n one
 
 # or block terminal till container is open, press Ctrl+C to close
-sudo csman.sh open container.bin -s secret.bin -ck -i e --- -l
+sudo csman.sh open container.bin -ck -i e --- -l
 ```
 
 Close a container by name:
