@@ -194,6 +194,6 @@ env | grep SNAP
 
 ## Summary
 
-Ubuntu snap is an interesting concept that creates an illusion of security.
+Ubuntu snap is an interesting concept that creates an illusion of security. Consider only installing snaps maintained by [Canonical](https://forum.snapcraft.io/t/snaps-officially-supported-by-canonical/1719), or other parties you trust.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-11-13-ETL-Solutions.md'>ETL Solutions</a></ins>
