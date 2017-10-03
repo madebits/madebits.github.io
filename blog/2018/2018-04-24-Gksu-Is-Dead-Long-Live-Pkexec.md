@@ -9,7 +9,7 @@
 
 ##Replacing gksu
 
-With `gksu`, one could used code similar to the following to re-run as root a script that contained UI commands started from a non-root user: 
+With `gksu`, one could used code similar to the following to re-run as *root* a script that contained UI commands started from a *non-root* user: 
 
 ```bash
 #!/bin/bash
@@ -22,7 +22,7 @@ fi
 echo $@
 ```
 
-Ideally, using `pkexec` as replacement would be same as easy, but the following does **not** work:
+Ideally, using `pkexec` as replacement would be same as easy, but the following code does **not** work:
 
 ```bash
 if [[ $(id -u) != "0" ]]; then
@@ -33,7 +33,7 @@ fi
 echo $@
 ```
 
-There are two problems to overcome to make the above work.
+There are two issues to overcome to make the above work.
 
 ##First Problem
 
@@ -79,7 +79,7 @@ Unable to init server: Could not connect: Connection refused
 (zenity:31120): Gtk-WARNING **: 20:14:17.933: cannot open display:
 ```
 
-The `man pkexec` says: "*pkexec will not allow you to run X11 applications as another user since the $DISPLAY and $XAUTHORITY environment variables are not set*". You have to [edit](https://unix.stackexchange.com/questions/203136/how-do-i-run-gui-applications-as-root-by-using-pkexec) the *polkit* files, and that per each application! We can overcome that, by passing in the variables we need:
+The `man pkexec` says: "*pkexec will not allow you to run X11 applications as another user since the $DISPLAY and $XAUTHORITY environment variables are not set*". You have to [edit](https://unix.stackexchange.com/questions/203136/how-do-i-run-gui-applications-as-root-by-using-pkexec) the *polkit* files, and that per each application! We can work around that, by passing in the variables we need:
 
 ```bash
 if [[ $(id -u) != "0" ]]; then
@@ -97,11 +97,9 @@ msg="$@"
 zenity --info --text="$msg"
 ```
 
-With these changes it works.
-
 ##A Poor Man's gksu
 
-We can use the idea above to create a poor man's `gksu.sh` script:
+Finally, we can use the idea above to create a poor man's `gksu.sh` replacement script:
 
 ```bash
 #!/bin/bash
@@ -119,7 +117,7 @@ shift
 $@
 ```
 
-It can be used as follows:
+The script can be used as follows:
 
 ```
 ./gksu.sh leafpad /etc/fstab
