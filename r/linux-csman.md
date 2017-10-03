@@ -87,7 +87,7 @@ The secret file encryption password is hashed using `argon2` before passed to AE
 container=slots(default 4)|encrypted data
 ```
 
-Similar to LUKS, one can use same password safely to protect more than one secret file, or to protect same secret in different files with different passwords. AES tool used to encrypt secret files uses CBC mode, so using same password on same on different files containing same secret leads to different binary files. Similar to [non-detached](https://wiki.archlinux.org/index.php/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header) LUKS, user is responsible to store secret files separately from containers (maybe in another container) or have them embedded (default). Unlike LUKS headers, secret files used by CSMan (with default `aes` tool) look random. In both cases, either secret file outside or in the header, the container contains no identifying byte patterns - it looks like random data from the beginning to the end.
+Similar to LUKS, one can use same password safely to protect more than one secret file, or to protect same secret in different files with different passwords. AES tool used to encrypt secret files uses CBC mode, so using same password on same on different files containing same secret leads to different binary files. Similar to [non-detached](https://wiki.archlinux.org/index.php/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header) LUKS, user is responsible to store secret files separately from containers (maybe in another container) or have them embedded (default). Unlike LUKS headers, secret files used by CSMan (with default `aes` tool) look random. In both cases, either secret file outside or in the header, the container contains no identifying byte patterns - the whole container looks like random data from the beginning to the end.
 
 ### Terminology
 
@@ -406,7 +406,7 @@ We are passing here some options to `cskey.sh` via `-ck ... --` and giving conta
 
 If the ETX4 volume has no label `csman.sh` will try to give it a label based on filename. You can use `-sl label` option to specify a new EXT4 volume label with open.
 
-It is possible to open the container, but leave it unmounted by passing `-u` to open command (e.g. if you want to `fsck` it). In this case you can use `sudo csman.sh mount name` later to mount the file system. Similarly, if a container is open and mounted `sudo csman.sh umount name` will unmount it only (but not close *dm-crypt* device).
+It is possible to open the container, but leave it unmounted by passing `-u` to open command (e.g. if you want to `fsck` it). In this case you can use `sudo csman.sh mount name` later to mount the file system. Similarly, if a container is open and mounted, then `sudo csman.sh umount name` will unmount it only (but not close *dm-crypt* device).
 
 #### Open Options
 
