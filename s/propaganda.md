@@ -2,6 +2,7 @@
 
 * [Hacker News](https://news.ycombinator.com/)
 * [Daily Rotation](http://www.dailyrotation.com/)
+* [Reddit Programming](https://www.reddit.com/r/programming/)
 * [SlashDot](https://slashdot.org/)
 * [How To Geek](http://www.howtogeek.com/)
 * [GHacks](http://www.ghacks.net/)
@@ -16,7 +17,6 @@
 * [Live Science](https://www.livescience.com/news)
 * [Heise](https://www.heise.de/newsticker/)
 * [MIT News](http://news.mit.edu/)
-* [Reddit Programming](https://www.reddit.com/r/programming/)
 * [Ted](https://www.ted.com/)
 * [EnGadget](https://www.engadget.com/)
 * [LifeHacker](https://lifehacker.com/)
