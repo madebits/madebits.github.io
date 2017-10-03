@@ -377,7 +377,7 @@ main "$@"
 
 ```
 
-The new `cs-map.sh` script can be used as follows:
+The `cs-map.sh` script can be used as follows:
 
 ```bash
 sudo ./cs-map open enc1 secret.bin container.bin
