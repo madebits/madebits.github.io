@@ -34,7 +34,7 @@ set $mod Mod4
 #font pango:monospace 8
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 14
+font pango:DejaVu Sans Mono 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -43,6 +43,8 @@ floating_modifier $mod
 set $term exec --no-startup-id ~/.config/i3/term.sh
 bindsym $mod+Return $term
 bindsym $mod+t $term
+#bindsym $mod+Shift+Enter exec --no-startup-id ~/.config/i3/term.sh --role=floating
+#for_window [window_role="^floating$"] floating enable
 
 # kill focused window
 #bindsym $mod+Shift+q kill
@@ -57,8 +59,8 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id /usr/bin/xkill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 #bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop
-set $apps exec --no-startup-id rofi -fake-transparency -fake-background screenshot -modi 'window#i3:.config/i3/rofi_custom.sh#drun#run' -show-icons -show window -sort -width 81  -lines 17 -sidebar-mode -columns 4 -terminal .config/i3/term.sh -location 1 -yoffset 23
-set $favs exec --no-startup-id rofi -fake-transparency -fake-background screenshot -modi 'window#i3:.config/i3/rofi_custom.sh#drun#run' -show-icons -show i3 -sort -width 81  -lines 17 -sidebar-mode -columns 4 -terminal .config/i3/term.sh -location 1 -yoffset 23
+set $apps exec --no-startup-id rofi -fake-transparency -fake-background screenshot -modi 'window#i3:.config/i3/rofi_custom.sh#drun#run' -show-icons -show window -sort -width 81 -lines 17 -sidebar-mode -columns 4 -terminal .config/i3/term.sh -location 1 -yoffset 20
+set $favs exec --no-startup-id rofi -fake-transparency -fake-background screenshot -modi 'window#i3:.config/i3/rofi_custom.sh#drun#run' -show-icons -show i3 -sort -width 81 -lines 17 -sidebar-mode -columns 4 -terminal .config/i3/term.sh -location 1 -yoffset 20
 bindsym --release Ctrl+Tab $apps
 
 # change focus
@@ -100,7 +102,7 @@ bindsym $mod+Shift+space floating toggle
 
 floating_minimum_size 128 x 72
 #floating_maximum_size 1024 x 768
-floating_maximum_size 1920 x 1030
+floating_maximum_size 1920 x 1039
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
@@ -111,15 +113,15 @@ bindsym $mod+a focus parent
 # focus the child container
 bindsym $mod+Shift+a focus child
 
-set $workspace1 "1: 🍓🍓"
-set $workspace2 "2: 🍊🍊"
-set $workspace3 "3: 🍋🍋"
-set $workspace4 "4: 🍏🍏"
-set $workspace5 "5: 🥝🥝"
-set $workspace6 "6: 🍒🍒"
-set $workspace7 "7: 🍅🍅"
-set $workspace8 "8: 🌽🌽"
-set $workspace9 "9: 🍑🍑"
+set $workspace1 "1: 🌏🌏"
+set $workspace2 "2: 📂📂"
+set $workspace3 "3: 💻💻"
+set $workspace4 "4: 🏢🏢"
+set $workspace5 "5: 💥💥"
+set $workspace6 "6: 📝📝"
+set $workspace7 "7: 🖼️🖼️"
+set $workspace8 "8: 🏳️‍🌈🏳️‍🌈"
+set $workspace9 "9: ⚡⚡"
 set $workspace10 "10: 🍄🍄"
 
 
@@ -201,7 +203,7 @@ bar {
             statusline #ffffff
             separator  #9fa3a5
         }
-        font pango:DejaVu Sans Mono 10
+        font pango:DejaVu Sans Mono 9
         status_command i3status # | ~/.config/i3status/i3-custom.sh
         bindsym button3 $favs
         bindsym button2 $nws
@@ -269,21 +271,28 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #888888   #888888
 
 client.background       #FFFFFF
 
+#🍎🐥🐬💢🗔#52545e
+
+for_window [class=".*"] title_format "<span foreground='#ffffff' background='#282a36'><b> 🗔 %class </b></span> %title"
+
 for_window [class="System-config-printer.py"] floating enable
 for_window [class="File-roller"] floating enable
 for_window [class="SpeedCrunch"] floating enable
-for_window [class="vlc"] floating enable
+#for_window [class="vlc"] floating enable
 for_window [class="mpv"] floating enable
-for_window [class="Gthumb"] floating enable
+#for_window [class="Gthumb"] floating enable
 for_window [class="Eog"] floating enable
-for_window [class="XnViewMP"] floating enable
+#for_window [class="XnViewMP"] floating enable
 for_window [class="feh"] floating enable
-for_window [class="Gimp"] floating enable
+#for_window [class="Gimp"] floating enable
 for_window [class="Catfish"] floating enable
 for_window [class="Gnome-disks"] floating enable
 for_window [class="keepassxc"] floating enable
 #for_window [class="Gnome-system-monitor"] floating enable
 for_window [class="Gnome-power-statistics"] floating enable
+for_window [class="Nm-connection-editor"] floating enable
+for_window [class="Xsane"] floating enable
+for_window [class="Xmessage"] floating enable
 
 # sudo apt install pavucontrol
 for_window [class="Pavucontrol"] floating enable

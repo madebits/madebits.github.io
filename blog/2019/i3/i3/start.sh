@@ -22,3 +22,5 @@ sudo /usr/local/bin/gnome-kill
 
 #/usr/bin/xinput set-button-map "$(/usr/bin/xinput list --name-only | grep -i touch)" 3 2 1 &
 /usr/bin/xinput --disable "$(/usr/bin/xinput list --name-only | grep -i touch)"
+
+#/home/d7/www/hserver.sh & disown

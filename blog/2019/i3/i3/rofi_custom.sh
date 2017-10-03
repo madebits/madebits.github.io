@@ -2,17 +2,19 @@
 
 # https://emojipedia.org/
 
+#🍓🍓🍊🍊🍋🍋🍏🍏🥝🥝🍒🍒🍅🍅🌽🌽🍑🍑
+
 ws=(
 ""
-"1: 🍉🍉"
-"2: 🍊🍊"
-"3: 🍋🍋"
-"4: 🍏🍏"
-"5: 🥝🥝"
-"6: 🍒🍒"
-"7: 🍅🍅"
-"8: 🌽🌽"
-"9: 🍑🍑"
+"1: 🌏🌏"
+"2: 📂📂"
+"3: 💻💻"
+"4: 🏢🏢"
+"5: 💥💥"
+"6: 📝📝"
+"7: 🖼️🖼️"
+"8: 🏳️‍🌈🏳️‍🌈"
+"9: ⚡⚡"
 "10: 🍄🍄"
 )
 
@@ -35,16 +37,19 @@ mem=$(free -h | grep Mem: | tr -s ' ' | cut -d ' ' -f 3,2,4)
 
 if [ -z "$@"]; then
     echo "👶${USER}|🕛${up}|Ⓜ️${mem}|☀️${bl}%"
-    echo "☠️ i3 Kill (A+F4|W+Q|W+F4|B2)"
-    echo "🎛️ i3 Toggle Layout (W+Tab|W+w)"
     echo "🔲 i3 New Workspace (W+^)"
     echo "▶️ i3 Move to New Workspace"
     echo "⏩ i3 Move All To New Workspace"
+    echo "🎛️ i3 Toggle Layout (W+Tab|W+w)"
+    echo "☠️ i3 Kill (A+F4|W+Q|W+F4)"
     echo "📌 i3 Bar Toggle (W+y)"
     echo "🛸 i3 Floating Toggle (W+Shift+space)"
     echo "💎 i3 Sticky Toggle"
     echo "📺 i3 Full Screen (W+f)"
     echo "⏹️ i3 Border Toggle (W+Shift+b)"
+    echo "🎎 i3 Split Horizontally || (W+S+h)"
+    echo "🍔 i3 Split Vertically = (W+S+v)"
+    echo "☝️ i3 Focus Parent (W+a)"
     echo "⚙️ i3 Config"
     echo "🌀 i3 Reload (W+S+r)"
     echo "🔊 Volume"
@@ -127,6 +132,15 @@ else
             ;;
         "⏹️ i3 Border Toggle (W+Shift+b)")
             /usr/bin/i3-msg 'border toggle' > /dev/null
+            ;;
+        "🎎 i3 Split Horizontally || (W+S+h)")
+            /usr/bin/i3-msg 'split h' > /dev/null && /usr/bin/notify-send -u low 'i3 tile horizontally' > /dev/null
+            ;;
+        "🍔 i3 Split Vertically = (W+S+v)")
+            /usr/bin/i3-msg 'split v' > /dev/null && /usr/bin/notify-send -u low 'i3 tile vertically' > /dev/null
+            ;;
+        "☝️ i3 Focus Parent (W+a)")
+            /usr/bin/i3-msg 'focus parent' > /dev/null && /usr/bin/notify-send -u low 'i3 focus parent' > /dev/null
             ;;
         "⚙️ i3 Config")
             /usr/bin/geany -i $HOME/.config/i3status/config $HOME/.config/i3/start.sh $HOME/.config/i3/rofi_custom.sh $HOME/.config/i3/config > /dev/null &
