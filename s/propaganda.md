@@ -113,10 +113,12 @@
 [CNN](https://edition.cnn.com/world)
 [CNBC](https://www.cnbc.com/world-news/)
 [CSBS News](https://www.cbsnews.com/world/)
+[NBC News](https://www.nbcnews.com/world)
 [USA Today](https://usatoday.com/)
 [Fox News](https://www.foxnews.com/world)
 [The New York Times](https://www.nytimes.com/section/world)
 [The Washington Times](https://www.washingtontimes.com/news/world/)
+[Wall Street Journal](https://www.wsj.com/news/world)
 [Reddit World News](https://www.reddit.com/r/worldnews/)
 [BuzzfeedNews](https://www.buzzfeednews.com/)
 [The Onion](https://www.theonion.com/)
@@ -124,8 +126,13 @@
 ### Canada & Australia
 
 [GlobalNews](https://globalnews.ca/world/)
+[CTV News](https://www.ctvnews.ca/world)
+[CBC](https://www.cbc.ca/news/world)
+[The Star](https://www.thestar.com/news/world.html)
 [NationalPost](https://nationalpost.com/category/news/world)
 [9News](https://www.9news.com.au/world)
+[The Age](https://www.theage.com.au/world)
+[NZHerald](https://www.nzherald.co.nz/world/news/headlines.cfm)
 
 ### UK
 
@@ -138,6 +145,8 @@
 [Daily Mail](https://www.dailymail.co.uk/news/worldnews/index.html)
 [Express](https://www.express.co.uk/news/world)
 [APNews](https://www.apnews.com/)
+[Sky](https://news.sky.com/world)
+[Metro](https://metro.co.uk/news/world/)
 
 ### Europe
 
@@ -145,6 +154,8 @@
 [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
 [T-Online Nachrichten](https://www.t-online.de/nachrichten/)
 [EuroNews](https://www.euronews.com/news/international)
+[Rte](https://www.rte.ie/news/world/)
+[Ansa](https://www.ansa.it/english/)
 [NetzPolitik](https://netzpolitik.org/)
 [B92](https://www.b92.net/eng/news/world.php)
 
@@ -157,19 +168,23 @@
 [PravdaReport](http://www.pravdareport.com/world/)
 [SouthFront](https://southfront.org/)
 
-## China
+## China & Asia
 
 [South China Morning Post](https://www.scmp.com/news/world)
 [Sina](http://english.sina.com/news/world/)
 [China Daily](http://www.chinadaily.com.cn/world)
 [Xinhua Net](http://www.xinhuanet.com/english/world/index.htm)
+[CGTN](https://www.cgtn.com/world)
+[Straits Times](https://www.straitstimes.com/world)
+[TodayOnLine](https://www.todayonline.com/world)
 
 ## Middle East
 
 [Press TV](https://www.presstv.com/)
 [AlJazeera](https://www.aljazeera.com/news/)
 [YeniSafak](https://www.yenisafak.com/en/world)
-[AlMasdarNews](https://www.almasdarnews.com/article/category/world-news/)
+[AlMasdar News](https://www.almasdarnews.com/article/category/world-news/)
+[Gulf News](https://gulfnews.com/world)
 [Haaretz](https://www.haaretz.com/world-news)
 [The Times of Israel](https://www.timesofisrael.com/)
 
@@ -177,6 +192,8 @@
 
 [The Indian Express](https://indianexpress.com/section/world/)
 [Hindustan Times](https://www.hindustantimes.com/world-news/)
+[India Today](https://www.indiatoday.in/world)
+[Times Of India](https://timesofindia.indiatimes.com/world)
 
 ## Other
 
