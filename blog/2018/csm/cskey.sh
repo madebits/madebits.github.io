@@ -564,6 +564,9 @@ function main()
 			;;
 			-ao)
 				cskSessionSecretFile="${2:?"! -ao file"}"
+				if [ "$cskSessionSecretFile" = "-" ]; then
+					cskSessionSecretFile="/dev/stdout"
+				fi
 				shift
 			;;
 			*)
