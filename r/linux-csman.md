@@ -155,7 +155,7 @@ sudo cskey.sh ses @foo
 # or, create / overwrite @foo slot
 sudo cskey.sh enc secret.bin -su -apo @foo
 # use foo slot via -ap
-sudo cskey.sg dec secret.bin -ap @foo | base64 -w 0
+sudo cskey.sh dec secret.bin -ap @foo | base64 -w 0
 ```
 
 ##### Password Hashing
