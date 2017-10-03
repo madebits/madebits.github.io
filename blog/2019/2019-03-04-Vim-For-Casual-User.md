@@ -40,7 +40,7 @@ If you panic after starting `vim`, press *Esc* key one more times (so that Vim e
 
 I write Vim editor commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). `Ctrl+d` and `Tab` can be used to auto-complete commands after `:`. I write *Ctrl* key combinations using lowercase key as in `Ctrl+d` (and not `Ctrl+D` as they are written in Vim documentation).
 
-If you started Vim without a file path, you can open a file from within Vim using `:edit filename` (or `:e`). *Tab* key can be used for auto-completion on file names.
+If you started Vim without a file path, you can open a file from within Vim using `:edit filename` (or `:e`, use `:e!` to discard current buffer changes). *Tab* key can be used for auto-completion on file names. Using `:e` with a folder opens file browser (whose layout can be changed using `i`).
 
 The fastest way to produce text in Vim is to write it in some other editor and save it as some file `text.txt`. Start `vim` and use `:r text.txt` to read it and put its text under the cursor position. File name completion should work after `:r` same as in shell using *Tab* key. This is also the best way to bring some existing pieces of text within a file in Vim (if you have no clipboard).
 
@@ -52,7 +52,7 @@ There are several ways to save the text:
 * `:wq` save and quit (or `ZZ` or `:x`).
 * `w!` force write read-only file.
 * `w !sudo tee % > /dev/null` yes, no one remembers this one, but it will force write some file open without `sudo` as `sudo` (basically this means write buffer and pipe it via *sudo* using *tee* to filename).
-    - If you can plan in advance, use `SUDO_EDITOR=vim sudo -e somefile` to edit a file as *sudo* using Vim.
+    - If you can plan in advance, use `SUDO_EDITOR=vim` and then `sudoedit somefile`.
 * `:q!` will not save your text and exit (you still have the nice memory of writing it) and `:qa!` will exit even if you have more than one buffer.
 
 A few quirks:
@@ -172,7 +172,7 @@ Replacing text:
 
 Using file explorer:
 
-* `:Explore` or `:E` or `:e.` opens file explorer (`F1` for help within it)
+* `:Explore` or `:E` or `:e.` opens file explorer (`F1` for help within it). Use `:e!` to discard current buffer changes. 
 * `Ctrl+6` (`^`) switches back and forth from open file to explorer on same window
 
 Using tabs:
