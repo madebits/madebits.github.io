@@ -172,7 +172,7 @@
 [TheMoscowTimes](https://www.themoscowtimes.com/news)
 [Pravda](https://english.pravda.ru/)
 [PravdaReport](http://www.pravdareport.com/world/)
-[RussiaInsider](https://russia-insider.com/enRussiaBeyond)
+[RussiaInsider](https://russia-insider.com/en)
 [SouthFront](https://southfront.org/)
 [RussiaBeyond](https://www.rbth.com/science-and-tech)
 [GlobalAffairs](https://eng.globalaffairs.ru/)
