@@ -71,14 +71,12 @@ function ownFile()
 }
 
 # name
-function closeContainer()
+function umountContainer()
 {
     local name=$(validName "$1")
     local mntDir1=$(mntDirRoot "$name")
     local mntDir2=$(mntDirUser "$name")
-
-    echo "Closing ${name} ..."
-
+    
     set +e
     fuser -km "$mntDir2"
     set -e
@@ -89,6 +87,37 @@ function closeContainer()
     set -e
     sleep 2
     umount "$mntDir1" && rmdir "$mntDir1"
+}
+
+# name
+function mountContainer()
+{
+    local name=$(validName "$1")
+    local mntDir1=$(mntDirRoot "$name")
+    local mntDir2=$(mntDirUser "$name")
+    local user=${SUDO_USER:-$(whoami)}
+    
+    mkdir -p "$mntDir1"
+    set +e
+    mount "/dev/mapper/$name" "$mntDir1"
+    if [ "$?" != "0" ]; then
+        cryptsetup close "$name"
+        rmdir "$mntDir1"
+        resetTime
+        exit 1
+    fi
+    set -e
+    mkdir -p "$mntDir2"
+    bindfs -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
+    echo "Mounted ${device} at ${mntDir2}."
+}
+
+# name
+function closeContainer()
+{
+    local name=$(validName "$1")
+    echo "Closing ${name} ..."
+    umountContainer "$name"
     cryptsetup close "$name"
     echo " Closed ${name} !"
 }
@@ -117,8 +146,6 @@ function openContainer()
     fi
     shift
 
-    local mntDir1=$(mntDirRoot "$name")
-    local mntDir2=$(mntDirUser "$name")
     local user=${SUDO_USER:-$(whoami)}
     echo "Opening /dev/mapper/${name} ..."
 
@@ -127,23 +154,25 @@ function openContainer()
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "$@" open "$device" "$name" -
     echo
     cryptsetup status "/dev/mapper/$name"
-    mkdir -p "$mntDir1"
-    set +e
-    mount "/dev/mapper/$name" "$mntDir1"
-    if [ "$?" != "0" ]; then
-        cryptsetup close "$name"
-        rmdir "$mntDir1"
-        resetTime
-        exit 1
-    fi
-    set -e
-    mkdir -p "$mntDir2"
-    
-    bindfs -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
-
-    echo "Mounted ${device} at ${mntDir2}. To close use:"
+    mountContainer "$name"
+    echo "To close use:"
     echo "$0 close ${oName}"
     echo "$0 closeAll"    
+}
+
+# container bs count seek
+function ddContainer()
+{
+    local container="$1"
+    local bs="$2"
+    local count="$3"
+    local seek="$4"
+    local user=${SUDO_USER:-$(whoami)}
+    if [ -z "$seek" ]; then
+        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" status=progress
+    else
+        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" seek="$seek" status=progress
+    fi
 }
 
 # name secret container size rest
@@ -164,13 +193,13 @@ function createContainer()
     shift
 
     local sizeNum="${size:$length:-1}"
+    local user=${SUDO_USER:-$(whoami)}
 
     echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
-
     if [ "${size: -1}" == "G" ]; then
-        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs=1G count="$sizeNum" status=progress
+        ddContainer "$container" "1G" "$sizeNum"
     elif [ "${size: -1}" == "M" ]; then
-        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs=1M count="$sizeNum" status=progress
+        ddContainer "$container" "1M" "$sizeNum"
     else
         (>&2 echo "! size can be M or G")
         exit 1  
@@ -178,8 +207,6 @@ function createContainer()
     sync
 
     echo "Creating ${secret} ..."
-
-    local user=${SUDO_USER:-$(whoami)}
     sudo -E -u "$user" "${toolsDir}/cskey.sh" enc "$secret"
     echo "You will asked to re-enter password to open the container for the first time ..."
     local key=$(sudo -E -u "$user" "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
@@ -263,6 +290,7 @@ function resizeContainer()
     resize2fs "/dev/mapper/$name"
 }
 
+# olny works for full G/M blocks
 function increaseContainer()
 {
     local name=$(validName "$1")
@@ -271,6 +299,7 @@ function increaseContainer()
     checkArg "$size" "size"
     shift
     local sizeNum="${size:$length:-1}"
+
     container=$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)
     if [ ! -f "$container" ]; then
         (>&2 echo "! no such container file ${container}")
@@ -283,14 +312,14 @@ function increaseContainer()
             (>&2 echo "! cannot determine current size in G")
             exit 1
         fi
-        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs=1G count="$sizeNum" seek="$sizeG" status=progress
+        ddContainer "$container" "1G" "$sizeNum" "$sizeG"
     elif [ "${size: -1}" == "M" ]; then
         local sizeM=$(($currentSize / (1024 * 1024)))
         if [ "$sizeM" = "0" ]; then
             (>&2 echo "! cannot determine current size in M")
             exit 1
         fi
-        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs=1M count="$sizeNum" seek="$sizeM" status=progress
+        ddContainer "$container" "1M" "$sizeNum" "$sizeM"
     else
         (>&2 echo "! size can be M or G")
         exit 1  
@@ -307,6 +336,8 @@ function showHelp()
     (>&2 echo " $bn openNamed name secret device [ additional cryptsetup parameters ]")
     (>&2 echo " $bn close name")
     (>&2 echo " $bn closeAll")
+    (>&2 echo " $bn mount name")
+    (>&2 echo " $bn umount name")
     (>&2 echo " $bn create secret container size [ additional cryptsetup parameters ]")
     (>&2 echo "    size should end in M or G, secret and container files will be overwritten, use with care")
     (>&2 echo " $bn changePass secret")
@@ -339,6 +370,12 @@ function main()
         ;;
         close|c)
             closeContainer "$@"
+        ;;
+        mount)
+            mountContainer "$1"
+        ;;
+        umount)
+            umountContainer "$1"
         ;;
         create)
             createContainer "$@"            
