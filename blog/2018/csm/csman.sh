@@ -26,6 +26,7 @@ csmLive="0"
 mkfsOptions=()
 csmChain="1"
 csmMount="1"
+cmsMountReadOnly="0"
 
 ########################################################################
 
@@ -239,7 +240,12 @@ function mountContainer()
     fi
     set -e
     mkdir -p "$mntDir2"
-    bindfs -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
+    local ro=""
+    if [ "$cmsMountReadOnly" = "1" ]; then
+        echo "# mounting user read-only"
+        ro="-r"
+    fi
+    bindfs ${ro} -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
     echo "Mounted ${dev} at ${mntDir2}"
 }
 
@@ -426,7 +432,6 @@ function createContainer()
     
     if [ "$writeContainer" = "1" ]; then
         echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
-        > "$container"
         if [ "${size: -1}" = "G" ]; then
             ddContainer "$container" "1G" "$sizeNum"
         elif [ "${size: -1}" = "M" ]; then
@@ -616,6 +621,7 @@ function showHelp()
     logError " -c : (open|create) clean screen after password entry"
     logError " -s : (open|create) use only one (outer) encryption layer"
     logError " -u : (open) do not mount on open"
+    logError " -r : (open) mount user read-only"
     logError "Example:"
     logError " sudo csmap.sh open container.bin -l -ck -k -h -p 8 -m 14 -t 1000 -- ---"
 }
@@ -680,6 +686,9 @@ function processOptions()
             ;;
             -u)
                 csmMount="0"
+            ;;
+            -r)
+                cmsMountReadOnly="1"
             ;;
             *)
                 onFailed "unknown option: $current"
