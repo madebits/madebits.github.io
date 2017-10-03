@@ -136,9 +136,12 @@ The session is created only if you make use of it as a `tmpfs` mounted volume in
 Session slots can be also create directly using:
 
 ```bash
+# store a password in session slot @foo
 sudo cskey.sh ses @foo
-# and used via -ap
-sudo cskey.sg dec secret.bin -ap @foo
+# or, overwrite @foo slot
+sudo cskey.sh enc secret.bin -su -apo @foo
+# use foo slot via -ap
+sudo cskey.sg dec secret.bin -ap @foo | base64 -w 0
 ```
 
 #### Password Hash Options
