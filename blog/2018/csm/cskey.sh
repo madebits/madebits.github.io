@@ -397,7 +397,7 @@ function createSessionStore()
 	if [ "${tfs}" != "tmpfs" ]; then
 		logError "# session: creating tmpfs store in ${fs} (use -ar to choose another)"
 		logError
-		mount -t tmpfs -o size=8m tmpfs "$fs"
+		mount -t tmpfs -o size=4m tmpfs "$fs"
 	fi
 	
 }
