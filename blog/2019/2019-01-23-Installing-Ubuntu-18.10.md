@@ -374,6 +374,49 @@ sudo apt install gnome-system-monitor
     image-display-duration=3
     ```
 
+##GNOME Eating CPU
+
+Even without doing anything `gnome-shell` [eats](https://bugs.launchpad.net/ubuntu/+source/gnome-shell/+bug/1773959) some small percent of CPU, doing something with some socket:
+
+```
+$ sudo strace -c -p $(pgrep gnome-shell$)
+strace: Process 2252 attached
+strace: [ Process PID=2252 runs in x32 mode. ]
+strace: [ Process PID=2252 runs in 64 bit mode. ]
+^Cstrace: Process 2252 detached
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 41.11    0.033921           2     22549     21055 recvmsg
+ 40.60    0.033497           6      6015           poll
+  9.28    0.007655           5      1535           writev
+  5.86    0.004835           3      1466           write
+  2.31    0.001906           2       771           read
+  0.30    0.000249           1       287           getpid
+  0.19    0.000155           0       550           mprotect
+  0.19    0.000155          26         6           shmdt
+  0.07    0.000061           0       131           futex
+  0.04    0.000037           2        17         8 openat
+  0.01    0.000010           0        66        33 recvfrom
+  0.01    0.000006           0        15           fstat
+  0.01    0.000005           1         6           getrusage
+  0.00    0.000004           1         8           close
+  0.00    0.000002           0        12           shmctl
+  0.00    0.000002           2         1           clone
+  0.00    0.000002           0         7           uname
+  0.00    0.000002           0         7           fcntl
+  0.00    0.000001           0         6           shmat
+  0.00    0.000001           1         1           fchmod
+  0.00    0.000001           1         1           fchown
+  0.00    0.000000           0       270       240 stat
+  0.00    0.000000           0         7           mmap
+  0.00    0.000000           0         6           shmget
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.082507                 33740     21336 total
+
+```
+
+This does not help with battery life.
+
 ##Summary
 
 Ubuntu 18.10 UI is usable with minor tweaks without having to install some other desktop variant. GNOME is still full of bugs and consumes more battery than LXDE, but the overall UI is tolerable. I can imagine using next LTS release UI as default desktop. Expect to see more things like `snap` and `ubuntu-report` being added there by default.
