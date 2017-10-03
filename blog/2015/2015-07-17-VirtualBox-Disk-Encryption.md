@@ -47,6 +47,12 @@ export VBOX_GUI_SELECTORWINDOW_RELEASE_LOG_DEST=nofile
 VirtualBox --startvm $1
 ```
 
+As one more tip, to mount a shared folder as another user run:
+
+```
+sudo mount -t vboxsf -o uid=user2 sharedFolderName /targetDir
+```
+
 ##Remember To Backup
 
 I run into a problem with `--compact` and encryption and reported a [bug](https://www.virtualbox.org/ticket/14496). First `vboxmanage --compact` cannot compact an encrypted volume. It will work without errors, but it will not compact. Compact work only with unencrypted disk images. The problem is if you ever compact a `.vdi` file, you cannot encrypt it. I [compacted](https://superuser.com/questions/529149/how-to-compact-virtualboxs-vdi-file-size) first my `.vdi` file, and then tried to encrypt it I got the following error:
