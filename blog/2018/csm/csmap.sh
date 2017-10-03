@@ -433,6 +433,7 @@ function showHelp()
     dumpError "Where openCreateOptions:"
     dumpError " -cso cryptsetup options --"
     dumpError " -csk cskey.sh options --"
+    dumpError " -c : clean screen, valid with open only"
     dumpError "Example:"
     dumpError " sudo csmap.sh openLive container.bin -csk -k -h -p 8 -m 14 -t 1000 --"
 }
