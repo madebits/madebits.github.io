@@ -33,7 +33,7 @@ fi
 echo $@
 ```
 
-There are two issues to overcome to make the above work.
+There are two issues to overcome to make this code work.
 
 ##First Problem
 
