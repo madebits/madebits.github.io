@@ -13,7 +13,7 @@
 ## Technology
 
 [Hacker News](https://news.ycombinator.com/)
-[Daily Rotation](https://www.dailyrotation.com/)
+[Daily Rotation](http://www.dailyrotation.com/)
 [Reddit Programming](https://www.reddit.com/r/programming/)
 [SlashDot](https://slashdot.org/)
 [How To Geek](https://www.howtogeek.com/)
