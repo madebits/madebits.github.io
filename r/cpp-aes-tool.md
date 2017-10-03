@@ -41,7 +41,7 @@ The password is specified as string on command-line, which is usually convenient
 
 1. If you like to type in the password in Bash shell use:
  ```
- read -s pass && ./aes -i file.txt -o file.bin -p "$pass"
+ read -p "Password: " -s pass && ./aes -i file.txt -o file.bin -p "$pass"
  read -s pass && ./aes -d -i file.bin -o file.txt -p "$pass"
  ```
 
