@@ -94,6 +94,7 @@ $ pstree -pu
 
 ```
 
+Snap creates temporary folders for run snaps, e.g for `gimp` under `/tmp/snap.gimp/tmp/`.
 
 ## Snap Configuration
 
