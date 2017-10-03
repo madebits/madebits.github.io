@@ -42,6 +42,7 @@
 [MVA](https://mva.microsoft.com/)
 [Ted](https://www.ted.com/)
 [CCC](https://media.ccc.de/)
+[OCW](https://ocw.mit.edu/index.htm)
 
 ### Linux
 
