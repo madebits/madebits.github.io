@@ -221,7 +221,7 @@ env | grep SNAP
 
 ## Snap Store
 
-Snap store (tracks)[https://snapcraft.io/docs/snap-store-metrics] snap installs and usage. The unique machine id is kept in `/var/lib/snapd/state.json` in `{"data": { "device": { "serial": "ID" } }}`. You may need to edit `/var/lib/snapd/state.json` manually in case of snap issues and restart `snapd`.
+Snap store (tracks)[https://snapcraft.io/docs/snap-store-metrics] snap installs and usage. The unique tracking machine id is kept in `/var/lib/snapd/state.json` in `{"data": { "device": { "serial": "ID" } }}`. You may need to edit `/var/lib/snapd/state.json` manually in case of snap issues and restart `snapd`.
 
 ## Summary
 
