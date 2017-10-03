@@ -7,12 +7,15 @@ up=$(uptime | cut -d ',' -f 1)
 mem=$(free -h | grep Mem: | tr -s ' ' | cut -d ' ' -f 3,2,4)
 
 sel=$(zenity --window-icon=question --height 900 --width 640 --list --title="🧑 ${USER} | 🕛 ${up} | Ⓜ️ ${mem} | ☀️ ${bl}% | 💻 Apps" --column "Apps"\
- ↗️... 🌐Browser 📂Files 📧Email 💥Sublime 📝Geany 🗳️DropBox 🌎Firefox\
+ ↗️... ☠️i3Kill 🌐Browser 📂Files 📧Email 💥Sublime 📝Geany 🗳️DropBox 🌎Firefox\
  📦VirtualBox 🔑VeraCrypt 🔐KeepassXC 🎦Vlc 🎶Audacious\
  🖼️Gimp 🏢Office 🧮Calculator 🗂️Ranger 💻Terminal\
- 💽Disks 🔄Updates 👨‍💻Synaptic 📚DiskSpace ⚡SysMon 🔋PowerStats 🛠️i3Config 🔊Volume-Up 🔉Volume-Down 📲Logout ♻️Reboot ⛔Shutdown   2>/dev/null)
+ 💽Disks 🔄Updates 👨‍💻Synaptic 📚DiskSpace ⚡SysMon 🔋PowerStats 🛠️i3Config 🎛️i3Toggle-Layout 🔊Volume-Up 🔉Volume-Down 📲Logout ♻️Reboot ⛔Shutdown   2>/dev/null)
 
 case "$sel" in
+    ☠️i3Kill)
+        i3-msg 'kill'
+        ;;
     🛠️i3Config)
         exec geany -i $HOME/.config/i3/config $HOME/.config/i3/favs.sh $HOME/.config/i3/start.sh $HOME/.config/i3status/config
         ;;
@@ -100,6 +103,9 @@ case "$sel" in
         ;;
     🔉Volume-Down)
         pactl set-sink-volume 0 -20%
+        ;;
+    🎛️i3Toggle-Layout)
+         i3-msg 'layout toggle tabbed stacking split' &
         ;;
     🔋PowerStats)
          exec gnome-power-statistics

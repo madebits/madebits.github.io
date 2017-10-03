@@ -48,8 +48,8 @@ battery all {
        status_unk = "❓ UNK"
        status_full = "😎 FULL"
        #path = "/sys/class/power_supply/BAT%d/uevent"
-       low_threshold = 10
-
+       low_threshold = 30
+       threshold_type = time
 }
 
 tztime local {

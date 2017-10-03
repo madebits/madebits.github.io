@@ -461,6 +461,11 @@ I learned something about [brightness](https://unix.stackexchange.com/questions/
     export TERMINAL=xterm
     # show current command in title https://unix.stackexchange.com/questions/104018/set-dynamic-window-title-based-on-command-input
     trap 'echo -ne "\033]0;$BASH_COMMAND\007"' DEBUG
+    if [ "$XDG_SESSION_DESKTOP" = "i3" ]; then
+        export PAGER="w3m"
+    else
+        export PAGER="most"
+    fi
     ```
 
 ##Summary
