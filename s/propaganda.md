@@ -36,7 +36,6 @@
 [ZDNet](https://www.zdnet.com/)
 [WeLiveSecurity](https://www.welivesecurity.com/)
 
-### Technology News in German
 
 [Heise](https://www.heise.de/newsticker/)
 [Golem.de](https://www.golem.de/)
@@ -44,7 +43,7 @@
 [ComputerWoche.de](https://www.computerwoche.de/)
 [DeskModder.de](https://www.deskmodder.de/blog/)
 
-### Technology Videos & Learning
+### Learning
 
 [Channel9](https://channel9.msdn.com/)
 [MVA](https://mva.microsoft.com/)
