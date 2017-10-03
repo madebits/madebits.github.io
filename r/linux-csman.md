@@ -140,7 +140,7 @@ It is not required to use `cskey.sh` directly most of the time, but knowing how 
 
 `cskey.sh` uses by default `/dev/urandom` to generate 480 bytes and `/dev/random` to generate 32 bytes of the total 512 secret bytes.
 
-Using `-su` option when generating secrets uses only `/dev/urandom` which [faster](https://security.stackexchange.com/questions/3936/is-a-rand-from-dev-urandom-secure-for-a-login-key) and [better](https://www.2uo.de/myths-about-urandom/). 
+Using `-su` option when generating secrets uses only `/dev/urandom` which [faster](https://security.stackexchange.com/questions/3936/is-a-rand-from-dev-urandom-secure-for-a-login-key) and [better](https://www.2uo.de/myths-about-urandom/).
 
 For all other operations where random data are needed `cskey.sh` uses `/dev/urandom`.
 
@@ -182,7 +182,7 @@ Sometimes, you may want to quickly generate a lot of secret files at once using 
 sudo cskey.sh enc secret.bin -b 3 -bs -su
 ```
 
-This generates 4 files (*secret.bin*, *secret.bin.01*, *...*, *secret.bin.03*). All these files are encrypted with same password. 
+This generates 4 files (*secret.bin*, *secret.bin.01*, *...*, *secret.bin.03*). All these files are encrypted with same password.
 
 Without `-bs` option, same secret will be stored on each file (due to used AES mode files will be still binary different).
 
@@ -254,13 +254,13 @@ The size will be ignored, but if specified needs to be 0G (or 0M).
 
 The `-oo` option tells `csman.sh` to only overwrite container data, but do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data, but you can run same command later without `-oo` to create the encrypted file system. If `-oo` is used, the secret file is ignored if specified.
 
-* `csman.sh` invokes `cskey.sh` to process *secret.bin* file (create it, ask for password), so you can use same password input and hash options as for `cskey.sh` using `-ck ... --`. For example:
+* `csman.sh` invokes `cskey.sh` to process *secret.bin* file (create it, ask for password), so you can use same password input and hash options as for `cskey.sh` using `-ck ... --` (or `@ ... @`). For example:
 
   ```bash
   sudo csman create /dev/sdc1 -s secret.bin -one -ck -ap @foo -i e -k --
   ```
 
-  In this example, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-one` option tells `csman.sh` to only use one (outer AES) encryption layer.
+  Here, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-one` option tells `csman.sh` to only use one (outer AES) encryption layer.
 
   As another example, we can embed the secret in slot 2 during creation (default is slot 1):
 
@@ -286,7 +286,7 @@ dd conv=notrunc if=secret.bin of=container.bin
 sudo csman.sh o container.bin container.bin -co -o 2 --
 ```
 
-The `-slots count` option is provided as convenience to create 1024 byte slots. 
+The `-slots count` option is provided as convenience to create 1024 byte slots.
 
 * If not set, it defaults to `-slots 4`. Using `-slots` overwrites `-co -o` (the number used with `-o` needs to be twice the number of slots). Use `-slots 0` if you need no slots, or if you do not want to overwrite `-co -o`. `-s0`  option is a shortcut for `-slots 0`. You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number. If slots is set bigger than `0`, then create command also embeds secret file in the first slot. If slots count is bigger than one and secret.bin.01, to secret.bin.03 files exists, they are also embedded in the other slots. Slots are not intended as a replacement for container file backups.
 
@@ -432,7 +432,7 @@ sudo csman.sh chp secret.bin -out new-secret.bin -ck -i e --
 ```
 
 * If `-out` is not specified *secret.bin* is modified in place.
-* The `-ck ... --` is used to pass option to `cskey.sh` to decrypt the file and `-cko .. --` is used (if needed) to pass options to `cskey.sh` to encrypt the new output file. 
+* The `-ck ... --` is used to pass option to `cskey.sh` to decrypt the file and `-cko .. --` is used (if needed) to pass options to `cskey.sh` to encrypt the new output file.
 * If `-cko` is not specified, then same `-ck` options are used also for encryption.
 
 If you have more than one secret file using same password, you can make use of sessions to change password of several files at once unattended. I assume here there are no key files used (if key files are used, pass them using `-kf keyfile`):
