@@ -98,7 +98,7 @@ Some of `aes` options you can use are:
 * -k to specify AES 128, 192, or 256 bit (256 bit is default).
 * -r read random data needed for encryption from `/dev/urandom` (default C `rand()` function is used if not found).
 * -c now many times we hash the password to obtain the encryption key (see also -a below) (default 500000).
-* -m to use PBKDF2 for -c (default is PBKDF1).
+* -m to use PBKDF1 for -c (default is PBKDF2).
 * -a use non-authenticated encryption, by default authenticated encryption is used 
 
 The -p, -k, -a, -c options must specified **same** during decrypt, otherwise cannot access your data.
