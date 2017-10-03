@@ -117,7 +117,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 When `csman.sh` is started without arguments, it prints prefix hashes of these files, if present:
 
 ```
-bd82b9188  /usr/local/bin/csman.sh
+20905a98b  /usr/local/bin/csman.sh
 f57ccd1e4  /usr/local/bin/cskey.sh
 50be633f6  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
@@ -396,7 +396,7 @@ sudo csman.sh l
 
 It will show also where containers are mounted under `%HOME/mnt/csm-name`. The folders under `%HOME/mnt/csm-*` are read / write to current logged user.
 
-The above command also shows how much total and free space is present in each container. Adding `-lk` option dumps raw `cryptsetup` keys used for container. These keys can be used to raw-open the containers directly via `cryptsetup`.
+The above command also shows how much total and free space is present in each container. Adding `-lk` option dumps raw `cryptsetup` keys used for container. These keys (after `xxd -r -p > key.bin`) can be used to raw-open the containers directly via `cryptsetup --key-file=key.bin ...`.
 
 To see a list of all devices in system use:
 
