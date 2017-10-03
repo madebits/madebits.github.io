@@ -119,6 +119,8 @@ To specify password via some script above use (e.g.: via `sudo sh -c "..."`):
 echo -n password | cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain /data2/temp/container.bin enc -
 ```
 
+Given `--type plain` hashes password only once, the above is useful if you combine it with some command that hashes password more than once.
+
 To close the open container use:
 
 ```
