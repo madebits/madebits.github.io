@@ -115,11 +115,12 @@
 
 ### UK
 
-[BBC](https://www.bbc.co.uk/news/world/) 
+[BBC](https://www.bbc.co.uk/news/world/)
+[TheGuardian](https://www.theguardian.com/international)
+[Reuters](https://www.reuters.com/)
 [The Telegraph](https://www.telegraph.co.uk/news/world/)
 [Daily Mail](https://www.dailymail.co.uk/news/worldnews/index.html)
 [Express](https://www.express.co.uk/news/world)
-[Reuters](https://www.reuters.com/)
 
 ### Europe
 
