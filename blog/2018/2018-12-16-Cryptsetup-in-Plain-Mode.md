@@ -485,7 +485,7 @@ sudo ./cs-map closeAll
 We may also use the script create a new container file (size can be either in M or G):
 
 ```bash
-sudo ./cs-map.sh create secret.bin container.bin 30M
+sudo $HOME/bin/cs-map.sh create secret.bin container.bin 30M
 ```
 
 These scripts use the following helper tools:
