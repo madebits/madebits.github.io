@@ -93,12 +93,12 @@ d3.select("#draw").append("svg")
 
 ##Encryption
 
-Markup documents can be encrypted with a password and hosted and loaded encrypted (decrypted in client browser) using `.dx` extension. [crypto.js](https://code.google.com/p/crypto-js/) with AES256 CBC is used. To generate encryption passwords use something like: `head -c 45 /dev/urandom | base64`. 
+Markup documents can be encrypted with a password and hosted and loaded encrypted (decrypted in client browser) using `.dx` extension. [crypto.js](https://code.google.com/p/crypto-js/) with AES256 CBC is used. To generate encryption passwords use something like: `head -c 45 /dev/urandom | base64`.
 Write you markdown text as normal, then select *Encrypt* button and provide the password. Save encrypted text as a `.dx` file.  To edit an encrypted document load in the [Markdown Editor](#s/markdown-editor.html) and use the *Decrypt* button to specify the password. Embedded images with `data:` URLs are supported, but you are limited by the amount of memory you browser can handle.
 
 ##External Markdown Preview
 
-MadeBits web site is a markdown previewer. You can preview markup documents from other allowed sites using something like `madebits.com/#http://somesite/path/doc.md` (use `.dx` documents for encrypted markdown). If the remote document URL does not end in `.dx` or `.md`, you can add `:md:` or `:dx:` before the remote URL. Due to *Content Security Policy* applied to MadeBits web pages, you can only use CORS content from publicly shared `dl.dropboxusercontent.com` and `crossorigin.me`.
+MadeBits web site is a markdown previewer. You can preview markup documents from other allowed sites using something like `URL/#http://somesite/path/doc.md` (use `.dx` documents for encrypted markdown). If the remote document URL does not end in `.dx` or `.md`, you can add `:md:` or `:dx:` before the remote URL. Due to *Content Security Policy* applied to MadeBits web pages, you can only use CORS content from publicly shared `dl.dropboxusercontent.com` and `crossorigin.me`.
 
 ---
 
