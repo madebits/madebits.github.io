@@ -227,10 +227,10 @@ If you specify `argon2` options during encrypt command (enc), you have to rememb
 To create an encrypted container you need to specify the container file name (can be any) or device, the size and **secret** file (see [Creating Secret Files](#r/linux-csman.md#creating-secret-files)). Create command is `create`, or `new`, or `n`. Secret file will be created if it does not exist and by default it is also embedded into first container slot:
 
 ```bash
-sudo csman.sh n container.bin 1M -s secret.bin -cf -T small -m 0 --
+sudo csman.sh n container.bin -S 1M -s secret.bin -cf -T small -m 0 --
 ```
 
-* The size to use can be only in units of M or G (for MiB, GiB, as powers of 1024).
+* The size (`-size` or `-S`) to use can be only in units of M or G (for MiB, GiB, as powers of 1024).
 
 * Secret file is optional. If not specified, slot 1 of container is used to store secret file. If `-slots 0` then secret file is required. If specified and `-slots` > 0 then secret is written in secret file and secret file content is embedded also in slot 1 of container.
   * If secret file exists, you will be asked to reuse it or overwrite it (create it new). If secret file is `--` then per convention no secret file is used and encryption key is directly generated after hashing from password. This is ok for quick things up and now, but it is not possible to change the container password. With secret files, password change or using more than one password are possible.
@@ -244,10 +244,10 @@ The container file will be created, overwritten with random data, and formatted 
 Encrypting a device (disk partition) is similar:
 
 ```
-sudo cskey /dev/sdc1 0G -oo
+sudo cskey /dev/sdc1 -oo
 ```
 
-The size will be ignored, but has to be specified as 0G (or 0M). If non-zero `csman.sh` will assume a mistake (you wanted to create a file, but passed a device path) and fail.
+The size will be ignored, but if specified needs to be 0G (or 0M).
 
 The `-oo` option tells `csman.sh` to only overwrite container data, but do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data, but you can run same command later without `-oo` to create the encrypted file system. If `-oo` is used, the secret file is ignored if specified.
 
@@ -262,7 +262,7 @@ The `-oo` option tells `csman.sh` to only overwrite container data, but do nothi
   As another example, we can embed the secret in slot 2 during creation (default is slot 1):
 
   ```bash
-  sudo csman.sh create container.bin 1M -ck -i e -slot 2 --
+  sudo csman.sh create container.bin -S 1M -ck -i e -slot 2 --
   ```
 
 Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you can pass other `cryptsetup` options, such an offset (offset is specified in 512 byte units, e.g: `-o 2` for 1024 bytes) via `-co ... --` (outer layer) and `-ci ... --` (inner layer).
@@ -272,7 +272,7 @@ Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you
 The `cryptsetup` options can be used if needed to embed secret file into the container. Assuming secret file is less than 1024 bytes long, the following commands create a container with offset and store secret there (more convenient commands follow, this is only an explanation):
 
 ```bash
-sudo csman.sh n container.bin 1M -s secret.bin -cf -N 1000 -- -co -o 2 --
+sudo csman.sh n container.bin -S 1M -s secret.bin -cf -N 1000 -- -co -o 2 --
 # to set or replace secret
 dd conv=notrunc if=secret.bin of=container.bin
 
@@ -289,17 +289,17 @@ The `-slots count` option is provided as convenience to create 1024 byte slots.
 
 ```bash
 # these are same, but only second one embeds secret during create
-sudo csman.sh n container.bin 1M -s secret.bin -co -o 8 --
-sudo csman.sh n container.bin 1M -s secret.bin -slots 4
+sudo csman.sh n container.bin -S 1M -s secret.bin -co -o 8 --
+sudo csman.sh n container.bin -S 1M -s secret.bin -slots 4
 
 # these are also same, open
 sudo csman.sh o container.bin -s secret.bin -co -o 8 --
 sudo csman.sh o container.bin -s secret.bin -slots 4
 
 # to create a secret and embed both in first two slots on create use
-sudo csman.sh n container.bin 1M -s secret.bin -ck -b 1 -su --
+sudo csman.sh n container.bin -S 1M -s secret.bin -ck -b 1 -su --
 # or backup key in all default 4 slots (creates or uses secret.bin, secret.bin.01, .., secret.bin.03)
-sudo csman.sh n container.bin 1M -s secret.bin -ck -b 3 -su --
+sudo csman.sh n container.bin -S 1M -s secret.bin -ck -b 3 -su --
 ```
 
 To extract secret file back from the container use:
