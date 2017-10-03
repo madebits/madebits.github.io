@@ -13,7 +13,7 @@
 Create a new container file (`-i e` or `-i echo` makes password entry visible):
 
 ```bash
-# size can be in M (mega) or G (giga) bytes, your sudo password will be asked
+# size can be in M (mega) or G (giga) bytes
 csman.sh new container.bin -size 1M -ck -i e --
 ```
 
