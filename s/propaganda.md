@@ -111,6 +111,7 @@
 ### Canada & Australia
 
 [GlobalNews](https://globalnews.ca/world/)
+[NationalPost](https://nationalpost.com/category/news/world)
 [9News](https://www.9news.com.au/world)
 
 ### UK
