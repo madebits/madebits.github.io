@@ -71,7 +71,7 @@ Common movement commands (in *command-mode*):
 * `Ctrl+g` shows current line position in file. `:set ruler` will show bottom status if not already visible.
 * `j` - down, `k` - up, `h` left, `l` -right (arrow keys also work) (can be combined also with numbers, e.g: `4j`).
     * appending `g` in front of `jkhl` will allow moving around display lines (`g` can be used same with `0^$`).
-* `0` - beginning of line, `^` first not blank char on line, `$` - end of line, `g_` last non-blank char on line.
+* `0` - move to beginning of line, `^` first not blank char on line, `$` - end of line, `g_` last non-blank char on line.
 * `fc` - *find* next char *c* and move cursor to it, `tc` find next char c and move cursor *to* it. `Fx`, `Tx` work same but jump to previous occurrence of *c*. All these commands work on current line only.
   * `;` repeats last `ftFT` forward, `,` repeats last `ftFT` backward
 * `/text` - find *text*. `n` moves to next occurrence, `N` to previous one. Use `set hls` to highlight matches and `:noh` to temporary disable search highlight. `?text` is same, but searches backward.
@@ -82,7 +82,7 @@ Common movement commands (in *command-mode*):
 * `zz` (not `ZZ`) will center cursor line on screen. `Ctrl+y` scroll one line down, `Ctrl+e` scroll one line up, while keeping cursor in current line.
 * `:number` or `numberG`- go to line number, `:+number` - go number lines down, `:-number` go number lines up.
   * It may help to run `:set number` (or `:set nu`) before to show line numbers. For extra Zen use `:set rnu` (or `:set relativenumber`) for relative numbers. Using both also works. Using `no` before removes them (e.g. `:set nonumber`).
-* `gg` - got top of file, `GG` go end of file.
+* `gg` - go to top of file, `G` go end of file.
 * `w` move one word forward, `b` move one word backward, `e` move to end of word; `W`, `B`, `E` work same but consider punctuation as part of words.
 * `%` move to matching char (`()`, `{}`, `[]`).
 * Usually combined with other commands: `)` or `s` move one sentence; `}` or `p` move one paragraph, `t` move one tag; `b` more one code block; all these can get confused in some source code files (in default configuration).
@@ -95,9 +95,10 @@ Common edit commands (in *command-mode*):
 * `o` insert in new line after current, `O` insert in new line before current.
 
 
-* `r` replace char under cursor; `R` or `s` are similar (`R` replaces more than one char at a time) as `r` and enter insert mode afterwards.
+* `r` replace char under cursor; `s` is similar to `r` but remains in insert mode afterwards.
+    * `R` replaces more than one char at a time. `S` replaces whole line and remains in insert mode. 
 * `c` change *motion* (using any motion command from above: `c5w`).
-* `C` change current line.
+    * `C` change current line.
 * `~` toggle case under cursor. `gu` lowercase `gU` uppercase.
 * `J` join current line with next one.
 * `Ctrl+a` increment, `Ctrl+x` decrement.
@@ -110,11 +111,11 @@ Common edit commands (in *command-mode*):
 
 * `x` delete char under cursor; `X` delete char before cursor.
 * `d` delete (cut) *motion* (using any motion command from above: `d5w`).
-* `dd` delete (cut) current line.
+* `dd` delete (cut) current line (`ddp` swap two lines).
 * `D` delete (cut) to end of line.
 
 
-* `u` undo; `Ctrl+r` redo, `U` undo line changes.
+* `u` undo; `Ctrl+r` redo, `U` undo whole line changes.
 * `.` repeat last action sequence (`number.` repeat last command sequence *number* times).
 * `:edit!` undo all unsaved changes in buffer.
 
@@ -130,9 +131,9 @@ While in *insert-mode*:
 * `Ctrl+j` same as *Enter* key.
 * `Ctrl+t` indent line, `Ctrl+d` un-indent line.
 * `Ctrl+n` and `Ctrl+p` enable auto-completion from words found in open buffers.
+* `Ctrl+x s` spell check (use `:set spell` before)
 
 Vim has also a **visual-mode** entered by any of: `v` char selection, `V` line selection, `Ctrl+v` block selection. Arrow keys expand selection (on which side can be toggled with `o`) and `gv` re-selects. In visual-mode, you select first the text and then run any command on it. Pressing `:` allows running ex commands in selection, such as, `normal i#` to comment lines (for `V`).
-
 
 ## Casual Zen
 
