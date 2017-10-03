@@ -94,7 +94,7 @@ cryptsetup create /dev/loop0
 ```
 Repeat Mount and Disconnect commands.
 
-**Update (2018-12-16)**
+##Update (2018-12-16)
 
 To create or open a plain (non-LUKS) container use (all shown commands need `sudo`):
 
