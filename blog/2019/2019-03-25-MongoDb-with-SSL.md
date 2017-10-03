@@ -238,8 +238,8 @@ var factory = new ConnectionFactory()
     NetworkRecoveryInterval = TimeSpan.FromSeconds(5),
     AutomaticRecoveryEnabled = true,
 };
-var query = url.ParseQueryString();
-if ((query.ContainsKey("ssl") && (query["ssl"] == "true")) {
+
+if (url.Scheme.ToLowerInvariant().Equals("amqps")) {
     var caFile = (string)Config.Get("db.caFile");
     if (string.IsNullOrWhiteSpace(caFile) || !File.Exists(caFile))
     {
@@ -278,38 +278,17 @@ if ((query.ContainsKey("ssl") && (query["ssl"] == "true")) {
 Connection = factory.CreateConnection();
 ```
 
-I have extended RabbitMQ URL format to contain `ssl=true`, to mimic the MongoDB one, and I am using this [helper class](https://stackoverflow.com/questions/2884551/get-individual-query-parameters-from-uri) to parse URL parameters:
-
-```
-public static class UriExtensions
-{
-    private static readonly Regex _regex = new Regex(@"[?&](\w[\w.]*)=([^?&]+)", RegexOptions.Compiled);
-
-    public static IReadOnlyDictionary<string, string> ParseQueryString(this Uri uri)
-    {
-        var match = _regex.Match(uri.PathAndQuery);
-        var parameters = new Dictionary<string, string>();
-        while (match.Success)
-        {
-            parameters.Add(match.Groups[1].Value, match.Groups[2].Value);
-            match = match.NextMatch();
-        }
-        return parameters;
-    }
-}
-```
-
 In Node.js, the official `amqplib` driver provides an example:
 
 ```
 const url = require('url')
 const amqp = require('amqplib')
 
-const rmqUrl = 'amqp://user:passsword@server:5774/myVhost?heartbeat=240&connection_timeout=5&ssl=true';
+const rmqUrl = 'amqps://user:passsword@server:5774/myVhost?heartbeat=240&connection_timeout=5';
 
 const rmq = new url.URL(rmqUrl)
 let opts = {}
-if(rmq.searchParams.get('ssl') === 'true') {
+if(rmq.protocol === 'amqps:') {
     opts = { ca: [fs.readFileSync('/mongoCA.crt')] }
 }
 let conn = await amqp.connect(rmqUrl, opts)
