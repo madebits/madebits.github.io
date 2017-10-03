@@ -33,10 +33,6 @@ The fastest way to produce text in Vim is to write it in some other editor and s
 
 Move the cursor (in *command-mode*) using `j` - down, `k` - up, `h` - left, `l` - right. *Arrow* keys work most of the time out the box too.
 
-To get help from within Vim use any of `:help`, `:h`, or *F1* key. Help opens in a separate *read-only* text buffer and you can close it using `:q` or `:close`. If you scroll down in help page (or press `/quick`) , you will find a link to *quickref*. Move cursor over and press `Ctrl+]` to open it. You can open it also directly using `: h quickref`. Quick reference contains most commands you will ever use (`:h text` will search help for *text*).
-
-To open shell without having to exit Vim use `:shell` or `:sh`. Run `exit` to return back from shell. Using `:!sh` or `:!cmd` can be also used to run the shell (or run a command, use `!cmd %` for to replace `%` with current file name if you need it). To put output of command as text in current buffer use `:r !cmd`.
-
 * If you pressed *Ctrl+z* by mistake while in Vim, use `fg` in shell to get back to Vim. 
 * If pressing [Ctrl+s](https://en.wikipedia.org/wiki/Software_flow_control) by mistake in terminal within Vim, press *Ctrl+q* to resume flow.
 
@@ -50,11 +46,17 @@ There are several ways to save the text:
 * `w !sudo tee % > /dev/null` yes, no one remembers this one, but it will force write some file open without `sudo` as `sudo` (basically this means write buffer and pipe it via *sudo* using *tee* to filename).
 * As noted before, `:q!` will not save your text and exit (you still have the nice memory of writing it) and `:qa!` will exit even if you have more than buffer.
 
+##Vim Help
+
+To get help from within Vim use any of `:help`, `:h`, or *F1* key. Help opens in a separate *read-only* text buffer and you can close it using `:q` or `:close`. Use `Ctrl+w Ctrl+w` to jump between window buffers.
+
+If you scroll down in help page (or press `/quick`) , you will find a link to *quickref*. Move cursor over and press `Ctrl+]` to open it. You can open it also directly using `: h quickref`. Quick reference contains most commands you will ever use (`:h text` will search help for *text*).
+
 ## Main Modes
 
 In Vim there are two main modes:
 
-* **command-mode** (normal-mode) is reachable by pressing *Esc* key or if that is broken *Ctrl+[*. *Ctrl+c* works too and it is the best to use in non-ANSI keyboards.
+* **command-mode** (aka: **normal-mode**) is reachable by pressing *Esc* key or if that is broken *Ctrl+[*. *Ctrl+c* works too and it is the best to use in non-ANSI keyboards.
     * In most terminals, *Alt+normal mode command key* will work form within *insert-mode*. 
     * *Ctrl+o normal mode command* works too from within *insert-mode*.
 * **insert-mode** is reachable from command-mode by initiating some text edit command.
@@ -173,6 +175,12 @@ Integrated spell checker can be activated via `:set spell`:
 * `[s` next, `s]` previous suggestion.
 * `zg` add / `zw` remove word from dictionary.
 * `Ctrl+x s` spell from within *insert mode*.
+
+Running external commands:
+
+* To open shell without having to exit Vim use `:shell` or `:sh`. Run `exit` to return back from shell. 
+* Using `:!sh` or `:!cmd` can be also used to run the shell (or run a command, use `!cmd %` for to replace `%` with current file name if you need it). 
+* To put output of command as text in current buffer use `:r !cmd`.
 
 Using external commands to filter buffer text:
 
