@@ -259,7 +259,7 @@ The device-serial ID and list of installed snaps and their usage data are sent t
 0.0.0.0 api.snapcraft.io
 ```
 
-Given Ubuntu wants to distribute parts of desktop via snap for them disable of refresh means they cannot deliver software updates. However, to get updates, you agree for them to connect data on you in a more invasive way than via `apt` and system updates.
+Given Ubuntu distributes parts of desktop via snap, disable of refresh means some desktop software software updates cannot be delivered.
 
 ## Summary
 
