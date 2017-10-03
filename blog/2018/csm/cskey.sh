@@ -159,7 +159,7 @@ function main()
             decodeKey "$file" "$pass"
         ;;
         chp)
-            pass=$(readPass)
+            pass1=$(readPass)
             (>&2 echo)
             key=$(decodeKey "$file" "$pass1" | base64 -w 0)
             readNewPass
