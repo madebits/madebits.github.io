@@ -66,6 +66,8 @@ Let us create a bash helper script:
 ```bash
 #!/bin/bash
 
+# cs-key.sh
+
 set -e
 
 # none of values in this file is secret
@@ -184,6 +186,8 @@ With `cs-key.sh` ready, we can now automate open / close with a second script fo
 
 ```bash
 #!/bin/bash
+
+# cs-map.sh
 
 set -e
 
