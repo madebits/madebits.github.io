@@ -976,7 +976,7 @@ Usage:
     if set, time has to be in format: "$(date +"%F %T.%N %z")"
  $bn synctime|st
  $bn chp inFile [outFile] [ openCreateOptions ] : only -ck -cko are used
- $bn -k ... : invoke $kn ...
+ $bn k ... : invoke $kn ...
 Where [ openCreateOptions ]:
  -co cryptsetup options --- : outer encryption layer
  -ci cryptsetup options --- : inner encryption layer
@@ -1185,7 +1185,7 @@ function main()
         chp)
             changePassword "$@"
         ;;
-        -k)
+        k)
             "${csmkeyTool}" "$@"
         ;;
         *)
