@@ -10,7 +10,7 @@
 
 ## Introduction
 
-CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The follow are some of the hard-coded settings of the script:
+CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The follow are some of the hard-coded choices of the script:
 
 * Uses `cryptsetup` in *plain* mode with 512 byte passwords (`-s 512 -h sha512`).
 * Supports only [EXT4](https://en.wikipedia.org/wiki/Ext4) volumes.
@@ -45,7 +45,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 * `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool. If this tool is found next to `cskey.sh` it is used. Alternately you can install `ccrypt` from Ubuntu repositories. 
 * `argon2` - this is a self-compiled copy of `argon2` from [official](https://github.com/P-H-C/phc-winner-argon2) repository ([my copy](https://github.com/madebits/phc-winner-argon2)). `argon2` can be found also in Ubuntu repositories. If found next to `cskey.sh`, this copy is used in place of the system copy.
 
-Every time `csman.sh` starts, it prints prefix hashes of these files if present:
+Every time `csman.sh` starts, it prints prefix hashes of these files, if present:
 
 ```
 615b333fd  /usr/local/bin/csman.sh
@@ -75,7 +75,7 @@ The command-line arguments are a bit *peculiar* (because I thought that it is fa
 
 Secret files are made of 32 random bytes of `argon2` salt, 512 random bytes of `cryptsetup` password encrypted, and are padded with random data to have random file lengths.
  
-It is not required to use `cskey.sh` directly most of the time, but knowing how to use it as shown in this section will make the later `csman.sh` commands clear.
+It is not required to use `cskey.sh` directly most of the time, but knowing how to use it as shown in this section will make the later `csman.sh` commands clearer.
 
 #### Using URandom
 
@@ -87,7 +87,7 @@ For all other operations where random data are needed `cskey.sh` uses `/dev/uran
 
 #### Creating Secret Files
 
-To create a new *secret file*:
+To create a new *secret file* use:
 
 ```bash
 sudo cskey.sh enc secret.bin -su
@@ -125,7 +125,7 @@ Without `-bs` option, same secret will be stored on each file (due to AES mode f
 
 With `-bs` option, a new different secret is generated for each file. `-su` makes secret generation faster by using `/dev/urandom`.
 
-`sudo cskey.sh rnd file -rb 5` command is similar, but it generates just random fixed size files that may look like secret files.
+`sudo cskey.sh rnd file -rb 5` command is similar, but it generates just random fixed size files that look like secret files.
 
 #### Password Options
 
