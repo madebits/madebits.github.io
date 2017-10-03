@@ -922,7 +922,7 @@ function showHelp()
 
 function processOptions()
 {
-    while [ -n "${1:-}" ]; do
+    while (( $# > 0 )); do
         local current="${1:-}"
         case "$current" in
             -co)
