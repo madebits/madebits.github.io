@@ -176,7 +176,7 @@ Examples of snap [interfaces](https://snapcraft.io/docs/supported-interfaces):
 * [:password-manager-service](https://snapcraft.io/docs/password-manager-service-interface) access to system password services.
 * [:x11](https://snapcraft.io/docs/x11-interface) monitor mouse/keyboard input and graphics output of other apps, a feature shared by all x11 applications.
 
-One can connect or disconnect defined *plugs* in a snap, but cannot add more, which is kind of [sad](https://askubuntu.com/questions/1178913/adding-a-plug-or-interface-to-existing-snap):
+One can connect or disconnect defined *plugs* in a snap, but cannot add more, which is kind of [sad](https://askubuntu.com/questions/1178913/adding-a-plug-or-interface-to-existing-snap), as original snap authors can never foresee all use cases:
 
 ```bash
 $ snap connect gimp:personal-files :personal-files
