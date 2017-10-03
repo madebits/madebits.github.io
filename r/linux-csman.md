@@ -13,7 +13,7 @@ CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or
 * Uses `cryptsetup` in *plain* mode with 512 bit keys.
 * Supports only *EXT4* volumes.
 * Uses two nested *dm-crypt* mappers: *aes-xts-plain64* and *twofish-cbc-essiv:sha256*.
-* Mounts for current user under `$HOME/mnt/cms-*`.
+* Mounts for current user under: `$HOME/mnt/csm-*`.
 
 ## Installation
 
@@ -28,9 +28,10 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 
 `csman.sh` and `cskey.sh` should be run always with `sudo`. 
 
-`csman.sh` is the main command to use. `csman.sh` delegates password and key operations to `cskey.sh`. You may need to use `cskey.sh` directly for advanced key manipulation. Running both commands without options lists their command-line arguments, e.g.: `sudo csman.sh` or `sudo cskey.sh`.
+`csman.sh` is the main command to use. `csman.sh` delegates password and key operations to `cskey.sh` (which uses `aes` and `argon2`). You may need to use `cskey.sh` directly for advanced key manipulation. Running both commands without options lists their command-line arguments, e.g.: `sudo csman.sh` or `sudo cskey.sh`.
 
-The command-line argument of these tools are a bit *peculiar* because I thought that it is faster to specify options after the main arguments. The command-line arguments follow therefore this general scheme: *command file(s) options*.
+The command-line arguments of these tools are a bit *peculiar* because I thought that it is faster to specify options after the main arguments. The command-line arguments follow therefore this general scheme: *command file(s) options*.
+
 
 
 
