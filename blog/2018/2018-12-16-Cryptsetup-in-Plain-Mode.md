@@ -65,7 +65,7 @@ If container open, but unmounted, to check its file system use:
 sudo e2fsck -f /dev/mapper/enc
 ```
 
-To shrink, after resize use `truncate` tool on container file.
+To shrink a container file `cryptsetup open` it, but do not mount it. Then after `resize2fs /dev/mapper/enc 20G`, use `truncate -s 20G` tool on container file.
 
 ##Better Plain Mode Passwords
 
