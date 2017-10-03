@@ -130,7 +130,7 @@ function pass2hash()
 		acmd="${toolsDir}/${acmd}"
 	fi
 
-	# argon2 has a build-in limit of 126 chars on pass length
+	# argon2 tool has a build-in limit of 126 chars on pass length
 	local state=$(set +o)
 	set +x
 	pass=$(echo -n "$pass" | sha512sum | cut -d ' ' -f 1 | tr -d '\n' | while read -n 2 code; do printf "\x$code"; done | base64 -w 0)
@@ -378,9 +378,9 @@ function readSessionPass()
 		local rsp=""
 		if [ "$cskSessionAutoPass" = "0" ]; then
 			if [ "$cskInputMode" = "1" ] || [ "$cskInputMode" = "e" ]; then
-				read -p "Session password (or Enter for none): " rsp
+				read -p "Session password (or Enter for default): " rsp
 			else
-				read -p "Session password (or Enter for none): " -s rsp
+				read -p "Session password (or Enter for default): " -s rsp
 			fi
 		fi
 		logError
@@ -475,10 +475,10 @@ function showHelp()
 	logError " -b count : (enc) generate file.count backup copies"
 	logError " -bs : (enc) generate a new secret for each -b file"
 	logError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
-	logError " -s file : (enc) read secret data as base64 -w 0 from file"
+	logError " -s file : (enc) read secret data as 'base64 -w 0' from file"
 	logError " -as file : (enc) read secret data from a session encrypted file (see -ao)"
-	logError " -ao outFile : (dec) write secret data in a session encrypted file"
-	logError " -aa : auto session encryption password"
+	logError " -ao outFile : (dec) write secret data to a session encrypted file"
+	logError " -aa : do not ask for session encryption password (use default)"
 	logError " -d : dump password and secret on stderr for debug"
 	logError "Examples:"
 	logError ' sudo bash -c '"'"'secret=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -s <(echo -n "$secret") -d'"'"''
