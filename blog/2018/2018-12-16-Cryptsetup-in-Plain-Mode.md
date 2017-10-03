@@ -478,7 +478,8 @@ sudo ./cs-map open secret.bin container.bin
 # mounted at $HOME/mnt/cms_XXXX_user
 # and when done, to close it use
 
-sudo ./cs-map close XXX
+sudo ./cs-map close XXXX
+sudo ./cs-map closeAll
 ```
 
 We may also use the script create a new container file (size can be either in M or G):
