@@ -846,7 +846,7 @@ function createContainer()
     closeContainerByName "$name"
     
     echo "Done! To open container use:"
-    echo "$0 open ${container} ${secret}"
+    echo "$(basename -- "$0") open ${container} ${secret}"
 }
 
 
