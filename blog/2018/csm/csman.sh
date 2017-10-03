@@ -537,7 +537,7 @@ function createContainer()
     checkArg "$container" "container"
     if [ -f "$container" ]; then
         echo "Container file exists: ${container}"
-        read -p "Overwrite? [y (overwrite) | e (erase) | any key to exit]: " overwriteContainer
+        read -p "Overwrite? [y (overwrite) | e (erase) | Enter to exit]: " overwriteContainer
         if [ "$overwriteContainer" = "y" ]; then
             writeContainer="1"
         elif [ "$overwriteContainer" = "e" ]; then
@@ -577,7 +577,7 @@ function createContainer()
     if [ -f "$secret" ]; then
         lastSecret="$secret"
         lastSecretTime=$(stat -c %z "$secret")
-        read -p "Overwrite secret file $secret [y | any key to reuse]: " overwriteSecret
+        read -p "Overwrite secret file $secret [y | Enter to reuse]: " overwriteSecret
         case "$overwriteSecret" in
             y)
             createSecret "$secret"
