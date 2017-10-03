@@ -120,11 +120,15 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 * `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool - it is used by default to encrypt secret files. Other tools can be used via `-c` option.
 * `argon2` - this is a self-compiled copy of `argon2` from [official](https://github.com/P-H-C/phc-winner-argon2) repository without any changes ([my copy](https://github.com/madebits/phc-winner-argon2)). `argon2` can be found also in Ubuntu repositories. If found next to `cskey.sh`, this copy is used in place of the system copy.
 
+```
+sudo install aes argon2 cskey.sh csman.sh /usr/local/bin/
+```
+
 When `csman.sh` is started without arguments, it prints prefix hashes of these files, if present:
 
 ```
-8d0fa9666  /usr/local/bin/csman.sh
-86ef4bd02  /usr/local/bin/cskey.sh
+9dbccb965  /usr/local/bin/csman.sh
+8a9a9c8e4  /usr/local/bin/cskey.sh
 50be633f6  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
 ```
