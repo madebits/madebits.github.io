@@ -8,10 +8,10 @@ AES tool is a free command-line tool that encrypts / decrypts one file at a time
 
 * Written in portable C code. Self contained, uses only standard C library.
 * Source code available (GPL). Easy to compile on your own.
-* Binaries for Windows and Linux.
+* Works on Windows and Linux.
 * AES 128, 192, 256 bit in CBC mode.
 
-Key generation based on PBKDF2 (or PBKDF1 (PKCS #5 v1.5)) with SHA256. AES (FIPS 197), SHA256 (FIPS 180-2) implementations are from http://xyssl.org/.
+Key generation is based on PBKDF2 (or PBKDF1 (PKCS #5 v1.5)) with SHA256. AES (FIPS 197), SHA256 (FIPS 180-2) implementations are from http://xyssl.org/.
 
 ##Usage
 
@@ -112,4 +112,3 @@ echo "abc" | ./aes -p p1 -k 256 | ./aes -p p2 -k 128 | ./aes -d -p p2 -k 128 | .
 We first encrypt twice with password `p1` and then `p2` with different AES key sizes (-k); and then we decrypt (`-d`) the pipe result twice with same data in reverse. The output is `abc`. Encrypting more that once is safer (but slower).
 
 Use `aes -?` for more help.
-
