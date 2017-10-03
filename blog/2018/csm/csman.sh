@@ -267,7 +267,9 @@ function mountContainer()
         failed
     fi
     set -e
-    chown $(id -un "$user"):$(id -gn "$user") "$mntDir1"
+    set +e
+    chown $(id -un "$user"):$(id -gn "$user") "$mntDir1" 2> /dev/null
+    set -e
     #mkdir -p "$mntDir2"
     #bindfs ${ro} --multithreaded -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
     #echo "Mounted ${dev} at ${mntDir2}"
@@ -374,7 +376,9 @@ function listContainer()
     local cipher=""
     echo -e "File:\t$container\t$mode"
     local dev="$(getDevice "$name" "0")"
+    local lastDev=""
     if [ -e "$dev" ]; then
+        lastDev="$dev"
         time=$(stat -c %z "$dev")
         echo -e "Open:\t${time}"
         cipher="$(cryptsetup status "$name" | grep cipher: | cut -d ' ' -f 5)"
@@ -389,6 +393,7 @@ function listContainer()
     fi
     dev="$(getDevice "$name" "1")"
     if [ -e "$dev" ]; then
+        lastDev="$dev"
         cipher="$(cryptsetup status "$dev" | grep cipher: | cut -d ' ' -f 5)"
         set +e
         local label="$(e2label "$dev" 2> /dev/null)"
@@ -415,6 +420,16 @@ function listContainer()
             m="mounted"
         fi
         echo -e "Dir:\t$mntDir2\t$m\t$(stat -c "%U %G" "$mntDir2")"
+    fi
+    if [ -n "$lastDev" ]; then
+        set +e
+        local df1=$(df --output=itotal,iused,iavail,ipcent "$lastDev" 2> /dev/null)
+        local df2=$(df --output=size,used,avail,pcent -h "$lastDev" 2> /dev/null)
+        set -e
+        if [ -n "$df1" ] || [ -n "$df2" ]; then
+            echo -e "Usage:\t$lastDev :"
+            echo -e "$df1\n$df2" | column -t
+        fi
     fi
 }
 
