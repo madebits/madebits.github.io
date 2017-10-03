@@ -128,7 +128,8 @@ Some `nautilus` shortcuts:
 *  Ctrl+T new tab
 *  Ctrl+Q or Ctrl+W close (tab)
 *  Ctrl+R of F5 refresh
-*  Ctrl+F find, Ctrl+S select, Ctrl+A select all 
+*  Ctrl+F find, Ctrl+S select, Ctrl+A select all
+*  `touch ~/Templates/New.txt` templates
 
 ###Hacks
 
