@@ -419,7 +419,8 @@ function createSessionPass()
 	readSessionPass
 	debugData "${cskSessionPass}" "${pass}"
 
-	echo -n "$pass" | encryptAes "$cskSessionPass" > "$file"
+	# add a token to pass
+	echo -n "${pass}CSKEY" | encryptAes "$cskSessionPass" > "$file"
 	ownFile "$file"
 }
 
@@ -434,9 +435,10 @@ function loadSessionPass()
 	set +e
 	local pass=$(readSessionPassFromFile "$file")
 	set -e
-	if [ -z "${pass}" ]; then
+	if [ -z "${pass}" ] || [ "${pass: -5}" != "CSKEY" ]; then
 		onFailed "cannot read file: ${file}"
 	fi
+	pass="${pass:0:${#pass}-5}" #remove token
 	debugData "${pass}"
 	cskSessionPassFile="${pass}"
 }
