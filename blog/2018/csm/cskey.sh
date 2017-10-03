@@ -237,9 +237,12 @@ function readPassFromFile()
 function readSessionPass()
 {
 	if [ -z "$cskSessionKey" ]; then
-		local sessionData=$(uptime -s)
+		# session specific
+		local sData1=$(uptime -s)
+		local sData2=$(ps ax | grep -E 'systemd --user|cron|udisks' | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | tr -d '\n')
+		local sessionData="${user}${sData1}${sData2}"
 		read -p "Session password: " -s rsp
-		cskSessionKey="${rsp}${rsp}${rsp}${rsp}${sessionData}{$user}${rsp}${rsp}${rsp}${rsp}${rsp}"
+		cskSessionKey="${rsp}${rsp}${rsp}${rsp}${sessionData}${rsp}${rsp}${rsp}${rsp}${rsp}"
 		if [ "$cskDebug" = "1" ]; then
 			dumpError "DEBUG [${cskSessionKey}]"
 		fi
