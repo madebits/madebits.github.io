@@ -475,18 +475,18 @@ main "$@"
 The `cs-map.sh` script can be used as follows:
 
 ```bash
-sudo ./cs-map open enc1 secret.bin container.bin
+sudo ./cs-map open secret.bin container.bin
 
-# mounted at $HOME/mnt/enc1_user
+# mounted at $HOME/mnt/cms_XXXX_user
 # and when done, to close it use
 
-sudo ./cs-map close enc1
+sudo ./cs-map close XXX
 ```
 
 We may also use the script create a new container file (size can be either in M or G):
 
 ```bash
-sudo ./cs-map.sh create enc1 secret.bin container.bin 30M
+sudo ./cs-map.sh create secret.bin container.bin 30M
 ```
 
 These scripts use the following helper tools:
