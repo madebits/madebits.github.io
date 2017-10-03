@@ -422,7 +422,7 @@ This does not help with battery life.
 
 ###i3wm
 
-I decided to co-install `sudo apt install i3`. It is not [first](#blog/2014/2014-02-04-Using-i3wm-on-Lubuntu.md) time I use [i3](https://plus.google.com/communities/112960345026405927743) and I do not really [like](http://xahlee.info/linux/why_tiling_window_manager_sucks.html) it, but it is very low resource and for that purpose ideal if battery life is important. This was the first time, however, that I had the insight that the key to keep using `i3` is to limit choice to the minimum of needed [flexibility](https://i3wm.org/docs/userguide.html).
+I decided to co-install `sudo apt install i3`. It is not [first](#blog/2014/2014-02-04-Using-i3wm-on-Lubuntu.md) time I use [i3](https://plus.google.com/communities/112960345026405927743) and I do not really [like](http://xahlee.info/linux/why_tiling_window_manager_sucks.html) it, but it is very low resource and for that purpose ideal if battery life is important.
 
 ####i3
 
@@ -476,6 +476,9 @@ I learned something about [brightness](https://unix.stackexchange.com/questions/
         export PAGER="most"
     fi
     ```
+
+    `w3m` works for mouse scroll within `man` in `urxvt`. Within `w3m` the `m` key activates mouse selection to copy text (or presing `Shift` in `urxvt` allows direct mouse selection in [any](http://nion.modprobe.de/blog/archives/634-copy-paste-in-text-mode-applications.html) console application).
+
 * [$HOME/.w3m/keymap](./blog/2019/i3/w3m/keymap)
 * To set mouse cursor theme, I [used](https://askubuntu.com/questions/126491/how-do-i-change-the-cursor-and-its-size): `sudo update-alternatives --config x-cursor-theme`.
 
