@@ -5,7 +5,7 @@
 
 <!--- tags: linux -->
 
-`gksu` has been [removed](https://jeremy.bicha.net/2018/04/18/gksu-removed-from-ubuntu/) in latest Ubuntu 18.04. The nearest alternative left to use is `pkexec`. Some workarounds are needed, given `pkexec` is not a drop in replacement for `gksu`.
+`gksu` has been [removed](https://jeremy.bicha.net/2018/04/18/gksu-removed-from-ubuntu/) in latest Ubuntu 18.04. The nearest alternative left to use is `pkexec`. Some workarounds are needed to use `pkexec` in scripts, given `pkexec` is not a drop-in replacement for `gksu`.
 
 ##Replacing gksu
 
