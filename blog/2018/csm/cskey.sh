@@ -97,8 +97,34 @@ function decodeKey()
     fi
 }
 
+function readKeyFiles()
+{
+    declare -a files
+    local count=0
+    local hash=""
+    while :
+    do
+        count=$((count+1))
+        if [ "$CS_ECHO" = "3" ]; then
+            keyFile="$(zenity --file-selection --title='Select a File' 2> /dev/null)"
+        else
+            read -e -p "Key file $count (or Enter if none): " keyFile
+        fi
+        if [ ! -f "$keyFile" ]; then
+            break
+        fi
+        files+=( "$keyFile" )
+    done
+    if (( ${#files[@]} )); then
+        # read order does not matter
+        hash=$(sha256sum "${files[@]}" | cut -d ' ' -f 1 | sort | sha256sum | cut -d ' ' -f 1)
+    fi
+    echo "$hash"
+}
+
 function readPass()
 {
+    local hash=$(readKeyFiles)
     if [ "$CS_ECHO" = "1" ]; then
         read -p "Password: " pass
     elif [ "$CS_ECHO" = "2" ]; then
@@ -112,11 +138,13 @@ function readPass()
         (>&2 echo "! no password")
         exit 1
     fi
+    pass="$pass$hash"
     echo "$pass"
 }
 
 function readNewPass()
 {
+    local hash=$(readKeyFiles)
     if [ "$CS_ECHO" = "1" ]; then
         read -p "New password: " pass
     elif [ "$CS_ECHO" = "2" ]; then
@@ -139,6 +167,8 @@ function readNewPass()
         (>&2 echo "! no password")
         exit 1
     fi
+    pass="$pass$hash"
+    echo "$pass"
 }
 
 # mode file
@@ -151,11 +181,12 @@ function main()
     local key=""
     case "$mode" in
         enc)
-            readNewPass
+            pass=$(readNewPass)
             key=$(head -c 512 /dev/urandom | base64 -w 0)
             if [ "$CS_ECHO_KEY" = "1" ]; then
                 echo
-                echo $key
+                echo "[$pass]"
+                echo "[$key]"
             fi
             encodeKey "$file" "$pass" "$key"
         ;;
@@ -171,7 +202,7 @@ function main()
                 echo
                 echo $key
             fi
-            readNewPass
+            pass=$(readNewPass)
             encodeKey "$file" "$pass" "$key"
         ;;
         *)
