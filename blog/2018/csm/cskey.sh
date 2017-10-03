@@ -582,8 +582,8 @@ function showHelp()
 	logError " -h hashToolOptions -- : (enc|dec) default -h ${cskHashToolOptions[@]} --"
 	logError " -s file : (enc) read secret data as 'base64 -w 0' from file"
 	logError " -as file : (enc) session : read secret data from a session file (see -aos)"
-	logError " -aos outFile : (dec) session: write secret data to a encrypted file"
-	logError " -aop outFile : (dec) session: write password data to a encrypted file"
+	logError " -aso outFile : (dec) session: write secret data to a encrypted file"
+	logError " -apo outFile : (dec) session: write password data to a encrypted file"
 	logError " -ar file : (enc|dec|ses) session: use file data as part of session key, will be created if not exists ($cskSessionLocation)"
 	logError " -aa : (enc|dec|ses) session: do not ask for session encryption password (use default)"
 	logError " -r length : (rnd) length of random bytes (default 64)"
@@ -677,7 +677,7 @@ function main()
 				useAes="${2:?"! -c encryptMode"}"
 				shift
 			;;
-			-aos)
+			-aso)
 				cskSessionSecretFile="${2:?"! -ao file"}"
 				cskSessionSecretFile=$(fixSessionFilePath "${cskSessionSecretFile}")
 				if [ "$(askOverwriteFile "${cskSessionSecretFile}")" != "y" ]; then
@@ -685,7 +685,7 @@ function main()
 				fi
 				shift
 			;;
-			-aop)
+			-apo)
 				cskSessionSaveDecodePassFile="${2:?"! -aop file"}"
 				cskSessionSaveDecodePassFile=$(fixSessionFilePath "${cskSessionSaveDecodePassFile}")
 				if [ "$(askOverwriteFile "${cskSessionSaveDecodePassFile}")" != "y" ]; then
