@@ -415,7 +415,46 @@ strace: [ Process PID=2252 runs in 64 bit mode. ]
 
 ```
 
-This does not help with battery life.
+This does not help with battery life. 
+
+###i3wm
+
+I decided to co-install `sudo apt install i3`. It is not [first](#blog/2014/2014-02-04-Using-i3wm-on-Lubuntu.md) time I use [i3](https://plus.google.com/communities/112960345026405927743) and I do not really [like](http://xahlee.info/linux/why_tiling_window_manager_sucks.html) it, but it is very low resource and for that purpose ideal if battery life is important. This was the first time, however, that I had the insight that the key to keep using `i3` is to limit choice to the minimum of needed [flexibility](https://i3wm.org/docs/userguide.html).
+
+####i3
+
+* [$HOME/.config/i3/config](./blog/2019/i3/i3/config)
+* [$HOME/.config/i3/start.sh](./blog/2019/i3/i3/start.sh)
+* [$HOME/.config/i3/favs.sh](./blog/2019/i3/i3/favs.sh)
+* [$HOME/.config/i3/term.sh](./blog/2019/i3/i3/term.sh)
+* [$HOME/.config/i3/.Xresources](./blog/2019/i3/i3/.Xresources) - this is more or less same as in [here](https://github.com/briancaffey/.i3)
+* [$HOME/.config/i3status/config](./blog/2019/i3/i3status/config)
+
+####GTK
+
+* [$HOME/.gtkrc-2.0](./blog/2019/i3/gtk/.gtkrc-2.0)
+* [$HOME/.config/gtk-3.0/settings.ini](./blog/2019/i3/gtk/settings.ini)
+
+####Tools
+
+* [$HOME/.config/ranger/rc.conf](./blog/2019/i3/ranger/rc.conf)
+* [$HOME/.config/ranger/rifle.conf](./blog/2019/i3/ranger/rifle.conf)
+* [$HOME/.config/ranger/scope.sh](./blog/2019/i3/ranger/scope.sh)
+* [$HOME/.config/rofi/config](./blog/2019/i3/rofi/config)
+
+####Screen Brightness
+
+I learned something about [brightness](https://unix.stackexchange.com/questions/322814/xf86monbrightnessup-xf86monbrightnessdown-special-keys-not-working) handling for Intel:
+
+* [/etc/acpi/actions/bl-down.sh](./blog/2019/i3/acpi/actions/bl-down.sh)
+* [/etc/acpi/actions/bl-up.sh](./blog/2019/i3/acpi/actions/bl-up.sh)
+* [/etc/acpi/actions/bl-status.sh](./blog/2019/i3/acpi/actions/bl-status.sh)
+* [/etc/acpi/events/bl-down](./blog/2019/i3/acpi/events/bl-down)
+* [/etc/acpi/events/bl-up](./blog/2019/i3/acpi/events/bl-up)
+
+####Other
+
+* [/etc/polkit-1/localauthority/50-local.d/com.ubuntu.disable-suspend.pkla](./blog/2019/i3/com.ubuntu.disable-suspend.pkla) - disable [suspend](https://askubuntu.com/questions/972114/ubuntu-17-10-cant-disable-suspend-with-systemd-hybrid-sleep)
 
 ##Summary
 
