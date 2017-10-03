@@ -11,6 +11,7 @@ fi
 
 user="${SUDO_USER:-$(whoami)}"
 toolsDir="$(dirname $0)"
+csmkeyTool="${toolsDir}/cskey.sh"
 lastName=""
 lastContainer=""
 lastContainerTime=""
@@ -356,7 +357,7 @@ function openContainer()
         oName=${name:4}
     fi
     
-    local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
+    local key=$("${csmkeyTool}" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     if [ -z "$key" ]; then
         onFailed "cannot get key"
     fi
@@ -394,7 +395,7 @@ function createSecret()
 {
     local secret="$1"
     echo "Creating ${secret} ..."
-    "${toolsDir}/cskey.sh" enc "$secret" "${ckOptions[@]}"
+    "${csmkeyTool}" enc "$secret" "${ckOptions[@]}"
     ownFile "$secret"
 }
 
@@ -462,7 +463,7 @@ function createContainer()
     clearScreen
     
     echo "(Re-)enter password to open the container for formating (existing data, if any, will be lost) ..."
-    local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
+    local key=$("${csmkeyTool}" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     if [ -z "$key" ]; then
         onFailed "cannot get key"
     fi
@@ -563,12 +564,12 @@ function changePassword()
     fi
     processOptions "$@"
     echo "# Decoding ${ifile} ..."
-    local secret=$(cskey.sh dec "${ifile}" "${ckOptions[@]}" | base64 -w 0)
+    local secret=$("${csmkeyTool}" dec "${ifile}" "${ckOptions[@]}" | base64 -w 0)
     if (( ! ${#ckOptions2[@]} )); then
-        echo "# using same cskey options for encode"
+        echo "# using same options for encode"
         ckOptions2=( "${ckOptions[@]}" )
     fi
-    cskey.sh enc "${ofile}" -s <(echo -n "${secret}") "${ckOptions2[@]}"
+    "${csmkeyTool}" enc "${ofile}" -s <(echo -n "${secret}") "${ckOptions2[@]}"
 }
 
 ########################################################################
@@ -585,7 +586,7 @@ function cleanUp()
 function showChecksum()
 {
     (>&2 sha256sum "$0")
-    (>&2 sha256sum "${toolsDir}/cskey.sh")
+    (>&2 sha256sum "${csmkeyTool}")
     if [ -f "${toolsDir}/aes" ]; then
         (>&2 sha256sum "${toolsDir}/aes")
     fi
@@ -597,7 +598,8 @@ function showChecksum()
 
 function showHelp()
 {
-    local bn=$(basename "$0")
+    local bn=$(basename -- "$0")
+    local kn=$(basename -- "${csmkeyTool}")
     logError "Usage:"
     logError " $bn open|o secret device [ openCreateOptions ]"
     logError " $bn close|c name"
@@ -612,12 +614,12 @@ function showHelp()
     logError " $bn touch|t fileOrDir [time]"
     logError "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\""
     logError " $bn chp inFile [outFile] [ openCreateOptions ] : only -ck -cko are used"
-    logError " $bn -k ... : invoke cskey.sh ..."
+    logError " $bn -k ... : invoke $kn ..."
     logError "Where [ openCreateOptions ]:"
     logError " -co cryptsetup options --- : outer encryption layer"
     logError " -ci cryptsetup options --- : inner encryption layer"
-    logError " -ck cskey.sh options ---"
-    logError " -cko cskey.sh options --- : only for use with chp output"
+    logError " -ck $kn options ---"
+    logError " -cko $kn options --- : only for use with chp output"
     logError " -cf mkfs ext4 options --- : (create)"
     logError " -l : (open) live"
     logError " -n name : (open) use csm-name"
@@ -758,7 +760,7 @@ function main()
             changePassword "$@"
         ;;
         -k)
-            "${toolsDir}/cskey.sh" "$@"
+            "${csmkeyTool}" "$@"
         ;;
         *)
             showHelp
