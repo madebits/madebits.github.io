@@ -7,9 +7,7 @@ set -eu
 # none of values in this file is secret
 # change default argon2 params as it fits you here
 # https://crypto.stackexchange.com/questions/37137/what-is-the-recommended-number-of-iterations-for-argon2
-adp="8"
-adm="14"
-adt="4000"
+argon2pmt="8,14,1000"
 
 # can be passed from outside
 CS_ECHO="${CS_ECHO:-0}"
@@ -17,12 +15,17 @@ CS_ECHO_KEY="${CS_ECHO_KEY:-0}"
 CS_KEY="${CS_KEY:-}"
 CS_SAME_PASS="${CS_SAME_PASS:-}"
 CS_BACKUP="${CS_BACKUP:-0}"
+CS_PMT="${CS_PMT:-}"
 
 toolsDir="$(dirname $0)"
 # set to 1 to use my aes tool, 0 uses ccrypt
 useAes=0
 if [ -f "${toolsDir}/aes" ]; then
 	useAes=1
+fi
+
+if [ -n "$CS_PMT" ]; then
+	argon2pmt="$CS_PMT"
 fi
 
 SCRIPT_PID=$$
@@ -69,11 +72,20 @@ function touchFile()
 	fi
 }
 
-# pass salt
+# pass salt "p,m,t"
 function pass2hash()
 {
 	local pass="$1"
 	local salt="$2"
+	local aa="${3:-$argon2pmt}"
+	local aaArgs=(${aa//,/ })
+	if [ "${#aaArgs[@]}" -ne "3" ]; then
+		(>&2 echo "! p,m,t")
+		failed
+	fi
+	local ap="${aaArgs[0]}"
+	local am="${aaArgs[1]}"
+	local at="${aaArgs[2]}"
 	# argon2 has a build-in limit of 126 chars on pass length
 	pass=$(echo -n "$pass" | sha512sum | cut -d ' ' -f 1 | tr -d '\n' | while read -n 2 code; do printf "\x$code"; done | base64 -w 0)
 	echo -n "$pass" | argon2 "$salt" -id -t $at -m $am -p $ap -l 128 -r
@@ -86,14 +98,12 @@ function encodeKey()
     local pass="$2"
     local key="$3"
     
-    local at="${4:-$adt}"
-	local am="${5:-$adm}"
-	local ap="${6:-$adp}"
+    local pmt="${4:-$argon2pmt}"
     
     debugKey "$pass" "$key"
     
     local salt=$(head -c 32 /dev/urandom | base64 -w 0)
-    hash=$(pass2hash "$pass" "$salt")
+    hash=$(pass2hash "$pass" "$salt" "$pmt")
     
     if [ "$file" = "-" ]; then
 		file="/dev/stdout"
@@ -115,15 +125,13 @@ function decodeKey()
     local pass="$2"
     local keyLength=$(encryptedKeyLength)
     
-    local at="${3:-$adt}"
-	local am="${4:-$adm}"
-	local ap="${5:-$adp}"
+    local pmt="${3:-$argon2pmt}"
     
     if [ -e "$file" ] || [ "$file" = "-" ]; then
 		local fileData=$(head -c 600 "$file" | base64 -w 0)
 		local salt=$(echo -n "$fileData" | base64 -d | head -c 32 | base64 -w 0)
 		local data=$(echo -n "$fileData" | base64 -d | tail -c +33 | head -c "$keyLength" | base64 -w 0)
-        local hash=$(pass2hash "$pass" "$salt")
+        local hash=$(pass2hash "$pass" "$salt" "$pmt")
 		touchFile "$file"
         echo -n "$data" | base64 -d | decryptAes "$hash"
     else
@@ -324,9 +332,9 @@ function reEncryptFile()
 		pass=$(readNewPass)
 	fi
 
-	if [ ! -z "${4:-}" ]; then
-		shift 3
-		(>&2 echo "# Using new argon2 params:" $@ )
+	if [ ! -z "${2:-}" ]; then
+		shift 1
+		(>&2 echo "# Using new argon2 params:" "$@" )
 	fi
 
 	echo "${file}"
@@ -362,12 +370,12 @@ function main()
 			reEncryptFile "$@"
         ;;
         *)
-            (>&2 echo "Usage: $(basename "$0") [enc | enc2 | dec | chp | chp2] file [t m p]")
+            (>&2 echo "Usage: $(basename "$0") [enc | enc2 | dec | chp | chp2] file [\"p,m,t\"]")
             (>&2 echo " file is overwritten by enc and chp, backup it as needed before")
-            (>&2 echo " default argon2 t m p are: $adt $adm $adp")
+            (>&2 echo " default argon2 \"p,m,t\" are: \"$argon2pmt\"")
             (>&2 echo 'Examples:')
-            (>&2 echo ' CS_KEY=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt 1000 16 8')
-            (>&2 echo ' CS_SAME_PASS=1 cskey.sh chp d.txt 1000 14 8 1000 16 8')
+            (>&2 echo ' CS_KEY=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt "8,16,1000"')
+            (>&2 echo ' CS_SAME_PASS=1 cskey.sh chp d.txt "8,14,1000" "8,16,1000"')
         ;;
     esac
 }
