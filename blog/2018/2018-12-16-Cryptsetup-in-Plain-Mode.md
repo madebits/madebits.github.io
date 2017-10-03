@@ -213,5 +213,6 @@ Related to `--offset` and `--size` is `--skip`, that tells `cryptsetup` the firs
 * https://github.com/P-H-C/phc-winner-argon2
 * https://www.gnu.org/software/bash/manual/bashref.html
 * https://unix.stackexchange.com/questions/10922/temporarily-suspend-bash-history-on-a-given-shell
+* https://www.digitalocean.com/community/tutorials/how-to-partition-and-format-storage-devices-in-linux
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2018/2018-04-26-Lubuntu-18.04-Disable-initfsram-Resume.md'>Lubuntu 18.04 Disable initfsram Resume</a></ins>
