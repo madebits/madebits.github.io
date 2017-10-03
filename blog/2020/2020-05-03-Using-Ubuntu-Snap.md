@@ -308,6 +308,31 @@ sudo cp state.json-new /var/lib/snapd/state.json
 sudo systemctl start snapd
 ```
 
+Same as a convenience script to save to a file and make executable and use to run snap commands:
+
+```bash
+#!/bin/bash -
+
+if [ $(id -u) != "0" ]; then
+    exec /usr/bin/sudo -S "$0" "$@"
+    exit $?
+fi
+
+systemctl stop snapd &> /dev/null
+# sh -c 'ls /var/lib/snapd/cookie/*'
+sh -c 'rm /var/lib/snapd/cookie/*'
+cat /var/lib/snapd/state.json | jq 'delpaths([["data", "auth", "device"], ["data", "snap-cookies"]])' > state.json-new
+cp state.json-new /var/lib/snapd/state.json
+systemctl start snapd
+echo ":) $@"
+sleep 2
+if [[ "$#" -gt 0 ]]; then
+    snap "$@"
+else
+    snap refresh
+fi
+```
+
 The device-serial ID and list of installed snaps and their usage data are sent to store on every refresh, which happens automatically and periodically. Refresh period can be controlled using [refresh.hold](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--refresh-hold), and postponed up to 2 months. To pause them for [longer](https://askubuntu.com/questions/930593/how-to-disable-autorefresh-in-snap) add in `/etc/hosts` (need to be removed when `snap install` or `snap refresh`):
 
 ```
