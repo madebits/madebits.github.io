@@ -427,6 +427,8 @@ I decided to co-install `sudo apt install i3`. It is not [first](#blog/2014/2014
 
 * [$HOME/.config/i3/config](./blog/2019/i3/i3/config)
 * [$HOME/.config/i3/start.sh](./blog/2019/i3/i3/start.sh)
+* [$HOME/.config/i3/battery.sh](./blog/2019/i3/i3/battery.sh)
+* * [$HOME/.config/i3/gnome-kill.sh](./blog/2019/i3/i3/gnome-kill.sh)
 * [$HOME/.config/i3/rofi_custom.sh](./blog/2019/i3/i3/rofi_custom.sh)
 * [$HOME/.config/i3/term.sh](./blog/2019/i3/i3/term.sh)
 * [$HOME/.config/i3/.Xresources](./blog/2019/i3/i3/.Xresources) - this is more or less same as in [here](https://github.com/briancaffey/.i3)

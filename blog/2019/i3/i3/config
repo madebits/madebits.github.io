@@ -7,6 +7,11 @@ exec --no-startup-id /usr/bin/nm-applet
 exec --no-startup-id pasystray
 exec --no-startup-id /usr/bin/pulseaudio
 exec --no-startup-id /usr/bin/redshift
+exec_always --no-startup-id xset dpms 0 0 0
+exec_always --no-startup-id xset -dpms
+exec_always --no-startup-id xset s off
+#exec --no-startup-id compton -b
+
 #exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 
 # left mouse
@@ -47,8 +52,8 @@ bindsym $mod+q kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 #bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop
-set $apps exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show window -sort -width 90  -lines 30 -sidebar-mode -columns 4 -terminal xterm
-set $favs exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show i3 -sort -width 90  -lines 30 -sidebar-mode -columns 4 -terminal xterm
+set $apps exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show window -sort -width 60  -lines 30 -sidebar-mode -columns 4 -terminal xterm -location 2 -yoffset 20
+set $favs exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show i3 -sort -width 60  -lines 30 -sidebar-mode -columns 4 -terminal xterm -location 2 -yoffset 20
 bindsym --release Ctrl+Tab $apps
 
 # change focus
@@ -118,7 +123,7 @@ bindsym $mod+8 workspace number $workspace8
 bindsym $mod+9 workspace number $workspace9
 bindsym $mod+0 workspace number $workspace10
 
-bindsym $mod+dead_circumflex exec --no-startup-id ~/.config/i3/i3-new-workspace.sh
+bindsym $mod+dead_circumflex exec --no-startup-id ~/.config/i3/rofi_custom.sh "🔲 i3 New Workspace (W+^)"
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $workspace1
@@ -236,6 +241,8 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 bindsym XF86Search exec --no-startup-id catfish
+
+#for_window [class="SpeedCrunch"] floating enable
 
 #bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 #bindsym XF86MonBrightnessDown exec xbacklight -dec 20

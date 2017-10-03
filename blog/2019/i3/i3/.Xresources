@@ -2,8 +2,8 @@
 
 ! General settings
 XTerm*termName: xterm-256color
-XTerm*geometry: 80x24
-XTerm*saveLines: 1024
+XTerm.vt100.geometry: 80x24
+XTerm*saveLines: 4096
 XTerm*scrollBar: False
 XTerm*loginshell: False
 XTerm*cursorBlink: False
@@ -15,7 +15,7 @@ XTerm*utf8Title: True
 XTerm*renderFont: True
 XTerm*preeditType: Root
 XTerm*xftAntialias: true
-XTerm*faceName: xft:Ubuntu Mono:pixelsize=22:antialias=true:hinting=true
+XTerm*faceName: xft:Ubuntu Mono:pixelsize=20:antialias=true:hinting=true
 
 ! Trim trailing spaces
 XTerm*trimSelection: true

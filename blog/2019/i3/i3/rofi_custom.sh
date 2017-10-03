@@ -40,6 +40,8 @@ if [ -z "$@"]; then
     echo "🔲 i3 New Workspace (W+^)"
     echo "⛵ i3 Move to New Workspace"
     echo "📌 i3 Toggle Bar (W+y)"
+    echo "📤 i3 Floating On"
+    echo "📥 i3 Floating Off"
     echo "📺 i3 Full Screen (W+f)"
     echo "🛠️ i3 Config"
     echo "🌀 i3 Reload (W+S+r)"
@@ -58,6 +60,8 @@ if [ -z "$@"]; then
     echo "🏢 Office"
     echo "💥 Sublime"
     echo "📝 Geany"
+    echo "📘 VsCode"
+    
     
     echo "🎦 Vlc"
     echo "🎶 Audacious"
@@ -95,9 +99,17 @@ else
             ;;
         "⛵ i3 Move to New Workspace")
             nws="$(i3NextFreeWorkspace)"
-            i3-msg move container to workspace number "$nws" > /dev/null
+            #i3-msg "move container to workspace number ${nws}; workspace number ${nws}" > /dev/null
+            i3-msg "move container to workspace number ${nws}" > /dev/null
             sleep 0.2 > /dev/null
             i3-msg workspace number "$nws" > /dev/null
+            ;;
+        "📤 i3 Floating On")
+            i3-msg floating enable > /dev/null
+            i3-msg move position center > /dev/null
+            ;;
+        "📥 i3 Floating Off")
+            i3-msg floating disable > /dev/null
             ;;
         "📺 i3 Full Screen (W+f)")
             i3-msg 'fullscreen toggle' > /dev/null
@@ -151,6 +163,9 @@ else
             ;;
         "📝 Geany")
             geany -i > /dev/null &
+            ;;
+        "📘 VsCode")
+            ~/opt/VSCode-linux-x64/code > /dev/null &
             ;;
 
         "🎦 Vlc")

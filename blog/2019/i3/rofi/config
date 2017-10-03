@@ -1,1 +1,3 @@
-rofi.theme: /usr/share/rofi/themes/Arc.rasi
+rofi.theme: /usr/share/rofi/themes/Paper.rasi
+rofi.me-accept-entry: MouseDPrimary,MouseSecondary
+rofi.kb-delete-entry: Shift+Delete,MouseMiddle

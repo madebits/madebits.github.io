@@ -29,7 +29,7 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5-0+20"
+    geometry = "400x5-0+20"
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
@@ -57,14 +57,14 @@
     padding = 4
 
     # Horizontal padding.
-    horizontal_padding = 4
+    horizontal_padding = 10
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 1
+    frame_width = 2
 
     # Defines color of the frame around the notification window.
-    frame_color = "#B9D6F5"
+    frame_color = "#FFFEDA"
 
     # Define a color for the separator.
     # possible values are:
@@ -85,7 +85,7 @@
 
     ### Text ###
 
-    font = Ubuntu Regular 10
+    font = Ubuntu Regular 12
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -125,7 +125,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "%i <i>%a</i>\n<b>%s</b>\n%b\n%p"
+    format = "✉️ <i>%a</i>\n<b>%s</b>\n%b\n%p"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
@@ -165,7 +165,7 @@
     max_icon_size = 32
 
     # Paths to default icons.
-    icon_path = /usr/share/icons/Adwaita/16x16/status/:/usr/share/icons/Adwaita/16x16/devices/
+    icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
     ### History ###
 
@@ -274,26 +274,26 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#e0e0e0"
+    background = "#B9D6F5"
     foreground = "#222222"
     timeout = 10
     # Icon for notifications with low urgency, uncomment to enable
-    icon = 🗯️
+    #icon = 🔔
 
 [urgency_normal]
     background = "#5F676A"
     foreground = "#ffffff"
     timeout = 10
     # Icon for notifications with normal urgency, uncomment to enable
-    icon = ℹ️
+    #icon = ℹ️
 
 [urgency_critical]
-    background = "#900000"
+    background = "#c30101"
     foreground = "#ffffff"
     #frame_color = "#ff0000"
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
-    icon = ⚠️
+    #icon = ⚠️
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
