@@ -13,7 +13,9 @@ set -eu -o pipefail
 
 if [ $(id -u) != "0" ]; then
     (>&2 echo "! needs sudo")
-    exit 1
+    #exit 1
+    pass="$(zenity --password --title='Sudo Password' 2> /dev/null)"
+    exec echo "$pass" | sudo -S "$0" "$@"
 fi
 
 user="${SUDO_USER:-$(whoami)}"
@@ -576,6 +578,9 @@ function openContainer()
     shift
 
     local device="${1:-}"
+    if [ "$device" = "!" ]; then
+        device="$(zenity --file-selection --title='Select Container File' 2> /dev/null)"
+    fi
     checkArg "$device" "container"
     lastContainer="$device"
     if [ -f "$device" ]; then
@@ -595,6 +600,9 @@ function openContainer()
     fi
     
     local secret="${1:-}"
+    if [ "$secret" = "!" ]; then
+        secret="$(zenity --file-selection --title='Select Secret File' 2> /dev/null)"
+    fi
     checkArg "$secret" "secret"
     lastSecret="$secret"
     if [ -f "$secret" ] && [ "$secret" != "--" ]; then
@@ -962,6 +970,7 @@ function showHelp()
     cat << EOF
 Usage:
  $bn open|o device secret [ openCreateOptions ]
+  if device and/or secret are ! zenity is used
  $bn close|c name
  $bn closeAll|ca
  $bn list|l
