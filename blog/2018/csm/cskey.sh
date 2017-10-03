@@ -66,6 +66,8 @@ function encodeKey()
 	local am="${5:-$adm}"
 	local ap="${6:-$adp}"
     
+    debugKey "$pass" "$key"
+    
     local salt=$(head -c 32 /dev/urandom | base64 -w 0)
     hash=$(echo -n "$pass" | argon2 "$salt" -id -t $at -p $ap -m $am -l 128 -r)
     
@@ -235,6 +237,16 @@ function readNewPass()
 	echo "$pass"
 }
 
+# pass key
+function debugKey()
+{
+	if [ "$CS_ECHO_KEY" = "1" ]; then
+		(>&2 echo)
+		(>&2 echo "[$1]")
+		(>&2 echo "[$2]")
+	fi
+}
+
 function encryptFile()
 {
 	local file="${1:-secret.bin}"
@@ -246,12 +258,6 @@ function encryptFile()
 		key="$CS_KEY"
 	else
 		key=$(head -c 512 /dev/urandom | base64 -w 0)
-	fi
-	
-	if [ "$CS_ECHO_KEY" = "1" ]; then
-		(>&2 echo)
-		(>&2 echo "[$pass]")
-		(>&2 echo "[$key]")
 	fi
 	encodeKey "$file" "$pass" "$key" "$@"
 }
@@ -280,15 +286,12 @@ function reEncryptFile()
 	else
 		pass=$(readNewPass)
 	fi
-	if [ "$CS_ECHO_KEY" = "1" ]; then
-		(>&2 echo)
-		(>&2 echo "[$pass]")
-		(>&2 echo "[$key]")
-	fi
+
 	if [ ! -z "$4" ]; then
 		shift 3
 		(>&2 echo "# Using new argon2 params:" $@ )
 	fi
+
 	encodeKey "$file" "$pass" "$key" "$@"
 	(>&2 echo "Done: $file")
 }
