@@ -115,6 +115,7 @@
 [SingularityHub](https://singularityhub.com/)
 [PhysOrg](https://phys.org/)
 [PhysicsWorld](https://physicsworld.com/)
+[Ri](https://www.youtube.com/user/TheRoyalInstitution/videos)
 
 ## USA
 
