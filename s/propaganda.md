@@ -100,6 +100,8 @@
 [ProjectEuler](https://projecteuler.net/archives)
 [ByteByByte](https://www.byte-by-byte.com/coding-interview-questions/)
 [LeetCode](https://leetcode.com/problemset/all/)
+[JuliaEvans](https://jvns.ca/)
+[LennartPoettering](http://0pointer.net/blog/)
 
 ### Science
 
