@@ -99,10 +99,6 @@ function decodeKey()
 
 function readKeyFiles()
 {
-	local msg="Key"
-	if [ ! -z "$1" ]; then
-		msg="New key"
-	fi
 	declare -a files
 	local count=0
 	local hash=""
@@ -113,7 +109,7 @@ function readKeyFiles()
 		if [ "$CS_ECHO" = "3" ]; then
 			keyFile="$(zenity --file-selection --title='Select a File' 2> /dev/null)"
 		else
-			read -e -p "${msg} file $count (or Enter if none): " keyFile
+			read -e -p "Key file $count (or Enter if none): " keyFile
 		fi
 		if [ ! -f "$keyFile" ]; then
 			break
@@ -150,19 +146,8 @@ function readPass()
 
 function readNewPass()
 {
-	local hash=$(readKeyFiles 1)
-	if [ "$CS_ECHO" = "1" ]; then
-		read -p "New password: " pass
-	elif [ "$CS_ECHO" = "2" ]; then
-		pass=$(zenity --password --title="New Password" 2> /dev/null)
-	elif [ "$CS_ECHO" = "3" ]; then
-		pass=$(zenity --entry --title="Password" --text="New Password (visible):"  2> /dev/null)
-	else
-		read -p "New password: " -s pass
-		if [ -z "$pass" ]; then
-			(>&2 echo "! no password")
-			exit 1
-		fi
+	local pass=$(readPass)
+	if [ -z "$CS_ECHO" ]; then
 		(>&2 echo)
 		if [ -t 0 ] ; then
 			read -p "Renter password: " -s pass2
@@ -205,9 +190,11 @@ function main()
             decodeKey "$file" "$pass"
         ;;
         chp)
+			(>&2 echo "Current:")
 			pass1=$(readPass)
             (>&2 echo)
             key=$(decodeKey "$file" "$pass1" | base64 -w 0)
+            (>&2 echo "New:")
             pass=$(readNewPass)
             if [ "$CS_ECHO_KEY" = "1" ]; then
 				(>&2 echo)
