@@ -240,15 +240,16 @@ function cleanUp()
 
 function showHelp()
 {
+    local bn=$(basename "$0")
     (>&2 echo "Usage:")
-    (>&2 echo " $0 open secret device [ additional cryptsetup parameters ]")
-    (>&2 echo " $0 openLive secret device [ additional cryptsetup parameters ]")
-    (>&2 echo " $0 openNamed name secret device [ additional cryptsetup parameters ]")
-    (>&2 echo " $0 close name")
-    (>&2 echo " $0 closeAll")
-    (>&2 echo " $0 create secret container size [ additional cryptsetup parameters ]")
+    (>&2 echo " $bn open secret device [ additional cryptsetup parameters ]")
+    (>&2 echo " $bn openLive secret device [ additional cryptsetup parameters ]")
+    (>&2 echo " $bn openNamed name secret device [ additional cryptsetup parameters ]")
+    (>&2 echo " $bn close name")
+    (>&2 echo " $bn closeAll")
+    (>&2 echo " $bn create secret container size [ additional cryptsetup parameters ]")
     (>&2 echo "    size should end in M or G, secret and container files will be overwritten, use with care")
-    (>&2 echo " $0 changePass secret")  
+    (>&2 echo " $bn changePass secret")  
 }
 
 function main()
