@@ -75,9 +75,9 @@ The command-line arguments are a bit *peculiar* (because I thought that it is fa
 
 ### Secret Files
 
-`csman.sh` creates and uses random read *secret files* using `cskey.sh`. Secret files are binary. Use `base64` tool as needed to convert them to text. 
+`csman.sh` creates and uses random *secret files* using `cskey.sh`. Secret files are binary. Use `base64` tool as needed to convert them to text. 
 
-Secret files are made of 32 random bytes of `argon2` salt, 512 random bytes of `cryptsetup` password encrypted, and are padded with random data to have random file lengths.
+Secret files are made of 32 random bytes of `argon2` salt, 512 random bytes of `cryptsetup` password encrypted, and are padded with random data to have random file lengths up to 1024 bytes.
  
 It is not required to use `cskey.sh` directly most of the time, but knowing how to use it as shown in this section will make the `csman.sh` commands later clearer.
 
@@ -170,7 +170,7 @@ If you specify `argon2` options during encrypt command (enc), you have to rememb
 
 ### Creating Containers
 
-To create an encrypted container you need to specify the container file or device, **secret** file (see [Creating Secret Files](#r/linux-csman.md#creating-secret-files)) and the size (create command is `create` or `n`):
+To create an encrypted container you need to specify the container file or device, **secret** file (see [Creating Secret Files](#r/linux-csman.md#creating-secret-files)) and the size (create command is `create` or `n`). Secret file will be created if it does not exist:
 
 ```bash
 sudo csman.sh n container.bin secret.bin 1M -cf -N 1000 ---
