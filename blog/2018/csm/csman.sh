@@ -501,7 +501,7 @@ function openContainer()
         oName=${name:4}
     fi
     
-    echo "Reading ${device} secret from: $secret"
+    echo "Reading ${device} secret from ${secret}"
     local key=$("${csmkeyTool}" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     if [ -z "$key" ]; then
         onFailed "cannot get key"
