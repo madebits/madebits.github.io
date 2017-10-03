@@ -82,7 +82,7 @@ While `scrypt` is the easiest tool to use, you may also consider combining `argo
 
 ##Using Argon2 and Ccrypt
 
-Let us create a bash helper script `cs-key.sh` to manage key contents:
+Let us create a bash helper script `cs-key.sh` to manage key contents. It uses `ccrypt` to save container key, or if found it uses my [aes](#r/cpp-aes-tool.md) tool. The only benefit of my `aes` tool is that it (same as *dm-crypt*) always decrypts the data even if the password is wrong, while `ccrypt` is designed to give an error, which I consider unsafe.
 
 ```bash
 #!/bin/bash
