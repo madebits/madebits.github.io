@@ -156,13 +156,13 @@ csman.sh
 cskey.sh
 ```
 
-The command-line arguments are a bit *peculiar* (because I thought that it is faster to specify options after the main arguments) and follow the scheme: *command file(s) options*. The `cskey.sh` options are passed from `csman.sh` within `-ck ... --`.
+The command-line arguments are a bit *peculiar* (because I thought, for better or not, that it is faster to specify options after the main arguments) and follow the scheme: *command file(s) options*. The `cskey.sh` options are passed from `csman.sh` within `-ck ... --`.
 
 ### Secret Files
 
-`csman.sh` creates and uses random *secret files* using `cskey.sh`. Secret files are binary. Use `base64` tool as needed to convert them to text.
+`csman.sh` creates and uses random *secret files* using `cskey.sh`. Secret files are binary. Use the GNU `base64` tool as needed to convert them to text.
 
-Secret files are made of 32 random bytes of `argon2` salt, 512 random bytes of `cryptsetup` password encrypted, and are padded with random data to have random file lengths up to 1024 bytes. Due to encryption, the length of secret files is longer than 512 bytes, but is less than 1024.
+Secret files are made of 32 random bytes of `argon2` salt, 512 random bytes of `cryptsetup` password encrypted, and are padded with random data to have random file lengths up to 1024 bytes. Due to encryption, the length of used secret file data is longer than 512 bytes (but it is less than 1024 bytes).
 
 It is not required to use `cskey.sh` directly most of the time, but knowing how to use it as shown in this section will make the `csman.sh` commands later clearer.
 
@@ -172,25 +172,26 @@ It is not required to use `cskey.sh` directly most of the time, but knowing how 
 
 Using `-su` option when generating secrets uses only `/dev/urandom` which [faster](https://security.stackexchange.com/questions/3936/is-a-rand-from-dev-urandom-secure-for-a-login-key) and [better](https://www.2uo.de/myths-about-urandom/).
 
-For all other operations where random data are needed `cskey.sh` uses `/dev/urandom`.
+For all other operations where random data is needed `cskey.sh` uses `/dev/urandom`.
 
 #### Creating Secret Files
 
-To create a new *secret file* use:
+To create (*enc*ode) a new *secret file* use:
 
 ```bash
 sudo cskey.sh enc secret.bin -su
 ```
 
-This command will generate a random secret and encrypt it with the password (combined with any key files) and store it as *secret.bin* file. You will be asked for:
+This command generates a random secret and encrypts it with a user entered password (combined with any user specified *key files*) and store it as *secret.bin* file. You will be asked for:
 
 1. `sudo` password
-2. any key files to use. Key files can be specified in any order as paths one by one by pressing *Enter* key to confirm them. Use *Enter* key without a path to stop entering key files, or if you are not using key files press *Enter* key to skip entry (or use `-k` option not to be asked for key files).
-3. password to encrypt the secret file. To have password visible append `-i e` option.
+2. Any user *key files* to use.
+  - Key files can be specified in any order as paths one by one by pressing *Enter* key to confirm them. Use *Enter* key without a path to stop entering key files, or if you are not using key files press *Enter* key to skip entry (or use `-k` option not to be asked for key files).
+3. The user *password* to encrypt the secret file. To have password visible on terminal append `-i e` option.
 
 If `secret.bin` file exists, it will be overwritten, but not truncated. To truncate existing files append `-t` option.
 
-To view back the used raw secret data (for the fun of it) use:
+To view (*dec*ode) the used raw secret data (for the fun of it) use:
 
 ```bash
 sudo cskey.sh dec secret.bin | base64 -w 0
@@ -202,11 +203,11 @@ You can combine the two commands if needed to change the password (or use `csman
 sudo bash -c 'secret=$(cskey.sh dec secret.bin | base64 -w 0) && cskey.sh enc secret.bin -s <(echo -n "$secret")'
 ```
 
-If *secret file* in *enc|dec* is specified as **?** it will read from command line.
+If *secret file* in *enc|dec* is specified as **?** then `cskey.sh` will prompt asking for its path.
 
 #### Multiple Secret Files
 
-Sometimes, you may want to quickly generate a lot of secret files at once using same password using backup `-b` option:
+Sometimes, you may want to quickly generate a lot of secret files at once using the same password. The backup `-b` option does that:
 
 ```bash
 sudo cskey.sh enc secret.bin -b 3 -bs -su
@@ -214,9 +215,9 @@ sudo cskey.sh enc secret.bin -b 3 -bs -su
 
 This generates 4 files (*secret.bin*, *secret.bin.01*, *...*, *secret.bin.03*). All these files are encrypted with same password.
 
-Without `-bs` option, same secret will be stored on each file (due to used AES mode files will be still binary different).
+Without `-bs` option, same secret will be stored on each file (due to the used AES CBC mode files will be still binary different).
 
-With `-bs` option, a new different secret is generated for each file. `-su` makes secret generation faster by using `/dev/urandom`.
+With `-bs` option, a new different secret is generated for each file. Adding `-su` option makes secret generation faster by using `/dev/urandom`.
 
 `sudo cskey.sh rnd file -rb 5` command is similar, but it generates random files that look like secret files with no other use.
 
