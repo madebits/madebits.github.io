@@ -8,10 +8,10 @@ I always wanted to write an own [Vim](https://www.vim.org/) text editor tutorial
 
 ##Starting and Stopping
 
-If you learn Vim, learn it without customizations. In your own machine, you can use some other editor or IDE, or even some heavily [customized](https://github.com/xmementoit/vim-ide) Vim. It is only when you are in some other machine that you really need to use Vim. And this the reason for the first command to learn:
+If you learn Vim, learn it without customization. In your own machine, you can use some other editor or IDE, or even some heavily [customized](https://github.com/xmementoit/vim-ide) Vim. It is only when you are in some other machine that you really need to use Vim. And this the reason for the first command to learn:
 
 ```
-# start vim without any customizations (do not load ~/.vimrc)
+# start vim without any customization (do not load ~/.vimrc)
 vim -u NONE
 ```
 
@@ -68,7 +68,7 @@ Common movement commands (in *command-mode*):
 * `:number` or `numberG`- go to line number, `:+number` - go number lines down, `:-number` go number lines up. 
     * It may help to run `:set number` (or `:set nu`) before to show line numbers. For extra Zen use `:set rnu` (or `:set relativenumber`) for relative numbers. Using both also works. Using `no` before removes them (e.g. `:set nonumber`).
 * `gg` - got top of file, `GG` go end of file.
-* `w` move one word forward, `b` move one word backward, `e` move to end of word; `W`, `B`, `E` work same but consider punctuations as part of words.
+* `w` move one word forward, `b` move one word backward, `e` move to end of word; `W`, `B`, `E` work same but consider punctuation as part of words.
 * `%` move to matching char (`()`, `{}`, `[]`).
 * Usually combined with other commands: `)` or `s` move one sentence; `}` or `p` move one paragraph, `t` move one tag; `b` more one code block; all these can get confused in some source code files (in default configuration).
 * `gg=G` format whole text, where `=` is [format](https://www.cs.swarthmore.edu/oldhelp/vim/reformatting.html) command. `<` and `>` indent left or right. 
@@ -107,7 +107,7 @@ Edit commands can be combined with **i**nside or **a**round *text-object* bound 
 
 While in *insert-mode*, `Ctrl+R 0` will paste text without having leave that mode (see `:h i_ctrl-r`). `Ctrl+o` will allow running a single command and coming back to insert-mode. `Ctrl+h` will delete previous char (same as *Backspace*) and `Ctrl+w` will delete previous word, while `Ctrl+u` will delete to start of line. `Ctrl+n` and `Ctrl+p` enable auto-completion from words found in open buffers.
 
-Vim has also a **visual-mode**, entered by any of: `v` char selection, `V` line selection, `Ctrl+V` block selection. Arrow keys expand selection (on whihc side can be toggled with `o`) and `gv` reselects. In visual-mode, you select first the text and then run any command on it.
+Vim has also a **visual-mode**, entered by any of: `v` char selection, `V` line selection, `Ctrl+V` block selection. Arrow keys expand selection (on which side can be toggled with `o`) and `gv` re-selects. In visual-mode, you select first the text and then run any command on it.
 
 ##Casual Zen
 
