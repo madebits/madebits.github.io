@@ -25,6 +25,7 @@
 * [France 24](https://www.france24.com/en/)
 * [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
 * [EuroNews](https://www.euronews.com/news/international)
+* [B92](https://www.b92.net/eng/news/world.php)
 
 <hr>
 
@@ -42,6 +43,3 @@
 * [Press TV](https://www.presstv.com/)
 * [AlJazeera](https://www.aljazeera.com/news/)
 
-<hr>
-
-* [B92](https://www.b92.net/eng/news/world.php)
