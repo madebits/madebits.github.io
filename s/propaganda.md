@@ -140,6 +140,7 @@
 [RT News](https://rt.com/news/)
 [Sputnik News](https://sputniknews.com/)
 [TASS](https://tass.com/world)
+[TheMoscowTimes](https://www.themoscowtimes.com/news)
 [SouthFront](https://southfront.org/)
 
 ## China
