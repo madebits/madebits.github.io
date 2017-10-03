@@ -177,6 +177,7 @@ Extra setup:
 
 * `gedit` fails to show [last](https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=826278) lines sometimes (cannot scroll to end of file). Will use `geany -i` for [text](https://askubuntu.com/questions/13447/how-do-i-change-the-default-text-editor) edits.
     - *[workaround](https://gitlab.gnome.org/GNOME/gedit/issues/42) is to unmaximize and then maximize the window again*
+    - [geany-themes](https://github.com/codebrainz/geany-themes)
 
 * VirtualBox mouse was freezing. I found a [solution](https://ubuntuforums.org/showthread.php?t=2395969) that seems to work: *Go into the preferences of your VirtualBox Manager. Click on "Input" and make sure that "Auto Capture Keyboard" is not selected for "VirtualBox Manager" and "Virtual Machine".*
 
