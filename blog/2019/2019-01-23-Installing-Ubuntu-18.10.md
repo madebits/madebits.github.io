@@ -214,7 +214,7 @@ Someone designed `snap` to use `squashfs` and now each *snap* needs a `loop` dev
 Useful `.bash_aliases` alias:
 
 ```
-dfh='df -h -T -x tmpfs -x devtmpfs -x squashfs'
+alias dfh='df -h -T -x tmpfs -x devtmpfs -x squashfs'
 ```
 
 ###Getting Rid of Snaps
