@@ -98,7 +98,8 @@
 [Hiltmon](https://hiltmon.com/)
 [CrazyForCode](http://www.crazyforcode.com)
 [ProjectEuler](https://projecteuler.net/archives)
-[ByteByByte](https://www.byte-by-byte.com/)
+[ByteByByte](https://www.byte-by-byte.com/coding-interview-questions/)
+[LeetCode](https://leetcode.com/problemset/all/)
 
 ### Science
 
