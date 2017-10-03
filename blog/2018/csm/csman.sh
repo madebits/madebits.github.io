@@ -260,16 +260,18 @@ function mountContainer()
     
     mkdir -p "$mntDir1"
     set +e
-    mount ${ro} "$dev" "$mntDir1"
+    mount ${ro} -o users "$dev" "$mntDir1"
     if [ "$?" != "0" ]; then
         closeContainerByName "$name"
         rmdir "$mntDir1"
         failed
     fi
     set -e
-    mkdir -p "$mntDir2"
-    bindfs ${ro} --multithreaded -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
-    echo "Mounted ${dev} at ${mntDir2}"
+    chown $(id -un "$user"):$(id -gn "$user") "$mntDir1"
+    #mkdir -p "$mntDir2"
+    #bindfs ${ro} --multithreaded -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
+    #echo "Mounted ${dev} at ${mntDir2}"
+    echo "Mounted ${dev} at ${mntDir1}"
 }
 
 function closeContainerByName()
@@ -401,14 +403,14 @@ function listContainer()
         if [ -n "$m" ]; then
             m="mounted"
         fi
-        echo -e "Dir1:\t$mntDir1\t$m\troot"
+        echo -e "Dir:\t$mntDir1\t$m\t$(stat -c "%U %G" "$mntDir1")"
     fi
     if [ -d "$mntDir2" ]; then
         local m="$(mount | grep "$mntDir2")"
         if [ -n "$m" ]; then
             m="mounted"
         fi
-        echo -e "Dir2:\t$mntDir2\t$m\t${user}"
+        echo -e "Dir:\t$mntDir2\t$m\t$(stat -c "%U %G" "$mntDir2")"
     fi
 }
 
@@ -607,7 +609,7 @@ function createContainer()
         else
             onFailed "nothing to do"
         fi
-        echo "Size will be ingored for block devices"
+        echo "Size will be ingored for block devices (must be 0)"
     fi
     
     local secret="${1:-}"
@@ -625,6 +627,9 @@ function createContainer()
     
     if [ "$writeContainer" = "1" ]; then
         if [ "$blockDevice" = "1" ]; then
+            if [ "$sizeNum" -gt 0 ]; then
+                onFailed "Invalid size: ${sizeNum} (must be set to 0 and will be ignored)"
+            fi
             umountDevice "${container}"
             testRndDataSource
             echo "Overwriting block device: ${container} ..."
