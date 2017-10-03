@@ -290,7 +290,7 @@ It is possible to overwrite free disk partition space using a directory in that 
 ```bash
 csman.sh dc .
 # to start directly without reading information
-# use any of these
+# use any of these:
 csman.sh dc . -q
 # default current folder .
 csman.sh dcq
