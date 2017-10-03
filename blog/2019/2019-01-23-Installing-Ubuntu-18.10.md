@@ -210,6 +210,17 @@ sudo apt install chromium-browser
 # --incognito --disk-cache-dir=/dev/null --disk-cache-size=1 -start-maximized --enable-dom-distiller
 ```
 
+Got an error from `synaptic` (*W: Download is performed unsandboxed as root as file '/root/.synaptic/tmp//tmp_sh' couldn't be accessed by user '_apt'.*) and had to [run](https://bugs.launchpad.net/ubuntu/+source/aptitude/+bug/1543280):
+
+```
+adduser --force-badname --system --home /nonexistent \
+--no-create-home --quiet _apt || true
+
+if dpkg --compare-versions "$2" lt-nl 1.1~exp10~; then
+usermod --home /nonexistent _apt
+fi
+```
+
 ##Snap
 
 [snap](https://snapcraft.io/) gives a whole class of users choice, and it is in the core strategy behind Ubuntu Core. There seems to be a [decision](https://askubuntu.com/questions/1039968/why-have-canonical-installed-core-gnome-apps-as-snaps-by-default) to deliver parts of desktop as snaps by default to update them cleaner in the future. `snap` is already active for GNOME parts:
