@@ -10,9 +10,14 @@
 * [Ars Technica](https://arstechnica.com/)
 * [Channel9](https://channel9.msdn.com/)
 * [MSDN Magazine](https://msdn.microsoft.com/en-us/magazine/default.aspx)
+* [Wired](https://www.wired.com/tag/programming/)
+* [Developer Tech](https://www.developer-tech.com/)
+* [Science Daily](https://www.sciencedaily.com)
 * [Live Science](https://www.livescience.com/news)
 * [Heise](https://www.heise.de/newsticker/)
+* [Mit News](http://news.mit.edu/)
 * [Ted](https://www.ted.com/)
+* [Reddit](https://www.reddit.com/r/programming/)
 
 <hr>
 
@@ -28,12 +33,16 @@
 <hr>
 
 * [BBC](http://www.bbc.co.uk/news/world/) 
-* [France 24](https://www.france24.com/en/)
-* [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
-* [EuroNews](https://www.euronews.com/news/international)
 * [The Telegraph](https://www.telegraph.co.uk/news/world/)
 * [Daily Mail](https://www.dailymail.co.uk/news/worldnews/index.html)
 * [Financial Times](https://www.ft.com/world)
+* [Reuters](https://www.reuters.com/)
+
+<hr>
+
+* [France 24](https://www.france24.com/en/)
+* [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
+* [EuroNews](https://www.euronews.com/news/international)
 * [B92](https://www.b92.net/eng/news/world.php)
 
 <hr>
@@ -51,6 +60,8 @@
 
 * [Press TV](https://www.presstv.com/)
 * [AlJazeera](https://www.aljazeera.com/news/)
+* [Haaretz](https://www.haaretz.com/world-news)
+* [The Times of Israel](https://www.timesofisrael.com/)
 
 <hr>
 
