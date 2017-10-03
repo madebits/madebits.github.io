@@ -73,7 +73,7 @@ Unable to init server: Could not connect: Connection refused
 (zenity:31120): Gtk-WARNING **: 20:14:17.933: cannot open display:
 ```
 
-The `man pkexec` is very clear: "*pkexec will not allow you to run X11 applications as another user since the $DISPLAY and $XAUTHORITY environment variables are not set*". You have to [edit](https://unix.stackexchange.com/questions/203136/how-do-i-run-gui-applications-as-root-by-using-pkexec) the *polkit* files, and that per each application! Definitively, not the way to go. Can we do better:
+The `man pkexec` is very clear: "*pkexec will not allow you to run X11 applications as another user since the $DISPLAY and $XAUTHORITY environment variables are not set*". You have to [edit](https://unix.stackexchange.com/questions/203136/how-do-i-run-gui-applications-as-root-by-using-pkexec) the *polkit* files, and that per each application! Definitively, not the way to go. We can do better:
 
 ```bash
 if [[ $(id -u) != "0" ]]; then
