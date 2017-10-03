@@ -117,7 +117,7 @@ Sometimes, you may want to quickly generate a lot of secret files at once using 
 sudo cskey.sh enc secret.bin -b 3 -bs -su
 ```
 
-This generates 3 files (*secret.bin*, *secret.bin.01*, *...*, *secret.bin.03*). All these files are encrypted with same password. 
+This generates 4 files (*secret.bin*, *secret.bin.01*, *...*, *secret.bin.03*). All these files are encrypted with same password. 
 
 Without `-bs` option, same secret will be stored on each file (due to AES mode files will be still binary different).
 
