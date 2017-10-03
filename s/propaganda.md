@@ -13,11 +13,11 @@
 ## Technology
 
 [Hacker News](https://news.ycombinator.com/)
-[Daily Rotation](http://www.dailyrotation.com/)
+[Daily Rotation](https://www.dailyrotation.com/)
 [Reddit Programming](https://www.reddit.com/r/programming/)
 [SlashDot](https://slashdot.org/)
-[How To Geek](http://www.howtogeek.com/)
-[GHacks](http://www.ghacks.net/)
+[How To Geek](https://www.howtogeek.com/)
+[GHacks](https://www.ghacks.net/)
 [Medium](https://medium.com/)
 [Ars Technica](https://arstechnica.com/)
 [MSDN Magazine](https://msdn.microsoft.com/en-us/magazine/default.aspx)
@@ -29,7 +29,7 @@
 [Golem.de](https://www.golem.de/)
 [Chip.de](https://www.chip.de/nachrichten)
 [ComputerWoche.de](https://www.computerwoche.de/)
-[MIT News](http://news.mit.edu/)
+[MIT News](https://news.mit.edu/)
 [EnGadget](https://www.engadget.com/)
 [LifeHacker](https://lifehacker.com/)
 [AnandTech](https://www.anandtech.com/)
@@ -54,16 +54,16 @@
 
 ### Linux
 
-[LinuxToday](http://www.linuxtoday.com/)
+[LinuxToday](https://www.linuxtoday.com/)
 [LinuxOrg](https://www.linux.org/)
 [Reddit UnixP0rn](https://www.reddit.com/r/unixporn/)
-[LXer](http://lxer.com/)
 [ItsFoss](https://itsfoss.com/)
 [Linuxize](https://linuxize.com/)
 [LinuxSlashDot](https://linux.slashdot.org/)
 [StackExchangeUnix](https://unix.stackexchange.com/questions)
 [AskUbuntu](https://askubuntu.com/questions)
 [Phoronix](https://www.phoronix.com/scan.php?page=home)
+[LinuxLinks](https://www.linuxlinks.com/)
 
 ## USA
 
@@ -83,7 +83,7 @@
 
 ### UK
 
-[BBC](http://www.bbc.co.uk/news/world/) 
+[BBC](https://www.bbc.co.uk/news/world/) 
 [The Telegraph](https://www.telegraph.co.uk/news/world/)
 [Daily Mail](https://www.dailymail.co.uk/news/worldnews/index.html)
 [Express](https://www.express.co.uk/news/world)
@@ -99,14 +99,14 @@
 
 ## Russia
 
-[RT News](http://rt.com/news/)
+[RT News](https://rt.com/news/)
 [Sputnik News](https://sputniknews.com/)
-[TASS](http://tass.com/world)
+[TASS](https://tass.com/world)
 [SouthFront](https://southfront.org/)
 
 ## China
 
-[South China Morning Post](http://www.scmp.com/news/world)
+[South China Morning Post](https://www.scmp.com/news/world)
 [China Daily](http://www.chinadaily.com.cn/world)
 [Xinhua Net](http://www.xinhuanet.com/english/world/index.htm)
 
@@ -126,7 +126,6 @@
 ## Other
 
 [AllTop](https://alltop.com/tech)
-[World Newspapers](http://www.world-newspapers.com)
 [LiveLeak](https://www.liveleak.com/)
 
 
