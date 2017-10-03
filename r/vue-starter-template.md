@@ -90,7 +90,7 @@ node index.js
 
 Backend will run at port http://localhost:3000 by default.
 
-##VSCode Configuration
+##VSCode Configuration (Extensions)
 
 * [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 * [Prettier - JavaScript formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
