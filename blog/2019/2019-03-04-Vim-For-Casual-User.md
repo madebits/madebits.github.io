@@ -119,7 +119,7 @@ Macros (`:h @`):
 * `q` stop recording
 * `@a` play back macro in register *a*, `@@` replays last macro, `number@a` play *a* *number* times, and `number@@` replays last macro *number* times.
 * `:registers` will show all registers, including the macro ones.
-* `"ap` paste register *a* (to edit as needed)
+* `"ap` paste register *a* (to edit as needed, *^[* is Esc key in a macro body)
 * `0"ay$` copy macro (or `v` to enter visual mode, select, then `"ay`)
 * `:help q` for more details
 
