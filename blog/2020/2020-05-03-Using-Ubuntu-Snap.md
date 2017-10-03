@@ -238,7 +238,12 @@ To view the world as a snap sees it from within, we can get a [shell](https://sn
 snap run --shell gimp
 # then within snap shell
 env | grep SNAP
+
+$ ls /
+bin  boot  dev  etc  home  lib  lib64  media  meta  mnt  opt  proc  root  run  sbin  snap  srv  sys  tmp  usr  var  writable
 ```
+
+User defined environment variables outside of snap are visible to snap. `XDG_` variables are also not changed.
 
 ## Snap Store
 
