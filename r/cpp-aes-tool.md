@@ -11,7 +11,7 @@ AES tool is a free command-line tool that encrypts / decrypts one file at a time
 * Binaries for Windows and Linux.
 * AES 128, 192, 256 bit in CBC mode.
 
-Key generation based on PBKDF1 (PKCS #5 v1.5) with SHA256. AES (FIPS 197), SHA256 (FIPS 180-2) implementations are from http://xyssl.org/.
+Key generation based on PBKDF1 (PKCS #5 v1.5) or PBKDF2 with SHA256. AES (FIPS 197), SHA256 (FIPS 180-2) implementations are from http://xyssl.org/.
 
 ##Usage
 
@@ -20,16 +20,16 @@ AES tool encrypts / decrypts one file at a time (CBC encryption mode).
 * To encrypt:
 
   ```bash
-  ./aes -i file.txt -o file.bin -p password
+  ./aes -m -i file.txt -o file.bin -p password
   ```
 
 * To decrypt:
 
   ```bash
-  ./aes -d -i file.bin -o file.txt -p password
+  ./aes -m -d -i file.bin -o file.txt -p password
   ```
 
-If input (`-i file`) is not specified or `-i -` then `stdin` is used. If output (`-o file`) is not specified or `-o -` then `stdout` is used. If the output file exists it will be overwritten!
+If input (`-i file`) is not specified or `-i -` then `stdin` is used. If output (`-o file`) is not specified or `-o -` then `stdout` is used. If the output file exists it will be overwritten! `-m` activates PBKDF2, if not set PBKDF1 is used.
 
 The password is specified as string on command-line via `-p`, which is usually convenient, but it be can be unsafe, or via a file using `-f` (reads at most 256 bytes of first line). In Bash shell:
 
@@ -98,6 +98,7 @@ Some of `aes` options you can use are:
 * -k to specify AES 128, 192, or 256 bit (256 bit is default).
 * -r read random data needed for encryption from `/dev/urandom` (default C `rand()` function is used).
 * -c now many times we hash the password to obtain the encryption key (see also -a below) (default 1024).
+* -m to use PBKDF2 for -c (defulr is PBKDF1).
 * -h some number - *this is evil (TM)* and it needs some more explanation. Without -h (or -h 0), `aes` tool stores the file as (iv,salt,encrypted data), where the file length is a multiple of 8 and the offset of begin of each part is known. If we specify an offset with -h we store that much random data first in file (random,iv,salt,encrypted data), so the file length is no more necessary a multiple of 8, and the offsets of the parts are not directly known (see also -a below) (default is -h 0).
 * -a [level] is an automatic shortcut for -c and -h (default level for -a is 5). When using -a, then -c, -h are ignored and their values are auto calculated from password based on the formulas shown next, where `passwordSum` is the sum of all password characters as an integer (and `**` is math power):
 
