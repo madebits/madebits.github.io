@@ -27,12 +27,10 @@ function showError()
 function newName()
 {
 	local newName=""
-	local count=0
 	while :
 	do
-		count=$((count+1))
-		newName=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 4 | head -n1)
-		newName="${count}_${newName}"
+		#a-zA-Z0-9
+		newName=$(cat /dev/urandom | tr -dc 'a-z' | fold -w 4 | head -n1)
 		if [ ! -e "/dev/mapper/${newName}" ]; then
 			break
 		fi
