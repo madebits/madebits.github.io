@@ -224,7 +224,7 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	sudo foremost -t jpg -i /dev/sda1 -o /media/udata/test
 	```
 
-1. The following trick helps to start bash without history saving active. In `$HOME/.bash_aliases` file add:
+1. The following trick helps starting `bash` with history saving not active. In `$HOME/.bash_aliases` file, add:
 
 	```
 	alias histoff='unset HISTFILE'
