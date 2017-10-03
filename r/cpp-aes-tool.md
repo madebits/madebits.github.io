@@ -31,7 +31,7 @@ AES tool encrypts / decrypts one file at a time (CBC encryption mode).
 
 If input (`-i file`) is not specified or `-i -` then `stdin` is used. If output (`-o file`) is not specified or `-o -` then `stdout` is used. If the output file exists it will be overwritten!
 
-The password is specified as string on command-line, which is usually convenient, but it be scan be unsafe. In Bash shell:
+The password is specified as string on command-line, which is usually convenient, but it be can be unsafe. In Bash shell:
 
 1. To skip commands stored in history file (given `aes` needs the password in command-line) use a **space** before the command (check bash `HISTIGNORE` documentation for more details). E.g. (note space after $ prompt): 
 
