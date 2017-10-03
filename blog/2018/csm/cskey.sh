@@ -584,7 +584,6 @@ function createRndFile()
 
 function showHelp()
 {
-	
 	cat << EOF
 Usage: $(basename -- "$0") [enc | dec | ses | rnd] file [options]
 Using -- for dec|enc file is a shortcut not to use a secret file (weak)
