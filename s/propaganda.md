@@ -16,8 +16,8 @@
 * [Live Science](https://www.livescience.com/news)
 * [Heise](https://www.heise.de/newsticker/)
 * [Mit News](http://news.mit.edu/)
+* [Reddit Programming](https://www.reddit.com/r/programming/)
 * [Ted](https://www.ted.com/)
-* [Reddit](https://www.reddit.com/r/programming/)
 
 <hr>
 
@@ -28,7 +28,7 @@
 * [Fox News](https://www.foxnews.com/world)
 * [The New York Times](https://www.nytimes.com/section/world)
 * [The Washington Times](https://www.washingtontimes.com/news/world/)
-* [Reddit](https://www.reddit.com/r/worldnews/)
+* [Reddit World News](https://www.reddit.com/r/worldnews/)
 
 <hr>
 
