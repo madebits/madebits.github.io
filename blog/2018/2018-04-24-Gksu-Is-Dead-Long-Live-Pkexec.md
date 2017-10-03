@@ -37,7 +37,7 @@ If you run the above from a `test.sh` script you get:
 Error executing ./test.sh: No such file or directory
 ```
 
-It seems `pkexec` works reliably only with absolute paths. One [way](https://stackoverflow.com/questions/4774054/reliable-way-for-a-bash-script-to-get-the-full-path-to-itself) to achieve that:
+It seems, `pkexec` works reliably only with absolute paths. One [way](https://stackoverflow.com/questions/4774054/reliable-way-for-a-bash-script-to-get-the-full-path-to-itself) to achieve that:
 
 ```bash
 if [[ $(id -u) != "0" ]]; then
@@ -51,7 +51,7 @@ echo $@
 
 ##Second Problem
 
-If you try to run a command that need access to user interface from `pkexec`, such as, `zenity` command in the script below:
+If you try to run a command that need access to user interface from `pkexec`, such as, this `zenity` command in the script below:
 
 ```bash
 if [[ $(id -u) != "0" ]]; then
@@ -65,7 +65,7 @@ msg="$@"
 zenity --info --text="$msg"
 ```
 
-You get this error:
+You get the following error:
 
 ```
 Unable to init server: Could not connect: Connection refused
