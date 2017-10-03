@@ -99,7 +99,7 @@ zenity --info --text="$msg"
 
 ##A Poor Man's gksu
 
-Finally, we can use the idea above to create a poor man's `gksu.sh` replacement script:
+We can use the idea above to create a final poor man's `gksu.sh` replacement script:
 
 ```bash
 #!/bin/bash
