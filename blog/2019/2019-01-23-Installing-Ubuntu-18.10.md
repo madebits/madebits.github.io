@@ -98,7 +98,7 @@ I can go on with the rest of my system specific configuration.
 
 ##Ah, Snap :(
 
-I have nothing against [snap](https://snapcraft.io/). I think it gives a whole class of users choice. But, I have a problem, when that choice is not there. Here I am with a newly installed Ubuntu, and I have not installed anything using `snap` on my own. Just what was there and software from official repositories (`deb` packages). But what I see, is `snap` already taking over:
+I have nothing against [snap](https://snapcraft.io/). I think it gives a whole class of users choice. I have a problem, when that choice is not there. Here I am, with a newly installed Ubuntu and I have not installed anything using `snap` on my own. Just what was there and software from official repositories (`deb` packages). What I see is `snap` already taking over:
 
 ```bash
 $ df -h -T | grep loop
