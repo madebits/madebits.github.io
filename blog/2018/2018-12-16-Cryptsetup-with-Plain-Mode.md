@@ -201,7 +201,7 @@ To change password of `secret.bin` (file is overwritten in place, so backup it b
 # enter new pass
 ```
 
-With `cs-key.sh` ready, we can now automate open / close with a second script for convenience (it is not really needed), lets name it `cs-map.sh` (`cs-key.sh` should be in same folder):
+With `cs-key.sh` ready, we can now automate for convenience open / close with a second script `cs-map.sh` (`cs-key.sh` should be in same folder):
 
 ```bash
 #!/bin/bash
@@ -344,7 +344,7 @@ main "$@"
 
 ```
 
-It can be used as follows:
+The new `cs-map.sh` script can be used as follows:
 
 ```bash
 sudo ./cs-map open enc1 secret.bin container.bin
@@ -355,7 +355,7 @@ sudo ./cs-map open enc1 secret.bin container.bin
 sudo ./cs-map close enc1
 ```
 
-You may wish to use the script also to create a container file (size can be either in M or G):
+We may also use the script create a new container file (size can be either in M or G):
 
 ```bash
 sudo ./cs-map.sh create enc1 secret.bin container.bin 30M
@@ -408,7 +408,7 @@ cryptsetup close layer1
 
 ### Shared Blob
 
-We can use `--offset (-o)` and `--size` option (both defined as number of 512 byte sectors) to have several non-overlapping encrypted containers on same binary file blob. We can even open several of them at once by adding `--shared` option to `cryptsetup open`:
+We can use `--offset (-o)` and `--size` option (both defined as number of 512 byte sectors) to have several *non-overlapping* encrypted containers on same binary file blob. We can even open several of them at once by adding `--shared` option to `cryptsetup open`:
 
 ```bash
 cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 open --type plain -o 100 --size 1000 container.bin container1
