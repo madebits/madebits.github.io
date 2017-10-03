@@ -154,7 +154,8 @@ function createContainer()
 	local user=${SUDO_USER:-$(whoami)}
     sudo -u "$user" "${toolsDir}/cs-key.sh" enc "$secret"
     echo "You will asked to re-enter password to open the container for the first time ..."
-    "${toolsDir}/cs-key.sh" dec "$secret" | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$container" "$name" -
+    local key=$(sudo -u "$user" "${toolsDir}/cs-key.sh" dec "$secret" | base64 -w 0)
+    echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$container" "$name" -
 
     echo "Creating file system ..."
     mkfs -m 0 -t ext4 "/dev/mapper/$name"
@@ -176,6 +177,14 @@ function closeAll()
     done
 }
 
+function changePass()
+{
+	local secret="$1"
+    checkArg "$secret" "secret"
+	local user=${SUDO_USER:-$(whoami)}
+	sudo -u "$user" "${toolsDir}/cs-key.sh" chp "$secret"
+}
+
 function showHelp()
 {
     (>&2 echo "Usage:")
@@ -184,7 +193,8 @@ function showHelp()
     (>&2 echo " $0 close name")
     (>&2 echo " $0 closeAll")
     (>&2 echo " $0 create secret container size [ additional cryptsetup parameters ]")
-    (>&2 echo "    size should end in M or G, secret and container files will be overwritten, use with care")   
+    (>&2 echo "    size should end in M or G, secret and container files will be overwritten, use with care")
+    (>&2 echo " $0 changePass secret")  
 }
 
 function main()
@@ -207,6 +217,9 @@ function main()
         ;;
         closeAll|ca|x)
             closeAll
+        ;;
+        changePass|chp)
+			changePass "$1"
         ;;
         *)
             showHelp

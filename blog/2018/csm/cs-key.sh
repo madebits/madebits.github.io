@@ -109,10 +109,11 @@ function main()
 {
     local mode="$1"
     local file="${2:-secret.bin}"
+    local key=""
     case "$mode" in
         enc)
             readPass
-            local key=$(head -c 512 /dev/urandom | base64 -w 0)
+            key=$(head -c 512 /dev/urandom | base64 -w 0)
             #echo $key | base64 -d > out.txt
             encodeKey "$file" "$pass" "$key"
         ;;
@@ -123,7 +124,7 @@ function main()
         chp)
             read -p "Current password: " -s pass1
             (>&2 echo)
-            key=$(decodeKey "$file" "$pass1")
+            key=$(decodeKey "$file" "$pass1" | base64 -w 0)
             readPass
             encodeKey "$file" "$pass" "$key"
         ;;
