@@ -257,6 +257,8 @@ sudo apt install gnome-system-monitor
 
 * `veracrypt` needs `sudo apt install libcanberra-gtk-module libcanberra-gtk3-module`.
 
+* Useful software: `sudo apt install mpv vlc speedcrunch speedcrunch keepassxc baobab`.
+
 ##Summary
 
 Apart of GNOME taskbar, which I really do not like, as it consumes the limited vertical space on screen:
