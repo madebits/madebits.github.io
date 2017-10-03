@@ -14,7 +14,7 @@ Have a look at https://code.visualstudio.com/docs/languages/javascript and let m
 
 * In the very introduction, they explain: *"Most of these features just work out of the box, while some may require basic configuration to get the best experience."*. This means, we do not really care to make it easy and comfortable to use JavaScript out of the box in VSCode.
 
-* *VS Code provides IntelliSense within your JavaScript projects; for many npm libraries such as ...*, basically, for all those libraries that come with TypeScript information.
+* *VSCode provides IntelliSense within your JavaScript projects; for many npm libraries such as ...*, basically, for all those libraries that come with TypeScript information.
 
 * *`jsconfig.json` files are not required ...*, but the TypeScript compiler uses them and while you do not want to use TypeScript, then at least take over its bad parts. TypeScript developers are used to that, JavaScript people can get used to that pain too.
 
