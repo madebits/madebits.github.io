@@ -71,7 +71,7 @@ Common movement commands (in *command-mode*):
 * `w` move one word forward, `b` move one word backward, `e` move to end of word; `W`, `B`, `E` work same but consider punctuations as part of words.
 * `%` move to matching char (`()`, `{}`, `[]`).
 * Usually combined with other commands: `)` or `s` move one sentence; `}` or `p` move one paragraph, `t` move one tag; `b` more one code block; all these can get confused in some source code files (in default configuration).
-* `gg=G` format whole text, where `=` is format command. `<` and `>` indent left or right.
+* `gg=G` format whole text, where `=` is format command. `<` and `>` indent left or right. 
 
 Common edit commands (in *command-mode*):
 
@@ -83,7 +83,7 @@ Common edit commands (in *command-mode*):
 * `r` replace char under cursor; `R` or `s` are same as `r` and enter insert mode afterwards.
 * `c` change *motion* (using any motion command from above: `c5w`).
 * `C` change current line.
-* `~` toggle case under cursor.
+* `~` toggle case under cursor. `gu` lowercase `gU` uppercase.
 * `J` join current line with next one.
 
 
@@ -101,13 +101,13 @@ Common edit commands (in *command-mode*):
 * `u` undo; `Ctrl+r` redo
 * `.` repeat last action sequence (`number.` repeat last command sequence *number* times)
 
-Edit commands can be combined with **i**nside or **a**round text-object bound options:
+Edit commands can be combined with **i**nside or **a**round *text-object* bound options:
 
-* `ciw` - change inside word, `caw` - change inside word. Mounded motions include: `w` word, `s` sentence, `p` paragraph, `t` tag, `'` single quote, `"`` double quote, and  `(`, `[`, '{' stand per their own.
+* `ciw` - change inside word, `caw` - change inside word. Mounded motions include: `w` word, `s` sentence, `p` paragraph, `t` tag, `'` single quote, `"` double quote, and  `(`, `[`, `{` stand per their own.
 
 While in *insert-mode*, `Ctrl+R 0` will paste text without having leave that mode (see `:h i_ctrl-r`). `Ctrl+o` will allow running a single command and coming back to insert-mode. `Ctrl+h` will delete previous char (same as *Backspace*) and `Ctrl+w` will delete previous word, while `Ctrl+u` will delete to start of line. `Ctrl+n` and `Ctrl+p` enable auto-completion from words found in open buffers.
 
-Vim has also a **visual-mode**, entered by any of: `v` char selection, `V` line selection, `Ctrl+V` block selection. Arrow keys expand selection (on whihc side can be toggled with `o`) and `gv` reselects. In visual-mode, you select first the text and run any command on it.
+Vim has also a **visual-mode**, entered by any of: `v` char selection, `V` line selection, `Ctrl+V` block selection. Arrow keys expand selection (on whihc side can be toggled with `o`) and `gv` reselects. In visual-mode, you select first the text and then run any command on it.
 
 ##Casual Zen
 
@@ -121,7 +121,7 @@ Macros (`:h @`):
 * `0"ay$` copy macro (or `v` to enter visual mode, select, then `"ay`)
 * `:help q` for more details
 
-Replacing text (do not bother more that this with replace, unless you have no other use for your life, better use macros):
+Replacing text (do not bother more that this with substitute command, unless you have no other use for your life, better use macros):
 
 * `:s%/foo/bar/g` replace `foo` with `bar` globally
 * `:s/foo/bar/g` replace `foo` with `bar` in current line
