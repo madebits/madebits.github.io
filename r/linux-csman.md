@@ -12,25 +12,29 @@
 
 CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The follow are some of the hard-coded settings of the script:
 
-* Uses `cryptsetup` in *plain* mode with 512 byte keys (`-s 512 -h sha512`).
+* Uses `cryptsetup` in *plain* mode with 512 byte passwords (`-s 512 -h sha512`).
 * Supports only [EXT4](https://en.wikipedia.org/wiki/Ext4) volumes.
 * Uses two nested *dm-crypt* mappers: (outer) *aes-xts-plain64* and (inner) *twofish-cbc-essiv:sha256*.
 * Mounts container accessible for current user under: `$HOME/mnt/csm-*`.
 
 ### How it Works
 
-CSMan uses randomly generated 512 byte binary keys (called **secret**) to with `cryptsetup` *plain* mode containers. The 512 byte passwords are stored in **secret files** encrypted with *AES* and protected with a user password (called **password**). The file encryption password is hashed using `argon2` before passed to AES tools (which do also their own hashing). To open a container both the secret file and password must be known. Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords (AES used is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret, leads to different binary files). On difference from LUKS, user is responsible to store secret files separately from containers (maybe in another container).
+CSMan uses a randomly generated 512 byte binary key (called **secret**) as passwords for a `cryptsetup` *plain* mode container. The secret 512 bytes are stored in **secret files** encrypted with *AES* and protected with a user password (called **password**). 
+
+The secret file encryption password is hashed using `argon2` before passed to AES tools (which do also their own hashing). To open a container both the secret file and password must be known. 
+
+Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords. AES used is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret, leads to different binary files. On difference from LUKS, user is responsible to store secret files separately from containers (maybe in another container).
 
 ### Terminology
 
 Some overlapping terms explained:
 
-* **secret** - randomly generated (or user specified) 512 bytes (binary). Binary values are shown as *base64*. Secret is used as `cryptsetup` password.
+* **secret** - randomly generated (or user specified) 512 bytes (binary). Binary values are shown as *base64* in tool. Secret is used as `cryptsetup` password.
 * **secret file** - file where *secret* is stored encrypted.
-* **password** - user password used to encrypt *secret file*.
+* **password** - user password (or paraphrase) used to encrypt *secret file* (hashed with `argon2`).
 * **key file** - user password can contain additionally to the paraphrase one or more optional key files. Their header bytes hashed content is added to the password. Order of specifying key files does not matter, but they have to be exact same files used during encryption and decryption.
-* **session** - optional state stored as part of current user session. There is by default no session, but it is possible to store passwords in named encrypted session slots in *tmpfs* and refer to them from there.
-* **session password** - an optional password used to protect contents stored in *session*.
+* **session** - optional state stored as part of current user session. There is by default no session, but it is possible to store passwords in named encrypted session slots in a *tmpfs* for current logged user and refer to them from there.
+* **session password** - an optional password used additionally to temporary random session key to protect contents stored in *session*.
 
 ## Installation
 
