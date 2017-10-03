@@ -249,9 +249,6 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	sudo systemctl stop whoopsie.service
 	sudo systemctl disable whoopsie.service
 	sudo systemctl status whoopsie.service
-
-	#edit /etc/apport/crashdb.conf
-	# comment out with # 'problem_types': 
 	```
 
 	Other things to disable:
