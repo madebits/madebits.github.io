@@ -238,6 +238,15 @@ function cleanUp()
     exit 0
 }
 
+function showChecksum()
+{
+    sha256sum "$0"
+    sha256sum "${toolsDir}/cskey.sh"
+    if [ -f "${toolsDir}/aes" ]; then
+        sha256sum "${toolsDir}/aes"
+    fi
+}
+
 function showHelp()
 {
     local bn=$(basename "$0")
@@ -254,6 +263,7 @@ function showHelp()
 
 function main()
 {
+    showChecksum
     local mode="$1"
     shift
 
