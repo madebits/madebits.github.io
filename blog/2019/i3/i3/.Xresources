@@ -83,6 +83,19 @@ URxvt.termName: xterm-256color
 URxvt.urgentOnBell: True
 URxvt.cursorBlink: False
 
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
+URxvt*scrollTtyKeypress: true
+
+! TODO: find why these are good for
+URxvt.shading: 15
+URxvt*depth: 32
+URxvt.inputMethod: ibus
+URxvt.preeditType: OverTheSpot
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
 ! Disable printing the terminal contents when pressing PrintScreen.
 URxvt.print-pipe: "cat > /dev/null"
 
@@ -91,9 +104,8 @@ URxvt.print-pipe: "cat > /dev/null"
 ! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/src/urxvt.pm
 ! https://wiki.archlinux.org/index.php/rxvt-unicode
 ! tabs: Shift+Down = new tab, ctrl+d = close tab, Shift+left / right = goto tab, Ctrl+left/right = move tab
-URxvt.perl-ext-common: default,font-size,tabbed,matcher,selection-to-clipboard,clipboard-past-on-right-click,confirm-paste
+URxvt.perl-ext-common: default,font-size,tabbed,matcher,selection-to-clipboard,right-click-paste,confirm-paste
 
-! URxvt.tabbed.autohide: true
 URxvt.tabbed.tabbar-fg: 2
 URxvt.tabbed.tabbar-bg: 7
 URxvt.tabbed.tab-fg: 3
@@ -104,8 +116,11 @@ URxvt.urlButton: 1
 URxvt.underlineURLs: True
 URxvt.matcher.rend.0: Uline Bold fg2
 
-! URxvt.copyCommand:  xclip -i -selection clipboard
-! URxvt.pasteCommand: xclip -o -selection clipboard
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+URxvt.keysym.C-Up:     font-size:increase
+URxvt.keysym.C-Down:   font-size:decrease
 
 ! Fonts 13 13:4
 
@@ -145,22 +160,6 @@ URxvt.color6  : #06989A
 URxvt.color14 : #34E2E2
 ! white
 URxvt.color7  : #D3D7CF
-URxvt.color15 : #EEEEEC
-
-
-URxvt.shading:       15
-urxvt*depth:        32
-
-URxvt.inputMethod: ibus
-URxvt.preeditType: OverTheSpot
-
-URxvt.iso14755: false
-URxvt.iso14755_52: false
-
-URxvt.keysym.C-Up:     font-size:increase
-URxvt.keysym.C-Down:   font-size:decrease
-! URxvt.keysym.C-S-Up:   font-size:incglobal
-! URxvt.keysym.C-S-Down: font-size:decglobal
-! URxvt.keysym.C-equal:  font-size:reset
-! URxvt.keysym.C-slash:  font-size:show
+! #EEEEEC
+URxvt.color15 : #cacac4
 

@@ -51,9 +51,10 @@ if [ -z "$@"]; then
     echo "🌐 Browser (W+b)"
     echo "🌎 Firefox"
     echo "📂 Files (W+e|W+n)"
+    echo "🔎 Search"
     echo "📧 Email"
     echo "🗳️ DropBox"
-    
+        
     echo "🔑 VeraCrypt"
     echo "🔐 KeepassXC"
     
@@ -90,60 +91,63 @@ else
     cmd="$@"
     case $cmd in
         "☠️ i3 Kill (A+F4|W+Q|W+F4|B2)")
-            i3-msg 'kill' > /dev/null
+            /usr/bin/i3-msg 'kill' > /dev/null
             ;;
         "🎛️ i3 Toggle Layout (W+Tab|W+w)")
-            i3-msg 'layout toggle tabbed stacking split' > /dev/null
+            /usr/bin/i3-msg 'layout toggle tabbed stacking split' > /dev/null
             ;;
         "🔲 i3 New Workspace (W+^)")
-            i3-msg workspace number "$(i3NextFreeWorkspace)" > /dev/null
+            /usr/bin/i3-msg workspace number "$(i3NextFreeWorkspace)" > /dev/null
             ;;
         "▶️ i3 Move to New Workspace")
             nws="$(i3NextFreeWorkspace)"
             #i3-msg "move container to workspace number ${nws}; workspace number ${nws}" > /dev/null
-            i3-msg "move container to workspace number ${nws}" > /dev/null
+            /usr/bin/i3-msg "move container to workspace number ${nws}" > /dev/null
             sleep 0.2 > /dev/null
-            i3-msg workspace number "$nws" > /dev/null
+            /usr/bin/i3-msg workspace number "$nws" > /dev/null
             ;;
         "⏩ i3 Move All To New Workspace")
             nws="$(i3NextFreeWorkspace)"
-            i3-msg "rename workspace to \"${nws}\"" > /dev/null
+            /usr/bin/i3-msg "rename workspace to \"${nws}\"" > /dev/null
             ;;
         "🛸 i3 Floating Toggle (W+Shift+space)")
-            i3-msg 'floating toggle; move position center' > /dev/null
+            /usr/bin/i3-msg 'floating toggle; move position center' > /dev/null
             ;;
         "💎 i3 Sticky Toggle")
-            i3-msg 'sticky toggle' > /dev/null
+            /usr/bin/i3-msg 'sticky toggle' > /dev/null
             ;;
         "📺 i3 Full Screen (W+f)")
-            i3-msg 'fullscreen toggle' > /dev/null
+            /usr/bin/i3-msg 'fullscreen toggle' > /dev/null
             ;;
         "📌 i3 Bar Toggle (W+y)")
-            i3-msg 'bar mode toggle' > /dev/null
+            /usr/bin/i3-msg 'bar mode toggle' > /dev/null
             ;;
         "⚙️ i3 Config")
-            geany -i $HOME/.config/i3status/config $HOME/.config/i3/start.sh $HOME/.config/i3/rofi_custom.sh $HOME/.config/i3/config > /dev/null &
+            /usr/bin/geany -i $HOME/.config/i3status/config $HOME/.config/i3/start.sh $HOME/.config/i3/rofi_custom.sh $HOME/.config/i3/config > /dev/null &
             ;;
         "🌀 i3 Reload (W+S+r)")
-            i3-msg reload > /dev/null
-            i3-msg restart > /dev/null
+            /usr/bin/i3-msg reload > /dev/null
+            /usr/bin/i3-msg restart > /dev/null
             ;;
         "🔊 Volume")
-            pavucontrol > /dev/null &
+            /usr/bin/pavucontrol > /dev/null &
             ;;
             
 
         "🌐 Browser (W+b)")
-            chromium-browser > /dev/null &
+            ~/bin/chrome.sh > /dev/null &
             ;;
         "🌎 Firefox")
-            firefox > /dev/null &
+            /usr/bin/firefox > /dev/null &
             ;;
         "📂 Files (W+e|W+n)")
-            nautilus > /dev/null &
+            /usr/bin/nautilus > /dev/null &
+            ;;
+        "🔎 Search")
+            /usr/bin/catfish > /dev/null &
             ;;
         "📧 Email")
-            thunderbird > /dev/null &
+            /usr/bin/thunderbird > /dev/null &
             ;;
         "🗳️ DropBox")
             $HOME/.dropbox-dist/dropboxd > /dev/null &
@@ -153,71 +157,71 @@ else
             /usr/bin/veracrypt > /dev/null &
             ;;
         "🔐 KeepassXC")
-            keepassxc > /dev/null &
+            /usr/bin/keepassxc > /dev/null &
             ;;
                 
         "🧮 Calculator")
-            speedcrunch > /dev/null &
+            /usr/bin/speedcrunch > /dev/null &
             ;;
         "🏢 Office")
-            libreoffice > /dev/null &
+            /usr/bin/libreoffice > /dev/null &
             ;;
         "💥 Sublime")
             $HOME/opt/sublime_text_3/sublime_text > /dev/null &
             ;;
         "📝 Geany")
-            geany -i > /dev/null &
+            /usr/bin/geany -i > /dev/null &
             ;;
         "📘 VsCode")
             ~/opt/VSCode-linux-x64/code > /dev/null &
             ;;
 
         "🎦 Vlc")
-            vlc $HOME/Desktop/music.xspf > /dev/null &
+            /usr/bin/vlc $HOME/Desktop/music.xspf > /dev/null &
             ;;
         "🎶 Audacious")
-            audacious > /dev/null &
+            /usr/bin/audacious > /dev/null &
             ;;
         "🖼️ Gimp")
-            gimp > /dev/null &
+            /usr/bin/gimp > /dev/null &
             ;;
 
         "📦 VirtualBox")
-            virtualbox > /dev/null &
+            /usr/bin/virtualbox > /dev/null &
             ;;
         "👨‍💻 Synaptic Install")
             #exec zenity --password | sudo -S synaptic
-            synaptic-pkexec  > /dev/null &
+            /usr/bin/synaptic-pkexec  > /dev/null &
             ;;
         "🔄 System Updates")
             #zenity --password | sudo -S update-manager
-            update-manager > /dev/null &
+            /usr/bin/update-manager > /dev/null &
             ;;
         "💽 Disks")
-            gnome-disks > /dev/null &
+            /usr/bin/gnome-disks > /dev/null &
             ;;
          
         "🔋 Power Stats")
-            gnome-power-statistics > /dev/null &
+            /usr/bin/gnome-power-statistics > /dev/null &
             ;;
         "⚡ System Monitor")
             gnome-system-monitor > /dev/null &
             ;;
         "📚 Disk Space")
-            baobab > /dev/null &
+            /usr/bin/baobab > /dev/null &
             ;;
         "️🖨️ Printers")
             system-config-printer > /dev/null &
             ;;
             
         "🗂️ Ranger (W+g)")
-            ~/.config/i3/term.sh -e ranger > /dev/null &
+            ~/.config/i3/term.sh -e $HOME/git/ranger/ranger.py > /dev/null &
             ;;
         "💻 Terminal (W+Enter|W+t)")
             ~/.config/i3/term.sh > /dev/null &
             ;;
         "📅 Calendar")
-            zenity --calendar --text="$(date)" --width=320 > /dev/null &
+            /usr/bin/zenity --calendar --text="$(date)" --width=320 > /dev/null &
             ;;
         
         "🏳️‍🌈 Lock Screen (W+Esc)")
@@ -225,7 +229,7 @@ else
             /usr/bin/i3lock -u -i ~/bin/img/i3lock.png > /dev/null
             ;;
         "📲 Logout")
-            i3-msg exit > /dev/null
+            /usr/bin/i3-msg exit > /dev/null
             ;;
         "♻️ Reboot")
             systemctl reboot > /dev/null

@@ -2,4 +2,5 @@
 
 xrdb -load ~/.config/i3/.Xresources
 #xterm "$@"
-urxvt "$@"
+#urxvtcd -pixmap "$HOME/.urxvt/bg.png;style=tiled" "$@"
+urxvtcd "$@"

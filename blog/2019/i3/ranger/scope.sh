@@ -37,8 +37,7 @@ FILE_EXTENSION_LOWER="$(printf "%s" "${FILE_EXTENSION}" | tr '[:upper:]' '[:lowe
 HIGHLIGHT_SIZE_MAX=262143  # 256KiB
 HIGHLIGHT_TABWIDTH=8
 HIGHLIGHT_STYLE='pablo'
-PYGMENTIZE_STYLE='autumn'
-
+PYGMENTIZE_STYLE='autumn'  
 
 handle_extension() {
     case "${FILE_EXTENSION_LOWER}" in
@@ -131,7 +130,8 @@ handle_image() {
         # Video
         video/*)
             # Thumbnail
-            ffmpegthumbnailer -f -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
+            #ffmpegthumbnailer -f -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
+            /usr/bin/mpv "${FILE_PATH}" --quiet --no-audio --start=05% --frames=1 --vo=image --vo-image-format=jpg -o "${IMAGE_CACHE_PATH}" && exit 6
             exit 1;;
 
         # PDF
@@ -253,16 +253,16 @@ handle_mime() {
             exit 1;;
 
         # Video and audio
-        video/* | audio/*)
-            mediainfo "${FILE_PATH}" && exit 5
-            exiftool "${FILE_PATH}" && exit 5
-            exit 1;;
+        #video/* | audio/*)
+        #    mediainfo "${FILE_PATH}" && exit 5
+        #    exiftool "${FILE_PATH}" && exit 5
+        #    exit 1;;
     esac
 }
 
 handle_fallback() {
     echo '----- File Type Classification -----' && file --dereference --brief -- "${FILE_PATH}" | fmt -s -w ${PV_WIDTH}\
-        && echo -e "\n\n" && hexdump -n 256 -C -- "${FILE_PATH}"\
+        && echo -e "\n\n" && hexdump -n 256 -e '"%_p"' -- "${FILE_PATH}"\
         | fmt -s -w ${PV_WIDTH} && exit 5
     exit 1
 }

@@ -1,17 +1,18 @@
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id /usr/bin/xsetroot -solid "#81584e"
+#exec --no-startup-id /usr/bin/xsetroot -solid "#81584e"
 exec_always --no-startup-id /usr/bin/xrdb -load ~/.config/i3/.Xresources
-#exec_always --no-startup-id ~/bin/feh/feh --bg-scale ~/.config/i3/bg.jpg
 exec_always --no-startup-id ~/.fehbg
+#exec_always --no-startup-id ~/bin/wallpaper.sh
 exec --no-startup-id ~/.config/i3/start.sh
 exec_always --no-startup-id /usr/bin/nm-applet
-exec --no-startup-id pasystray
+exec --no-startup-id /usr/bin/pasystray
 exec --no-startup-id /usr/bin/pulseaudio
 exec --no-startup-id /usr/bin/redshift
-exec_always --no-startup-id xset dpms 0 0 0
-exec_always --no-startup-id xset -dpms
-exec_always --no-startup-id xset s off
-#exec --no-startup-id compton -b
+exec_always --no-startup-id /usr/bin/xset dpms 0 0 0
+exec_always --no-startup-id /usr/bin/xset -dpms
+exec_always --no-startup-id /usr/bin/xset s off
+#exec --no-startup-id /usr/bin/compton -b
+exec --no-startup-id /usr/bin/parcellite
 
 #exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 
@@ -46,7 +47,7 @@ bindsym $mod+t $term
 bindsym $mod+F4 kill
 bindsym Mod1+F4 kill
 bindsym $mod+q kill
-bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+bindsym $mod+Ctrl+x --release exec --no-startup-id /usr/bin/xkill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
@@ -54,8 +55,8 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 #bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop
-set $apps exec rofi -modi 'window#i3:.config/i3/rofi_custom.sh#drun#run' -show-icons -show window -sort -width 80  -lines 17 -sidebar-mode -columns 4 -terminal .config/i3/term.sh -location 1 -yoffset 23
-set $favs exec rofi -modi 'window#i3:.config/i3/rofi_custom.sh#drun#run' -show-icons -show i3 -sort -width 80  -lines 17 -sidebar-mode -columns 4 -terminal .config/i3/term.sh -location 1 -yoffset 23
+set $apps exec rofi -modi 'window#i3:.config/i3/rofi_custom.sh#drun#run' -show-icons -show window -sort -width 81  -lines 17 -sidebar-mode -columns 4 -terminal .config/i3/term.sh -location 1 -yoffset 23
+set $favs exec rofi -modi 'window#i3:.config/i3/rofi_custom.sh#drun#run' -show-icons -show i3 -sort -width 81  -lines 17 -sidebar-mode -columns 4 -terminal .config/i3/term.sh -location 1 -yoffset 23
 bindsym --release Ctrl+Tab $apps
 
 # change focus
@@ -73,10 +74,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+Shift+h split h; exec notify-send -u low 'i3 tile horizontally'
+bindsym $mod+Shift+h split h; exec /usr/bin/notify-send -u low 'i3 tile horizontally'
 
 # split in vertical orientation
-bindsym $mod+Shift+v split v; exec notify-send -u low 'i3 tile vertically'
+bindsym $mod+Shift+v split v; exec /usr/bin/notify-send -u low 'i3 tile vertically'
 
 #bindsym $mod+q split toggle
 
@@ -95,8 +96,9 @@ bindsym $mod+Tab $layout
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-floating_minimum_size 128 x 96
-floating_maximum_size 1024 x 768
+floating_minimum_size 128 x 72
+#floating_maximum_size 1024 x 768
+floating_maximum_size 1920 x 1040
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
@@ -105,7 +107,7 @@ floating_maximum_size 1024 x 768
 bindsym $mod+a focus parent
 
 # focus the child container
-bindsym $mod+Shift+d focus child
+bindsym $mod+Shift+a focus child
 
 set $workspace1 "1: 🍓🍓"
 set $workspace2 "2: 🍊🍊"
@@ -212,24 +214,27 @@ bindsym Mod1+Left $prevw
 bindsym Mod1+Shift+Tab $prevw
 
 bindsym $mod+d $favs
-bindsym $mod+b exec --no-startup-id chromium-browser
-bindsym $mod+n exec --no-startup-id nautilus
-bindsym $mod+e exec --no-startup-id nautilus
-bindsym $mod+g exec --no-startup-id ~/.config/i3/term.sh -e ranger
+#bindsym $mod+b exec --no-startup-id /usr/bin/chromium-browser
+
+set $browser ~/.config/i3/rofi_custom.sh "🌐 Browser (W+b)"
+bindsym $mod+b exec --no-startup-id $browser
+
+bindsym $mod+n exec --no-startup-id /usr/bin/nautilus
+bindsym $mod+e exec --no-startup-id /usr/bin/nautilus
+bindsym $mod+g exec --no-startup-id ~/.config/i3/term.sh -e ~/git/ranger/ranger.py
 
 bindsym $mod+y bar mode toggle
 bindsym $mod+Escape $lock
+bindsym XF86AudioNext $lock
 #bindsym $mod+Shift+t border toggle
 
-bindsym --release Print exec --no-startup-id gnome-screenshot -i
+bindsym --release Print exec --no-startup-id /usr/bin/gnome-screenshot -i
 
 #floating_minimum_size 150 x 50
 #floating_maximum_size 640 x 480
 #for_window [class="SpeedCrunch"] floating enable, resize set 30% 90%, move position center
 
-
-
-bindsym --release XF86Calculator exec --no-startup-id speedcrunch
+bindsym --release XF86Calculator exec --no-startup-id /usr/bin/speedcrunch
 #XF86Sleep
 
 bindsym --release button2 kill
@@ -260,17 +265,21 @@ for_window [class="mpv"] floating enable
 for_window [class="Gthumb"] floating enable
 for_window [class="Eog"] floating enable
 for_window [class="XnViewMP"] floating enable
-
+for_window [class="feh"] floating enable
+for_window [class="Gimp"] floating enable
+for_window [class="Catfish"] floating enable
+for_window [class="Gnome-disks"] floating enable
+for_window [class="keepassxc"] floating enable
+for_window [class="Gnome-system-monitor"] floating enable
+for_window [class="Gnome-power-statistics"] floating enable
 
 # sudo apt install pavucontrol
 for_window [class="Pavucontrol"] floating enable
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec /usr/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle
 
-bindsym XF86Search exec --no-startup-id catfish
-
-
+bindsym XF86Search exec --no-startup-id /usr/bin/catfish
 
 #bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 #bindsym XF86MonBrightnessDown exec xbacklight -dec 20
@@ -278,7 +287,7 @@ bindsym XF86Search exec --no-startup-id catfish
 #bindsym $mod+Shift+t exec i3-input -F 'rename workspace to %s' -P 'New name: '
 
 #exec --no-startup-id i3-msg 'workspace 1; layout tabbed'
-exec --no-startup-id i3-msg 'workspace $workspace1; exec /usr/bin/chromium-browser'
+exec --no-startup-id i3-msg 'workspace $workspace1; exec $browser'
 
 workspace_auto_back_and_forth yes
 
