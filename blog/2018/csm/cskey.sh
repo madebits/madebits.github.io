@@ -373,6 +373,7 @@ function showHelp()
 # cmd file options
 function main()
 {
+	dumpError ""
 	local cskCmd="${1:-}"
 	if [ -z "$cskCmd" ]; then
 		showHelp
