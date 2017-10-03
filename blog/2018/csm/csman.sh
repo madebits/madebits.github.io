@@ -307,7 +307,7 @@ function closeAll()
 {
     for filename in /dev/mapper/*; do
         [ -e "$filename" ] || continue
-        local name=$(basename "$filename")
+        local name=$(basename -- "$filename")
         [ "$name" != "control" ] || continue
         [[ "$name" == csm-* ]] || continue
         [ "${name: -1}" != "_" ] || continue
