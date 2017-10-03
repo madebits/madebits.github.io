@@ -8,3 +8,5 @@ A selected collection of data structures and algorithms implemented in JavaScrip
 
 * https://github.com/donnemartin/interactive-coding-challenges
 * https://github.com/trekhleb/javascript-algorithms/blob/master/README.md
+* https://github.com/careercup/CtCI-6th-Edition
+
