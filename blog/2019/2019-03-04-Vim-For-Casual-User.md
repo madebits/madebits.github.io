@@ -49,7 +49,9 @@ There are several ways to save the text:
 
 As many have noted, there is no basic Vim. You need to learn upfront enough commands to move around and edit text. In Vim there are two main modes:
 
-* **command-mode** (normal-mode) is reachable by pressing *Esc* key or if that is broken *Ctrl+[*. In most terminals, *Alt+normal mode command key* will work form within *insert-mode*.
+* **command-mode** (normal-mode) is reachable by pressing *Esc* key or if that is broken *Ctrl+[*. *Ctrl+c* works too and it is the best to use in non-ANSI keyboards.
+    * In most terminals, *Alt+normal mode command key* will work form within *insert-mode*. 
+    * *Ctrl+o normal mode command* works too from within *insert-mode*.
 * **insert-mode** is reachable from command-mode by initiating some text edit command
 
 Commands are usually are made of multiple key of the [form](https://danielmiessler.com/study/vim/#language): *operator (verb)* *modifier (scope)* *noun (motion)* and can be combined creatively given enough time. The best way to learn basic commands is to use `vimtutor` as often as you remembers everything.
@@ -64,7 +66,7 @@ Common movement commands (in *command-mode*):
 * `*` and `#` find next and previous occurrence of word under cursor (`n` and `N` and highlight work same as for `/`).
 * `Ctrl+i` - jump to previous location, `Ctrl+o` jump back. `gi` moves to last node in edit tree.
 * `H` move to top, `M` move to middle, `L` move to bottom of screen
-* `Ctrl+D` - move half-page down, `Ctrl+U` move half-page up; `Ctrl+F` move down a page, `Ctrl+B` move up a page.
+* `Ctrl+d` - move half-page down, `Ctrl+u` move half-page up; `Ctrl+f` move down a page, `Ctrl+b` move up a page.
 * `zz` (not `ZZ`) will center cursor line on screen. `Ctrl+y` scroll one line down, `Ctrl+e` scroll one line up, while keeping cursor in current line.
 * `:number` or `numberG`- go to line number, `:+number` - go number lines down, `:-number` go number lines up.
   * It may help to run `:set number` (or `:set nu`) before to show line numbers. For extra Zen use `:set rnu` (or `:set relativenumber`) for relative numbers. Using both also works. Using `no` before removes them (e.g. `:set nonumber`).
@@ -108,9 +110,17 @@ Edit commands can be combined with **i**nside or **a**round *text-object* bound 
 
 * `ciw` - change inside word, `caw` - change inside word. Mounded motions include: `w` word, `s` sentence, `p` paragraph, `t` tag, `'` single quote, `"` double quote, and  `(`, `[`, `{` stand per their own.
 
-While in *insert-mode*, `Ctrl+R 0` will paste text without having leave that mode, where `0` is register name (see `:h i_ctrl-r`). `Ctrl+o` will allow running a single command and coming back to insert-mode. `Ctrl+h` will delete previous char (same as *Backspace*) and `Ctrl+w` will delete previous word, while `Ctrl+u` will delete to start of line. `Ctrl+n` and `Ctrl+p` enable auto-completion from words found in open buffers.
+While in *insert-mode*: 
 
-Vim has also a **visual-mode** entered by any of: `v` char selection, `V` line selection, `Ctrl+V` block selection. Arrow keys expand selection (on which side can be toggled with `o`) and `gv` re-selects. In visual-mode, you select first the text and then run any command on it.
+* `Ctrl+r 0` will paste text without having leave that mode, where `0` is register name (see `:h i_ctrl-r`). 
+* `Ctrl+o` will allow running a single command and coming back to insert-mode (e.g.: `Ctrl+o D` to deleted to end of line). 
+* `Ctrl+h` will delete previous char (same as *Backspace*) and `Ctrl+w` will delete previous word, while `Ctrl+u` will delete to start of line.
+* `Ctrl+j` same as *Enter* key.
+* `Ctrl+t` indent line, `Ctrl+d` un-indent line.
+* `Ctrl+n` and `Ctrl+p` enable auto-completion from words found in open buffers.
+
+Vim has also a **visual-mode** entered by any of: `v` char selection, `V` line selection, `Ctrl+v` block selection. Arrow keys expand selection (on which side can be toggled with `o`) and `gv` re-selects. In visual-mode, you select first the text and then run any command on it. Pressing `:` allows running ex commands in selection, such as, `normal i#` to comment lines (for `V`).
+
 
 ## Casual Zen
 
