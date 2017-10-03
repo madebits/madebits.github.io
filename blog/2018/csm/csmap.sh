@@ -106,6 +106,7 @@ function mountContainer()
         cryptsetup close "$name"
         rmdir "$mntDir1"
         resetTime
+        echo " Closed ${name} !"
         exit 1
     fi
     set -e
@@ -254,8 +255,13 @@ function touchDiskFile()
         (>&2 echo "! no file $1")
         exit 1
     fi
-    local time=$(stat -c %z "$1")
+    local time="$2"
+    if [ -z "$time" ]; then
+        time=$(stat -c %z "$1")
+    fi
+    echo "Setting file times to: $time"
     touchFile "$1" "$time"
+    stat "$1"
 }
 
 function touchFile()
@@ -265,7 +271,7 @@ function touchFile()
     if [ -f "$file" ]; then
         #local user=${SUDO_USER:-$(whoami)}
 sudo bash -s "$file" "$fileTime" <<'EOF'
-    now=$(date +"%Y-%M-%d %T") && date -s "$2" > /dev/null && touch "$1"
+    now=$(date +"%F %T.%N %z") && date -s "$2" > /dev/null && touch "$1"
     # && date -s "$now"
 EOF
     fi
@@ -356,7 +362,8 @@ function showHelp()
     (>&2 echo " $bn resize name")
     (>&2 echo " $bn increase name size") 
     (>&2 echo "    size should end in M or G")
-    (>&2 echo " $bn touch file")
+    (>&2 echo " $bn touch file [time]")
+    (>&2 echo "    if set, time has to be in format of: \"$(date +"%F %T.%N %z")\"")
 }
 
 function main()
@@ -406,7 +413,7 @@ function main()
             increaseContainer "$@"
         ;;
         touch)
-            touchDiskFile "$1"
+            touchDiskFile "$@"
         ;;
         *)
             showHelp
