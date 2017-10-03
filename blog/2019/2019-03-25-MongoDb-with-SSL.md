@@ -6,6 +6,8 @@
 
 Use of self-signed certificates for SSL provides freedom generate as many of them as needed conveniently on our own and it comes handy for internal infrastructure. I show here how to enable SSL from both [MongoDb](https://docs.mongodb.com/manual/tutorial/configure-ssl/) and [RabbitMQ](https://www.rabbitmq.com/ssl.html) using same certificate. Only server is authenticated to clients via SSL, any client can be connected to servers if credentials are known to client (so we rely here on having long *passwords* for clients).
 
+<div id='toc'></div>
+
 ## SSL for MongoDb 
 
 To set up MongoDb with self-signed certificates for SSL, we need to follow several [steps](https://www.cloudandheat.com/blog/deploy-a-mongodb-3-0-replica-set-with-x-509-authentication-and-self-signed-certificates/).
@@ -165,6 +167,8 @@ return client;
 
 The code depending on whether SSL is used or not checks the validity of the server certificate either based on its thumb-print if configured, or via its chain information and host name. In production code, `SslSettings` object needs to be cached (otherwise .NET driver cannot pool the connections).
 
+#### Node.js Clients
+
 Node.js driver can do something similar to chain / hostname verification if used as follows:
 
 ```js
@@ -277,6 +281,8 @@ if (url.Scheme.ToLowerInvariant().Equals("amqps")) {
 
 Connection = factory.CreateConnection();
 ```
+
+#### Node.js Clients
 
 In Node.js, the official `amqplib` driver provides an example:
 
