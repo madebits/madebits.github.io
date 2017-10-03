@@ -70,7 +70,7 @@ $$$
 
 Where:
 
-$$$ a_{ij} = \langle i \rvert A \rvert j \rangle $$$
+$$$ a_{ij} \to \langle i \rvert A \rvert j \rangle $$$
 
 ##Linearity
 
