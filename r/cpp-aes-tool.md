@@ -55,7 +55,7 @@ In a similar way, this command outputs "abc":
 ```bash
 echo -n "abc" | ./aes -p "t" | base64 | base64 -d | ./aes -d -p "t"
 
-#or
+# or
 
 read -s pass && echo abc | aes -f <(echo -n "$pass") | aes -d -f <(echo -n "$pass")
 ```
@@ -88,7 +88,7 @@ Use passwords with more than 20 random numbers letters and special characters. T
    ```bash
    head -c 45 /dev/urandom | base64 -w 0
 
-   #or
+   # or
 
    dd if=/dev/urandom bs=45 count=1 | base64 -w 0
    ```
@@ -116,6 +116,10 @@ To have an infinite *pseudo-random* data stream use:
 
 ```bash
 cat /dev/zero | ./aes -a -m -p t -c 1024
+
+# or as text
+
+cat /dev/zero | ./aes -a -m -p t -c 1024 | base64 -w 0
 ```
 
 Use `aes -?` to view help.
