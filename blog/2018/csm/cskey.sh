@@ -312,7 +312,7 @@ function main()
 			reEncryptFile "$@"
         ;;
         *)
-            (>&2 echo "Usage: basename($0) [enc | dec | chp] file [t m p]")
+            (>&2 echo "Usage: $(basename "$0") [enc | dec | chp] file [t m p]")
             (>&2 echo " file is overwritten by enc and chp, backup it as needed before")
             (>&2 echo " default argon2 t m p are: $adt $adm $adp")
             (>&2 echo 'Examples:')
