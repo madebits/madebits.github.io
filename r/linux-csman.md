@@ -22,7 +22,7 @@ rm secret.bin
 Open a container, it gets a random *name* and it is mounted under `$HOME/mnt/csm-name` (or append `-name name`):
 
 ```bash
-# append -exec to allow running executable from container
+# append -exec to allow running executables from container
 sudo csman.sh open container.bin -ck -i e --- -name one
 
 # or block terminal till container is open, press Ctrl+C to close
