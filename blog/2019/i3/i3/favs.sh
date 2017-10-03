@@ -10,7 +10,7 @@ sel=$(zenity --window-icon=question --height 1000 --width 640 --list --title="�
  ↗️... ☠️i3Kill 🌐Browser 📂Files 📧Email 💥Sublime 📝Geany 🗳️DropBox 🌎Firefox\
  📦VirtualBox 🔑VeraCrypt 🔐KeepassXC 🎦Vlc 🎶Audacious\
  🖼️Gimp 🏢Office 🧮Calculator 🗂️Ranger 💻Terminal\
- 💽Disks 🔄Updates 👨‍💻Synaptic 📚DiskSpace ⚡SysMon 🔋PowerStats\
+ 💽Disks 🔄Updates 👨‍💻Synaptic ️🖨️Printers 📚DiskSpace ⚡SysMon 🔋PowerStats\
  🛠️i3Config 🎛️i3Toggle-Layout 🔲i3New-Workspace 🔊Volume-Up 🔉Volume-Down 🔇Volume-0 📲Logout ♻️Reboot ⛔Shutdown   2>/dev/null)
 
 sleep 0.1
@@ -58,13 +58,15 @@ case "$sel" in
         exec geany -i
         ;;
     🔄Updates)
-        exec zenity --password | sudo -S update-manager
+        #exec zenity --password | sudo -S update-manager
+        update-manager 
         ;;
     💽Disks)
         exec gnome-disks
         ;;
     👨‍💻Synaptic)
-        exec zenity --password | sudo -S synaptic
+        #exec zenity --password | sudo -S synaptic
+        synaptic-pkexec &
         ;;
     🧮Calculator)
         exec speedcrunch
@@ -117,6 +119,9 @@ case "$sel" in
         ;;
     🔋PowerStats)
          exec gnome-power-statistics
+        ;;
+    ️🖨️Printers)
+        exec system-config-printer
         ;;
     *)
         exit 1

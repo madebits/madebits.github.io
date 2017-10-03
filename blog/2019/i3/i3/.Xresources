@@ -65,3 +65,6 @@ XTerm*color14 : #34E2E2
 ! white
 XTerm*color7  : #D3D7CF
 XTerm*color15 : #EEEEEC
+
+Xcursor.theme: redglass
+Xcursor.size: 28
