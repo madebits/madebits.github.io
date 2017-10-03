@@ -146,7 +146,9 @@ sudo cskey.sg dec secret.bin -ap @foo | base64 -w 0
 
 #### Password Hash Options
 
-It is possible to overwrite default options used for `argon2` tool using ` -h -p 8 -m 14 -t 1000 --` (note `--` in the end is required). All options have to be specified and are passed verbatim to `argon2`. The defaults used if not specified are shown in command-line help when you run `sudo cskey.sh`. If you specify `argon2` options during encrypt (enc), you have to remember them and provide them same for decryption (dec) to work.
+It is possible to overwrite default options used for `argon2` tool using ` -h -p 8 -m 14 -t 1000 --` (note `--` in the end is required). All options have to be specified and are passed verbatim to `argon2`. The defaults used, if not specified, are shown in command-line help when you run `sudo cskey.sh`. 
+
+If you specify `argon2` options during encrypt command (enc), you have to remember them and provide them same for decryption (dec) to work.
 
 ### Creating Containers
 
