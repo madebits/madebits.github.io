@@ -118,6 +118,7 @@
 
 ## USA
 
+[NPR](https://www.npr.org/sections/news/)
 [CNN](https://edition.cnn.com/)
 [CNBC](https://www.cnbc.com/world-news/)
 [CSBS News](https://www.cbsnews.com/world/)
@@ -192,9 +193,12 @@
 ## Middle East
 
 [Press TV](https://www.presstv.com/)
+[Tasnim News](https://www.tasnimnews.com/en)
 [AlJazeera](https://www.aljazeera.com/news/)
 [YeniSafak](https://www.yenisafak.com/en/world)
+[SANA](https://www.sana.sy/en/)
 [AlMasdar News](https://www.almasdarnews.com/article/category/world-news/)
+[AlManar](https://english.almanar.com.lb/)
 [Gulf News](https://gulfnews.com/world)
 [Haaretz](https://www.haaretz.com/world-news)
 [The Times of Israel](https://www.timesofisrael.com/)
