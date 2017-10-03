@@ -216,7 +216,7 @@ System versions of these also exit for root snap packaged services (`sudo snap s
 * `SNAP_DATA=/var/snap/gimp/current`
 * `SNAP_COMMON=/var/snap/gimp/common`
 
-Using [layouts](https://snapcraft.io/docs/snap-layouts) a snap can map any snap folder data on these folders.
+Using [layouts](https://snapcraft.io/docs/snap-layouts) a snap can map any snap folder data on these folders. For example, docker snap, uses `/var/snap/docker/common/var-lib-docker` for `/var/lib/docker` (can be found with `docker info` command).
 
 ### Snap Data Snapshots
 
