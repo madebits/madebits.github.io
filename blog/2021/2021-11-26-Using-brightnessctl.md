@@ -64,4 +64,17 @@ Then add your user name (`id -un`) to the mentioned `video` group and restart th
 sudo usermod -a -G video myUserName
 ```
 
+To have the script run at session *startup*, create a file `~/.config/autostart/light.desktop` that points to the script path:
+
+```
+[Desktop Entry]
+Name=Light
+GenericName=Light
+Comment=Light
+Exec=/home/user/bin/light.sh
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true
+```
+
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2021/2021-11-25-Feh-Start-Script.md'>Feh Start Script</a></ins>
