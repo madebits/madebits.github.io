@@ -163,7 +163,7 @@ var client = new MongoClient(clientSettings);
 return client;
 ```
 
-The code depending on whether SSL is used or not checks the validity of the server certificate either based on its thumb-print if configured, or via its chain information and host name. In production code, `SslSettings` needs to be cached.
+The code depending on whether SSL is used or not checks the validity of the server certificate either based on its thumb-print if configured, or via its chain information and host name. In production code, `SslSettings` object needs to be cached (otherwise .NET driver cannot pool the connections).
 
 Node.js driver can do something similar to chain / hostname verification if used as follows:
 
