@@ -58,7 +58,7 @@ These hashes should normally be same unless a new version of files is copied.
 
 ## Usage
 
-> `csman.sh` and `cskey.sh` should be run always with `sudo`. 
+> `csman.sh` and `cskey.sh` should be run **always** with `sudo`. 
 
 `csman.sh` is the main command to use. `csman.sh` delegates password and secret operations to `cskey.sh` (which uses `aes` and `argon2`). You may need to use `cskey.sh` directly for advanced key manipulation. Running both commands without options lists their command-line arguments, e.g.: 
 
@@ -278,7 +278,7 @@ sudo csman.sh chp secret.bin new-secret.bin -ck -i e ---
 
 ## File Tools
 
-> These commands are intended to be run without `sudo`.
+> These commands are intended to be run **without** `sudo`.
 
 ### Copy Folders
 
