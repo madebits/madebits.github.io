@@ -229,7 +229,7 @@ The device-serial ID and list of installed snaps and their usage data are sent t
 
 ## Summary
 
-Ubuntu snap is an interesting concept, with impressive achievements and with several unpolished corners, that creates an illusion of security, and is here to stay.
+Ubuntu snap is an interesting concept, with impressive achievements and with several unpolished corners, that creates an illusion of security, and that is here to stay.
 
 * Consider only installing snaps maintained by [Canonical](https://forum.snapcraft.io/t/snaps-officially-supported-by-canonical/1719), or other parties you trust. Avoid *devmode* and *classic* snaps, unless you really trust the provider.
 * https://snapcraft.io/store is scarce on snap details. Some people write a link to their *yaml* definition in read-me there, some not. The store itself gives no details on permissions needed by a snap, during install, use, and removal. The only way to know what is inside, is to download and examine files on your own.
