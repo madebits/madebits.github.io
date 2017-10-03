@@ -157,6 +157,7 @@
 [Ansa](https://www.ansa.it/english/)
 [NetzPolitik](https://netzpolitik.org/)
 [B92](https://www.b92.net/eng/news/world.php)
+[TheDuran](https://theduran.locals.com/?showPosts=1)
 
 ## Russia
 
