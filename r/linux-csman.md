@@ -282,7 +282,7 @@ sudo csman.sh chp secret.bin new-secret.bin -ck -i e ---
 
 ### Copy Folders
 
-Two copy file commands are provided to copy directories. First uses `tar` and `pv` and second invokes `rsync` with some parameters to improve progress reporting (removing training slashes from input directories) (no `sudo` is needed):
+Two copy commands are provided to copy directories. First uses `tar` and `pv` and second invokes `rsync` with some parameters to improve progress reporting (and removes training slashes from input directories) (no `sudo` is needed):
 
 ```bash
 # faster
@@ -304,35 +304,4 @@ csman.sh dc . -q
 csman.sh dcq
 ```
 
-The `dc` command is useful to overwrite disk space from within an encrypted container. The command creates a temporary folder `csm-zero-tmp` under the folder given as its first argument, where it writes `zero.*` files filled with zeros till that disk partition runs out of free  disk space. If the command ever fails to clean the temporary `csm-zero-tmp` folder, it can be removed manually using `rm -rf csm-zero-tmp`.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The `dc` command is useful to overwrite disk space from within an encrypted container. The command creates a temporary folder `csm-zero-tmp` under the folder given as its first argument, where it writes `zero.*` files filled with `/dev/zero` till that disk partition runs out of free  disk space. If the command ever fails to clean the temporary `csm-zero-tmp` folder, it can be removed manually using `rm -rf csm-zero-tmp`.
