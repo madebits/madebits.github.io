@@ -216,7 +216,7 @@ The `cryptsetup` options can be used if needed to embed secret file into the con
 sudo csman.sh n container.bin secret.bin 1M -cf -N 1000 --- -co -o 2 ---
 # to set or replace secret
 dd conv=notrunc if=secret.bin of=container.bin
-# open it, container is also the secret now
+# open container, container is also the secret now
 sudo csman.sh o container.bin container.bin -co -o 2 ---
 ```
 
