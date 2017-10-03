@@ -1,5 +1,9 @@
 # News Outlets
 
+<div id='toc'></div>
+
+##Technology
+
 * [Hacker News](https://news.ycombinator.com/)
 * [Daily Rotation](http://www.dailyrotation.com/)
 * [Reddit Programming](https://www.reddit.com/r/programming/)
@@ -34,7 +38,7 @@
 * [ZDNet](https://www.zdnet.com/)
 * [Ted](https://www.ted.com/)
 
-<hr>
+##USA
 
 * [CNN](https://edition.cnn.com/world)
 * [CNBC](https://www.cnbc.com/world-news/)
@@ -45,12 +49,12 @@
 * [The Washington Times](https://www.washingtontimes.com/news/world/)
 * [Reddit World News](https://www.reddit.com/r/worldnews/)
 
-<hr>
+##Canada & Australia
 
 * [GlobalNews](https://globalnews.ca/world/)
 * [9News](https://www.9news.com.au/world)
 
-<hr>
+##UK
 
 * [BBC](http://www.bbc.co.uk/news/world/) 
 * [The Telegraph](https://www.telegraph.co.uk/news/world/)
@@ -59,7 +63,7 @@
 * [Financial Times](https://www.ft.com/world)
 * [Reuters](https://www.reuters.com/)
 
-<hr>
+##Europe
 
 * [France 24](https://www.france24.com/en/)
 * [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
@@ -68,29 +72,29 @@
 * [The Local](https://www.thelocal.de/)
 * [B92](https://www.b92.net/eng/news/world.php)
 
-<hr>
+##Russia
 
 * [RT News](http://rt.com/news/)
 * [Sputnik News](https://sputniknews.com/)
 * [TASS](http://tass.com/world)
 
-<hr>
+##China
 
 * [South China Morning Post](http://www.scmp.com/news/world)
 * [Xinhua Net](http://www.xinhuanet.com/english/world/index.htm)
 
-<hr>
+##Middle East
 
 * [Press TV](https://www.presstv.com/)
 * [AlJazeera](https://www.aljazeera.com/news/)
 * [Haaretz](https://www.haaretz.com/world-news)
 * [The Times of Israel](https://www.timesofisrael.com/)
 
-<hr>
+##India
 
 * [The Indian Express](https://indianexpress.com/section/world/)
 * [Hindustan Times](https://www.hindustantimes.com/world-news/)
 
-<hr>
+##Other
 
 * [LiveLeak](https://www.liveleak.com/c/news)
