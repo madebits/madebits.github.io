@@ -52,7 +52,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 Every time `csman.sh` starts, it prints prefix hashes of these files, if present:
 
 ```
-c3bb7d75c  /usr/local/bin/csman.sh
+58dedbada  /usr/local/bin/csman.sh
 a4a5d332c  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
@@ -239,7 +239,7 @@ sudo csman.sh n container.bin 1M -s secret.bin -ck -b 1 -su ---
 sudo csman.sh n container.bin 1M -s secret.bin -ck -b 3 -su ---
 ```
 
-Do **not** manipulate container file as if it were a secret file using `cskey.sh` or other tooling (such as `csman.sh chp`), other than for reading (decoding) the secret. To extract secret file back from the container use:
+Do **not** manipulate a container file as if it were a secret file using `cskey.sh` or other tooling (such as `csman.sh chp`), other than for reading (decoding) the secret. To extract secret file back from the container use:
 
 ```bash
 dd if=container.bin of=secret.bin bs=1024 count=1
