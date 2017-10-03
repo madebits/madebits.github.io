@@ -450,6 +450,7 @@ function createSessionPass()
 	if [ -f "$file" ]; then
 		read -p "Overwrite ${file}? [y - (overwrite) | Enter (leave as is)]: " fsp
 		if [ "$fsp" != "y" ]; then
+			logError "# left file ${file} as is!"
 			return
 		fi
 	fi
