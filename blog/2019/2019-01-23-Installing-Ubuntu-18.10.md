@@ -133,7 +133,7 @@ To move notifications to corner:
 
 Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcut](https://wiki.gnome.org/Design/OS/KeyboardShortcuts) to open applications.
 
-Some `nautilus` shortcuts:
+Some [nautilus](https://wiki.archlinux.org/index.php/GNOME/Files) shortcuts:
 
 *  Ctrl+Shift+N new folder
 *  Ctrl+L edit address bar
