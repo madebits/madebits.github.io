@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# cs-key.sh
+# cskey.sh
 
 set -e
 
@@ -50,7 +50,7 @@ function touchFile()
 {
     local file=$1
     if [ -f "$file" ]; then
-        local md=$(stat -c %y "$file")
+        local md=$(stat -c %z "$file")
         touch -d "$md" "$file"
     fi
 }

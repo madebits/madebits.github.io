@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# cs-map.sh
+# csmap.sh
 
 set -e
 
@@ -10,6 +10,9 @@ if [ $(id -u) != "0" ]; then
 fi
 
 toolsDir="$(dirname $0)"
+lastName=""
+lastContainer=""
+lastContainerTime=""
 
 function newName()
 {
@@ -85,13 +88,14 @@ function closeContainer()
     sleep 2
     umount "$mntDir1" && rmdir "$mntDir1"
     cryptsetup close "$name"
-    echo " Closed ${name}!"
+    echo " Closed ${name} !"
 }
 
 # name secret container rest
 function openContainer()
 {
     local name=$(validName "$1")
+    lastName="$name"
     local oName=${name:4}
     shift
 
@@ -101,6 +105,10 @@ function openContainer()
 
     local device="$1"
     checkArg "$device" "container"
+    lastContainer="$device"
+    if [ -f "$device" ]; then
+        lastContainerTime=$(stat -c %z "$device")
+    fi
     shift
 
     local mntDir1=$(mntDirRoot "$name")
@@ -108,7 +116,7 @@ function openContainer()
     local user=${SUDO_USER:-$(whoami)}
     echo "Opening /dev/mapper/${name} ..."
 
-    local key=$(sudo -u "$user" "${toolsDir}/cs-key.sh" dec "$secret" | base64 -w 0)
+    local key=$(sudo -u "$user" "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$device" "$name" -
     echo
     mkdir -p "$mntDir1"
@@ -162,9 +170,9 @@ function createContainer()
     echo "Creating ${secret} ..."
 
     local user=${SUDO_USER:-$(whoami)}
-    sudo -u "$user" "${toolsDir}/cs-key.sh" enc "$secret"
+    sudo -u "$user" "${toolsDir}/cskey.sh" enc "$secret"
     echo "You will asked to re-enter password to open the container for the first time ..."
-    local key=$(sudo -u "$user" "${toolsDir}/cs-key.sh" dec "$secret" | base64 -w 0)
+    local key=$(sudo -u "$user" "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$container" "$name" -
 
     echo "Creating file system ..."
@@ -193,13 +201,33 @@ function changePass()
     local secret="$1"
     checkArg "$secret" "secret"
     local user=${SUDO_USER:-$(whoami)}
-    sudo -u "$user" "${toolsDir}/cs-key.sh" chp "$secret"
+    sudo -u "$user" "${toolsDir}/cskey.sh" chp "$secret"
+}
+
+function touchFile()
+{
+    local file="$1"
+    local fileTime="$2"
+    if [ -f "$file" ]; then
+        #local user=${SUDO_USER:-$(whoami)}
+sudo bash -s "$file" "$fileTime" <<'EOF'
+    now=$(date +"%Y-%M-%d %T") && date -s "$2" && touch "$1" && date -s "$now"
+EOF
+    fi
+}
+
+function cleanUp()
+{
+    closeContainer "$lastName"
+    touchFile "$lastContainer" "$lastContainerTime"
+    exit 0
 }
 
 function showHelp()
 {
     (>&2 echo "Usage:")
     (>&2 echo " $0 open secret device [ additional cryptsetup parameters ]")
+    (>&2 echo " $0 openLive secret device [ additional cryptsetup parameters ]")
     (>&2 echo " $0 openNamed name secret device [ additional cryptsetup parameters ]")
     (>&2 echo " $0 close name")
     (>&2 echo " $0 closeAll")
@@ -217,8 +245,15 @@ function main()
         open|o)
             openContainer "-" "$@"
         ;;
-        openNamed|openName|openN|open2|o2)
+        openNamed|openName|on)
             openContainer "$@"  
+        ;;
+        openLive|ol)
+            openContainer "-" "$@"
+            trap cleanUp SIGHUP SIGINT SIGTERM
+            read -p "Press Enter or Ctrl+C to close the container ..."
+            echo
+            cleanUp
         ;;
         close|c)
             closeContainer "$@"

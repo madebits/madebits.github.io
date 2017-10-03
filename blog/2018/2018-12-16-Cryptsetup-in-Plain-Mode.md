@@ -84,8 +84,8 @@ While `scrypt` is the easiest tool to use, you may also consider combining `argo
 
 We need the following helper bash scripts (ideally copy them as root in `/usr/local/bin`):
 
-* [cs-key.sh](blog/2018/csm/cs-key.sh)
-* [cs-map.sh](blog/2018/csm/cs-map.sh)
+* [cskey.sh](blog/2018/csm/cskey.sh)
+* [csmap.sh](blog/2018/csm/csmap.sh)
 
 These scripts use the following helper tools:
 
@@ -95,24 +95,24 @@ sudo apt install cryptsetup bindfs argon2 ccrypt
 
 ###Key Generation
 
-`cs-key.sh` bash script helps manage key contents. It uses `ccrypt` to save container key, or if present, it uses my [aes](#r/cpp-aes-tool.md) tool. The benefit of my `aes` tool is that it (same as *dm-crypt*) always decrypts the data even if the password is wrong, while `ccrypt` is designed to give an error, which I consider unsafe. We can use `cs-key.sh` to generate a secret file (we only need to do this once):
+`cskey.sh` bash script helps manage key contents. It uses `ccrypt` to save container key, or if present, it uses my [aes](#r/cpp-aes-tool.md) tool. The benefit of my `aes` tool is that it (same as *dm-crypt*) always decrypts the data even if the password is wrong, while `ccrypt` is designed to give an error, which I consider unsafe. We can use `cskey.sh` to generate a secret file (we only need to do this once):
 
 ```bash
-./cs-key.sh enc secret.bin
+./cskey.sh enc secret.bin
 # enter password for container here
 ```
 
 Now that we created *secret.bin* file (we need to store it together with the container), we can use that to open the container:
 
 ```bash
-sudo sh -c "./cs-key.sh dec secret.bin | cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain container.bin enc -"
+sudo sh -c "./cskey.sh dec secret.bin | cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain container.bin enc -"
 # enter password for container here
 ```
 
 To change password of `secret.bin` (file is overwritten in place, so backup it before as needed) use:
 
 ```bash
-./cs-key.sh chp secret.bin
+./cskey.sh chp secret.bin
 # enter current pass
 # enter new pass
 ```
@@ -121,22 +121,22 @@ Use `history -r` or `kill -9 $$` to prevent `bash` from storing command history.
 
 ###Container Management
 
-With `cs-key.sh` ready, we can now automate for convenience open / close with a second script `cs-map.sh` (`cs-key.sh` should be in same folder). The `cs-map.sh` script can be used as follows:
+With `cskey.sh` ready, we can now automate for convenience open / close with a second script `csmap.sh` (`cskey.sh` should be in same folder). The `csmap.sh` script can be used as follows:
 
 ```bash
-sudo ./cs-map open secret.bin container.bin
+sudo ./csmap open secret.bin container.bin
 
 # mounted at $HOME/mnt/csm_XXXX_user
 # and when done, to close it use
 
-sudo ./cs-map close XXXX
-sudo ./cs-map closeAll
+sudo ./csmap close XXXX
+sudo ./csmap closeAll
 ```
 
 We may also use the script create a new container file (size can be either in M or G):
 
 ```bash
-sudo $HOME/bin/cs-map.sh create secret.bin container.bin 30M
+sudo $HOME/bin/csmap.sh create secret.bin container.bin 30M
 ```
 
 ##Finding Container Key 
