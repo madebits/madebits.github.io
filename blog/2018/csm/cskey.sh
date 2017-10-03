@@ -584,37 +584,40 @@ function createRndFile()
 
 function showHelp()
 {
-	logError "Usage: $(basename -- "$0") [enc | dec | ses | rnd] file [options]"
-	logError "Using -- for dec|enc file is a shortcut not to use a secret file (weak)"
-	logError "Options:"
-	logError " -i inputMode : (enc|dec|ses) used for password"
-	logError "    Password input modes:"
-	logError "     0 read from console, no echo (default)"
-	logError "     1|e read from console with echo"
-	logError "     2|c read from 'xclip -o -selection clipboard'"
-	logError "     3|u read from 'zenity --password'"
-	logError "     4 read from 'zenity --text'"
-	logError " -c encryptMode : (enc|dec|ses) use 1 for aes tool, 0 or any other value uses ccrypt"
-	logError " -p passFile : (enc|dec|ses) read pass from first line in passFile"
-	logError " -ap file : (enc|dec) session: read pass from encrypted file (see -apo), other pass input options are ignored"
-	logError " -k : (enc|dec) do not ask for keyfiles"
-	logError " -kf keyFile : (enc|dec) use keyFile (combine with -k)"
-	logError " -b count : (enc) generate file.count backup copies"
-	logError " -bs : (enc) generate a new secret for each -b file"
-	logError " -h hashToolOptions -- : (enc|dec) default -h ${cskHashToolOptions[@]} --"
-	logError " -s file : (enc) read secret data as 'base64 -w 0' from file"
-	logError " -as file : (enc) session : read secret data from a session file (see -aso)"
-	logError " -aso outFile : (dec) session: write secret data to a encrypted file"
-	logError " -apo outFile : (dec) session: write password data to a encrypted file"
-	logError " -ar file : (enc|dec|ses) session: use file data as part of session seed, created if not exists ($cskSessionLocation)"
-	logError " -aa : (enc|dec|ses) session: do not ask for session key (use default)"
-	logError " -ak file : (enc|dec|ses) session: read session key from file"
-	logError " -r length : (rnd) length of random bytes (default 64)"
-	logError " -rb count : (rnd) generate file.count files"
-	logError " -d : dump password and secret on stderr for debug"
-	logError "Examples:"
-	logError ' sudo bash -c '"'"'secret=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -s <(echo -n "$secret") -d'"'"''
-}
+	
+	cat << EOF
+Usage: $(basename -- "$0") [enc | dec | ses | rnd] file [options]
+Using -- for dec|enc file is a shortcut not to use a secret file (weak)
+Options:
+ -i inputMode : (enc|dec|ses) used for password
+    Password input modes:
+     0 read from console, no echo (default)
+     1|e read from console with echo
+     2|c read from 'xclip -o -selection clipboard'
+     3|u read from 'zenity --password'
+     4 read from 'zenity --text'
+ -c encryptMode : (enc|dec|ses) use 1 for aes tool, 0 or any other value uses ccrypt
+ -p passFile : (enc|dec|ses) read pass from first line in passFile
+ -ap file : (enc|dec) session: read pass from encrypted file (see -apo), other pass input options are ignored
+ -k : (enc|dec) do not ask for keyfiles
+ -kf keyFile : (enc|dec) use keyFile (combine with -k)
+ -b count : (enc) generate file.count backup copies
+ -bs : (enc) generate a new secret for each -b file
+ -h hashToolOptions -- : (enc|dec) default -h ${cskHashToolOptions[@]} --
+ -s file : (enc) read secret data as 'base64 -w 0' from file
+ -as file : (enc) session : read secret data from a session file (see -aso)
+ -aso outFile : (dec) session: write secret data to a encrypted file
+ -apo outFile : (dec) session: write password data to a encrypted file
+ -ar file : (enc|dec|ses) session: use file data as part of session seed, created if not exists ($cskSessionLocation)
+ -aa : (enc|dec|ses) session: do not ask for session key (use default)
+ -ak file : (enc|dec|ses) session: read session key from file
+ -r length : (rnd) length of random bytes (default 64)
+ -rb count : (rnd) generate file.count files
+ -d : dump password and secret on stderr for debug
+Examples:
+EOF
+echo ' sudo bash -c '"'"'secret=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -s <(echo -n "$secret") -d'"'"''
+} >&2
 
 # cmd file options
 function main()
