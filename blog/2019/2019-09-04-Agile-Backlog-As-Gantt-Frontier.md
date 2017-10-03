@@ -14,4 +14,4 @@ A agile [backlog](https://en.wikipedia.org/wiki/Backlog) can be considered a str
 
 In IT software projects, however, unless the same team has done same project before (even than), a full-level WBS with time estimates is not possible upfront (it will be anyway wrong). The backlog contains the next few frontiers that are known to start with, with deeper frontiers being vague. Critical-path length is unknown and cannot be estimated by team velocity. Keeping a WBS outside the backlog, even if incomplete, helps to keep a bird-eye view over the project, that maybe missed otherwise by a flat backlog. The ideal agile management tool is a WBS Gantt-like tool with frontiers streamlined ordered into the backlog.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-08-30-When-to-use-Vuex.md'>When to use Vuex</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-11-13-ETL-Solutions.md'>ETL Solutions</a> <a rel='next' id='fnext' href='#blog/2019/2019-08-30-When-to-use-Vuex.md'>When to use Vuex</a></ins>

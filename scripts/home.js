@@ -1,1 +1,1 @@
-var homeUrl='blog/2019/2019-09-04-Agile-Backlog-As-Gantt-Frontier.md';
+var homeUrl='blog/2019/2019-11-13-ETL-Solutions.md';
