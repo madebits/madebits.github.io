@@ -213,7 +213,7 @@ env | grep SNAP
 
 Ubuntu snap is an interesting concept, with impressive achievements and with several unpolished corners, that creates an illusion of security, and is here to stay.
 
-* Consider only installing snaps maintained by [Canonical](https://forum.snapcraft.io/t/snaps-officially-supported-by-canonical/1719), or other parties you trust.
+* Consider only installing snaps maintained by [Canonical](https://forum.snapcraft.io/t/snaps-officially-supported-by-canonical/1719), or other parties you trust. Avoid *devmode* and *classic* snaps, unless you really trust the provider.
 * https://snapcraft.io/store is scarce on snap details. Some people write a link to their *yaml* definition in read-me there, some not. The store itself gives no details on permissions needed by a snap, during install, use, and removal. The only way to know what is inside, is to download and examine files on your own.
 * Avoid *Ubuntu Software Center* as it may not be clear what it installs. Look carefully to `deb` packages and they may be transitional *snap* installs. Better install directly via `snap install` after own evaluation.
 * Creating a snap is a complex process, and the build process is transparent about code and dependencies used and can be reproduced. This is good, but due to complexity, things may land to a snap that are not obvious, or end up being in non-maintained versions within the snap.
