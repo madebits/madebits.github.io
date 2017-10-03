@@ -106,7 +106,7 @@ It is possible to encrypt same data more than once in a chain:
 echo "abc" | ./aes -p p1 -k 256 -a | ./aes -p p2 -k 128 -a | ./aes -d -p p2 -k 128 -a | ./aes -d -p p1 -k 256 -a
 ```
 
-Here, we first encrypt twice with password `p1` and then `p2` with different AES key sizes (-k); and then we decrypt (`-d`) the pipe result twice with same data in reverse. The output is `abc`. Encrypting more that once is in general safer (but also slower).
+We first encrypt twice with password `p1` and then `p2` with different AES key sizes (-k); and then we decrypt (`-d`) the pipe result twice with same data in reverse. The output is `abc`. Encrypting more that once is safer (but slower).
 
 Use `aes -?` for more help.
 
