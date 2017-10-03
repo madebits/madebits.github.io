@@ -189,7 +189,10 @@ function decodeSecret()
 		if [ -n "$cskSessionSecretFile" ]; then
 			readSessionPass
 			echo -n "$data" | base64 -d | decryptAes "$hash" | encryptAes "$cskSessionPass" > "$cskSessionSecretFile"
-			debugData "$cskSessionSecretFile" $(echo -n "$data" | base64 -d | decryptAes "$hash" | base64 -w 0)
+			debugData "secret" "$(echo -n "$data" | base64 -d | decryptAes "$hash" | base64 -w 0)"
+			logError "# session: secret stored in: ${cskSessionSecretFile}"
+			debugData "$(cat ${cskSessionSecretFile} | base64 -w 0)"
+			logError
 		fi
 		echo -n "$data" | base64 -d | decryptAes "$hash"
     else
@@ -369,7 +372,6 @@ function decryptFile()
 	readKeyFiles
 	local pass=$(readPass)
 	if [ -n "${cskSessionSaveDecodePassFile}" ]; then
-		logError "# creating password session file: ${cskSessionSaveDecodePassFile} ..."
 		createSessionPass "${cskSessionSaveDecodePassFile}" "$pass"
 	fi
     decodeSecret "$1" "$pass"
@@ -384,14 +386,14 @@ function readSessionPass()
 		local sData0=""
 		if [ -n "$cskSessionSaltFile" ]; then
 			if [ ! -e "$cskSessionSaltFile" ]; then
-				logError "# creating new session salt file: ${cskSessionSaltFile}"
+				logError "# session: creating new key file: ${cskSessionSaltFile}"
 				createRndFile "$cskSessionSaltFile"
 			fi
 			sData0=$(head -c 64 "${cskSessionSaltFile}" | base64 -w 0)
 			if [ -z "${sData0}" ]; then
-					onFailed "cannot read session salt from: ${cskSessionSaltFile}"
+					onFailed "cannot read session key from: ${cskSessionSaltFile}"
 				else
-					logError "# reading session salt from: ${cskSessionSaltFile}"
+					logError "# session: reading key from file: ${cskSessionSaltFile}"
 			fi
 		fi
 		local sData1="$(uptime -s)"
@@ -400,6 +402,7 @@ function readSessionPass()
 		local sSecret="${sessionData}"
 		local rsp=""
 		if [ "$cskSessionAutoPass" = "0" ]; then
+			logError
 			if [ "$cskInputMode" = "1" ] || [ "$cskInputMode" = "e" ]; then
 				read -p "Session password (or Enter for default): " rsp
 			else
@@ -407,6 +410,9 @@ function readSessionPass()
 			fi
 		fi
 		logError
+		if [ -z "$rsp" ]; then
+			logError "# session: default (see -ar ${cskSessionSaltFile})"
+		fi
 		sSecret="${sessionData}${rsp}"
 		cskSessionPass="$(echo -n "${sSecret}" | sha256sum | cut -d ' ' -f 1)"
 		debugData "${sSecret}" "${cskSessionPass}"
@@ -416,6 +422,7 @@ function readSessionPass()
 # file
 function readSessionPassFromFile()
 {
+	logError "# session: reading password from: $1"
 	if [ -e "$1" ] || [ "$1" = "-" ]; then
 		if [ -z "$cskSessionPass" ]; then
 			onFailed "no session password"
@@ -430,32 +437,45 @@ function readSessionPassFromFile()
 	fi
 }
 
+function askOverwriteFile()
+{
+	local file="$1"
+	local fsp=""
+	if [ -f "$file" ]; then
+		read -p "Overwrite ${file}? [y - (overwrite) | Enter (leave as is)]: " fsp
+		if [ "$fsp" != "y" ]; then
+			logError "# unchanged: ${file}"
+			logError
+			return
+		fi
+		logError
+		echo "y"
+	else
+		echo "y"
+	fi
+}
+
 # file [pass]
 function createSessionPass()
 {
 	local file="$1"
 	local pass="${2:-}"
+	logError
+	#logError "# session: creating password file: ${cskSessionSaveDecodePassFile}"
 	if [ -z "$pass" ]; then
 		readKeyFiles
 		pass=$(readPass)
 	fi
 	readSessionPass
 	debugData "${cskSessionPass}" "${pass}"
-	
-	local fsp=""
-	if [ -f "$file" ]; then
-		read -p "Overwrite ${file}? [y - (overwrite) | Enter (leave as is)]: " fsp
-		logError
-		if [ "$fsp" != "y" ]; then
-			logError "# left file unchanged: ${file}"
-			return
-		fi
-	fi
 
 	# add a token to pass
-	echo -n "${pass}CSKEY" | encryptAes "$cskSessionPass" > "$file"
+	echo -n "${pass}CSKEY" | encryptAes "$cskSessionPass" > "${file}"
 	ownFile "$file"
-	logError "# created session password file: ${file}" 
+	logError
+	logError "# session: password stored in: ${file}"
+	debugData "$(cat ${file} | base64 -w 0)"
+	logError
 }
 
 # file
@@ -470,6 +490,7 @@ function loadSessionPass()
 	local pass=$(readSessionPassFromFile "$file")
 	set -e
 	if [ -z "${pass}" ] || [ "${pass: -5}" != "CSKEY" ]; then
+		debugData "${pass}"
 		onFailed "invalid session password in: ${file}"
 	fi
 	pass="${pass:0:${#pass}-5}" #remove token
@@ -485,6 +506,7 @@ function loadSessionSecret()
 		return
 	fi
 	readSessionPass
+	logError "# session: reading secret from: ${file}"
 	cskSecret="$(cat ${file} | decryptAes "$cskSessionPass" | base64 -w 0)"
 	if [ -z "$cskSecret" ]; then
 		onFailed "cannot read session secret from: ${file}"
@@ -527,18 +549,18 @@ function showHelp()
 	logError "     4 read from 'zenity --text'"
 	logError " -c encryptMode : use 1 for aes tool, 0 or any other value uses ccrypt"
 	logError " -p passFile : (enc) read pass from first line in passFile"
-	logError " -ap file : read pass from session encrypted file, other pass input options are ignored"
+	logError " -ap file : session: read pass from encrypted file (see -aop), other pass input options are ignored"
 	logError " -k : (enc) do not ask for keyfiles"
 	logError " -kf keyFile : (enc) use keyFile (combine with -k)"
 	logError " -b count : (enc) generate file.count backup copies"
 	logError " -bs : (enc) generate a new secret for each -b file"
 	logError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
 	logError " -s file : (enc) read secret data as 'base64 -w 0' from file"
-	logError " -as file : (enc) read secret data from a session encrypted file (see -ao)"
-	logError " -aos outFile : (dec) write secret data to a session encrypted file"
-	logError " -aop outFile : (dec) write password data to a session encrypted file"
-	logError " -ar file : use file as session salt, will be created if not exists"
-	logError " -aa : do not ask for session encryption password (use default)"
+	logError " -as file : (enc) session : read secret data from a session file (see -aos)"
+	logError " -aos outFile : (dec) session: write secret data to a encrypted file"
+	logError " -aop outFile : (dec) session: write password data to a encrypted file"
+	logError " -ar file : session: use file data as part of session key, will be created if not exists"
+	logError " -aa : session: do not ask for session encryption password (use default)"
 	logError " -r length : (rnd) length of random bytes (default 64)"
 	logError " -rb count : (rnd) generate file.count files"
 	logError " -d : dump password and secret on stderr for debug"
@@ -630,19 +652,16 @@ function main()
 			;;
 			-aos)
 				cskSessionSecretFile="${2:?"! -ao file"}"
-				if [ -f "$cskSessionSecretFile" ]; then
-					local fss=""
-					read -p "Overwrite ${cskSessionSecretFile}? [y (overwrite) | Enter (leave as is)]: " fss
-					logError
-					if [ "$fss" != "y" ]; then
-						logError "# left file unchanged: ${cskSessionSecretFile}"
-						cskSessionSecretFile=""
-					fi
+				if [ "$(askOverwriteFile "${cskSessionSecretFile}")" != "y" ]; then
+					cskSessionSecretFile=""
 				fi
 				shift
 			;;
 			-aop)
 				cskSessionSaveDecodePassFile="${2:?"! -aop file"}"
+				if [ "$(askOverwriteFile "${cskSessionSaveDecodePassFile}")" != "y" ]; then
+					cskSessionSaveDecodePassFile=""
+				fi
 				shift
 			;;
 			-r)
