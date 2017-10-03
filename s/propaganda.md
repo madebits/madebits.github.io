@@ -15,7 +15,7 @@
 * [Science Daily](https://www.sciencedaily.com)
 * [Live Science](https://www.livescience.com/news)
 * [Heise](https://www.heise.de/newsticker/)
-* [Mit News](http://news.mit.edu/)
+* [MIT News](http://news.mit.edu/)
 * [Reddit Programming](https://www.reddit.com/r/programming/)
 * [Ted](https://www.ted.com/)
 
