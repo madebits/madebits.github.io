@@ -127,7 +127,7 @@ An initial bad decision is followed by even more bad decisions to cover up the i
 
 ###Getting Rid of Snaps
 
-Ubuntu desktop may not function properly if you do any of these. This info is for completes only.
+Ubuntu desktop may not function properly if you do any of these. This info is listed here for completes only.
 
 To [remove](https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu) `snap` one can use:
 
