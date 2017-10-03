@@ -32,7 +32,7 @@ Some overlapping terms explained:
 * **secret** - randomly generated (or user specified) 512 bytes (binary). Binary values are shown as *base64* in tool. Secret is used as `cryptsetup` password.
 * **secret file** - file where *secret* is stored encrypted.
 * **password** - user password (or pass-phrase) used to encrypt *secret file* (hashed with `argon2`).
-* **key file** - user password can contain additionally to the paraphrase one or more optional key files. Their header bytes hashed content is added to the password. Order of specifying key files does not matter, but they have to be exact same files used during encryption and decryption.
+* **key file** - user password can contain, additionally to the pass-phrase, one or more optional key files. The hashed header bytes content of key files is appended to the password. Order of specifying key files does not matter, but they have to be exact same files used during encryption and decryption.
 * **session** - optional state stored as part of current user session. There is by default no session, but it is possible to store passwords in named encrypted session slots in a *tmpfs* for current logged user and refer to them from there.
 * **session password** - an optional password used additionally to temporary random session key to protect contents stored in *session*.
 
