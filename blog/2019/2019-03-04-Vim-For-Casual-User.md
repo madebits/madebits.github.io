@@ -157,6 +157,7 @@ Integrated spell checker can be activated via `:set spell`:
 `z=` show lists of suggestions. Type *number* *Enter* to replace word.
 `[s` next, `s]` previous suggestion.
 `zg` add / `zw` remove word from dictionary.
+`Ctrl+x s` spell from within *insert mode*.
 
 To encrypt current buffer text:
 
