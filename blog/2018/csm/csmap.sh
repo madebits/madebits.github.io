@@ -9,6 +9,7 @@ if [ $(id -u) != "0" ]; then
     exit 1
 fi
 
+user=${SUDO_USER:-$(whoami)}
 toolsDir="$(dirname $0)"
 lastName=""
 lastContainer=""
@@ -65,7 +66,6 @@ function ownFile()
 {
     local file="$1"
     if [ -f "$file" ]; then
-        local user=${SUDO_USER:-$(whoami)}
         chown $(id -un "$user"):$(id -gn "$user") "$file"
     fi
 }
@@ -97,7 +97,6 @@ function mountContainer()
     local name=$(validName "$1")
     local mntDir1=$(mntDirRoot "$name")
     local mntDir2=$(mntDirUser "$name")
-    local user=${SUDO_USER:-$(whoami)}
     
     mkdir -p "$mntDir1"
     set +e
@@ -149,7 +148,6 @@ function openContainer()
     fi
     shift
 
-    local user=${SUDO_USER:-$(whoami)}
     echo "Opening /dev/mapper/${name} ..."
 
     local key=$(sudo -E -u "$user" "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
@@ -170,7 +168,7 @@ function ddContainer()
     local bs="$2"
     local count="$3"
     local seek="$4"
-    local user=${SUDO_USER:-$(whoami)}
+    
     if [ -z "$seek" ]; then
         sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" status=progress
     else
@@ -196,7 +194,6 @@ function createContainer()
     shift
 
     local sizeNum="${size:$length:-1}"
-    local user=${SUDO_USER:-$(whoami)}
 
     echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
     if [ "${size: -1}" == "G" ]; then
@@ -243,7 +240,7 @@ function changePass()
     if [ -f "$secret" ]; then
         lastSecretTime=$(stat -c %z "$secret")
     fi
-    local user=${SUDO_USER:-$(whoami)}
+
     sudo -E -u "$user" "${toolsDir}/cskey.sh" chp "$secret"
     sleep 1
     touchFile "$secret" "$lastSecretTime"
@@ -269,7 +266,6 @@ function touchFile()
     local file="$1"
     local fileTime="$2"
     if [ -f "$file" ]; then
-        #local user=${SUDO_USER:-$(whoami)}
 sudo bash -s "$file" "$fileTime" <<'EOF'
     now=$(date +"%F %T.%N %z") && date -s "$2" > /dev/null && touch "$1"
     # && date -s "$now"
