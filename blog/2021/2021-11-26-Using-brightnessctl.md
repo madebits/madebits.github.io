@@ -40,6 +40,12 @@ if [ -n "$1" ]; then
         down|-)
             brightnessctl -d intel_backlight set 1%-
         ;;
+        bat)
+            ac=$(upower -i /org/freedesktop/UPower/devices/line_power_AC | grep --color=never online | tr -s ' ' | cut -d ' ' -f 3)
+            if [ "$ac" = "no" ]; then
+                brightnessctl -d intel_backlight set 2%
+            fi
+        ;;
         *)
             brightnessctl -d intel_backlight set "${1}%"
         ;;
