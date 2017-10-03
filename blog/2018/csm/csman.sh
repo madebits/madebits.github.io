@@ -562,7 +562,7 @@ function changePassword()
         shift
     fi
     processOptions "$@"
-    echo "# Decoding $ifile ..."
+    echo "# Decoding ${ifile} ..."
     local secret=$(cskey.sh dec "${ifile}" "${ckOptions[@]}" | base64 -w 0)
     if (( ! ${#ckOptions2[@]} )); then
         echo "# using same cskey options for encode"
@@ -584,15 +584,15 @@ function cleanUp()
 
 function showChecksum()
 {
-    sha256sum "$0"
-    sha256sum "${toolsDir}/cskey.sh"
+    (>&2 sha256sum "$0")
+    (>&2 sha256sum "${toolsDir}/cskey.sh")
     if [ -f "${toolsDir}/aes" ]; then
-        sha256sum "${toolsDir}/aes"
+        (>&2 sha256sum "${toolsDir}/aes")
     fi
     if [ -f "${toolsDir}/argon2" ]; then
-        sha256sum "${toolsDir}/argon2"
+        (>&2 sha256sum "${toolsDir}/argon2")
     fi
-    echo
+    logError
 }
 
 function showHelp()
@@ -612,6 +612,7 @@ function showHelp()
     logError " $bn touch|t fileOrDir [time]"
     logError "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\""
     logError " $bn chp inFile [outFile] [ openCreateOptions ] : only -ck -cko are used"
+    logError " $bn -k ... : invoke cskey.sh ..."
     logError "Where [ openCreateOptions ]:"
     logError " -co cryptsetup options --- : outer encryption layer"
     logError " -ci cryptsetup options --- : inner encryption layer"
@@ -722,7 +723,7 @@ function main()
                 tput setaf 1
                 read -p "Press Enter or Ctrl+C to close the container ..."
                 tput sgr 0
-                echo
+                logError
                 cleanUp
             fi
         ;;
@@ -755,6 +756,9 @@ function main()
         ;;
         chp)
             changePassword "$@"
+        ;;
+        -k)
+            "${toolsDir}/cskey.sh" "$@"
         ;;
         *)
             showHelp
