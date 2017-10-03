@@ -306,7 +306,11 @@ Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you
 
 #### Embedding Secret
 
-The `cryptsetup` options can be used if needed to embed a secret file into the container. Assuming secret file is less than 1024 bytes long, the following commands create a container with offset and store secret there (*more convenient commands follow later, this here is only an explanation*):
+Secret files can be embedded into the beginning of the encrypted container. Given both secret file data and container data look random, it is not possible to tell that are secret file data in the beginning of the container. `csman.sh` can use several slots of 1204 byte each to embed one more secret files.
+
+##### How Embedded Secret Slots Work
+
+The `cryptsetup` options (`-o`) can be used if needed to embed a secret file into the container. Assuming secret file is less than 1024 bytes long, the following commands create a container with offset and store secret there. *More convenient commands follow later, this here is only an explanation*.
 
 ```bash
 sudo csman.sh n container.bin -S 1M -s secret.bin -cf -N 1000 -- -co -o 2 --
@@ -316,13 +320,15 @@ dd conv=notrunc if=secret.bin of=container.bin
 # to store more than one secret file use (-o 4)
 # dd conv=notrunc seek=1 bs=1024 if=secret2.bin of=container.bin
 
-# open container, container is also the secret now
+# open container, container is also its own secret now
 sudo csman.sh o container.bin container.bin -co -o 2 --
 ```
 
-The `-slots count` option is provided as convenience to create as many as count 1024 byte slots.
+##### Using Embedded Secret Slots
 
-* If not set, it defaults to `-slots 4`. Using `-slots` overwrites `-co -o` (the number used with `-o` needs to be twice the number of slots). Use `-slots 0` if you need no slots, or if you do not want to overwrite `-co -o`. `-s0`  option is a shortcut for `-slots 0`. You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number. If slots is set bigger than `0`, then create command also embeds secret file in the first slot. If slots count is bigger than one and secret.bin.01, to secret.bin.03 files exists, they are also embedded in the other slots. Slots are not intended as a replacement for container file backups.
+The `csman.sh` `-slots count` option is provided as convenience to create as many as *count* `1024` byte slots to embed the secret files. Slots are not intended as a replacement for container and secret file backups.
+
+* If not set, it defaults to `-slots 4`. Using `-slots` overwrites `-co -o` (the number used with `-o` needs to be twice the number of slots). Use `-slots 0` if you need no slots, or if you do not want to overwrite `-co -o` option. `-s0`  option is a shortcut for `-slots 0`. You need to remember `-slots` count used when the container is created and use it also with open command (you can use always same number). If slots is set bigger than `0`, then create container command also embeds secret file in the first slot. If slots count is bigger than one and secret.bin.01, to secret.bin.03 files exists, they are also embedded in the other slots.
 
 ```bash
 # these are same, but only second one embeds secret during create
@@ -333,7 +339,7 @@ sudo csman.sh n container.bin -S 1M -s secret.bin -slots 4
 sudo csman.sh o container.bin -s secret.bin -co -o 8 --
 sudo csman.sh o container.bin -s secret.bin -slots 4
 
-# to create a secret and embed both in first two slots on create use
+# to create a secret with two files and embed both in first two slots on create use
 sudo csman.sh n container.bin -S 1M -s secret.bin -ck -b 1 -su --
 # or backup key in all default 4 slots (creates or uses secret.bin, secret.bin.01, .., secret.bin.03)
 sudo csman.sh n container.bin -S 1M -s secret.bin -ck -b 3 -su --
@@ -356,7 +362,7 @@ Two *convenience* commands (no `sudo` needed) are provided to embed (`e` or `emb
 csman e container.bin -s secret.bin
 csman e container.bin -s secret.bin.01 -slot 2
 
-# extract, will overwrite secret file if exists
+# extract, this will overwrite secret file if exists
 csman ex container.bin -s secret.bin
 csman ex container.bin -s secret.bin.01 -slot 2
 ```
@@ -376,7 +382,7 @@ sudo csman.sh o container.bin -slots 2 -ck -slot 2 --
 
 The `cskey.sh -slot` if not specified is 1. `cskey.sh enc` if a slot is specified pads secret to 1024 bytes using random data.
 
-To remove a slot's data, overwrite it with random data using delete `-d` option of `e` command:
+To remove a slot's data, overwrite it with random data using delete `-d` option of the `e` command:
 
 ```bash
 csman.sh e container.bin -d -slot 2
@@ -410,8 +416,6 @@ For these commands there are a few open command shortcuts: `o` *open*, `ol` *ope
 
 The `-e` option mounts container with `exec` option so that executable files inside can be run (default is `noexec`).
 
-
-
 ### Container Details
 
 You can see a list of open containers using `list` or `l` command:
@@ -434,7 +438,7 @@ csman.sh d
 
 It is possible to increase the size of an open container file live.
 
-If you enlarge the container file on your own you can run `sudo csman.sh resize name` to inform `cryptsetup` and EXT4 of added size.
+If you enlarge the container file on your own, you can run `sudo csman.sh resize name` to inform `cryptsetup` and EXT4 of added size.
 
 Alternatively, use `sudo csman.sh increase name size`. The *size* is the delta size to add in *M* or *G* (same as with `create` command) and not the total final size.
 
@@ -460,7 +464,7 @@ sudo csman.sh x
 
 ### Changing Password
 
-Changing the password of a secret file can be done via:
+Changing the password of a *secret file* can be done via:
 
 ```bash
 # old file is left as is, a new file is created
