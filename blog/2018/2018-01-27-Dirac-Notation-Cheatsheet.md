@@ -65,7 +65,7 @@ $$$ \prod_{\rvert 0 \rangle} (\rvert v \rangle) = \prod_0 \rvert v \rangle = \rv
 Matrices:
 
 $$$
-A_{2x2} = \langle 0 \rvert A \rvert 0 \rangle \rvert 0 \rangle \langle 0 \rvert + \langle 0 \rvert A \rvert 1 \rangle \rvert 0 \rangle \langle 1 \rvert + \langle 1 \rvert A \rvert 0 \rangle \rvert 1 \rangle \langle 0 \rvert  + \langle 1 \rvert A \rvert 1 \rangle \rvert 1 \rangle \langle 1 \rvert 
+A_{2\times2} = \langle 0 \rvert A \rvert 0 \rangle \rvert 0 \rangle \langle 0 \rvert + \langle 0 \rvert A \rvert 1 \rangle \rvert 0 \rangle \langle 1 \rvert + \langle 1 \rvert A \rvert 0 \rangle \rvert 1 \rangle \langle 0 \rvert  + \langle 1 \rvert A \rvert 1 \rangle \rvert 1 \rangle \langle 1 \rvert 
 $$$
 
 Where:
