@@ -53,7 +53,7 @@ Every time `csman.sh` starts, it prints prefix hashes of these files, if present
 
 ```
 62d96ae31  /usr/local/bin/csman.sh
-de2d6e6e7  /usr/local/bin/cskey.sh
+b6a0b478b  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
 ```
@@ -244,7 +244,13 @@ csman e container.bin secret.bin.01 -es 2
 
 # will overwrite secret file if exists
 csman ex container.bin secret.bin
-csman e container.bin secret.bin.01 -es 2
+csman ex container.bin secret.bin.01 -es 2
+
+# cskey.sh knows to read from a default slot using -es, or from a byte offset using -o
+# open container using slot 2
+sudo csman.sh o container.bin container.bin -co -o 4 --- -ck -es 2 ---
+# open container using slot 1
+sudo csman.sh o container.bin container.bin -co -o 4 ---
 ```
 
 Ideally, generate two secret files for same key and password using `cskey.sh`, so that they are not same.
