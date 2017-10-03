@@ -41,7 +41,7 @@ Vue Starter Template template does not use `vue-client`. I learned a lot from th
 * To debug both application and unit tests with hot replacement use:
 
     ```
-    npm start-debug-withunittests
+    npm start-debug-withtests
     ```
  
   Unit tests are available in browser via http://localhost:8080/test.html URL.
@@ -100,6 +100,11 @@ Backend will run at port http://localhost:3000 by default.
   "prettier.eslintIntegration": true
   ```
 * [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
+  ```
+  "vetur.format.defaultFormatter": {
+        "html": "prettier"
+     }
+  ```
 
 ##Vue.Js Resources
 
