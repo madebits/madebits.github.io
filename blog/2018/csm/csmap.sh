@@ -329,21 +329,6 @@ function closeAll()
     done
 }
 
-function changePass()
-{
-    local secret="${1:-}"
-    checkArg "$secret" "secret"
-    shift
-    processOptions "$@"
-    if [ -f "$secret" ]; then
-        lastSecretTime=$(stat -c %z "$secret")
-    fi
-    echo " Processing ${secret} ..."
-    "${toolsDir}/cskey.sh" chp "$secret" "${ckOptions[@]}"
-    ownFile "$secret"
-    touchFile "$secret" "$lastSecretTime"
-}
-
 function touchDiskFile()
 {
     file="${1:-}"
@@ -464,7 +449,6 @@ function showHelp()
     dumpError " $bn umount name"
     dumpError " $bn create secret container size [ openCreateOptions ]"
     dumpError "    size should end in M or G"
-    dumpError " $bn changePass secret [ -csk cskey.sh options ]"
     dumpError " $bn resize name"
     dumpError " $bn increase name bySize"
     dumpError "    size should end in M or G"
@@ -555,9 +539,6 @@ function main()
         ;;
         closeAll|ca|x)
             closeAll
-        ;;
-        changePass|chp)
-            changePass "$@"
         ;;
         resize|r)
             resizeContainer "$1"
