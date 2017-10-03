@@ -132,6 +132,8 @@ System versions of these also exit for root snap packaged services (`sudo snap s
 * `SNAP_DATA=/var/snap/gimp/current`
 * `SNAP_COMMON=/var/snap/gimp/common`
 
+It seems `snap remove` saves the snap data as snapshot automatically, same as `snap save`. To view saved data snapshots, use `snap saved`. It list snapshot `id` is in the first *Set* column. To remove a snapshot use `snap forget id`.
+
 ### Application Configuration
 
 The `HOME/snap/*/current/.config` path will link to latest `$HOME/.config` folder as seen by application, but only if application is run once, otherwise link is invalid (e.g. if snap updates the application in between runs).
