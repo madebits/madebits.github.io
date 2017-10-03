@@ -500,6 +500,10 @@ function openContainerByName()
                 set -e
             fi
         fi
+        label="$(e2label "$lastDev" 2> /dev/null)"
+        if [ -n "$label" ]; then
+            echo "# label: $label"
+        fi
     fi
 }
 
