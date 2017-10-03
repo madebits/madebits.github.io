@@ -292,6 +292,9 @@ sudo cskey.sh ses @new -i e -aa -k
 
 # go over all key files and replace pass
 sudo bash -c 'for f in *.bin; do csman.sh chp "${f}" "$new-{f}" -ck -ap @old -aa -k --- -cko -ap @new -aa -k ---; done'
+
+# remove session data explicitly
+sudo cskey.sh x
 ```
 
 ## File Tools
