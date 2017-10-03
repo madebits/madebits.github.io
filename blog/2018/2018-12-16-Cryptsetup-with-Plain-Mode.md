@@ -27,10 +27,10 @@ To specify password via some script above use (e.g.: via `sudo sh -c "..."`):
 echo -n password | cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain /data2/temp/container.bin enc -
 ```
 
-Given `--type plain` hashes password only once, the above is useful if you combine it with some command that hashes password more than once. For example, generate a long secret and encrypt it using `scrypt`:
+Given `--type plain` hashes password only once, the above is useful if you combine it with some command that hashes password more than once. For example, generate a long secret and encrypt it using `scrypt`. `scrypt `tool uses AES in CTR mode to encrypt data after hashing password via `scrypt`:
 
 ```
-head -c 521 /dev/urandom | scrypt enc -t 60 -m 1000000 - secret.bin
+head -c 512 /dev/urandom | scrypt enc -t 60 -m 1000000 - secret.bin
 # enter here the password
 # keep secret.bin together with container.bin
 
