@@ -101,7 +101,7 @@ To mount:
 ```bash
 # --key-file file1.txt --tcrypt-hidden
 sudo cryptsetup --type tcrypt --veracrypt --veracrypt-query-pim open ./test.bin sometest
-sudo mount -o users /dev/mapper/sometest ~/mnt/
+sudo mount -o user /dev/mapper/sometest ~/mnt/
 ```
 To unmount:
 
