@@ -970,7 +970,7 @@ function showHelp()
     cat << EOF
 Usage:
  $bn open|o device secret [ openCreateOptions ]
-  if device and/or secret are ! zenity is used
+  if device and / or secret are ! zenity is used
  $bn close|c name
  $bn closeAll|ca
  $bn list|l
