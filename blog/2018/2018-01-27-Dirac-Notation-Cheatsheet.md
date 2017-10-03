@@ -10,13 +10,13 @@
 
 **ket** 
 
-$$$\rvert v \rangle = v_0 \rvert 0 \rangle + v_1 \rvert 1 \rangle \mapsto \left[
+$$$\rvert v \rangle = v_0 \rvert 0 \rangle + v_1 \rvert 1 \rangle \equiv \left[
 \begin{array}{cc}  v_0 \cr v_1 \end{array} \right] $$$
 
 **bra**
 
-$$$\langle v \rvert = \bar{v_0} \langle 0 \rvert + \bar{v_1} \langle 1 \rvert  \mapsto \left[
-\begin{array}{cc}  \bar{v_0} & \bar{v_1} \end{array} \right] $$$
+$$$\langle v \rvert = \overline{v_0} \langle 0 \rvert + \overline{v_1} \langle 1 \rvert \equiv \left[
+\begin{array}{cc}  \overline{v_0}, & \overline{v_1} \end{array} \right] $$$
 
 Where:
 
@@ -24,7 +24,7 @@ $$$ \rvert v \rangle^{\dagger} = \langle v \rvert $$$
 
 ##Inner Product
 
-$$$\langle v \rvert w \rangle = \bar{v_0}w_0 + \bar{v_1}w_1$$$
+$$$\langle v \rvert w \rangle = \overline{v_0}w_0 + \overline{v_1}w_1$$$
 
 $$$ \langle v \rvert w \rangle^{\dagger} = \langle w \rvert v \rangle $$$
 
