@@ -182,9 +182,7 @@ $@
 ```
 
 
-This script works same as the one above, but additionally, supports specifying users other than root:
-
-This script can be used as follows:
+This script works same as the one above, but additionally, it supports specifying users other than `root`:
 
 ```
 ./gksu.sh -u user2 leafpad /etc/fstab
