@@ -14,6 +14,8 @@
 <hr>
 
 * [CNN](https://edition.cnn.com/world)
+* [CNBC](https://www.cnbc.com/world-news/)
+* [CSBS News](https://www.cbsnews.com/world/)
 * [USA Today](https://usatoday.com/)
 * [Fox News](https://www.foxnews.com/world)
 * [The New York Times](https://www.nytimes.com/section/world)
@@ -28,6 +30,7 @@
 * [EuroNews](https://www.euronews.com/news/international)
 * [B92](https://www.b92.net/eng/news/world.php)
 * [Daily Mail](https://www.dailymail.co.uk/news/worldnews/index.html)
+* [Financial Times](https://www.ft.com/world)
 
 <hr>
 
