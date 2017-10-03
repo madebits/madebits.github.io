@@ -190,9 +190,8 @@ function decodeSecret()
 			readSessionPass
 			echo -n "$data" | base64 -d | decryptAes "$hash" | encryptAes "$cskSessionPass" > "$cskSessionSecretFile"
 			debugData "$cskSessionSecretFile" $(echo -n "$data" | base64 -d | decryptAes "$hash" | base64 -w 0)
-		else
-			echo -n "$data" | base64 -d | decryptAes "$hash"
 		fi
+		echo -n "$data" | base64 -d | decryptAes "$hash"
     else
         onFailed "no such file: $file"
     fi
@@ -370,7 +369,7 @@ function decryptFile()
 	readKeyFiles
 	local pass=$(readPass)
 	if [ -n "${cskSessionSaveDecodePassFile}" ]; then
-		logError "# creating password session file: ${cskSessionSaveDecodePassFile}"
+		logError "# creating password session file: ${cskSessionSaveDecodePassFile} ..."
 		createSessionPass "${cskSessionSaveDecodePassFile}" "$pass"
 	fi
     decodeSecret "$1" "$pass"
@@ -435,9 +434,6 @@ function readSessionPassFromFile()
 function createSessionPass()
 {
 	local file="$1"
-	if [ "$file" = "-" ]; then
-		file="/dev/stdout"
-	fi
 	local pass="${2:-}"
 	if [ -z "$pass" ]; then
 		readKeyFiles
@@ -449,8 +445,9 @@ function createSessionPass()
 	local fsp=""
 	if [ -f "$file" ]; then
 		read -p "Overwrite ${file}? [y - (overwrite) | Enter (leave as is)]: " fsp
+		logError
 		if [ "$fsp" != "y" ]; then
-			logError "# left file ${file} as is!"
+			logError "# left file unchanged: ${file}"
 			return
 		fi
 	fi
@@ -633,8 +630,14 @@ function main()
 			;;
 			-aos)
 				cskSessionSecretFile="${2:?"! -ao file"}"
-				if [ "$cskSessionSecretFile" = "-" ]; then
-					cskSessionSecretFile="/dev/stdout"
+				if [ -f "$cskSessionSecretFile" ]; then
+					local fss=""
+					read -p "Overwrite ${cskSessionSecretFile}? [y (overwrite) | Enter (leave as is)]: " fss
+					logError
+					if [ "$fss" != "y" ]; then
+						logError "# left file unchanged: ${cskSessionSecretFile}"
+						cskSessionSecretFile=""
+					fi
 				fi
 				shift
 			;;
