@@ -10,17 +10,17 @@ Why does VSCode sucks at JavaScript?
 
 > Because VSCode developers use [TypeScript](https://www.typescriptlang.org/). They only care about JavaScript as an afterthought - TypeScript works great, JavaScript kind of works too.
 
-Have a look at https://code.visualstudio.com/docs/languages/javascript and let me explain some of its highlight for you:
+Have a look at https://code.visualstudio.com/docs/languages/javascript and let me explain some of its highlights:
 
 * In the very introduction, they explain: *"Most of these features just work out of the box, while some may require basic configuration to get the best experience."*. This means, we do not really care to make it easy and comfortable to use JavaScript out of the box in VSCode.
 
-* *VS Code provides IntelliSense within your JavaScript projects; for many npm libraries such as ...*, basically, for all those that come with TypeScript information.
+* *VS Code provides IntelliSense within your JavaScript projects; for many npm libraries such as ...*, basically, for all those libraries that come with TypeScript information.
 
 * *`jsconfig.json` files are not required ...*, but the TypeScript compiler uses them and while you do not want to use TypeScript, then at least take over its bad parts. TypeScript developers are used to that, JavaScript people can get used to that pain too.
 
-* *Go to Definition* - most of the time will not work, unless you use write JavaScript that looks like TypeScript, better map F12 to plain text search.
+* *Go to Definition* - most of the time will not work, unless you use write JavaScript code that looks like TypeScript, better map F12 to plain text search.
 
-* To take over the terrible programming experience of TypeScript to JavaScript decorate files with `//@ts-check`. Common, who do they expect to decorate each file one by one like that? Anyway, every time I tried that, it make the whole error checking experience terrible and had to turn it off. VSCode will think it is TypeScript and report non-sense, you have to give quickly up. Not sure if VSCode developers have ever tried programming JavaScript with it.
+* To take over the terrible programming experience of TypeScript to JavaScript decorate files with `//@ts-check`. Who do they expect to decorate each file in a code-base like that? Anyway, every time I tried that, it make the whole error checking experience terrible and had to turn it off. VSCode will think code is TypeScript and will report non-sense. Not sure if VSCode developers have ever tried programming JavaScript for more than demo with it on.
 
 How can VSCode be better at JavaScript? 
 
