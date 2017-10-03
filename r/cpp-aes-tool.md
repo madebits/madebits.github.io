@@ -112,6 +112,12 @@ echo "abc" | ./aes -p p1 -k 256 | ./aes -p p2 -k 128 | ./aes -d -p p2 -k 128 | .
 
 We first encrypt twice with password `p1` and then `p2` with different AES key sizes (-k); and then we decrypt (`-d`) the pipe result twice with same data in reverse. The output is `abc`. Encrypting more than once is safer, but slower.
 
+To have an infinite *pseudo-random* data stream use:
+
+```bash
+cat /dev/zero | ./aes -a -m -p t -c 1024
+```
+
 Use `aes -?` to view help.
 
 ## Encrypted File format
