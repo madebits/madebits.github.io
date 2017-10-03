@@ -26,7 +26,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 
 ## Usage
 
-`csman.sh` and `cskey.sh` should be run always with `sudo`. 
+> `csman.sh` and `cskey.sh` should be run always with `sudo`. 
 
 `csman.sh` is the main command to use. `csman.sh` delegates password and key operations to `cskey.sh` (which uses `aes` and `argon2`). You may need to use `cskey.sh` directly for advanced key manipulation. Running both commands without options lists their command-line arguments, e.g.: `sudo csman.sh` or `sudo cskey.sh`.
 
