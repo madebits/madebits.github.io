@@ -1,5 +1,4 @@
-
-#gksu Is Dead, Long Live pkexec
+# gksu Is Dead, Long Live pkexec
 
 2018-04-24
 
@@ -7,7 +6,7 @@
 
 `gksu` has been [removed](https://bugs.launchpad.net/ubuntu/+source/umit/+bug/1740618) in latest Ubuntu 18.04. The nearest alternative left to use is `pkexec`. Some workarounds are needed to use `pkexec` in `bash` scripts, given `pkexec` is not a drop-in replacement for `gksu`.
 
-##Replacing gksu
+## Replacing gksu
 
 With `gksu`, one could use code similar to the following, to re-run as *root* a script that contained UI commands started from a *non-root* user: 
 
@@ -35,7 +34,7 @@ echo $@
 
 There are two issues to overcome to make this code work.
 
-##First Problem
+## First Problem
 
 If you run the above script as `test.sh`, you get:
 
@@ -55,7 +54,7 @@ fi
 echo $@
 ```
 
-##Second Problem
+## Second Problem
 
 If you run a command that needs access to the user interface from `pkexec` as in this example, it will fail:
 
@@ -73,7 +72,7 @@ zenity --info --text="$msg"
 
 The following error is reported:
 
-```
+```text
 Unable to init server: Could not connect: Connection refused
 
 (zenity:31120): Gtk-WARNING **: 20:14:17.933: cannot open display:
@@ -97,7 +96,7 @@ msg="$@"
 zenity --info --text="$msg"
 ```
 
-##A Poor Man's gksu
+## A Poor Man's gksu
 
 We can use the idea above to create a final poor man's `gksu.sh` replacement script:
 
@@ -121,13 +120,13 @@ $@
 
 This script can be used as follows:
 
-```
+```bash
 ./gksu.sh leafpad /etc/fstab
 ```
 
 More environment variables can be passed as needed in same fashion.
 
-##Supporting Non-Root Users
+## Supporting Non-Root Users
 
 The script above works for `root` user, as root user has [access](https://serverfault.com/questions/51005/how-to-use-xauth-to-run-graphical-application-via-other-user-on-linux) to `$XAUTHORITY` file of all users. To support running scripts as other users, a more evolved version of the script is needed:
 
