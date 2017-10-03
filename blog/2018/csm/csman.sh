@@ -17,11 +17,15 @@ lastContainerTime=""
 lastSecret=""
 lastSecretTime=""
 csOptions=()
+csiOptions=()
 ckOptions=()
 csmCleanScreen="0"
 csmName=""
 csmLive="0"
 mkfsOptions=()
+csmChain="1"
+
+########################################################################
 
 currentScriptPid=$$
 function failed()
@@ -29,15 +33,15 @@ function failed()
     kill -9 "$currentScriptPid"
 }
 
-function dumpError()
+function logError()
 {
     (>&2 echo "$@")
 }
 
 # error
-function showError()
+function onFailed()
 {
-    dumpError "! $1"
+    logError "!" "$@"
     failed
 }
 
@@ -45,9 +49,82 @@ function showError()
 function checkArg()
 {
     if [ -z "$1" ]; then
-        showError "required $2"
+        onFailed "required ${2:-}"
     fi
 }
+
+# size
+function checkNumber()
+{
+    local re='^[0-9]+$'
+    if ! [[ "$1" =~ $re ]] ; then
+        onFailed "$1 not a number"
+    fi
+}
+
+function clearScreen()
+{
+    if [ "$csmCleanScreen" = "1" ]; then
+        tput reset
+    fi
+}
+
+########################################################################
+
+# file
+function ownFile()
+{
+    if [ -f "${1:-}" ]; then
+        chown $(id -un "$user"):$(id -gn "$user") "$1"
+    fi
+}
+
+# fileOrDir
+function touchDiskFile()
+{
+    file="${1:-}"
+    checkArg "$file" "fileOrDir"
+    local time="${2:-}"
+    if [ -z "$time" ]; then
+        time=$(stat -c %z "$file")
+    fi
+    echo "Setting file times to: $time"
+    if [ -f "$file" ]; then
+        ownFile "$file"
+        touchFile "$file" "$time"
+        stat "$file"
+    elif [ -d "$file" ]; then
+        find "$file" -type f | while IFS=$'\n' read -r f; do
+            echo " $f"
+            ownFile "$f"
+            touchFile "$f" "$time"
+        done
+    else
+        onFailed "not found: $file"
+    fi
+    echo "Done"
+}
+
+# file time
+function touchFile()
+{
+    local file="$1"
+    local fileTime="$2"
+    if [ -f "$file" ]; then
+    #sudo bash -s "$file" "$fileTime" <<-'EOF'
+        now=$(date +"%F %T.%N %z") && date -s "$2" > /dev/null && touch "$1" && date -s "$now" > /dev/null
+    #   EOF
+    fi
+}
+
+function resetTime()
+{
+    touchFile "$lastContainer" "$lastContainerTime"
+    sleep 1
+    touchFile "$lastSecret" "$lastSecretTime"
+}
+
+########################################################################
 
 function newName()
 {
@@ -74,7 +151,26 @@ function validName()
     if [[ "$name" != csm-* ]]; then
         name="csm-${name}"
     fi
-    echo ${name//[^a-zA-Z0-9-]/_}
+    name="${name//[^a-zA-Z0-9-]/}"
+    checkArg "$name" "name"
+    echo "$name"
+}
+
+# name
+function innerName()
+{
+    echo "${1}_"
+}
+
+# name 1
+function getDevice()
+{
+    local name="$1"
+    # inner
+    if [ "${2:-}" = "1" ]; then
+        name=$(innerName "$name")
+    fi
+    echo "/dev/mapper/$name"
 }
 
 # name
@@ -89,13 +185,7 @@ function mntDirUser()
     echo "$(mntDirRoot "$1")-user"
 }
 
-# file
-function ownFile()
-{
-    if [ -f "${1:-}" ]; then
-        chown $(id -un "$user"):$(id -gn "$user") "$1"
-    fi
-}
+########################################################################
 
 # name
 function umountContainer()
@@ -125,20 +215,45 @@ function mountContainer()
     local mntDir1=$(mntDirRoot "$name")
     local mntDir2=$(mntDirUser "$name")
     
+    # check for inner one first
+    local hasInner="1"
+    local dev="$(getDevice "$name" "1")"
+    if [ ! -e "$dev" ]; then
+        hasInner="0"
+        dev="$(getDevice "$name" "0")"
+    fi
+    if [ ! -e "$dev" ]; then
+        onFailed "no mapper device: $name"
+    fi
+    
     mkdir -p "$mntDir1"
     set +e
-    mount "/dev/mapper/$name" "$mntDir1"
+    mount "$dev" "$mntDir1"
     if [ "$?" != "0" ]; then
-        cryptsetup close "$name"
+        closeContainerByName "$name"
         rmdir "$mntDir1"
         resetTime
-        echo " Closed ${name} !"
         failed
     fi
     set -e
     mkdir -p "$mntDir2"
     bindfs -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
-    echo "Mounted ${name} at ${mntDir2}."
+    echo "Mounted ${dev} at ${mntDir2}"
+}
+
+function closeContainerByName()
+{
+    local name=$(validName "${1:-}")
+    
+    local dev="$(getDevice "$name" "1")"
+    if [ -e "$dev" ]; then
+        cryptsetup close "$(innerName "$name")"
+    fi
+    dev="$(getDevice "$name" "0")"
+    if [ -e "$dev" ]; then
+        cryptsetup close "$name"
+    fi
+    echo " Closed ${name} !"
 }
 
 # name
@@ -147,14 +262,47 @@ function closeContainer()
     local name=$(validName "${1:-}")
     echo "Closing ${name} ..."
     umountContainer "$name"
-    cryptsetup close "$name"
-    echo " Closed ${name} !"
+    closeContainerByName "$name"
 }
 
-function clearScreen()
+function closeAll()
 {
-    if [ "$csmCleanScreen" = "1" ]; then
-        tput reset
+    for filename in /dev/mapper/*; do
+        [ -e "$filename" ] || continue
+        local name=$(basename "$filename")
+        [ "$name" != "control" ] || continue
+        [[ "$name" == csm-* ]] || continue
+        [ "${name: -1}" != "_" ] || continue
+        closeContainer "$name"
+    done
+}
+
+########################################################################
+
+#key name device
+function openContainerByName()
+{
+    local key="$1"
+    local name="$2"
+    local device="$3"
+    
+    local dev="$(getDevice "$name" "0")"
+    echo "Opening ${dev} ..."
+    echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "${csOptions[@]}" open "${device}" "${name}" -
+    cryptsetup status "${dev}"
+    
+    if [ "$csmChain" = "1" ]; then
+        local name1="$(innerName "$name")"
+        local dev1="$(getDevice "$name" "1")"
+        echo "Opening ${dev1} ..."
+        set +e
+        echo -n "${key}" | base64 -d | cat - <(echo -n "different key") | cryptsetup --type plain -c twofish-cbc-essiv:sha256 -s 256 -h sha512 "${csiOptions[@]}" open "${dev}" "${name1}" -
+        if [ "$?" != "0" ]; then
+            closeContainerByName "$name"
+            failed
+        fi
+        set -e
+        cryptsetup status "${dev1}"
     fi
 }
 
@@ -174,7 +322,7 @@ function openContainer()
     fi
     if [ ! -e "$secret" ]; then
         resetTime
-        showError "cannot open: $secret"
+        onFailed "cannot open: $secret"
     fi
     shift
 
@@ -186,7 +334,7 @@ function openContainer()
     fi
     if [ ! -e "$device" ]; then
         resetTime
-        showError "cannot open: $device"
+        onFailed "cannot open: $device"
     fi
     shift
     
@@ -198,22 +346,21 @@ function openContainer()
         oName=${name:4}
     fi
     
-    echo "Opening /dev/mapper/${name} ..."
-
     local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     if [ -z "$key" ]; then
-        showError "cannot get key"
+        onFailed "cannot get key"
     fi
     touchFile "$lastSecret" "$lastSecretTime"
     clearScreen
-    echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "${csOptions[@]}" open "$device" "$name" -
-    echo
-    cryptsetup status "/dev/mapper/$name"
+    openContainerByName "$key" "$name" "$device"
+    
     mountContainer "$name"
     echo "To close use:"
     echo "$0 close ${oName}"
     echo "$0 closeAll"    
 }
+
+########################################################################
 
 # container bs count seek
 function ddContainer()
@@ -227,15 +374,6 @@ function ddContainer()
         sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" status=progress
     else
         sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" seek="$seek" status=progress
-    fi
-}
-
-# size
-function checkNumber()
-{
-    local re='^[0-9]+$'
-    if ! [[ "$1" =~ $re ]] ; then
-        showError "$1 not a number"
     fi
 }
 
@@ -262,7 +400,7 @@ function createContainer()
     if [ -f "$container" ]; then
         read -p "Overwrite container file ${container} [y | any key to exit]: " overwriteContainer
         if [ "$overwriteContainer" != "y" ]; then
-            showError "nothing to do"
+            onFailed "nothing to do"
         fi
     fi
     shift
@@ -281,7 +419,7 @@ function createContainer()
     elif [ "${size: -1}" = "M" ]; then
         ddContainer "$container" "1M" "$sizeNum"
     else
-        showError "size can be M or G"
+        onFailed "size can be M or G"
     fi
     sync
     
@@ -303,76 +441,77 @@ function createContainer()
     echo "(Re-)enter password to open the container for the first time ..."
     local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     if [ -z "$key" ]; then
-        showError "cannot get key"
+        onFailed "cannot get key"
     fi
-    echo
+
     clearScreen
     touchFile "$lastSecret" "$lastSecretTime"
-    echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "${csOptions[@]}" open "$container" "$name" -
+    openContainerByName "$key" "$name" "$container"
+    
+    local dev="$(getDevice "$name" "1")"
+    if [ ! -e "$dev" ]; then
+        dev="$(getDevice "$name" "0")"
+    fi
+    if [ ! -e "$dev" ]; then
+        onFailed "cannot find: $dev"
+    fi
 
-    echo "Creating filesystem in /dev/mapper/$name ..."
-    mkfs -t ext4 -m 0 "${mkfsOptions[@]}" "/dev/mapper/$name"
+    echo "Creating filesystem in $dev ..."
+    mkfs -t ext4 -m 0 "${mkfsOptions[@]}" "$dev"
     sync
-    sleep 2
-    cryptsetup close "$name"
+    sleep 1
+    closeContainerByName "$name"
     ownFile "$container"
     echo "Done! To open container use:"
     echo "$0 open ${secret} ${container}"
 }
 
-function closeAll()
+
+########################################################################
+
+# name
+function resizeContainer()
 {
-    for filename in /dev/mapper/*; do
-        [ -e "$filename" ] || continue
-        local name=$(basename "$filename")
-        [ "$name" != "control" ] || continue
-        [[ "$name" == csm-* ]] || continue
-        closeContainer "$name"
-    done
+    local name=$(validName "${1:-}")
+    cryptsetup resize "$name"
+    resize2fs "/dev/mapper/$name"
 }
 
-function touchDiskFile()
+# only works for full G/M blocks
+function increaseContainer()
 {
-    file="${1:-}"
-    checkArg "$file" "fileOrDir"
-    local time="${2:-}"
-    if [ -z "$time" ]; then
-        time=$(stat -c %z "$file")
+    local name=$(validName "${1:-}")
+    shift
+    local size="${1:-}"
+    checkArg "$size" "size"
+    shift
+    local sizeNum="${size: : -1}"
+    checkNumber "$sizeNum"
+
+    container=$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)
+    if [ ! -f "$container" ]; then
+        onFailed "no such container file ${container}"
     fi
-    echo "Setting file times to: $time"
-    if [ -f "$file" ]; then
-        ownFile "$file"
-        touchFile "$file" "$time"
-        stat "$file"
-    elif [ -d "$file" ]; then
-        find "$file" -type f | while IFS=$'\n' read -r f; do
-            echo " $f"
-            ownFile "$f"
-            touchFile "$f" "$time"
-        done
+    local currentSize=$(stat -c "%s" "$container")
+    if [ "${size: -1}" = "G" ]; then
+        local sizeG=$(($currentSize / (1024 * 1024 * 1024)))
+        if [ "$sizeG" = "0" ]; then # keep it simple
+            onFailed "cannot determine current size in G"
+        fi
+        ddContainer "$container" "1G" "$sizeNum" "$sizeG"
+    elif [ "${size: -1}" = "M" ]; then
+        local sizeM=$(($currentSize / (1024 * 1024)))
+        if [ "$sizeM" = "0" ]; then
+            onFailed "cannot determine current size in M"
+        fi
+        ddContainer "$container" "1M" "$sizeNum" "$sizeM"
     else
-        showError "not found: $file"
+        onFailed "size can be M or G"
     fi
-    echo "Done"
+    resizeContainer "$name"
 }
 
-function touchFile()
-{
-    local file="$1"
-    local fileTime="$2"
-    if [ -f "$file" ]; then
-    #sudo bash -s "$file" "$fileTime" <<-'EOF'
-        now=$(date +"%F %T.%N %z") && date -s "$2" > /dev/null && touch "$1" && date -s "$now" > /dev/null
-    #   EOF
-    fi
-}
-
-function resetTime()
-{
-    touchFile "$lastContainer" "$lastContainerTime"
-    sleep 1
-    touchFile "$lastSecret" "$lastSecretTime"
-}
+########################################################################
 
 function cleanUp()
 {
@@ -396,73 +535,33 @@ function showChecksum()
     echo
 }
 
-# name
-function resizeContainer()
-{
-    local name=$(validName "${1:-}")
-    cryptsetup resize "$name"
-    resize2fs "/dev/mapper/$name"
-}
-
-# only works for full G/M blocks
-function increaseContainer()
-{
-    local name=$(validName "${1:-}")
-    shift
-    local size="${1:-}"
-    checkArg "$size" "size"
-    shift
-    local sizeNum="${size: : -1}"
-    checkNumber "$sizeNum"
-
-    container=$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)
-    if [ ! -f "$container" ]; then
-        showError "no such container file ${container}"
-    fi
-    local currentSize=$(stat -c "%s" "$container")
-    if [ "${size: -1}" = "G" ]; then
-        local sizeG=$(($currentSize / (1024 * 1024 * 1024)))
-        if [ "$sizeG" = "0" ]; then # keep it simple
-            showError "cannot determine current size in G"
-        fi
-        ddContainer "$container" "1G" "$sizeNum" "$sizeG"
-    elif [ "${size: -1}" = "M" ]; then
-        local sizeM=$(($currentSize / (1024 * 1024)))
-        if [ "$sizeM" = "0" ]; then
-            showError "cannot determine current size in M"
-        fi
-        ddContainer "$container" "1M" "$sizeNum" "$sizeM"
-    else
-        showError "size can be M or G"
-    fi
-    resizeContainer "$name"
-}
-
 function showHelp()
 {
     local bn=$(basename "$0")
-    dumpError "Usage:"
-    dumpError " $bn open|o secret device [ openCreateOptions ]"
-    dumpError " $bn close|c name"
-    dumpError " $bn closeAll|ca"
-    dumpError " $bn mount|m name"
-    dumpError " $bn umount|u name"
-    dumpError " $bn create|n secret container size [ openCreateOptions ]"
-    dumpError "    size should end in M or G"
-    dumpError " $bn resize|r name"
-    dumpError " $bn increase|i name bySize"
-    dumpError "    bySize should end in M or G"
-    dumpError " $bn touch|t fileOrDir [time]"
-    dumpError "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\""
-    dumpError "Where [ openCreateOptions ]:"
-    dumpError " -cso cryptsetup options ---"
-    dumpError " -csk cskey.sh options ---"
-    dumpError " -cfs mkfs ext4 options --- : (create)"
-    dumpError " -l : (open) live"
-    dumpError " -n name : (open) use csm-name"
-    dumpError " -c : (open|create) clean screen after password entry"
-    dumpError "Example:"
-    dumpError " sudo csmap.sh open container.bin -l -csk -k -h -p 8 -m 14 -t 1000 -- ---"
+    logError "Usage:"
+    logError " $bn open|o secret device [ openCreateOptions ]"
+    logError " $bn close|c name"
+    logError " $bn closeAll|ca"
+    logError " $bn mount|m name"
+    logError " $bn umount|u name"
+    logError " $bn create|n secret container size [ openCreateOptions ]"
+    logError "    size should end in M or G"
+    logError " $bn resize|r name"
+    logError " $bn increase|i name bySize"
+    logError "    bySize should end in M or G"
+    logError " $bn touch|t fileOrDir [time]"
+    logError "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\""
+    logError "Where [ openCreateOptions ]:"
+    logError " -cso cryptsetup options --- : outer encryption layer"
+    logError " -csi cryptsetup options --- : inner encryption layer"
+    logError " -csk cskey.sh options ---"
+    logError " -cfs mkfs ext4 options --- : (create)"
+    logError " -l : (open) live"
+    logError " -n name : (open) use csm-name"
+    logError " -c : (open|create) clean screen after password entry"
+    logError " -s : (open|create) use only one (outer) encryption layer"
+    logError "Example:"
+    logError " sudo csmap.sh open container.bin -l -csk -k -h -p 8 -m 14 -t 1000 -- ---"
 }
 
 function processOptions()
@@ -475,6 +574,14 @@ function processOptions()
                 csOptions=()
                 while [ "${1:-}" != "---" ]; do
                     csOptions+=( "${1:-}" )
+                    shift
+                done
+            ;;
+            -csi)
+                shift
+                csiOptions=()
+                while [ "${1:-}" != "---" ]; do
+                    csiOptions+=( "${1:-}" )
                     shift
                 done
             ;;
@@ -504,8 +611,11 @@ function processOptions()
             -l)
                 csmLive="1"
             ;;
+            -s)
+                csmChain="0"
+            ;;
             *)
-            showError "unknown option: $current"
+                onFailed "unknown option: $current"
             ;;
         esac
         shift
@@ -523,6 +633,10 @@ function main()
     shift
 
     case "$mode" in
+        ol)
+            csmLive="1"
+            csmCleanScreen="1"
+        ;&
         open|o)
             openContainer "-" "$@"
             if [ "$csmLive" = "1" ]; then
