@@ -154,8 +154,7 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 
 	```
 	#!/bin/bash
-
-	#call once before manually per partition
+	#call before once manually
 	#sudo tune2fs -m 0 /dev/sda1
 	#sudo tune2fs -l /dev/sda1 | grep 'Reserved block count'
 
@@ -179,12 +178,26 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 		exit
 	}
 
+	function printAvailable {
+		available=$(df -Ph "$dir" | tail -1 | tr -s ' ' | cut -d ' ' -f 4)
+		echo -n "($available)"
+	} 
+
 	trap cleanUp SIGHUP SIGINT SIGTERM
 
 	partition=$(df -P "$dir" | tail -1 | tr -s ' ' | cut -d ' ' -f 1)
 	echo -e "Creating ${dir}\nOverwriting free partition space in ${partition} (may take some time):"
-	available=$(df -P "$dir" | tail -1 | tr -s ' ' | cut -d ' ' -f 4)
-	echo -n "($available)"
+
+	printAvailable
+	while : ; do
+		echo -n .
+		dd if=/dev/zero count=1024 bs=1M >> "${dir}/zero.$RANDOM" 2>/dev/null
+		if [ $? -ne 0 ] ; then
+			sync
+			printAvailable
+			break;
+		fi
+	done
 
 	while : ; do
 		cat /dev/zero > "${dir}/zero.$RANDOM" 2>/dev/null
