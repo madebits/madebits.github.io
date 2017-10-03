@@ -129,6 +129,8 @@ And what do they do? In place of fixing the root of problem and come with someth
 
 ###Getting Rid of Snaps
 
+Ubuntu desktop may not function properly if you do any of these.
+
 To [remove](https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu) `snap` one can use:
 
 ```bash
