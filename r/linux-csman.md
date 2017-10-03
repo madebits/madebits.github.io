@@ -311,6 +311,17 @@ sudo cskey.sh x
 
 > These commands are intended to be run **without** `sudo`.
 
+### List Disk Volumes
+
+List disk volumes and block devices (no `sudo` is needed):
+
+```bash
+csman.sh disks
+# same
+csman.sh disk
+csman.sh d
+```
+
 ### Copy Folders
 
 Two copy commands are provided to copy directories. First uses `tar` and `pv` and second invokes `rsync` with some parameters to improve progress reporting (and removes training slashes from input directories) (no `sudo` is needed):
