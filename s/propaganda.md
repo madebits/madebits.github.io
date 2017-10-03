@@ -49,12 +49,12 @@
 * [The Washington Times](https://www.washingtontimes.com/news/world/)
 * [Reddit World News](https://www.reddit.com/r/worldnews/)
 
-##Canada & Australia
+###Canada & Australia
 
 * [GlobalNews](https://globalnews.ca/world/)
 * [9News](https://www.9news.com.au/world)
 
-##UK
+###UK
 
 * [BBC](http://www.bbc.co.uk/news/world/) 
 * [The Telegraph](https://www.telegraph.co.uk/news/world/)
@@ -63,7 +63,7 @@
 * [Financial Times](https://www.ft.com/world)
 * [Reuters](https://www.reuters.com/)
 
-##Europe
+###Europe
 
 * [France 24](https://www.france24.com/en/)
 * [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
