@@ -31,18 +31,25 @@ AES tool encrypts / decrypts one file at a time (CBC encryption mode).
 
 If input (`-i file`) is not specified or `-i -` then `stdin` is used. If output (`-o file`) is not specified or `-o -` then `stdout` is used. If the output file exists it will be overwritten!
 
-The password is specified as string on command-line, which is usually convenient, but it be can be unsafe. In Bash shell:
+The password is specified as string on command-line via `-p`, which is usually convenient, but it be can be unsafe, or via a file using `-f` (reads at most 256 bytes of first line). In Bash shell:
 
-1. To skip commands stored in history file (given `aes` needs the password in command-line) use a **space** before the command (check bash `HISTIGNORE` documentation for more details). E.g. (note space after $ prompt): 
+1. To skip commands stored in history file (if you specify the password in command-line) use a **space** before the command (check bash `HISTIGNORE` documentation for more details). E.g. (note space after $ prompt): 
 
    ```bash
    $ ./aes -i file.txt -o file.bin -p password
    ```
+   
+   Or to read password from a file use:
+
+   ```bash
+   ./aes -i file.txt -o file.bin -f passwordFile
+   ./aes -i file.txt -o file.bin -f <(echo -n "password")
+   ```
 
 1. If you like to type in the password in Bash shell use:
  ```bash
- read -p "Password: " -s pass && ./aes -i file.txt -o file.bin -p "$pass"
- read -s pass && ./aes -d -i file.bin -o file.txt -p "$pass"
+ read -p "Password: " -s pass && ./aes -i file.txt -o file.bin -f <(echo -n "$pass")
+ read -s pass && ./aes -d -i file.bin -o file.txt -f <(echo -n "$pass")
  ```
 
 ##Using Pipes
