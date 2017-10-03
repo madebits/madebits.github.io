@@ -8,7 +8,7 @@
 
 ## Introduction
 
-CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or disk data partitions. CSMan cannot be used to encrypt live partitions. The follow are some of hard-coded settings on CSMan:
+CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or disk data partitions. CSMan cannot be used to encrypt live partitions. The follow are some of the hard-coded settings of CSMan:
 
 * Uses `cryptsetup` in *plain* mode with 512 bit keys.
 * Supports only *EXT4* volumes.
