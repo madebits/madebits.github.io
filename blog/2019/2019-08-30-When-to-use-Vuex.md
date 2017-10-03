@@ -1,4 +1,4 @@
-#When to use Vuex
+# When to use Vuex
 
 2019-08-30
 
@@ -116,7 +116,7 @@ export default {
 }
 ```
 
-The last two plug-ins added to Vuex in this example `storeLocalSync` and `   storeWatchers` deal with specific cases when state needs to be synchronized between tabs and when store needs to react to local storage changes.
+The last two plug-ins added to Vuex in this example `storeLocalSync` and `storeWatchers` deal with specific cases when state needs to be synchronized between tabs and when store needs to react to local storage changes.
 
 ```javascript
 // storeLocalSync.js

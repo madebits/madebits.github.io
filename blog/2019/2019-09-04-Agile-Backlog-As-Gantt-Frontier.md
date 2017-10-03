@@ -1,10 +1,10 @@
-#Agile Backlog As Gantt Frontier
+# Agile Backlog As Gantt Frontier
 
 2019-09-04
 
 <!--- tags: agile management -->
 
-In classical project management a [Gantt](https://en.wikipedia.org/wiki/Gantt_chart) chart helps keep track of tasks, time, and critical paths in a project. 
+In classical project management a [Gantt](https://en.wikipedia.org/wiki/Gantt_chart) chart helps keep track of tasks, time, and critical paths in a project.
 
 The Gantt chart contains the **work break-down structure** (WBS) on the left as a tree all tasks to be done, plus the **time forecast and the dependencies** between tasks on the right. Task estimates are in intervals *(min, max)* and software usually helps propagate changes in estimates down to the whole Gantt chart graph. Using Gantt chart information, we can easy identify the tasks that can be started next (their predecessor tasks are done or are not existing) and also figure whole project time forecast based on the time of the longest critical path.
 
