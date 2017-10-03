@@ -12,7 +12,6 @@
 [GHacks](http://www.ghacks.net/)
 [Medium](https://medium.com/)
 [Ars Technica](https://arstechnica.com/)
-[Channel9](https://channel9.msdn.com/)
 [MSDN Magazine](https://msdn.microsoft.com/en-us/magazine/default.aspx)
 [Wired](https://www.wired.com/tag/programming/)
 [Developer Tech](https://www.developer-tech.com/)
@@ -36,6 +35,10 @@
 [BetaNews](https://betanews.com/)
 [The Inquirer](https://www.theinquirer.net/type/news)
 [ZDNet](https://www.zdnet.com/)
+
+### Technology Videos
+
+[Channel9](https://channel9.msdn.com/)
 [Ted](https://www.ted.com/)
 [CCC](https://media.ccc.de/)
 
