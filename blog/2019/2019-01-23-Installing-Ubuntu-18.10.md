@@ -483,11 +483,11 @@ I learned something about [brightness](https://unix.stackexchange.com/questions/
 * To set mouse cursor theme, I [used](https://askubuntu.com/questions/126491/how-do-i-change-the-cursor-and-its-size): `sudo update-alternatives --config x-cursor-theme`.
 * For Logitech M325 mouse, I created `/etc/udev/hwdb.d/71-mouse-local.hwdb` and copied from ` /lib/udev/hwdb.d/70-mouse.hwdb` the 325 lines and set `MOUSE_WHEEL_CLICK_ANGLE=4` from the default `20` to slow down the scroll:
     ```
-    # Logitech Wireless Mouse M325
-    mouse:usb:v046dp400a:name:Logitech M325:
-    mouse:usb:v046dpc52b:name:Logitech Unifying Device. Wireless PID:400a:
-     MOUSE_DPI=600@166
-     MOUSE_WHEEL_CLICK_ANGLE=4
+# Logitech Wireless Mouse M325
+mouse:usb:v046dp400a:name:Logitech M325:
+mouse:usb:v046dpc52b:name:Logitech Unifying Device. Wireless PID:400a:
+ MOUSE_DPI=600@166
+ MOUSE_WHEEL_CLICK_ANGLE=3
     ```
  To list devices use `sudo libinput list-devices`, to see events use `sudo libinput debug-events --verbose`. To [apply](https://github.com/systemd/systemd/issues/10459) changes use `sudo systemd-hwdb update` and `sudo udevadm trigger /dev/input/event*`. 
 
