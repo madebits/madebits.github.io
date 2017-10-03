@@ -13,6 +13,8 @@ toolsDir="$(dirname $0)"
 lastName=""
 lastContainer=""
 lastContainerTime=""
+lastSecret=""
+lastSecretTime=""
 
 function newName()
 {
@@ -101,6 +103,10 @@ function openContainer()
 
     local secret="$1"
     checkArg "$secret" "secret"
+    lastSecret="$secret"
+    if [ -f "$secret" ]; then
+        lastSecretTime=$(stat -c %z "$secret")
+    fi
     shift
 
     local device="$1"
@@ -124,7 +130,7 @@ function openContainer()
     mount "/dev/mapper/$name" "$mntDir1"
     if [ "$?" != "0" ]; then
         cryptsetup close "$name"
-        touchFile "$lastContainer" "$lastContainerTime"
+        resetTime
         exit 1
     fi
     set -e
@@ -218,10 +224,16 @@ EOF
     fi
 }
 
+function resetTime()
+{
+    touchFile "$lastContainer" "$lastContainerTime"
+    touchFile "$lastSecret" "$lastSecretTime"
+}
+
 function cleanUp()
 {
     closeContainer "$lastName"
-    touchFile "$lastContainer" "$lastContainerTime"
+    resetTime
     exit 0
 }
 
