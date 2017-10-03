@@ -1,12 +1,11 @@
 # News Outlets
 
-<form class="form-inline" target="_blank" action="https://www.startpage.com/do/search" method="get">
+<form class="form-inline" target="_blank" action="https://www.startpage.com/do/search" method="get" style="margin-bottom: 6px;">
     <input id="prfh" name="prfh" type="hidden" value="enable_stay_controlEEE1N1NsuggestionsEEE1N1Ngeo_mapEEE1N1Nwikipedia_iaEEE1N1Nother_iaEEE1N1Ndisable_open_in_new_windowEEE0N1Ndisable_video_family_filterEEE1N1Nenable_post_methodEEE0N1Nenable_proxy_safety_suggestEEE1N1Ndisable_family_filterEEE1N1NsslEEE1N1Nlanguage_uiEEEenglishN1NlanguageEEEenglishN1Nwt_unitEEEcelsiusN1Nnum_of_resultsEEE20N1Nlang_homepageEEEs/default/en/">
 
-
-      <input type="text" class="form-control" id="query" name="query" placeholder="web search ..." >
+    <input type="text" class="form-control" id="query" name="query" placeholder="web search ..." >
  
-    <button type="submit" class="btn btn-primary btn-xs"><i class="fa fa-search"></i></button>
+    <button type="submit" class="form-control btn btn-primary btn-xs"><i class="fa fa-search"></i> Web Search</button>
 </form>
 
 <div id='toc'></div>
@@ -126,8 +125,9 @@
 
 ## Other
 
-[AllTop](https://alltop.com/)
+[AllTop](https://alltop.com/tech)
 [World Newspapers](http://www.world-newspapers.com)
 [LiveLeak](https://www.liveleak.com/)
+
 
 
