@@ -19,7 +19,7 @@ Anecdotally, a friend following this advice found once himself once a broken Lin
 
 If you panic when starting `vim`, press *Esc* key one more times (so that Vim enters *command-mode*) and then press `:q!`. This will quit Vim without saving your changes. By chance, the reverse `q:` is the *raise panic level* command; it re-shows your panic keys. If `:q!` does not work to exit then `:qa!` will.
 
-I will write here Vim commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). `Ctrl+d` and `Tab` can be used to auto-complete commands after `:`. Wherever possible, I write control combinations using lowercase key as in `Ctrl+d` (and not `Ctrl+D` as they are written in Vim documentation).
+I will write here Vim commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). `Ctrl+d` and `Tab` can be used to auto-complete commands after `:`. WI write control combinations using lowercase key as in `Ctrl+d` (and not `Ctrl+D` as they are written in Vim documentation).
 
 Vim assumes you own the machine and its disk is encrypted, leaving generous usage traces by default. If that is not the case, use `vim -u NONE -i NONE -n` to start Vim in a mode where it does not leak usage information (`-i` means no *.viminfo* file and `-n` means no *swap* temporary file). If you forget any of this, use `vim --help` in shell to get a list of command-line options.
 
