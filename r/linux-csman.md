@@ -375,6 +375,16 @@ sudo bash -c 'for f in *.bin; do csman.sh chp "${f}" -out "$new-{f}" -ck -ap @ol
 sudo cskey.sh x
 ```
 
+If you have an existing secret file and want to replicate it for use with slots, you can use this command:
+
+```bash
+sudo csman.sh chp secret.bin -out new-secret.bin -ck -i e --- -cko -i e -b 3 ---
+# or is secret is in some container slot use
+sudo csman.sh chp container.bin -out new-secret.bin -ck -i e -slot 1 --- -cko -i e -b 3 ---
+# slots can then be replaced with embed command
+csman.sh e container.bin -s new-secret.bin -slot 1
+```
+
 ## File Tools
 
 > These commands are intended to be run **without** `sudo`.
