@@ -280,7 +280,8 @@ function encodeMany()
 	fi
 	for ((i=1 ; i <= $count; i++))
 	{
-		local file="${1}.${i}"
+		local pad=$(printf "%02d" ${i})
+		local file="${1}.${pad}"
 		echo "$file"
 		if [ "$cskBackupNewKey" = "1" ]; then
 			key=$(getKey)
