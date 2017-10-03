@@ -14,6 +14,7 @@ cskFile2=""
 cskDebug="0"
 cskInputMode="0"
 cskBackup="0"
+cskBackupNewKey="0"
 cskHashToolOptions=( "-p" "8" "-m" "14" "-t" "1000" )
 cskHashToolOptions2=( "${cskHashToolOptions[@]}" )
 cskSamePass="0"
@@ -209,11 +210,11 @@ function readPassword()
 {
 	if [ -n "$cskPassFile" ]; then
 		pass="$cskPassFile"
-	elif [ "$cskInputMode" = "1" ]; then
+	elif [ "$cskInputMode" = "1" ] || [ "$cskInputMode" = "e" ]; then
 		read -p "Password: " pass
-	elif [ "$cskInputMode" = "2" ]; then
-		pass=$(xclip -o)
-	elif [ "$cskInputMode" = "3" ]; then
+	elif [ "$cskInputMode" = "2" ] || [ "$cskInputMode" = "c" ]; then
+		pass=$(xclip -o -selection clipboard)
+	elif [ "$cskInputMode" = "3" ] || [ "$cskInputMode" = "u" ]; then
 		pass=$(zenity --password --title="Password" 2> /dev/null)
 	elif [ "$cskInputMode" = "4" ]; then
 		pass=$(zenity --entry --title="Password" --text="Password (visible):"  2> /dev/null)
@@ -255,7 +256,8 @@ function encodeMany()
 {
 	dumpError "#  using hash tool parameters:" "${cskHashToolOptions[@]}"
 	echo "$1"
-	encodeKey "$1" "$2" "$3"
+	local key="$3"
+	encodeKey "$1" "$2" "$key"
 	
 	local count=$(($cskBackup + 0))
 	if [ "$count" -gt "64" ]; then
@@ -265,7 +267,11 @@ function encodeMany()
 	{
 		local file="${1}.${i}"
 		echo "$file"
-		encodeKey "$file" "$2" "$3"
+		if [ "$cskBackupNewKey" = "1" ]; then
+			key=$(getKey)
+			dumpError "#  using new key"
+		fi
+		encodeKey "$file" "$2" "$key"
 	}
 }
 
@@ -360,9 +366,9 @@ function showHelp()
 	dumpError " -i inputMode : used for password"
 	dumpError "    Password input modes:"
 	dumpError "     0 read from console, no echo (default)"
-	dumpError "     1 read from console with echo"
-	dumpError "     2 read from 'xclip -o'"
-	dumpError "     3 read from 'zenity --password'"
+	dumpError "     1|e read from console with echo"
+	dumpError "     2|c read from 'xclip -o -selection clipboard'"
+	dumpError "     3|u read from 'zenity --password'"
 	dumpError "     4 read from 'zenity --text'"
 	dumpError " -c encryptMode : use 1 for aes tool, 0 or any other value uses ccrypt"
 	dumpError " -p passFile : (enc | chp) read pass from first line in passFile"
@@ -375,6 +381,7 @@ function showHelp()
 	dumpError " -kf keyFile : (enc | chp) use keyFile"
 	dumpError " -kfn keyFile : (chp) use keyFile, used for new file"
 	dumpError " -b count : (enc | chp) generate file.count backup copies"
+	dumpError " -bk : (enc | chp) generate a new key for each -b file"
 	dumpError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
 	dumpError " -hn hashToolOptions -- : (chp) default -hn ${cskHashToolOptions2[@]} --, used for new file"
 	dumpError " -key file : (enc) read key data from file"
@@ -422,6 +429,9 @@ function main()
 				fi
 				checkNumber "$cskBackup"
 				shift
+			;;
+			-bk)
+				cskBackupNewKey="1"
 			;;
 			-h)
 				shift

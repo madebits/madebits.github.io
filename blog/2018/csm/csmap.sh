@@ -359,6 +359,10 @@ function showChecksum()
     if [ -f "${toolsDir}/aes" ]; then
         sha256sum "${toolsDir}/aes"
     fi
+    if [ -f "${toolsDir}/argon2" ]; then
+        sha256sum "${toolsDir}/argon2"
+    fi
+    echo
 }
 
 # name
