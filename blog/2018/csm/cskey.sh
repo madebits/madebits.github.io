@@ -40,6 +40,7 @@ cskSessionSecretFile=""
 cskSessionSaveDecodePassFile=""
 cskRndLen="64"
 cskRndBatch="0"
+cskUseURandom="0"
 
 user="${SUDO_USER:-$(whoami)}"
 currentScriptPid=$$
@@ -167,6 +168,10 @@ function encodeSecret()
     local file="$1"
     local pass="$2"
     local secret="$3"
+
+    if [ -z "${secret}" ]; then
+        onFailed "no secret"
+    fi
     
     debugData "Pass:" "$pass" "Secret:" "$secret"
     
@@ -347,13 +352,18 @@ function getSecret()
         logError "# secret: user specified (-s or -as)"
         secret="$cskSecret"
     else
-        logError "# secret: generating new, move mouse around if stuck"
-        # skip some bytes
-        head -c $RANDOM /dev/urandom > /dev/null
-        # 32 bytes from /dev/random are enough
-        # but length matters anyway :), so we use 512 byte long keys
-        secret=$(cat <(head -c 480 /dev/urandom) <(head -c 32 /dev/random) | base64 -w 0)
-        #secret=$(head -c 512 /dev/urandom | base64 -w 0)
+        if [ "${cskUseURandom}" = "1" ]; then
+            logError "# secret: generating new"
+            # https://security.stackexchange.com/questions/3936/is-a-rand-from-dev-urandom-secure-for-a-login-key
+            secret=$(head -c 512 /dev/urandom | base64 -w 0)
+        else
+            logError "# secret: generating new, move mouse around if stuck"
+            # skip some bytes
+            head -c $RANDOM /dev/urandom > /dev/null
+            # 32 bytes from /dev/random are enough
+            # but length matters anyway :), so we use 512 byte long keys
+            secret=$(cat <(head -c 480 /dev/urandom) <(head -c 32 /dev/random) | base64 -w 0)    
+        fi
     fi
     echo "${secret}"
 }
@@ -615,6 +625,7 @@ Options:
  -bs : (enc) generate a new secret for each -b file
  -h hashToolOptions -- : (enc|dec) default -h ${cskHashToolOptions[@]} --
  -s file : (enc) read secret data (512 binary bytes encoded as 'base64 -w 0') from file
+ -su : (enc) use only /dev/urandom to generate secret
  -as file : (enc) session : read secret data from a session file (see -aso)
  -aso outFile : (dec) session: write secret data to a encrypted file
  -apo outFile : (dec) session: write password data to a encrypted file
@@ -716,6 +727,9 @@ function main()
                     onFailed "cannot read: ${kk}"
                 fi
                 shift
+            ;;
+            -su)
+                cskUseURandom="1"
             ;;
             -as)
                 createSessionStore
