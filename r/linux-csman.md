@@ -93,13 +93,13 @@ This command will generate a random secret and encrypt it with the password (com
 * for any key files to use. Key files can be specified in any order as paths one by one by pressing *Enter* key to confirm them. Use *Enter* key without a path to stop entering key files, or if you are not using key files press *Enter* key to skip entry (or use `-k` option not to be asked for key files). 
 * password to encrypt the secret file.
 
-To view back the used raw secret data just for the fun of it, you can use:
+To view back the used raw secret data (for fun) use:
 
 ```bash
 sudo cskey.sh dec secret.bin | base64 -w 0
 ```
 
-For even more fun, you can combine the two commands if needed as shown to change password (or use `csman.sh chp` command which is easier):
+You can combine the two commands if needed to change the password (or use `csman.sh chp` command which is easier):
 
 ```bash
 sudo bash -c 'secret=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -s <(echo -n "$secret") -d'
@@ -123,20 +123,22 @@ With `-bs` option, a new different secret is generated for each file. `-su` make
 
 #### Password Input Options
 
-If no password input options are specified, `cskey.sh` prompts to read password from command-line, this is same as `-i 0` option. Using `-i 1` or `-i e` read password from console echoed (visible). Command-line help lists other `-i` options.
+If no password input options are specified, `cskey.sh` prompts to read password from command-line (same as `-i 0` option). Using `-i 1` or `-i e` reads password from console echoed (visible). Command-line help lists other `-i` options.
 
 The password can also be read from first line in a file using `-p passwordFile`.
 
-You are asked by default about any **key files**, and specify them one by one, or press Enter without a path to stop. If you do not want to be asked about key files use `-k` option. Key files can be specified also in command-line using one or more `-kf keyFile` options. Even if you use `kf keyFile` you will be still asked in command-line for any more, unless you specify `-k`. Up to 1024 first bytes are used from each key file hashed (SHA256) and appended to password.
+You are asked by default about any **key files** before entering the password. Key files are part of the password and up to 1024 first bytes are used from each key file hashed (SHA256) and appended to password. Hashed are sorted, so order of specifying key files does not matter. You can specify key files one by one, or press *Enter* key without a path to stop. If you do not want to be asked about key files use `-k` option. Key files can be specified also in command-line using one or more `-kf keyFile` options. Even if you use `kf keyFile` you will be still asked in command-line for any additional ones, unless you specify `-k`. 
 
-It is possible to store passwords in a **session** for current logged user.  Session make use of name *@slots* to write and read passwords. To store the password you will input is slot `foo` use `-apo @foo`. You specifiy later same password by using `-ap @foo`. If combined with `-k and -kf` then this means no passwords are asked (apart of session password).
+It is possible to store passwords (but not key files) in a **session** for current logged user. Session makes use of named *@slots* to write and read passwords. To store a password that you are about to enter in slot `foo` use `-apo @foo` in command-line. You can specify later the stored password by using `-ap @foo`. If combined with `-k and -kf` then this means no passwords are asked (apart of optional session password).
 
-The session is created only if you make use of it as a `tmpfs` mounted volume in `$HOME/mnt/tmpcsm`. When you shutdown the temporary volume disappears (or use `cskey.sh x` or when using `csman.sh x`). The session encrypts passwords using a session seed generated randomly in session volume. It is optional (press *Enter* key when asked to skip it), but it is recommended to also use a **session password**, which if specified is used additionally to seed to encrypt password data. You may use different session passwords for different slot. Each slot is an encrypted file in session volume. If you do not want to be asked to provide a session password specify `-aa`.
+The session is created only if you make use of it as a `tmpfs` mounted volume in `$HOME/mnt/tmpcsm`. When you shutdown the temporary volume disappears (or use `cskey.sh x` or when using `csman.sh x`). The session encrypts passwords using a session seed generated randomly in session volume (root access only). It is optional (press *Enter* key when asked to skip it), but it is recommended to also use a **session password**, which if specified is used additionally to the seed to encrypt password data. You may use different session passwords for different slots. Each slot is stored as an encrypted file in session volume. If you do not want to be asked to provide a session password specify `-aa`.
 
 Session slots can be also create directly using:
 
 ```bash
 sudo cskey.sh ses @foo
+# and used via -ap
+sudo cskey.sg dec secret.bin -ap @foo
 ```
 
 #### Password Hash Options
