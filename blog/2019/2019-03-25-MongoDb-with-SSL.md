@@ -227,7 +227,7 @@ We can access also RabbitMQ Management via web using SSL if configured as shown 
 
 ### RabbitMQ Client Configuration
 
-For .NET the RabbitMQ client configuration to use SSL is simple:
+For .NET, the RabbitMQ client configuration to use SSL is simple:
 
 ```
 var url = new Uri(Ctx.Get("rmq"));
@@ -278,7 +278,7 @@ if ((query.ContainsKey("ssl") && (query["ssl"] == "true")) {
 Connection = factory.CreateConnection();
 ```
 
-I have extended the RabbitMQ URL format to contain `ssl=true`, to mimin MongoDB one, and I am using this [helper class](https://stackoverflow.com/questions/2884551/get-individual-query-parameters-from-uri) to parse URL parameters:
+I have extended RabbitMQ URL format to contain `ssl=true`, to mimic the MongoDB one, and I am using this [helper class](https://stackoverflow.com/questions/2884551/get-individual-query-parameters-from-uri) to parse URL parameters:
 
 ```
 public static class UriExtensions
