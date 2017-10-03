@@ -1,8 +1,8 @@
 # News Outlets
 
 * [Hacker News](https://news.ycombinator.com/)
-* [SlashDot](https://slashdot.org/)
 * [Daily Rotation](http://www.dailyrotation.com/)
+* [SlashDot](https://slashdot.org/)
 * [How To Geek](http://www.howtogeek.com/)
 * [GHacks](http://www.ghacks.net/)
 * [LinuxToday](http://www.linuxtoday.com/)
@@ -44,3 +44,6 @@
 * [Press TV](https://www.presstv.com/)
 * [AlJazeera](https://www.aljazeera.com/news/)
 
+<hr>
+
+* [LiveLeak](https://www.liveleak.com/c/news)
