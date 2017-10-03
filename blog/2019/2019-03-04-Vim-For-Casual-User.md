@@ -143,8 +143,8 @@ Using tabs:
 
 Marking text positions:
 
-* `ma` mark current potion with *a* (`a-z` same file, `A-Z` to mark between open files)
-* `'a` move to mark *a*, or `d'a` delete from current potion to mark *a*
+* `ma` mark current position with *a* (`a-z` same file, `A-Z` to mark between open files)
+* `'a` move to mark *a* line, or `d'a` delete from current potion to mark *a*
 
 Using external commands to filter buffer text:
 
