@@ -99,13 +99,13 @@ ap="${5:-8}"
 
 # set to 1 to use my aes tool, 0 uses ccrypt
 toolsDir="$(dirname $0)"
-useAes=0
+useAes=1
 
 function encryptAes()
 {
     local pass=$1
     if [ "$useAes" = "1" ]; then
-        "${toolsDir}/aes" -e -f <(echo -n "$pass")
+        "${toolsDir}/aes" -r /dev/urandom -e -f <(echo -n "$pass")
     else
         ccrypt -e -f -k <(echo -n "$pass")
     fi
