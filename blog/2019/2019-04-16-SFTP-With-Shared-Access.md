@@ -103,8 +103,6 @@ sudo chown root:sftphome /home/user/public
 sudo chmod 775 /home/user/public
 ```
 
-What SFTP chroot really cares is that jail folder is at most `*55`, not who owns it. So in case of single users, you can also own the jail */home/user* folder by *user:sftphome* and then you do not need *public* folder inside it.
-
 We have to be careful to also set *nologin* shell for such home users (or [use](https://askubuntu.com/questions/49271/how-to-setup-a-sftp-server-with-users-chrooted-in-their-home-directories) `AllowGroups`).
 
 It is also a good idea to set file-system [quotas](https://www.digitalocean.com/community/tutorials/how-to-set-filesystem-quotas-on-ubuntu-18-04) for STFP users.
