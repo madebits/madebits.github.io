@@ -59,19 +59,19 @@ Common movement commands (in *command-mode*):
 * `j` - down, `k` - up, `h` left, `l` -right (or arrow keys will mostly work) (can be combined also with numbers, e.g: `4j`); appending `g` in front of `jkhl` will allow moving around display lines (`g` can be used same with `0^$`).
 * `0` - beginning of line, `^` first not blank char on line, `$` - end of line, `g_` last non-blank char on line.
 * `fc` - *find* next char *c* and move cursor to it, `tc` find next char c and move cursor *to* it. `Fx`, `Tx` work same but jump to previous occurrence of *c*.
-    * `;` repeat last `ftFT` forward, `,` repeat last `ftFT` backward, or just use `.`
+  * `;` repeat last `ftFT` forward, `,` repeat last `ftFT` backward, or just use `.`
 * `/text` - find *text*. `n` moves to next occurrence, `N` to previous one. Use `set hls` to highlight matches. `?text` is same, but searches backward.
 * `*` find next occurrence of work under cursor (`n` and `N` and highlight work same as for `/`).
 * `Ctrl+i` - jump to previous location, `Ctrl+o` jump back
 * `M` move to middle of screen, `L` move to bottom of screen; `Ctrl+D` - move half-page down, `Ctrl+U` move half-page up; `Ctrl+F` move down a page, `Ctrl+B` move up a page.
 * `zz` (not `ZZ`) will center cursor line on screen.  `Ctrl+y` scroll one line down, `Ctrl+e` scroll one line up, while keeping cursor in current line.
-* `:number` or `numberG`- go to line number, `:+number` - go number lines down, `:-number` go number lines up. 
-    * It may help to run `:set number` (or `:set nu`) before to show line numbers. For extra Zen use `:set rnu` (or `:set relativenumber`) for relative numbers. Using both also works. Using `no` before removes them (e.g. `:set nonumber`).
+* `:number` or `numberG`- go to line number, `:+number` - go number lines down, `:-number` go number lines up.
+  * It may help to run `:set number` (or `:set nu`) before to show line numbers. For extra Zen use `:set rnu` (or `:set relativenumber`) for relative numbers. Using both also works. Using `no` before removes them (e.g. `:set nonumber`).
 * `gg` - got top of file, `GG` go end of file.
 * `w` move one word forward, `b` move one word backward, `e` move to end of word; `W`, `B`, `E` work same but consider punctuation as part of words.
 * `%` move to matching char (`()`, `{}`, `[]`).
 * Usually combined with other commands: `)` or `s` move one sentence; `}` or `p` move one paragraph, `t` move one tag; `b` more one code block; all these can get confused in some source code files (in default configuration).
-* `gg=G` format whole text, where `=` is [format](https://www.cs.swarthmore.edu/oldhelp/vim/reformatting.html) command. `<` and `>` indent left or right. 
+* `gg=G` format whole text, where `=` is [format](https://www.cs.swarthmore.edu/oldhelp/vim/reformatting.html) command. `<` and `>` indent left or right.
 
 Common edit commands (in *command-mode*):
 
@@ -131,7 +131,7 @@ Replacing text:
 Using file explorer:
 
 * `:Explore` or `:E` or `:e.` opens file explorer (`F1` for help within it)
-* `Ctrl+6` (`^`) switches back and forth from open file to explorer on same window 
+* `Ctrl+6` (`^`) switches back and forth from open file to explorer on same window
 
 Using tabs:
 
