@@ -111,6 +111,8 @@ You can combine the two commands if needed to change the password (or use `csman
 sudo bash -c 'secret=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -s <(echo -n "$secret") -d'
 ```
 
+If *secret file* in *enc|dec* is specified as **?** it will read from command line; if specified as **!** *zenity* will be used.
+
 #### Creating Multiple Secret Files
 
 Sometimes, you may want to quickly generate a lot of secret files at once using same password using backup `-b` option:
