@@ -80,6 +80,7 @@
 [Hanselman Blog](https://www.hanselman.com/blog/)
 [TechieDelight](https://www.techiedelight.com/)
 [GeeksForGeeks](https://www.geeksforgeeks.org/fundamentals-of-algorithms/)
+[CSS Tricks](https://css-tricks.com/)
 
 ### Science
 
