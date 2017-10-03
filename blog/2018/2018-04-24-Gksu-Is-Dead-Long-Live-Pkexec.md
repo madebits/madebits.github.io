@@ -1,5 +1,5 @@
 
-#gksu Is Dead Long Live pkexec
+#gksu Is Dead, Long Live pkexec
 
 <!--- tags: linux -->
 
