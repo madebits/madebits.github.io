@@ -125,7 +125,7 @@ function touchFile()
         fi
         set +e
         #sudo bash -s "$file" "$fileTime" <<-'EOF'
-            now=$(date +"%F %T.%N %z") && date -s "${fileTime}" > /dev/null && touch "$file"
+            now=$(date +"%F %T.%N %z") && date -s "${fileTime}" > /dev/null && touch "$file" 2> /dev/null
             date -s "$now" > /dev/null
         #   EOF
         set -e
@@ -135,7 +135,6 @@ function touchFile()
 function resetTime()
 {
     touchFile "$lastContainer" "$lastContainerTime"
-    sleep 1
     touchFile "$lastSecret" "$lastSecretTime"
 }
 
@@ -257,7 +256,6 @@ function mountContainer()
     if [ "$?" != "0" ]; then
         closeContainerByName "$name"
         rmdir "$mntDir1"
-        resetTime
         failed
     fi
     set -e
@@ -777,10 +775,6 @@ function cleanUp()
     tput sgr 0
     echo
     closeContainer "$lastName"
-    resetTime
-    #set +e
-    #systemctl restart systemd-timesyncd
-    #set -e
     exit 0
 }
 
