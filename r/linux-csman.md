@@ -276,7 +276,7 @@ sudo csman.sh o container.bin -slots 2 -ck -slot 2 ---
 
 The `cskey.sh -slot` option only works with `cskey.sh dec` command and it is ignored by `cskey.sh enc` command, the original output file is always truncated by `cskey.sh enc`.
 
-To remove a slot's data, overwrite it with random data:
+To remove a slot's data, overwrite it with random data using delete `-d` option of `e` command:
 
 ```bash
 csman.sh e container.bin -d -slot 2
