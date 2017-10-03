@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-I always wanted to write an own Vim tutorial that I have around and can return to for a quick reference. There is no reason I can think of me to use Vim extensively nowadays, but there are always plenty of chances to use it.
+I always wanted to write an own Vim tutorial that I have around and can return to for a quick reference. There is no reason for me to use Vim extensively nowadays, but there are always plenty of chances to use it.
 
 ##Starting and Stopping
 
