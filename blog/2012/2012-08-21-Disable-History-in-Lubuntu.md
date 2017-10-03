@@ -249,6 +249,16 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	sudo systemctl stop whoopsie.service
 	sudo systemctl disable whoopsie.service
 	sudo systemctl status whoopsie.service
+
+	#edit /etc/apport/crashdb.conf
+	# comment out with # 'problem_types': 
+	```
+
+	Other things to disable:
+
+	```
+	sudo apt remove popularity-contest
+	ubuntu-report -f send no
 	```
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-08-25-Fully-Remove-Installed-Packages-in-Lubuntu.md'>Fully Remove Installed Packages in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2012/2012-08-01-Change-Wallpaper-at-Startup-in-Lubuntu.md'>Change Wallpaper at Startup in Lubuntu</a></ins>
