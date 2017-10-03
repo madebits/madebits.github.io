@@ -75,6 +75,25 @@ drwxr-xr-x 2 root root     50 Apr 28 15:16 hooks
 -rwxr-xr-x 1 root root  18564 Apr 28 14:30 snapcraft.yaml
 ```
 
+The gimp process, runs under current user:
+
+```bash
+$ pstree -pu
+...
+           ├─gimp(3750,user)─┬─script-fu(3883)───{script-fu}(3884)
+           │                 ├─{gimp}(3864)
+           │                 ├─{gimp}(3865)
+           │                 ├─{gimp}(3866)
+           │                 ├─{gimp}(3867)
+           │                 ├─{gimp}(3868)
+           │                 ├─{gimp}(3869)
+           │                 ├─{gimp}(3870)
+           │                 ├─{gimp}(3872)
+           │                 ├─{gimp}(3873)
+           │                 └─{gimp}(3875)
+
+```
+
 ## Snap Configuration
 
 To get [configuration](https://snapcraft.io/docs/configuration-in-snaps) options of a snap use (*set/unset* option can be used to set/clear them):
