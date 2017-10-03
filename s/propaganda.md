@@ -23,13 +23,10 @@
 [MSDN Magazine](https://msdn.microsoft.com/en-us/magazine/default.aspx)
 [Wired](https://www.wired.com/tag/programming/)
 [Developer Tech](https://www.developer-tech.com/)
-[Science Daily](https://www.sciencedaily.com)
-[Live Science](https://www.livescience.com/news)
 [Heise](https://www.heise.de/newsticker/)
 [Golem.de](https://www.golem.de/)
 [Chip.de](https://www.chip.de/nachrichten)
 [ComputerWoche.de](https://www.computerwoche.de/)
-[MIT News](https://news.mit.edu/)
 [EnGadget](https://www.engadget.com/)
 [LifeHacker](https://lifehacker.com/)
 [AnandTech](https://www.anandtech.com/)
@@ -43,14 +40,18 @@
 [BetaNews](https://betanews.com/)
 [The Inquirer](https://www.theinquirer.net/type/news)
 [ZDNet](https://www.zdnet.com/)
+[FrontEndDaily](https://twitter.com/FrontEndDaily)
 
-### Technology Videos
+
+### Technology Videos & Learning
 
 [Channel9](https://channel9.msdn.com/)
 [MVA](https://mva.microsoft.com/)
 [Ted](https://www.ted.com/)
 [CCC](https://media.ccc.de/)
 [OCW](https://ocw.mit.edu/index.htm)
+[LSO](https://lagunita.stanford.edu/)
+[BetterExplained](https://betterexplained.com/)
 
 ### Linux
 
@@ -64,6 +65,13 @@
 [AskUbuntu](https://askubuntu.com/questions)
 [Phoronix](https://www.phoronix.com/scan.php?page=home)
 [LinuxLinks](https://www.linuxlinks.com/)
+
+### Science
+
+[QuantaMagazine](https://www.quantamagazine.org/)
+[Science Daily](https://www.sciencedaily.com)
+[Live Science](https://www.livescience.com/news)
+[MIT News](https://news.mit.edu/)
 
 ## USA
 
@@ -127,6 +135,7 @@
 
 [AllTop](https://alltop.com/tech)
 [LiveLeak](https://www.liveleak.com/)
+[LibGen](http://libgen.io/)
 
 
 
