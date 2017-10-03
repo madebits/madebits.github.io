@@ -278,7 +278,9 @@ function main()
         openLive|ol)
             openContainer "-" "$@"
             trap cleanUp SIGHUP SIGINT SIGTERM
+            tput setaf 1
             read -p "Press Enter or Ctrl+C to close the container ..."
+            tput sgr 0
             echo
             cleanUp
         ;;

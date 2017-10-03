@@ -99,8 +99,10 @@ function decodeKey()
 
 function readPass()
 {
-    if [ "$CS_ECHO" == "1" ]; then
+    if [ "$CS_ECHO" = "1" ]; then
         read -p "New password: " pass
+    elif [ "$CS_ECHO" = "2" ]; then
+        pass=$(zenity --password --title="New Password" 2> /dev/null)
     else
         read -p "New password: " -s pass
         (>&2 echo)
@@ -133,16 +135,20 @@ function main()
             encodeKey "$file" "$pass" "$key"
         ;;
         dec)
-            if [ "$CS_ECHO" == "1" ]; then
+            if [ "$CS_ECHO" = "1" ]; then
                 read -p "Enter password: " pass
+            elif [ "$CS_ECHO" = "2" ]; then
+                pass=$(zenity --password --title="Enter Password" 2> /dev/null)
             else
                 read -p "Enter password: " -s pass
             fi
             decodeKey "$file" "$pass"
         ;;
         chp)
-            if [ "$CS_ECHO" == "1" ]; then
+            if [ "$CS_ECHO" = "1" ]; then
                 read -p "Current password: " pass1
+            elif [ "$CS_ECHO" = "2" ]; then
+                pass=$(zenity --password --title="Current Password" 2> /dev/null)
             else
                 read -p "Current password: " -s pass1
             fi
