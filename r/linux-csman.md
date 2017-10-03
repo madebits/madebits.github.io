@@ -105,7 +105,7 @@ You can combine the two commands if needed to change the password (or use `csman
 sudo bash -c 'secret=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -s <(echo -n "$secret") -d'
 ```
 
-#### Creating Multiple Secret Files At Once
+#### Creating Multiple Secret Files
 
 Sometimes, you may want to quickly generate a lot of secret files at once using same password using backup `-b` option:
 
@@ -121,13 +121,17 @@ With `-bs` option, a new different secret is generated for each file. `-su` make
 
 `sudo cskey.sh rnd file -rb 5` command is similar, but it generates just random files that only look like secret files.
 
-#### Password Input Options
+#### Password Options
 
 If no password input options are specified, `cskey.sh` prompts to read password from command-line (same as `-i 0` option). Using `-i 1` or `-i e` reads password from console echoed (visible). Command-line help lists other `-i` options.
 
 The password can also be read from first line in a file using `-p passwordFile`.
 
-You are asked by default about any **key files** before entering the password. Key files are part of the password and up to 1024 first bytes are used from each key file hashed (SHA256) and appended to password. Hashed are sorted, so order of specifying key files does not matter. You can specify key files one by one, or press *Enter* key without a path to stop. If you do not want to be asked about key files use `-k` option. Key files can be specified also in command-line using one or more `-kf keyFile` options. Even if you use `kf keyFile` you will be still asked in command-line for any additional ones, unless you specify `-k`. 
+##### Key Files
+
+You are asked by default about any **key files** before entering the password. Key files are part of the password and up to 1024 first bytes are used from each key file hashed (SHA256) and appended to password. Hashed are sorted, so order of specifying key files does not matter. You can specify key files one by one, or press *Enter* key without a path to stop. If you do not want to be asked about key files use `-k` option. Key files can be specified also in command-line using one or more `-kf keyFile` options. Even if you use `kf keyFile` you will be still asked in command-line for any additional ones, unless you specify `-k`.
+
+##### Using Sessions
 
 It is possible to store passwords (but not key files) in a **session** for current logged user. Session makes use of named *@slots* to write and read passwords. To store a password that you are about to enter in slot `foo` use `-apo @foo` in command-line. You can specify later the stored password by using `-ap @foo`. If combined with `-k and -kf` then this means no passwords are asked (apart of optional session password).
 
@@ -144,7 +148,7 @@ sudo cskey.sh enc secret.bin -su -apo @foo
 sudo cskey.sg dec secret.bin -ap @foo | base64 -w 0
 ```
 
-#### Password Hash Options
+##### Password Hashing
 
 It is possible to overwrite default options used for `argon2` tool using ` -h -p 8 -m 14 -t 1000 --` (note `--` in the end is required). All options have to be specified and are passed verbatim to `argon2`. The defaults used, if not specified, are shown in command-line help when you run `sudo cskey.sh`. 
 
@@ -202,7 +206,7 @@ If the ETX4 volume has no label `csman.sh` will try to give it a label based on 
 
 It is possible to open the container, but leave it unmounted by passing `-u` to open command. In this case you can use `sudo csman.sh mount name` later to mount the file system. Similarly, if a container is open and mounted `sudo csman.sh umount name` will unmount it only (but not close *dm-crypt*).
 
-#### Open Read-Only and Live
+#### Open Options
 
 There are some additional options that can be specified with open command. `-r` to mount read-only, and `-l` to keep container open live - the open command does not exit in this case, it waits for you to press twice *Enter* key to close the container. 
 
