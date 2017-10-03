@@ -38,7 +38,7 @@ cryptsetup close enc
 First, note that we can specify a password via some script to `cryptsetup` open by using (e.g.: via `sudo sh -c "..."`):
 
 ```
-echo -n password | cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain /data2/temp/container.bin enc -
+echo -n password | cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain container.bin enc -
 ```
 
 Given `--type plain` hashes password only once, the above is useful if you combine it with some command that hashes password more than once. We can generate a long random secret and encrypt it using `scrypt`. `scrypt` tool uses AES in CTR mode to encrypt data after better hashing password:
@@ -95,7 +95,7 @@ cryptsetup close layer2
 cryptsetup close layer1
 ```
 
-### Shared Encryption
+### Shared Blob
 
 We can use `--offset (-o)` and `--size` option (both in number of 512 byte sectors) to have several encrypted containers on same binary file. We can even open several of the at once by adding `--shared` option to `cryptsetup open`.
 
