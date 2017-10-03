@@ -320,7 +320,7 @@ sudo ./cs-map open enc1 secret.bin container.bin
 sudo ./cs-map close enc1
 ```
 
-You may wish to use the script also to create a container file (size can be with in M or G):
+You may wish to use the script also to create a container file (size can be either in M or G):
 
 ```bash
 sudo ./cs-map.sh create enc1 secret.bin container.bin 30M
