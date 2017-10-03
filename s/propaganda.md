@@ -12,6 +12,7 @@
 * [MSDN Magazine](https://msdn.microsoft.com/en-us/magazine/default.aspx)
 * [Live Science](https://www.livescience.com/news)
 * [Heise](https://www.heise.de/newsticker/)
+* [Ted](https://www.ted.com/)
 
 <hr>
 
