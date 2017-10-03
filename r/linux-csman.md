@@ -248,7 +248,7 @@ dd if=container.bin of=secret.bin bs=1024 count=1
 # dd if=container.bin of=secret.bin bs=1024 count=1 skip=1
 ```
 
-Two *convenience* commands (no `sudo` needed) are provided to embed (`e`) and extract (`ex`) secret files from default 1024 byte offset slots. Default slot is 1 (byte offset 0) and can be changed via `-slot slot` option. We assume the container has been created with `-slots 4` option:
+Two *convenience* commands (no `sudo` needed) are provided to embed (`e` or `embed`) and extract (`ex`) secret files from default 1024 byte offset slots. Default slot is 1 (byte offset 0) and can be changed via `-slot slot` option. We assume the container has been created with `-slots 4` option:
 
 ```bash
 # cskey.sh enc secret.bin -b 3 -su
@@ -279,8 +279,12 @@ The `cskey.sh -slot` option only works with `cskey.sh dec` command and it is ign
 To remove a slot's data, overwrite it with random data:
 
 ```bash
+csman.sh e container.bin -d -slot 2
+# or this will also do
 cskey.sh rnd - -r 1024 | csman.sh e container.bin -s - -slot 2
 ```
+
+If `-d` and one or more `-s` are used together for `embed` command, they operate on next slot based on order given, starting with specified `-slot`. 
 
 ### Using Containers
 
