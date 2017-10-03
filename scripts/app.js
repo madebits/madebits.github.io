@@ -220,6 +220,10 @@ var	goa = null
 }
 
 , collectStats = function() {
+	// be free
+	goa = null;
+	return;
+
 	if(navigator.doNotTrack && (navigator.doNotTrack == 1)) {
 		goa = null;
 		return;
