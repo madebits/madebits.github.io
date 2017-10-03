@@ -256,7 +256,9 @@ function readKeyFiles()
     do
         count=$((count+1))
         if [ "$cskInputMode" = "!" ] || [ "$cskInputMode" = "4" ]; then
-            keyFile="$(zenity --file-selection --title='Select a File' 2> /dev/null)"
+            set +e
+            keyFile="$(zenity --file-selection --title='Key File (press Cancel when done)' 2> /dev/null)"
+            set -e
         else
             read -e -p "Key file $count (or Enter if none): " keyFile
             logError
