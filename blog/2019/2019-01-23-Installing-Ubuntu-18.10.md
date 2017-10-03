@@ -104,7 +104,7 @@ I can go on with the rest of my system specific configuration.
 
 ##Snap
 
-[snap](https://snapcraft.io/) gives a whole class of users choice, and it is in the core strategy behind Ubuntu Core. There seems to be a [decision](https://askubuntu.com/questions/1039968/why-have-canonical-installed-core-gnome-apps-as-snaps-by-default) to deliver parts of desktop as snaps by default to update them cleaner in the future. `snap` is already active:
+[snap](https://snapcraft.io/) gives a whole class of users choice, and it is in the core strategy behind Ubuntu Core. There seems to be a [decision](https://askubuntu.com/questions/1039968/why-have-canonical-installed-core-gnome-apps-as-snaps-by-default) to deliver parts of desktop as snaps by default to update them cleaner in the future. `snap` is already active for GNOME parts:
 
 ```bash
 $ df -h -T | grep loop
