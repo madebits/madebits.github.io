@@ -299,7 +299,7 @@ public static class UriExtensions
 }
 ```
 
-In Node.js, the official drive has an example:
+In Node.js, the official `amqplib` driver provides an example:
 
 ```
 const url = require('url')
