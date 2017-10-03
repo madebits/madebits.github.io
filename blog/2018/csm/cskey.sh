@@ -132,11 +132,11 @@ function dumpKbLine()
 # experimental
 function readPassMapping()
 {
-	alpha=( a b c d e f g h i j k l m n o p q r s t u v w x y z 
+	local alpha=( a b c d e f g h i j k l m n o p q r s t u v w x y z 
 	A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
     \< \> \[ \] \( \) \{ \} / \\ \$ \? ! \| \~ \& % . , : \; + - _ \# = 
     0 1 2 3 4 5 6 7 8 9 )
-	coded=( $(shuf -e "${alpha[@]}") )
+	local coded=( $(shuf -e "${alpha[@]}") )
 
 	dumpKbLine "# Password keymap (chars after # or not in map are taken as they are): "
 	dumpKbLine ""
@@ -153,8 +153,8 @@ function readPassMapping()
 	dumpKbLine "$(echo "${coded[@]}" | fold -w 52 | head -n 4 | tail -n 1 )"
 	
 	read -p "Password: " pass
-	passLen=${#pass}
-	decoded=""
+	local passLen=${#pass}
+	local decoded=""
 	for (( i=0; i<${passLen}; i++ )); do
 		p="${pass:$i:1}"
 		if [ "$p" = "#" ]; then
