@@ -850,8 +850,8 @@ function main()
             local tfs="$HOME/mnt/tmpcsm"
             if [ -d "${tfs}" ]; then
                 set +e
-                umount "$HOME/mnt/tmpcsm" 2> /dev/null
-                logError "umounted: $HOME/mnt/tmpcsm"
+                umount "${tfs}" 2> /dev/null
+                logError "# umount: ${tfs}"
                 rmdir "${tfs}"
                 set -e
             fi

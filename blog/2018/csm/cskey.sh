@@ -191,7 +191,7 @@ function decodeSecret()
 			readSessionPass
 			echo -n "$data" | base64 -d | decryptAes "$hash" | encryptAes "$cskSessionPass" > "$cskSessionSecretFile"
 			debugData "secret" "$(echo -n "$data" | base64 -d | decryptAes "$hash" | base64 -w 0)"
-			logError "# session: secret stored in: ${cskSessionSecretFile}"
+			logError "# session: stored secret in: ${cskSessionSecretFile}"
 			debugData "$(cat ${cskSessionSecretFile} | base64 -w 0)"
 			logError
 		fi
@@ -389,16 +389,17 @@ function fixSessionFilePath()
 	echo "${file}"
 }
 
-function createSessionSalt()
+function createSessionStore()
 {
 	local fs="${cskSessionLocation}"
 	mkdir -p "$fs"
 	local tfs=$(mount | grep "$fs" | cut -d ' ' -f 1)
 	if [ "${tfs}" != "tmpfs" ]; then
-		logError "# session: creating tmpfs in ${fs} (use -ar to choose another)"
+		logError "# session: creating tmpfs store in ${fs} (use -ar to choose another)"
+		logError
 		mount -t tmpfs -o size=8m tmpfs "$fs"
 	fi
-	cskSessionSaltFile="$fs/$(uptime -s | tr -d ' :-')"
+	
 }
 
 function readSessionPass()
@@ -407,18 +408,18 @@ function readSessionPass()
 		# session specific
 		local sData0=""
 		if [ -z "$cskSessionSaltFile" ]; then
-			createSessionSalt
+			cskSessionSaltFile="${cskSessionLocation}/$(uptime -s | tr -d ' :-')"
 		fi
 		if [ -n "$cskSessionSaltFile" ]; then
 			if [ ! -e "$cskSessionSaltFile" ]; then
-				logError "# session: creating new key file: ${cskSessionSaltFile}"
+				logError "# session: creating new seed: ${cskSessionSaltFile}"
 				createRndFile "$cskSessionSaltFile"
 			fi
 			sData0=$(head -c 64 "${cskSessionSaltFile}" | base64 -w 0)
 			if [ -z "${sData0}" ]; then
-					onFailed "cannot read session key from: ${cskSessionSaltFile}"
+					onFailed "cannot read session seed from: ${cskSessionSaltFile}"
 				else
-					logError "# session: reading key from file: ${cskSessionSaltFile}"
+					logError "# session: reading seed from: ${cskSessionSaltFile}"
 			fi
 		fi
 		local sData1="$(uptime -s)"
@@ -498,7 +499,7 @@ function createSessionPass()
 	echo -n "${pass}CSKEY" | encryptAes "$cskSessionPass" > "${file}"
 	#ownFile "$file"
 	logError
-	logError "# session: password stored in: ${file}"
+	logError "# session: stored password in: ${file}"
 	debugData "$(cat ${file} | base64 -w 0)"
 	logError
 }
@@ -584,7 +585,7 @@ function showHelp()
 	logError " -as file : (enc) session : read secret data from a session file (see -aso)"
 	logError " -aso outFile : (dec) session: write secret data to a encrypted file"
 	logError " -apo outFile : (dec) session: write password data to a encrypted file"
-	logError " -ar file : (enc|dec|ses) session: use file data as part of session key, created if not exists ($cskSessionLocation)"
+	logError " -ar file : (enc|dec|ses) session: use file data as part of session seed, created if not exists ($cskSessionLocation)"
 	logError " -aa : (enc|dec|ses) session: do not ask for session encryption password (use default)"
 	logError " -r length : (rnd) length of random bytes (default 64)"
 	logError " -rb count : (rnd) generate file.count files"
@@ -641,13 +642,16 @@ function main()
 				shift
 			;;
 			-aa)
+				createSessionStore
 				cskSessionAutoPass="1"
 			;;
 			-ar)
+				createSessionStore
 				cskSessionSaltFile="${2:?"! -ar saltFile"}"
 				shift
 			;;
 			-ap)
+				createSessionStore
 				apf="${2:?"! -ap file"}"
 				apf=$(fixSessionFilePath "${apf}")
 				shift
@@ -669,6 +673,7 @@ function main()
 				shift
 			;;
 			-as)
+				createSessionStore
 				asf="${2:?"! -as file"}"
 				asf=$(fixSessionFilePath "${asf}")
 				shift
@@ -678,6 +683,7 @@ function main()
 				shift
 			;;
 			-aso)
+				createSessionStore
 				cskSessionSecretFile="${2:?"! -ao file"}"
 				cskSessionSecretFile=$(fixSessionFilePath "${cskSessionSecretFile}")
 				if [ "$(askOverwriteFile "${cskSessionSecretFile}")" != "y" ]; then
@@ -686,6 +692,7 @@ function main()
 				shift
 			;;
 			-apo)
+				createSessionStore
 				cskSessionSaveDecodePassFile="${2:?"! -aop file"}"
 				cskSessionSaveDecodePassFile=$(fixSessionFilePath "${cskSessionSaveDecodePassFile}")
 				if [ "$(askOverwriteFile "${cskSessionSaveDecodePassFile}")" != "y" ]; then
@@ -723,6 +730,8 @@ function main()
 			decryptFile "$cskFile"
 		;;
 		ses|s)
+			createSessionStore
+			cskFile=$(fixSessionFilePath "${cskFile}")
 			createSessionPass "$cskFile"
 		;;
 		rnd|r)
