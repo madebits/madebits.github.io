@@ -113,6 +113,7 @@
 [Aeon](https://aeon.co/science)
 [Nautilus](http://nautil.us/blog)
 [SingularityHub](https://singularityhub.com/)
+[PhysOrg](https://phys.org/)
 
 ## USA
 
@@ -209,7 +210,8 @@
 [AllTop](https://alltop.com/tech)
 [SkimFeed](https://skimfeed.com/)
 [LiveLeak](https://www.liveleak.com/)
-[LibGen](https://yandex.com/search/?text=libgen)
+[LibGen](https://www.yandex.com/search/?text=libgen)
+[Sci-Hub](https://www.yandex.com/search/?text=Sci-Hub%20whereis)
 [BoingBoing](https://boingboing.net/)
 [Top.st](https://top.st/)
 
