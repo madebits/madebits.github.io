@@ -22,7 +22,7 @@ sudo adduser sftpuser001 --ingroup sftponly --shell /usr/sbin/nologin --home /da
 
 All such users are assigned same home folder.
 
-Lets make sure we have the needed folders in place. All folders that lead to *shared* folder need to be owned by *root* and have mode *755*, if not use these commands:
+Lets make sure we have the needed folders in place. All folders that lead to *shared* folder [need](https://man.openbsd.org/sshd_config#ChrootDirectory) to be owned by *root* and have mode *755*, if not use these commands:
 
 ```bash
 sudo mkdir -p /data/jail/shared
