@@ -78,10 +78,11 @@ function rcp()
         sameDir "$1" "$3"
         sameDir "$2" "$3"
         echo "Copying $1 to $2 (with backup in $3) ..."
-        time rsync --progress -ahWSD --delete --stats "$1/" "$2" --backup-dir="$3"
+        time rsync --info=progress2 -ahWS --delete --stats "$1/" "$2" --backup-dir="$3"
     else
         echo "Copying $1 to $2 ..."
-        time rsync --progress -ahWSD --delete --stats "$1/" "$2"
+        #--progress 
+        time rsync --info=progress2 -ahWS --delete --stats "$1/" "$2"
     fi
     echo "Done"
 }
