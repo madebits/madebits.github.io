@@ -577,7 +577,7 @@ function createRndFile()
 function showHelp()
 {
 	logError "Usage: $(basename "$0") [enc | dec | ses | rnd] file [options]"
-    logError "Using -- for dec|enc file is a weak shortcut without secret file"
+	logError "Using -- for dec|enc file is a shortcut not to use a secret file (weak)"
 	logError "Options:"
 	logError " -i inputMode : (enc|dec|ses) used for password"
 	logError "    Password input modes:"
