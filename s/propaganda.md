@@ -86,7 +86,6 @@
 [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
 [T-Online Nachrichten](https://www.t-online.de/nachrichten/)
 [EuroNews](https://www.euronews.com/news/international)
-[The Local](https://www.thelocal.de/)
 [B92](https://www.b92.net/eng/news/world.php)
 
 ## Russia
