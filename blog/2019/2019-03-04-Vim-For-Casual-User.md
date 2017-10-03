@@ -109,7 +109,7 @@ Edit commands can be combined with **i**nside or **a**round *text-object* bound 
 
 While in *insert-mode*, `Ctrl+R 0` will paste text without having leave that mode (see `:h i_ctrl-r`). `Ctrl+o` will allow running a single command and coming back to insert-mode. `Ctrl+h` will delete previous char (same as *Backspace*) and `Ctrl+w` will delete previous word, while `Ctrl+u` will delete to start of line. `Ctrl+n` and `Ctrl+p` enable auto-completion from words found in open buffers.
 
-Vim has also a **visual-mode**, entered by any of: `v` char selection, `V` line selection, `Ctrl+V` block selection. Arrow keys expand selection (on which side can be toggled with `o`) and `gv` re-selects. In visual-mode, you select first the text and then run any command on it.
+Vim has also a **visual-mode** entered by any of: `v` char selection, `V` line selection, `Ctrl+V` block selection. Arrow keys expand selection (on which side can be toggled with `o`) and `gv` re-selects. In visual-mode, you select first the text and then run any command on it.
 
 ## Casual Zen
 
