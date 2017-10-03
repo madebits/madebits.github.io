@@ -35,15 +35,15 @@ cryptsetup close enc
 
 ##Better Plain Mode Passwords
 
-Given `--type plain` hashes password only once, the above is safe only if we combine it with some tool that hashes password more than once. 
+Given `--type plain` hashes password only once, the above is safe only if combined with some tool that hashes password more than once. 
 
-First, note that we can specify a password via some script to `cryptsetup` open by using (e.g.: via `sudo sh -c "..."`):
+We can specify a password via some script to `cryptsetup open` by using (e.g.: via `sudo sh -c "..."`):
 
 ```bash
 echo -n "password" | cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain container.bin enc -
 ```
 
-We can generate a long random secret and encrypt it using `scrypt`. `scrypt` tool uses AES in CTR mode to encrypt data after better hashing password:
+The idea is to generate a long random secret and encrypt it using `scrypt`. `scrypt` tool uses AES in CTR mode to encrypt data after better hashing password:
 
 ```bash
 # only once
