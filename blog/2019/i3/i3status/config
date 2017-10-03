@@ -9,7 +9,7 @@
 general {
         colors = true
         interval = 15
-        color_good = "#B1FFD7"
+        color_good = "#9fe5c1"
         color_degraded = "#FFFEDA"
         color_bad = "#FFA3A3"
         markup = pango
@@ -36,8 +36,8 @@ wireless _first_ {
 
 ethernet _first_ {
         # if you use %speed, i3status requires root privileges
-        format_up = "☢️ %ip (%speed)"
-        format_down = "⚪ down"
+        format_up = "🙂 %ip (%speed)"
+        format_down = "😡 down"
 }
 
 battery all {
@@ -53,7 +53,7 @@ battery all {
 }
 
 tztime local {
-        format = "📅 %a %b %d 🕛 %H:%M"
+        format = "📅 %b %a %d 🕛 %H:%M"
 }
 
 load {

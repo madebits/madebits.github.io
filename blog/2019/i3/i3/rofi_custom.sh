@@ -30,11 +30,11 @@ function i3NextFreeWorkspace()
 }
 
 bl=$(/etc/acpi/actions/bl-status.sh)
-up=$(uptime | cut -d ',' -f 1)
+up=$(uptime | cut -d ',' -f 1 | tr -s ' ' )
 mem=$(free -h | grep Mem: | tr -s ' ' | cut -d ' ' -f 3,2,4)
 
 if [ -z "$@"]; then
-    echo "🧑 ${USER} | 🕛 ${up} | Ⓜ️ ${mem} | ☀️ ${bl}%"
+    echo "👶${USER}|🕛${up}|Ⓜ️${mem}|☀️${bl}%"
     echo "☠️ i3 Kill (A+F4|W+Q|W+F4|B2)"
     echo "🎛️ i3 Toggle Layout (W+Tab|W+w)"
     echo "🔲 i3 New Workspace (W+^)"
@@ -42,6 +42,7 @@ if [ -z "$@"]; then
     echo "📌 i3 Toggle Bar (W+y)"
     echo "📤 i3 Floating On"
     echo "📥 i3 Floating Off"
+    echo "💎 i3 Sticky Toggle"
     echo "📺 i3 Full Screen (W+f)"
     echo "🛠️ i3 Config"
     echo "🌀 i3 Reload (W+S+r)"
@@ -110,6 +111,9 @@ else
             ;;
         "📥 i3 Floating Off")
             i3-msg floating disable > /dev/null
+            ;;
+        "💎 i3 Sticky Toggle")
+            i3-msg 'sticky toggle' > /dev/null
             ;;
         "📺 i3 Full Screen (W+f)")
             i3-msg 'fullscreen toggle' > /dev/null

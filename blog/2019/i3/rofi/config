@@ -1,3 +1,10 @@
-rofi.theme: /usr/share/rofi/themes/Paper.rasi
 rofi.me-accept-entry: MouseDPrimary,MouseSecondary
 rofi.kb-delete-entry: Shift+Delete,MouseMiddle
+! rofi.theme: /usr/share/rofi/themes/android_notification.rasi
+! State:           ´bg´,     ´fg´,     ´bgalt´,  ´hlbg´,   ´hlfg´
+rofi.color-normal: #5F676A,  #efeff0,  #5F676A,  #81584e,  #eee8d5
+rofi.color-urgent: #5F676A,  #efeff0,  #5F676A,  #81584e,  #eee8d5
+rofi.color-active: #5F676A,  #efeff0,  #5F676A,  #81584e,  #eee8d5
+
+!                  ´background´, ´border´, ´separator´
+rofi.color-window: #5F676A,      #5F676A,  #5F676A

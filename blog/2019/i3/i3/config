@@ -1,4 +1,4 @@
-exec --no-startup-id /usr/bin/xsetroot -solid "#993853"
+exec --no-startup-id /usr/bin/xsetroot -solid "#81584e"
 exec_always --no-startup-id /usr/bin/xrdb -load ~/.config/i3/.Xresources
 #exec_always --no-startup-id ~/bin/feh/feh --bg-scale ~/.config/i3/bg.jpg
 exec_always --no-startup-id ~/.fehbg
@@ -52,8 +52,8 @@ bindsym $mod+q kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 #bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop
-set $apps exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show window -sort -width 60  -lines 30 -sidebar-mode -columns 4 -terminal xterm -location 2 -yoffset 20
-set $favs exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show i3 -sort -width 60  -lines 30 -sidebar-mode -columns 4 -terminal xterm -location 2 -yoffset 20
+set $apps exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show window -sort -width 80  -lines 17 -sidebar-mode -columns 4 -terminal xterm -location 2 -yoffset 19
+set $favs exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show i3 -sort -width 80  -lines 17 -sidebar-mode -columns 4 -terminal xterm -location 2 -yoffset 19
 bindsym --release Ctrl+Tab $apps
 
 # change focus
@@ -179,8 +179,12 @@ bar {
             #statusline #DEDEDE
             #separator #666666
             background #5F676A
-            statusline #FFFFFF
-            separator  #B9D6F5
+            #statusline #f1f1f1
+            #separator  #B9D6F5
+            #background #2f343f
+            #background #33231f
+            statusline #efeff0
+            separator  #9fa3a5
         }
         font pango:DejaVu Sans Bold 8
         status_command i3status
@@ -224,9 +228,9 @@ bindsym --release button3 $favs
 
 #https://thomashunter.name/i3-configurator/
 # class                 border  bground text    indicator child_border
-client.focused          #993853 #993853 #FFFFFF #888888   #888888
+client.focused          #81584e #81584e #FFFFFF #888888   #888888
 client.focused_inactive #5F676A #5F676A #FFFFFF #888888   #888888
-client.unfocused        #E7E7E7 #E7E7E7 #000000 #888888   #888888
+client.unfocused        #ccbcb8 #ccbcb8 #000000 #888888   #888888
 client.urgent           #A1301D #A1301D #FFFFFF #888888   #888888
 client.placeholder      #000000 #0C0C0C #FFFFFF #888888   #888888
 
