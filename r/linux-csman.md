@@ -71,8 +71,10 @@ The command-line arguments are a bit *peculiar* (because I thought that it is fa
 
 ### Secret Files
 
-`csman.sh` creates and uses random read *secret files* using `cskey.sh`. Secret files are binary. Use `base64` tool as needed to convert them to text.
+`csman.sh` creates and uses random read *secret files* using `cskey.sh`. Secret files are binary. Use `base64` tool as needed to convert them to text. 
 
+Secret files are made of 32 random bytes of `argon2` salt, 512 random bytes of `cryptsetup` password encrypted, and are padded with random data to have random file lengths.
+ 
 It is not required to use `cskey.sh` directly most of the time, but knowing how to use it as shown in this section will make the later `csman.sh` commands clear.
 
 #### Using URandom
@@ -123,7 +125,7 @@ Without `-bs` option, same secret will be stored on each file (due to AES mode f
 
 With `-bs` option, a new different secret is generated for each file. `-su` makes secret generation faster by using `/dev/urandom`.
 
-`sudo cskey.sh rnd file -rb 5` command is similar, but it generates just random files that only look like secret files.
+`sudo cskey.sh rnd file -rb 5` command is similar, but it generates just random fixed size files that may look like secret files.
 
 #### Password Options
 

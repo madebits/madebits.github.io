@@ -59,7 +59,7 @@ Common movement commands (in *command-mode*):
 * `j` - down, `k` - up, `h` left, `l` -right (or arrow keys will mostly work) (can be combined also with numbers, e.g: `4j`); appending `g` in front of `jkhl` will allow moving around display lines (`g` can be used same with `0^$`).
 * `0` - beginning of line, `^` first not blank char on line, `$` - end of line, `g_` last non-blank char on line.
 * `fc` - *find* next char *c* and move cursor to it, `tc` find next char c and move cursor *to* it. `Fx`, `Tx` work same but jump to previous occurrence of *c*. All these commands work on current line only.
-  * `;` repeat last `ftFT` forward, `,` repeat last `ftFT` backward, or just use `.`
+  * `;` repeats last `ftFT` forward, `,` repeats last `ftFT` backward
 * `/text` - find *text*. `n` moves to next occurrence, `N` to previous one. Use `set hls` to highlight matches and `:noh` to temporary disable search highlight. `?text` is same, but searches backward.
 * `*` and `#` find next and previous occurrence of word under cursor (`n` and `N` and highlight work same as for `/`).
 * `Ctrl+i` - jump to previous location, `Ctrl+o` jump back
