@@ -51,7 +51,7 @@ There are several ways to save the text:
 * `:w` will save current text buffer in current file (either open via `vim somefilename`, or set via first `:w somefilename`). `:wa` save all buffers.
 * `:wq` save and quit (or `ZZ` or `:x`).
 * `w!` force write read-only file.
-* `w !sudo tee % > /dev/null` yes, no one remembers this one, but it will force write some file open without `sudo` as `sudo` (basically this means write buffer and pipe it via *sudo* using *tee* to filename).
+* `w !sudo tee % > /dev/null` no one remembers this one, but it will force write some file open without `sudo` as `sudo` (basically this means write buffer and pipe it via *sudo* using *tee* to filename).
     - If you can plan in advance, use `SUDO_EDITOR=vim` and then `sudoedit somefile`.
 * `:q!` will not save your text and exit (you still have the nice memory of writing it) and `:qa!` will exit even if you have more than one buffer.
 
@@ -79,6 +79,8 @@ In Vim, there are two main modes:
 
 There is no basic Vim. You need to learn upfront enough commands to move around and edit text. Commands are usually are made of multiple keys of the [form](https://danielmiessler.com/study/vim/#language): *operator (verb)* *modifier (scope)* *noun (motion)* and can be combined creatively given enough time. The best way to learn the most basic commands is to use `vimtutor` as often as everything there becomes a habit.
 
+### Movement
+
 Common movement commands (in *command-mode*):
 
 * `Ctrl+g` shows current line position in file. `:set ruler` will show bottom status if not already visible.
@@ -100,6 +102,8 @@ Common movement commands (in *command-mode*):
 * `%` move to matching char (`()`, `{}`, `[]`).
 * Usually combined with other commands: `)` or `s` move one sentence; `}` or `p` move one paragraph, `t` move one tag; `b` more one code block; all these can get confused in some source code files (in default configuration).
 * `gg=G` format whole text, where `=` is [format](https://www.cs.swarthmore.edu/oldhelp/vim/reformatting.html) command. `<` and `>` indent left or right.
+
+### Edits
 
 Common edit commands (in *command-mode*):
 
@@ -140,6 +144,10 @@ Edit commands can be combined with **i**nside or **a**round *text-object* bound 
 
 * `ciw` - change inside word, `caw` - change inside word. Mounded motions include: `w` word, `s` sentence, `p` paragraph, `t` tag, `'` single quote, `"` double quote, and  `(`, `[`, `{` stand per their own.
 
+Most of the edit commands can be combined with movement commands, e.g.: `d5w`.
+
+### Inserts
+
 While in *insert-mode*: 
 
 * `Ctrl+r 0` will paste text without having leave that mode, where `0` is register name (see `:h i_ctrl-r`). 
@@ -150,11 +158,13 @@ While in *insert-mode*:
 * `Ctrl+n` and `Ctrl+p` enable auto-completion from words found in open buffers.
 * `Ctrl+x s` spell check (use `:set spell` before)
 
+### Visual Mode
+
 Vim has also a **visual-mode** entered by any of: `v` char selection, `V` line selection, `Ctrl+v` block selection. Arrow keys expand selection (on which side can be toggled with `o`) and `gv` re-selects. In visual-mode, you select first the text and then run any command on it. Pressing `:` allows running ex commands in selection, such as, `normal i#` to comment lines (for `V`).
 
 ## Casual Zen
 
-Macros (`:h @`):
+Macros (`:h @`) are easier to get right than search / replace:
 
 * `qa` record macro in register *a* (a-z). Type commands here. `qA` appends to macro *a*.
 * `q` stop recording
@@ -184,6 +194,14 @@ Using tabs:
 * `:tabs` list tabs, tabs numbers start from *1*
 * `gt`, `gT` go to next, previous tab (or `:tabn`, `:tabp`)
 * `numbergt` go to tab *number*
+
+Window splits:
+
+* `:sp[lit] [file]` horizontal split and optionally open file
+* `vs[plit] [file]` vertical split and optionally open file
+* `Ctrl-w c` or `:clo[se]` close current window; `Ctrl-w o` or `:on[ly]` close rest, but keep current
+* `Ctrl-w <cursor keys>`, `Ctrl-w [hjkl]`, or `Ctrl-w Ctrl-[hjkl]` to move between windows
+* `Ctrl-w w` or `Ctrl-w Ctrl-w` next window, `Ctrl-w W` previous window, `Ctrl-w p` or ` Ctrl-w Ctrl-p` last accessed window
 
 Marking text positions:
 
