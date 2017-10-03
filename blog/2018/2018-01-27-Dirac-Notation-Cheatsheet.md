@@ -78,8 +78,6 @@ $$$
 \langle v \rvert w \rangle = \langle v \rvert (w_0 \rvert \rangle + w_1 \rvert 1 \rangle ) = w_0 \langle v \rvert 0 \rangle + w_1 \langle v \rvert 1 \rangle
 $$$
 
-Dual-space:
-
 $$$
 \langle v \rvert w \rangle = (v_0 \langle 0 \rvert + v_1 \langle 1 \rvert) \rvert w \rangle = v_0 \langle 0 \rvert w \rangle + v_1 \langle 1 \rvert w \rangle
 $$$
