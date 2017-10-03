@@ -270,7 +270,7 @@ XDG_DATA_DIRS=/home/user/snap/gimp/252/.local/share:/home/user/snap/gimp/252:/sn
 XDG_CACHE_HOME=/home/user/snap/gimp/common/.cache
 XDG_RUNTIME_DIR=/run/user/1000/snap.gimp
 XDG_DATA_HOME=/home/user/snap/gimp/252/.local/share
-XDG_CONFIG_DIRS=/snap/gimp/252/gnome-platform/etc/xdg:/etc/xdg/lubuntu:/etc/xdg/xdg-Lubuntu:/etc/xdg
+XDG_CONFIG_DIRS=/snap/gimp/252/gnome-platform/etc/xdg:...:/etc/xdg
 
 $ env | grep HOME
 HOME=/home/u7/snap/gimp/252
