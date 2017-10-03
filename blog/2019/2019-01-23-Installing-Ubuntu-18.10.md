@@ -106,4 +106,4 @@ Apart of GNOME taskbar, which I really do not like, as it consumes the limited v
 
 I think with minor tweaks, Ubuntu 18.10 UI is usable, without having to install some other desktop variant. The overall UI direction looks ok, I can imagine using next LTS release as default desktop.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2018/2018-12-16-Cryptsetup-in-Plain-Mode.md'>Cryptsetup in Plain Mode</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-01-24-Docker-s-Blackhole-Like-Behavior.md'>Docker s Blackhole Like Behavior</a> <a rel='next' id='fnext' href='#blog/2018/2018-12-16-Cryptsetup-in-Plain-Mode.md'>Cryptsetup in Plain Mode</a></ins>
