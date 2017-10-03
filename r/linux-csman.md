@@ -49,11 +49,11 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 * `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool. If this tool is found next to `cskey.sh` it is used. Alternately you can install `ccrypt` from Ubuntu repositories. 
 * `argon2` - this is a self-compiled copy of `argon2` from [official](https://github.com/P-H-C/phc-winner-argon2) repository without any changes ([my copy](https://github.com/madebits/phc-winner-argon2)). `argon2` can be found also in Ubuntu repositories. If found next to `cskey.sh`, this copy is used in place of the system copy.
 
-Every time `csman.sh` starts, it prints prefix hashes of these files, if present:
+When `csman.sh` starts without arguments, it prints prefix hashes of these files, if present:
 
 ```
-3c641cfaf  /usr/local/bin/csman.sh
-a4a5d332c  /usr/local/bin/cskey.sh
+d613bd605  /usr/local/bin/csman.sh
+fcf2f56d6  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
 ```
