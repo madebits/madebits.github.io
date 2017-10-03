@@ -216,7 +216,7 @@ To make a [snapshot](https://snapcraft.io/docs/snapshots) of all data use `snap 
 
 If you make a type and forget `d` in the end of `snap saved`, you end up creating a new full snapshot which gets listed, rather than viewing what is there. 
 
-Snapshots are created automatically for removed snaps (listed with `auto` in Notes), unless you use `snap remove --purse gimp`.
+Snapshots are created automatically for removed snaps (listed with `auto` in Notes), unless you use `snap remove --purge gimp`.
 
 ### Application Configuration
 
