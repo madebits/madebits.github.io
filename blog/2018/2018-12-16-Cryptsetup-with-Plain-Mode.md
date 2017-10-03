@@ -61,76 +61,128 @@ While `scrypt` is the easiest tool to use, you may also consider combining `argo
 
 ##Using Argon2 and Ccrypt
 
-Let us create a quick bash helper file:
+Let us create a bash helper script:
 
 ```bash
 #!/bin/bash
 
 set -e
-mode=$1
 
 # none of values in this file is secret
-# change argon2 params as it fit you here
-at=1000
-ap=8
-am=14
+# change argon2 params as it fits you here
+at="${3:-1000}"
+am="${4:-14}"
+ap="${5:-8}"
 
-if [ "$mode" = "enc" ]; then
-    read -p "Enter password: " -s pass
+# file pass key
+function encodeKey()
+{
+    local file=$1
+    local pass=$2
+    local key=$3
+    local salt=$(head -c 32 /dev/urandom | base64 -w 0)
+    hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
+    > "$file"
+    echo -n "$salt" >> "$file"
+    echo -n "$key" | ccrypt -e -f -k <(echo -n "$hash") | base64 -w 0 >> "$file"
+}
+
+# file pass
+function decodeKey()
+{
+    local file=$1
+    local pass=$2
+
+    if [ -f "$file" ]; then
+        local salt=$(head -c 44 "$file")
+        local data=$(tail -c +45 "$file")
+        local hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
+        echo -n "$data" | base64 -d | ccrypt -d -k <(echo -n "$hash")
+    else
+        (>&2 echo "! no such file: $file")
+        exit 1
+    fi
+}
+
+function readPass()
+{
+    read -p "New password: " -s pass
+    echo
     if [ -t 0 ] ; then
-        read -p "Re-Enter password: " -s pass2
+        read -p "Renter new password: " -s pass2
+        echo
         if [ "$pass" != "$pass2" ]; then
-            (>&2 echo "Passwords do not match")
+            (>&2 echo "! passwords do not match")
             exit 1
         fi
     fi
-    
-    file="${2:-secret.bin}"
-    > "$file"
-
-    salt=$(head -c 32 /dev/urandom | base64 -w 0)
-    echo -n "$salt" >> "$file"
-    hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
-    retVal=$?
-    if [ $retVal -ne 0 ]; then
-        (>&2 echo "argon2 failed")
-    fi
-
-    head -c 512 /dev/urandom | base64 -w 0 | ccrypt -e -f -k <(echo -n "$hash") | base64 -w 0 >> "$file"
-    
-elif [ "$mode" = "dec" ]; then
-    read -p "Enter password: " -s pass
-    file="$2"
-    if [ -f "$file" ]; then
-        salt=$(head -c 44 "$file")
-        data=$(tail -c +45 "$file")
-        hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
-        echo -n "$data" | base64 -d | ccrypt -d -k <(echo -n "$hash")
-    else
-        (>&2 echo "no such file: $file")
+    if [ -z "$pass" ]; then
+        (>&2 echo "! no password")
         exit 1
     fi
-    
-else
-    (>&2 echo "$0 enc secret.bin | $0 dec secret.bin")
-    exit 1
-fi
+}
+
+# mode file
+function main()
+{
+    local mode=$1
+    local file="${2:-secret.bin}"
+    case "$mode" in
+        enc)
+            readPass
+            local key=$(head -c 512 /dev/urandom | base64 -w 0)
+            encodeKey "$file" "$pass" "$key"
+
+        ;;
+        dec)
+
+            read -p "Enter password: " -s pass
+            decodeKey "$file" "$pass"
+
+        ;;
+        chp)
+
+            read -p "Current password: " -s pass1
+            echo
+            key=$(decodeKey "$file" "$pass1")
+            readPass
+            encodeKey "$file" "$pass" "$key"
+
+        ;;
+        *)
+            (>&2 echo "$0 enc secret.bin | $0 dec secret.bin | $0 chp secret.bin")
+            (>&2 echo "secret.bin is overwritten by enc and chp, backup it as needed before")
+            exit 1
+        ;;
+    esac
+}
+
+main $1 $2
+
 ```
 
-Save it as `helper.sh` and make it executable.
+Save it as `cs-key.sh` and make it executable.
 
-We can use helper script to generate a secret file (we only need to do this once):
+We can use `cs-key.sh` to generate a secret file (we only need to do this once):
 
 ```bash
-./helper.sh enc secret.bin
+./cs-key.sh enc secret.bin
 # enter password for container here
 ```
 
 Now that we created *secret.bin* file (we need to store it together with the container), we can use that to open the container:
 
 ```bash
-sudo sh -c "./helper.sh dec secret.bin | cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain container.bin enc -"
+sudo sh -c "./cs-key.sh dec secret.bin | cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain container.bin enc -"
 # enter password for container here
+```
+
+To change password of `secret.bin` (file is overwritten in place, so backup it before as needed) use:
+
+```bash
+./cs-key.sh chp secret.bin
+# enter current pass
+# enter new pass
 ```
 
 ##Finding Container Key 
