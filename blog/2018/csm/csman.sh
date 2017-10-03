@@ -407,7 +407,6 @@ function createContainer()
         read -p "Overwrite? [y (overwrite) | e (erase) | any key to exit]: " overwriteContainer
         if [ "$overwriteContainer" = "y" ]; then
             writeContainer="1"
-            > "$container"
         elif [ "$overwriteContainer" = "e" ]; then
             writeContainer="0"
         else
@@ -426,8 +425,8 @@ function createContainer()
     processOptions "$@"
     
     if [ "$writeContainer" = "1" ]; then
-    
         echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
+        > "$container"
         if [ "${size: -1}" = "G" ]; then
             ddContainer "$container" "1G" "$sizeNum"
         elif [ "${size: -1}" = "M" ]; then
