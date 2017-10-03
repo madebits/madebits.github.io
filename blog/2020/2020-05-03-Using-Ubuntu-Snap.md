@@ -370,5 +370,4 @@ Ubuntu snap is an interesting concept, with impressive achievements and with sev
 * Creating a snap is a complex process, and the build process is transparent about code and dependencies used and can be reproduced. This is good, but due to complexity, things may land to a snap that are not obvious, or end up being in non-maintained versions within the snap.
 * Snap services (systemd snap.*.service units) are not usable in servers due to forced updates. `snap install docker` is maybe the only snap service needed. Rest can be installed and controlled better via `docker`.
 
-
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-11-13-ETL-Solutions.md'>ETL Solutions</a></ins>
