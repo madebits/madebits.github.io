@@ -68,7 +68,7 @@ And run `sudo update-initramfs -u`. Additionally, I claimed all disk space with:
 
 Above, [sda2](https://askubuntu.com/questions/950307/why-guided-partitioning-create-a-sda2-of-1-kb) is the extended partition. What is shown as *1K* is the [unaligned](https://unix.stackexchange.com/questions/128290/what-is-this-1k-logical-partition) area in it.
 
-`/boot` is not [encrypted](https://askubuntu.com/questions/109898/how-to-change-the-password-of-an-encrypted-lvm-system-done-with-the-alternate-i) by default. Rather that deal with effort to [encrypt](https://dustymabe.com/2015/07/06/encrypting-more-boot-joins-the-party/) it (`grub` will still be unencrypted and you have to take extra care during kernel / grub / distribution updates), an additional BIOS disk password (or VM disk encryption password) maybe better.
+`/boot` is not encrypted by default. Rather that deal with effort to [encrypt](https://dustymabe.com/2015/07/06/encrypting-more-boot-joins-the-party/) it (`grub` will still be unencrypted and you have to take extra care during kernel / grub / distribution updates), an additional BIOS disk password (or VM disk encryption password) maybe better.
 
 For [reference](https://vitobotta.com/2018/01/11/ubuntu-full-disk-encryption-manual-partitioning-uefi/), if we need to login as root in grub and fix something:
 
@@ -88,6 +88,18 @@ mount --types=sysfs sys /sys
 ...
 exit
 reboot
+```
+
+To change [password](https://askubuntu.com/questions/109898/how-to-change-the-password-of-an-encrypted-lvm-system-done-with-the-alternate-i), either use `sudo gnome-disks` or:
+
+```
+# find device
+cat /etc/crypttab
+# find used slots
+sudo cryptsetup luksDump /dev/sda3
+# change or add new slot
+sudo cryptsetup luksAddKey /dev/sda3 -S 0
+# sudo cryptsetup luksRemoveKey /dev/sda3
 ```
 
 ##GNOME
