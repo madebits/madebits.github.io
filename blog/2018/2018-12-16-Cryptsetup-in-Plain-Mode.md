@@ -44,12 +44,25 @@ To increase size of the container file, we can use use again `dd` with *seek* pa
 dd iflag=fullblock if=/dev/urandom of=container.bin bs=1G count=10 seek=30
 ```
 
-Now `cryptsetup open` container (and either mount it or leave it unmounted):
+The command above will work for both open and closed containers.
+
+If the container is not open, you can `cryptsetup open` it and run:
 
 ```bash
-sudo e2fsck -f /dev/mapper/enc # if unmounted
 sudo resize2fs /dev/mapper/enc
-sudo e2fsck -f /dev/mapper/enc # if unmounted
+```
+
+If the container was already open before `dd`, to resize it live run:
+
+```bash
+sudo cryptsetup resize enc
+sudo resize2fs /dev/mapper/enc
+```
+
+If container open, but unmounted, to check its file system use:
+
+```bash
+sudo e2fsck -f /dev/mapper/enc
 ```
 
 To shrink, after resize use `truncate` tool on container file.

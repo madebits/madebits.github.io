@@ -124,8 +124,9 @@ function openContainer()
 
     local key=$(sudo -E -u "$user" "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
     touchFile "$lastSecret" "$lastSecretTime"
-    echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$device" "$name" -
+    echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "$@" open "$device" "$name" -
     echo
+    cryptsetup status "/dev/mapper/$name"
     mkdir -p "$mntDir1"
     set +e
     mount "/dev/mapper/$name" "$mntDir1"
@@ -209,8 +210,13 @@ function changePass()
 {
     local secret="$1"
     checkArg "$secret" "secret"
+    if [ -f "$secret" ]; then
+        lastSecretTime=$(stat -c %z "$secret")
+    fi
     local user=${SUDO_USER:-$(whoami)}
     sudo -E -u "$user" "${toolsDir}/cskey.sh" chp "$secret"
+    sleep 1
+    touchFile "$secret" "$lastSecretTime"
 }
 
 function touchFile()
