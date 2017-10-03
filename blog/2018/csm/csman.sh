@@ -529,7 +529,10 @@ function openContainerByName()
     
     # set default label if volume has no label, may fail if no FS
     if [ -n "$lastDev" ]; then
-        local label="$(e2label "$lastDev" 2> /dev/null)"
+        local label=""
+        set +e
+        label="$(e2label "$lastDev" 2> /dev/null)"
+        set -e
         if [ -z "$label" ] && [ -f "$device" ]; then
             label=$(getVolumeDefaultLabel "$device")
             if [ -n "$label" ]; then
@@ -538,7 +541,9 @@ function openContainerByName()
                 set -e
             fi
         fi
+        set +e
         label="$(e2label "$lastDev" 2> /dev/null)"
+        set -e
         if [ -n "$label" ]; then
             echo "# label: $label"
         fi
@@ -906,13 +911,14 @@ function cleanUp()
 
 function showChecksum()
 {
-    sha256sum "$0"
-    sha256sum "${csmkeyTool}"
+    local how=56
+    sha256sum "$0" | tail -c +$how
+    sha256sum "${csmkeyTool}" | tail -c +$how
     if [ -f "${toolsDir}/aes" ]; then
-        sha256sum "${toolsDir}/aes"
+        sha256sum "${toolsDir}/aes" | tail -c +$how
     fi
     if [ -f "${toolsDir}/argon2" ]; then
-        sha256sum "${toolsDir}/argon2"
+        sha256sum "${toolsDir}/argon2" | tail -c +$how
     fi
     echo
 } >&2
