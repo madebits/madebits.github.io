@@ -195,7 +195,7 @@ function decodeSecret()
     fi
     
     if [ -e "$file" ] || [ "$file" = "-" ]; then
-		local fileData=$(head -c 600 "$file" | base64 -w 0)
+		local fileData=$(head -c 600 -- "$file" | base64 -w 0)
 		if [ -z "$fileData" ]; then
 			onFailed "cannot read: $file"
 		fi
@@ -208,7 +208,7 @@ function decodeSecret()
 			echo -n "$data" | base64 -d | decryptAes "$hash" | encryptAes "$cskSessionKey" > "$cskSessionSecretFile"
 			debugData "secret" "$(echo -n "$data" | base64 -d | decryptAes "$hash" | base64 -w 0)"
 			logError "# session: stored secret in: ${cskSessionSecretFile}"
-			debugData "$(cat ${cskSessionSecretFile} | base64 -w 0)"
+			debugData "$(cat -- ${cskSessionSecretFile} | base64 -w 0)"
 			logError
 		fi
 		echo -n "$data" | base64 -d | decryptAes "$hash"
@@ -222,7 +222,7 @@ function decodeSecret()
 function keyFileHash()
 {
 	local keyFile="$1"
-	head -c 1024 "$keyFile" | sha256sum | cut -d ' ' -f 1
+	head -c 1024 -- "$keyFile" | sha256sum | cut -d ' ' -f 1
 	if [ "$?" != "0" ]; then
 		onFailed "cannot read keyFile: ${keyFile}"
 	fi
@@ -271,7 +271,7 @@ function readPassFromFile()
 {
 	if [ -e "$1" ] || [ "$1" = "-" ]; then
 		logError "# reading: $1"
-		head -n 1 "$1" | tr -d '\n'
+		head -n 1 -- "$1" | tr -d '\n'
 		if [ "$?" != "0" ]; then
 			onFailed "cannot read file: ${1}"
 		fi
@@ -435,7 +435,7 @@ function readSessionPass()
 				logError "# session: creating new seed: ${cskSessionSaltFile}"
 				createRndFile "$cskSessionSaltFile"
 			fi
-			sData0=$(head -c 64 "${cskSessionSaltFile}" | base64 -w 0)
+			sData0=$(head -c 64 -- "${cskSessionSaltFile}" | base64 -w 0)
 			if [ -z "${sData0}" ]; then
 					onFailed "cannot read session seed from: ${cskSessionSaltFile}"
 				else
@@ -473,7 +473,7 @@ function readSessionPassFromFile()
 		if [ -z "$cskSessionKey" ]; then
 			onFailed "no session key"
 		fi
-		local p=$(cat "$1" | base64 -w 0)
+		local p=$(cat -- "$1" | base64 -w 0)
 		if [ -z "$p" ]; then
 			onFailed "cannot read session password from: ${1}"
 		fi
@@ -520,7 +520,7 @@ function createSessionPass()
 	#ownFile "$file"
 	logError
 	logError "# session: stored password in: ${file}"
-	debugData "$(cat ${file} | base64 -w 0)"
+	debugData "$(cat -- ${file} | base64 -w 0)"
 	logError
 }
 
@@ -553,7 +553,7 @@ function loadSessionSecret()
 	fi
 	readSessionPass
 	logError "# session: reading secret from: ${file}"
-	cskSecret="$(cat ${file} | decryptAes "$cskSessionKey" | base64 -w 0)"
+	cskSecret="$(cat -- ${file} | decryptAes "$cskSessionKey" | base64 -w 0)"
 	if [ -z "$cskSecret" ]; then
 		onFailed "cannot read session secret from: ${file}"
 	fi
@@ -693,7 +693,7 @@ function main()
 			;;
 			-s)
 				local kk="${2:?"! -s file"}"
-				cskSecret=$(cat "${kk}")
+				cskSecret=$(cat -- "${kk}")
 				if [ -z "$cskSecret" ]; then
 					onFailed "cannot read: ${kk}"
 				fi
