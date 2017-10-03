@@ -13,16 +13,16 @@
 
 <hr>
 
-* [BBC](http://www.bbc.co.uk/news/world/)
 * [CNN](https://edition.cnn.com/world)
 * [USA Today](https://usatoday.com/)
 * [Fox News](https://www.foxnews.com/world)
 * [The New York Times](https://www.nytimes.com/section/world)
 * [Reddit](https://www.reddit.com/r/worldnews/)
 
-
 <hr>
 
+* [BBC](http://www.bbc.co.uk/news/world/) 
+* [The Telegraph](https://www.telegraph.co.uk/news/world/)
 * [France 24](https://www.france24.com/en/)
 * [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
 * [EuroNews](https://www.euronews.com/news/international)
