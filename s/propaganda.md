@@ -24,6 +24,7 @@
 * [The Register](https://www.theregister.co.uk/)
 * [DZone](https://dzone.com/)
 * [ACM TechNews](https://technews.acm.org/)
+* [ACM Queue](https://queue.acm.org/)
 * [Tech Crunch](https://techcrunch.com/)
 
 <hr>
@@ -39,9 +40,15 @@
 
 <hr>
 
+* [GlobalNews](https://globalnews.ca/world/)
+* [9News](https://www.9news.com.au/world)
+
+<hr>
+
 * [BBC](http://www.bbc.co.uk/news/world/) 
 * [The Telegraph](https://www.telegraph.co.uk/news/world/)
 * [Daily Mail](https://www.dailymail.co.uk/news/worldnews/index.html)
+* [Express](https://www.express.co.uk/news/world)
 * [Financial Times](https://www.ft.com/world)
 * [Reuters](https://www.reuters.com/)
 
@@ -49,7 +56,9 @@
 
 * [France 24](https://www.france24.com/en/)
 * [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
+* [T-Online Nachrichten](https://www.t-online.de/nachrichten/)
 * [EuroNews](https://www.euronews.com/news/international)
+* [The Local](https://www.thelocal.de/)
 * [B92](https://www.b92.net/eng/news/world.php)
 
 <hr>
