@@ -1,1 +1,1 @@
-var homeUrl='blog/2019/2019-11-13-ETL-Solutions.md';
+var homeUrl='blog/2020/2020-05-03-Using-Ubuntu-Snap.md';

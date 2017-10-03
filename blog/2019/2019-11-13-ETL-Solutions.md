@@ -1,5 +1,9 @@
 # ETL Solutions
 
+2019-11-13
+
+<!--- tags: data -->
+
 This post is based on an opinionated review of discussion of a HackerNews [entry](https://news.ycombinator.com/item?id=21513566), which lists also a [registry](https://github.com/thenaturalist/awesome-business-intelligence) of such tools.
 
 ## Extract - Transform - Load
@@ -64,4 +68,4 @@ This post is based on an opinionated review of discussion of a HackerNews [entry
 * [Amplitude](https://amplitude.com/) and [Mixpanel](https://mixpanel.com/) are product intelligence [tools](https://effinamazing.com/blog/mixpanel-vs-amplitude/).
 * [Heap](https://heap.io/) product analytics.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-09-04-Agile-Backlog-As-Gantt-Frontier.md'>Agile Backlog As Gantt Frontier</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2020/2020-05-03-Using-Ubuntu-Snap.md'>Using Ubuntu Snap</a> <a rel='next' id='fnext' href='#blog/2019/2019-09-04-Agile-Backlog-As-Gantt-Frontier.md'>Agile Backlog As Gantt Frontier</a></ins>

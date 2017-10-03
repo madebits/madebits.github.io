@@ -1,3 +1,4 @@
+* [Using Ubuntu Snap](#blog/2020/2020-05-03-Using-Ubuntu-Snap.md)
 * [ETL Solutions](#blog/2019/2019-11-13-ETL-Solutions.md)
 * [Agile Backlog As Gantt Frontier](#blog/2019/2019-09-04-Agile-Backlog-As-Gantt-Frontier.md)
 * [When to use Vuex](#blog/2019/2019-08-30-When-to-use-Vuex.md)
@@ -5,4 +6,3 @@
 * [MongoDb with SSL](#blog/2019/2019-03-25-MongoDb-with-SSL.md)
 * [How To Speak Like A Leader](#blog/2019/2019-03-10-How-To-Speak-Like-A-Leader.md)
 * [Vim For Casual User](#blog/2019/2019-03-04-Vim-For-Casual-User.md)
-* [Docker s Blackhole Like Behavior](#blog/2019/2019-01-24-Docker-s-Blackhole-Like-Behavior.md)
