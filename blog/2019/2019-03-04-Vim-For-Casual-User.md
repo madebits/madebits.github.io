@@ -48,12 +48,12 @@ There are several ways to save the text:
 
 * `:w somefilename` will save current text buffer in *somefilename*.
 * `:saveas somefilename` will save current text buffer in *somefilename* and use it for follow-up saves.
-* `:w` will save current text buffer in current file (either open via `vim somefilename`, or set via first `w somefilename`). `:wa` save all buffers.
+* `:w` will save current text buffer in current file (either open via `vim somefilename`, or set via first `:w somefilename`). `:wa` save all buffers.
 * `:wq` save and quit (or `ZZ` or `:x`).
 * `w!` force write read-only file.
 * `w !sudo tee % > /dev/null` yes, no one remembers this one, but it will force write some file open without `sudo` as `sudo` (basically this means write buffer and pipe it via *sudo* using *tee* to filename).
     - If you can plan in advance, use `SUDO_EDITOR=vim sudo -e somefile` to edit a file as *sudo* using Vim.
-* As noted before, `:q!` will not save your text and exit (you still have the nice memory of writing it) and `:qa!` will exit even if you have more than one buffer.
+* `:q!` will not save your text and exit (you still have the nice memory of writing it) and `:qa!` will exit even if you have more than one buffer.
 
 A few quirks:
 
