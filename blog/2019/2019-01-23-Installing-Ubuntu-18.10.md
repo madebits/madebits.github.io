@@ -299,7 +299,7 @@ $ df -h -T | grep loop
 
 ```
 
-Someone [designed](https://docs.snapcraft.io/) `snap` to use `squashfs` and now each *snap* needs a `loop` device. Ubuntu developers are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices.
+Someone [designed](https://docs.snapcraft.io/) `snap` to use `squashfs` and now each *snap* needs a `loop` device. Ubuntu developers are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices. `HOME/snap` is the [folder](https://askubuntu.com/questions/882562/how-can-i-change-or-hide-the-snap-directory) where snaps are mapped.
 
 Useful `.bash_aliases` alias:
 
