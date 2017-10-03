@@ -68,12 +68,18 @@
 [AskUbuntu](https://askubuntu.com/questions)
 [Phoronix](https://www.phoronix.com/scan.php?page=home)
 [LinuxLinks](https://www.linuxlinks.com/)
-[LinuxJournal](https://www.linuxjournal.com/)
 [NoobsLab](https://www.noobslab.com/)
 [UbuntuHandbook](http://ubuntuhandbook.org/)
 [OMGUbuntu](https://www.omgubuntu.co.uk/)
 [TechMint](https://www.tecmint.com/)
 [LinuxAndUbuntu](http://www.linuxandubuntu.com/)
+[WebUpd8](http://www.webupd8.org/)
+[UbuntuHandbook](http://ubuntuhandbook.org/)
+[TechDriveIn](https://www.techdrivein.com/)
+[UnixMen](https://www.unixmen.com/)
+[UbuntuGeek](http://www.ubuntugeek.com/)
+[LinuxNews](http://linux-news.org/)
+[LinuxInsider](https://www.linuxinsider.com/)
 
 ### Programming
 
