@@ -100,7 +100,7 @@ Common edit commands (in *command-mode*):
 * `D` delete (cut) to end of line.
 
 
-* `u` undo; `Ctrl+r` redo
+* `u` undo; `Ctrl+r` redo, `U` undo line changes.
 * `.` repeat last action sequence (`number.` repeat last command sequence *number* times).
 * `:edit!` undo all unsaved changes in buffer.
 
