@@ -80,10 +80,10 @@ Similar to LUKS, one can use same password safely to protect more than one secre
 Some overlapping terms explained:
 
 ```
-1) password => sha512 => + <= optional key file headers (sha256 of max 1024 first bytes)
+1) password => sha512 => + <= optional key file headers (sha256 of: sha256 of max 1024 first bytes)
 2) 32 bytes random salt | argon2 (id) =>
-3) aes <= 512 bytes random secret =>
-4) secret file=salt+encrypted secret+random => slot
+3) aes (PBKDF2 sha256) <= 512 bytes random secret =>
+4) secret file=salt+aes encrypted secret+random pad => slot
 ```
 
 * **secret** - randomly generated (or user specified) 512 bytes (binary). Binary values are shown as *base64* in tool. Secret is used binary as `cryptsetup` password.
@@ -100,10 +100,10 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 
 * `csman.sh` - main tool.
 * `cskey.sh` - is invoked by `csman.sh` for handling encryption and decryption of keys.
-* `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool. If this tool is found next to `cskey.sh` it is used. Alternately you can install `ccrypt` from Ubuntu repositories. The default [aes](#r/cpp-aes-tool.md) tool uses non-authenticated encryption - the ambiguity is wished.
+* `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool. If this tool is found next to `cskey.sh` then it is used. Alternately, you can install `ccrypt` from Ubuntu repositories. The default [aes](#r/cpp-aes-tool.md) tool uses non-authenticated encryption - the ambiguity is wished.
 * `argon2` - this is a self-compiled copy of `argon2` from [official](https://github.com/P-H-C/phc-winner-argon2) repository without any changes ([my copy](https://github.com/madebits/phc-winner-argon2)). `argon2` can be found also in Ubuntu repositories. If found next to `cskey.sh`, this copy is used in place of the system copy.
 
-When `csman.sh` starts without arguments, it prints prefix hashes of these files, if present:
+When `csman.sh` is started without arguments, it prints prefix hashes of these files, if present:
 
 ```
 6ba7b94dd  /usr/local/bin/csman.sh
@@ -121,8 +121,8 @@ These hashes should normally be same unless a new version of files is copied.
 `csman.sh` is the main command to use. `csman.sh` delegates password and secret operations to `cskey.sh` (which uses `aes` and `argon2`). You may need to use `cskey.sh` directly for advanced key manipulation. Running both commands without options lists their command-line arguments, e.g.: 
 
 ```
-sudo csman.sh
-sudo cskey.sh
+csman.sh
+cskey.sh
 ```
 
 The command-line arguments are a bit *peculiar* (because I thought that it is faster to specify options after the main arguments) and follow the scheme: *command file(s) options*.
@@ -155,11 +155,11 @@ This command will generate a random secret and encrypt it with the password (com
 
 1. `sudo` password
 2. any key files to use. Key files can be specified in any order as paths one by one by pressing *Enter* key to confirm them. Use *Enter* key without a path to stop entering key files, or if you are not using key files press *Enter* key to skip entry (or use `-k` option not to be asked for key files). 
-3. password to encrypt the secret file.
+3. password to encrypt the secret file. To have password visible append `-i e` option.
 
 If `secret.bin` file exists, it will be overwritten, but not truncated. To truncate existing files append `-t` option.
 
-To view back the used raw secret data (for fun) use:
+To view back the used raw secret data (for the fun of it) use:
 
 ```bash
 sudo cskey.sh dec secret.bin | base64 -w 0
@@ -183,11 +183,11 @@ sudo cskey.sh enc secret.bin -b 3 -bs -su
 
 This generates 4 files (*secret.bin*, *secret.bin.01*, *...*, *secret.bin.03*). All these files are encrypted with same password. 
 
-Without `-bs` option, same secret will be stored on each file (due to AES mode files will be still binary different).
+Without `-bs` option, same secret will be stored on each file (due to used AES mode files will be still binary different).
 
 With `-bs` option, a new different secret is generated for each file. `-su` makes secret generation faster by using `/dev/urandom`.
 
-`sudo cskey.sh rnd file -rb 5` command is similar, but it generates random fixed size files that look like secret files with no other use.
+`sudo cskey.sh rnd file -rb 5` command is similar, but it generates random files that look like secret files with no other use.
 
 #### Password Options
 
@@ -226,7 +226,7 @@ If you specify `argon2` options during encrypt command (enc), you have to rememb
 
 ### Creating Containers
 
-To create an encrypted container you need to specify the container file name (can be any) or device, the size and **secret** file (see [Creating Secret Files](#r/linux-csman.md#creating-secret-files)). Create command is `create` or `n`. Secret file will be created if it does not exist:
+To create an encrypted container you need to specify the container file name (can be any) or device, the size and **secret** file (see [Creating Secret Files](#r/linux-csman.md#creating-secret-files)). Create command is `create`, or `new`, or `n`. Secret file will be created if it does not exist and by default it is also embedded into first container slot:
 
 ```bash
 sudo csman.sh n container.bin 1M -s secret.bin -cf -T small -m 0 ---
@@ -234,13 +234,13 @@ sudo csman.sh n container.bin 1M -s secret.bin -cf -T small -m 0 ---
 
 * The size to use can be only in units of M or G (for MiB, GiB, as powers of 1024).
 
-* If secret file exists, you will be asked to reuse it or overwrite it (create it new). If secret file is `--` then per convention no secret file is used and encryption key is directly generated after hashing from password. This is ok for quick things up and now, but it is no more possible to change the container password. With secret files, password changes, or using more than one password is possible. 
+* If secret file exists, you will be asked to reuse it or overwrite it (create it new). If secret file is `--` then per convention no secret file is used and encryption key is directly generated after hashing from password. This is ok for quick things up and now, but it is not possible to change the container password. With secret files, password change or using more than one password are possible.
 
-* The `-cf ... ---` can be used to pass EXT4 options for file system creation, such as, the number of *inodes* to use `-N 1000` (or `-T small`), or the EXT4 volume label `-L VOL1` (see `man mkfs.ext4`).
+* The `-cf ... ---` can be used to pass EXT4 options for file system creation, such as, the number of *inodes* to use `-N 1000` (or `-T small`), or the EXT4 volume label `-L VOL1`. See `man mkfs.ext4`.
 
 If container file exists, you be asked if you want to overwrite its data (in this case specified size will be ignored), or to just re-create the file system, or press *Enter* to abort and keep existing file data. You may choose to create only file system if file is already created with random data, or you plan to overwrite free space with zeros later from within the encrypted container once mounted.
 
-* The container file will be created, overwritten with random data, and formated with a new EXT4 file system. You will asked to re-enter the password the first time encrypted container is opened for file-system creation.
+The container file will be created, overwritten with random data, and formated with a new EXT4 file system. You will asked to re-enter the password the first time encrypted container is opened for file-system creation.
 
 Encrypting a device (disk partition) is similar:
 
@@ -252,13 +252,13 @@ The size will be ignored, but has to be specified as 0G (or 0M). If non-zero `cs
 
 The `-oo` option tells `csman.sh` to only overwrite container data, but do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data, but you can run same command later without `-oo` to create the encrypted file system. If `-oo` is used, the secret file is ignored if specified.
 
-`csman.sh` invokes `cskey.sh` to process *secret.bin* file (create it, ask for password), so you can use same password input and hash options as for `cskey.sh` using `-ck ... ---`. For example:
+* `csman.sh` invokes `cskey.sh` to process *secret.bin* file (create it, ask for password), so you can use same password input and hash options as for `cskey.sh` using `-ck ... ---`. For example:
 
-```bash
-sudo csman create /dev/sdc1 -s secret.bin -one -ck -ap @foo -i e -k ---
-```
+  ```bash
+  sudo csman create /dev/sdc1 -s secret.bin -one -ck -ap @foo -i e -k ---
+  ```
 
-In this example, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-one` option tells `csman.sh` to only use one (outer AES) encryption layer.
+  In this example, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-one` option tells `csman.sh` to only use one (outer AES) encryption layer.
 
 Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you can pass other `cryptsetup` options, such an offset (offset is specified in 512 byte units, e.g: `-o 2` for 1024 bytes) via `-co ... ---` (outer layer) and `-ci ... ---` (inner layer). 
 
@@ -278,7 +278,9 @@ dd conv=notrunc if=secret.bin of=container.bin
 sudo csman.sh o container.bin container.bin -co -o 2 ---
 ```
 
-The `-slots count` option is provided as convenience to create 1024 byte slots. If not set, it defaults to `-slots 4`. Using `-slots` overwrites `-co -o` (the number used with `-o` needs to be twice the number of slots). Use `-slots 0` if you need no slots, or if you do not want to overwrite `-co -o` (the `-s0`  option is a shortcut for `-slots 0`). You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number. If slots is set bigger than `0`, then create command also embeds secret file in the first slot. If slots count is bigger than one and secret.bin.01, to secret.bin.03 files exists, they are also embedded in the other slots. Slots are not intended as a replacement for container file backups.
+The `-slots count` option is provided as convenience to create 1024 byte slots. 
+
+* If not set, it defaults to `-slots 4`. Using `-slots` overwrites `-co -o` (the number used with `-o` needs to be twice the number of slots). Use `-slots 0` if you need no slots, or if you do not want to overwrite `-co -o`. `-s0`  option is a shortcut for `-slots 0`. You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number. If slots is set bigger than `0`, then create command also embeds secret file in the first slot. If slots count is bigger than one and secret.bin.01, to secret.bin.03 files exists, they are also embedded in the other slots. Slots are not intended as a replacement for container file backups.
 
 ```bash
 # these are same, but only second one embeds secret during create
@@ -330,7 +332,7 @@ sudo csman.sh o container.bin -slots 2 -ck -slot 1 ---
 sudo csman.sh o container.bin -slots 2 -ck -slot 2 ---
 ```
 
-The `cskey.sh -slot` if not specified is 1. `cskey.sh enc` if a slot is specified pads secret to 1024 bytes using random data. 
+The `cskey.sh -slot` if not specified is 1. `cskey.sh enc` if a slot is specified pads secret to 1024 bytes using random data.
 
 To remove a slot's data, overwrite it with random data using delete `-d` option of `e` command:
 
@@ -340,11 +342,11 @@ csman.sh e container.bin -d -slot 2
 cskey.sh rnd - -r 1024 | csman.sh e container.bin -s - -slot 2
 ```
 
-If `-d` and one or more `-s` are used together for `embed` command, they operate on next slot based on order given, starting with specified `-slot`. 
+If `-d` and one or more `-s` are used together for `embed` command, they operate on next slot based on order given, starting with specified `-slot`.
 
 ### Using Containers
 
-`cryptsetup` requires names for devices and `csman.sh` follows same convention. The container names are prefixed with `csm-`. You can specify names in command and options either with `csm-` prefix, or without it. The name is used as part of mount folder. If you want to have a pre-known path to copy files consider specifying a name when opening the container using `-n name` option. If you specify no name, a random one is generated and printed out by *open* command. 
+`cryptsetup` requires names for devices and `csman.sh` follows same convention. The container names are prefixed with `csm-`. You can specify name in command and options either with `csm-` prefix, or without it. The name is used as part of mount folder. If you want to have a pre-known path to copy files consider specifying a name when opening the container using `-n name` option. If you specify no name, a random one is generated and printed out by *open* command.
 
 The open command is `open` or `o`. Secret is specified via `-s` option, if not set it tries to read secret from container file slots:
 
@@ -394,7 +396,7 @@ Alternatively, use `sudo csman.sh increase name size`. The *size* is the delta s
 
 ### Closing Containers
 
-The open command with `-l` option will close the container if user presses twice *Enter* key.
+The open command with `-l` option will close the container if user presses twice *Enter* key or *Ctrl+C*.
 
 To close a container named *n1* (*csm-n1*) use `close` or `c` command:
 
@@ -438,7 +440,7 @@ sudo bash -c 'for f in *.bin; do csman.sh chp "${f}" -out "$new-{f}" -ck -ap @ol
 sudo cskey.sh x
 ```
 
-If you have an existing secret file and want to replicate it for use with slots, you can use this command:
+If you have an existing secret file and want to replicate it for use with container slots, you can use this command:
 
 ```bash
 sudo csman.sh chp secret.bin -out new-secret.bin -ck -i e --- -cko -i e -b 3 ---
@@ -497,4 +499,4 @@ csman.sh dc . -q
 csman.sh dcq
 ```
 
-The `dc` command is useful to overwrite disk space from within an encrypted container. The command creates a temporary folder `csm-zero-tmp` under the folder given as its first argument, where it writes `zero.*` files filled with `/dev/zero` till that disk partition runs out of free  disk space. If the command ever fails to clean the temporary `csm-zero-tmp` folder, it can be removed manually using `rm -rf csm-zero-tmp`.
+The `dc` command is useful to overwrite disk space from *within* an encrypted container. The command creates a temporary folder `csm-zero-tmp` under the folder given as its first argument, where it writes `zero.*` files filled with `/dev/zero` till that disk partition runs out of free  disk space. If the command ever fails to clean the temporary `csm-zero-tmp` folder, it can be removed manually using `rm -rf csm-zero-tmp`.
