@@ -68,6 +68,37 @@ To view *thumb-print* of the server certificate we can use:
 openssl x509 -noout -fingerprint -sha256 -inform pem -in hostMongo.pem
 ```
 
+Some of the steps above can be put in script to generate new host certificates:
+
+```bash
+#!/bin/bash
+
+if [ "$1" = "" ]; then
+        echo 'Please enter a hostname (Common Name CN )!'
+        exit 1
+fi
+
+HOST_NAME="$1"
+SUBJECT="/C=DE/ST=Hessen/L=Frankfurt/O=Testorg/OU=Test/CN=$HOST_NAME"
+SUBJECT_ALT="DNS"
+
+if [[ $HOST_NAME =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  SUBJECT_ALT="IP"
+fi
+
+openssl req -new -nodes -newkey rsa:4096 -subj "$SUBJECT" -keyout $HOST_NAME.key -out $HOST_NAME.csr
+
+openssl x509 -CA mongoCA.crt -CAkey mongoCA.key -CAcreateserial -extfile <(printf "\nsubjectAltName=${SUBJECT_ALT}:${HOST_NAME}") -req -days 3650 -in $HOST_NAME.csr -out $HOST_NAME.crt
+
+rm $HOST_NAME.csr
+cat $HOST_NAME.key $HOST_NAME.crt > $HOST_NAME.pem
+rm $HOST_NAME.key
+rm $HOST_NAME.crt
+
+```
+
+The scripts shows also [how](https://stackoverflow.com/questions/21488845/how-can-i-generate-a-self-signed-certificate-with-subjectaltname-using-openssl) to set a proper [subject alternative name](https://www.openssl.org/docs/man1.0.2/man5/x509v3_config.html).
+
 ### MongoDB Daemon Configuration
 
 The following options can either be passed via parameters to `mongod --ssl --sslCAFile /config/certs/mongoCA.crt --sslPEMKeyFile /config/certs/mongoHost.pem` or via a configuration file `mongod -f /config/mongo.conf`:
