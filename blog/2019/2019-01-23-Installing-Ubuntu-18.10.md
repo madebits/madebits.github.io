@@ -6,6 +6,8 @@
 
 I gave Ubuntu 18.10 a try in VirtualBox and 18.04 in a machine and here is a summary of some of the things I had to do, for own reference.
 
+<div id='toc'></div>
+
 ##Remove Swap Partition
 
 Installer gave me errors when I tried to modify partitions of default encrypted disk setup (I guess they need to be modified by live CD before installer) and I ended up with using defaults. 
