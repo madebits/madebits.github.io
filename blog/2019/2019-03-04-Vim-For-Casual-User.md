@@ -54,7 +54,7 @@ As many have noted, there is no basic Vim. You need to learn upfront enough comm
     * *Ctrl+o normal mode command* works too from within *insert-mode*.
 * **insert-mode** is reachable from command-mode by initiating some text edit command
 
-Commands are usually are made of multiple key of the [form](https://danielmiessler.com/study/vim/#language): *operator (verb)* *modifier (scope)* *noun (motion)* and can be combined creatively given enough time. The best way to learn basic commands is to use `vimtutor` as often as you remembers everything.
+Commands are usually are made of multiple key of the [form](https://danielmiessler.com/study/vim/#language): *operator (verb)* *modifier (scope)* *noun (motion)* and can be combined creatively given enough time. The best way to learn the most basic commands is to use `vimtutor` as often as everything there becomes a habit.
 
 Common movement commands (in *command-mode*):
 
