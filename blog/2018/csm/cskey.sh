@@ -224,7 +224,6 @@ function readNewPass()
 		(>&2 echo "! no password")
 		exit 1
 	fi
-	pass="$pass$hash"
 	echo "$pass"
 }
 
