@@ -10,9 +10,10 @@
 
 ## Quick Start
 
-Create a new container file (`-i e` makes password entry visible):
+Create a new container file (`-i e` or `-i echo` makes password entry visible):
 
 ```bash
+# size can be in M (mega) or G (giga) bytes
 sudo csman.sh new container.bin 1M -ck -i e ---
 ```
 
@@ -104,7 +105,7 @@ When `csman.sh` is started without arguments, it prints prefix hashes of these f
 
 ```
 5c5148e62  /usr/local/bin/csman.sh
-0c25372f8  /usr/local/bin/cskey.sh
+77d900003  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
 ```
