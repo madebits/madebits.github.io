@@ -98,7 +98,7 @@ Some of `aes` options you can use are:
 * -k to specify AES 128, 192, or 256 bit (256 bit is default).
 * -r read random data needed for encryption from `/dev/urandom` (default C `rand()` function is used).
 * -c now many times we hash the password to obtain the encryption key (see also -a below) (default 1024).
-* -m to use PBKDF2 for -c (defulr is PBKDF1).
+* -m to use PBKDF2 for -c (default is PBKDF1).
 * -h some number - *this is evil (TM)* and it needs some more explanation. Without -h (or -h 0), `aes` tool stores the file as (iv,salt,encrypted data), where the file length is a multiple of 8 and the offset of begin of each part is known. If we specify an offset with -h we store that much random data first in file (random,iv,salt,encrypted data), so the file length is no more necessary a multiple of 8, and the offsets of the parts are not directly known (see also -a below) (default is -h 0).
 * -a [level] is an automatic shortcut for -c and -h (default level for -a is 5). When using -a, then -c, -h are ignored and their values are auto calculated from password based on the formulas shown next, where `passwordSum` is the sum of all password characters as an integer (and `**` is math power):
 
