@@ -12,20 +12,25 @@ general {
         color_good = "#B1FFD7"
         color_degraded = "#FFFEDA"
         color_bad = "#FFA3A3"
+        markup = pango
 }
 
 #order += "ipv6"
 order += "volume master"
 order += "disk /"
+order += "disk /data2"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "battery all"
 order += "load"
 order += "cpu_usage"
+order += "cpu_temperature 0"
 order += "tztime local"
 
+# %frequency %ip (%bitrate)
+
 wireless _first_ {
-        format_up = "📶 %quality %essid %frequency %ip (%bitrate)"
+        format_up = "📶 %essid %quality"
         format_down = "📡 down"
 }
 
@@ -55,6 +60,11 @@ load {
         format = "🔥 %1min"
 }
 
+cpu_temperature 0 {
+        format = "🌡️%degrees °C"
+        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
+}
+
 cpu_usage {
     format = "🚦%usage"
     max_threshold = 70
@@ -62,7 +72,11 @@ cpu_usage {
 }
 
 disk "/" {
-        format = "💽 %avail"
+        format = "💿 %avail"
+}
+
+disk "/data2" {
+        format = "📀 %avail"
 }
 
 volume master {

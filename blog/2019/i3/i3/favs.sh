@@ -4,12 +4,13 @@
 
 bl=$(/etc/acpi/actions/bl-status.sh)
 up=$(uptime | cut -d ',' -f 1)
+mem=$(free -h | grep Mem: | tr -s ' ' | cut -d ' ' -f 3,2,4)
 
-sel=$(zenity --window-icon=question --height 900 --width 640 --list --title="☀️ ${bl}% | 🧑 ${USER} | 🕛 ${up} | 💻 Apps" --column "Apps"\
+sel=$(zenity --window-icon=question --height 900 --width 640 --list --title="🧑 ${USER} | 🕛 ${up} | Ⓜ️ ${mem} | ☀️ ${bl}% | 💻 Apps" --column "Apps"\
  ↗️... 🌐Browser 📂Files 📧Email 💥Sublime 📝Geany 🗳️DropBox 🌎Firefox\
  📦VirtualBox 🔑VeraCrypt 🔐KeepassXC 🎦Vlc 🎶Audacious\
  🖼️Gimp 🏢Office 🧮Calculator 🗂️Ranger 💻Terminal\
- 💽Disks 🔄Updates 👨‍💻Synaptic 📚DiskSpace ⚡SysMon 🔋PowerStats 🛠️i3Config 🔊Volume-Up 🔉Volume-Down 📲Logout 🔶Reboot ⛔Shutdown   2>/dev/null)
+ 💽Disks 🔄Updates 👨‍💻Synaptic 📚DiskSpace ⚡SysMon 🔋PowerStats 🛠️i3Config 🔊Volume-Up 🔉Volume-Down 📲Logout ♻️Reboot ⛔Shutdown   2>/dev/null)
 
 case "$sel" in
     🛠️i3Config)
@@ -55,7 +56,7 @@ case "$sel" in
         exec zenity --password | sudo -S update-manager
         ;;
     💽Disks)
-        gnome-disks &
+        exec gnome-disks
         ;;
     👨‍💻Synaptic)
         exec zenity --password | sudo -S synaptic
@@ -84,15 +85,15 @@ case "$sel" in
     📲Logout)
         i3-msg exit
         ;;
-    🔶Reboot)
+    ♻️Reboot)
         systemctl reboot
         ;;
     ⛔Shutdown)
         systemctl poweroff -i
         ;;
     ↗️...)
-        sleep 1
-        rofi -modi 'drun#window#run' -show drun -show-icons -sort &
+        sleep 0.1
+        rofi -modi 'window#drun#run' -show window -show-icons -sort -width 90 -lines 30 -sidebar-mode -columns 4 &
         ;;
     🔊Volume-Up)
         pactl set-sink-volume 0 +20%
@@ -101,7 +102,7 @@ case "$sel" in
         pactl set-sink-volume 0 -20%
         ;;
     🔋PowerStats)
-         gnome-power-statistics
+         exec gnome-power-statistics
         ;;
     *)
         exit 1

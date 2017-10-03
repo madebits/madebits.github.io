@@ -48,7 +48,7 @@ bindsym $mod+q kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 #bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop
-bindsym Ctrl+Tab exec rofi -modi 'drun#window#run' -show drun -show-icons -sort
+bindsym Ctrl+Tab exec rofi -modi 'window#drun#run' -show window -show-icons -sort -width 90  -lines 30 -sidebar-mode -columns 4
 
 # change focus
 #bindsym $mod+j focus left
@@ -200,6 +200,7 @@ bindsym Mod1+Shift+Tab $prevw
 bindsym $mod+a exec --no-startup-id  $favs
 bindsym $mod+b exec --no-startup-id chromium-browser
 bindsym $mod+n exec --no-startup-id nautilus
+bindsym $mod+e exec --no-startup-id nautilus
 
 bindsym $mod+y bar mode toggle
 bindsym $mod+Escape $lock

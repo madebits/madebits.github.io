@@ -455,6 +455,13 @@ I learned something about [brightness](https://unix.stackexchange.com/questions/
 ####Other
 
 * [/etc/polkit-1/localauthority/50-local.d/com.ubuntu.disable-suspend.pkla](./blog/2019/i3/com.ubuntu.disable-suspend.pkla) - disable [suspend](https://askubuntu.com/questions/972114/ubuntu-17-10-cant-disable-suspend-with-systemd-hybrid-sleep)
+* `HOME/.bashrc` changes:
+
+    ```
+    export TERMINAL=xterm
+    # show current command in title https://unix.stackexchange.com/questions/104018/set-dynamic-window-title-based-on-command-input
+    trap 'echo -ne "\033]0;$BASH_COMMAND\007"' DEBUG
+    ```
 
 ##Summary
 
