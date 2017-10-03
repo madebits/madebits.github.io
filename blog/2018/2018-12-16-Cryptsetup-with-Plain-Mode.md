@@ -154,7 +154,7 @@ cryptsetup --key-file=key.bin -c aes-xts-plain64 -s 512 -o 111 open --type plain
 
 [Arch Wiki](https://wiki.archlinux.org/index.php/Dm-crypt/Device_encryption#Encrypting_devices_with_plain_mode) has two interesting uses of plain mode.
 
-###Chain Encryption
+###Encryption Chaining
 
 We can nest multiple `cryptsetup open` calls with a previous `/dev/mapper/*` device. This enables multiple layers of encryption:
 
