@@ -19,13 +19,14 @@ sudo csman.sh new container.bin 1M -s secret.bin -ck -i e ---
 rm secret.bin
 ```
 
-Open a container, it gets a random *name* and it is mounted under `$HOME/mnt/csm-name` (or append `-n name`):
+Open a container, it gets a random *name* and it is mounted under `$HOME/mnt/csm-name` (or append `-name name`):
 
 ```bash
-sudo csman.sh open container.bin -ck -i e --- -n one
+# append -exec to allow running executable from container
+sudo csman.sh open container.bin -ck -i e --- -name one
 
 # or block terminal till container is open, press Ctrl+C to close
-sudo csman.sh open container.bin -ck -i e --- -l
+sudo csman.sh open container.bin -ck -i e --- -live
 ```
 
 Close a container by name:
@@ -35,6 +36,12 @@ sudo csman.sh close one
 
 # or close all open containers
 sudo csman.sh closeAll
+```
+
+List all CSMan open containers:
+
+```bash
+sudo csman.sh list
 ```
 
 Change password:
