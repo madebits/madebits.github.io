@@ -86,7 +86,7 @@ I did a minimal Ubuntu install. I am so happy they offer that, as in the past I 
 ```bash
 sudo apt remove --purge ubuntu-report 
 # please fire the dev that stored state in ~/.cache
-# was the new intern in the team the only that agreed to implement ubuntu-report?
+# was the new intern in the team the only one that agreed to implement ubuntu-report?
 
 sudo apt install synaptic
 sudo apt install gnome-tweaks
