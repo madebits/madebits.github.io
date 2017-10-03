@@ -102,7 +102,9 @@ I can go on with the rest of my system specific configuration.
 
 ##Ah, Snap :(
 
-I have nothing against [snap](https://snapcraft.io/). I think it gives a whole class of users choice. I have a problem, when that choice is not there. Here I am, with a newly installed Ubuntu and I have not installed anything using `snap` on my own. Just what was there and software from official repositories (`deb` packages). What I see is `snap` already taking over:
+I have nothing against [snap](https://snapcraft.io/). It gives a whole class of users choice, and it is in the core strategy behind Ubuntu Core. I have a problem, when that choice is not there. 
+
+Here I have a newly installed Ubuntu and I have not installed anything using `snap` on my own. Just what was there and software from official repositories (`deb` packages). My expectation would be there is nothing using `snap` in a fresh system using only software from official repositories. However, `snap` is already there active
 
 ```bash
 $ df -h -T | grep loop
@@ -121,11 +123,9 @@ $ df -h -T | grep loop
 
 ```
 
-My expectation would be there is nothing using `snap` in a fresh system using only software from official repositories.
+There is one more thing to complain. Someone designed `snap` to use `squashfs` and now each *snap* needs a `loop` device. Suddenly, people end up seeing a lot of `loop` devices in system, even those that do not directly use `snap` like me. This is real nuisance for something that is expected to take world over.
 
-There is one more very disturbing thing to complain. Someone designs `snap` to use `squashfs` and now each *snap* needs a `loop` device. Suddenly, people end up seeing a lot of `loop` devices in system, even those that do not use `snap` like me. This is real nuisance for something that is expected to take world over.
-
-And what do they do? In place of fixing the root of problem and come with something better, they are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices. An initial bad decision is followed by even more bad decisions to cover up the initial bad one. What about *GNU coreutils*, will they hack them too? What about all third-party software (e.g. *VeraCrypt*)? Oh, they compiled its code in GNOME too, next one in the list?
+And what do they do? In place of fixing the root of problem and come with something better, they are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices. An initial bad decision is followed by even more bad decisions to cover up the initial bad one. What about *GNU coreutils*, will they hack them too? What about all third-party software (e.g. *VeraCrypt*)? Oh, they compiled its code in GNOME too. What is next one in the list? Getting rid of KDE, and so on.
 
 ##Summary
 
@@ -135,6 +135,6 @@ Apart of GNOME taskbar, which I really do not like, as it consumes the limited v
 * auto-hide is not so easy to use within VirtualBox;
 * if you are used with free vertical space from other environments, it is hard to accept lack of that option;
 
-I think with minor tweaks, Ubuntu 18.10 UI is usable, without having to install some other desktop variant. The overall UI direction looks ok, I can imagine using next LTS release UI as default desktop. Thought, I expect to see more crap like `snap` and `ubuntu-report` being added there by default.
+I think with minor tweaks, Ubuntu 18.10 UI is usable, without having to install some other desktop variant. The overall UI direction looks ok, I can imagine using next LTS release UI as default desktop. I expect to see more crap like `snap` and `ubuntu-report` being added there by default.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-01-24-Docker-s-Blackhole-Like-Behavior.md'>Docker s Blackhole Like Behavior</a> <a rel='next' id='fnext' href='#blog/2018/2018-12-16-Cryptsetup-in-Plain-Mode.md'>Cryptsetup in Plain Mode</a></ins>
