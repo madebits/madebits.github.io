@@ -34,7 +34,8 @@ cskKey=""
 cskChpFile=""
 cskSessionPass=""
 cskSessionPass2=""
-cskSessionKey=""
+cskSessionSecret=""
+cskSessionKeyFile=""
 
 user="${SUDO_USER:-$(whoami)}"
 currentScriptPid=$$
@@ -125,8 +126,10 @@ function debugKey()
 {
 	if [ "$cskDebug" = "1" ]; then
 		dumpError
-		dumpError "DEBUG [$1]"
-		dumpError "DEBUG [$2]"
+		while [ -n "${1:-}" ]; do
+			dumpError "DEBUG [${1}]"
+			shift
+		done
 	fi
 }
 
@@ -172,7 +175,14 @@ function decodeKey()
 		local data=$(echo -n "$fileData" | base64 -d | tail -c +33 | head -c "$keyLength" | base64 -w 0)
         local hash=$(pass2hash "$pass" "$salt")
 		touchFile "$file"
-        echo -n "$data" | base64 -d | decryptAes "$hash"
+		if [ -n "$cskSessionKeyFile" ]; then
+			dumpError
+			readSessionPass
+			echo -n "$data" | base64 -d | decryptAes "$hash" | encryptAes "$cskSessionSecret" > "$cskSessionKeyFile"
+			debugKey "$cskSessionKeyFile" $(echo -n "$data" | base64 -d | decryptAes "$hash" | base64 -w 0)
+		else
+			echo -n "$data" | base64 -d | decryptAes "$hash"
+		fi
     else
         onFailed "no such file: $file"
     fi
@@ -236,7 +246,7 @@ function readPassFromFile()
 
 function readSessionPass()
 {
-	if [ -z "$cskSessionKey" ]; then
+	if [ -z "$cskSessionSecret" ]; then
 		# session specific
 		local sData1=$(uptime -s)
 		local sData2=$(ps ax | grep -E 'systemd --user|cron|udisks' | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | tr -d '\n')
@@ -247,10 +257,8 @@ function readSessionPass()
 			read -p "Session password: " -s rsp
 		fi
 		# lengthen artificially
-		cskSessionKey="${rsp}${rsp^^}${rsp,,}${rsp}${sessionData}${rsp}${rsp,,}${rsp^^}${rsp}${rsp}"
-		if [ "$cskDebug" = "1" ]; then
-			dumpError "DEBUG [${cskSessionKey}]"
-		fi
+		cskSessionSecret="${rsp}${rsp^^}${rsp,,}${rsp}${sessionData}${rsp}${rsp,,}${rsp^^}${rsp}${rsp}"
+		debugKey "${cskSessionSecret}"
 		dumpError
 	fi
 }
@@ -259,14 +267,14 @@ function readSessionPass()
 function readSessionPassFromFile()
 {
 	if [ -e "$1" ] || [ "$1" = "-" ]; then
-		if [ -z "$cskSessionKey" ]; then
+		if [ -z "$cskSessionSecret" ]; then
 			onFailed "no session password"
 		fi
 		local p=$(cat "$1" | base64 -w 0)
 		if [ -z "$p" ]; then
 			onFailed "cannot read file: ${1}"
 		fi
-		echo -n "$p" | base64 -d | decryptAes "$cskSessionKey"
+		echo -n "$p" | base64 -d | decryptAes "$cskSessionSecret"
 	else
 		onFailed "cannot read file: ${1}"
 	fi
@@ -386,6 +394,9 @@ function reEncryptFile()
 	readKeyFiles
 	local pass1=$(readPass)
 	dumpError ""
+	if [ -n "$cskSessionKeyFile" ]; then
+		onFailed "-ao is not a valid option for chp"
+	fi
 	local key=$(decodeKey "$file" "$pass1" | base64 -w 0)
 	if [ -z "$key" ]; then
 		onFailed "cannot get key"
@@ -451,12 +462,24 @@ function createSessionPass()
 	local pass=$(readPass)
 	dumpError
 	readSessionPass
-	if [ "$cskDebug" = "1" ]; then
-		dumpError ""
-		dumpError "DEBUG [$pass]"
-		dumpError "DEBUG [$cskSessionKey]"
+	debugKey "${cskSessionSecret}" "${pass}"
+
+	echo -n "$pass" | encryptAes "$cskSessionSecret" > "$file"
+	ownFile "$file"
+}
+
+# file keybase64
+function createSessionKey()
+{
+	local file="$1"
+	if [ "$file" = "-" ]; then
+		file="/dev/stdout"
 	fi
-	echo -n "$pass" | encryptAes "$cskSessionKey" > "$file"
+	local key="$2"
+	readSessionPass
+	debugKey "${cskSessionSecret}" "${key}"
+
+	echo -n "$key" | base64 -d | encryptAes "$cskSessionSecret" > "$file"
 	ownFile "$file"
 }
 
@@ -481,6 +504,20 @@ function loadSessionPass()
 	fi
 }
 
+# file
+function loadSessionKey()
+{
+	local file="${1:-}"
+	if [ -z "$file" ]; then
+		return
+	fi
+	readSessionPass
+	cskKey=$(cat ${file} | decryptAes "$cskSessionSecret" | base64 -w 0)
+	if [ -z "$cskKey" ]; then
+		onFailed "cannot read: ${file}"
+	fi
+}
+
 function showHelp()
 {
 	dumpError "Usage: $(basename "$0") [enc | dec | chp | ses] file [options]"
@@ -495,8 +532,8 @@ function showHelp()
 	dumpError " -c encryptMode : use 1 for aes tool, 0 or any other value uses ccrypt"
 	dumpError " -p passFile : (enc | chp) read pass from first line in passFile"
 	dumpError " -pn passFile : (chp) read pass from first line in passFile, used for new file"
-	dumpError " -ap file : read pass from session file"
-	dumpError " -apn file : (chp) read pass from session file, used for new file"
+	dumpError " -ap file : read pass from session file, other pass input options are ignored"
+	dumpError " -apn file : (chp) read pass from session file, used for new file, other pass input options are ignored"
 	dumpError " -s : (chp) use same password for new file, -pn is ignored"
 	dumpError " -sk : (chp) use same key files for new file, -kfn, -kn are ignored"
 	dumpError " -sh : (chp) use same hash tool options for new file, -hn is ignored"
@@ -509,8 +546,10 @@ function showHelp()
 	dumpError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
 	dumpError " -hn hashToolOptions -- : (chp) default -hn ${cskHashToolOptions2[@]} --, used for new file"
 	dumpError " -key file : (enc) read key data as base64 -w 0 from file"
+	dumpError " -akey file : (enc) read key data from session encrypted file (see -ao)"
 	dumpError " -o outFile : (chp) write to outFile in place of file"
-	dumpError " -d -- (enc | chp) dump password and key on screen for debug"
+	dumpError " -ao outFile : (dec) write key in session encrypted file"
+	dumpError " -d -- dump password and key on stderr for debug"
 	dumpError "Examples:"
 	dumpError ' key=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt -key <(echo -n "$key") -h -p 8 -m 16 -t 1000 --'
 }
@@ -530,6 +569,7 @@ function main()
 	
 	local apf=""
 	local apnf=""
+	local akeyf=""
 	
 	while [ -n "${1:-}" ]; do
 		local current="${1:-}"
@@ -617,12 +657,20 @@ function main()
 				cskKey=$(cat "$kk")
 				shift
 			;;
+			-akey)
+				akeyf="${2:?"! -akey file"}"
+				shift
+			;;
 			-c)
 				useAes="${2:?"! -c encryptMode"}"
 				shift
 			;;
 			-o)
 				cskChpFile="${2:?"! -o outFile"}"
+				shift
+			;;
+			-ao)
+				cskSessionKeyFile="${2:?"! -ao file"}"
 				shift
 			;;
 			*)
@@ -635,6 +683,7 @@ function main()
 		
 	loadSessionPass "${apf}" "0"
 	loadSessionPass "${apnf}" "1"
+	loadSessionKey "${akeyf}"
 
 	case "$cskCmd" in
 		enc|e)
