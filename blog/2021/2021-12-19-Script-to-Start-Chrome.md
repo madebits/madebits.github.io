@@ -100,4 +100,4 @@ fi
 /usr/bin/google-chrome-stable ${options[@]} --disk-cache-dir=/dev/null --disk-cache-size=1 --media-cache-size=0 --incognito -start-maximized --no-first-run --user-data-dir=$profileDir
 ```
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2021/2021-11-26-Using-brightnessctl.md'>Using brightnessctl</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2022/2022-01-12-Investment-Notes.md'>Investment Notes</a> <a rel='next' id='fnext' href='#blog/2021/2021-11-26-Using-brightnessctl.md'>Using brightnessctl</a></ins>

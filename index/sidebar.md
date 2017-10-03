@@ -1,3 +1,4 @@
+* [Investment Notes](#blog/2022/2022-01-12-Investment-Notes.md)
 * [Script to Start Chrome](#blog/2021/2021-12-19-Script-to-Start-Chrome.md)
 * [Using brightnessctl](#blog/2021/2021-11-26-Using-brightnessctl.md)
 * [Feh Start Script](#blog/2021/2021-11-25-Feh-Start-Script.md)
@@ -5,4 +6,3 @@
 * [Using Ubuntu Snap](#blog/2020/2020-05-03-Using-Ubuntu-Snap.md)
 * [ETL Solutions](#blog/2019/2019-11-13-ETL-Solutions.md)
 * [Agile Backlog As Gantt Frontier](#blog/2019/2019-09-04-Agile-Backlog-As-Gantt-Frontier.md)
-* [When to use Vuex](#blog/2019/2019-08-30-When-to-use-Vuex.md)

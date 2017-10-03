@@ -1,6 +1,7 @@
 #Blog | [Latest](#blog)
 
 <div class='bloglinks'>
+[2022](#index/2022.md)
 [2021](#index/2021.md)
 [2020](#index/2020.md)
 [2019](#index/2019.md)

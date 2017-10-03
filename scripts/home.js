@@ -1,1 +1,1 @@
-var homeUrl='blog/2021/2021-12-19-Script-to-Start-Chrome.md';
+var homeUrl='blog/2022/2022-01-12-Investment-Notes.md';
