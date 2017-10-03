@@ -14,7 +14,7 @@ The template helps starting with following features:
 * Full sample of using Bootstrap modal dialogs, including events.
 * Vue render JSX support.
 * [Vuex](https://vuex.vuejs.org/en/) is fully integrated along with persistence on client. Example actions are provided.
-  * Intellisense support on Vuex actions and mutations strings 
+  * Intellisense support on Vuex actions and mutations strings. 
 * [vue-router](https://router.vuejs.org/en/) is used to handle routing. Nested routes are demonstrated.
 * [vue-i18n](http://kazupon.github.io/vue-i18n/en/) internationalization fully integrated.
 * Sample starter code to help with Ajax (via [axios](https://github.com/axios/axios)), logging, authentication, timers.
