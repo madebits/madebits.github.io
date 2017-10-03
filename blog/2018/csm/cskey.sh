@@ -488,7 +488,7 @@ function showHelp()
 	logError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
 	logError " -s file : (enc) read secret data as 'base64 -w 0' from file"
 	logError " -as file : (enc) read secret data from a session encrypted file (see -ao)"
-	logError " -ao outFile : (dec) write secret data to a session encrypted file"
+	logError " -aos outFile : (dec) write secret data to a session encrypted file"
 	logError " -aop outFile : (dec) write password data to a session encrypted file"
 	logError " -aa : do not ask for session encryption password (use default)"
 	logError " -d : dump password and secret on stderr for debug"
@@ -574,7 +574,7 @@ function main()
 				useAes="${2:?"! -c encryptMode"}"
 				shift
 			;;
-			-ao)
+			-aos)
 				cskSessionSecretFile="${2:?"! -ao file"}"
 				if [ "$cskSessionSecretFile" = "-" ]; then
 					cskSessionSecretFile="/dev/stdout"

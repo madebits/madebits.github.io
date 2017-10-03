@@ -25,6 +25,7 @@ csmName=""
 csmLive="0"
 mkfsOptions=()
 csmChain="1"
+csmMount="1"
 
 ########################################################################
 
@@ -169,7 +170,7 @@ function getDevice()
     local name="$1"
     # inner
     if [ "${2:-}" = "1" ]; then
-        name=$(innerName "$name")
+        name="$(innerName "$name")"
     fi
     echo "/dev/mapper/$name"
 }
@@ -355,7 +356,9 @@ function openContainer()
     clearScreen
     openContainerByName "$key" "$name" "$device"
     
-    mountContainer "$name"
+    if [ "$csmMount" = "1" ]; then
+        mountContainer "$name"
+    fi
     echo "To close use:"
     echo "$0 close ${oName}"
     echo "$0 closeAll"    
@@ -400,7 +403,8 @@ function createContainer()
     local container="${1:-}"
     checkArg "$container" "container"
     if [ -f "$container" ]; then
-        read -p "Overwrite container file ${container} [y (overwrite) | e (erase existing) | any key to exit]: " overwriteContainer
+        echo "Container file exists: ${container}"
+        read -p "Overwrite? [y (overwrite) | e (erase) | any key to exit]: " overwriteContainer
         if [ "$overwriteContainer" = "y" ]; then
             writeContainer="1"
             > "$container"
@@ -486,8 +490,22 @@ function createContainer()
 function resizeContainer()
 {
     local name=$(validName "${1:-}")
-    cryptsetup resize "$name"
-    resize2fs "/dev/mapper/$name"
+    local dev="$(getDevice "$name" "0")"
+    local lastDev=""
+    if [ -e "$dev" ]; then
+        lastDev="$dev"
+        cryptsetup resize "$name"
+    fi
+    dev="$(getDevice "$name" "1")"
+    if [ -e "$dev" ]; then
+        lastDev="$dev"
+        local iName="$(innerName "$name")"
+        cryptsetup resize "${iName}"
+    fi
+    
+    if [ -n "$lastDev" ]; then
+        resize2fs "$lastDev"
+    fi
 }
 
 # only works for full G/M blocks
@@ -598,6 +616,7 @@ function showHelp()
     logError " -n name : (open) use csm-name"
     logError " -c : (open|create) clean screen after password entry"
     logError " -s : (open|create) use only one (outer) encryption layer"
+    logError " -u : (open) do not mount on open"
     logError "Example:"
     logError " sudo csmap.sh open container.bin -l -ck -k -h -p 8 -m 14 -t 1000 -- ---"
 }
@@ -659,6 +678,9 @@ function processOptions()
             ;;
             -s)
                 csmChain="0"
+            ;;
+            -u)
+                csmMount="0"
             ;;
             *)
                 onFailed "unknown option: $current"
