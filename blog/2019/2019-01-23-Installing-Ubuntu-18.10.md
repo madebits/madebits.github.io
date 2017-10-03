@@ -285,6 +285,14 @@ fs
 image-display-duration=3
 ```
 
+* To have `nautilus` generate video [thumbnails](https://askubuntu.com/questions/2608/nautilus-video-thumbnails-without-totem), I installed `sudo apt install ffmpegthumbnailer` (though [mpv](https://github.com/mpv-player/mpv/issues/3735) can also be used) and then created `/usr/share/thumbnailers/totem.thumbnailer` file with the following content:
+
+```
+[Thumbnailer Entry]
+TryExec=ffmpegthumbnailer
+Exec=ffmpegthumbnailer -s %s -i %i -o %o -c png -f -t 10
+```
+
 ##Summary
 
 Ubuntu 18.10 UI is usable with minor tweaks without having to install some other desktop variant. GNOME is still full of bugs, but the overall UI is acceptable. I can imagine using next LTS release UI as default desktop. Expect to see more things like `snap` and `ubuntu-report` being added there by default.
