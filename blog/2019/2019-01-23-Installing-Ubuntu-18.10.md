@@ -24,7 +24,7 @@ sda                       8:0    0    30G  0 disk
     +-ubuntu--vg-swap_1 253:2    0   976M  0 lvm   # I do not want this
 ```
 
-Fortunately, removal after installation is easy:
+Fortunately, swap removal after installation is easy:
 
 ```bash
 sudo swapoff -a
