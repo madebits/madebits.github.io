@@ -103,7 +103,7 @@ function rcp()
         echo "Copying $s to $d ..."
         if (( rpcParallel > 0 )); then
             echo "# $rpcParallel instances"
-            time ls -1 "$s" | xargs -n 1 -I {} -P "${rpcParallel}" rsync --info=all -aWS --delete "$s/"{} "$d/"
+            time ls -1 "$s" | xargs -n 1 -I {} -P "${rpcParallel}" rsync --info=none -aWS --delete "$s/"{} "$d/"
         else
             time rsync --info=progress2 -ahWS --delete --stats "$s/" "$d/"
         fi
