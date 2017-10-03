@@ -94,10 +94,56 @@ cryptsetup create /dev/loop0
 ```
 Repeat Mount and Disconnect commands.
 
+**Update (2018-12-16)**
+
+To create or open a plain (non-LUKS) container use (all shown commands need `sudo`):
+
+```
+# only on creation
+dd iflag=fullblock if=/dev/urandom of=container.bin bs=1G count=30
+
+# note adding some offset -o 111 for extra secrecy
+cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain container.bin enc
+
+# only on creation
+mkfs -m 0 -t ext4 /dev/mapper/enc
+
+mount /dev/mapper/enc /mnt/tmp
+# re-mount to access as current user without sudo
+bindfs -u $(id -u) -g $(id -g) /mnt/tmp $HOME/tmp
+```
+
+To close the open container use:
+
+```
+umount $HOME/tmp
+umount /mnt/tmp
+cryptsetup remove enc
+```
+
+While a container is open, anyone (with `sudo` rights) can get its binary key using:
+
+```
+lsblk -p
+
+NAME              MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+/dev/loop0          7:0    0    30G  0 loop  
+└─/dev/mapper/enc 253:0    0    30G  0 crypt
+
+dmsetup table --target crypt --showkey /dev/mapper/enc | cut -d ' ' -f 5 | xxd -r -p >  key.bin
+
+# and use that key.bin file later to reopen the container
+cryptsetup --key-file=key.bin  -c aes-xts-plain64 -s 512 -o 111 open --type plain /data2/temp/container.bin enc
+```
+
+
 **References**
 
 * http://www.linux.org/threads/encrypted-containers-without-truecrypt.4478/
 * http://rkd.zgib.net/wiki/DebianNotes/EncryptedLoopback
 * http://sleepyhead.de/howto/?href=cryptpart
+
+* https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_a_non-root_file_system#Loop_device
+* https://lumit.it/how-to-get-a-tails-luks-master-key/
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-09-28-Tmux-on-Lubuntu.md'>Tmux on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-08-20-Sort-Photos-By-EXIF-Date.md'>Sort Photos By EXIF Date</a></ins>
