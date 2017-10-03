@@ -350,8 +350,6 @@ function isSameContainerFile()
     return 1
 }
 
-
-
 # name
 function getContainerFile()
 {
@@ -966,7 +964,7 @@ function main()
         open|o)
             openContainer "-" "$@"
             if [ "$csmLive" = "1" ]; then
-                trap cleanUp SIGHUP SIGINT SIGTERM EXIT
+                trap cleanUp SIGHUP SIGINT SIGTERM
                 tput setaf 1
                 read -p "Press Enter twice or Ctrl+C to close the container ..."
                 logError
