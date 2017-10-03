@@ -133,7 +133,7 @@ LANG=en_US.UTF-8 snap list --all | awk '/disabled/{print $1, $3}' |
     done
 ```
 
-Ideally, snaps should not be running when running above script, but that is now hard in Ubuntu, so a system restart may be needed after running the above script.
+Ideally, snaps should not be running when running above script, but that is now hard in Ubuntu, so a system restart may be needed after running the above script (need to be run with `sudo`).
 
 ## Connections: Interfaces = Plugs and Slots
 
