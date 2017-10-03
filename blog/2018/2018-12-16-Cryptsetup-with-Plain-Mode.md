@@ -179,9 +179,7 @@ main $1 $2
 
 ```
 
-Save it as `cs-key.sh` and make it executable.
-
-We can use `cs-key.sh` to generate a secret file (we only need to do this once):
+Save it as `cs-key.sh` and make it executable. We can use `cs-key.sh` to generate a secret file (we only need to do this once):
 
 ```bash
 ./cs-key.sh enc secret.bin
