@@ -139,16 +139,16 @@ If you do not want to be asked about key files use `-k` option. Key files can be
 
 ##### Using Sessions
 
-It is possible to store passwords (but not key files) in a **session** for current logged user. Session makes use of named *@slots* to write and read passwords. To store a password that you are about to enter in slot `foo` use `-apo @foo` in command-line. You can specify later the stored password by using `-ap @foo`. If combined with `-k and -kf` then this means no passwords are asked (apart of optional session password).
+It is possible to store passwords (but not key files) in a **session** for current logged user. Session makes use of named *@slots* to write and read passwords. To store a password that you are about to enter in slot `foo` use `-apo @foo` in command-line of `cskey.sh`. You can specify later the stored password by using `-ap @foo`. If combined with `-k and -kf` then no passwords are asked (apart of optional session password).
 
-The session is created only if you make use of it as a `tmpfs` mounted volume in `$HOME/mnt/tmpcsm`. When you shutdown the temporary volume disappears (or use `cskey.sh x` or when using `csman.sh x`). The session encrypts passwords using a session seed generated randomly in session volume (root access only). It is optional (press *Enter* key when asked to skip it), but it is recommended to also use a **session password**, which if specified is used additionally to the seed to encrypt password data. You may use different session passwords for different slots. Each slot is stored as an encrypted file in session volume. If you do not want to be asked to provide a session password specify `-aa`.
+The session is created only if you make use of it as a `tmpfs` mounted volume in `$HOME/mnt/tmpcsm`. When you shutdown the system the temporary volume disappears (or use `cskey.sh x` or `csman.sh x` to clean session data). The session encrypts passwords using a session seed generated randomly in session volume (root access only). It is optional (press *Enter* key when asked to skip it), but it is recommended to also use a **session password**, which if specified is used additionally to the seed to encrypt password data. You may use different session passwords for different slots. Each slot is stored as an encrypted file in session volume. If you do not want to be asked to provide a session password specify `-aa`.
 
-Session slots can be also create directly using:
+Session slots can be also created directly using:
 
 ```bash
 # store a password in session slot @foo
 sudo cskey.sh ses @foo
-# or, overwrite @foo slot
+# or, create / overwrite @foo slot
 sudo cskey.sh enc secret.bin -su -apo @foo
 # use foo slot via -ap
 sudo cskey.sg dec secret.bin -ap @foo | base64 -w 0
