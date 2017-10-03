@@ -92,6 +92,7 @@ sudo apt remove --purge ubuntu-report
 
 sudo apt install synaptic
 sudo apt install gnome-tweaks
+sudo apt install dconf-editor
 sudo apt install gnome-system-tools
 sudo apt install menulibre
 sudo apt install faenza-icon-theme # I am used to those icons, rest confuses me
