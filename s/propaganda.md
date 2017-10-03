@@ -112,6 +112,7 @@
 [MIT News](https://news.mit.edu/)
 [Aeon](https://aeon.co/science)
 [Nautilus](http://nautil.us/blog)
+[SingularityHub](https://singularityhub.com/)
 
 ## USA
 
