@@ -105,7 +105,7 @@ While `scrypt` is the easiest tool to use, you may also consider combining `argo
 We need the following helper bash scripts (ideally copy them as root in `/usr/local/bin`):
 
 * [cskey.sh](blog/2018/csm/cskey.sh)
-* [csmap.sh](blog/2018/csm/csmap.sh)
+* [csman.sh](blog/2018/csm/csman.sh)
 
 These scripts use the following helper tools:
 
@@ -141,22 +141,22 @@ Use `history -r` or `kill -9 $$` to prevent `bash` from storing command history.
 
 ###Container Management
 
-With `cskey.sh` ready, we can now automate for convenience open / close with a second script `csmap.sh` (`cskey.sh` should be in same folder). The `csmap.sh` script can be used as follows:
+With `cskey.sh` ready, we can now automate for convenience open / close with a second script `csman.sh` (`cskey.sh` should be in same folder). The `csman.sh` script can be used as follows:
 
 ```bash
-sudo ./csmap open secret.bin container.bin
+sudo ./csman open secret.bin container.bin
 
 # mounted at $HOME/mnt/csm_XXXX_user
 # and when done, to close it use
 
-sudo ./csmap close XXXX
-sudo ./csmap closeAll
+sudo ./csman close XXXX
+sudo ./csman closeAll
 ```
 
 We may also use the script create a new container file (size can be either in M or G):
 
 ```bash
-sudo $HOME/bin/csmap.sh create secret.bin container.bin 30M
+sudo $HOME/bin/csman.sh create secret.bin container.bin 30M
 ```
 
 ##Finding Container Key 

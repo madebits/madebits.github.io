@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# csmap.sh
+# csman.sh
 
 set -eu -o pipefail
 
@@ -20,6 +20,8 @@ csOptions=()
 ckOptions=()
 csmCleanScreen="0"
 csmName=""
+csmLive="0"
+mkfsOptions=()
 
 currentScriptPid=$$
 function failed()
@@ -309,7 +311,7 @@ function createContainer()
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "${csOptions[@]}" open "$container" "$name" -
 
     echo "Creating filesystem in /dev/mapper/$name ..."
-    mkfs -m 0 -t ext4 "/dev/mapper/$name"
+    mkfs -t ext4 -m 0 "${mkfsOptions[@]}" "/dev/mapper/$name"
     sync
     sleep 2
     cryptsetup close "$name"
@@ -440,27 +442,27 @@ function showHelp()
 {
     local bn=$(basename "$0")
     dumpError "Usage:"
-    dumpError " $bn open secret device [ openCreateOptions ]"
-    dumpError " $bn openLive secret device [ openCreateOptions ]"
-    dumpError " $bn openNamed name secret device [ openCreateOptions ]"
-    dumpError " $bn close name"
-    dumpError " $bn closeAll"
-    dumpError " $bn mount name"
-    dumpError " $bn umount name"
-    dumpError " $bn create secret container size [ openCreateOptions ]"
+    dumpError " $bn open|o secret device [ openCreateOptions ]"
+    dumpError " $bn close|c name"
+    dumpError " $bn closeAll|ca"
+    dumpError " $bn mount|m name"
+    dumpError " $bn umount|u name"
+    dumpError " $bn create|n secret container size [ openCreateOptions ]"
     dumpError "    size should end in M or G"
-    dumpError " $bn resize name"
-    dumpError " $bn increase name bySize"
-    dumpError "    size should end in M or G"
-    dumpError " $bn touch fileOrDir [time]"
+    dumpError " $bn resize|r name"
+    dumpError " $bn increase|i name bySize"
+    dumpError "    bySize should end in M or G"
+    dumpError " $bn touch|t fileOrDir [time]"
     dumpError "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\""
-    dumpError "Where openCreateOptions:"
-    dumpError " -cso cryptsetup options --"
-    dumpError " -csk cskey.sh options --"
-    dumpError " -n name : (open*) use csm-name"
-    dumpError " -c : (open*|create) clean screen after password entry"
+    dumpError "Where [ openCreateOptions ]:"
+    dumpError " -cso cryptsetup options ---"
+    dumpError " -csk cskey.sh options ---"
+    dumpError " -cfs mkfs ext4 options --- : (create)"
+    dumpError " -l : (open) live"
+    dumpError " -n name : (open) use csm-name"
+    dumpError " -c : (open|create) clean screen after password entry"
     dumpError "Example:"
-    dumpError " sudo csmap.sh openLive container.bin -csk -k -h -p 8 -m 14 -t 1000 --"
+    dumpError " sudo csmap.sh open container.bin -l -csk -k -h -p 8 -m 14 -t 1000 -- ---"
 }
 
 function processOptions()
@@ -471,7 +473,7 @@ function processOptions()
             -cso)
                 shift
                 csOptions=()
-                while [ "${1:-}" != "--" ]; do
+                while [ "${1:-}" != "---" ]; do
                     csOptions+=( "${1:-}" )
                     shift
                 done
@@ -479,8 +481,16 @@ function processOptions()
             -csk)
                 shift
                 ckOptions=()
-                while [ "${1:-}" != "--" ]; do
+                while [ "${1:-}" != "---" ]; do
                     ckOptions+=( "${1:-}" )
+                    shift
+                done
+            ;;
+            -cfs)
+                shift
+                mkfsOptions=()
+                while [ "${1:-}" != "---" ]; do
+                    mkfsOptions+=( "${1:-}" )
                     shift
                 done
             ;;
@@ -490,6 +500,9 @@ function processOptions()
             -n)
                 csmName="${2:-}"
                 shift
+            ;;
+            -l)
+                csmLive="1"
             ;;
             *)
             showError "unknown option: $current"
@@ -512,29 +525,28 @@ function main()
     case "$mode" in
         open|o)
             openContainer "-" "$@"
+            if [ "$csmLive" = "1" ]; then
+                trap cleanUp SIGHUP SIGINT SIGTERM
+                tput setaf 1
+                read -p "Press Enter or Ctrl+C to close the container ..."
+                tput sgr 0
+                echo
+                cleanUp
+            fi
         ;;
-        openNamed|openName|on)
-            openContainer "$@"  
-        ;;
-        openLive|ol)
-            openContainer "-" "$@"
-            trap cleanUp SIGHUP SIGINT SIGTERM
-            tput setaf 1
-            read -p "Press Enter or Ctrl+C to close the container ..."
-            tput sgr 0
-            echo
-            cleanUp
-        ;;
+        #openNamed|openName|on)
+        #    openContainer "$@"  
+        #;;
         close|c)
             closeContainer "$@"
         ;;
-        mount)
+        mount|m)
             mountContainer "$1"
         ;;
-        umount)
+        umount|u)
             umountContainer "$1"
         ;;
-        create)
+        create|n)
             createContainer "$@"            
         ;;
         closeAll|ca|x)
@@ -543,10 +555,10 @@ function main()
         resize|r)
             resizeContainer "$1"
         ;;
-        increase|inc)
+        increase|inc|i)
             increaseContainer "$@"
         ;;
-        touch)
+        touch|t)
             touchDiskFile "$@"
         ;;
         *)
