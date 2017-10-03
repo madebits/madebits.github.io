@@ -191,6 +191,42 @@ Extra setup:
 
 * Graphical `update-manager` was closing after update check. I had to clean all files in `/var/lib/apt/lists` and run `sudo apt update` to fix the issue.
 
+* `eog` is not ok for me as mouse wheel does not work as I would like to. I `sudo apt install feh`, and create a `$HOME/bin/feh.sh` file:
+
+    ```bash
+    #!/bin/bash
+
+    cmd="feh -F -B white --no-recursive --no-menus"
+    path="${1:-.}"
+    if [ -d "$path" ]; then
+        exec $cmd "$path"
+    elif [ -e "$path" ]; then
+        file=$(realpath -- "$path")
+        dir=$(dirname -- "$file")
+        exec $cmd "$dir" --start-at "$file"
+    fi
+    ```
+
+    And added `HOME/.local/share/applications/feh.desktop` file:
+
+    ```
+    [Desktop Entry]
+    Value=1.0
+    Encoding=UTF-8
+    Terminal=0
+    TryExec=/home/user/bin/feh.sh
+    Exec=/home/user/bin/feh.sh %F
+    Icon=/home/user/bin/img/feh.png
+    Type=Application
+    Categories=Graphics;
+    StartupNotify=false
+    Name=Feh
+    GenericName=XnViewMP
+    MimeType=image/bmp;image/jpeg;image/png;image/tiff;image/gif;
+    ```
+
+    Then in GNome Files, I made it default for images (using *Properties* menu).
+
 ##First Tools
 
 I did a minimal Ubuntu install. I am happy they offer that, as in the past I had to un-install most of things. I installed some initial set of tools to get started:
