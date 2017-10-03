@@ -195,8 +195,8 @@ function main()
             key=$(head -c 512 /dev/urandom | base64 -w 0)
             if [ "$CS_ECHO_KEY" = "1" ]; then
 				(>&2 echo)
-				(>&2 "[$pass]")
-				(>&2 "[$key]")
+				(>&2 echo "[$pass]")
+				(>&2 echo "[$key]")
 			fi
             encodeKey "$file" "$pass" "$key"
         ;;
@@ -211,8 +211,8 @@ function main()
             pass=$(readNewPass)
             if [ "$CS_ECHO_KEY" = "1" ]; then
 				(>&2 echo)
-				(>&2 "[$pass]")
-				(>&2 "[$key]")
+				(>&2 echo "[$pass]")
+				(>&2 echo "[$key]")
 			fi
             encodeKey "$file" "$pass" "$key"
         ;;
