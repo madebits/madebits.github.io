@@ -97,12 +97,14 @@ cryptsetup close layer1
 
 ### Shared Encryption
 
-We can use `--offset (-o)` and `--size` option (both in bytes) to have several encrypted containers on same binary file. We can even open several of the at once by adding `--shared` option to `cryptsetup open`.
+We can use `--offset (-o)` and `--size` option (both in number of 512 byte sectors) to have several encrypted containers on same binary file. We can even open several of the at once by adding `--shared` option to `cryptsetup open`.
 
 ```
 cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 open --type plain -o 100 --size 1000 container.bin container1
 cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 open --type plain -o 1100 --size 1000 --shared container.bin container2
 ```
+
+Related to `--offset` and `--size` is `--skip` that tells cryptsetup first sector number to use for IV calculation (by default same as that set by  `--offset`). I am not sure why that info is exposed to use user.
 
 **References**
 
