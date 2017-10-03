@@ -10,6 +10,9 @@ If you learn Vim, learn it without any customizations. In your own machine, you 
 
 Anecdotally, a friend following this advice found once himself once a broken Linux server having only `ed` command available and no network. The advice is still sound, thought the level you need to apply it may vary.
 
+
+> Note: I write here Vim editor commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). `Ctrl+d` and `Tab` can be used to auto-complete commands after `:`. I write *Ctrl* key combinations using lowercase key as in `Ctrl+d` (and not `Ctrl+D` as they are written in Vim documentation).
+
 <div id='toc'></div>
 
 ## Starting and Stopping
@@ -38,11 +41,9 @@ If you panic after starting `vim`, press *Esc* key one more times (so that Vim e
 
 ## Edit and Save
 
-I write Vim editor commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). `Ctrl+d` and `Tab` can be used to auto-complete commands after `:`. I write *Ctrl* key combinations using lowercase key as in `Ctrl+d` (and not `Ctrl+D` as they are written in Vim documentation).
-
 If you started Vim without a file path, you can open a file from within Vim using `:edit filename` (or `:e`, use `:e!` to discard current buffer changes). *Tab* key can be used for auto-completion on file names. Using `:e` with a folder opens file browser (whose layout can be changed using `i`).
 
-The fastest way to produce text in Vim is to write it in some other editor and save it as some file `text.txt`. Start `vim` and use `:r text.txt` to read it and put its text under the cursor position. File name completion should work after `:r` same as in shell using *Tab* key. This is also the best way to bring some existing pieces of text within a file in Vim (if you have no clipboard).
+The fastest way to produce text in Vim is to write the text in some other editor and saveas some file `text.txt`. Start `vim` and use `:r text.txt` to read it and put its text under the cursor position. File name completion should work after `:r` same as in shell using *Tab* key. This is also the best way to bring some existing pieces of text within a file in Vim (if you have no clipboard).
 
 There are several ways to save the text:
 
