@@ -149,7 +149,7 @@ System versions of these also exit for root snap packaged services (`sudo snap s
 * `SNAP_DATA=/var/snap/gimp/current`
 * `SNAP_COMMON=/var/snap/gimp/common`
 
-It seems `snap remove` saves the snap data as [snapshot](https://snapcraft.io/docs/snapshots) automatically, same as `snap save` (in `/var/lib/snapd/snapshots` folder). To view saved data snapshots, use `snap saved`. It list snapshot `id` is in the first *Set* column. To remove a snapshot use `snap forget id`.
+To make a [snapshot](https://snapcraft.io/docs/snapshots) of all data use `snap save` (saved in `/var/lib/snapd/snapshots` folder). To view saved data snapshots, use `snap saved`. It list snapshot `id` is in the first *Set* column. To remove a snapshot use `snap forget id`.
 
 ### Application Configuration
 
