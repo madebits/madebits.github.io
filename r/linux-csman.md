@@ -204,7 +204,21 @@ sudo csman create /dev/sdc1 secret.bin -c -ck -ap @foo -i e -k ---
 
 In this example, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-c` option clears the terminal screen after password entry (after `cskey.sh` invocation).
 
-The `-s` option tells `csman.sh` to only use one (outer AES) encryption layer. Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you can pass other `cryptsetup` options, such an offset (`-o 111`) via `-co ... ---` (outer layer) and `-ci ... ---` (inner layer).
+The `-s` option tells `csman.sh` to only use one (outer AES) encryption layer.
+
+Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you can pass other `cryptsetup` options, such an offset (`-o 111`, offset is specified in 512 byte units) via `-co ... ---` (outer layer) and `-ci ... ---` (inner layer). 
+
+#### Embedding Secret File
+
+The `cryptsetup` options can be used if needed to embed secret file into the container. Assuming secret file is less than 1024 bytes long, then the following commands create a container with offset and store secret there:
+
+```bash
+sudo csman.sh n container.bin secret.bin 1M -cf -N 1000 --- -co -o 2 ---
+# to set or replace secret
+dd conv=notrunc if=secret.bin of=container.bin
+# open it, container is also the secret now
+sudo csman.sh o container.bin container.bin -co -o 2 ---
+```
 
 ### Using Containers
 
