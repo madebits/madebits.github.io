@@ -142,6 +142,8 @@ Some [nautilus](https://wiki.archlinux.org/index.php/GNOME/Files) shortcuts:
 *  Ctrl+R of F5 refresh
 *  Ctrl+F find, Ctrl+S select, Ctrl+A select all
 *  `touch ~/Templates/New.txt` templates
+* [folder-color](http://foldercolor.tuxfamily.org/) `sudo apt install folder-color`
+* `nautilus -q` to quit instances
 
 ###Hacks
 
