@@ -4,13 +4,13 @@
 
 <!--- tags: linux -->
 
-<a href="https://en.wikipedia.org/wiki/Snap_(package_manager)">Snap</a> is not easy avoidable anymore in Ubuntu desktop, so I am sharing my notes from reading its documentation (and `man snap`) in an effort to understand it.
+<a href="https://en.wikipedia.org/wiki/Snap_(package_manager)">Snap</a> is not easy avoidable anymore in Ubuntu desktop. An understanding of snap beyond the *bona-fine* basics is required by reading `man snap` and [online](https://snapcraft.io/docs/) documentation.
 
 <div id='toc'></div>
 
 ## Snap Files
 
-Snap uses `snap` package [files](https://snapcraft.io/docs/snap-format), which are [SquashFS](https://en.wikipedia.org/wiki/SquashFS) package files, a low-overhead, read-only, compressed file [system](https://tldp.org/HOWTO/SquashFS-HOWTO/index.html). 
+Snap uses `*.snap` package [files](https://snapcraft.io/docs/snap-format), which are [SquashFS](https://en.wikipedia.org/wiki/SquashFS) package files, a low-overhead, read-only, compressed file [system](https://tldp.org/HOWTO/SquashFS-HOWTO/index.html).
 
 Snap application files are obtained, for example, via `snap install gimp` -- I am using [gimp](https://snapcraft.io/gimp) as an example snap application. They are stored in `/var/lib/snapd/snaps/`, which seems [cannot](https://askubuntu.com/questions/1029562/move-snap-packages-to-another-location-directory) be easy changed. 
 
@@ -47,7 +47,7 @@ $ df -h | grep gimp
 
 I am not sure why they need to mount all revisions, I guess just to make `mount` and `df` commands unusable (`df -h -x squashfs`). They have patched, however, `gnome-disks` not to show snap loop devices. 
 
-The binary files declared within snap meta files are linked to `/snap/bin` (which is added to system `$PATH` in Ubuntu):
+The binary files declared within snap meta files are created as links in `/snap/bin` (which is added to system `$PATH` in Ubuntu):
 
 ```bash
 $ ls -l /snap/bin | grep gimp
@@ -60,7 +60,7 @@ To view commands of a snap use:
 $ snap info gimp
 ```
 
-All commands link to `/usr/bin/snap` which uses a common trick to figure out what command is, based on link invocation information. The `/snap/gimp/current/snap` folder contains details how the snap package was built:
+All commands link to `/usr/bin/snap` which uses a common trick to figure out what command is, based on program path invocation information. The `/snap/gimp/current/snap` folder contains details how the snap package was built:
 
 ```bash
 $ ls -l /snap/gimp/current/snap
@@ -79,6 +79,8 @@ To get configuration options of a snap use (*set/unset* option can be used to se
 $ sudo snap get -d gimp
 $ sudo snap get -d core # system
 ```
+
+Snaps can choose to [react](https://snapcraft.io/docs/supported-snap-hooks#heading--the-configure-hook) to configuration changes.
 
 ## Removing Old Revisions
 
@@ -136,10 +138,11 @@ Examples of snap [interfaces](https://snapcraft.io/docs/supported-interfaces):
 
 * [:home](https://snapcraft.io/docs/home-interface) *core* snap interface gives the application access to non-hidden files in real `$HOME` directory. This is off, unless a [classic](https://snapcraft.io/docs/snap-confinement) snap, or an [approved](https://snapcraft.io/docs/permission-requests) snap. That means there is no way to know, until you install the snap, which may be too late, due to [hooks](https://snapcraft.io/docs/supported-snap-hooks).
 * [:personal-files](https://snapcraft.io/docs/personal-files-interface) allows access to hidden $HOME folders and files.
-* [:network](https://snapcraft.io/docs/network-interface) gives access to network (which is not good when combined with `:home`, as it is the case for `gimp` above). It can be removed using `sudo snap disconnect gimp:network :network` and it can be added back using `sudo snap connect gimp:network :network`. These changes are preserved by `snap refresh`.
+* [:network](https://snapcraft.io/docs/network-interface) gives access to network (which is not good when combined with `:home`, as it is the case for `gimp` above). It can be removed using `sudo snap disconnect gimp:network :network` and it can be added back using `sudo snap connect gimp:network :network`. These changes are preserved by `snap refresh`. Connecting or disconnect of an interface may cause snap to execute code (via interface hooks).
 * [content](https://snapcraft.io/docs/content-interface) allows snaps of same publisher to share data with each-other.
-* [:browser-support] allows access to system via modern browser APIs.
-* [:password-manager-service] access to system password services.
+* [:browser-support](https://snapcraft.io/docs/browser-support-interface) access to local system via modern browser APIs.
+* [:password-manager-service](https://snapcraft.io/docs/password-manager-service-interface) access to system password services.
+* [:x11](https://snapcraft.io/docs/x11-interface) monitor mouse/keyboard input and graphics output of other apps, a feature shared by all x11 applications.
 
 While `snap info --verbose gimp` works without having to install a snap, the `snap connections gimp` works only after a snap is installed. To view connections without having to install try:
 
@@ -174,9 +177,15 @@ System versions of these also exit for root snap packaged services (`sudo snap s
 * `SNAP_DATA=/var/snap/gimp/current`
 * `SNAP_COMMON=/var/snap/gimp/common`
 
+Using [layouts](https://snapcraft.io/docs/snap-layouts) a snap can map any snap folder data on these folders.
+
 ### Snap Data Snapshots
 
 To make a [snapshot](https://snapcraft.io/docs/snapshots) of all data use `snap save` (saved in `/var/lib/snapd/snapshots` folder). To view saved data snapshots, use `snap saved`. It lists snapshot `id` is in the first *Set* column. To remove a snapshot use `snap forget id`.
+
+If you make a type and forget `d` in the end of `snap saved`, you end up creating a new full snapshot which gets listed, rather than viewing what is there. 
+
+Snapshots are created automatically for removed snaps (listed with `auto` in Notes). You may want to delete them manually.
 
 ### Application Configuration
 
@@ -202,6 +211,13 @@ env | grep SNAP
 
 ## Summary
 
-Ubuntu snap is an interesting concept that creates an illusion of security. Consider only installing snaps maintained by [Canonical](https://forum.snapcraft.io/t/snaps-officially-supported-by-canonical/1719), or other parties you trust.
+Ubuntu snap is an interesting concept, with several unpolished corners, that creates an illusion of security. 
+
+* Consider only installing snaps maintained by [Canonical](https://forum.snapcraft.io/t/snaps-officially-supported-by-canonical/1719), or other parties you trust.
+* https://snapcraft.io/store is scarce on snap details. Some people write a link to their *yaml* definition in read-me there, some not. The store itself gives no details on permissions needed by a snap, during install, use, and removal. The only way to know what is inside, is to download and examine files on your own.
+* Avoid Ubuntu Software Center as it may not be clear what it installs. Also look carefully to `deb` packages and they may be transitional snap installs. Better install via `snap install` directly after own evaluation.
+* Creating a snap is a complex process, and the build process is transparent about code and dependencies used and can be reproduced. This is good, but due to complexity, things may land to a snap that are not obvious, or end up being in non-maintained versions within snap.
+* Snap services are good for Canonical, but given for the rest, `snap install docker` is the only snap service needed. Rest can be installed and controlled better via `docker`. In most servers, you would need to set [refresh.hold](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--refresh-hold).
+
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-11-13-ETL-Solutions.md'>ETL Solutions</a></ins>
