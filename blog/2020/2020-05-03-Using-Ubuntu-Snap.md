@@ -76,7 +76,7 @@ $ sudo snap get -d core # system
 
 ## Removing Old Revisions
 
-To remove an old [revision](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--controlling-updates), one can use (ideally snaps should not be running when running this, but that is now hard in Ubuntu, so maybe a restart will be needed after running this):
+To remove an old [revision](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--controlling-updates), one can use:
 
 ```bash
 $ snap list --all | grep gimp
@@ -99,6 +99,8 @@ LANG=en_US.UTF-8 snap list --all | awk '/disabled/{print $1, $3}' |
         snap remove "$snapname" --revision="$revision"
     done
 ```
+
+Ideally snaps should not be running when running above script, but that is now hard in Ubuntu, so maybe a restart will be needed after running the script.
 
 ## Connections: Interfaces = Plugs and Slots
 
