@@ -85,6 +85,7 @@ Common edit commands (in *command-mode*):
 * `C` change current line.
 * `~` toggle case under cursor. `gu` lowercase `gU` uppercase.
 * `J` join current line with next one.
+* `Ctrl+a` increment, `Ctrl+x` decrement.
 
 
 * `y` copy (yank) *motion* (using any motion command from above: `y5w`). (`"*y` to copy to *X11* clipboard, same for paste `"*p`, where `"*` means register `*` the clipboard).
