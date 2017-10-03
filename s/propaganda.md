@@ -105,7 +105,4 @@
 
 [AllTop](https://alltop.com/)
 [World Newspapers](http://www.world-newspapers.com)
-[Strategic Culture](https://www.strategic-culture.org)
-[Global Research](https://www.globalresearch.ca/)
-[SouthFront](https://southfront.org/)
-[LiveLeak](https://www.liveleak.com/c/news)
+
