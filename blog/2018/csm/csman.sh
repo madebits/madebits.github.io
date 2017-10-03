@@ -19,6 +19,7 @@ lastSecretTime=""
 csOptions=()
 csiOptions=()
 ckOptions=()
+ckOptions2=()
 csmCleanScreen="0"
 csmName=""
 csmLive="0"
@@ -525,6 +526,29 @@ function increaseContainer()
 
 ########################################################################
 
+# infile [outfile]
+function changePassword()
+{
+    local ifile="$1"
+    shift
+    local ofile="${1:-}"
+    if [ -z "$ofile" ]; then
+        ofile="$ifile"
+    else
+        shift
+    fi
+    processOptions "$@"
+    echo "# Decoding $ifile ..."
+    local secret=$(cskey.sh dec "${ifile}" "${ckOptions[@]}" | base64 -w 0)
+    if (( ! ${#ckOptions2[@]} )); then
+        echo "# using same cskey options for encode"
+        ckOptions2=( "${ckOptions[@]}" )
+    fi
+    cskey.sh enc "${ofile}" -s <(echo -n "${secret}") "${ckOptions2[@]}"
+}
+
+########################################################################
+
 function cleanUp()
 {
     tput sgr 0
@@ -563,10 +587,12 @@ function showHelp()
     logError "    bySize should end in M or G"
     logError " $bn touch|t fileOrDir [time]"
     logError "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\""
+    logError " $bn chp inFile [outFile] [ openCreateOptions ] : only -ck -cko are used"
     logError "Where [ openCreateOptions ]:"
     logError " -co cryptsetup options --- : outer encryption layer"
     logError " -ci cryptsetup options --- : inner encryption layer"
     logError " -ck cskey.sh options ---"
+    logError " -cko cskey.sh options --- : only for use with chp output"
     logError " -cf mkfs ext4 options --- : (create)"
     logError " -l : (open) live"
     logError " -n name : (open) use csm-name"
@@ -602,6 +628,14 @@ function processOptions()
                 ckOptions=()
                 while [ "${1:-}" != "---" ]; do
                     ckOptions+=( "${1:-}" )
+                    shift
+                done
+            ;;
+            -cko)
+                shift
+                ckOptions2=()
+                while [ "${1:-}" != "---" ]; do
+                    ckOptions2+=( "${1:-}" )
                     shift
                 done
             ;;
@@ -686,6 +720,9 @@ function main()
         ;;
         touch|t)
             touchDiskFile "$@"
+        ;;
+        chp)
+            changePassword "$@"
         ;;
         *)
             showHelp

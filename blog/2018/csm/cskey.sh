@@ -354,7 +354,7 @@ function encryptFile()
 	local pass=$(readNewPass)
 	local secret=$(getSecret)
 	encodeMany "$1" "$pass" "$secret"
-	logError "Done"
+	logError "# Done"
 }
 
 # file
