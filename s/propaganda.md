@@ -182,6 +182,7 @@
 [TASS](https://tass.com/world)
 [TheMoscowTimes](https://www.themoscowtimes.com/news)
 [PravdaReport](http://www.pravdareport.com/world/)
+[RussiaInsider](https://russia-insider.com/en)
 [SouthFront](https://southfront.org/)
 
 ## China & Asia
