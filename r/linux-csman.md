@@ -78,7 +78,7 @@ CSMan is an opinionated bash script wrapper around `cryptsetup` to encrypt disk 
 CSMan uses a randomly generated 512 byte binary key (called **secret**) as password for a `cryptsetup` *plain* mode container (`-s 512 -h sha512`). The secret 512 bytes are stored in **secret files** encrypted with *AES* and protected with a user password (called **password**).
 
 ```
-cryptsetup <= random secret key (512 bit) <= password encrypted secret file (Argon / AES)
+cryptsetup <= password <= password encrypted secret file (Argon / AES)
 ```
 
 The secret file encryption password is hashed using `argon2` before passed to AES tool (which does also their own hashing). To open a container both the secret file and password must be known. By default, the secret file is embedded in the container (in a key **slot**).
@@ -100,10 +100,12 @@ Some overlapping terms explained:
 4) secret file=salt+aes encrypted secret+random pad => slot
 ```
 
-* **secret** - randomly generated (or user specified) 512 bytes (binary). Binary values are shown as *base64* in tool. Secret is used binary as `cryptsetup` password.
+* **secret** - randomly generated (or user specified) binary 768 bytes. Binary values are shown as *base64* in tool. Secret is used binary as `cryptsetup` password:
+  * 512 bytes (binary) are used as password for outer *aes-xts-plain64* with 512 bits key (-s 512 -h sha512)
+  * 256 bytes (binary) are used as password for inner *twofish-cbc-essiv:sha256* with 256 bit key (-s 256 -h sha512)
 * **secret file** - binary file where *secret* is stored encrypted.
 * **password** - user password (or pass-phrase) used to encrypt *secret file* (hashed with `argon2`).
-* **key file** - user password can contain, additionally to the pass-phrase, one or more optional key files. The hashed header bytes content of key files is appended to the password. Order of specifying key files does not matter, but they have to be exact same files used during encryption and decryption.
+* **key file** - user password can contain, additionally to the pass-phrase, one or more optional key files. The hashed header bytes content of key files is appended to the password. Order of specifying key files does not matter, but they have to be exact same files used during encryption and decryption. The same key file can be used more than once.
 * **session** - optional state stored as part of current user session. There is by default no session, but it is possible to store passwords in named encrypted session slots in a *tmpfs* for current logged user and refer to them from there.
 * **session password** - an optional password used additionally to temporary random session key to protect contents stored in *session*.
 * **slot** - a 1024 byte section in the beginning of the container file where secret files can be embedded.
@@ -120,8 +122,8 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 When `csman.sh` is started without arguments, it prints prefix hashes of these files, if present:
 
 ```
-ca19fc88b  /usr/local/bin/csman.sh
-f57ccd1e4  /usr/local/bin/cskey.sh
+af433ec0f  /usr/local/bin/csman.sh
+5665b11ad  /usr/local/bin/cskey.sh
 50be633f6  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
 ```
@@ -130,7 +132,7 @@ These hashes should normally be same unless a new version of files is copied.
 
 ## Usage
 
-> `csman.sh` and `cskey.sh` should be run **always** with `sudo`.
+> `csman.sh` and `cskey.sh` should be run **always** with `sudo`. `csman.sh` will invoke `sudo` if started without it.
 
 `csman.sh` is the main command to use. `csman.sh` delegates password and secret operations to `cskey.sh` (which uses `aes` and `argon2`). You may need to use `cskey.sh` directly for advanced key manipulation. Running both commands without options lists their command-line arguments, e.g.:
 
@@ -145,13 +147,13 @@ The command-line arguments are a bit *peculiar* (because I thought that it is fa
 
 `csman.sh` creates and uses random *secret files* using `cskey.sh`. Secret files are binary. Use `base64` tool as needed to convert them to text.
 
-Secret files are made of 32 random bytes of `argon2` salt, 512 random bytes of `cryptsetup` password encrypted, and are padded with random data to have random file lengths up to 1024 bytes.
+Secret files are made of 32 random bytes of `argon2` salt, 768=512+256 random bytes of `cryptsetup` password encrypted, and are padded with random data to have random file lengths up to 1024 bytes. Due to encryption, the length of secret files is longer than 768 bytes, but is less than 1024.
 
 It is not required to use `cskey.sh` directly most of the time, but knowing how to use it as shown in this section will make the `csman.sh` commands later clearer.
 
 #### Using URandom
 
-`cskey.sh` uses by default `/dev/urandom` to generate 480 bytes and `/dev/random` to generate 32 bytes of the total 512 secret bytes.
+`cskey.sh` uses by default `/dev/urandom` to generate 480 bytes and `/dev/random` to generate 32 bytes of the total 512 secret bytes of outer layer; and 256 bytes using `/dev/urandom` for inner layer.
 
 Using `-su` option when generating secrets uses only `/dev/urandom` which [faster](https://security.stackexchange.com/questions/3936/is-a-rand-from-dev-urandom-secure-for-a-login-key) and [better](https://www.2uo.de/myths-about-urandom/).
 
