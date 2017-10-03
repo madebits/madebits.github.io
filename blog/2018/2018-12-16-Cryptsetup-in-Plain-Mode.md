@@ -212,6 +212,7 @@ Related to `--offset` and `--size` is `--skip`, that tells `cryptsetup` the firs
 * https://en.wikipedia.org/wiki/Argon2
 * https://github.com/P-H-C/phc-winner-argon2
 * https://www.gnu.org/software/bash/manual/bashref.html
+* http://www.gnu.org/software/coreutils/manual/coreutils.html
 * https://unix.stackexchange.com/questions/10922/temporarily-suspend-bash-history-on-a-given-shell
 * https://www.digitalocean.com/community/tutorials/how-to-partition-and-format-storage-devices-in-linux
 

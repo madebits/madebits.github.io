@@ -906,55 +906,58 @@ function cleanUp()
 
 function showChecksum()
 {
-    (>&2 sha256sum "$0")
-    (>&2 sha256sum "${csmkeyTool}")
+    sha256sum "$0"
+    sha256sum "${csmkeyTool}"
     if [ -f "${toolsDir}/aes" ]; then
-        (>&2 sha256sum "${toolsDir}/aes")
+        sha256sum "${toolsDir}/aes"
     fi
     if [ -f "${toolsDir}/argon2" ]; then
-        (>&2 sha256sum "${toolsDir}/argon2")
+        sha256sum "${toolsDir}/argon2"
     fi
-    logError
-}
+    echo
+} >&2
 
 function showHelp()
 {
     local bn=$(basename -- "$0")
     local kn=$(basename -- "${csmkeyTool}")
-    logError "Usage:"
-    logError " $bn open|o device secret [ openCreateOptions ]"
-    logError " $bn close|c name"
-    logError " $bn closeAll|ca"
-    logError " $bn list|l"
-    logError " $bn mount|m name"
-    logError " $bn umount|u name"
-    logError " $bn create|n container secret size [ openCreateOptions ]"
-    logError "    size should end in M or G"
-    logError " $bn resize|r name"
-    logError " $bn increase|i name bySize"
-    logError "    bySize should end in M or G"
-    logError " $bn touch|t fileOrDir [time]"
-    logError "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\""
-    logError " $bn synctime|st"
-    logError " $bn chp inFile [outFile] [ openCreateOptions ] : only -ck -cko are used"
-    logError " $bn -k ... : invoke $kn ..."
-    logError "Where [ openCreateOptions ]:"
-    logError " -co cryptsetup options --- : outer encryption layer"
-    logError " -ci cryptsetup options --- : inner encryption layer"
-    logError " -ck $kn options ---"
-    logError " -cko $kn options --- : only for use with chp output"
-    logError " -cf mkfs ext4 options --- : (create)"
-    logError " -l : (open) live"
-    logError " -n name : (open) use csm-name"
-    logError " -c : (open|create) clean screen after password entry"
-    logError " -s : (open|create) use only one (outer) encryption layer"
-    logError " -u : (open) do not mount on open"
-    logError " -r : (open) mount user read-only"
-    logError " -lk : (list) list raw keys"
-    logError " -oo : (create) dd only"
-    logError "Example:"
-    logError " sudo csmap.sh open container.bin -l -ck -k -h -p 8 -m 14 -t 1000 -- ---"
-}
+    cat << EOF
+Usage:
+ $bn open|o device secret [ openCreateOptions ]
+ $bn close|c name
+ $bn closeAll|ca
+ $bn list|l
+ $bn mount|m name
+ $bn umount|u name
+ $bn create|n container secret size [ openCreateOptions ]
+   size should end in M or G
+ $bn resize|r name
+ $bn increase|i name bySize
+    bySize should end in M or G
+ $bn touch|t fileOrDir [time]
+    if set, time has to be in format: "$(date +"%F %T.%N %z")"
+ $bn synctime|st
+ $bn chp inFile [outFile] [ openCreateOptions ] : only -ck -cko are used
+ $bn -k ... : invoke $kn ...
+Where [ openCreateOptions ]:
+ -co cryptsetup options --- : outer encryption layer
+ -ci cryptsetup options --- : inner encryption layer
+ -ck $kn options ---"
+ -cko $kn options --- : only for use with chp output
+ -cf mkfs ext4 options --- : (create)
+ -l : (open) live
+ -n name : (open) use csm-name
+ -c : (open|create) clean screen after password entry
+ -s : (open|create) use only one (outer) encryption layer
+ -u : (open) do not mount on open
+ -r : (open) mount user read-only
+ -lk : (list) list raw keys
+ -oo : (create) dd only
+Example:
+ sudo csmap.sh open container.bin -l -ck -k -h -p 8 -m 14 -t 1000 -- ---
+
+EOF
+} >&2
 
 function processOptions()
 {
