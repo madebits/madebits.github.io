@@ -53,6 +53,8 @@ function sameDir()
 
 ########################################################################
 
+tcpUsePv="0"
+
 # src dst
 function tcp()
 {
@@ -61,7 +63,7 @@ function tcp()
     
     echo "Copying $1 to $2 ..."
         
-    if [ -e "/usr/bin/pv" ]; then
+    if [ "$tcpUsePv" = "1" ]; then
         time tar --ignore-failed-read -C "$1" -cf - . | pv | tar --ignore-failed-read -C "$2" -xf -
     else
         time tar --ignore-failed-read -C "$1" -cf - . | tar --ignore-failed-read -C "$2" -xf -
@@ -69,16 +71,20 @@ function tcp()
     echo "Done"
 }
 
+########################################################################
+
+rcpBackupDir=""
+
 function rcp()
 {
     checkSrcDst "$1" "$2"
     mkdir -p "$2"
     
-    if [ -n "${3:-}" ]; then
-        sameDir "$1" "$3"
-        sameDir "$2" "$3"
+    if [ -n "${rcpBackupDir}" ]; then
+        sameDir "$1" "${rcpBackupDir}"
+        sameDir "$2" "${rcpBackupDir}"
         echo "Copying $1 to $2 (with backup in $3) ..."
-        time rsync --info=progress2 -ahWS --delete --stats "$1/" "$2" --backup-dir="$3"
+        time rsync --info=progress2 -ahWS --delete --stats "$1/" "$2" --backup-dir="${rcpBackupDir}"
     else
         echo "Copying $1 to $2 ..."
         #--progress 
@@ -171,20 +177,48 @@ function dc()
 
 ########################################################################
 
-showHelp()
+function processOptions()
+{
+    while (( $# > 0 )); do
+        local current="${1:-}"
+        case "$current" in
+            -tp)
+                tcpUsePv="1"
+            ;;
+            -rb)
+                rcpBackupDir="${2:?"! -rb backupDir"}"
+                shift
+            ;;
+            *)
+                onFailed "unknown option: $current"
+            ;;
+        esac
+        shift
+    done
+
+}
+
+########################################################################
+
+function showHelp()
 {
     local bn="$(basename -- $0)"
     cat <<EOF
 Usage:
 
-$bn tcp srcDir dstDir
-$bn rcp srcDir dstDir [backupDir]
-$bn dc [dir]
+ $bn tcp srcDir dstDir [options]
+ $bn rcp srcDir dstDir [options]
+ $bn dc [dir]  [options]
+
+Where [options]:
+ 
+ -tp : (tcp) use pv
+ -rb backupDir : (rcp) rsync backup dir
 
 Notes:
 
-    (tcp | rcp ) : copy content within srcDir to dstDir
-    (dc) : default dir is $HOME/tmp, a csfile-$RANDOM folder is created within
+ (tcp | rcp ) : copy content within srcDir to dstDir
+ (dc) : default dir is $HOME/tmp, a csfile-$RANDOM folder is created within
     
 EOF
 
