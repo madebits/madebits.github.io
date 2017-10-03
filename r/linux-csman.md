@@ -52,7 +52,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 Every time `csman.sh` starts, it prints prefix hashes of these files, if present:
 
 ```
-70f903ed1  /usr/local/bin/csman.sh
+c150ca21c  /usr/local/bin/csman.sh
 a4a5d332c  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
@@ -173,8 +173,10 @@ If you specify `argon2` options during encrypt command (enc), you have to rememb
 To create an encrypted container you need to specify the container file or device, **secret** file (see [Creating Secret Files](#r/linux-csman.md#creating-secret-files)) and the size (create command is `create` or `n`). Secret file will be created if it does not exist:
 
 ```bash
-sudo csman.sh n container.bin secret.bin 1M -cf -N 1000 ---
+sudo csman.sh n container.bin 1M -s secret.bin -cf -N 1000 ---
 ```
+
+If secret file is `--` then per convention no secret file is used and encryption key is directly generated after hashing from password. This is ok for quick things up and now, but it is no more possible to change the container password. With secret files, password changes, or using more than one password is possible. 
 
 The `-cf ... ---` can be used to pass EXT4 options for file system creation, such as, the number of *inodes* to use `-N 1000` (or `-T small`), or the EXT4 volume label `-L VOL1` (see `man mkfs.ext4`).
 
@@ -213,7 +215,7 @@ Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you
 The `cryptsetup` options can be used if needed to embed secret file into the container. Assuming secret file is less than 1024 bytes long, the following commands create a container with offset and store secret there:
 
 ```bash
-sudo csman.sh n container.bin secret.bin 1M -cf -N 1000 --- -co -o 2 ---
+sudo csman.sh n container.bin 1M -s secret.bin -cf -N 1000 --- -co -o 2 ---
 # to set or replace secret
 dd conv=notrunc if=secret.bin of=container.bin
 
@@ -224,16 +226,16 @@ dd conv=notrunc if=secret.bin of=container.bin
 sudo csman.sh o container.bin container.bin -co -o 2 ---
 ```
 
-The `-slots count` option is provided as convenience to create 1024 byte slots. Using `-slots` overwrites `-co -o` (the number used with `-o` needs to be twice the number of slots). You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number, such as 2 or 4. By default, created containers have no slots to store secrets unless `-slots count` is specified.
+The `-slots count` option is provided as convenience to create 1024 byte slots. If not set, it defaults to `-slots 4`. Using `-slots` overwrites `-co -o` (the number used with `-o` needs to be twice the number of slots). Use `-slots 0` if you need no slots, or if you do not want to overwrite `-co -o`. You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number. If slots is set bigger than `0`, then create command also embeds secret file in first slot.
 
 ```bash
-# these are same, create
-sudo csman.sh n container.bin secret.bin 1M -co -o 8 ---
-sudo csman.sh n container.bin secret.bin 1M -slots 4
+# these are same, but only second one embeds secret during create
+sudo csman.sh n container.bin 1M -s secret.bin -co -o 8 ---
+sudo csman.sh n container.bin 1M -s secret.bin -slots 4
 
 # these are also same, open
-sudo csman.sh o container.bin secret.bin 1M -co -o 8 ---
-sudo csman.sh o container.bin secret.bin 1M -slots 4
+sudo csman.sh o container.bin -s secret.bin -co -o 8 ---
+sudo csman.sh o container.bin -s secret.bin -slots 4
 ```
 
 Do **not** manipulate container file as secret file using `cskey.sh` or other tooling (such as `csman.sh chp`), other than for reading (decoding) the secret. To extract secret file back from the container use:
@@ -245,17 +247,17 @@ dd if=container.bin of=secret.bin bs=1024 count=1
 # dd if=container.bin of=secret.bin bs=1024 count=1 skip=1
 ```
 
-Two *convenience* commands (no `sudo` needed) are provided to embed (`e`) and extract (`ex`) secret files from default @x1024 byte offset slots. Default slot is 1 (byte offset 0) and can be changed via `-slot slot` option. The order of files is important in these commands (secret is **last**). We assume the container has been created with `-slots 2` option:
+Two *convenience* commands (no `sudo` needed) are provided to embed (`e`) and extract (`ex`) secret files from default @x1024 byte offset slots. Default slot is 1 (byte offset 0) and can be changed via `-slot slot` option. We assume the container has been created with `-slots 2` option:
 
 ```bash
 # cskey.sh enc secret.bin -b 2 -su
 # embed, default -slot 1
-csman e container.bin secret.bin
-csman e container.bin secret.bin.01 -slot 2
+csman e container.bin -s secret.bin
+csman e container.bin -s secret.bin.01 -slot 2
 
 # extract, will overwrite secret file if exists
-csman ex container.bin secret.bin
-csman ex container.bin secret.bin.01 -slot 2
+csman ex container.bin -s secret.bin
+csman ex container.bin -s secret.bin.01 -slot 2
 ```
 
 Ideally, generate two secret files for same key using `cskey.sh`, so that they are not same. 
@@ -264,21 +266,21 @@ Ideally, generate two secret files for same key using `cskey.sh`, so that they a
 
 ```bash
 # open container using slot 1
-sudo csman.sh o container.bin container.bin -slots 2
-sudo csman.sh o container.bin container.bin -slots 2 -ck -slot 1 ---
+sudo csman.sh o container.bin -slots 2
+sudo csman.sh o container.bin -slots 2 -ck -slot 1 ---
 
 # open container using slot 2
-sudo csman.sh o container.bin container.bin -slots 2 -ck -slot 2 ---
+sudo csman.sh o container.bin -slots 2 -ck -slot 2 ---
 ```
 
 ### Using Containers
 
 `cryptsetup` requires names for devices and `csman.sh` follows same convention. The container names are prefixed with `csm-`. You can specify names in command and options either with `csm-` prefix, or without it. The name is used as part of mount folder. If you want to have a pre-known path to copy files consider specifying a name when opening the container using `-n name` option. If you specify no name, a random one is generated and printed out by *open* command. 
 
-The open command is `open` or `o`:
+The open command is `open` or `o`. Secret is specified via `-s` option, if not set it tries to read secret from container file:
 
 ```
-sudo csman.sh o container.bin secret.bin -ck -i e -ao @foo -k --- -n n1
+sudo csman.sh o container.bin -s secret.bin -ck -i e -ao @foo -k --- -n n1
 ```
 
 We are passing here some options to `cskey.sh` via `-ck ... ---` and giving container a name via `-n`. The name will be `csm-n1`, mounted in `$HOME/mnt/csm-n1`.
