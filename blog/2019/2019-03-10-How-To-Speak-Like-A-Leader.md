@@ -16,7 +16,7 @@ There was an interesting [post](https://news.ycombinator.com/item?id=19349676) o
     * Prefer working for a boss that can explain why your idea is stupid.
     * Have people accept your idea as theirs, by arguing against it with surface arguments, if it benefits the team. Do what has to be done.
 1. Figure out the business truth and base decisions upon that, rather than focus on non-business topics.
-1. Summarize your choices in a high level language, never get more technical than is required.
+1. Summarize your choices in a high level language, never get more technical than required.
     * Figure out what others care about and speak to that.
     * Associate with non-engineers to learn their language.
 1. Don't use your team to work on a project / product. User the project to work on your team.
