@@ -29,9 +29,9 @@ cskKey=""
 
 currentScriptPid=$$
 toolsDir="$(dirname $0)"
-useAes=0
+useAes="0"
 if [ -f "${toolsDir}/aes" ]; then
-	useAes=1
+	useAes="1"
 fi
 
 function dumpError()
@@ -364,6 +364,7 @@ function showHelp()
 	dumpError "     2 read from 'xclip -o'"
 	dumpError "     3 read from 'zenity --password'"
 	dumpError "     4 read from 'zenity --text'"
+	dumpError " -c encryptMode : use 1 for aes tool, 0 or any other value uses ccrypt"
 	dumpError " -p passFile : (enc | chp) read pass from first line in passFile"
 	dumpError " -pn passFile : (chp) read pass from first line in passFile, used for new file"
 	dumpError " -s : (chp) use same password for new file, -pn is ignored"
@@ -504,6 +505,14 @@ function main()
 					exit 1
 				fi
 				cskKey=$(head -c 512 "$kk")
+				shift
+			;;
+			-c)
+				useAes="${2:-}"
+				if [ -z "$useAes" ]; then
+					dumpError "! required -c encryptMode"
+					exit 1
+				fi
 				shift
 			;;
 			*)
