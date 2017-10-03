@@ -6,6 +6,40 @@
 
 Several small useful tool for monitor and screen management in Ubuntu:
 
+##Xrandr
+
+(xrandr)[https://xorg-team.pages.debian.net/xorg/howto/use-xrandr.html] is the lowest most versatile command to configure displays. If you attach a new monitor and not want to restart X11 to detect it use first:
+
+```
+xrandr --auto
+```
+
+To get a list of all monitors use:
+
+```
+$ xrandr | grep -e "^\S"
+Screen 0: minimum 320 x 200, current 3840 x 1080, maximum 8192 x 8192
+eDP-1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 344mm x 194mm
+HDMI-1 connected 1920x1080+1920+0 (normal left inverted right x axis y axis) 531mm x 299mm
+DP-1 disconnected (normal left inverted right x axis y axis)
+HDMI-2 disconnected (normal left inverted right x axis y axis)
+```
+
+To get a short list of monitors use (`xrandr --listactivemonitors` gives same result for me):
+
+```
+$ xrandr --listmonitors 
+Monitors: 2
+ 0: +*eDP-1 1920/344x1080/194+0+0  eDP-1
+ 1: +HDMI-1 1920/531x1080/299+1920+0  HDMI-1
+```
+
+A useful GUI frontend to `xrandr` to setups displays is `sudo apt install arandr`. It can help generate something like this:
+
+```
+xrandr --output DP-1 --off --output HDMI-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-2 --off
+```
+
 ##Disper
 
 [disper](http://willem.engen.nl/projects/disper/) enables easy [dynamic](https://help.ubuntu.com/community/DynamicMultiMonitor) monitor switching. It is useful when connecting the HDMI cable (TV) after Ubuntu is started. `disper` is a command-line tool available via Ubuntu repositories (`sudo apt install disper`). Common [options](http://manpages.ubuntu.com/manpages/xenial/man1/disper.1.html) include:
@@ -29,7 +63,7 @@ Several small useful tool for monitor and screen management in Ubuntu:
 
 ##Redshift
 
-[Redshift](http://jonls.dk/redshift/) is useful in the hope you can sleep well after using the laptop just before going to bed. It changes the screen color temperature to match the official sun times in your location detected based on your IP. It can be installed in Ubuntu via `sudo apt install redshift` (or if you want the try applet too, use `sudo apt install redshift-gtk`). The most useful command to know is `redshift -x` that resets (clears) `redshift` changes.
+[Redshift](http://jonls.dk/redshift/) is useful in the hope you can sleep well after using the laptop just before going to bed. It changes the screen color temperature to match the official sun times in your location detected based on your IP. It can be installed in Ubuntu via `sudo apt install redshift` (or if you want the tray applet, use `sudo apt install redshift-gtk`). The most useful command to know is `redshift -x` that resets (clears) `redshift` changes.
 
 The automatic location detection works ok, but if your exit IP does not match you country of location, it is better you configure an approximate location in `~/.config/redshift.conf` (or via command-line `-l 50.1:8.6`):
 
