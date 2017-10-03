@@ -6,6 +6,15 @@
 
 **CSMan** is a *bash* script around `cryptsetup` for Ubuntu.
 
+## Introduction
+
+CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or disk data partitions. CSMan cannot be used to encrypt live partitions. The follow are some of hard-coded settings on CSMan:
+
+* Uses `cryptsetup` in *plain* mode.
+* Supports only *EXT4* volumes.
+* Uses two nested *dm-crypt* mappers: *aes-xts-plain64* and *twofish-cbc-essiv:sha256*.
+* Mounts for current user under `$HOME/mnt/cms-*`.
+
 ## Installation
 
 Download repository files and copy as root under `/usr/local/bin` the following files:
@@ -18,5 +27,16 @@ Download repository files and copy as root under `/usr/local/bin` the following 
 ## Usage
 
 `csman.sh` and `cskey.sh` should be run always with `sudo`. 
+
+`csman.sh` is the main command to use. `csman.sh` delegates password and key operations to `cskey.sh`. You may need to use `cskey.sh` directly for advanced key manipulation. Running both commands without options lists their command-line arguments, e.g.: `sudo csman.sh`.
+
+The command-line argument of these tools are a bit peculiar because I thought that it is faster to specify options after the main arguments. The command-line arguments follow therefore this general scheme: *command files options*.
+
+
+
+
+
+
+
 
 
