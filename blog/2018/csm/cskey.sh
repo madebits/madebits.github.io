@@ -188,7 +188,8 @@ function decodeSecret()
     
     # weak shortcut, ok to use for something quick, once a while
     if [ "$1" = "--" ]; then
-		local sps="$(echo -n "$pass" | sha256sum | cut -d ' ' -f 1 | tr -d '\n')"
+		# we put only part of pass hash in command line here!
+		local sps="$(echo -n "$pass" | sha256sum | cut -d ' ' -f 1 | tr -d '\n' | head -c 32)"
 		pass2hash "$pass" "$sps"
 		return
     fi
@@ -742,8 +743,7 @@ function main()
 		esac
 		shift
 	done
-		
-
+	
 	case "$cskCmd" in
 		enc|e)
 			loadSessionPass "${apf}"
