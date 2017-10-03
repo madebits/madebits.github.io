@@ -1,4 +1,4 @@
-#Encrypted Containers with Cryptsetup
+# Encrypted Containers with Cryptsetup
 
 2013-09-07
 
@@ -6,13 +6,13 @@
 
 Summary of commands to set up an encrypted container in Ubuntu using `cryptsetup`. There are many places where to find these commands, listing them once more tested will not hurt :). The commands (most) should be run as root and data will be accessible as root only. Both LUKS and not LUKS commands are shown. LUKS is better in long term (to change keys etc), but its containers can be easy identified as such. Without LUKS it is safer, but it not easy change password, etc.
 
-#1. Install cryptsetup
+# 1. Install cryptsetup
 
 ```
 sudo apt-get install cryptsetup
 ```
 
-#2. Creation
+# 2. Creation
 
 Create empty container (512MB container, see `dd` help for other sizes):
 ```
@@ -47,35 +47,35 @@ Command (m for help): w
 The partition table has been altered!
 ```
 
-###With LUKS
+### With LUKS
 ```
 cryptsetup -v -y luksFormat /dev/loop0
 cryptsetup luksOpen /dev/loop0 sometest
 ```
-###Without LUKS
+### Without LUKS
 ```
 cryptsetup -v -y create /dev/loop0
 ```
 
-##3. Format
+## 3. Format
 ```
 mkfs -j -m 0 -t ext4 /dev/mapper/sometest
 ```
 
-##4. Mount
+## 4. Mount
 ```
 mkdir /mnt/e1
 mount /dev/mapper/sometest /mnt/e1
 ```
 Use as root (or use `bindfs`).
 
-##5. Disconnect
+## 5. Disconnect
 ```
 umount /mnt/e1
 cryptsetup remove sometest
 sudo losetup -d /dev/loop0
 ```
-#6. Reconnect
+# 6. Reconnect
 
 To use:
 ```
@@ -83,16 +83,27 @@ losetup -f
 losetup /dev/loop0 /root/test.bin
 ```
 
-###With LUKS
+### With LUKS
 ```
 cryptsetup luksOpen /dev/loop0 sometest
 ```
 
-###Without LUKS
+### Without LUKS
 ```
 cryptsetup create /dev/loop0
 ```
 Repeat Mount and Disconnect commands.
+
+## Update: VeraCrypt
+
+```bash
+# --key-file file1.txt --tcrypt-hidden
+sudo cryptsetup --type tcrypt --veracrypt --veracrypt-query-pim open ./test.bin sometest
+sudo mount -o users /dev/mapper/sometest ~/mnt/
+
+umount ~/mnt/
+cryptsetup remove sometest
+```
 
 **References**
 
