@@ -3,7 +3,7 @@
 
 <!--- tags: linux -->
 
-Well, no more `gksu` in latest Ubuntu 18.04, people recommend using `pkexec` instead.
+Well, [no](https://forums.linuxmint.com/viewtopic.php?t=268140) more `gksu` in latest Ubuntu 18.04, people recommend using `pkexec` instead.
 
 With `gksu` I could add code similar to the following to re-run a script that contained `zenity` UI started from a non-root user as root: 
 
