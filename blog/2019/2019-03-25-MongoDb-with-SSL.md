@@ -4,7 +4,7 @@
 
 <!--- tags: mongodb, rabbitmq -->
 
-SSL *self-signed* certificates provide a convenient mechanism to manage security for internal infrastructure. I show here how to enable SSL from both [MongoDb](https://docs.mongodb.com/manual/tutorial/configure-ssl/) and [RabbitMQ](https://www.rabbitmq.com/ssl.html) using same certificate. Only server is authenticated to clients via SSL in this configuration. Any client can be connected to servers if authentication credentials are known to client.
+SSL *self-signed* certificates provide a convenient mechanism to manage security for internal infrastructure. I show here how to enable SSL from both [MongoDb](https://docs.mongodb.com/manual/tutorial/configure-ssl/) and [RabbitMQ](https://www.rabbitmq.com/ssl.html) using same certificate. Only server is authenticated to clients via SSL in this configuration. Any client can be connected to servers if authentication credentials are known to client (data transfer over network is secure).
 
 <div id='toc'></div>
 
