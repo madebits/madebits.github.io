@@ -296,7 +296,7 @@ csman.sh dc . -q
 csman.sh dcq
 ```
 
-The `dc` command is useful to overwrite disk space from within an encrypted container. The command creates a temporary folder `csm-*` under the folder given as its first argument, where it writes `zero.*` files filled with zeros till that disk partition runs out of free  disk space. If the command ever fails to clean these temporary folders, they can be removed manually using `rm -rf`.
+The `dc` command is useful to overwrite disk space from within an encrypted container. The command creates a temporary folder `csm-zero-tmp` under the folder given as its first argument, where it writes `zero.*` files filled with zeros till that disk partition runs out of free  disk space. If the command ever fails to clean the temporary `csm-zero-tmp` folder, it can be removed manually using `rm -rf csm-zero-tmp`.
 
 
 
