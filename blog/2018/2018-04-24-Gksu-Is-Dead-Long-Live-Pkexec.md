@@ -37,7 +37,7 @@ There are two issues to overcome to make this code work.
 
 ##First Problem
 
-If you run the above from a `test.sh` script you get:
+If you run the above script as `test.sh`, you get:
 
 ```
 Error executing ./test.sh: No such file or directory
@@ -79,7 +79,7 @@ Unable to init server: Could not connect: Connection refused
 (zenity:31120): Gtk-WARNING **: 20:14:17.933: cannot open display:
 ```
 
-The `man pkexec` says: "*pkexec will not allow you to run X11 applications as another user since the $DISPLAY and $XAUTHORITY environment variables are not set*". You have to [edit](https://unix.stackexchange.com/questions/203136/how-do-i-run-gui-applications-as-root-by-using-pkexec) the *polkit* files, and that per each application! We can work around that, by passing in the variables we need, in a new iteration of the script:
+The `man pkexec` says: "*pkexec will not allow you to run X11 applications as another user since the $DISPLAY and $XAUTHORITY environment variables are not set*". You have to [edit](https://unix.stackexchange.com/questions/203136/how-do-i-run-gui-applications-as-root-by-using-pkexec) the *polkit* files, and that per each application! We can work around that by passing in the variables we need, in a new iteration of the script:
 
 ```bash
 if [[ $(id -u) != "0" ]]; then
