@@ -48,7 +48,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 Every time `csman.sh` starts, it prints prefix hashes of these files, if present:
 
 ```
-37372c5d7  /usr/local/bin/csman.sh
+a8fcce08b  /usr/local/bin/csman.sh
 35e249b09  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
@@ -190,7 +190,7 @@ sudo cskey /dev/sdc1 secret.bin 0G -oo
 
 The size will be ignored, but has to be specified as 0G (or 0M). If non-zero `csman.sh` will assume a mistake (you wanted to create a file, but passed a device path) and fail.
 
-The `-oo` option tells `csman.sh` to only overwrite data, but do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data, but you can run same command later without `-oo` to create the encrypted file system. If `oo` is used the secret file can be any string, it is ignored.
+The `-oo` option tells `csman.sh` to only overwrite data, but do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data, but you can run same command later without `-oo` to create the encrypted file system. If `-oo` is used the secret file can be any string, it is ignored.
 
 `csman.sh` invokes `cskey.sh` to process *secret.bin* file (create it, ask for password), so you can use same password input and hash options as for `cskey.sh` using `-ck ... ---`. For example:
 
@@ -223,6 +223,8 @@ It is possible to open the container, but leave it unmounted by passing `-u` to 
 There are some additional options that can be specified with open command. `-r` to mount *read-only*, and `-l` to keep container open *live* - the open command does not exit in this case, it waits for you to press twice *Enter* key to close the container. 
 
 For these commands there are a few open command shortcuts: `o` *open*, `ol` *open ... -l* and `olr` *open ... -r -l*.
+
+The `-e` option mounts container with `exec` option so that executable files inside can be run (default is `noexec`).
 
 ### Container Details
 
@@ -278,6 +280,18 @@ By default, *secret.bin* is modified in place, which can be risky. To create a n
 
 ```bash
 sudo csman.sh chp secret.bin new-secret.bin -ck -i e ---
+```
+
+If we have more than one file using same password, we can make use of sessions to change password of several files at once unattended. I assume here there are no key files used (if key files are used pass them using `-kf keyfile`):
+
+```bash
+# save old pass in session
+sudo cskey.sh ses @old -i e -aa -k
+# save new pass in session
+sudo cskey.sh ses @new -i e -aa -k
+
+# go over all key files and replace pass
+sudo bash -c 'for f in *.bin; do csman.sh chp "${f}" "$new-{f}" -ck -ap @old -aa -k --- -cko -ap @new -aa -k ---; done'
 ```
 
 ## File Tools
