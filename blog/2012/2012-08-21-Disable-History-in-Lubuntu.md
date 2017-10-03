@@ -90,6 +90,10 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	```
 	none /tmp tmpfs defaults,nodev,nosuid,noexec 0 0
 	none /var/tmp tmpfs defaults,nodev,nosuid,noexec 0 0
+	none /var/log tmpfs defaults,nodev,nosuid,noexec 0 0
+	none /var/lib/systemd/catalog tmpfs defaults,nodev,nosuid,noexec 0 0
+	none /var/lib/systemd/coredump tmpfs defaults,nodev,nosuid,noexec 0 0
+	none /var/crash tmpfs defaults,nodev,nosuid,noexec 0 0
 	```
 	
 	Some software may need to run files from `/tmp` folder during install. If you get errors, then temporary give `exec` rights to `/tmp` folder:
