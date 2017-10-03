@@ -259,7 +259,7 @@ sudo apt install gnome-system-monitor
 
 * Useful software: `sudo apt install mpv vlc speedcrunch speedcrunch keepassxc baobab`.
 
-* `mpv` config (`~/.config/mpv/`) (using also [nextfile](https://github.com/donmaiq/mpv-nextfile) script):
+* `mpv` config (`~/.config/mpv/`) (using also [nextfile](https://github.com/donmaiq/mpv-nextfile) [script](https://github.com/mpv-player/mpv/wiki/User-Scripts)):
 
 ```
 #input.conf
