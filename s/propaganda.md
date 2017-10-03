@@ -157,7 +157,6 @@
 [Ansa](https://www.ansa.it/english/)
 [NetzPolitik](https://netzpolitik.org/)
 [B92](https://www.b92.net/eng/news/world.php)
-[TheDuran](https://theduran.locals.com/?showPosts=1)
 
 ## Russia
 
@@ -174,6 +173,8 @@
 [RussiaBeyond](https://www.rbth.com/science-and-tech)
 [GlobalAffairs](https://eng.globalaffairs.ru/)
 [FilmHub](https://russianfilmhub.com/genre/russian-war-movies/)
+[TheDuran](https://theduran.locals.com/?showPosts=1) 
+[AMercouris](https://www.youtube.com/c/AlexanderMercourisReal/videos)
 
 ## China & Asia
 
