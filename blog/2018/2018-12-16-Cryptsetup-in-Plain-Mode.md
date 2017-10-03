@@ -129,14 +129,6 @@ sudo sh -c "./cskey.sh dec secret.bin | cryptsetup -v -c aes-xts-plain64 -s 512 
 # enter password for container here
 ```
 
-To change password of `secret.bin` (file is overwritten in place, so backup it before as needed) use:
-
-```bash
-./cskey.sh chp secret.bin
-# enter current pass
-# enter new pass
-```
-
 Use `history -r` or `kill -9 $$` to prevent `bash` from storing command history.
 
 ###Container Management
