@@ -270,7 +270,11 @@ sudo csman.sh chp secret.bin new-secret.bin -ck -i e ---
 
 ## File Tools
 
-Two copy file commands are provided to copy directories. These commands can be run without `sudo`. First uses `tar` and `pv` and second invokes `rsync` with some parameters to improve progress reporting (removing training slashes from input directories):
+These commands can be run without `sudo`.
+
+### Copy Folders
+
+Two copy file commands are provided to copy directories. First uses `tar` and `pv` and second invokes `rsync` with some parameters to improve progress reporting (removing training slashes from input directories):
 
 ```bash
 # faster
@@ -278,6 +282,24 @@ csman.sh cp src dst
 # a bit slower, but can be resumed
 csman.sh rsync src dst
 ```
+
+### Clean Free Disk Space
+
+It is possible to overwrite free disk partition space using a directory in that partition using (no `sudo` is needed):
+
+```bash
+csman.sh dc .
+# to start directly without reading information
+# use any of these
+csman.sh dc . -q
+# default current folder .
+csman.sh dcq
+```
+
+The `dc` command is useful to overwrite disk space from within an encrypted container. The command creates a temporary folder `csm-*` under the folder given as its first argument, where it writes files filled with zeros till partition runs out of disk space. If ever the command fails to clean these folders, they can be removed manually.
+
+
+
 
 
 
