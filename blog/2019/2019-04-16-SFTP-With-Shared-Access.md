@@ -124,4 +124,4 @@ sftp -o FingerprintHash=md5 -v sftpuser001@localhost
 ssh -o FingerprintHash=md5 -v sftpuser001@localhost
 ```
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-03-25-MongoDb-with-SSL.md'>MongoDb with SSL</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-08-30-When-to-use-Vuex.md'>When to use Vuex</a> <a rel='next' id='fnext' href='#blog/2019/2019-03-25-MongoDb-with-SSL.md'>MongoDb with SSL</a></ins>
