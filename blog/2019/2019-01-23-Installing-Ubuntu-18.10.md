@@ -56,7 +56,13 @@ sda                     8:0    0    30G  0 disk
     +-ubuntu--vg-root 253:1    0  29,3G  0 lvm   /
 ```
 
-[sda2](https://askubuntu.com/questions/950307/why-guided-partitioning-create-a-sda2-of-1-kb) is the extended partition. What is shown as *1K* is the [unaligned](https://unix.stackexchange.com/questions/128290/what-is-this-1k-logical-partition) area in it.
+I edited also `/etc/initramfs-tools/conf.d/resume` to set:
+
+```
+RESUME=none
+```
+
+Above, [sda2](https://askubuntu.com/questions/950307/why-guided-partitioning-create-a-sda2-of-1-kb) is the extended partition. What is shown as *1K* is the [unaligned](https://unix.stackexchange.com/questions/128290/what-is-this-1k-logical-partition) area in it.
 
 `/boot` is not encrypted by default. Rather that deal with effort to [encrypt](https://dustymabe.com/2015/07/06/encrypting-more-boot-joins-the-party/) it (`grub` will still be unencrypted and you have to take extra care during kernel / grub / distribution updates), an additional BIOS disk password (or VM disk encryption password) maybe better.
 
