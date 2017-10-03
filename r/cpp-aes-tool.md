@@ -8,7 +8,7 @@ AES tool is a free command-line tool that encrypts / decrypts one file at a time
 
 * Self-contained, only dependant on standard C library.
 * Cross-platform. C source code available (GPL). Easy to compile on your own on any platform.
-* Secure by design: 
+* Secure by design:
    * AES 256 bit in CBC mode. CBC encryption is a time-proven secure mode in this context. Most threats against disk-based or SSL-based CBC do not apply if you encrypt few files fully one at at a time.
    * Additional authenticated encryption (AE) with HMAC-SHA256 around data CBC stream. Stream speed is not an issue in this use case. Both AE salt (used with PBKDF2 to generate initial HMAC block) and final HMAC hash are also encrypted as part of CBC stream.
    * Key generation is based on PBKDF2 with HMAC-SHA256 with a *sensible* default iteration count of 1.000.000 (configurable), which is ok for encrypting few files.
@@ -18,7 +18,7 @@ AES tool is a free command-line tool that encrypts / decrypts one file at a time
 
 ## Usage
 
-AES tool encrypts / decrypts one file at a time. 
+AES tool encrypts / decrypts one file at a time:
 
 * To encrypt:
 
@@ -34,7 +34,7 @@ AES tool encrypts / decrypts one file at a time.
 
 If the input (`-i file`) is not specified, or `-i -` then `stdin` is used. If the output (`-o file`) is not specified, or `-o -` then `stdout` is used. If the output file exists it will be overwritten!
 
-The password is specified as string on command-line via `-p`, which is usually convenient, but it be can be unsafe, or via a file using `-f` (reads at most 256 bytes of first line). If you like to type in the password safely in Bash shell use:
+The password is specified as string on command-line via `-p`, which is usually convenient, but it be can be unsafe, or via a file using `-f` (reads at most 1024 bytes from first line in file). If you like to type in the password safely in Bash shell use:
 
  ```bash
  read -p "Password: " -s pass && ./aes -i file.txt -o file.bin -f <(echo -n "$pass")
@@ -44,7 +44,7 @@ The password is specified as string on command-line via `-p`, which is usually c
 
 ## Using Pipes
 
-`aes` tool supports reading input from stdin and writing to stdout. For example, the following command should print "0" on Linux:
+`aes` tool supports reading input from stdin and writing to stdout. For example, the following command should print `0` on Linux:
 
 ```
 ./aes -p test < test.txt | ./aes -d -p test > test1.txt ; [ -z "$(diff test.txt test1.txt)" ] ; echo $?
@@ -55,19 +55,21 @@ In a similar way, this command outputs "abc":
 ```bash
 echo -n "abc" | ./aes -p "t" | base64 | base64 -d | ./aes -d -p "t"
 
-read -s pass && echo abc | aes -p $pass | aes -d -p $pass
+#or
+
+read -s pass && echo abc | aes -f <(echo -n "$pass") | aes -d -f <(echo -n "$pass")
 ```
 
-The `base64 | base64 -d` part is not really needed. I put it here to show how to encrypt as printable text if you ever needed that.
+The `base64 | base64 -d` part in example above is not really needed. I put it there to show how to encrypt as printable text, if you ever need that.
 
 ## Advanced Usage Examples
 
 On Linux, */dev/urandom* is used as default source for IV, salt data. The file source to read random data can be set also via `-r /dev/urandom` option during encryption.
 
-* If */dev/urandom* is not found and `-r file` is not set, or not enough data in specified file to read from, then the C `rand()` is used, which is *weak*, but it is fully ok if you encrypt few data once a while to send them securely over Internet (because salt and IV only need to be different, not really random).
+* If */dev/urandom* is not found and `-r file` is not set, or not enough data to read in the specified `-r file`, then the C `rand()` is used, which is *weak*. Salt and IV only need to be different for each encryption, not really random.
 * The `-r file` can also be used for testing, to have reproducible encryption tests (e.g., using `-r /dev/zero`).
 
-An example using `tar` on Linux to compress a folder `./pictures` (you can use same command to backup your home folder):
+An example using `tar` on Linux to compress a folder `./pictures` (a similar command can be used to backup whole $HOME folder):
 
 * To archive `./pictures` folder compressed and then encrypt it as `data.bin` use:
 
@@ -86,20 +88,20 @@ Use passwords with more than 20 random numbers letters and special characters. T
    ```bash
    head -c 45 /dev/urandom | base64 -w 0
 
-   #or 
+   #or
    dd if=/dev/urandom bs=45 count=1 | base64 -w 0
    ```
 
-The iteration count is by default *1000000*. It can be changed via `-c count` option.
+The iteration count is by default *1.000.000*. It can be changed via `-c 1024` option.
 
 Some of less useful `aes` tool options *weaken* the default settings, but are useful up and now for variability:
 
 * `-k  256` to specify AES 128, 192, or 256 bit (256 bit is default).
-* `-a` use non-authenticated encryption, by default authenticated encryption is used 
+* `-a` use non-authenticated encryption, by default authenticated encryption is used.
 * `-m` to use PBKDF1 for `-c interationCount` (default is PBKDF2). The `-m` option makes sense only if `-a` is also specified and it is ignored otherwise.
-* `-s` use 16 byte salt for CBC. By default CBC salt length is same as `-k` size. AE salt is always 32 bytes.
+* `-s` use 16 byte salt for CBC. By default, the CBC salt length is same as `-k` size. AE salt is always 32 bytes.
 
-The -p, -k, -a, -c options must specified **same** during decrypt, otherwise cannot access your data.
+The `-p`, `-k`, `-a`, `-m`, `-s`, `-c` options must specified **same** during decryption, otherwise you cannot access your data.
 
 It is possible to encrypt same data more than once in a chain:
 
@@ -107,7 +109,7 @@ It is possible to encrypt same data more than once in a chain:
 echo "abc" | ./aes -p p1 -k 256 | ./aes -p p2 -k 128 | ./aes -d -p p2 -k 128 | ./aes -d -p p1 -k 256
 ```
 
-We first encrypt twice with password `p1` and then `p2` with different AES key sizes (-k); and then we decrypt (`-d`) the pipe result twice with same data in reverse. The output is `abc`. Encrypting more than once is safer (but slower).
+We first encrypt twice with password `p1` and then `p2` with different AES key sizes (-k); and then we decrypt (`-d`) the pipe result twice with same data in reverse. The output is `abc`. Encrypting more than once is safer, but slower.
 
 Use `aes -?` to view help.
 
@@ -126,6 +128,3 @@ CBC encrypted data = ae salt (32 bytes), plain text data padded, ae hmac of plai
 ```
 
 If `-a` option is used  *CBC encrypted data* does not contain AE data.
-
-
-
