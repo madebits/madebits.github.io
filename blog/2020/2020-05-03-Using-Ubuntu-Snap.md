@@ -51,7 +51,7 @@ $ df -h /snap/gimp/265
 
 I am not sure why they need to mount all revisions, I guess just to make `mount` and `df` commands unusable (`df -h -x squashfs`). They have patched, however, `gnome-disks` not to show snap loop devices. 
 
-The binary files declared within snap meta files are created as links in `/snap/bin` (which is added to system `$PATH` in Ubuntu):
+The binary files declared within snap meta files are created as links in `/snap/bin` (which is added to the end of system `$PATH` in Ubuntu, so snaps take precedence):
 
 ```bash
 $ ls -l /snap/bin | grep gimp
@@ -94,7 +94,7 @@ $ pstree -pu
 
 ```
 
-Snap creates temporary folders for run snaps, e.g for `gimp` under `/tmp/snap.gimp/tmp/`.
+Snap creates temporary folders for run snaps, e.g for `gimp` under `/tmp/snap.gimp/tmp/` (it looks to me, to be without execute rights).
 
 ## Snap Configuration
 
@@ -246,18 +246,46 @@ To view the world as a snap sees it from within, we can get a [shell](https://sn
 snap run --shell gimp
 # then within snap shell
 env | grep SNAP
+SNAP_DESKTOP_RUNTIME=/snap/gimp/252/gnome-platform
+SNAP_USER_DATA=/home/user/snap/gimp/252
+SNAP_REVISION=252
+SNAP_ARCH=amd64
+SNAP_INSTANCE_KEY=
+SNAP_USER_COMMON=/home/user/snap/gimp/common
+SNAP_LAUNCHER_ARCH_TRIPLET=x86_64-linux-gnu
+SNAP=/snap/gimp/252
+SNAP_COMMON=/var/snap/gimp/common
+SNAP_NAME=gimp
+SNAP_INSTANCE_NAME=gimp
+SNAP_DATA=/var/snap/gimp/252
+SNAP_COOKIE=uSiqYplNbNuej3yGeSWIxI9MmoNIksa7gDZgRJ_yATiuWFRjz4jr
+SNAP_REEXEC=
+SNAP_CONTEXT=uSiqYplNbNuej3yGeSWIxI9MmoNIksa7gDZgRJ_yATiuWFRjz4jr
+SNAP_VERSION=2.10.18
+SNAP_LIBRARY_PATH=/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
+
+$ env | grep XDG
+XDG_CONFIG_HOME=/home/user/snap/gimp/252/.config
+XDG_DATA_DIRS=/home/user/snap/gimp/252/.local/share:/home/user/snap/gimp/252:/snap/gimp/252/data-dir:/snap/gimp/252/usr/share:/snap/gimp/252/gnome-platform/usr/share:...:/var/lib/snapd/desktop:/var/lib/snapd/desktop
+XDG_CACHE_HOME=/home/user/snap/gimp/common/.cache
+XDG_RUNTIME_DIR=/run/user/1000/snap.gimp
+XDG_DATA_HOME=/home/user/snap/gimp/252/.local/share
+XDG_CONFIG_DIRS=/snap/gimp/252/gnome-platform/etc/xdg:/etc/xdg/lubuntu:/etc/xdg/xdg-Lubuntu:/etc/xdg
+
+$ env | grep HOME
+HOME=/home/u7/snap/gimp/252
 
 $ ls /
 bin  boot  dev  etc  home  lib  lib64  media  meta  mnt  opt  proc  root  run  sbin  snap  srv  sys  tmp  usr  var  writable
 ```
 
-User defined environment variables outside of snap are visible to snap. `XDG_` variables are also not changed.
+User defined environment variables outside of snap are visible to snap. Some of `XDG_` variables are changed to writable snap folders.
 
 ## Snap Store
 
 Snap store [tracks](https://snapcraft.io/docs/snap-store-metrics) snap installs and usage. Geo-location data based on IPs are also collected.
 
-The unique tracking machine id is kept in `/var/lib/snapd/state.json` in `{"data": { "device": { "serial": "ID" } }}`. Snap usage data (kept also in`/var/lib/snapd/state.json`) includes start and stop times. Snaps are traced via unique cookies (found in `/var/lib/snapd/cookies` folder that match *snap-cookies* inside `/var/lib/snapd/state.json`. Snap cookie is passed to each snap via *SNAP* environment variables  `SNAP_COOKIE=Nv9FlFlPr7MwhvBbV66BxXLQbk6YlJ4hMntXdYbgNNBF`. Even if you reset your device id, your can still be continuously uniquely identified via the snap cookies.
+The unique tracking machine id is kept in `/var/lib/snapd/state.json` in `{"data": { "device": { "serial": "ID" } }}`. Snap usage data (kept also in`/var/lib/snapd/state.json`) includes start and stop times. Snaps are traced via unique cookies (found in `/var/lib/snapd/cookie` folder that match *snap-cookies* inside `/var/lib/snapd/state.json`. Snap cookie is passed to each snap via *SNAP* environment variables  `SNAP_COOKIE=Nv9FlFlPr7MwhvBbV66BxXLQbk6YlJ4hMntXdYbgNNBF`. Even if you reset your device id, your can still be continuously uniquely identified via the snap cookies.
 
 To reset your [device-serial](https://forum.snapcraft.io/t/cant-install-or-refresh-snaps-on-arch-linux/8690/27) use:
 
@@ -267,6 +295,17 @@ $ sudo cat /var/lib/snapd/state.json | \
     jq 'delpaths([["data", "auth", "device"]])' > state.json-new
 $ sudo cp state.json-new /var/lib/snapd/state.json
 $ sudo systemctl start snapd
+```
+
+To reset both device serial and cookies, use this modified version:
+
+```bash
+sudo systemctl stop snapd
+sudo sh -c 'ls /var/lib/snapd/cookie/*'
+sudo sh -c 'rm /var/lib/snapd/cookie/*'
+sudo cat /var/lib/snapd/state.json | jq 'delpaths([["data", "auth", "device"], ["data", "snap-cookies"]])' > state.json-new
+sudo cp state.json-new /var/lib/snapd/state.json
+sudo systemctl start snapd
 ```
 
 The device-serial ID and list of installed snaps and their usage data are sent to store on every refresh, which happens automatically and periodically. Refresh period can be controlled using [refresh.hold](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--refresh-hold), and postponed up to 2 months. To pause them for [longer](https://askubuntu.com/questions/930593/how-to-disable-autorefresh-in-snap) add in `/etc/hosts` (need to be removed when `snap install` or `snap refresh`):
