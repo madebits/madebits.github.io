@@ -202,7 +202,7 @@ function main()
     
     case "$mode" in
         open)
-            if [-z "$name" ]; then
+            if [ -z "$name" ]; then
                 (>&2 echo "! name required")
                 exit 1
             fi
@@ -210,13 +210,13 @@ function main()
             shift
 
             local secret="$1"
-            if [-z "$secret" ]; then
+            if [ -z "$secret" ]; then
                 (>&2 echo "! secret required")
                 exit 1
             fi
             shift
             local device="$1"
-            if [-z "$device" ]; then
+            if [ -z "$device" ]; then
                 (>&2 echo "! device required")
                 exit 1
             fi
@@ -231,7 +231,7 @@ function main()
             bindfs -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
         ;;
         close)
-            if [-z "$name" ]; then
+            if [ -z "$name" ]; then
                 (>&2 echo "! name required")
                 exit 1
             fi
@@ -241,10 +241,65 @@ function main()
             rmdir "$mntDir1"
             cryptsetup close "$name"
         ;;
+        create)
+            if [ -z "$name" ]; then
+                (>&2 echo "! name required")
+                exit 1
+            fi
+            shift 
+            shift
+            local secret="$1"
+            if [ -z "$secret" ]; then
+                (>&2 echo "! secret required")
+                exit 1
+            fi
+            shift
+            local container="$1"
+            if [ -z "$container" ]; then
+                (>&2 echo "! container required")
+                exit 1
+            fi
+            shift
+            local size="$1"
+            if [ -z "$size" ]; then
+                (>&2 echo "! size required")
+                exit 1
+            fi
+            shift
+            sizeNum="${size:$length:-1}"
+
+            echo "Creating ${container} with ${sizeNum}${size: -1} ..."
+
+            if [ "${size: -1}" == "G" ]; then
+                dd iflag=fullblock if=/dev/urandom of="$container" bs=1G count="$sizeNum"
+            elif [ "${size: -1}" == "M" ]; then
+                dd iflag=fullblock if=/dev/urandom of="$container" bs=1M count="$sizeNum"
+            else
+                (>&2 echo "! size can be M or G")
+                exit 1  
+            fi
+            sync
+
+            echo "Creating ${secret} ..."
+
+            "${toolsDir}/cs-key.sh" enc "$secret"
+            echo "You will asked to re-enter password to open the container for first time ..."
+            "${toolsDir}/cs-key.sh" dec "$secret" | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$container" "$name" -
+
+            echo "Creating file system ..."
+            mkfs -m 0 -t ext4 "/dev/mapper/$name"
+            sync
+            sleep 2
+            cryptsetup close "$name"
+            echo "Done! Container is closed. To open container use:"
+            echo "$0 open ${name} ${secret} ${container}"
+        ;;
         *)
             (>&2 echo "Usage:")
-            (>&2 echo "Usage: $0 open name secret device [ additional cryptsetup parameters ]")
-            (>&2 echo "Usage: $0 close name")
+            (>&2 echo " $0 open name secret device [ additional cryptsetup parameters ]")
+            (>&2 echo " $0 close name")
+            (>&2 echo " $0 create name secret container size [ additional cryptsetup parameters ]")
+            (>&2 echo "    size should end in M or G, secret and container files will be overwritten, use with care")
             exit 1
         ;;
     esac
@@ -263,6 +318,18 @@ sudo ./cs-map open enc1 secret.bin container.bin
 # and when done, to close it use
 
 sudo ./cs-map close enc1
+```
+
+You may wish to use the script also to create a container file (size can be with in M or G):
+
+```bash
+sudo ./cs-map.sh create enc1 secret.bin container.bin 30M
+```
+
+These script use the following helper tools:
+
+```
+sudo apt install cryptsetup bindfs argon2 ccrypt
 ```
 
 ##Finding Container Key 
