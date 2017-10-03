@@ -1,4 +1,4 @@
-#iptables for OpenVpn
+# iptables for OpenVpn
 
 2017-10-03
 
@@ -6,7 +6,7 @@
 
 Two small [iptables](https://wiki.archlinux.org/index.php/iptables) scripts for dealing with [openvpn](https://openvpn.net/).
 
-##OpenVpn Config
+## OpenVpn Config
 
 OpenVpn configuration is in `*.conf` files under `/etc/openvpn`:
 ```
@@ -27,7 +27,7 @@ sudo systemctl start openvpn-client@myvpn
 sudo systemctl enable openvpn-client@myvpn
 ```
 
-##Forcing All Traffic via OpenVpn
+## Forcing All Traffic via OpenVpn
 
 I modified this script I found online to be able to deal with several local interfaces and cards.
 
@@ -190,7 +190,7 @@ sudo systemctl enable netfilter-persistent
 sudo systemctl status netfilter-persistent.service
 ```
 
-##Minimal Firewall
+## Minimal Firewall
 
 The following script disables the above rules, but still leaves up a minimal firewall active:
 
