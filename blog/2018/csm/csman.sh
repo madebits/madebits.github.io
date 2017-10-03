@@ -395,11 +395,17 @@ function createContainer()
     checkArg "$secret" "secret"
     shift
 
+    local writeContainer="1"
     local container="${1:-}"
     checkArg "$container" "container"
     if [ -f "$container" ]; then
-        read -p "Overwrite container file ${container} [y | any key to exit]: " overwriteContainer
-        if [ "$overwriteContainer" != "y" ]; then
+        read -p "Overwrite container file ${container} [y (overwrite) | e (erase existing) | any key to exit]: " overwriteContainer
+        if [ "$overwriteContainer" = "y" ]; then
+            writeContainer="1"
+            > "$container"
+        elif [ "$overwriteContainer" = "e" ]; then
+            writeContainer="0"
+        else
             onFailed "nothing to do"
         fi
     fi
@@ -413,15 +419,21 @@ function createContainer()
     checkNumber "$sizeNum"
 
     processOptions "$@"
-    echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
-    if [ "${size: -1}" = "G" ]; then
-        ddContainer "$container" "1G" "$sizeNum"
-    elif [ "${size: -1}" = "M" ]; then
-        ddContainer "$container" "1M" "$sizeNum"
+    
+    if [ "$writeContainer" = "1" ]; then
+    
+        echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
+        if [ "${size: -1}" = "G" ]; then
+            ddContainer "$container" "1G" "$sizeNum"
+        elif [ "${size: -1}" = "M" ]; then
+            ddContainer "$container" "1M" "$sizeNum"
+        else
+            onFailed "size can be M or G"
+        fi
+        sync
     else
-        onFailed "size can be M or G"
+        echo "Using existing file (size $size is ingored): $container"
     fi
-    sync
     
     if [ -f "$secret" ]; then
         lastSecret="$secret"
@@ -438,7 +450,7 @@ function createContainer()
     
     clearScreen
     
-    echo "(Re-)enter password to open the container for the first time ..."
+    echo "(Re-)enter password to open the container for formating (existing data, if any, will be lost) ..."
     local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     if [ -z "$key" ]; then
         onFailed "cannot get key"
