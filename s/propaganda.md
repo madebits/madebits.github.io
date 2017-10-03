@@ -8,6 +8,7 @@
 [Daily Rotation](http://www.dailyrotation.com/)
 [Reddit Programming](https://www.reddit.com/r/programming/)
 [SlashDot](https://slashdot.org/)
+[LinuxSlashDot](https://linux.slashdot.org/)
 [How To Geek](http://www.howtogeek.com/)
 [GHacks](http://www.ghacks.net/)
 [LinuxToday](http://www.linuxtoday.com/)
@@ -37,6 +38,8 @@
 [The Inquirer](https://www.theinquirer.net/type/news)
 [ZDNet](https://www.zdnet.com/)
 [Ted](https://www.ted.com/)
+[LXer](http://lxer.com/)
+[ItsFoss](https://itsfoss.com/)
 
 ##USA
 
@@ -99,6 +102,7 @@
 
 ##Other
 
+[AllTop](https://alltop.com/)
 [World Newspapers](http://www.world-newspapers.com)
 [Strategic Culture](https://www.strategic-culture.org)
 [Global Research](https://www.globalresearch.ca/)
