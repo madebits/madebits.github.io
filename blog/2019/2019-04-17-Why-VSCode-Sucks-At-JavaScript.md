@@ -8,7 +8,7 @@ I like [VSCode](https://code.visualstudio.com) and use it often to program a lot
 
 Why does VSCode sucks at JavaScript? 
 
-    Because VSCode developers use [TypeScript](https://www.typescriptlang.org/). They only care about JavaScript as an afterthought - TypeScript works great, JavaScript kind of works too.
+> Because VSCode developers use [TypeScript](https://www.typescriptlang.org/). They only care about JavaScript as an afterthought - TypeScript works great, JavaScript kind of works too.
 
 Have a look at https://code.visualstudio.com/docs/languages/javascript and let me explain some of its highlight for you:
 
@@ -24,6 +24,6 @@ Have a look at https://code.visualstudio.com/docs/languages/javascript and let m
 
 How can VSCode be better at JavaScript? 
 
-    Force VSCode developers to do maintain some JavaScript project in parallel using VSCode.
+> Force VSCode developers to do maintain some JavaScript project in parallel using VSCode.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-04-16-SFTP-With-Shared-Access.md'>SFTP With Shared Access</a></ins>
