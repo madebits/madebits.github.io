@@ -109,7 +109,7 @@ It is also a good idea to set file-system [quotas](https://www.digitalocean.com/
 
 ## Ssh Host FingerPrint
 
-To find SSH host finger print we can use:
+To find SSH host finger print we can [use](https://unix.stackexchange.com/questions/126908/get-ssh-server-key-fingerprint):
 
 ```
 ssh-keyscan localhost 2>/dev/null | ssh-keygen -E md5 -lf -
