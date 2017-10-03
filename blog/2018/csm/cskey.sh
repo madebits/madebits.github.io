@@ -102,6 +102,7 @@ function readKeyFiles()
     declare -a files
     local count=0
     local hash=""
+    local fileHash=""
     while :
     do
         count=$((count+1))
@@ -113,11 +114,12 @@ function readKeyFiles()
         if [ ! -f "$keyFile" ]; then
             break
         fi
-        files+=( "$keyFile" )
+        fileHash=$(head -c 1024 "$keyFile" | sha256sum | cut -d ' ' -f 1)
+        files+=( "$fileHash" )
     done
     if (( ${#files[@]} )); then
         # read order does not matter
-        hash=$(sha256sum "${files[@]}" | cut -d ' ' -f 1 | sort | sha256sum | cut -d ' ' -f 1)
+        hash=$(printf '%s\n' "${files[@]}" | sort | sha256sum | cut -d ' ' -f 1)
     fi
     echo "$hash"
 }
