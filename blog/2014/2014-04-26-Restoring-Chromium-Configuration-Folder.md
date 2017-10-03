@@ -4,9 +4,15 @@
 
 <!--- tags: linux browser -->
 
-I usually use Chromium web browser in incognito mode in Lubuntu and have mapped its cache folder to `tmpfs`. Despite this, Chromium stores a lot of data in its profile folder. I have no idea why these data are good for me and I have no use for them, so I made a small script to start Chrome with a clean profile and take over only my settings, bookmarks, and extensions from the old one.
+I always start Chromium web browser in incognito mode in Ubuntu using by default command-line arguments similar to the following (my .cache and tmp and var are in tmpfs and I have no swap):
 
-The safest way to store data is not to collect them in the first place. The script if use to start Chromium periodically will prevent it from collecting any historic data over time in incognito mode. The script works for my Chromium browser profile in Lubuntu:
+```
+--disk-cache-dir=/dev/null --disk-cache-size=1 --incognito -start-maximized --no-first-run --user-data-dir=/home/$USER/Private/chromium
+```
+
+Despite this, Chromium stores a lot of data in its profile folder. I have no idea why these data are good for me and I have found no use for them. The safest way to store data is not to collect them in the first place. To clean them I created a small script that starts Chrome with a clean profile and takes over only my settings, bookmarks, and extensions from the old one.
+
+The script below, if used to start Chromium periodically will prevent it from collecting any historic data over time locally in incognito mode. The script works for my Chromium browser profile in Ubuntu:
 
 ```
 #!/bin/bash
@@ -51,8 +57,31 @@ rm -rf "${DIRTMP1}/"
 
 The first part of the script re-creates the current profile and takes over from the old the extensions and their state, the bookmarks, and the the preferences.
 
-The rest is a trick to deal with search engines. They are stored in `Web Data` file, a `sqlite3` DB. I start Chromium once to have it re-create Web Data file. Then I kill it, and set my own search engine configuration to it (that basically disables search from the address bar). Then I start Chromium again and remove the old profile. You need to install: `sudo apt-get install sqlite3`
+The rest is a trick to deal with search engines. They are stored in `Web Data` file, a `sqlite3` DB. I start Chromium first time to have it re-create Web Data file. Then I kill it, and set my own search engine configuration to it (it basically disables search from the address bar). Then I start Chromium again and remove the old profile. You need to install: `sudo apt-get install sqlite3`
 
-I can use this file to start Chromium once a while - the config colder size goes down then from over 20MB to less than 2MB.
+I can use this file to start Chromium once a while - the config folder size goes down then from over 20MB to less than 2MB.
+
+As related tip, apart of using 'uBlock' in browser, my `/etc/hosts` contains the following entries just to be sure:
+
+```
+0.0.0.0 google-analytics.com
+0.0.0.0 www.google-analytics.com
+0.0.0.0 ssl.google-analytics.com
+0.0.0.0 pagead.googlesyndication.com
+0.0.0.0 pagead2.googlesyndication.com
+0.0.0.0 adservices.google.com
+0.0.0.0 imageads.googleadservices.com 
+0.0.0.0 imageads1.googleadservices.com
+0.0.0.0 imageads2.googleadservices.com
+0.0.0.0 imageads3.googleadservices.com
+0.0.0.0 imageads4.googleadservices.com
+0.0.0.0 imageads5.googleadservices.com
+0.0.0.0 imageads6.googleadservices.com
+0.0.0.0 imageads7.googleadservices.com
+0.0.0.0 imageads8.googleadservices.com
+0.0.0.0 imageads9.googleadservices.com
+0.0.0.0 partner.googleadservices.com
+0.0.0.0 www.googleadservices.com
+```
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2014/2014-04-28-Debugging-Plain-C-Programs-in-QtCreator-in-Ubuntu.md'>Debugging Plain C Programs in QtCreator in Ubuntu</a> <a rel='next' id='fnext' href='#blog/2014/2014-04-18-Upgrading-Lubuntu-13.10-to-Lubuntu-14.04.md'>Upgrading Lubuntu 13.10 to Lubuntu 14.04</a></ins>
