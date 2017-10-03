@@ -189,20 +189,20 @@ If container file exists, you be asked if you want to overwrite its data (in thi
 Encrypting a device (disk partition) is similar:
 
 ```
-sudo cskey /dev/sdc1 0G -s secret.bin -oo
+sudo cskey /dev/sdc1 0G -oo
 ```
 
 The size will be ignored, but has to be specified as 0G (or 0M). If non-zero `csman.sh` will assume a mistake (you wanted to create a file, but passed a device path) and fail.
 
-The `-oo` option tells `csman.sh` to only overwrite data, but do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data, but you can run same command later without `-oo` to create the encrypted file system. If `-oo` is used the secret file can be any string, it is ignored.
+The `-oo` option tells `csman.sh` to only overwrite data, but do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data, but you can run same command later without `-oo` to create the encrypted file system. If `-oo` is used the secret file is ignored if specified.
 
 `csman.sh` invokes `cskey.sh` to process *secret.bin* file (create it, ask for password), so you can use same password input and hash options as for `cskey.sh` using `-ck ... ---`. For example:
 
 ```bash
-sudo csman create /dev/sdc1 -s secret.bin -one -c -ck -ap @foo -i e -k ---
+sudo csman create /dev/sdc1 -s secret.bin -one -ck -ap @foo -i e -k ---
 ```
 
-In this example, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-c` option clears the terminal screen after password entry (after `cskey.sh` invocation). The `-one` option tells `csman.sh` to only use one (outer AES) encryption layer.
+In this example, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-one` option tells `csman.sh` to only use one (outer AES) encryption layer.
 
 Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you can pass other `cryptsetup` options, such an offset (offset is specified in 512 byte units, e.g: `-o 2` for 1024 bytes) via `-co ... ---` (outer layer) and `-ci ... ---` (inner layer). 
 
