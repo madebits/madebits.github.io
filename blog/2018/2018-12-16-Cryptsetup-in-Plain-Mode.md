@@ -97,6 +97,18 @@ at="${3:-1000}"
 am="${4:-14}"
 ap="${5:-8}"
 
+function encryptAes()
+{
+    local pass=$1
+    ccrypt -e -f -k <(echo -n "$pass")
+}
+
+function decryptAes()
+{
+    local pass=$1
+    ccrypt -d -k <(echo -n "$pass")
+}
+
 # file pass key
 function encodeKey()
 {
@@ -107,7 +119,7 @@ function encodeKey()
     hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
     > "$file"
     echo -n "$salt" >> "$file"
-    echo -n "$key" | ccrypt -e -f -k <(echo -n "$hash") | base64 -w 0 >> "$file"
+    echo -n "$key" | encryptAes "$hash" | base64 -w 0 >> "$file"
 }
 
 # file pass
@@ -120,7 +132,7 @@ function decodeKey()
         local salt=$(head -c 44 "$file")
         local data=$(tail -c +45 "$file")
         local hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
-        echo -n "$data" | base64 -d | ccrypt -d -k <(echo -n "$hash")
+        echo -n "$data" | base64 -d | decryptAes "$hash"
     else
         (>&2 echo "! no such file: $file")
         exit 1
