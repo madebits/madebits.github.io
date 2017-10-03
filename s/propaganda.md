@@ -2,18 +2,14 @@
 
 <div id='toc'></div>
 
-##Technology
+## Technology
 
 [Hacker News](https://news.ycombinator.com/)
 [Daily Rotation](http://www.dailyrotation.com/)
 [Reddit Programming](https://www.reddit.com/r/programming/)
 [SlashDot](https://slashdot.org/)
-[LinuxSlashDot](https://linux.slashdot.org/)
 [How To Geek](http://www.howtogeek.com/)
 [GHacks](http://www.ghacks.net/)
-[LinuxToday](http://www.linuxtoday.com/)
-[LinuxOrg](https://www.linux.org/)
-[Reddit UnixP0rn](https://www.reddit.com/r/unixporn/)
 [Medium](https://medium.com/)
 [Ars Technica](https://arstechnica.com/)
 [Channel9](https://channel9.msdn.com/)
@@ -41,12 +37,19 @@
 [The Inquirer](https://www.theinquirer.net/type/news)
 [ZDNet](https://www.zdnet.com/)
 [Ted](https://www.ted.com/)
+[CCC](https://media.ccc.de/)
+
+### Linux
+
+[LinuxToday](http://www.linuxtoday.com/)
+[LinuxOrg](https://www.linux.org/)
+[Reddit UnixP0rn](https://www.reddit.com/r/unixporn/)
 [LXer](http://lxer.com/)
 [ItsFoss](https://itsfoss.com/)
 [Linuxize](https://linuxize.com/)
-[CCC](https://media.ccc.de/)
+[LinuxSlashDot](https://linux.slashdot.org/)
 
-##USA
+## USA
 
 [CNN](https://edition.cnn.com/world)
 [CNBC](https://www.cnbc.com/world-news/)
@@ -57,12 +60,12 @@
 [The Washington Times](https://www.washingtontimes.com/news/world/)
 [Reddit World News](https://www.reddit.com/r/worldnews/)
 
-###Canada & Australia
+### Canada & Australia
 
 [GlobalNews](https://globalnews.ca/world/)
 [9News](https://www.9news.com.au/world)
 
-###UK
+### UK
 
 [BBC](http://www.bbc.co.uk/news/world/) 
 [The Telegraph](https://www.telegraph.co.uk/news/world/)
@@ -70,7 +73,7 @@
 [Express](https://www.express.co.uk/news/world)
 [Reuters](https://www.reuters.com/)
 
-###Europe
+### Europe
 
 [France 24](https://www.france24.com/en/)
 [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
@@ -79,20 +82,20 @@
 [The Local](https://www.thelocal.de/)
 [B92](https://www.b92.net/eng/news/world.php)
 
-##Russia
+## Russia
 
 [RT News](http://rt.com/news/)
 [Sputnik News](https://sputniknews.com/)
 [TASS](http://tass.com/world)
 [SouthFront](https://southfront.org/)
 
-##China
+## China
 
 [South China Morning Post](http://www.scmp.com/news/world)
 [China Daily](http://www.chinadaily.com.cn/world)
 [Xinhua Net](http://www.xinhuanet.com/english/world/index.htm)
 
-##Middle East
+## Middle East
 
 [Press TV](https://www.presstv.com/)
 [AlJazeera](https://www.aljazeera.com/news/)
@@ -100,12 +103,12 @@
 [Haaretz](https://www.haaretz.com/world-news)
 [The Times of Israel](https://www.timesofisrael.com/)
 
-##India
+## India
 
 [The Indian Express](https://indianexpress.com/section/world/)
 [Hindustan Times](https://www.hindustantimes.com/world-news/)
 
-##Other
+## Other
 
 [AllTop](https://alltop.com/)
 [World Newspapers](http://www.world-newspapers.com)
