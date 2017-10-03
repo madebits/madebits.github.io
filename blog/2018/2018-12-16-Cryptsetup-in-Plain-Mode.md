@@ -104,16 +104,10 @@ While `scrypt` is the easiest tool to use, you may also consider combining `argo
 
 ##Using Argon2 and Ccrypt
 
-We need the following helper bash scripts (ideally copy them as root in `/usr/local/bin`):
-
-* [cskey.sh](blog/2018/csm/cskey.sh)
-* [csman.sh](blog/2018/csm/csman.sh)
-* [csfile.sh](blog/2018/csm/csfile.sh) (optional)
-
-These scripts use the following helper tools:
+We some [helper](#r/linux-csman.md) bash scripts (ideally copy them as root in `/usr/local/bin`). The scripts use the following helper tools:
 
 ```bash
-sudo apt install cryptsetup bindfs argon2 ccrypt
+sudo apt install cryptsetup argon2 ccrypt
 ```
 
 ###Key Generation
