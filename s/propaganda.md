@@ -181,6 +181,7 @@
 [RT News](https://rt.com/news/)
 [Sputnik News](https://sputniknews.com/)
 [TASS](https://tass.com/world)
+[SiberianTimes](https://siberiantimes.com/home/)
 [TheMoscowTimes](https://www.themoscowtimes.com/news)
 [PravdaReport](http://www.pravdareport.com/world/)
 [RussiaInsider](https://russia-insider.com/en)
