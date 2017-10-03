@@ -278,6 +278,8 @@ usermod --home /nonexistent _apt
 fi
 ```
 
+*Update*: I think, that warning come because, I run `synaptic` via `sudo` once. To [fix](https://askubuntu.com/questions/908800/what-does-this-synaptic-error-message-mean) it, I had also to run `sudo chmod -Rv 755 /root/.synaptic/tmp`.
+
 ##Snap
 
 There seems to be a [decision](https://askubuntu.com/questions/1039968/why-have-canonical-installed-core-gnome-apps-as-snaps-by-default) to deliver parts of desktop as [snaps](https://snapcraft.io/) by default to update them cleaner in the future. `snap` is already active for GNOME parts:
