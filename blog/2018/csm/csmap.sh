@@ -17,6 +17,13 @@ lastContainerTime=""
 lastSecret=""
 lastSecretTime=""
 
+# error
+function showError()
+{
+    (>&2 echo "! $1")
+    exit 1
+}
+
 function newName()
 {
     cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n1
@@ -28,8 +35,7 @@ function checkArg()
     local value=$1
     local key=$2
     if [ -z "$value" ]; then
-        (>&2 echo "! ${key} required")
-        exit 1
+        showError "${key} required"
     fi
 }
 
@@ -181,8 +187,7 @@ function checkNumber()
 {
     local re='^[0-9]+$'
     if ! [[ "$1" =~ $re ]] ; then
-        (>&2 echo "! $1 not a number")
-        exit 1
+        showError "$1 not a number"
     fi
 }
 
@@ -208,8 +213,7 @@ function createContainer()
     if [ -f "$container" ]; then
         read -p "Overwrite container file ${container} [y | any key to exit]: " overwriteContainer
         if [ "$overwriteContainer" != "y" ]; then
-            (>&2 echo "! nothing to do")
-            exit 1
+            showError "nothing to do"
         fi
     fi
     shift
@@ -227,8 +231,7 @@ function createContainer()
     elif [ "${size: -1}" = "M" ]; then
         ddContainer "$container" "1M" "$sizeNum"
     else
-        (>&2 echo "! size can be M or G")
-        exit 1  
+        showError "size can be M or G"
     fi
     sync
     
@@ -356,27 +359,23 @@ function increaseContainer()
 
     container=$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)
     if [ ! -f "$container" ]; then
-        (>&2 echo "! no such container file ${container}")
-        exit 1
+        showError "no such container file ${container}"
     fi
     local currentSize=$(stat -c "%s" "$container")
     if [ "${size: -1}" = "G" ]; then
         local sizeG=$(($currentSize / (1024 * 1024 * 1024)))
         if [ "$sizeG" = "0" ]; then # keep it simple
-            (>&2 echo "! cannot determine current size in G")
-            exit 1
+            showError "cannot determine current size in G"
         fi
         ddContainer "$container" "1G" "$sizeNum" "$sizeG"
     elif [ "${size: -1}" = "M" ]; then
         local sizeM=$(($currentSize / (1024 * 1024)))
         if [ "$sizeM" = "0" ]; then
-            (>&2 echo "! cannot determine current size in M")
-            exit 1
+            showError "cannot determine current size in M"
         fi
         ddContainer "$container" "1M" "$sizeNum" "$sizeM"
     else
-        (>&2 echo "! size can be M or G")
-        exit 1  
+        showError "size can be M or G"
     fi
     resizeContainer "$name"
 }
