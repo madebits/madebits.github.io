@@ -356,11 +356,40 @@ function isSameContainerFile()
 function getContainerFile()
 {
     local name=$(validName "${1:-}")
-    local f="$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)"
+    #local f="$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)"
+    set -- $(cryptsetup status "$name" | grep loop:)
+    shift
+    local f="$@"
     if [ -z "$f" ]; then
-        f="$(cryptsetup status csm-dwpi | grep device: | cut -d ' ' -f 5)"
+        #f="$(cryptsetup status csm-dwpi | grep device: | cut -d ' ' -f 5)"
+        set -- $(cryptsetup status "$name" | grep device:)
+        shift
+        f="$@"
     fi
     echo "$f"
+}
+
+#dev
+function getChipher()
+{
+    set -- $(cryptsetup status "$1" | grep cipher: )
+    shift
+    echo "$@"
+}
+
+function getMode()
+{
+    set -- $(cryptsetup status "$1" | grep mode:)
+    shift
+    echo "$@"
+}
+
+#dev
+function getDmKey()
+{
+    #local k=$(dmsetup table --target crypt --showkey "${dev}" | cut -d ' ' -f 5)
+    set -- $(dmsetup table --target crypt --showkey "$1")
+    echo $5
 }
 
 function listContainer()
@@ -369,10 +398,11 @@ function listContainer()
     local oName=${name:4}
     echo -e "Name:\t$oName\t$name"
     local container="$(getContainerFile "$name")"
-    local mode="$(cryptsetup status "$name" | grep mode: | cut -d ' ' -f 7)"
     if [ -z "$container" ]; then
         return
     fi
+    
+    local mode="$(getMode "$name")"
     local cipher=""
     echo -e "File:\t$container\t$mode"
     local dev="$(getDevice "$name" "0")"
@@ -381,26 +411,26 @@ function listContainer()
         lastDev="$dev"
         time=$(stat -c %z "$dev")
         echo -e "Open:\t${time}"
-        cipher="$(cryptsetup status "$name" | grep cipher: | cut -d ' ' -f 5)"
+        cipher="$(getChipher "$dev")"
         set +e
         local label="$(e2label "$dev" 2> /dev/null)"
         set -e
         echo -e "Device:\t${dev}\t${cipher}\t${label}"
         if [ "$csmListShowKey" = "1" ]; then
-            local k=$(dmsetup table --target crypt --showkey "${dev}" | cut -d ' ' -f 5)
+            local k=$(getDmKey "$dev")
             echo -e "RawKey:\t$k"
         fi
     fi
     dev="$(getDevice "$name" "1")"
     if [ -e "$dev" ]; then
         lastDev="$dev"
-        cipher="$(cryptsetup status "$dev" | grep cipher: | cut -d ' ' -f 5)"
+        cipher="$(getChipher "$dev")"
         set +e
         local label="$(e2label "$dev" 2> /dev/null)"
         set -e
         echo -e "Device:\t${dev}\t${cipher}\t${label}"
         if [ "$csmListShowKey" = "1" ]; then
-            local k=$(dmsetup table --target crypt --showkey "${dev}" | cut -d ' ' -f 5)
+            local k=$(getDmKey "$dev")
             echo -e "RawKey:\t$k"
         fi
     fi
