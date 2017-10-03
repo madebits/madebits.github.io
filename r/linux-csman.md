@@ -61,19 +61,30 @@ CSMan is an opinionated wrapper bash script around `cryptsetup` to encrypt disk 
 
 ### How it Works
 
-CSMan uses a randomly generated 512 byte binary key (called **secret**) as passwords for a `cryptsetup` *plain* mode container (`-s 512 -h sha512`). The secret 512 bytes are stored in **secret files** encrypted with *AES* and protected with a user password (called **password**).
+CSMan uses a randomly generated 512 byte binary key (called **secret**) as password for a `cryptsetup` *plain* mode container (`-s 512 -h sha512`). The secret 512 bytes are stored in **secret files** encrypted with *AES* and protected with a user password (called **password**).
 
 ```
 cryptsetup <= random secret key (512 bit) <= password encrypted secret file (Argon / AES)
 ```
 
-The secret file encryption password is hashed using `argon2` before passed to AES tool (which does also their own hashing). To open a container both the secret file and password must be known. 
+The secret file encryption password is hashed using `argon2` before passed to AES tool (which does also their own hashing). To open a container both the secret file and password must be known. By default, the secret file is embedded in the container (in a key **slot**).
 
-Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords. AES used to encrypt secret files is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret leads to different binary files. Similar to [non-detached](https://wiki.archlinux.org/index.php/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header) LUKS, user is responsible to store secret files separately from containers (maybe in another container) or embed them as needed (default). Unlike LUKS headers, secret files used by CSMan (with default aes tool) look random.
+```
+container=slots(default 4)|encrypted data
+```
+
+Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords. AES used to encrypt secret files is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret leads to different binary files. Similar to [non-detached](https://wiki.archlinux.org/index.php/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header) LUKS, user is responsible to store secret files separately from containers (maybe in another container) or have them embedded (default). Unlike LUKS headers, secret files used by CSMan (with default aes tool) look random.
 
 ### Terminology
 
 Some overlapping terms explained:
+
+```
+1) password => sha512 => + <= optional key file headers (sha256 of max 1024 first bytes)
+2) 32 bytes random salt | argon2 (id) =>
+3) aes <= 512 bytes random secret =>
+4) secret file=salt+encrypted secret+random => slot
+```
 
 * **secret** - randomly generated (or user specified) 512 bytes (binary). Binary values are shown as *base64* in tool. Secret is used binary as `cryptsetup` password.
 * **secret file** - binary file where *secret* is stored encrypted.
@@ -81,6 +92,7 @@ Some overlapping terms explained:
 * **key file** - user password can contain, additionally to the pass-phrase, one or more optional key files. The hashed header bytes content of key files is appended to the password. Order of specifying key files does not matter, but they have to be exact same files used during encryption and decryption.
 * **session** - optional state stored as part of current user session. There is by default no session, but it is possible to store passwords in named encrypted session slots in a *tmpfs* for current logged user and refer to them from there.
 * **session password** - an optional password used additionally to temporary random session key to protect contents stored in *session*.
+* **slot** - a 1024 byte section in the beginning of the container file where secret files can be embedded.
 
 ## Installation
 
