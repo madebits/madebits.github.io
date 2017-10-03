@@ -4,28 +4,38 @@
 
 <!--- tags: linux -->
 
-I wanted to write an own [Vim](https://www.vim.org/) text editor tutorial that I have around as quick reference.
+I wanted to write an own [Vim](https://www.vim.org/) text editor tutorial that I have around as quick reference. 
+
+If you learn Vim, learn it without any customizations. In your own machine, you can use some other editor or IDE, or even some heavily [customized](https://github.com/xmementoit/vim-ide) Vim. It is when you are in some other machine or non-UI server that you really need to use Vim. 
+
+Anecdotally, a friend following this advice found once himself once a broken Linux server having only `ed` command available and no network. The advice is still sound, thought the level you need to apply it may vary.
 
 ## Starting and Stopping
 
-If you learn Vim, learn it without any customizations. In your own machine, you can use some other editor or IDE, or even some heavily [customized](https://github.com/xmementoit/vim-ide) Vim. It is when you are in some other machine or non-UI server that you really need to use Vim. And this the reason for the first command to learn:
+To start Vim without any customizations use:
 
 ```bash
 # start vim without any customization (do not load ~/.vimrc)
 vim -u NONE
 ```
 
-Anecdotally, a friend following this advice found once himself once a broken Linux server having only `ed` command available and no network. The advice is still sound, thought the level you need to apply it may vary.
+Vim assumes you own the machine and its disk is encrypted, leaving generous usage traces by default. To start Vim in a mode where it does not leak usage information use:
+
+```bash
+vim -u NONE -i NONE -n
+```
+
+Where, `-i` means no *.viminfo* file and `-n` means no *swap* temporary file. If you forget any of these, use `vim --help` in shell to get a list of command-line options.
+
+A file name can be used after the above command-line options to edit it. To open a file read-only use `vim -R file.txt` (or `:set ro` from within Vim).
+
+### How to Quit Vim
 
 If you panic when starting `vim`, press *Esc* key one more times (so that Vim enters *command-mode*) and then press `:q!`. This will quit Vim without saving your changes. By chance, the reverse `q:` is the *raise panic level* command; it re-shows your panic keys. If `:q!` does not work to exit then `:qa!` will.
 
-I will write here Vim commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). `Ctrl+d` and `Tab` can be used to auto-complete commands after `:`. I write control combinations using lowercase key as in `Ctrl+d` (and not `Ctrl+D` as they are written in Vim documentation).
-
-Vim assumes you own the machine and its disk is encrypted, leaving generous usage traces by default. If that is not the case, use `vim -u NONE -i NONE -n` to start Vim in a mode where it does not leak usage information (`-i` means no *.viminfo* file and `-n` means no *swap* temporary file). If you forget any of these, use `vim --help` in shell to get a list of command-line options.
-
-Another occasionally useful command-line option is `vim -R file.txt` to open a file read-only (or `set ro` from within Vim).
-
 ## Pre-Basics
+
+I write here Vim commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). `Ctrl+d` and `Tab` can be used to auto-complete commands after `:`. I write control combinations using lowercase key as in `Ctrl+d` (and not `Ctrl+D` as they are written in Vim documentation).
 
 If you started Vim without a filename, you can open a file from within Vim using `:edit filename` (or `:e`). *Tab* key can be used for auto-completion on file names.
 
