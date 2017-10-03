@@ -10,7 +10,7 @@
 
 ## Snap Files
 
-Snap uses `snap` package [files](https://snapcraft.io/docs/snap-format), which are [SquashFS](https://en.wikipedia.org/wiki/SquashFS) package files, using a low-overhead read-only compressed file [system](https://tldp.org/HOWTO/SquashFS-HOWTO/index.html). Snap application files (obtained via `snap install gimp`) are stored in `/var/lib/snapd/snaps/`, which seems [cannot](https://askubuntu.com/questions/1029562/move-snap-packages-to-another-location-directory) be easy changed. They are managed by `snapd` service (`systemctl status snapd.service`) that connects their snap defined interfaces and enforces [security](https://snapcraft.io/docs/snap-confinement).
+Snap uses `snap` package [files](https://snapcraft.io/docs/snap-format), which are [SquashFS](https://en.wikipedia.org/wiki/SquashFS) package files, using a low-overhead read-only compressed file [system](https://tldp.org/HOWTO/SquashFS-HOWTO/index.html). Snap application files (obtained via `snap install gimp`) are stored in `/var/lib/snapd/snaps/`, which seems [cannot](https://askubuntu.com/questions/1029562/move-snap-packages-to-another-location-directory) be easy changed. They are managed by `snapd` service (`systemctl status snapd.service`) that connects their snap defined interfaces and enforces [security](https://snapcraft.io/docs/snap-confinement), given snaps can be [published](https://snapcraft.io/docs/permission-requests) by everyone.
 
 ## Snap Mounts
 
@@ -124,7 +124,11 @@ x11                       gimp:x11                                   :x11       
 
 ```
 
-For example, [:home](https://snapcraft.io/docs/home-interface) *core* snap interface gives the application access to non-hidden files in real `$HOME` directory.
+Examples of core snap [interfaces](https://snapcraft.io/docs/supported-interfaces):
+
+* [:home](https://snapcraft.io/docs/home-interface) *core* snap interface gives the application access to non-hidden files in real `$HOME` directory. 
+* [:personal-files](https://snapcraft.io/docs/personal-files-interface) allows access to hidden $HOME folders and files.
+* [:network](https://snapcraft.io/docs/network-interface) gives access to network. It can be removed using `sudo snap disconnect gimp:network :network` and can be added back using `sudo snap connect gimp:network :network`. These changes are preserved by `snap refresh`.
 
 ## Snap Home
 
