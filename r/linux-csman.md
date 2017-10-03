@@ -164,7 +164,7 @@ If you specify `argon2` options during encrypt command (enc), you have to rememb
 
 ### Creating Containers
 
-To create a container you need to specify container file or device, secret file and the size (create command is `create` or `n`):
+To create an encrypted container you need to specify the container file or device, secret file and the size (create command is `create` or `n`):
 
 ```bash
 sudo csman.sh n container.bin secret.bin 1M -cf -N 1000 ---
