@@ -39,7 +39,7 @@ $ df -h | grep gimp
 
 I am not sure why they need to mount all revisions, I guess just to make `mount` and `df` commands unusable (`df -h -x squashfs`), but they have patched `gnome-disks` not to show snap loop devices. 
 
-The binary files declared within snap meta files are linked to `/snap/bin`:
+The binary files declared within snap meta files are linked to `/snap/bin` (it seem to be added to `$PATH` in Ubuntu):
 
 ```bash
 $ ls -l /snap/bin | grep gimp
