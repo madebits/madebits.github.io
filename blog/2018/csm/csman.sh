@@ -181,13 +181,13 @@ function getDevice()
 # name
 function mntDirRoot()
 {
-    echo "$HOME/mnt/$1"
+    echo "$HOME/mnt/${1}"
 }
 
 # name
 function mntDirUser()
 {
-    echo "$(mntDirRoot "$1")-user"
+    echo "$HOME/mnt/u${1}"
 }
 
 ########################################################################
@@ -247,7 +247,7 @@ function mountContainer()
         echo "# mounting user read-only"
         ro="-r"
     fi
-    bindfs ${ro} -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
+    bindfs ${ro} --multithreaded -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
     echo "Mounted ${dev} at ${mntDir2}"
 }
 
