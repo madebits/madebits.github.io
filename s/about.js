@@ -51,6 +51,9 @@
 		if(window.navigator.vendor) addClientData('Vendor', window.navigator.vendor);
 		addClientData('Cookies', window.navigator.cookieEnabled ? 'Supported' : 'Not supported');
 		addClientData('Cpus', window.navigator.hardwareConcurrency);
+		if(navigator.deviceMemory) {
+			addClientData('Ram', navigator.deviceMemory + 'GB');
+		}
 		addClientData('Resolution', 
 			'Screen: ' + screen.width + 'x' + screen.height
 			+ ', Window: ' + $(window).width() + 'x' + $(window).height()
