@@ -192,4 +192,8 @@ snap run --shell gimp
 env | grep SNAP
 ```
 
+## Summary
+
+Snap is an interesting concept that creates an illusion of security.
+
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-11-13-ETL-Solutions.md'>ETL Solutions</a></ins>
