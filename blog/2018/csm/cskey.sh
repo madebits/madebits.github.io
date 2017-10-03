@@ -426,6 +426,9 @@ function fixSessionFilePath()
     local file="$1"
     if [[ "$file" == @* ]]; then
         file="${cskSessionLocation}/${file:1}"
+    else
+        file="$(basename -- "${file}")"
+        file="${cskSessionLocation}/${file}"
     fi
     echo "${file}"
 }
