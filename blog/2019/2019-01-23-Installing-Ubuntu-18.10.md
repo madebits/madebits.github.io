@@ -262,7 +262,7 @@ sudo apt install gnome-tweaks
 sudo apt install dconf-editor
 sudo apt install gnome-system-tools
 sudo apt install menulibre
-sudo apt install faenza-icon-theme # I am used to those icons, rest confuses me
+sudo apt install faenza-icon-theme
 sudo apt install chromium-browser
 # with flags
 # --incognito --disk-cache-dir=/dev/null --disk-cache-size=1 -start-maximized --enable-dom-distiller
