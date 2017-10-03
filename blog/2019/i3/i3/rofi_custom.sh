@@ -67,6 +67,7 @@ if [ -z "$@"]; then
     
     echo "🎦 Vlc"
     echo "🎶 Audacious"
+    echo "🎧 Moc"
     echo "🖼️ Gimp"
     
     echo "📦 VirtualBox"
@@ -181,6 +182,9 @@ else
             ;;
         "🎶 Audacious")
             /usr/bin/audacious > /dev/null &
+            ;;
+        "🎧 Moc")
+            ~/.config/i3/term.sh -e /usr/bin/mocp > /dev/null &
             ;;
         "🖼️ Gimp")
             /usr/bin/gimp > /dev/null &

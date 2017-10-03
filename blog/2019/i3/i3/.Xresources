@@ -106,15 +106,15 @@ URxvt.print-pipe: "cat > /dev/null"
 ! tabs: Shift+Down = new tab, ctrl+d = close tab, Shift+left / right = goto tab, Ctrl+left/right = move tab
 URxvt.perl-ext-common: default,font-size,tabbed,matcher,selection-to-clipboard,right-click-paste,confirm-paste
 
-URxvt.tabbed.tabbar-fg: 2
-URxvt.tabbed.tabbar-bg: 7
-URxvt.tabbed.tab-fg: 3
-URxvt.tabbed.tab-bg: 7
+URxvt.tabbed.tabbar-fg: 1
+URxvt.tabbed.tabbar-bg: 15
+URxvt.tabbed.tab-fg: 0
+URxvt.tabbed.tab-bg: 15
 
 URxvt.urlLauncher: /usr/bin/xdg-open
 URxvt.urlButton: 1
 URxvt.underlineURLs: True
-URxvt.matcher.rend.0: Uline Bold fg2
+URxvt.matcher.rend.0: Uline Bold fg3
 
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
@@ -129,37 +129,22 @@ URxvt.font: xft:Inconsolata-14
 ! URxvt.boldFont: xft:Inconsolata-14
 URxvt.letterSpace: -1
 
-! Tango theme
+#include "term/dracula.xres"
 
-! fafafa
-URxvt.background: #fafafa
-URxvt.foreground: #161616
+! https://unix.stackexchange.com/questions/232881/urxvt-change-background-color-on-the-fly
+
+! gnome
+URxvt*keysym.Control-Shift-F8: command:\033]11;#FFFFFF\007\033]10;#000000\007\033]12;#5555FF\007\033]4;0;#000000\007\033]4;1;#AA0000\007\033]4;2;#00AA00\007\033]4;3;#AA5500\007\033]4;4;#0000AA\007\033]4;5;#AA00AA\007\033]4;6;#00AAAA\007\033]4;7;#AAAAAA\007\033]4;8;#555555\007\033]4;9;#FF5555\007\033]4;10;#55FF55\007\033]4;11;#FFFF55\007\033]4;12;#5555FF\007\033]4;13;#FF55FF\007\033]4;14;#55FFFF\007\033]4;15;#d1d1d1\007
+
+
+! white
+URxvt*keysym.Control-Shift-F9: command:\033]11;#fafafa\007\033]10;#1C1C1C\007\033]12;#729FCF\007\033]4;0;#2E3436\007\033]4;1;#CC0000\007\033]4;2;#4E9A06\007\033]4;3;#C4A000\007\033]4;4;#3465A4\007\033]4;5;#75507B\007\033]4;6;#06989A\007\033]4;7;#D3D7CF\007\033]4;8;#555753\007\033]4;9;#EF2929\007\033]4;10;#8AE234\007\033]4;11;#FCE94F\007\033]4;12;#729FCF\007\033]4;13;#AD7FA8\007\033]4;14;#34E2E2\007\033]4;15;#a0a0a0\007
+
+! gray
+URxvt*keysym.Control-Shift-F10: command:\033]11;#2c2c2c\007\033]10;#bdbdbd\007\033]12;#bcc3e4\007\033]4;0;#000000\007\033]4;1;#ae7b7d\007\033]4;2;#68b885\007\033]4;3;#a6b87d\007\033]4;4;#7073c2\007\033]4;5;#ae73ba\007\033]4;6;#68b0c2\007\033]4;7;#bdbdbd\007\033]4;8;#2c2c2c\007\033]4;9;#d0c6ce\007\033]4;10;#b9dad0\007\033]4;11;#cddace\007\033]4;12;#bcc3e4\007\033]4;13;#d0c3e2\007\033]4;14;#b9d7e4\007\033]4;15;#ffffff\007
 
 ! black
-! #2E3436
-URxvt.color0  : #2E3436
-URxvt.color8  : #555753
-! red
-URxvt.color1  : #CC0000
-URxvt.color9  : #EF2929
-! green
-URxvt.color2  : #4E9A06
-URxvt.color10 : #8AE234
-! yellow
-URxvt.color3  : #C4A000
-! #FCE94F
-URxvt.color11 : #B0A337
-! blue
-URxvt.color4  : #3465A4
-URxvt.color12 : #729FCF
-! magenta
-URxvt.color5  : #75507B
-URxvt.color13 : #AD7FA8
-! cyan
-URxvt.color6  : #06989A
-URxvt.color14 : #34E2E2
-! white
-URxvt.color7  : #D3D7CF
-! #EEEEEC
-URxvt.color15 : #cacac4
+URxvt*keysym.Control-Shift-F11: command:\033]11;#000000\007\033]10;#ffffff\007\033]12;#729FCF\007\033]4;0;#2E3436\007\033]4;1;#a40000\007\033]4;2;#4E9A06\007\033]4;3;#C4A000\007\033]4;4;#3465A4\007\033]4;5;#75507B\007\033]4;6;#ce5c00\007\033]4;7;#babdb9\007\033]4;8;#555753\007\033]4;9;#EF2929\007\033]4;10;#8AE234\007\033]4;11;#FCE94F\007\033]4;12;#729FCF\007\033]4;13;#AD7FA8\007\033]4;14;#fcaf3e\007\033]4;15;#EEEEEC\007
 
+! dracula
+URxvt*keysym.Control-Shift-F12: command:\033]11;#282A36\007\033]10;#F8F8F2\007\033]12;#CAA9FA\007\033]4;0;#000000\007\033]4;1;#FF5555\007\033]4;2;#50FA7B\007\033]4;3;#F1FA8C\007\033]4;4;#BD93F9\007\033]4;5;#FF79C6\007\033]4;6;#8BE9FD\007\033]4;7;#BFBFBF\007\033]4;8;#4D4D4D\007\033]4;9;#FF6E67\007\033]4;10;#5AF78E\007\033]4;11;#F4F99D\007\033]4;12;#CAA9FA\007\033]4;13;#FF92D0\007\033]4;14;#9AEDFE\007\033]4;15;#E6E6E6\007

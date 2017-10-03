@@ -1,0 +1,8 @@
+Theme = nightly_enhanced
+#MusicDir=
+KeyMap = keymap
+Repeat = yes
+ShowStreamErrors = no
+Layout3 = "directory(0,0,100%,40%):playlist(0,40%,100%,60%)"
+Layout1 = "directory(0,0,100%,100%):playlist(0,0,100%,100%)"
+Layout2 = "directory(0,0,30%,100%):playlist(30%,0,70%,100%)"

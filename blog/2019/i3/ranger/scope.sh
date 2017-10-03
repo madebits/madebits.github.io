@@ -131,7 +131,7 @@ handle_image() {
         video/*)
             # Thumbnail
             #ffmpegthumbnailer -f -i "${FILE_PATH}" -o "${IMAGE_CACHE_PATH}" -s 0 && exit 6
-            /usr/bin/mpv "${FILE_PATH}" --quiet --no-audio --start=05% --frames=1 --vo=image --vo-image-format=jpg -o "${IMAGE_CACHE_PATH}" && exit 6
+            /usr/bin/mpv "${FILE_PATH}" --quiet --no-audio --start=10% --frames=1 --vo=image --vo-image-format=jpg -o "${IMAGE_CACHE_PATH}" && exit 6
             exit 1;;
 
         # PDF
