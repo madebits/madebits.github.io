@@ -14,10 +14,11 @@ cskFile2=""
 cskDebug="0"
 cskInputMode="0"
 cskBackup="0"
-cskHashToolOptions="-p 8 -m 14 -t 1000"
-cskHashToolOptions2="$cskHashToolOptions"
+cskHashToolOptions=( "-p" "8" "-m" "14" "-t" "1000" )
+cskHashToolOptions2=( "${cskHashToolOptions[@]}" )
 cskSamePass="0"
 cskSameKeyFiles="0"
+cskSameHashToolOptions="0"
 cskPassFile=""
 cskPassFile2=""
 csmKeyFiles=()
@@ -94,9 +95,10 @@ function pass2hash()
 
 	# argon2 has a build-in limit of 126 chars on pass length
 	local state=$(set +o)
+	set +x
 	pass=$(echo -n "$pass" | sha512sum | cut -d ' ' -f 1 | tr -d '\n' | while read -n 2 code; do printf "\x$code"; done | base64 -w 0)
 	eval "$state"
-	echo -n "$pass" | "$acmd" "$salt" -id $cskHashToolOptions -l 128 -r
+	echo -n "$pass" | "$acmd" "$salt" -id "${cskHashToolOptions[@]}" -l 128 -r
 }
 
 # pass key
@@ -250,7 +252,7 @@ function readNewPass()
 # file pass key
 function encodeMany()
 {
-	dumpError "#  using hash tool parameters:" "$cskHashToolOptions"
+	dumpError "#  using hash tool parameters:" "${cskHashToolOptions[@]}"
 	echo "$1"
 	encodeKey "$1" "$2" "$3"
 	
@@ -305,9 +307,9 @@ function reEncryptFile()
 	local key=$(decodeKey "$file" "$pass1" | base64 -w 0)
 	dumpError "# New"
 	
-	if [ "$cskSameKeyFiles" -ne "1" ]; then
+	if [ "$cskSameKeyFiles" != "1" ]; then
 		csmNoKeyFiles="$csmNoKeyFiles2"
-		csmKeyFiles=("${csmKeyFiles2[@]}")
+		csmKeyFiles=( "${csmKeyFiles2[@]}" )
 	else
 		csmNoKeyFiles="1"
 		dumpError "#  using same key files"
@@ -324,7 +326,11 @@ function reEncryptFile()
 		pass=$(readNewPass)
 	fi
 
-	cskHashToolOptions="$cskHashToolOptions2"
+	if [ "$cskSameHashToolOptions" != "1" ]; then
+		cskHashToolOptions=( "${cskHashToolOptions2[@]}" )
+	else
+		dumpError "#  using same hash tool options"
+	fi
 	
 	if [ -n "$cskFile2" ]; then
 		file="$cskFile2"
@@ -347,27 +353,28 @@ function showHelp()
 {
 	dumpError "Usage: $(basename "$0") [enc | dec | chp] file [options]"
 	dumpError "Options:"
-	dumpError " -i inputMode -- used for password"
+	dumpError " -i inputMode : used for password"
 	dumpError "    Password input modes:"
 	dumpError "     0 read from console, no echo (default)"
 	dumpError "     1 read from console with echo"
 	dumpError "     2 read from 'xclip -o'"
 	dumpError "     3 read from 'zenity --password'"
 	dumpError "     4 read from 'zenity --text'"
-	dumpError " -p passFile -- (enc | chp) read pass from first line in passFile"
-	dumpError " -pn passFile -- (chp) read pass from first line in passFile, used for new file"
-	dumpError " -s -- (chp) use same password for new file, -pn is ignored"
-	dumpError " -sk -- (chp) use same key files for new file, -kfn, -kn are ignored"
-	dumpError " -k -- (enc | chp) do not ask for keyfiles"
-	dumpError " -kn -- (chp) do not ask for keyfiles, used for new file"
-	dumpError " -kf keyFile -- (enc | chp) use keyFile"
-	dumpError " -kfn keyFile -- (chp) use keyFile, used for new file"
-	dumpError " -b count -- (enc | chp) generate file.count backup copies"
-	dumpError " -h \"hashToolOptions\" -- default \"${cskHashToolOptions}\""
-	dumpError " -hn \"hashToolOptions\" -- (chp) default \"${cskHashToolOptions}\", used for new file"
+	dumpError " -p passFile : (enc | chp) read pass from first line in passFile"
+	dumpError " -pn passFile : (chp) read pass from first line in passFile, used for new file"
+	dumpError " -s : (chp) use same password for new file, -pn is ignored"
+	dumpError " -sk : (chp) use same key files for new file, -kfn, -kn are ignored"
+	dumpError " -sh : (chp) use same hash tool options for new file, -hn is ignored"
+	dumpError " -k : (enc | chp) do not ask for keyfiles"
+	dumpError " -kn : (chp) do not ask for keyfiles, used for new file"
+	dumpError " -kf keyFile : (enc | chp) use keyFile"
+	dumpError " -kfn keyFile : (chp) use keyFile, used for new file"
+	dumpError " -b count : (enc | chp) generate file.count backup copies"
+	dumpError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
+	dumpError " -hn hashToolOptions -- : (chp) default -hn ${cskHashToolOptions2[@]} --, used for new file"
 	dumpError " -d -- (enc | chp) dump password and key on screen for debug"
 	dumpError "Examples:"
-	dumpError ' CS_KEY=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt -h "-p 8 -m 16 -t 1000"'
+	dumpError ' CS_KEY=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt -h -p 8 -m 16 -t 1000 --'
 }
 
 # cmd file options
@@ -411,26 +418,29 @@ function main()
 				shift
 			;;
 			-h)
-				cskHashToolOptions="${2:-}"
-				if [ -z "$cskHashToolOptions" ]; then
-					dumpError "! required -h hashToolOptions"
-					exit 1
-				fi
 				shift
+				cskHashToolOptions=()
+				while [ "${1:-}" != "--" ]; do
+					cskHashToolOptions+=( "${1:-}" )
+					shift
+				done
 			;;
 			-hn)
-				cskHashToolOptions2="${2:-}"
-				if [ -z "$cskHashToolOptions2" ]; then
-					dumpError "! required -hn hashToolOptions"
-					exit 1
-				fi
 				shift
+				cskHashToolOptions2=()
+				while [ "${1:-}" != "--" ]; do
+					cskHashToolOptions2+=( "${1:-}" )
+					shift
+				done
 			;;
-			-s)
+			-s|-sp)
 				cskSamePass="1"
 			;;
 			-sk)
 				cskSameKeyFiles="1"
+			;;
+			-sh)
+				cskSameHashToolOptions="1"
 			;;
 			-p)
 				local passFile="${2:-}"

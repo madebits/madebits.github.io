@@ -9,18 +9,19 @@ if [ $(id -u) != "0" ]; then
     exit 1
 fi
 
-user=${SUDO_USER:-$(whoami)}
+user="${SUDO_USER:-$(whoami)}"
 toolsDir="$(dirname $0)"
 lastName=""
 lastContainer=""
 lastContainerTime=""
 lastSecret=""
 lastSecretTime=""
+CSKEY_OPS="${CSKEY_OPS:-}"
 
-SCRIPT_PID=$$
+currentScriptPid=$$
 function failed()
 {
-    kill -9 "$SCRIPT_PID"
+    kill -9 "$currentScriptPid"
 }
 
 # error
@@ -101,12 +102,12 @@ function umountContainer()
     set +e
     fuser -km "$mntDir2"
     set -e
-    sleep 2
+    sleep 1
     umount "$mntDir2" && rmdir "$mntDir2"
     set +e
     fuser -km "$mntDir1"
     set -e
-    sleep 2
+    sleep 1
     set +e
     umount "$mntDir1" && rmdir "$mntDir1"
     set -e
@@ -171,7 +172,7 @@ function openContainer()
 
     echo "Opening /dev/mapper/${name} ..."
 
-    local key=$(sudo -E "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
+    local key=$(sudo -E "${toolsDir}/cskey.sh" dec "$secret" $CSKEY_OPS | base64 -w 0)
     touchFile "$lastSecret" "$lastSecretTime"
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "$@" open "$device" "$name" -
     echo
@@ -211,7 +212,7 @@ function createSecret()
 {
     local secret="$1"
     echo "Creating ${secret} ..."
-    sudo -E "${toolsDir}/cskey.sh" enc "$secret"
+    sudo -E "${toolsDir}/cskey.sh" enc "$secret" $CSKEY_OPS
     ownFile "$secret"
 }
 
@@ -265,7 +266,7 @@ function createContainer()
     fi
     
     echo "(Re-)enter password to open the container for the first time ..."
-    local key=$(sudo -E "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
+    local key=$(sudo -E "${toolsDir}/cskey.sh" dec "$secret" $CSKEY_OPS | base64 -w 0)
     echo
     touchFile "$lastSecret" "$lastSecretTime"
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$container" "$name" -
@@ -418,6 +419,8 @@ function showHelp()
     (>&2 echo "    size should end in M or G")
     (>&2 echo " $bn touch file [time]")
     (>&2 echo "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\"")
+    (>&2 echo " To pass cskey.sh options in open/create use:")
+    (>&2 echo "    CSKEY_OPS='-k -h -p 8 -m 14 -t 1000 --' sudo -E csmap.sh openLive container.bin")
 }
 
 function main()
