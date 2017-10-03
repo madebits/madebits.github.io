@@ -39,6 +39,7 @@
 ### Technology Videos
 
 [Channel9](https://channel9.msdn.com/)
+[MVA](https://mva.microsoft.com/)
 [Ted](https://www.ted.com/)
 [CCC](https://media.ccc.de/)
 
