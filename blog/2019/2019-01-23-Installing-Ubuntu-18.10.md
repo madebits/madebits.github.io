@@ -261,16 +261,16 @@ sudo apt install gnome-system-monitor
 
 * Obligatory `/etc/hosts` entries:
 
-```
-0.0.0.0 google-analytics.com
-0.0.0.0 www.google-analytics.com
-0.0.0.0 ssl.google-analytics.com
+    ```
+    0.0.0.0 google-analytics.com
+    0.0.0.0 www.google-analytics.com
+    0.0.0.0 ssl.google-analytics.com
 
-0.0.0.0 daisy.ubuntu.com
-0.0.0.0 metrics.ubuntu.com
-0.0.0.0 popcon.ubuntu.com
-0.0.0.0 motd.ubuntu.com
-```
+    0.0.0.0 daisy.ubuntu.com
+    0.0.0.0 metrics.ubuntu.com
+    0.0.0.0 popcon.ubuntu.com
+    0.0.0.0 motd.ubuntu.com
+    ```
 
 * Installed `sudo apt install tlp zram-config` and enabled and started their services.
 
@@ -282,28 +282,28 @@ sudo apt install gnome-system-monitor
 
 * `mpv` config (`~/.config/mpv/`) (using also [nextfile](https://github.com/donmaiq/mpv-nextfile) [script](https://github.com/mpv-player/mpv/wiki/User-Scripts)):
 
-```
-#input.conf
+    ```
+    #input.conf
 
-- quit
-x quit
-s quit
-S quit
-ctrl+s quit
-Alt+s quit
-ESC quit
-LEFT playlist-prev force
-RIGHT playlist-next force
-WHEEL_UP playlist-prev
-WHEEL_DOWN playlist-next
-ctrl+LEFT script-binding previousfile
-ctrl+RIGHT script-binding nextfile
+    - quit
+    x quit
+    s quit
+    S quit
+    ctrl+s quit
+    Alt+s quit
+    ESC quit
+    LEFT playlist-prev force
+    RIGHT playlist-next force
+    WHEEL_UP playlist-prev
+    WHEEL_DOWN playlist-next
+    ctrl+LEFT script-binding previousfile
+    ctrl+RIGHT script-binding nextfile
 
-# mpv.conf
+    # mpv.conf
 
-fs
-image-display-duration=3
-```
+    fs
+    image-display-duration=3
+    ```
 
 ##Summary
 
