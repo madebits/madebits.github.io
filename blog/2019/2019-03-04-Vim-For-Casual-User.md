@@ -71,7 +71,7 @@ Common movement commands (in *command-mode*):
 * `w` move one word forward, `b` move one word backward, `e` move to end of word; `W`, `B`, `E` work same but consider punctuations as part of words.
 * `%` move to matching char (`()`, `{}`, `[]`).
 * Usually combined with other commands: `)` or `s` move one sentence; `}` or `p` move one paragraph, `t` move one tag; `b` more one code block; all these can get confused in some source code files (in default configuration).
-* `gg=G` format whole text, where `=` is format command. `<` and `>` indent left or right. 
+* `gg=G` format whole text, where `=` is [format](https://www.cs.swarthmore.edu/oldhelp/vim/reformatting.html) command. `<` and `>` indent left or right. 
 
 Common edit commands (in *command-mode*):
 
@@ -140,6 +140,11 @@ Using tabs:
 * `:tabs` list tabs, tabs numbers start from *1*
 * `gt`, `gT` go to next, previous tab (or `:tabn`, `:tabp`)
 * `numbergt` go to tab *number*
+
+Marking text positions:
+
+* `ma` mark current potion with *a* (`a-z` same file, `A-Z` to mark between open files)
+* `'a` move to mark *a*, or `d'a` delete from current potion to mark *a*
 
 Using external commands to filter buffer text:
 
