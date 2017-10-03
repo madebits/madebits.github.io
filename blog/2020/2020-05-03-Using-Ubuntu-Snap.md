@@ -227,8 +227,6 @@ The unique tracking machine id is kept in `/var/lib/snapd/state.json` in `{"data
 
 The device-serial ID and list of installed snaps and their usage data are sent to store on every refresh, which happens automatically and periodically. Refresh period can be controlled using [refresh.hold](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--refresh-hold).
 
-
-
 ## Summary
 
 Ubuntu snap is an interesting concept, with impressive achievements and with several unpolished corners, that creates an illusion of security, and that is here to stay.
