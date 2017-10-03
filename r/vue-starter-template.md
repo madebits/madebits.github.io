@@ -105,6 +105,9 @@ Backend will run at port http://localhost:3000 by default.
         "html": "prettier"
      }
   ```
+* [Vue Peek](https://marketplace.visualstudio.com/items?itemName=dariofuzinato.vue-peek)
+
+See also: (Vue.js Extension Pack)[https://marketplace.visualstudio.com/items?itemName=mubaidr.vuejs-extension-pack]
 
 ##Vue.Js Resources
 

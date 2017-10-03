@@ -28,6 +28,10 @@ An incomplete list of useful [VSCode extensions](https://marketplace.visualstudi
 
 * [Prettier - JavaScript formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - improves Format Document when using `eslint`.
 
+* [Auto Rename Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag) - useful to edit HTML.
+
+* [Auto Close Tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag) - useful to edit HTML.
+
 
 ##Git
 
@@ -51,7 +55,7 @@ An incomplete list of useful [VSCode extensions](https://marketplace.visualstudi
 
 ##Settings
 
-VSCode is usable out of the box. Some customization is needed thought and here is a copy of my current settings. Some of these are added here because I switched them via menus, some are manually added.
+VSCode is usable out of the box. Some customization is needed thought and here is a copy of my current settings. Some of these are added here because I switched them via menus, some are manually added. I [overwrote](https://code.visualstudio.com/docs/getstarted/theme-color-reference) some of the theme colors.
 
 ```json
 {
@@ -73,7 +77,8 @@ VSCode is usable out of the box. Some customization is needed thought and here i
     "workbench.colorCustomizations": {
         "statusBar.background" : "#353434",
         "statusBar.noFolderBackground" : "#212121",
-        "statusBar.debuggingBackground": "#4B453D"
+        "statusBar.debuggingBackground": "#4B453D",
+        "editorWhitespace.foreground": "#343434"
     },
     "workbench.colorTheme": "Afterglow",
     "workbench.activityBar.visible": true,
@@ -81,31 +86,11 @@ VSCode is usable out of the box. Some customization is needed thought and here i
         80,
         120
     ],
-    "cSpell.enabledLanguageIds": [
-        "c",
-        "cpp",
-        "csharp",
-        "go",
-        "handlebars",
-        "html",
-        "javascript",
-        "javascriptreact",
-        "json",
-        "latex",
-        "markdown",
-        "php",
-        "plaintext",
-        "python",
-        "restructuredtext",
-        "text",
-        "typescript",
-        "typescriptreact",
-        "yml"
-    ],
     "prettier.singleQuote": true,
     "prettier.semi": false,
     "prettier.eslintIntegration": true,
     "terminal.integrated.scrollback": 5000,
+    "auto-close-tag.SublimeText3Mode": true,
     "statusbar_command.commands": [
         {
              "text": "$(terminal)",
