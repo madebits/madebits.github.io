@@ -1,3 +1,4 @@
+* [SFTP With Shared Access](#blog/2019/2019-04-16-SFTP-With-Shared-Access.md)
 * [MongoDb with SSL](#blog/2019/2019-03-25-MongoDb-with-SSL.md)
 * [How To Speak Like A Leader](#blog/2019/2019-03-10-How-To-Speak-Like-A-Leader.md)
 * [Vim For Casual User](#blog/2019/2019-03-04-Vim-For-Casual-User.md)
@@ -5,4 +6,3 @@
 * [Installing Ubuntu 18.10](#blog/2019/2019-01-23-Installing-Ubuntu-18.10.md)
 * [Cryptsetup in Plain Mode](#blog/2018/2018-12-16-Cryptsetup-in-Plain-Mode.md)
 * [Lubuntu 18.04 Disable initfsram Resume](#blog/2018/2018-04-26-Lubuntu-18.04-Disable-initfsram-Resume.md)
-* [OpenVPN In Azure](#blog/2018/2018-04-25-OpenVPN-In-Azure.md)

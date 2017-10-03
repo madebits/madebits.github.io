@@ -311,4 +311,4 @@ if(rmq.protocol === 'amqps:') {
 let conn = await amqp.connect(rmqUrl, opts)
 ```
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-03-10-How-To-Speak-Like-A-Leader.md'>How To Speak Like A Leader</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-04-16-SFTP-With-Shared-Access.md'>SFTP With Shared Access</a> <a rel='next' id='fnext' href='#blog/2019/2019-03-10-How-To-Speak-Like-A-Leader.md'>How To Speak Like A Leader</a></ins>
