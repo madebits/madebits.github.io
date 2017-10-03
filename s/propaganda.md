@@ -14,13 +14,11 @@
 
 [Hacker News](https://news.ycombinator.com/)
 [Daily Rotation](http://www.dailyrotation.com/)
-[Reddit Programming](https://www.reddit.com/r/programming/)
 [SlashDot](https://slashdot.org/)
 [How To Geek](https://www.howtogeek.com/)
 [GHacks](https://www.ghacks.net/)
 [Medium](https://medium.com/)
-[Ars Technica](https://arstechnica.com/)
-[MSDN Magazine](https://msdn.microsoft.com/en-us/magazine/default.aspx)
+[ArsTechnica](https://arstechnica.com/)
 [Wired](https://www.wired.com/tag/programming/)
 [Developer Tech](https://www.developer-tech.com/)
 [EnGadget](https://www.engadget.com/)
@@ -36,8 +34,6 @@
 [BetaNews](https://betanews.com/)
 [The Inquirer](https://www.theinquirer.net/type/news)
 [ZDNet](https://www.zdnet.com/)
-[FrontEndDaily](https://twitter.com/FrontEndDaily)
-[.Net Blog](https://devblogs.microsoft.com/dotnet/)
 [WeLiveSecurity](https://www.welivesecurity.com/)
 
 ### Technology News in German
@@ -73,6 +69,12 @@
 [LinuxLinks](https://www.linuxlinks.com/)
 [LinuxJournal](https://www.linuxjournal.com/)
 [NoobsLab](https://www.noobslab.com/)
+
+### Programming
+
+[Reddit Programming](https://www.reddit.com/r/programming/)
+[.Net Blog](https://devblogs.microsoft.com/dotnet/)
+[MSDN Magazine](https://msdn.microsoft.com/en-us/magazine/default.aspx)
 
 ### Science
 
