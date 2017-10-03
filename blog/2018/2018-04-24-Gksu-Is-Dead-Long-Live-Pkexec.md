@@ -116,6 +116,7 @@ if [[ "$1" == "$sentinel" ]]; then
 fi
 
 $@
+
 ```
 
 This script can be used as follows:
