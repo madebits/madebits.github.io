@@ -30,7 +30,7 @@
 
 * [RT News](http://rt.com/news/)
 * [Sputnik News](https://sputniknews.com/)
-* [TASS](http://tass.com/)
+* [TASS](http://tass.com/world)
 
 <hr>
 
