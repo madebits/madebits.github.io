@@ -256,7 +256,7 @@ To close a container named *n1* (*csm-n1*) use `close` or `c` command:
 sudo csman.sh c n1
 ```
 
-The close command will try to undo all effects of open. It can be run more than once in case something does work on first time. Any open applications accessing files in mounted volume will be killed.
+The close command will try to undo all effects of open. It can be run more than once in case something does not work on first time. Any open applications accessing files in mounted volume will be killed.
 
 To close all `csman.sh` open containers use `closeAll`, `ca`, or `x` command (the `x` command also removes session data if any):
 
