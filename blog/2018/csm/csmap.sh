@@ -333,7 +333,6 @@ function changePass()
     shift
     "${toolsDir}/cskey.sh" chp "$secret" "$@"
     ownFile "$secret"
-    sleep 1
     touchFile "$secret" "$lastSecretTime"
 }
 
