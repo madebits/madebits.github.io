@@ -41,3 +41,7 @@
 
 * [Press TV](https://www.presstv.com/)
 * [AlJazeera](https://www.aljazeera.com/news/)
+
+<hr>
+
+* [B92](https://www.b92.net/eng/news/world.php)
