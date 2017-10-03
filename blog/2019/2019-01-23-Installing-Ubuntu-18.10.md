@@ -290,12 +290,13 @@ fs
 image-display-duration=3
 ```
 
-* To have `nautilus` generate video [thumbnails](https://askubuntu.com/questions/2608/nautilus-video-thumbnails-without-totem), I installed `sudo apt install ffmpegthumbnailer` (though [mpv](https://github.com/mpv-player/mpv/issues/3735) can also be used) and then created `/usr/share/thumbnailers/totem.thumbnailer` file with the following content:
+* To have `nautilus` generate video [thumbnails](https://askubuntu.com/questions/2608/nautilus-video-thumbnails-without-totem), I installed `sudo apt install ffmpegthumbnailer` (though [mpv](https://github.com/mpv-player/mpv/issues/3735) can also be used). It created `/usr/share/thumbnailers/ffmpegthumbnailer.thumbnailer` file with the following content:
 
 ```
 [Thumbnailer Entry]
 TryExec=ffmpegthumbnailer
-Exec=ffmpegthumbnailer -s %s -i %i -o %o -c png -f
+Exec=ffmpegthumbnailer -i %i -o %o -s %s -f
+MimeType=video/jpeg;video/mp4;video/mpeg;video/quicktime;video/x-ms-asf;video/x-ms-wm;video/x-ms-wmv;video/x-msvideo;video/x-flv;video/x-matroska;video/webm;video/mp2t;
 ```
 
 ##Summary
