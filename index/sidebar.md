@@ -1,3 +1,4 @@
+* [Script to Start Chrome](#blog/2021/2021-12-19-Script-to-Start-Chrome.md)
 * [Using brightnessctl](#blog/2021/2021-11-26-Using-brightnessctl.md)
 * [Feh Start Script](#blog/2021/2021-11-25-Feh-Start-Script.md)
 * [Extensions](#blog/2021/2021-11-24-Extensions.md)
@@ -5,4 +6,3 @@
 * [ETL Solutions](#blog/2019/2019-11-13-ETL-Solutions.md)
 * [Agile Backlog As Gantt Frontier](#blog/2019/2019-09-04-Agile-Backlog-As-Gantt-Frontier.md)
 * [When to use Vuex](#blog/2019/2019-08-30-When-to-use-Vuex.md)
-* [SFTP With Shared Access](#blog/2019/2019-04-16-SFTP-With-Shared-Access.md)

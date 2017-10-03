@@ -83,4 +83,4 @@ Type=Application
 X-GNOME-Autostart-enabled=true
 ```
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2021/2021-11-25-Feh-Start-Script.md'>Feh Start Script</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2021/2021-12-19-Script-to-Start-Chrome.md'>Script to Start Chrome</a> <a rel='next' id='fnext' href='#blog/2021/2021-11-25-Feh-Start-Script.md'>Feh Start Script</a></ins>
