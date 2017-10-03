@@ -114,7 +114,7 @@
 
 ## USA
 
-[CNN](https://edition.cnn.com/world)
+[CNN](https://edition.cnn.com/)
 [CNBC](https://www.cnbc.com/world-news/)
 [CSBS News](https://www.cbsnews.com/world/)
 [NBC News](https://www.nbcnews.com/world)
