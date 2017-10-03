@@ -817,7 +817,7 @@ function main()
             createSessionPass "$cskFile"
         ;;
         x)
-            # file arg is ingored
+            # file arg is ignored
             clearSessionTempDir
         ;;
         rnd|r)
