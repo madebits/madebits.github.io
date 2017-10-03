@@ -17,15 +17,15 @@ cskFile=""
 cskDebug="0"
 cskInputMode="0"
 cskBackup="0"
-cskBackupNewKey="0"
+cskBackupNewSecret="0"
 cskHashToolOptions=( "-p" "8" "-m" "14" "-t" "1000" )
 cskPassFile=""
 cskKeyFiles=()
 cskNoKeyFiles="0"
-cskKey=""
+cskSecret=""
+cskSessionPassFile=""
 cskSessionPass=""
-cskSessionSecret=""
-cskSessionKeyFile=""
+cskSessionSecretFile=""
 cskSessionAutoPass="0"
 
 user="${SUDO_USER:-$(whoami)}"
@@ -36,15 +36,37 @@ if [ -f "${toolsDir}/aes" ]; then
 	useAes="1"
 fi
 
-function dumpError()
+########################################################################
+
+function logError()
 {
 	(>&2 echo "$@")
 }
 
+function debugData()
+{
+	if [ "$cskDebug" = "1" ]; then
+		logError
+		while [ -n "${1:-}" ]; do
+			logError "DEBUG [${1}]"
+			shift
+		done
+	fi
+}
+
 function onFailed()
 {
-	dumpError "!" "$@"
+	logError "!" "$@"
 	kill -9 "${currentScriptPid}"
+}
+
+function checkNumber()
+{
+	local re='^[0-9]+$'
+	if ! [[ "$1" =~ $re ]] ; then
+		logError "$1 not a number"
+		exit 1
+	fi
 }
 
 # file
@@ -65,7 +87,9 @@ function ownFile()
 	fi
 }
 
-function encryptedKeyLength()
+########################################################################
+
+function encryptedSecretLength()
 {
 	if [ "$useAes" = "1" ]; then
 		echo 560
@@ -94,6 +118,8 @@ function decryptAes()
 	fi
 }
 
+########################################################################
+
 # pass salt
 function pass2hash()
 {
@@ -112,26 +138,14 @@ function pass2hash()
 	echo -n "$pass" | "$acmd" "$salt" -id "${cskHashToolOptions[@]}" -l 128 -r
 }
 
-# pass key
-function debugKey()
-{
-	if [ "$cskDebug" = "1" ]; then
-		dumpError
-		while [ -n "${1:-}" ]; do
-			dumpError "DEBUG [${1}]"
-			shift
-		done
-	fi
-}
-
-# file pass key
-function encodeKey()
+# file pass secret
+function encodeSecret()
 {
     local file="$1"
     local pass="$2"
-    local key="$3"
+    local secret="$3"
     
-    debugKey "$pass" "$key"
+    debugData "$pass" "$secret"
     
     local salt=$(head -c 32 /dev/urandom | base64 -w 0)
     hash=$(pass2hash "$pass" "$salt")
@@ -142,7 +156,7 @@ function encodeKey()
     
     > "$file"
     echo -n "$salt" | base64 -d >> "$file"
-    echo -n "$key" | base64 -d | encryptAes "$hash" >> "$file"
+    echo -n "$secret" | base64 -d | encryptAes "$hash" >> "$file"
     # random file size
     local r=$((1 + RANDOM % 512))
     head -c "$r" /dev/urandom >> "$file"
@@ -151,11 +165,11 @@ function encodeKey()
 }
 
 # file pass
-function decodeKey()
+function decodeSecret()
 {
     local file="$1"
     local pass="$2"
-    local keyLength=$(encryptedKeyLength)
+    local secretLength=$(encryptedSecretLength)
     
     if [ -e "$file" ] || [ "$file" = "-" ]; then
 		local fileData=$(head -c 600 "$file" | base64 -w 0)
@@ -163,14 +177,13 @@ function decodeKey()
 			onFailed "cannot read: $file"
 		fi
 		local salt=$(echo -n "$fileData" | base64 -d | head -c 32 | base64 -w 0)
-		local data=$(echo -n "$fileData" | base64 -d | tail -c +33 | head -c "$keyLength" | base64 -w 0)
+		local data=$(echo -n "$fileData" | base64 -d | tail -c +33 | head -c "${secretLength}" | base64 -w 0)
         local hash=$(pass2hash "$pass" "$salt")
 		touchFile "$file"
-		if [ -n "$cskSessionKeyFile" ]; then
-			dumpError
+		if [ -n "$cskSessionSecretFile" ]; then
 			readSessionPass
-			echo -n "$data" | base64 -d | decryptAes "$hash" | encryptAes "$cskSessionSecret" > "$cskSessionKeyFile"
-			debugKey "$cskSessionKeyFile" $(echo -n "$data" | base64 -d | decryptAes "$hash" | base64 -w 0)
+			echo -n "$data" | base64 -d | decryptAes "$hash" | encryptAes "$cskSessionPass" > "$cskSessionSecretFile"
+			debugData "$cskSessionSecretFile" $(echo -n "$data" | base64 -d | decryptAes "$hash" | base64 -w 0)
 		else
 			echo -n "$data" | base64 -d | decryptAes "$hash"
 		fi
@@ -178,6 +191,8 @@ function decodeKey()
         onFailed "no such file: $file"
     fi
 }
+
+########################################################################
 
 function keyFileHash()
 {
@@ -193,7 +208,7 @@ function readKeyFiles()
 	local count=0
 	local keyFile=""
 	
-	if [ "$cskNoKeyFiles" = "1" ] || [ -n "$cskSessionPass" ]; then
+	if [ "$cskNoKeyFiles" = "1" ] || [ -n "$cskSessionPassFile" ]; then
 		return
 	fi
 	
@@ -204,6 +219,7 @@ function readKeyFiles()
 			keyFile="$(zenity --file-selection --title='Select a File' 2> /dev/null)"
 		else
 			read -e -p "Key file $count (or Enter if none): " keyFile
+			logError
 		fi
 		if [ ! -f "$keyFile" ]; then
 			break
@@ -222,6 +238,8 @@ function computeKeyFilesHash()
 	echo "$hash"
 }
 
+########################################################################
+
 # file
 function readPassFromFile()
 {
@@ -235,51 +253,13 @@ function readPassFromFile()
 	fi
 }
 
-function readSessionPass()
-{
-	if [ -z "$cskSessionSecret" ]; then
-		# session specific
-		local sData1=$(uptime -s)
-		local sData2=$(ps ax | grep -E 'systemd --user|cron|udisks' | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | tr -d '\n')
-		local sessionData="${user}${sData1}${sData2}"
-		local sSecret="${sessionData}"
-		if [ "$cskSessionAutoPass" = "0" ]; then
-			if [ "$cskInputMode" = "1" ] || [ "$cskInputMode" = "e" ]; then
-				read -p "Session password: " rsp
-			else
-				read -p "Session password: " -s rsp
-			fi
-			sSecret="${sessionData}${rsp}"
-		fi
-		cskSessionSecret=$(echo -n "${sSecret}" | sha256sum | cut -d ' ' -f 1)
-		debugKey "${sSecret}" "${cskSessionSecret}"
-		dumpError
-	fi
-}
-
-# file
-function readSessionPassFromFile()
-{
-	if [ -e "$1" ] || [ "$1" = "-" ]; then
-		if [ -z "$cskSessionSecret" ]; then
-			onFailed "no session password"
-		fi
-		local p=$(cat "$1" | base64 -w 0)
-		if [ -z "$p" ]; then
-			onFailed "cannot read file: ${1}"
-		fi
-		echo -n "$p" | base64 -d | decryptAes "$cskSessionSecret"
-	else
-		onFailed "cannot read file: ${1}"
-	fi
-}
-
 function readPassword()
 {
 	if [ -n "$cskPassFile" ]; then
 		pass="$cskPassFile"
 	elif [ "$cskInputMode" = "1" ] || [ "$cskInputMode" = "e" ]; then
 		read -p "Password: " pass
+		logError
 	elif [ "$cskInputMode" = "2" ] || [ "$cskInputMode" = "c" ]; then
 		pass=$(xclip -o -selection clipboard)
 	elif [ "$cskInputMode" = "3" ] || [ "$cskInputMode" = "u" ]; then
@@ -288,12 +268,12 @@ function readPassword()
 		pass=$(zenity --entry --title="Password" --text="Password (visible):"  2> /dev/null)
 	else
 		read -p "Password: " -s pass
+		logError
 		if [ "${1:-}" = "1" ]; then
 			# new password from console, ask to re-enter
-			dumpError ""
 			if [ -t 0 ] ; then
 				read -p "Renter password: " -s pass2
-				dumpError ""
+				logError
 				if [ "$pass" != "$pass2" ]; then
 					onFailed "passwords do not match"
 				fi
@@ -308,8 +288,8 @@ function readPassword()
 
 function readPass()
 {
-	if [ -n "$cskSessionPass" ]; then
-		echo "$cskSessionPass"
+	if [ -n "$cskSessionPassFile" ]; then
+		echo "$cskSessionPassFile"
 		return
 	fi
 	
@@ -324,13 +304,31 @@ function readNewPass()
 	readPass "1"
 }
 
-# file pass key
+function getSecret()
+{
+	# can be passed from outside
+	CS_SECRET="${CS_SECRET:-}"
+	local secret=""
+	if [ -n "$cskSecret" ]; then
+		logError "# secret: user-specified"
+		secret="$cskSecret"
+	elif [ -n "$CS_SECRET" ]; then
+		logError "# secret: from CS_SECRET"
+		secret="$CS_SECRET"
+	else
+		logError "# secret: generated"
+		secret=$(head -c 512 /dev/urandom | base64 -w 0)
+	fi
+	echo "${secret}"
+}
+
+# file pass secret
 function encodeMany()
 {
-	dumpError "#  using hash tool parameters:" "${cskHashToolOptions[@]}"
-	echo "$1"
-	local key="$3"
-	encodeKey "$1" "$2" "$key"
+	logError "# hashtool:" "${cskHashToolOptions[@]}"
+	logError "$1"
+	local secret="$3"
+	encodeSecret "$1" "$2" "${secret}"
 	
 	local count=$(($cskBackup + 0))
 	if [ "$count" -gt "64" ]; then
@@ -340,56 +338,75 @@ function encodeMany()
 	{
 		local pad=$(printf "%02d" ${i})
 		local file="${1}.${pad}"
-		echo "$file"
-		if [ "$cskBackupNewKey" = "1" ]; then
-			key=$(getKey)
-			dumpError "#  using new key"
+		logError "$file"
+		if [ "$cskBackupNewSecret" = "1" ]; then
+			secret=$(getSecret)
 		fi
-		encodeKey "$file" "$2" "$key"
+		encodeSecret "$file" "$2" "${secret}"
 	}
 }
 
-function getKey()
-{
-	# can be passed from outside
-	CS_KEY="${CS_KEY:-}"
-	local key=""
-	if [ -n "$cskKey" ]; then
-		dumpError "#  using user-define key"
-		key="$cskKey"
-	elif [ -n "$CS_KEY" ]; then
-		dumpError "#  using key from CS_KEY"
-		key="$CS_KEY"
-	else
-		key=$(head -c 512 /dev/urandom | base64 -w 0)
-	fi
-	echo "$key"
-}
-
+# file
 function encryptFile()
 {
+	logError "# Encoding secret in: $1"
 	readKeyFiles
 	local pass=$(readNewPass)
-	local key=$(getKey)
-	encodeMany "$1" "$pass" "$key"
+	local secret=$(getSecret)
+	encodeMany "$1" "$pass" "$secret"
+	logError "Done"
 }
 
+# file
 function decryptFile()
 {
 	readKeyFiles
 	local pass=$(readPass)
-	dumpError
-    decodeKey "$1" "$pass"
+    decodeSecret "$1" "$pass"
 }
 
-function checkNumber()
+########################################################################
+
+function readSessionPass()
 {
-	local re='^[0-9]+$'
-	if ! [[ "$1" =~ $re ]] ; then
-		dumpError "$1 not a number"
-		exit 1
+	if [ -z "$cskSessionPass" ]; then
+		# session specific
+		local sData1=$(uptime -s)
+		local sData2=$(ps ax | grep -E 'systemd --user|cron|udisks' | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | tr -d '\n')
+		local sessionData="${user}${sData1}${sData2}"
+		local sSecret="${sessionData}"
+		local rsp=""
+		if [ "$cskSessionAutoPass" = "0" ]; then
+			if [ "$cskInputMode" = "1" ] || [ "$cskInputMode" = "e" ]; then
+				read -p "Session password (or Enter for none): " rsp
+			else
+				read -p "Session password (or Enter for none): " -s rsp
+			fi
+		fi
+		logError
+		sSecret="${sessionData}${rsp}"
+		cskSessionPass=$(echo -n "${sSecret}" | sha256sum | cut -d ' ' -f 1)
+		debugData "${sSecret}" "${cskSessionPass}"
 	fi
 }
+
+# file
+function readSessionPassFromFile()
+{
+	if [ -e "$1" ] || [ "$1" = "-" ]; then
+		if [ -z "$cskSessionPass" ]; then
+			onFailed "no session password"
+		fi
+		local p=$(cat "$1" | base64 -w 0)
+		if [ -z "$p" ]; then
+			onFailed "cannot read file: ${1}"
+		fi
+		echo -n "$p" | base64 -d | decryptAes "$cskSessionPass"
+	else
+		onFailed "cannot read file: ${1}"
+	fi
+}
+
 # file
 function createSessionPass()
 {
@@ -399,26 +416,10 @@ function createSessionPass()
 	fi
 	readKeyFiles
 	local pass=$(readPass)
-	dumpError
 	readSessionPass
-	debugKey "${cskSessionSecret}" "${pass}"
+	debugData "${cskSessionPass}" "${pass}"
 
-	echo -n "$pass" | encryptAes "$cskSessionSecret" > "$file"
-	ownFile "$file"
-}
-
-# file keybase64
-function createSessionKey()
-{
-	local file="$1"
-	if [ "$file" = "-" ]; then
-		file="/dev/stdout"
-	fi
-	local key="$2"
-	readSessionPass
-	debugKey "${cskSessionSecret}" "${key}"
-
-	echo -n "$key" | base64 -d | encryptAes "$cskSessionSecret" > "$file"
+	echo -n "$pass" | encryptAes "$cskSessionPass" > "$file"
 	ownFile "$file"
 }
 
@@ -431,60 +432,62 @@ function loadSessionPass()
 	fi
 	readSessionPass
 	set +e
-	local sPass=$(readSessionPassFromFile "$file")
+	local pass=$(readSessionPassFromFile "$file")
 	set -e
-	if [ -z "$sPass" ]; then
+	if [ -z "${pass}" ]; then
 		onFailed "cannot read file: ${file}"
 	fi
-	cskSessionPass="$sPass"
+	cskSessionPassFile="${pass}"
 }
 
 # file
-function loadSessionKey()
+function loadSessionSecret()
 {
 	local file="${1:-}"
 	if [ -z "$file" ]; then
 		return
 	fi
 	readSessionPass
-	cskKey=$(cat ${file} | decryptAes "$cskSessionSecret" | base64 -w 0)
-	if [ -z "$cskKey" ]; then
+	cskSecret=$(cat ${file} | decryptAes "$cskSessionPass" | base64 -w 0)
+	if [ -z "$cskSecret" ]; then
 		onFailed "cannot read: ${file}"
 	fi
 }
 
+########################################################################
+
 function showHelp()
 {
-	dumpError "Usage: $(basename "$0") [enc | dec | ses] file [options]"
-	dumpError "Options:"
-	dumpError " -i inputMode : used for password"
-	dumpError "    Password input modes:"
-	dumpError "     0 read from console, no echo (default)"
-	dumpError "     1|e read from console with echo"
-	dumpError "     2|c read from 'xclip -o -selection clipboard'"
-	dumpError "     3|u read from 'zenity --password'"
-	dumpError "     4 read from 'zenity --text'"
-	dumpError " -c encryptMode : use 1 for aes tool, 0 or any other value uses ccrypt"
-	dumpError " -p passFile : (enc) read pass from first line in passFile"
-	dumpError " -ap file : read pass from session encrypted file, other pass input options are ignored"
-	dumpError " -k : (enc) do not ask for keyfiles"
-	dumpError " -kf keyFile : (enc) use keyFile (combine with -k)"
-	dumpError " -b count : (enc) generate file.count backup copies"
-	dumpError " -bk : (enc) generate a new key for each -b file"
-	dumpError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
-	dumpError " -key file : (enc) read key data as base64 -w 0 from file"
-	dumpError " -akey file : (enc) read key data from session encrypted file (see -ao)"
-	dumpError " -ao outFile : (dec) write key in session encrypted file"
-	dumpError " -aa : auto session encryption password"
-	dumpError " -d : dump password and key on stderr for debug"
-	dumpError "Examples:"
-	dumpError ' sudo bash -c '"'"'key=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -key <(echo -n "$key") -d'"'"''
+	logError "Usage: $(basename "$0") [enc | dec | ses] file [options]"
+	logError "Options:"
+	logError " -i inputMode : used for password"
+	logError "    Password input modes:"
+	logError "     0 read from console, no echo (default)"
+	logError "     1|e read from console with echo"
+	logError "     2|c read from 'xclip -o -selection clipboard'"
+	logError "     3|u read from 'zenity --password'"
+	logError "     4 read from 'zenity --text'"
+	logError " -c encryptMode : use 1 for aes tool, 0 or any other value uses ccrypt"
+	logError " -p passFile : (enc) read pass from first line in passFile"
+	logError " -ap file : read pass from session encrypted file, other pass input options are ignored"
+	logError " -k : (enc) do not ask for keyfiles"
+	logError " -kf keyFile : (enc) use keyFile (combine with -k)"
+	logError " -b count : (enc) generate file.count backup copies"
+	logError " -bs : (enc) generate a new secret for each -b file"
+	logError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
+	logError " -s file : (enc) read secret data as base64 -w 0 from file"
+	logError " -as file : (enc) read secret data from session encrypted file (see -ao)"
+	logError " -ao outFile : (dec) write key in session encrypted file"
+	logError " -aa : auto session encryption password"
+	logError " -d : dump password and key on stderr for debug"
+	logError "Examples:"
+	logError ' sudo bash -c '"'"'key=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -key <(echo -n "$key") -d'"'"''
 }
 
 # cmd file options
 function main()
 {
-	dumpError ""
+	logError
 	local cskCmd="${1:-}"
 	if [ -z "$cskCmd" ]; then
 		showHelp
@@ -495,7 +498,7 @@ function main()
 	shift
 	
 	local apf=""
-	local akeyf=""
+	local asf=""
 	
 	while [ -n "${1:-}" ]; do
 		local current="${1:-}"
@@ -512,8 +515,8 @@ function main()
 				checkNumber "$cskBackup"
 				shift
 			;;
-			-bk)
-				cskBackupNewKey="1"
+			-bs)
+				cskBackupNewSecret="1"
 			;;
 			-h)
 				shift
@@ -543,16 +546,16 @@ function main()
 				cskKeyFiles+=( "$(keyFileHash "$kf")" )
 				shift
 			;;
-			-key)
-				local kk="${2:?"! -key file"}"
-				cskKey=$(cat "${kk}")
-				if [ -z "$cskKey" ]; then
+			-s)
+				local kk="${2:?"! -s file"}"
+				cskSecret=$(cat "${kk}")
+				if [ -z "$cskSecret" ]; then
 					onFailed "cannot read: ${kk}"
 				fi
 				shift
 			;;
-			-akey)
-				akeyf="${2:?"! -akey file"}"
+			-as)
+				asf="${2:?"! -as file"}"
 				shift
 			;;
 			-c)
@@ -560,11 +563,11 @@ function main()
 				shift
 			;;
 			-ao)
-				cskSessionKeyFile="${2:?"! -ao file"}"
+				cskSessionSecretFile="${2:?"! -ao file"}"
 				shift
 			;;
 			*)
-				dumpError "! unknown option: $current"
+				logError "! unknown option: $current"
 				exit 1
 			;;
 		esac
@@ -572,7 +575,7 @@ function main()
 	done
 		
 	loadSessionPass "${apf}"
-	loadSessionKey "${akeyf}"
+	loadSessionSecret "${asf}"
 
 	case "$cskCmd" in
 		enc|e)
@@ -585,7 +588,7 @@ function main()
 			createSessionPass "$cskFile"
 		;;
 		*)
-			dumpError "! unknown command: $cskCmd"
+			logError "! unknown command: $cskCmd"
 			showHelp
 		;;
 	esac
