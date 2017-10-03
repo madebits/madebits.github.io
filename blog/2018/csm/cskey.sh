@@ -129,6 +129,9 @@ function main()
             encodeKey "$file" "$pass" "$key"
         ;;
         dec)
+            if [ "$CSM_ECHO" == "1" ]; then
+                read -p "Enter password: " pass
+            fi
             read -p "Enter password: " -s pass
             decodeKey "$file" "$pass"
         ;;

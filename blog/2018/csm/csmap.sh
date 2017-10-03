@@ -122,7 +122,7 @@ function openContainer()
     local user=${SUDO_USER:-$(whoami)}
     echo "Opening /dev/mapper/${name} ..."
 
-    local key=$(sudo -u "$user" "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
+    local key=$(sudo -E -u "$user" "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
     touchFile "$lastSecret" "$lastSecretTime"
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$device" "$name" -
     echo
