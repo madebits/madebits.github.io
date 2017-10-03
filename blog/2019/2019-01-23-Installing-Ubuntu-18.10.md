@@ -196,7 +196,7 @@ Extra setup:
     ```bash
     #!/bin/bash
 
-    cmd="feh -F -B white --no-recursive --no-menus"
+    cmd="feh -F -B white --no-recursive"
     path="${1:-.}"
     if [ -d "$path" ]; then
         exec $cmd "$path"
