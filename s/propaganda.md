@@ -9,7 +9,9 @@
 * [Medium](https://medium.com/)
 * [Ars Technica](https://arstechnica.com/)
 * [Channel9](https://channel9.msdn.com/)
+* [MSDN Magazine](https://msdn.microsoft.com/en-us/magazine/default.aspx)
 * [Live Science](https://www.livescience.com/news)
+* [Heise](https://www.heise.de/newsticker/)
 
 <hr>
 
