@@ -302,11 +302,17 @@ public static class UriExtensions
 In Node.js, the official drive has an example:
 
 ```
+const url = require('url')
 const amqp = require('amqplib')
 
-const opts = {  ca: [fs.readFileSync('/mongoCA.crt')] }
-let conn = await amqp.connect('amqp://user:passsword@server:5774/myVhost', opts)
-// to parse custom ssl=true if needed here, we can use Node.js url library
+const rmqUrl = 'amqp://user:passsword@server:5774/myVhost?heartbeat=240&connection_timeout=5&ssl=true';
+
+const rmq = new url.URL(rmqUrl)
+let opts = {}
+if(rmq.searchParams.get('ssl') === 'true') {
+    opts = { ca: [fs.readFileSync('/mongoCA.crt')] }
+}
+let conn = await amqp.connect(rmqUrl, opts)
 ```
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-03-10-How-To-Speak-Like-A-Leader.md'>How To Speak Like A Leader</a></ins>
