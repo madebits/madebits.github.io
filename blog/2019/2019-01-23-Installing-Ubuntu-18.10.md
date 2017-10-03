@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-I gave Ubuntu 18.10 a try in VirtualBox and here is a summary of some of the things I had to do, for own reference.
+I gave Ubuntu 18.10 a try in VirtualBox and 18.04 in a machine and here is a summary of some of the things I had to do, for own reference.
 
 ##Remove Swap Partition
 
@@ -38,7 +38,7 @@ sudo vgdisplay
 # Free  PE / Size       253 / 1012,00 MiB
 
 sudo lvextend -l +253  /dev/ubuntu-vg/root
-resize2fs /dev/ubuntu-vg/root 
+sudo resize2fs /dev/ubuntu-vg/root 
 
 sudo lvdisplay
 ```
@@ -62,7 +62,7 @@ I edited also `/etc/initramfs-tools/conf.d/resume` to set:
 RESUME=none
 ```
 
-And run `sudo update-initramfs -u`.
+And run `sudo update-initramfs -u`. Additionally, I claimed all disk space with: `sudo tune2fs -m 0 /dev/mapper/ubuntu--vg-root`.
 
 Above, [sda2](https://askubuntu.com/questions/950307/why-guided-partitioning-create-a-sda2-of-1-kb) is the extended partition. What is shown as *1K* is the [unaligned](https://unix.stackexchange.com/questions/128290/what-is-this-1k-logical-partition) area in it.
 
@@ -93,21 +93,35 @@ A well-done menu:
 
 * Gno-Menu https://extensions.gnome.org/extension/608/gnomenu/
 
+To move notifications to corner:
+
+* Panel-OSD https://extensions.gnome.org/extension/708/panel-osd/
+
 Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcut](https://wiki.gnome.org/Design/OS/KeyboardShortcuts) to open applications.
 
 ###Hacks
 
-* GEdit was showing *'Preferences'* menu only if run with *sudo*. I had to [run](https://askubuntu.com/questions/375049/where-are-gedits-preferences/671398#671398):
+* GEdit and other GNOME programs was showing *'Preferences'* menu only if run with *sudo*. I had to [run](https://askubuntu.com/questions/375049/where-are-gedits-preferences/671398#671398):
 
     ```
     gsettings set org.gnome.settings-daemon.plugins.xsettings overrides '@a{sv} {"Gtk/ShellShowsAppMenu": <int32 0>}'
     ```
 
+* `gedit` fails to show last lines sometimes on an open file (cannot scroll to end of file). Will use `geany` for [text](https://askubuntu.com/questions/13447/how-do-i-change-the-default-text-editor) edits.
+
 * VirtualBox mouse was freezing. I found a [solution](https://ubuntuforums.org/showthread.php?t=2395969) that seems to work: *Go into the preferences of your VirtualBox Manager. Click on "Input" and make sure that "Auto Capture Keyboard" is not selected for "VirtualBox Manager" and "Virtual Machine".*
+
+* `gthumb` had a dark theme, ignoring system theme. I had to edit its [desktop](https://askubuntu.com/questions/1017886/gthumb-version-3-4-3-with-light-background-colors-in-menus-and-browser-like) file: 
+
+```
+Exec=env GTK_THEME=Ambiance:light gthumb %U
+```
 
 * The frequent apps list is in `~/.local/share/gnome-shell/application_state`.
 
 * If GNOME shell [freezes](https://wiki.archlinux.org/index.php/GNOME/Troubleshooting#Shell_freezes), type `Ctrl+Alt+F3`, login and run `pkill -HUP gnome-shell`.
+
+* I copied *ttf* [fonts](https://askubuntu.com/questions/3697/how-do-i-install-fonts) from a Windows VM to `~/.local/share/fonts`.  
 
 ##Other Useful Tools
 
@@ -115,8 +129,7 @@ I did a minimal Ubuntu install. I am so happy they offer that, as in the past I 
 
 ```bash
 sudo apt remove --purge ubuntu-report 
-# please fire the dev that stored configuration in ~/.cache ($XDG_CONFIG_HOME ?)
-# was the new intern in the team the only one that agreed to implement ubuntu-report?
+sudo apt remove --purge popularity-contest
 
 sudo apt install synaptic
 sudo apt install gnome-tweaks
@@ -154,6 +167,12 @@ $ df -h -T | grep loop
 
 Someone designed `snap` to use `squashfs` and now each *snap* needs a `loop` device. In place of fixing the root of problem and come up with something better, Ubuntu developers are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices.
 
+Useful `.bash_aliases` alias:
+
+```
+dfh='df -h -T -x tmpfs -x devtmpfs -x squashfs'
+```
+
 ###Getting Rid of Snaps
 
 Ubuntu desktop may not function properly if you do any of these. This info is listed here for completeness only.
@@ -172,6 +191,27 @@ To [remove](https://www.reddit.com/r/Ubuntu/comments/8krkam/system_monitor_on_18
 sudo snap remove gnome-system-monitor
 sudo apt install gnome-system-monitor
 ```
+
+###Final Steps
+
+* Obligatory `/etc/hosts` entries:
+
+```
+0.0.0.0 google-analytics.com
+0.0.0.0 www.google-analytics.com
+0.0.0.0 ssl.google-analytics.com
+
+0.0.0.0 daisy.ubuntu.com
+0.0.0.0 metrics.ubuntu.com
+0.0.0.0 popcon.ubuntu.com
+0.0.0.0 motd.ubuntu.com
+```
+
+* Installed `sudo apt install tlp zram-config` and enabled and started their services.
+
+* Installed `openvpn`. Added client configuration in `/etc/openvpn/client/my-client.conf` and enabled and started its service `sudo systemctl start openvpn-client@my-client`. For firewall, had to install `sudo apt install netfilter-persistent`.
+
+* `veracrypt` needs `sudo apt install libcanberra-gtk-module libcanberra-gtk3-module`.
 
 ##Summary
 
