@@ -18,6 +18,7 @@
 * [Heise](https://www.heise.de/newsticker/)
 * [Golem.de](https://www.golem.de/)
 * [Chip.de](https://www.chip.de/nachrichten)
+* [ComputerWoche.de](https://www.computerwoche.de/)
 * [MIT News](http://news.mit.edu/)
 * [EnGadget](https://www.engadget.com/)
 * [LifeHacker](https://lifehacker.com/)
@@ -30,6 +31,7 @@
 * [Reddit InternetIsBeautiful](https://www.reddit.com/r/internetisbeautiful)
 * [BetaNews](https://betanews.com/)
 * [The Inquirer](https://www.theinquirer.net/type/news)
+* [ZDNet](https://www.zdnet.com/)
 * [Ted](https://www.ted.com/)
 
 <hr>
