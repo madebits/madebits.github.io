@@ -117,6 +117,8 @@ To change password of `secret.bin` (file is overwritten in place, so backup it b
 # enter new pass
 ```
 
+Use `history -r` or `kill -9 $$` to prevent `bash` from storing command history.
+
 ###Container Management
 
 With `cs-key.sh` ready, we can now automate for convenience open / close with a second script `cs-map.sh` (`cs-key.sh` should be in same folder). The `cs-map.sh` script can be used as follows:
