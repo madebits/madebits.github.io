@@ -180,4 +180,14 @@ My `$HOME/.cache` is mounted in `tmpfs` (despite my encrypted disk partition) as
 ls -d snap/*/common/.cache | xargs rm -rf
 ```
 
+## Within The Snap
+
+To view the world as a snap sees it from within, we can get a [shell](https://snapcraft.io/tutorials/advanced-snap-usage#6-and-more) using:
+
+```
+snap run --shell gimp
+# then within snap shell
+env | grep SNAP
+```
+
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-11-13-ETL-Solutions.md'>ETL Solutions</a></ins>
