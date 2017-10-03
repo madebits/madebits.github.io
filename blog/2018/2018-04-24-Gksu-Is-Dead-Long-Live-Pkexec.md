@@ -1,6 +1,8 @@
 
 #gksu Is Dead, Long Live pkexec
 
+2018-04-24
+
 <!--- tags: linux -->
 
 Well, [no](https://jeremy.bicha.net/2018/04/18/gksu-removed-from-ubuntu/) more `gksu` in latest Ubuntu 18.04. People recommend using `pkexec` instead.
