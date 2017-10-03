@@ -398,7 +398,7 @@ The following command changes the password of a slot in place. Note that `-slot 
 
 ```bash
 sudo csman.sh chp container.bin -ck -slot 1 --- -out container.bin -cko -slot 1 ---
-# put same container secret of slot 1, in slot 2 with maybe a different pass
+# put same container secret of slot 1, in slot 2 using maybe a different or same pass
 sudo csman.sh chp container.bin -ck -slot 1 --- -out container.bin -cko -slot 2 ---
 ```
 
