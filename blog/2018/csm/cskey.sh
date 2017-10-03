@@ -145,13 +145,18 @@ function readNewPass()
 function main()
 {
     local mode="$1"
-    local file="${2:-secret.bin}"
+    shift
+    local file="${1:-secret.bin}"
+    shift
     local key=""
     case "$mode" in
         enc)
             readNewPass
             key=$(head -c 512 /dev/urandom | base64 -w 0)
-            #echo $key | base64 -d > out.txt
+            if [ "$CS_ECHO_KEY" = "1" ]; then
+                echo
+                echo $key
+            fi
             encodeKey "$file" "$pass" "$key"
         ;;
         dec)
@@ -162,6 +167,10 @@ function main()
             pass1=$(readPass)
             (>&2 echo)
             key=$(decodeKey "$file" "$pass1" | base64 -w 0)
+            if [ "$CS_ECHO_KEY" = "1" ]; then
+                echo
+                echo $key
+            fi
             readNewPass
             encodeKey "$file" "$pass" "$key"
         ;;
