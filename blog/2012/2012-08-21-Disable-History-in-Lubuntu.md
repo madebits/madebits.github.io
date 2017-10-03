@@ -22,7 +22,7 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	sudo chattr +i ~/.local/share/recently-used.xbel
 	```
 
-	If using GThumb, apply same to `$HOME/.config/gthumb/history.xbel` (same for the `root` user).
+	If using GThumb, apply same to `$HOME/.config/gthumb/history.xbel` (same for the `root` user). If you use GNOME, apply same to `$HOME/.local/share/gnome-shell/application_state` and to `$HOME/.config/nautilus/desktop-metadata` (or link it to `/dev/null`).
 
 1. Disable thumbnail caching. One way to achieve that is as follows (but movie thumbnails, etc, will not work). Several applications, including pcmanfm, cache thumbnails on ~/.thumbnails folder. To disable this feature permanently, I used:
 	```
