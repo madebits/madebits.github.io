@@ -20,13 +20,24 @@ lastSecretTime=""
 # error
 function showError()
 {
-    (>&2 echo "! $1")
+	(>&2 echo "! $1")
     exit 1
 }
 
 function newName()
 {
-    cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 8 | head -n1
+	local newName=""
+	local count=0
+	while :
+	do
+		count=$((count+1))
+		newName=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 4 | head -n1)
+		newName="${count}_${newName}"
+		if [ ! -e "/dev/mapper/${newName}" ]; then
+			break
+		fi
+    done
+    echo "$newName"
 }
 
 # value valueName
@@ -35,7 +46,7 @@ function checkArg()
     local value=$1
     local key=$2
     if [ -z "$value" ]; then
-        showError "${key} required"
+		showError "${key} required"
     fi
 }
 
@@ -70,10 +81,10 @@ function mntDirUser()
 # file
 function ownFile()
 {
-    local file="$1"
-    if [ -f "$file" ]; then
-        chown $(id -un "$user"):$(id -gn "$user") "$file"
-    fi
+	local file="$1"
+	if [ -f "$file" ]; then
+		chown $(id -un "$user"):$(id -gn "$user") "$file"
+	fi
 }
 
 # name
@@ -100,7 +111,7 @@ function umountContainer()
 # name
 function mountContainer()
 {
-    local name=$(validName "$1")
+	local name=$(validName "$1")
     local mntDir1=$(mntDirRoot "$name")
     local mntDir2=$(mntDirUser "$name")
     
@@ -142,7 +153,7 @@ function openContainer()
     checkArg "$secret" "secret"
     lastSecret="$secret"
     if [ -f "$secret" ]; then
-        lastSecretTime=$(stat -c %z "$secret")
+		lastSecretTime=$(stat -c %z "$secret")
     fi
     shift
 
@@ -150,7 +161,7 @@ function openContainer()
     checkArg "$device" "container"
     lastContainer="$device"
     if [ -f "$device" ]; then
-        lastContainerTime=$(stat -c %z "$device")
+		lastContainerTime=$(stat -c %z "$device")
     fi
     shift
 
@@ -170,32 +181,32 @@ function openContainer()
 # container bs count seek
 function ddContainer()
 {
-    local container="$1"
-    local bs="$2"
-    local count="$3"
-    local seek="$4"
-    
-    if [ -z "$seek" ]; then
-        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" status=progress
-    else
-        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" seek="$seek" status=progress
-    fi
+	local container="$1"
+	local bs="$2"
+	local count="$3"
+	local seek="$4"
+	
+	if [ -z "$seek" ]; then
+		sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" status=progress
+	else
+		sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" seek="$seek" status=progress
+	fi
 }
 
 # size
 function checkNumber()
 {
-    local re='^[0-9]+$'
-    if ! [[ "$1" =~ $re ]] ; then
-        showError "$1 not a number"
-    fi
+	local re='^[0-9]+$'
+	if ! [[ "$1" =~ $re ]] ; then
+		showError "$1 not a number"
+	fi
 }
 
 # secret
 function createSecret()
 {
-    local secret="$1"
-    echo "Creating ${secret} ..."
+	local secret="$1"
+	echo "Creating ${secret} ..."
     sudo -E -u "$user" "${toolsDir}/cskey.sh" enc "$secret"
 }
 
@@ -203,7 +214,7 @@ function createSecret()
 function createContainer()
 {
     local name=$(validName "-")
-    
+	
     local secret="$1"
     checkArg "$secret" "secret"
     shift
@@ -211,10 +222,10 @@ function createContainer()
     local container="$1"
     checkArg "$container" "container"
     if [ -f "$container" ]; then
-        read -p "Overwrite container file ${container} [y | any key to exit]: " overwriteContainer
-        if [ "$overwriteContainer" != "y" ]; then
-            showError "nothing to do"
-        fi
+		read -p "Overwrite container file ${container} [y | any key to exit]: " overwriteContainer
+		if [ "$overwriteContainer" != "y" ]; then
+			showError "nothing to do"
+		fi
     fi
     shift
 
@@ -227,7 +238,7 @@ function createContainer()
 
     echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
     if [ "${size: -1}" = "G" ]; then
-        ddContainer "$container" "1G" "$sizeNum"
+		ddContainer "$container" "1G" "$sizeNum"
     elif [ "${size: -1}" = "M" ]; then
         ddContainer "$container" "1M" "$sizeNum"
     else
@@ -236,16 +247,16 @@ function createContainer()
     sync
     
     if [ -f "$secret" ]; then
-        lastSecret="$secret"
-        lastSecretTime=$(stat -c %z "$secret")
-        read -p "Overwrite secret file $secret [y | any key to reuse]: " overwriteSecret
-        case "$overwriteSecret" in
-            y)
+		lastSecret="$secret"
+		lastSecretTime=$(stat -c %z "$secret")
+		read -p "Overwrite secret file $secret [y | any key to reuse]: " overwriteSecret
+		case "$overwriteSecret" in
+			y)
             createSecret "$secret"
-            ;;
+			;;
         esac
-    else
-        createSecret "$secret"
+	else
+		createSecret "$secret"
     fi
     
     echo "(Re-)enter password to open the container for the first time ..."
@@ -277,102 +288,102 @@ function closeAll()
 
 function changePass()
 {
-    local secret="$1"
+	local secret="$1"
     checkArg "$secret" "secret"
     if [ -f "$secret" ]; then
-        lastSecretTime=$(stat -c %z "$secret")
+		lastSecretTime=$(stat -c %z "$secret")
     fi
 
-    sudo -E -u "$user" "${toolsDir}/cskey.sh" chp "$secret"
-    sleep 1
-    touchFile "$secret" "$lastSecretTime"
+	sudo -E -u "$user" "${toolsDir}/cskey.sh" chp "$secret"
+	sleep 1
+	touchFile "$secret" "$lastSecretTime"
 }
 
 function touchDiskFile()
 {
-    if [ ! -f "$1" ]; then
-        (>&2 echo "! no file $1")
-        exit 1
-    fi
-    local time="$2"
-    if [ -z "$time" ]; then
-        time=$(stat -c %z "$1")
-    fi
-    echo "Setting file times to: $time"
-    touchFile "$1" "$time"
-    stat "$1"
+	if [ ! -f "$1" ]; then
+		(>&2 echo "! no file $1")
+		exit 1
+	fi
+	local time="$2"
+	if [ -z "$time" ]; then
+		time=$(stat -c %z "$1")
+	fi
+	echo "Setting file times to: $time"
+	touchFile "$1" "$time"
+	stat "$1"
 }
 
 function touchFile()
 {
-    local file="$1"
-    local fileTime="$2"
-    if [ -f "$file" ]; then
+	local file="$1"
+	local fileTime="$2"
+	if [ -f "$file" ]; then
 sudo bash -s "$file" "$fileTime" <<'EOF'
-    now=$(date +"%F %T.%N %z") && date -s "$2" > /dev/null && touch "$1"
-    # && date -s "$now"
+	now=$(date +"%F %T.%N %z") && date -s "$2" > /dev/null && touch "$1"
+	# && date -s "$now"
 EOF
-    fi
+	fi
 }
 
 function resetTime()
 {
-    touchFile "$lastContainer" "$lastContainerTime"
-    sleep 1
-    touchFile "$lastSecret" "$lastSecretTime"
+	touchFile "$lastContainer" "$lastContainerTime"
+	sleep 1
+	touchFile "$lastSecret" "$lastSecretTime"
 }
 
 function cleanUp()
 {
-    closeContainer "$lastName"
-    resetTime
-    exit 0
+	closeContainer "$lastName"
+	resetTime
+	exit 0
 }
 
 function showChecksum()
 {
-    sha256sum "$0"
-    sha256sum "${toolsDir}/cskey.sh"
-    if [ -f "${toolsDir}/aes" ]; then
-        sha256sum "${toolsDir}/aes"
-    fi
+	sha256sum "$0"
+	sha256sum "${toolsDir}/cskey.sh"
+	if [ -f "${toolsDir}/aes" ]; then
+		sha256sum "${toolsDir}/aes"
+	fi
 }
 
 # name
 function resizeContainer()
 {
-    local name=$(validName "$1")
-    cryptsetup resize "$name"
-    resize2fs "/dev/mapper/$name"
+	local name=$(validName "$1")
+	cryptsetup resize "$name"
+	resize2fs "/dev/mapper/$name"
 }
 
 # only works for full G/M blocks
 function increaseContainer()
 {
-    local name=$(validName "$1")
-    shift
-    local size="$1"
+	local name=$(validName "$1")
+	shift
+	local size="$1"
     checkArg "$size" "size"
     shift
     local sizeNum="${size:$length:-1}"
     checkNumber "$sizeNum"
 
-    container=$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)
-    if [ ! -f "$container" ]; then
-        showError "no such container file ${container}"
-    fi
-    local currentSize=$(stat -c "%s" "$container")
-    if [ "${size: -1}" = "G" ]; then
-        local sizeG=$(($currentSize / (1024 * 1024 * 1024)))
-        if [ "$sizeG" = "0" ]; then # keep it simple
-            showError "cannot determine current size in G"
-        fi
+	container=$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)
+	if [ ! -f "$container" ]; then
+		showError "no such container file ${container}"
+	fi
+	local currentSize=$(stat -c "%s" "$container")
+	if [ "${size: -1}" = "G" ]; then
+		local sizeG=$(($currentSize / (1024 * 1024 * 1024)))
+		if [ "$sizeG" = "0" ]; then # keep it simple
+			showError "cannot determine current size in G"
+		fi
         ddContainer "$container" "1G" "$sizeNum" "$sizeG"
     elif [ "${size: -1}" = "M" ]; then
-        local sizeM=$(($currentSize / (1024 * 1024)))
-        if [ "$sizeM" = "0" ]; then
-            showError "cannot determine current size in M"
-        fi
+		local sizeM=$(($currentSize / (1024 * 1024)))
+		if [ "$sizeM" = "0" ]; then
+			showError "cannot determine current size in M"
+		fi
         ddContainer "$container" "1M" "$sizeNum" "$sizeM"
     else
         showError "size can be M or G"
@@ -382,7 +393,7 @@ function increaseContainer()
 
 function showHelp()
 {
-    local bn=$(basename "$0")
+	local bn=$(basename "$0")
     (>&2 echo "Usage:")
     (>&2 echo " $bn open secret device [ additional cryptsetup parameters ]")
     (>&2 echo " $bn openLive secret device [ additional cryptsetup parameters ]")
@@ -403,7 +414,7 @@ function showHelp()
 
 function main()
 {
-    showChecksum
+	showChecksum
     local mode="$1"
     shift
 
@@ -415,22 +426,22 @@ function main()
             openContainer "$@"  
         ;;
         openLive|ol)
-            openContainer "-" "$@"
-            trap cleanUp SIGHUP SIGINT SIGTERM
-            tput setaf 1
-            read -p "Press Enter or Ctrl+C to close the container ..."
-            tput sgr 0
-            echo
-            cleanUp
+			openContainer "-" "$@"
+			trap cleanUp SIGHUP SIGINT SIGTERM
+			tput setaf 1
+			read -p "Press Enter or Ctrl+C to close the container ..."
+			tput sgr 0
+			echo
+			cleanUp
         ;;
         close|c)
             closeContainer "$@"
         ;;
         mount)
-            mountContainer "$1"
+			mountContainer "$1"
         ;;
         umount)
-            umountContainer "$1"
+			umountContainer "$1"
         ;;
         create)
             createContainer "$@"            
@@ -439,16 +450,16 @@ function main()
             closeAll
         ;;
         changePass|chp)
-            changePass "$1"
+			changePass "$1"
         ;;
         resize|r)
-            resizeContainer "$1"
+			resizeContainer "$1"
         ;;
         increase|inc)
-            increaseContainer "$@"
+			increaseContainer "$@"
         ;;
         touch)
-            touchDiskFile "$@"
+			touchDiskFile "$@"
         ;;
         *)
             showHelp
