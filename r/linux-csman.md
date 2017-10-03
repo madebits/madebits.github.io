@@ -200,7 +200,7 @@ Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you
 
 ### Using Containers
 
-`cryptsetup` requires names for devices and `csman.sh` follows same convention. The container names are prefixed with `csm-`. You can specify names in command and options either with `csm-` prefix, or without it. The name is used as part of mount folder. If you want to have a pre-known path to copy files consider specifying a name when opening the container using `-n name` option. If you specify no name, a random one one is generated and printed out by *open* command. 
+`cryptsetup` requires names for devices and `csman.sh` follows same convention. The container names are prefixed with `csm-`. You can specify names in command and options either with `csm-` prefix, or without it. The name is used as part of mount folder. If you want to have a pre-known path to copy files consider specifying a name when opening the container using `-n name` option. If you specify no name, a random one is generated and printed out by *open* command. 
 
 The open command is `open` or `o`:
 
@@ -208,15 +208,15 @@ The open command is `open` or `o`:
 sudo csman.sh o container.bin secret.bin -ck -i e -ao @foo -k --- -n n1
 ```
 
-We are passing here some options to `cskey.sh` via `-ck ... ---` and giving container a name via `-n`.
+We are passing here some options to `cskey.sh` via `-ck ... ---` and giving container a name via `-n`. The name will be `csm-n1`, mounted in `$HOME/mnt/csm-n1`.
 
 If the ETX4 volume has no label `csman.sh` will try to give it a label based on filename. You can use `-sl label` option to specify a new EXT4 volume label with open.
 
-It is possible to open the container, but leave it unmounted by passing `-u` to open command. In this case you can use `sudo csman.sh mount name` later to mount the file system. Similarly, if a container is open and mounted `sudo csman.sh umount name` will unmount it only (but not close *dm-crypt*).
+It is possible to open the container, but leave it unmounted by passing `-u` to open command (e.g. if you want to `fsck` it). In this case you can use `sudo csman.sh mount name` later to mount the file system. Similarly, if a container is open and mounted `sudo csman.sh umount name` will unmount it only (but not close *dm-crypt* device).
 
 #### Open Options
 
-There are some additional options that can be specified with open command. `-r` to mount read-only, and `-l` to keep container open live - the open command does not exit in this case, it waits for you to press twice *Enter* key to close the container. 
+There are some additional options that can be specified with open command. `-r` to mount *read-only*, and `-l` to keep container open *live* - the open command does not exit in this case, it waits for you to press twice *Enter* key to close the container. 
 
 For these commands there are a few open command shortcuts: `o` *open*, `ol` *open ... -l* and `olr` *open ... -r -l*.
 
@@ -238,7 +238,7 @@ It is possible to increase the size of an open container file live.
 
 If you enlarge the container file on your own you can run `sudo csman.sh resize name` to inform `cryptsetup` and EXT4 of added size.
 
-Alternatively, use `sudo csman.sh increase name size`. The *size* is the delta size to add in M or G (same as with create command) and not the total final size.
+Alternatively, use `sudo csman.sh increase name size`. The *size* is the delta size to add in *M* or *G* (same as with `create` command) and not the total final size.
 
 ### Closing Containers
 
@@ -250,9 +250,9 @@ To close a container named *n1* (*csm-n1*) use `close` or `c` command:
 sudo csman.sh c n1
 ```
 
-The close command will try to undo all effects of open. It can be run more than once in case something does work on first time.
+The close command will try to undo all effects of open. It can be run more than once in case something does work on first time. Any open applications accessing files in mounted volume will be killed.
 
-To close all `csman.sh` open containers use `closeAll`, `ca` or `x`:
+To close all `csman.sh` open containers use `closeAll`, `ca`, or `x` command (the `x` command also removes session data if any):
 
 ```bash
 sudo csman.sh x
@@ -268,7 +268,7 @@ Changing the password of a secret file can be done via:
 sudo csman.sh chp secret.bin -ck -i e ---
 ```
 
-The `-ck` is used to pass option to `cskey.sh` to decrypt the file and `-cko` is used if needed to pass options to `cskey.sh` to encrypt the new output file.
+The `-ck` is used to pass option to `cskey.sh` to decrypt the file and `-cko` is used (if needed) to pass options to `cskey.sh` to encrypt the new output file.
 
 By default, *secret.bin* is modified in place, which can be risky. To create a new copy use:
 
@@ -278,7 +278,7 @@ sudo csman.sh chp secret.bin new-secret.bin -ck -i e ---
 
 ## File Tools
 
-These commands can be run without `sudo`.
+> These commands are intended to be run without `sudo`.
 
 ### Copy Folders
 
