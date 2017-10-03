@@ -93,6 +93,34 @@ msg="$@"
 zenity --info --text="$msg"
 ```
 
-And now, finally, it *just* works.
+And now, it *just* works.
+
+##A Poor Man's gksu
+
+We can use the idea above to create a poor man's `gksu.sh` script:
+
+```bash
+#!/bin/bash
+
+if [[ $(id -u) != "0" ]]; then
+    absScriptPath="$( cd "$(dirname "$0")" ; pwd -P )/$(basename "$0")"
+    pkexec "$absScriptPath" "$DISPLAY" "$XAUTHORITY" "$@"
+    exit 0
+fi
+# root here
+export DISPLAY="$1"
+shift
+export XAUTHORITY="$1"
+shift
+$@
+```
+
+It can be used as follows:
+
+```
+./gksu.sh leafpad /etc/fstab
+```
+
+We are back were it started. More environment variables can be passed in same fashion as needed.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2018/2018-04-25-OpenVPN-In-Azure.md'>OpenVPN In Azure</a> <a rel='next' id='fnext' href='#blog/2018/2018-01-27-Dirac-Notation-Cheatsheet.md'>Dirac Notation Cheatsheet</a></ins>
