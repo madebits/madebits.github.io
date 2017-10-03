@@ -228,12 +228,12 @@ The `-slots count` option is provided as convenience to create 1024 byte slots. 
 
 ```bash
 # these are same, create
-sudo csman.sh n container.bin secret.bin 1M -co -o 4 ---
-sudo csman.sh n container.bin secret.bin 1M -slots 2
+sudo csman.sh n container.bin secret.bin 1M -co -o 8 ---
+sudo csman.sh n container.bin secret.bin 1M -slots 4
 
 # these are also same, open
-sudo csman.sh o container.bin secret.bin 1M -co -o 4 ---
-sudo csman.sh o container.bin secret.bin 1M -slots 2
+sudo csman.sh o container.bin secret.bin 1M -co -o 8 ---
+sudo csman.sh o container.bin secret.bin 1M -slots 4
 ```
 
 Do **not** manipulate container file as secret file using `cskey.sh` or other tooling (such as `csman.sh chp`), other than for reading (decoding) the secret. To extract secret file back from the container use:
