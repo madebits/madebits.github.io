@@ -108,7 +108,8 @@ We need the following helper bash scripts (ideally copy them as root in `/usr/lo
 
 * [cskey.sh](blog/2018/csm/cskey.sh)
 * [csman.sh](blog/2018/csm/csman.sh)
-
+* [csfile.sh](blog/2018/csm/csfile.sh) (optional)
+* 
 These scripts use the following helper tools:
 
 ```bash
