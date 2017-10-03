@@ -127,6 +127,14 @@ There is one more thing to complain. Someone designed `snap` to use `squashfs` a
 
 And what do they do? In place of fixing the root of problem and come with something better, they are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices. An initial bad decision is followed by even more bad decisions to cover up the initial bad one. What about *GNU coreutils*, will they hack them too? What about all third-party software (e.g. *VeraCrypt*)? Oh, they compiled its code in GNOME too. What is next one in the list? Getting rid of KDE, and so on.
 
+To [remove](https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu) `snap` one can use:
+
+```bash
+sudo apt autoremove --purge snapd
+# to remove snaps appearing in gnome-software only
+sudo apt-get remove --purge gnome-software-plugin-snap
+```
+
 ##Summary
 
 Apart of GNOME taskbar, which I really do not like, as it consumes the limited vertical space on screen:
