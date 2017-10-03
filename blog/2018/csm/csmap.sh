@@ -150,7 +150,7 @@ function openContainer()
 function createContainer()
 {
     local name=$(validName "-")
-
+    
     local secret="$1"
     checkArg "$secret" "secret"
     shift
@@ -163,7 +163,7 @@ function createContainer()
     checkArg "$size" "size"
     shift
 
-    sizeNum="${size:$length:-1}"
+    local sizeNum="${size:$length:-1}"
 
     echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
 
@@ -255,6 +255,49 @@ function showChecksum()
     fi
 }
 
+# name
+function resizeContainer()
+{
+    local name=$(validName "$1")
+    cryptsetup resize "$name"
+    resize2fs "/dev/mapper/$name"
+}
+
+function increaseContainer()
+{
+    local name=$(validName "$1")
+    shift
+    local size="$1"
+    checkArg "$size" "size"
+    shift
+    local sizeNum="${size:$length:-1}"
+    container=$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)
+    if [ ! -f "$container" ]; then
+        (>&2 echo "! no such container file ${container}")
+        exit 1
+    fi
+    local currentSize=$(stat -c "%s" "$container")
+    if [ "${size: -1}" == "G" ]; then
+        local sizeG=$(($currentSize / (1024 * 1024 * 1024)))
+        if [ "$sizeG" = "0" ]; then # keep it simple
+            (>&2 echo "! cannot determine current size in G")
+            exit 1
+        fi
+        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs=1G count="$sizeNum" seek="$sizeG" status=progress
+    elif [ "${size: -1}" == "M" ]; then
+        local sizeM=$(($currentSize / (1024 * 1024)))
+        if [ "$sizeM" = "0" ]; then
+            (>&2 echo "! cannot determine current size in M")
+            exit 1
+        fi
+        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs=1M count="$sizeNum" seek="$sizeM" status=progress
+    else
+        (>&2 echo "! size can be M or G")
+        exit 1  
+    fi
+    resizeContainer "$name"
+}
+
 function showHelp()
 {
     local bn=$(basename "$0")
@@ -266,7 +309,10 @@ function showHelp()
     (>&2 echo " $bn closeAll")
     (>&2 echo " $bn create secret container size [ additional cryptsetup parameters ]")
     (>&2 echo "    size should end in M or G, secret and container files will be overwritten, use with care")
-    (>&2 echo " $bn changePass secret")  
+    (>&2 echo " $bn changePass secret")
+    (>&2 echo " $bn resize name")
+    (>&2 echo " $bn increase name size") 
+    (>&2 echo "    size should end in M or G")
 }
 
 function main()
@@ -302,6 +348,12 @@ function main()
         ;;
         changePass|chp)
             changePass "$1"
+        ;;
+        resize|r)
+            resizeContainer "$1"
+        ;;
+        increase|inc)
+            increaseContainer "$@"
         ;;
         *)
             showHelp
