@@ -68,14 +68,16 @@ To view *thumb-print* of the server certificate we can use:
 openssl x509 -noout -fingerprint -sha256 -inform pem -in hostMongo.pem
 ```
 
+#### Helper Script
+
 Some of the steps above can be put in script to generate new host certificates:
 
 ```bash
 #!/bin/bash
 
 if [ "$1" = "" ]; then
-        echo 'Please enter a hostname (Common Name CN )!'
-        exit 1
+  echo 'Please enter a hostname (Common Name CN )!'
+  exit 1
 fi
 
 HOST_NAME="$1"
