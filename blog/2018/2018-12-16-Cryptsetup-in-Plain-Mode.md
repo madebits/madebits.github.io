@@ -59,7 +59,7 @@ sudo cryptsetup resize enc
 sudo resize2fs /dev/mapper/enc
 ```
 
-If container open, but unmounted, to check its file system use:
+If container is open, but unmounted, to check its file system use:
 
 ```bash
 sudo e2fsck -f /dev/mapper/enc
