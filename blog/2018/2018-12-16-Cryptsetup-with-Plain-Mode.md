@@ -44,7 +44,7 @@ dd iflag=fullblock if=/dev/urandom of=container.bin bs=1G count=10 seek=30
 
 Now `cryptsetup open` container, but do not mount it:
 
-```
+```bash
 sudo e2fsck -f /dev/mapper/enc
 sudo resize2fs /dev/mapper/enc
 sudo e2fsck -f /dev/mapper/enc
@@ -363,7 +363,7 @@ sudo ./cs-map.sh create enc1 secret.bin container.bin 30M
 
 These scripts use the following helper tools:
 
-```
+```bash
 sudo apt install cryptsetup bindfs argon2 ccrypt
 ```
 
