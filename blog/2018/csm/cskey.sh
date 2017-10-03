@@ -352,16 +352,16 @@ function getSecret()
         logError "# secret: user specified (-s or -as)"
         secret="$cskSecret"
     else
+        # skip some bytes
+        head -c $RANDOM /dev/urandom > /dev/null
         if [ "${cskUseURandom}" = "1" ]; then
-            logError "# secret: generating new"
+            logError "# secret: generating new (-su)"
             # https://security.stackexchange.com/questions/3936/is-a-rand-from-dev-urandom-secure-for-a-login-key
             secret=$(head -c 512 /dev/urandom | base64 -w 0)
         else
             logError "# secret: generating new, move mouse around if stuck"
-            # skip some bytes
-            head -c $RANDOM /dev/urandom > /dev/null
             # 32 bytes from /dev/random are enough
-            # but length matters anyway :), so we use 512 byte long keys
+            # but length matters anyway, so we use 512 byte keys
             secret=$(cat <(head -c 480 /dev/urandom) <(head -c 32 /dev/random) | base64 -w 0)    
         fi
     fi
