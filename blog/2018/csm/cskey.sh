@@ -1,6 +1,13 @@
-#!/bin/bash
+#!/bin/bash -
 
 # cskey.sh
+
+PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+\export PATH
+\unalias -a
+hash -r
+ulimit -H -c 0 --
+IFS=$' \t\n'
 
 set -eu -o pipefail
 
@@ -139,10 +146,10 @@ function pass2hash()
 	fi
 
 	# argon2 tool has a build-in limit of 126 chars on pass length
-	local state=$(set +o)
-	set +x
+	#local state=$(set +o)
+	#set +x
 	pass=$(echo -n "$pass" | sha512sum | cut -d ' ' -f 1 | tr -d '\n' | while read -n 2 code; do printf "\x$code"; done | base64 -w 0)
-	eval "$state"
+	#eval "$state"
 	echo -n "$pass" | "$acmd" "$salt" -id "${cskHashToolOptions[@]}" -l 128 -r | tr -d '\n'
 }
 

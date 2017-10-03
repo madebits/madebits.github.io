@@ -1,6 +1,13 @@
-#!/bin/bash
+#!/bin/bash -
 
 # csman.sh
+
+PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+\export PATH
+\unalias -a
+hash -r
+ulimit -H -c 0 --
+IFS=$' \t\n'
 
 set -eu -o pipefail
 
@@ -1013,7 +1020,7 @@ function main()
         open|o)
             openContainer "-" "$@"
             if [ "$csmLive" = "1" ]; then
-                trap cleanUp SIGHUP SIGINT SIGTERM
+                trap cleanUp SIGHUP SIGINT SIGTERM ABRT QUIT
                 tput setaf 1
                 read -p "Press Enter twice or Ctrl+C to close the container ..."
                 logError
