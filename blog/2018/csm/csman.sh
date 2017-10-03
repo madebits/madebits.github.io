@@ -484,10 +484,10 @@ function openContainer()
     local secret="${1:-}"
     checkArg "$secret" "secret"
     lastSecret="$secret"
-    if [ -f "$secret" ]; then
+    if [ -f "$secret" ] && [ "$secret" != "--" ]; then
         lastSecretTime=$(stat -c %z "$secret")
     fi
-    if [ ! -e "$secret" ]; then
+    if [ ! -e "$secret" ] && [ "$secret" != "--" ]; then
         resetTime
         onFailed "cannot open: $secret"
     fi
@@ -504,7 +504,7 @@ function openContainer()
     echo "Reading ${device} secret from ${secret}"
     local key=$("${csmkeyTool}" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     if [ -z "$key" ]; then
-        onFailed "cannot get key"
+        onFailed "cannot get secret"
     fi
     touchFile "$lastSecret" "$lastSecretTime"
     clearScreen
@@ -559,6 +559,9 @@ function ddContainer()
 function createSecret()
 {
     local secret="$1"
+    if [ "${secret}" = "--" ]; then
+        return
+    fi
     echo "Creating ${secret} ..."
     "${csmkeyTool}" enc "$secret" "${ckOptions[@]}"
     ownFile "$secret"
@@ -642,7 +645,7 @@ function createContainer()
         echo "Reusing existing data (size $size is ingored): $container"
     fi
     
-    if [ -f "$secret" ]; then
+    if [ -f "$secret" ] && [ "$secret" != "--" ]; then
         lastSecret="$secret"
         lastSecretTime=$(stat -c %z "$secret")
         read -p "Overwrite secret file $secret [y | Enter to reuse]: " overwriteSecret
@@ -660,7 +663,7 @@ function createContainer()
     echo "(Re-)enter password to open the container for formating (existing data, if any, will be lost) ..."
     local key=$("${csmkeyTool}" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     if [ -z "$key" ]; then
-        onFailed "cannot get key"
+        onFailed "cannot get secret"
     fi
 
     clearScreen
