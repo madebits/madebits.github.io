@@ -196,7 +196,7 @@ Extra setup:
     ```bash
     #!/bin/bash -
 
-    cmd="feh -F -B white --no-recursive --auto-rotate --draw-filename --hide-pointer"
+    cmd="feh -F -B white --no-recursive --auto-rotate --draw-filename --hide-pointer --auto-zoom"
     path="${1:-.}"
     if [ -d "$path" ]; then
         exec $cmd "$path"
@@ -207,7 +207,7 @@ Extra setup:
         exec $cmd "$dir" --start-at "$file"
     fi
     ```
-
+    
     And added `HOME/.local/share/applications/feh.desktop` file:
 
     ```
