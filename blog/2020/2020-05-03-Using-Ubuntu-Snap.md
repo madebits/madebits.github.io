@@ -256,7 +256,7 @@ The device-serial in `/var/lib/snapd/state.json` looks as follows: `d1360083-b6e
 The device-serial ID and list of installed snaps and their usage data are sent to store on every refresh, which happens automatically and periodically. Refresh period can be controlled using [refresh.hold](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--refresh-hold), and postponed up to 2 months. To pause them for [longer](https://askubuntu.com/questions/930593/how-to-disable-autorefresh-in-snap) and in `/etc/hosts` (need to remove when `snap install`):
 
 ```
-127.0.0.1 api.snapcraft.io
+0.0.0.0 api.snapcraft.io
 ```
 
 ## Summary
