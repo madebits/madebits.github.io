@@ -143,7 +143,7 @@ function pass2hash()
 	set +x
 	pass=$(echo -n "$pass" | sha512sum | cut -d ' ' -f 1 | tr -d '\n' | while read -n 2 code; do printf "\x$code"; done | base64 -w 0)
 	eval "$state"
-	echo -n "$pass" | "$acmd" "$salt" -id "${cskHashToolOptions[@]}" -l 128 -r
+	echo -n "$pass" | "$acmd" "$salt" -id "${cskHashToolOptions[@]}" -l 128 -r | tr -d '\n'
 }
 
 # file pass secret
@@ -178,6 +178,13 @@ function decodeSecret()
     local file="$1"
     local pass="$2"
     local secretLength=$(encryptedSecretLength)
+    
+    # weak shortcut, ok to use for something quick, once a while
+    if [ "$1" = "--" ]; then
+		local sps="$(echo -n "$pass" | sha256sum | cut -d ' ' -f 1 | tr -d '\n')"
+		pass2hash "$pass" "$sps"
+		return
+    fi
     
     if [ -e "$file" ] || [ "$file" = "-" ]; then
 		local fileData=$(head -c 600 "$file" | base64 -w 0)
@@ -361,6 +368,9 @@ function encodeMany()
 # file
 function encryptFile()
 {
+	if [ "$1" = "--" ]; then
+		return
+	fi
 	logError "# Encoding secret in: $1"
 	readKeyFiles
 	local pass=$(readNewPass)
@@ -567,6 +577,7 @@ function createRndFile()
 function showHelp()
 {
 	logError "Usage: $(basename "$0") [enc | dec | ses | rnd] file [options]"
+    logError "Using -- for dec|enc file is a weak shortcut without secret file"
 	logError "Options:"
 	logError " -i inputMode : (enc|dec|ses) used for password"
 	logError "    Password input modes:"
