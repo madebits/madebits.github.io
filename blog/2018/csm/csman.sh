@@ -117,8 +117,8 @@ function touchFile()
     local fileTime="${2:-}"
     if [ -f "$file" ]; then
         if [ -z "${fileTime}" ]; then
-            if [ -d "$HOME/Desktop" ]; then
-                fileTime=$(stat -c %z "$HOME/Desktop")
+            if [ -d "/usr" ]; then
+                fileTime=$(stat -c %z "/usr")
             else
                 fileTime=$(stat -c %z "$HOME")
             fi
