@@ -191,6 +191,11 @@ With `cs-key.sh` ready, we can now automate open / close with a second script fo
 
 set -e
 
+if [ $(id -u) != "0" ]; then
+    (>&2 echo "! needs sudo")
+    exit 1
+fi
+
 toolsDir="$(dirname $0)"
 
 function main()
@@ -223,12 +228,14 @@ function main()
             shift
 
             "${toolsDir}/cs-key.sh" dec "$secret" | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$device" "$name" -
-
+            echo
             mkdir -p "$mntDir1"
             mount "/dev/mapper/$name" "$mntDir1"
             mkdir -p "$mntDir2"
             user=${SUDO_USER:-$(whoami)}
             bindfs -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
+            echo "Mounted $device at $mntDir2. To close use:"
+            echo "$0 close ${name}"
         ;;
         close)
             if [ -z "$name" ]; then
