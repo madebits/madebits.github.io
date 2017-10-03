@@ -231,10 +231,16 @@ function mountContainer()
     if [ ! -e "$dev" ]; then
         onFailed "no mapper device: $name"
     fi
+        
+    local ro=""
+    if [ "$cmsMountReadOnly" = "1" ]; then
+        echo "# mounting read-only"
+        ro="-o ro"
+    fi
     
     mkdir -p "$mntDir1"
     set +e
-    mount "$dev" "$mntDir1"
+    mount ${ro} "$dev" "$mntDir1"
     if [ "$?" != "0" ]; then
         closeContainerByName "$name"
         rmdir "$mntDir1"
@@ -243,11 +249,6 @@ function mountContainer()
     fi
     set -e
     mkdir -p "$mntDir2"
-    local ro=""
-    if [ "$cmsMountReadOnly" = "1" ]; then
-        echo "# mounting user read-only"
-        ro="-r"
-    fi
     bindfs ${ro} --multithreaded -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
     echo "Mounted ${dev} at ${mntDir2}"
 }
