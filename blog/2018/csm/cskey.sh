@@ -31,6 +31,7 @@ cskSessionSaveDecodePassFile=""
 cskSessionSaltFile=""
 cskRndLen="64"
 cskRndBatch="0"
+cskSessionLocation="$HOME/mnt/tmpcsm"
 
 user="${SUDO_USER:-$(whoami)}"
 currentScriptPid=$$
@@ -379,11 +380,35 @@ function decryptFile()
 
 ########################################################################
 
+function fixSessionFilePath()
+{
+	local file="$1"
+	if [[ "$file" == @* ]]; then
+		file="${cskSessionLocation}/${file:1}"
+	fi
+	echo "${file}"
+}
+
+function createSessionSalt()
+{
+	local fs="${cskSessionLocation}"
+	mkdir -p "$fs"
+	local tfs=$(mount | grep "$fs" | cut -d ' ' -f 1)
+	if [ "${tfs}" != "tmpfs" ]; then
+		logError "# session: creating tmpfs in ${fs} (use -ar to choose another)"
+		mount -t tmpfs -o size=8m tmpfs "$fs"
+	fi
+	cskSessionSaltFile="$fs/csm1"
+}
+
 function readSessionPass()
 {
 	if [ -z "$cskSessionPass" ]; then
 		# session specific
 		local sData0=""
+		if [ -z "$cskSessionSaltFile" ]; then
+			createSessionSalt
+		fi
 		if [ -n "$cskSessionSaltFile" ]; then
 			if [ ! -e "$cskSessionSaltFile" ]; then
 				logError "# session: creating new key file: ${cskSessionSaltFile}"
@@ -471,7 +496,7 @@ function createSessionPass()
 
 	# add a token to pass
 	echo -n "${pass}CSKEY" | encryptAes "$cskSessionPass" > "${file}"
-	ownFile "$file"
+	#ownFile "$file"
 	logError
 	logError "# session: password stored in: ${file}"
 	debugData "$(cat ${file} | base64 -w 0)"
@@ -559,7 +584,7 @@ function showHelp()
 	logError " -as file : (enc) session : read secret data from a session file (see -aos)"
 	logError " -aos outFile : (dec) session: write secret data to a encrypted file"
 	logError " -aop outFile : (dec) session: write password data to a encrypted file"
-	logError " -ar file : (enc|dec|ses) session: use file data as part of session key, will be created if not exists"
+	logError " -ar file : (enc|dec|ses) session: use file data as part of session key, will be created if not exists ($cskSessionLocation)"
 	logError " -aa : (enc|dec|ses) session: do not ask for session encryption password (use default)"
 	logError " -r length : (rnd) length of random bytes (default 64)"
 	logError " -rb count : (rnd) generate file.count files"
@@ -624,6 +649,7 @@ function main()
 			;;
 			-ap)
 				apf="${2:?"! -ap file"}"
+				apf=$(fixSessionFilePath "${apf}")
 				shift
 			;;
 			-k)
@@ -644,6 +670,7 @@ function main()
 			;;
 			-as)
 				asf="${2:?"! -as file"}"
+				asf=$(fixSessionFilePath "${asf}")
 				shift
 			;;
 			-c)
@@ -652,6 +679,7 @@ function main()
 			;;
 			-aos)
 				cskSessionSecretFile="${2:?"! -ao file"}"
+				cskSessionSecretFile=$(fixSessionFilePath "${cskSessionSecretFile}")
 				if [ "$(askOverwriteFile "${cskSessionSecretFile}")" != "y" ]; then
 					cskSessionSecretFile=""
 				fi
@@ -659,6 +687,7 @@ function main()
 			;;
 			-aop)
 				cskSessionSaveDecodePassFile="${2:?"! -aop file"}"
+				cskSessionSaveDecodePassFile=$(fixSessionFilePath "${cskSessionSaveDecodePassFile}")
 				if [ "$(askOverwriteFile "${cskSessionSaveDecodePassFile}")" != "y" ]; then
 					cskSessionSaveDecodePassFile=""
 				fi

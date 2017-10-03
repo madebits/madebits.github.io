@@ -117,7 +117,11 @@ function touchFile()
     local fileTime="${2:-}"
     if [ -f "$file" ]; then
         if [ -z "${fileTime}" ]; then
-        fileTime=$(stat -c %z "$HOME")
+            if [ -d "$HOME/Desktop" ]; then
+                fileTime=$(stat -c %z "$HOME/Desktop")
+            else
+                fileTime=$(stat -c %z "$HOME")
+            fi
         fi
         set +e
         #sudo bash -s "$file" "$fileTime" <<-'EOF'
@@ -270,7 +274,7 @@ function closeContainerByName()
     if [ -e "$dev" ]; then
         if [ -z "$lastContainer" ]; then
             set +e
-            lastContainer="$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)"
+            lastContainer="$(getContainerFile "$name")"
             set -e
             resetTime
         fi
@@ -310,12 +314,18 @@ function closeAll()
     done
 }
 
+function getContainerFile()
+{
+    local name=$(validName "${1:-}")
+    cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7
+}
+
 function listContainer()
 {
     local name=$(validName "${1:-}")
     local oName=${name:4}
     echo -e "Name:\t$oName\t$name"
-    local container="$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)"
+    local container="$(getContainerFile "$name")"
     local mode="$(cryptsetup status "$name" | grep mode: | cut -d ' ' -f 7)"
     if [ -z "$container" ]; then
         return
@@ -607,7 +617,7 @@ function increaseContainer()
     local sizeNum="${size: : -1}"
     checkNumber "$sizeNum"
 
-    container="$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)"
+    container="$(getContainerFile "$name")"
     if [ ! -f "$container" ]; then
         onFailed "no such container file ${container}"
     fi
@@ -836,7 +846,17 @@ function main()
         create|n)
             createContainer "$@"            
         ;;
-        closeAll|ca|x)
+        x)
+            local tfs="$HOME/mnt/tmpcsm"
+            if [ -d "${tfs}" ]; then
+                set +e
+                umount "$HOME/mnt/tmpcsm" 2> /dev/null
+                logError "umounted: $HOME/mnt/tmpcsm"
+                rmdir "${tfs}"
+                set -e
+            fi
+        ;&
+        closeAll|ca)
             closeAll
         ;;
         list|l)
