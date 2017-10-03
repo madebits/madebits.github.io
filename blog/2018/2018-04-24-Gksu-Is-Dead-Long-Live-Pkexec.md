@@ -5,9 +5,11 @@
 
 <!--- tags: linux -->
 
-Well, [no](https://jeremy.bicha.net/2018/04/18/gksu-removed-from-ubuntu/) more `gksu` in latest Ubuntu 18.04. People recommend using `pkexec` instead.
+`gksu` has been [removed](https://jeremy.bicha.net/2018/04/18/gksu-removed-from-ubuntu/) in latest Ubuntu 18.04. The nearest alternative left to use is `pkexec`. Some workarounds are needed, given `pkexec` is not a drop in replacement for `gksu`.
 
-With `gksu` I could add code similar to the following to re-run as root a script that contained `zenity` UI started from a non-root user: 
+##Replacing gksu
+
+With `gksu`, one could used code similar to the following to re-run as root a script that contained UI commands started from a non-root user: 
 
 ```bash
 #!/bin/bash
@@ -20,7 +22,7 @@ fi
 echo $@
 ```
 
-Ideally, using `pkexec` as replacement would be same as easy:
+Ideally, using `pkexec` as replacement would be same as easy, but the following does **not** work:
 
 ```bash
 if [[ $(id -u) != "0" ]]; then
@@ -30,6 +32,8 @@ fi
 # root here
 echo $@
 ```
+
+There are two problems to overcome to make the above work.
 
 ##First Problem
 
@@ -53,7 +57,7 @@ echo $@
 
 ##Second Problem
 
-If you try to run a command that needs access to the user interface from `pkexec`, such as, this `zenity` command in the script below:
+If you run a command that needs access to the user interface from `pkexec` as in this example, it will fail:
 
 ```bash
 if [[ $(id -u) != "0" ]]; then
@@ -67,7 +71,7 @@ msg="$@"
 zenity --info --text="$msg"
 ```
 
-You get the following error:
+The following error is reported:
 
 ```
 Unable to init server: Could not connect: Connection refused
@@ -75,7 +79,7 @@ Unable to init server: Could not connect: Connection refused
 (zenity:31120): Gtk-WARNING **: 20:14:17.933: cannot open display:
 ```
 
-The `man pkexec` is very clear: "*pkexec will not allow you to run X11 applications as another user since the $DISPLAY and $XAUTHORITY environment variables are not set*". You have to [edit](https://unix.stackexchange.com/questions/203136/how-do-i-run-gui-applications-as-root-by-using-pkexec) the *polkit* files, and that per each application! Definitively, not the way to go. We can do better:
+The `man pkexec` says: "*pkexec will not allow you to run X11 applications as another user since the $DISPLAY and $XAUTHORITY environment variables are not set*". You have to [edit](https://unix.stackexchange.com/questions/203136/how-do-i-run-gui-applications-as-root-by-using-pkexec) the *polkit* files, and that per each application! We can overcome that, by passing in the variables we need:
 
 ```bash
 if [[ $(id -u) != "0" ]]; then
@@ -93,7 +97,7 @@ msg="$@"
 zenity --info --text="$msg"
 ```
 
-And now, it *just* works.
+With these changes it works.
 
 ##A Poor Man's gksu
 
@@ -121,6 +125,6 @@ It can be used as follows:
 ./gksu.sh leafpad /etc/fstab
 ```
 
-We are back were it started. More environment variables can be passed in same fashion as needed.
+More environment variables can be passed in same fashion as needed.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2018/2018-04-25-OpenVPN-In-Azure.md'>OpenVPN In Azure</a> <a rel='next' id='fnext' href='#blog/2018/2018-01-27-Dirac-Notation-Cheatsheet.md'>Dirac Notation Cheatsheet</a></ins>
