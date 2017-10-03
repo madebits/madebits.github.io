@@ -36,6 +36,7 @@ cskSessionPass=""
 cskSessionPass2=""
 cskSessionSecret=""
 cskSessionKeyFile=""
+cskSessionAutoPass="0"
 
 user="${SUDO_USER:-$(whoami)}"
 currentScriptPid=$$
@@ -251,14 +252,17 @@ function readSessionPass()
 		local sData1=$(uptime -s)
 		local sData2=$(ps ax | grep -E 'systemd --user|cron|udisks' | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | tr -d '\n')
 		local sessionData="${user}${sData1}${sData2}"
-		if [ "$cskInputMode" = "1" ] || [ "$cskInputMode" = "e" ]; then
-			read -p "Session password: " rsp
-		else
-			read -p "Session password: " -s rsp
+		local sSecret="${sessionData}"
+		if [ "$cskSessionAutoPass" = "0" ]; then
+			if [ "$cskInputMode" = "1" ] || [ "$cskInputMode" = "e" ]; then
+				read -p "Session password: " rsp
+			else
+				read -p "Session password: " -s rsp
+			fi
+			sSecret="${sessionData}${rsp}"
 		fi
-		# lengthen artificially
-		cskSessionSecret="${rsp}${rsp^^}${rsp,,}${rsp}${sessionData}${rsp}${rsp,,}${rsp^^}${rsp}${rsp}"
-		debugKey "${cskSessionSecret}"
+		cskSessionSecret=$(echo -n "${sSecret}" | sha256sum | cut -d ' ' -f 1)
+		debugKey "${sSecret}" "${cskSessionSecret}"
 		dumpError
 	fi
 }
@@ -390,7 +394,7 @@ function decryptFile()
 function reEncryptFile()
 {
 	local file="$1"
-	dumpError "# Current: ${file}"
+	dumpError "## Current: ${file}"
 	readKeyFiles
 	local pass1=$(readPass)
 	dumpError ""
@@ -402,7 +406,7 @@ function reEncryptFile()
 		onFailed "cannot get key"
 	fi
 	
-	dumpError "# New"
+	dumpError "## New"
 	
 	cskSessionPass="$cskSessionPass2"
 	
@@ -549,7 +553,8 @@ function showHelp()
 	dumpError " -akey file : (enc) read key data from session encrypted file (see -ao)"
 	dumpError " -o outFile : (chp) write to outFile in place of file"
 	dumpError " -ao outFile : (dec) write key in session encrypted file"
-	dumpError " -d -- dump password and key on stderr for debug"
+	dumpError " -aa : auto session password"
+	dumpError " -d : dump password and key on stderr for debug"
 	dumpError "Examples:"
 	dumpError ' key=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt -key <(echo -n "$key") -h -p 8 -m 16 -t 1000 --'
 }
@@ -623,6 +628,9 @@ function main()
 				local passFile="${2:?"! -pn passFile"}"
 				cskPassFile2=$(readPassFromFile "$passFile")
 				shift
+			;;
+			-aa)
+				cskSessionAutoPass="1"
 			;;
 			-ap)
 				apf="${2:?"! -ap file"}"
