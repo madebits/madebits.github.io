@@ -87,7 +87,7 @@ function clearScreen()
 function ownFile()
 {
     if [ -f "${1:-}" ]; then
-        chown $(id -un "$user"):$(id -gn "$user") "$1"
+        chown $(id -un "$user"):$(id -gn "$user") -- "$1"
     fi
 }
 
@@ -127,12 +127,12 @@ function touchFile()
             if [ -d "/usr" ]; then
                 fileTime=$(stat -c %z "/usr")
             else
-                fileTime=$(stat -c %z "$HOME")
+                fileTime=$(stat -c %z -- "$HOME")
             fi
         fi
         set +e
         #sudo bash -s "$file" "$fileTime" <<-'EOF'
-            now=$(date +"%F %T.%N %z") && date -s "${fileTime}" > /dev/null && touch "$file" 2> /dev/null
+            now=$(date +"%F %T.%N %z") && date -s "${fileTime}" > /dev/null && touch -- "$file" 2> /dev/null
             date -s "$now" > /dev/null
         #   EOF
         set -e
