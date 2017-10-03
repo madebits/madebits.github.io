@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+# https://emojipedia.org/
+
 ws=(
 ""
 "1: ❤️❤️"
@@ -33,17 +35,19 @@ mem=$(free -h | grep Mem: | tr -s ' ' | cut -d ' ' -f 3,2,4)
 
 if [ -z "$@"]; then
     echo "🧑 ${USER} | 🕛 ${up} | Ⓜ️ ${mem} | ☀️ ${bl}%"
-    echo "☠️ i3 Kill"
-    echo "🎛️ i3 Toggle Layout"
-    echo "🔲 i3 New Workspace"
+    echo "☠️ i3 Kill (A+F4|W+Q|W+F4|B2)"
+    echo "🎛️ i3 Toggle Layout (W+Tab|W+w)"
+    echo "🔲 i3 New Workspace (W+^)"
     echo "⛵ i3 Move to New Workspace"
+    echo "📌 i3 Toggle Bar (W+y)"
+    echo "📺 i3 Full Screen (W+f)"
     echo "🛠️ i3 Config"
-    echo "🌀 i3 Reload"
+    echo "🌀 i3 Reload (W+S+r)"
     echo "🔊 Volume"
     
-    echo "🌐 Browser"
+    echo "🌐 Browser (W+b)"
     echo "🌎 Firefox"
-    echo "📂 Files"
+    echo "📂 Files (W+e|W+n)"
     echo "📧 Email"
     echo "🗳️ DropBox"
     
@@ -69,23 +73,24 @@ if [ -z "$@"]; then
     echo "📚 Disk Space"
     echo "️🖨️ Printers"
     
-    echo "🗂️ Ranger"
-    echo "💻 Terminal"
+    echo "🗂️ Ranger (W+g)"
+    echo "💻 Terminal (W+Enter|W+t)"
     echo "📅 Calendar"
     
+    echo "🏳️‍🌈 Lock Screen (W+Esc)"
     echo "📲 Logout"
     echo "♻️ Reboot"
     echo "⛔ Shutdown"
 else
     cmd=$@
     case $cmd in
-        "☠️ i3 Kill")
+        "☠️ i3 Kill (A+F4|W+Q|W+F4|B2)")
             i3-msg 'kill' > /dev/null
             ;;
-        "🎛️ i3 Toggle Layout")
+        "🎛️ i3 Toggle Layout (W+Tab|W+w)")
             i3-msg 'layout toggle tabbed stacking split' > /dev/null
             ;;
-        "🔲 i3 New Workspace")
+        "🔲 i3 New Workspace (W+^)")
             i3-msg workspace number "$(i3NextFreeWorkspace)" > /dev/null
             ;;
         "⛵ i3 Move to New Workspace")
@@ -94,10 +99,16 @@ else
             sleep 0.2 > /dev/null
             i3-msg workspace number "$nws" > /dev/null
             ;;
+        "📺 i3 Full Screen (W+f)")
+            i3-msg 'fullscreen toggle' > /dev/null
+            ;;
+        "📌 i3 Toggle Bar (W+y)")
+            i3-msg 'bar mode toggle' > /dev/null
+            ;;
         "🛠️ i3 Config")
             geany -i $HOME/.config/i3status/config $HOME/.config/i3/start.sh $HOME/.config/i3/rofi_custom.sh $HOME/.config/i3/config > /dev/null &
             ;;
-        "🌀 i3 Reload")
+        "🌀 i3 Reload (W+S+r)")
             i3-msg reload > /dev/null
             i3-msg restart > /dev/null
             ;;
@@ -106,13 +117,13 @@ else
             ;;
             
 
-        "🌐 Browser")
+        "🌐 Browser (W+b)")
             chromium-browser > /dev/null &
             ;;
         "🌎 Firefox")
             firefox > /dev/null &
             ;;
-        "📂 Files")
+        "📂 Files (W+e|W+n)")
             nautilus > /dev/null &
             ;;
         "📧 Email")
@@ -180,16 +191,20 @@ else
             system-config-printer > /dev/null &
             ;;
             
-        "🗂️ Ranger")
+        "🗂️ Ranger (W+g)")
             xterm -e ranger > /dev/null &
             ;;
-        "💻 Terminal")
+        "💻 Terminal (W+Enter|W+t)")
             xterm > /dev/null &
             ;;
         "📅 Calendar")
             zenity --calendar --text="$(date)" --width=320 > /dev/null &
             ;;
-            
+        
+        "🏳️‍🌈 Lock Screen (W+Esc)")
+            echo "Password1!" | xclip -i -sel p -f | xclip -i -sel c -f | xclip -i -sel s -f > /dev/null
+            /usr/bin/i3lock -u -i ~/bin/img/i3lock.png > /dev/null
+            ;;
         "📲 Logout")
             i3-msg exit > /dev/null
             ;;

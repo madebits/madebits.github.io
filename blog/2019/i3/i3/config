@@ -4,6 +4,7 @@ exec_always --no-startup-id /usr/bin/xrdb -load ~/.config/i3/.Xresources
 exec_always --no-startup-id ~/.fehbg
 exec --no-startup-id ~/.config/i3/start.sh
 exec --no-startup-id /usr/bin/nm-applet
+exec --no-startup-id pasystray
 exec --no-startup-id /usr/bin/pulseaudio
 exec --no-startup-id /usr/bin/redshift
 #exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
@@ -139,6 +140,7 @@ bindsym $mod+Shift+r restart
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
+# $Mod+right-mouse button, also works
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -181,8 +183,6 @@ bar {
         bindsym button1 $apps
         position top
 }
-
-# vasian
 
 hide_edge_borders smart
 

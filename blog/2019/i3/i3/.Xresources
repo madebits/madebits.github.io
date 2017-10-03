@@ -15,7 +15,7 @@ XTerm*utf8Title: True
 XTerm*renderFont: True
 XTerm*preeditType: Root
 XTerm*xftAntialias: true
-XTerm*faceName: xft:Inconsolata-14
+XTerm*faceName: xft:Ubuntu Mono:pixelsize=22:antialias=true:hinting=true
 
 ! Trim trailing spaces
 XTerm*trimSelection: true
