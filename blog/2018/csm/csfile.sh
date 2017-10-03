@@ -110,7 +110,7 @@ function printAvailable {
 function dcInfo()
 {
     cat <<EOF
-# Info: Before running this tool call before once manually on your partition:
+# Info: Before running dc tool, call once manually on your partition:
 
   sudo tune2fs -m 0 $1
   sudo tune2fs -l $1 | grep 'Reserved block count'
@@ -120,10 +120,19 @@ EOF
     read -p "Press Enter to continue or Ctrl+C to exit: "
 } >&2
 
+function makeTmpDir()
+{
+    local tmp="${dcDir}/csfile-$RANDOM"
+    while [ -d "$tmp" ]; do
+        tmp="${dcDir}/csfile-$RANDOM"
+    done
+    dcDir="${tmp}"
+}
+
 function dc()
 {
     dcDir="${1:-$HOME/tmp}"
-    dcDir="${dcDir}/csfile-$RANDOM"
+    makeTmpDir
     trap cleanUp SIGHUP SIGINT SIGTERM
     mkdir -p "${dcDir}"
     local partition=$(df -P "${dcDir}" | tail -1 | tr -s ' ' | cut -d ' ' -f 1)
@@ -146,7 +155,7 @@ function dc()
         cat /dev/zero > "${dcDir}/zero.$RANDOM" 2>/dev/null
         if [ $? -ne 0 ] ; then
             sync
-            available=$(df -P "$dir" | tail -1 | tr -s ' ' | cut -d ' ' -f 4)
+            available=$(df -P "${dcDir}" | tail -1 | tr -s ' ' | cut -d ' ' -f 4)
             echo -n "$available"
             echo -n .
             if [[ $available -lt 5 ]] ; then
