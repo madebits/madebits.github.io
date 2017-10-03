@@ -66,7 +66,7 @@ RESUME=none
 
 And run `sudo update-initramfs -u`. Additionally, I claimed all disk space with: `sudo tune2fs -m 0 /dev/mapper/ubuntu--vg-root`.
 
-###Encrypted Disk Layout Details
+##Encrypted Disk Layout Details
 
 The [/dev/sda2](https://askubuntu.com/questions/950307/why-guided-partitioning-create-a-sda2-of-1-kb) is the extended partition. What is shown as *1K* is the [unaligned](https://unix.stackexchange.com/questions/128290/what-is-this-1k-logical-partition) area in it.
 
@@ -92,7 +92,9 @@ exit
 reboot
 ```
 
-To change [password](https://askubuntu.com/questions/109898/how-to-change-the-password-of-an-encrypted-lvm-system-done-with-the-alternate-i), either use `sudo gnome-disks` or:
+###Changing LUKS Password
+
+To change disk [password](https://askubuntu.com/questions/109898/how-to-change-the-password-of-an-encrypted-lvm-system-done-with-the-alternate-i), either use `sudo gnome-disks` or:
 
 ```
 # find device
@@ -115,6 +117,8 @@ sudo apt install chrome-gnome-shell
 
 On Firefox, installed [GNOME Shell Integration](https://addons.mozilla.org/en-US/firefox/addon/gnome-shell-integration/). Next, I installed a minimum set of [GNOME extensions](https://extensions.gnome.org/local/).
 
+Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcut](https://wiki.gnome.org/Design/OS/KeyboardShortcuts) to open applications.
+
 ###Minimal Selection of GNome Extensions
 
 * Dash to Panel https://extensions.gnome.org/extension/1160/dash-to-panel/
@@ -134,7 +138,7 @@ On Firefox, installed [GNOME Shell Integration](https://addons.mozilla.org/en-US
 
 * AlternateTab https://extensions.gnome.org/extension/15/alternatetab/
 
-Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcut](https://wiki.gnome.org/Design/OS/KeyboardShortcuts) to open applications.
+###GNOME Files
 
 Some [nautilus](https://wiki.archlinux.org/index.php/GNOME/Files) shortcuts:
 
@@ -177,7 +181,7 @@ Exec=env GTK_THEME=Ambiance:light gthumb %U
 
 ##First Tools
 
-I did a minimal Ubuntu install. I am so happy they offer that, as in the past I had to un-install most of things. I installed some initial set of tools to get started:
+I did a minimal Ubuntu install. I am happy they offer that, as in the past I had to un-install most of things. I installed some initial set of tools to get started:
 
 ```bash
 sudo apt remove --purge ubuntu-report 
