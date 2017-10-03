@@ -918,7 +918,6 @@ function processOptions()
 function main()
 {
     showChecksum
-    cleanMntDir
     local mode="${1:-}"
     if [ -z "$mode" ]; then
         showHelp
@@ -973,6 +972,7 @@ function main()
         ;&
         closeAll|ca)
             closeAll
+            cleanMntDir
         ;;
         list|l)
             processOptions "$@"
