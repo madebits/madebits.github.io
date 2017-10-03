@@ -165,7 +165,7 @@ function openContainer()
 
     echo "Opening /dev/mapper/${name} ..."
 
-    local key=$(sudo -E -u "$user" "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
+    local key=$(sudo -E "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
     touchFile "$lastSecret" "$lastSecretTime"
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "$@" open "$device" "$name" -
     echo
@@ -205,7 +205,8 @@ function createSecret()
 {
     local secret="$1"
     echo "Creating ${secret} ..."
-    sudo -E -u "$user" "${toolsDir}/cskey.sh" enc "$secret"
+    sudo -E "${toolsDir}/cskey.sh" enc "$secret"
+    ownFile "$secret"
 }
 
 # name secret container size rest
@@ -258,7 +259,7 @@ function createContainer()
     fi
     
     echo "(Re-)enter password to open the container for the first time ..."
-    local key=$(sudo -E -u "$user" "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
+    local key=$(sudo -E "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
     echo
     touchFile "$lastSecret" "$lastSecretTime"
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$container" "$name" -
@@ -291,8 +292,9 @@ function changePass()
     if [ -f "$secret" ]; then
         lastSecretTime=$(stat -c %z "$secret")
     fi
-
-    sudo -E -u "$user" "${toolsDir}/cskey.sh" chp "$secret"
+    shift
+    sudo -E "${toolsDir}/cskey.sh" chp "$secret" "$@"
+    ownFile "$secret"
     sleep 1
     touchFile "$secret" "$lastSecretTime"
 }
@@ -402,7 +404,7 @@ function showHelp()
     (>&2 echo " $bn umount name")
     (>&2 echo " $bn create secret container size [ additional cryptsetup parameters ]")
     (>&2 echo "    size should end in M or G")
-    (>&2 echo " $bn changePass secret")
+    (>&2 echo " $bn changePass secret [t m p]")
     (>&2 echo " $bn resize name")
     (>&2 echo " $bn increase name size") 
     (>&2 echo "    size should end in M or G")
@@ -448,7 +450,7 @@ function main()
             closeAll
         ;;
         changePass|chp)
-            changePass "$1"
+            changePass "$@"
         ;;
         resize|r)
             resizeContainer "$1"
