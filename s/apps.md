@@ -5,8 +5,8 @@
 * [MarkDown Editor](#s/markdown-editor.html)
 * [Password Generator](#s/site-password.html)
 
-#Other
+#<i class="fa fa-list"></i> Other
 
 <div class="mb-ulgroup"></div>
 
-* [Propaganda & News Outlets](#s/propaganda.md)
+* [News Outlets](#s/propaganda.md)
