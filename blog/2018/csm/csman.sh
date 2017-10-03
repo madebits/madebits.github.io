@@ -413,8 +413,8 @@ function umountDevice()
     local device="$1"
     if [ -b "${device}" ]; then
         set +e
-        ls ${device}?* 2>/dev/null | xargs -n 1 -I {} fuser -km {}
-        ls ${device}?* 2>/dev/null | xargs -n 1 umount
+        ls ${device}?* 2>/dev/null | xargs -r -n 1 -I {} fuser -km {}
+        ls ${device}?* 2>/dev/null | xargs -r -n 1 umount
         set -e
     fi
 }
