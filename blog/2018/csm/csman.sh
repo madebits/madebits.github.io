@@ -503,6 +503,22 @@ function openContainer()
 
 ########################################################################
 
+function testRndDataSource()
+{
+    openssl enc -aes-256-ctr -pass pass:"test" -nosalt < <(echo -n "test") > /dev/null
+}
+
+function rndDataSource()
+{
+    # https://unix.stackexchange.com/questions/248235/always-error-writing-output-file-in-openssl
+    testRndDataSource
+    # https://wiki.archlinux.org/index.php/Securely_wipe_disk/Tips_and_tricks#dd_-_advanced_example
+    local tpass=$(tr -cd '[:alnum:]' < /dev/urandom | head -c128)
+    set +e
+    openssl enc -aes-256-ctr -pass pass:"$tpass" -nosalt </dev/zero 2>/dev/null
+    set -e
+}
+
 # container bs count seek
 function ddContainer()
 {
@@ -510,16 +526,13 @@ function ddContainer()
     local bs="$2"
     local count="$3"
     local seek="${4:-}"
-    
-    # https://wiki.archlinux.org/index.php/Securely_wipe_disk/Tips_and_tricks#dd_-_advanced_example
-    local tpass=$(tr -cd '[:alnum:]' < /dev/urandom | head -c128)
-       
+
     if [ -z "$seek" ]; then
-        openssl enc -aes-256-ctr -pass pass:"$tpass" -nosalt </dev/zero | dd iflag=fullblock of="$container" bs="$bs" count="$count" status=progress
+        time rndDataSource | dd iflag=fullblock of="$container" bs="$bs" count="$count" status=progress
         #sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" status=progress
     else
         #sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" seek="$seek" status=progress
-        openssl enc -aes-256-ctr -pass pass:"$tpass" -nosalt </dev/zero | dd iflag=fullblock of="$container" bs="$bs" count="$count" seek="$seek" status=progress
+        time rndDataSource | dd iflag=fullblock of="$container" bs="$bs" count="$count" seek="$seek" status=progress
     fi
     sleep 1
     #sync -f "$container"
@@ -560,7 +573,7 @@ function createContainer()
     if [ -b "$container" ]; then
         blockDevice="1"
         echo "Are you sure encrypt block device: ${container}"
-        read -p "Overwrite? [y (overwrite) | e (erase file system) | Enter to exit]: " overwriteContainer
+        read -p "Overwrite? [y (overwrite) | e (erase files) | Enter to exit]: " overwriteContainer
         if [ "$overwriteContainer" = "y" ]; then
             writeContainer="1"
         elif [ "$overwriteContainer" = "e" ]; then
@@ -586,9 +599,14 @@ function createContainer()
     
     if [ "$writeContainer" = "1" ]; then
         if [ "$blockDevice" = "1" ]; then
+            testRndDataSource
             echo "Overwriting block device: ${container} ..."
-            local tpass=$(tr -cd '[:alnum:]' < /dev/urandom | head -c128)
-            openssl enc -aes-256-ctr -pass pass:"$tpass" -nosalt </dev/zero | dd iflag=fullblock of="$container" bs="1M" status=progress
+            #hmm, we have to ingore errors here
+            echo "# script will go on in case of errors here, please read the output and decide if all ok ..."
+            echo "# it is ok to see when done: dd: error writing '...': No space left on device"
+            set +e
+            time rndDataSource | dd iflag=fullblock of="$container" bs=1M status=progress
+            set -e
         else
             echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
             if [ "${size: -1}" = "G" ]; then
@@ -598,6 +616,7 @@ function createContainer()
             else
                 onFailed "size can be M or G"
             fi
+            ownFile "$container"
         fi
     else
         echo "Reusing existing data (size $size is ingored): $container"
@@ -641,9 +660,7 @@ function createContainer()
     echo "Created file system."
     sleep 1
     closeContainerByName "$name"
-    if [ "$blockDevice" != "1" ]; then
-        ownFile "$container"
-    fi
+    
     echo "Done! To open container use:"
     echo "$0 open ${container} ${secret}"
 }
