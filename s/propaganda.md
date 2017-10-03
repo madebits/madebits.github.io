@@ -74,6 +74,12 @@
 [Reddit Programming](https://www.reddit.com/r/programming/)
 [.Net Blog](https://devblogs.microsoft.com/dotnet/)
 [MSDN Magazine](https://msdn.microsoft.com/en-us/magazine/default.aspx)
+[CodingHorror](https://blog.codinghorror.com/)
+[TheDailyWTF](https://thedailywtf.com/)
+[NetFlix Blog](https://medium.com/netflix-techblog)
+[Hanselman Blog](https://www.hanselman.com/blog/)
+[TechieDelight](https://www.techiedelight.com/)
+[GeeksForGeeks](https://www.geeksforgeeks.org/fundamentals-of-algorithms/)
 
 ### Science
 
