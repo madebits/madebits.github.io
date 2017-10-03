@@ -466,7 +466,7 @@ function showHelp()
 	dumpError "     4 read from 'zenity --text'"
 	dumpError " -c encryptMode : use 1 for aes tool, 0 or any other value uses ccrypt"
 	dumpError " -p passFile : (enc) read pass from first line in passFile"
-	dumpError " -ap file : read pass from session file, other pass input options are ignored"
+	dumpError " -ap file : read pass from session encrypted file, other pass input options are ignored"
 	dumpError " -k : (enc) do not ask for keyfiles"
 	dumpError " -kf keyFile : (enc) use keyFile (combine with -k)"
 	dumpError " -b count : (enc) generate file.count backup copies"
@@ -475,7 +475,7 @@ function showHelp()
 	dumpError " -key file : (enc) read key data as base64 -w 0 from file"
 	dumpError " -akey file : (enc) read key data from session encrypted file (see -ao)"
 	dumpError " -ao outFile : (dec) write key in session encrypted file"
-	dumpError " -aa : auto session password"
+	dumpError " -aa : auto session encryption password"
 	dumpError " -d : dump password and key on stderr for debug"
 	dumpError "Examples:"
 	dumpError ' sudo bash -c '"'"'key=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -key <(echo -n "$key") -d'"'"''
