@@ -8,12 +8,27 @@
 
 ## Introduction
 
-CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or disk data partitions. CSMan cannot be used to encrypt live partitions. The follow are some of the hard-coded settings of CSMan:
+CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The follow are some of the hard-coded settings of CSMan:
 
-* Uses `cryptsetup` in *plain* mode with 512 bit keys.
+* Uses `cryptsetup` in *plain* mode with 512 byte keys.
 * Supports only [EXT4](https://en.wikipedia.org/wiki/Ext4) volumes.
 * Uses two nested *dm-crypt* mappers: *aes-xts-plain64* and *twofish-cbc-essiv:sha256*.
 * Mounts for current user under: `$HOME/mnt/csm-*`.
+
+### How it Works
+
+CSMan use randomly generated 512 byte passwords (called **secret** in CSMan documentation) to with `cryptsetup` *plain* mode containers. The 512 byte passwords are stored in **secret files** encrypted with *AES* and protected with a user password (called **password** in CSMan documentation). The file encryption password is hashed using `argon2` before passed to AES tools (which do also their own hashing). To open a container both the secret file and password must be known. Similar to LUKS, one can use same password to protect more than one secret file, or protect secret in different files with different passwords (AES used is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret, leads to different binary files). On difference from LUKS, user is responsible to store secret files separately from containers (maybe in another container).
+
+### Terminology
+
+Some overlapping terms are used more that once and I had to be creative to distinguish them consistently:
+
+* **secret** - randomly generated (or user specified) 512 bytes (binary). Binary values are shown as *base64*.
+* **secret file** - file where secret is stored encrypted.
+* **password** - user password used to encrypt secret file.
+* **key file** - user password can contain additionally to a paraphrase one or more optional key files. Their header hashed content is added to the password. Order of specifying key files does not matter, but they have to be same files.
+* **session** - optional state stored as part of user session. There is by default no session, but it is possible to store passwords in named encrypted session slots in *tmpfs* and refer to them from there.
+* **session password** - an optional password used to protect contents stored in session.
 
 ## Installation
 
