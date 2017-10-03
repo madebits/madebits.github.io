@@ -2,8 +2,7 @@
 
 # cskey.sh
 
-set -eu
-set -o pipefail
+set -eu -o pipefail
 
 if [ $(id -u) != "0" ]; then
     (>&2 echo "! using sudo recommended")
@@ -49,7 +48,7 @@ function dumpError()
 
 function onFailed()
 {
-	dumpError "! " "$@"
+	dumpError "!" "$@"
 	kill -9 "${currentScriptPid}"
 }
 

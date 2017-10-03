@@ -2,8 +2,7 @@
 
 # csmap.sh
 
-set -eu
-set -o pipefail
+set -eu -o pipefail
 
 if [ $(id -u) != "0" ]; then
     (>&2 echo "! needs sudo")
@@ -201,7 +200,7 @@ function openContainer()
 
     local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     if [ -z "$key" ]; then
-        showError "cannot read: $secret"
+        showError "cannot get key"
     fi
     touchFile "$lastSecret" "$lastSecretTime"
     clearScreen
@@ -302,7 +301,7 @@ function createContainer()
     echo "(Re-)enter password to open the container for the first time ..."
     local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     if [ -z "$key" ]; then
-        showError "cannot read: $secret"
+        showError "cannot get key"
     fi
     echo
     clearScreen
