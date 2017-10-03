@@ -51,6 +51,16 @@ Change password:
 csman.sh chp container.bin -ck -i e --
 ```
 
+Backup and restore container key:
+
+```bash
+# backup: first 1024 bytes are copied to secret.bin
+csman ex container.bin -s secret.bin
+
+# restore
+csman e container.bin -s secret.bin
+```
+
 ## Introduction
 
 CSMan is an opinionated bash script wrapper around `cryptsetup` to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The following are some of the hard-coded choices of the script:
@@ -172,7 +182,7 @@ You can combine the two commands if needed to change the password (or use `csman
 sudo bash -c 'secret=$(cskey.sh dec secret.bin | base64 -w 0) && cskey.sh enc secret.bin -s <(echo -n "$secret")'
 ```
 
-If *secret file* in *enc|dec* is specified as **?** it will read from command line; if specified as **!** *zenity* will be used.
+If *secret file* in *enc|dec* is specified as **?** it will read from command line.
 
 #### Creating Multiple Secret Files
 
