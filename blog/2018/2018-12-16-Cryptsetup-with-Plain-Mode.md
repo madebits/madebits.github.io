@@ -77,9 +77,9 @@ ap="${5:-8}"
 # file pass key
 function encodeKey()
 {
-    local file=$1
-    local pass=$2
-    local key=$3
+    local file="$1"
+    local pass="$2"
+    local key="$3"
     local salt=$(head -c 32 /dev/urandom | base64 -w 0)
     hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
     > "$file"
@@ -90,8 +90,8 @@ function encodeKey()
 # file pass
 function decodeKey()
 {
-    local file=$1
-    local pass=$2
+    local file="$1"
+    local pass="$2"
 
     if [ -f "$file" ]; then
         local salt=$(head -c 44 "$file")
@@ -125,29 +125,24 @@ function readPass()
 # mode file
 function main()
 {
-    local mode=$1
+    local mode="$1"
     local file="${2:-secret.bin}"
     case "$mode" in
         enc)
             readPass
             local key=$(head -c 512 /dev/urandom | base64 -w 0)
             encodeKey "$file" "$pass" "$key"
-
         ;;
         dec)
-
             read -p "Enter password: " -s pass
             decodeKey "$file" "$pass"
-
         ;;
         chp)
-
             read -p "Current password: " -s pass1
             echo
             key=$(decodeKey "$file" "$pass1")
             readPass
             encodeKey "$file" "$pass" "$key"
-
         ;;
         *)
             (>&2 echo "Usage: $0 [enc | dec | chp] file")
@@ -183,6 +178,86 @@ To change password of `secret.bin` (file is overwritten in place, so backup it b
 ./cs-key.sh chp secret.bin
 # enter current pass
 # enter new pass
+```
+
+With `cs-key.sh` ready, we can now automate open / close with a second script for convenience (it is not really needed), lets name it `cs-map.sh`:
+
+```bash
+#!/bin/bash
+
+set -e
+
+toolsDir="$(dirname $0)"
+
+function main()
+{
+    local mode="$1"
+    local name="$2"
+    local mntDir1="$HOME/mnt/${name}"
+    local mntDir2="$HOME/mnt/${name}_user"
+    
+    case "$mode" in
+        open)
+            if [-z "$name" ]; then
+                (>&2 echo "! name required")
+                exit 1
+            fi
+            shift 
+            shift
+
+            local secret="$1"
+            if [-z "$secret" ]; then
+                (>&2 echo "! secret required")
+                exit 1
+            fi
+            shift
+            local device="$1"
+            if [-z "$device" ]; then
+                (>&2 echo "! device required")
+                exit 1
+            fi
+            shift
+
+            "${toolsDir}/cs-key.sh" dec "$secret" | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$device" "$name" -
+
+            mkdir -p "$mntDir1"
+            mount "/dev/mapper/$name" "$mntDir1"
+            mkdir -p "$mntDir2"
+            user=${SUDO_USER:-$(whoami)}
+            bindfs -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
+        ;;
+        close)
+            if [-z "$name" ]; then
+                (>&2 echo "! name required")
+                exit 1
+            fi
+            umount "$mntDir2"
+            rmdir "$mntDir2"
+            umount "$mntDir1"
+            rmdir "$mntDir1"
+            cryptsetup close "$name"
+        ;;
+        *)
+            (>&2 echo "Usage:")
+            (>&2 echo "Usage: $0 open name secret device [ additional cryptsetup parameters ]")
+            (>&2 echo "Usage: $0 close name")
+            exit 1
+        ;;
+    esac
+}
+
+main "$@"
+
+```
+
+It can be used as follows:
+
+```bash
+sudo ./cs-map open enc1 secret.bin container.bin
+
+# and when done
+
+sudo ./cs-map close enc1
 ```
 
 ##Finding Container Key 
