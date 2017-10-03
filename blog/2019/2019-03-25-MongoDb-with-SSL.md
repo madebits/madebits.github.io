@@ -100,7 +100,11 @@ db.createUser({ user: "myAdmin", pwd: "password", roles: [ { role: "root", db: "
 
 ### MongoDB Client Configuration
 
-We have several options how to verify server SSL certificate in client depending on the driver used. The following code shows how we can verify certificate in C# driver:
+We have several options how to verify server SSL certificate in client depending on the driver used. 
+
+#### .NET Clients
+
+The following code shows how we can verify certificate in C# driver:
 
 ```c#
 var connectionStr="mongo://...?ssl=true"
@@ -230,6 +234,10 @@ We merged above for MongoDB both private and public keys in `mongoHost.pem` so w
 We can access also RabbitMQ Management via web using SSL if configured as shown above, but given SSL is self-signed, we have to accept the connection manually when using `https://server:15774` in browser. In this case, we may want to look at the certificate thumb-print manually in browser to make sure it matches out server ones, before we enter the login credentials.
 
 ### RabbitMQ Client Configuration
+
+.NET and Node.js client code configurations for RabbitMQ SSL connections.
+
+#### .NET Clients
 
 For .NET, the RabbitMQ client configuration to use SSL is simple:
 
