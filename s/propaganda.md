@@ -59,6 +59,8 @@
 [LinuxToday](https://www.linuxtoday.com/)
 [LinuxOrg](https://www.linux.org/)
 [Reddit UnixP0rn](https://www.reddit.com/r/unixporn/)
+[Reddit LinuxQuestions](https://www.reddit.com/r/linuxquestions/)
+[Reddit Linux](https://www.reddit.com/r/linux/)
 [ItsFoss](https://itsfoss.com/)
 [Linuxize](https://linuxize.com/)
 [LinuxSlashDot](https://linux.slashdot.org/)
@@ -68,6 +70,7 @@
 [LinuxLinks](https://www.linuxlinks.com/)
 [LinuxJournal](https://www.linuxjournal.com/)
 [NoobsLab](https://www.noobslab.com/)
+[ubuntuhandbook](http://ubuntuhandbook.org/)
 
 ### Programming
 
@@ -81,6 +84,8 @@
 [TechieDelight](https://www.techiedelight.com/)
 [GeeksForGeeks](https://www.geeksforgeeks.org/fundamentals-of-algorithms/)
 [CSS Tricks](https://css-tricks.com/)
+[R-Bloggers](https://www.r-bloggers.com/)
+[InfoQ](https://www.infoq.com/)
 
 ### Science
 
