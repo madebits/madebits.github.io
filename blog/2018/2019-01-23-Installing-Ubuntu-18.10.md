@@ -65,7 +65,7 @@ sudo apt-get update
 sudo apt install chrome-gnome-shell
 ```
 
-On Firefox, installed [GNOME Shell Integration](https://addons.mozilla.org/en-US/firefox/addon/gnome-shell-integration/). Now, I easy install a minimum set of [extensions](https://extensions.gnome.org/local/).
+On Firefox, installed [GNOME Shell Integration](https://addons.mozilla.org/en-US/firefox/addon/gnome-shell-integration/). Next, I installed a minimum set of [GNOME extensions](https://extensions.gnome.org/local/).
 
 ###Minimal Selection of GNome Extensions
 
@@ -77,11 +77,11 @@ I added also some CPU load indicator (first one I found that looked ok):
 
 * SysPeek-GS https://extensions.gnome.org/extension/1409/syspeek-gs/
 
-Not having used GNome in a while, I had to remind myself of *Windows+A* shortcut to open applications https://wiki.gnome.org/Design/OS/KeyboardShortcuts
+Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcut](https://wiki.gnome.org/Design/OS/KeyboardShortcuts) to open applications.
 
 ##Other Useful Tools
 
-I did a minimal Ubuntu install. I am so happy they offer that, as before I had to un-install most of things. I installed some initial set of tools to get started: 
+I did a minimal Ubuntu install. I am so happy they offer that, as in the past I had to un-install most of things. I installed some initial set of tools to get started:
 
 ```bash
 sudo apt remove --purge ubuntu-report
@@ -94,10 +94,16 @@ sudo apt install chromium-browser
 # --incognito --enable-dom-distiller
 ```
 
-So, I can go on with rest of my specific configuration.
+I can go on with rest of my specific configuration.
 
 ##Summary
 
-Apart of GNome taskbar, that I really do not like (it consumes the limited vertical space on screen; you cannot move it right or left; auto-hide is not so easy to use within VirtualBox; and once you are used with free vertical space from other environments, it is hard to accept lack of it), I think with minor tweaks Ubuntu 18.10 UI is usable, without having to install some other desktop variant. The overall UI direction looks ok, I can imagine using next LTS release as default desktop.
+Apart of GNOME taskbar, which I really do not like, as it consumes the limited vertical space on screen:
+
+* you cannot move it right or left; 
+* auto-hide is not so easy to use within VirtualBox;
+* if you are used with free vertical space from other environments, it is hard to accept lack of that option;
+
+I think with minor tweaks, Ubuntu 18.10 UI is usable, without having to install some other desktop variant. The overall UI direction looks ok, I can imagine using next LTS release as default desktop.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2018/2018-12-16-Cryptsetup-in-Plain-Mode.md'>Cryptsetup in Plain Mode</a></ins>
