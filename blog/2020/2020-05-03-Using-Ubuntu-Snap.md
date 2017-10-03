@@ -128,7 +128,7 @@ Examples of core snap [interfaces](https://snapcraft.io/docs/supported-interface
 
 * [:home](https://snapcraft.io/docs/home-interface) *core* snap interface gives the application access to non-hidden files in real `$HOME` directory. 
 * [:personal-files](https://snapcraft.io/docs/personal-files-interface) allows access to hidden $HOME folders and files.
-* [:network](https://snapcraft.io/docs/network-interface) gives access to network. It can be removed using `sudo snap disconnect gimp:network :network` and can be added back using `sudo snap connect gimp:network :network`. These changes are preserved by `snap refresh`.
+* [:network](https://snapcraft.io/docs/network-interface) gives access to network (which I think is not good when combined with `:home`). It can be removed using `sudo snap disconnect gimp:network :network` and can be added back using `sudo snap connect gimp:network :network`. These changes are preserved by `snap refresh`.
 
 ## Snap Home
 
