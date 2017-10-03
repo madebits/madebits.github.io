@@ -230,14 +230,19 @@ function readNewPass()
 function main()
 {
     local mode="$1"
-    shift
-    local file="${1:-secret.bin}"
-    shift
+    local file="${2:-secret.bin}"
     local key=""
     case "$mode" in
         enc)
             pass=$(readNewPass)
-            key=$(head -c 512 /dev/urandom | base64 -w 0)
+            
+            if [ ! -z "$CS_KEY" ]; then
+				(>&2 echo "# Using key from CS_KEY")
+				key="$CS_KEY"
+			else
+				key=$(head -c 512 /dev/urandom | base64 -w 0)
+            fi
+            
             if [ "$CS_ECHO_KEY" = "1" ]; then
 				(>&2 echo)
 				(>&2 echo "[$pass]")
@@ -264,8 +269,9 @@ function main()
             encodeKey "$file" "$pass" "$key"
         ;;
         *)
-            (>&2 echo "Usage: $0 [enc | dec | chp] file")
+            (>&2 echo "Usage: $0 [enc | dec | chp] file [t m p]")
             (>&2 echo "file is overwritten by enc and chp, backup it as needed before")
+            (>&2 echo 'Example: CS_KEY=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt 1000 16 8')
             exit 1
         ;;
     esac
