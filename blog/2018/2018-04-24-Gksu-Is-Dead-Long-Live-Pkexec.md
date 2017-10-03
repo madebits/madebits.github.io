@@ -49,7 +49,7 @@ echo $@
 
 ##Second Problem
 
-If you try to run a command that need access to user interface, such as follows:
+If you try to run a command that need access to user interface from `pkexec`, such as, `zenity` command in script below:
 
 ```
 if [[ $(id -u) != "0" ]]; then
