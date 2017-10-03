@@ -246,6 +246,16 @@ function changePass()
     touchFile "$secret" "$lastSecretTime"
 }
 
+function touchDiskFile()
+{
+    if [ ! -f "$1" ]; then
+        (>&2 echo "! no file $1")
+        exit 1
+    fi
+    local time=$(stat -c %z "$1")
+    touchFile "$1" "$time"
+}
+
 function touchFile()
 {
     local file="$1"
@@ -344,6 +354,7 @@ function showHelp()
     (>&2 echo " $bn resize name")
     (>&2 echo " $bn increase name size") 
     (>&2 echo "    size should end in M or G")
+    (>&2 echo " $bn touch file")
 }
 
 function main()
@@ -391,6 +402,9 @@ function main()
         ;;
         increase|inc)
             increaseContainer "$@"
+        ;;
+        touch)
+            touchDiskFile "$1"
         ;;
         *)
             showHelp
