@@ -527,7 +527,7 @@ function showHelp()
 	logError " -as file : (enc) read secret data from a session encrypted file (see -ao)"
 	logError " -aos outFile : (dec) write secret data to a session encrypted file"
 	logError " -aop outFile : (dec) write password data to a session encrypted file"
-	logErrir " -ar file : use file as session salt, will be created if not exists"
+	logError " -ar file : use file as session salt, will be created if not exists"
 	logError " -aa : do not ask for session encryption password (use default)"
 	logError " -r length : (rnd) length of random bytes (default 64)"
 	logError " -rb count : (rnd) generate file.count files"
