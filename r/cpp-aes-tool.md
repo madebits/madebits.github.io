@@ -89,6 +89,7 @@ Use passwords with more than 20 random numbers letters and special characters. T
    head -c 45 /dev/urandom | base64 -w 0
 
    #or
+
    dd if=/dev/urandom bs=45 count=1 | base64 -w 0
    ```
 
