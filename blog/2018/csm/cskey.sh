@@ -350,8 +350,8 @@ function getSecret()
         logError "# secret: generating new, move mouse around if stuck"
         # skip some bytes
         head -c $RANDOM /dev/urandom > /dev/null
-        # that 32 bytes from /dev/random are enough
-        # but length matters anyway :)
+        # 32 bytes from /dev/random are enough
+        # but length matters anyway :), so we use 512 byte long keys
         secret=$(cat <(head -c 480 /dev/urandom) <(head -c 32 /dev/random) | base64 -w 0)
         #secret=$(head -c 512 /dev/urandom | base64 -w 0)
     fi
