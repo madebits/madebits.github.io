@@ -8,9 +8,44 @@
 
 <div id='toc'></div>
 
+## Quick Start
+
+Create a new container file (`-i e` make password entry visible):
+
+```bash
+sudo csman.sh new container.bin 1M -s secret.bin -ck -i e ---
+
+# if needed backup or delete secret file, it is embedded already in container after creation
+rm secret.bin
+```
+
+Open a container, get a random name under `$HOME/mnt/csm-*` (or append `n name`):
+
+```bash
+sudo csman.sh open container.bin -s secret.bin -ck -i e --- -n one
+
+# or block till container is open, press Ctrl+C to close
+sudo csman.sh open container.bin -s secret.bin -ck -i e --- -l
+```
+
+Close a container by name:
+
+```bash
+sudo csman.sh close one
+
+# or close all open
+sudo csman.sh closeAll
+```
+
+Change password:
+
+```bash
+sudo csman.sh chp container.bin -ck -slot 1 --- -out container.bin -cko -slot 1 ---
+```
+
 ## Introduction
 
-CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The following are some of the hard-coded choices of the script:
+CSMan is an opinionated wrapper bash script around `cryptsetup` to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The following are some of the hard-coded choices of the script:
 
 * Uses `cryptsetup` in *plain* mode with 512 byte passwords (`-s 512 -h sha512`).
 * Supports only [EXT4](https://en.wikipedia.org/wiki/Ext4) volumes.
@@ -27,7 +62,7 @@ cryptsetup <= random secret key (512 bit) <= password encrypted secret file (Arg
 
 The secret file encryption password is hashed using `argon2` before passed to AES tool (which does also their own hashing). To open a container both the secret file and password must be known. 
 
-Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords. AES used to encrypt secret files is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret leads to different binary files. Similar to [non-detached](https://wiki.archlinux.org/index.php/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header) LUKS, user is responsible to store secret files separately from containers (maybe in another container) (or embed them as needed). Unlike LUKS headers, secret files used by CSMan (with default aes tool) look random.
+Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords. AES used to encrypt secret files is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret leads to different binary files. Similar to [non-detached](https://wiki.archlinux.org/index.php/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header) LUKS, user is responsible to store secret files separately from containers (maybe in another container) or embed them as needed (default). Unlike LUKS headers, secret files used by CSMan (with default aes tool) look random.
 
 ### Terminology
 
@@ -52,7 +87,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 When `csman.sh` starts without arguments, it prints prefix hashes of these files, if present:
 
 ```
-bae2b9b1e  /usr/local/bin/csman.sh
+6ba7b94dd  /usr/local/bin/csman.sh
 a61744e2c  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
