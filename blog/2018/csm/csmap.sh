@@ -63,7 +63,7 @@ function newName()
 # name
 function validName()
 {
-    local name="$1"
+    local name="${1:-}"
     checkArg "$name" "name"
     if [ "$name" = "-" ]; then
         name="$(newName)"
@@ -89,7 +89,7 @@ function mntDirUser()
 # file
 function ownFile()
 {
-    if [ -f "$1" ]; then
+    if [ -f "${1:-}" ]; then
         chown $(id -un "$user"):$(id -gn "$user") "$1"
     fi
 }
@@ -97,7 +97,7 @@ function ownFile()
 # name
 function umountContainer()
 {
-    local name=$(validName "$1")
+    local name=$(validName "${1:-}")
     local mntDir1=$(mntDirRoot "$name")
     local mntDir2=$(mntDirUser "$name")
     
@@ -118,7 +118,7 @@ function umountContainer()
 # name
 function mountContainer()
 {
-    local name=$(validName "$1")
+    local name=$(validName "${1:-}")
     local mntDir1=$(mntDirRoot "$name")
     local mntDir2=$(mntDirUser "$name")
     
@@ -141,7 +141,7 @@ function mountContainer()
 # name
 function closeContainer()
 {
-    local name=$(validName "$1")
+    local name=$(validName "${1:-}")
     echo "Closing ${name} ..."
     umountContainer "$name"
     cryptsetup close "$name"
@@ -151,7 +151,7 @@ function closeContainer()
 # name secret container rest
 function openContainer()
 {
-    local name=$(validName "$1")
+    local name=$(validName "${1:-}")
     lastName="$name"
     local oName=${name:4}
     shift
@@ -315,7 +315,7 @@ function changePass()
 
 function touchDiskFile()
 {
-    if [ ! -f "$1" ]; then
+    if [ ! -f "${1:-}" ]; then
         dumpError "! no file $1"
         failed
     fi
@@ -372,7 +372,7 @@ function showChecksum()
 # name
 function resizeContainer()
 {
-    local name=$(validName "$1")
+    local name=$(validName "${1:-}")
     cryptsetup resize "$name"
     resize2fs "/dev/mapper/$name"
 }
@@ -380,7 +380,7 @@ function resizeContainer()
 # only works for full G/M blocks
 function increaseContainer()
 {
-    local name=$(validName "$1")
+    local name=$(validName "${1:-}")
     shift
     local size="${1:-}"
     checkArg "$size" "size"
