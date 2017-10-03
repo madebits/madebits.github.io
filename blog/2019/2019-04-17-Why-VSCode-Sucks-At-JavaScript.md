@@ -22,7 +22,7 @@ Have a look at https://code.visualstudio.com/docs/languages/javascript and let m
 
 * To take over the terrible programming experience of TypeScript to JavaScript decorate files with `//@ts-check`. Who do they expect to decorate each file in a code-base like that? Anyway, every time I tried that, it make the whole error checking experience terrible and had to turn it off. VSCode will think code is TypeScript and will report non-sense. Not sure if VSCode developers have ever tried programming JavaScript for more than demo with it on.
 
-How can VSCode be better at JavaScript? 
+How can VSCode be better at JavaScript? Via management:
 
 > Force VSCode developers to do maintain some JavaScript project in parallel using VSCode. The older the code base, the better.
 
