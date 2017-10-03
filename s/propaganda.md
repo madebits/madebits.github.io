@@ -106,6 +106,7 @@
 [The New York Times](https://www.nytimes.com/section/world)
 [The Washington Times](https://www.washingtontimes.com/news/world/)
 [Reddit World News](https://www.reddit.com/r/worldnews/)
+[BuzzfeedNews](https://www.buzzfeednews.com/)
 [The Onion](https://www.theonion.com/)
 
 ### Canada & Australia
