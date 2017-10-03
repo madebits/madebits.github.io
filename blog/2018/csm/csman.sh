@@ -1009,7 +1009,12 @@ function processOptions()
                 csOptions=()
                 while [ "${1:-}" != "---" ]; do
                     csOptions+=( "${1:-}" )
+                    set +e
                     shift
+                    if [ $? != 0 ]; then
+                        onFailed "-co no ---"
+                    fi
+                    set -e
                 done
             ;;
             -ci)
@@ -1017,7 +1022,12 @@ function processOptions()
                 csiOptions=()
                 while [ "${1:-}" != "---" ]; do
                     csiOptions+=( "${1:-}" )
+                    set +e
                     shift
+                    if [ $? != 0 ]; then
+                        onFailed "-ci no ---"
+                    fi
+                    set -e
                 done
             ;;
             -ck)
@@ -1025,7 +1035,12 @@ function processOptions()
                 ckOptions=()
                 while [ "${1:-}" != "---" ]; do
                     ckOptions+=( "${1:-}" )
+                    set +e
                     shift
+                    if [ $? != 0 ]; then
+                        onFailed "-ck no ---"
+                    fi
+                    set -e
                 done
             ;;
             -cko)
@@ -1033,7 +1048,12 @@ function processOptions()
                 ckOptions2=()
                 while [ "${1:-}" != "---" ]; do
                     ckOptions2+=( "${1:-}" )
+                    set +e
                     shift
+                    if [ $? != 0 ]; then
+                        onFailed "-cko no ---"
+                    fi
+                    set -e
                 done
             ;;
             -cf)
@@ -1041,7 +1061,12 @@ function processOptions()
                 mkfsOptions=()
                 while [ "${1:-}" != "---" ]; do
                     mkfsOptions+=( "${1:-}" )
+                    set +e
                     shift
+                    if [ $? != 0 ]; then
+                        onFailed "-cf no ---"
+                    fi
+                    set -e
                 done
             ;;
             -c|-cls)

@@ -657,7 +657,12 @@ function main()
                 cskHashToolOptions=()
                 while [ "${1:-}" != "--" ]; do
                     cskHashToolOptions+=( "${1:-}" )
+                    set +e
                     shift
+                    if [ $? != 0 ]; then
+                        onFailed "-h no --"
+                    fi
+                    set -e
                 done
             ;;
             -p)
