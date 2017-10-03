@@ -46,14 +46,14 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 
 * `csman.sh` - main tool.
 * `cskey.sh` - is invoked by `csman.sh` for handling encryption and decryption of keys.
-* `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool. If this tool is found next to `cskey.sh` it is used. Alternately you can install `ccrypt` from Ubuntu repositories. 
+* `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool. If this tool is found next to `cskey.sh` it is used. Alternately you can install `ccrypt` from Ubuntu repositories. The default `aes` tool uses non-authenticated encryption - the ambiguity is wished.
 * `argon2` - this is a self-compiled copy of `argon2` from [official](https://github.com/P-H-C/phc-winner-argon2) repository without any changes ([my copy](https://github.com/madebits/phc-winner-argon2)). `argon2` can be found also in Ubuntu repositories. If found next to `cskey.sh`, this copy is used in place of the system copy.
 
 When `csman.sh` starts without arguments, it prints prefix hashes of these files, if present:
 
 ```
-4e88baa6f  /usr/local/bin/csman.sh
-fcf2f56d6  /usr/local/bin/cskey.sh
+bae2b9b1e  /usr/local/bin/csman.sh
+a9c915c0b  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
 ```
@@ -112,7 +112,7 @@ sudo cskey.sh dec secret.bin | base64 -w 0
 You can combine the two commands if needed to change the password (or use `csman.sh chp` command which is easier):
 
 ```bash
-sudo bash -c 'secret=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -s <(echo -n "$secret") -d'
+sudo bash -c 'secret=$(cskey.sh dec secret.bin | base64 -w 0) && cskey.sh enc secret.bin -s <(echo -n "$secret")'
 ```
 
 If *secret file* in *enc|dec* is specified as **?** it will read from command line; if specified as **!** *zenity* will be used.
@@ -239,7 +239,7 @@ sudo csman.sh n container.bin 1M -s secret.bin -ck -b 1 -su ---
 sudo csman.sh n container.bin 1M -s secret.bin -ck -b 3 -su ---
 ```
 
-Do **not** manipulate a container file slots as if it were a secret file using `cskey.sh enc` or other tooling (such as `csman.sh chp -out`), other than for reading (decoding) the secret. To extract secret file back from the container use:
+To extract secret file back from the container use:
 
 ```bash
 dd if=container.bin of=secret.bin bs=1024 count=1
@@ -274,7 +274,7 @@ sudo csman.sh o container.bin -slots 2 -ck -slot 1 ---
 sudo csman.sh o container.bin -slots 2 -ck -slot 2 ---
 ```
 
-The `cskey.sh -slot` option only works with `cskey.sh dec` command and it is ignored by `cskey.sh enc` command, the original output file is always truncated by `cskey.sh enc`.
+The `cskey.sh -slot` for `cskey.sh dec` if not specified is 1. `cskey.sh enc` if no slot is specified also assumes 1, but additionally truncates the output file. If you use `cskey.sh enc` (or `csman.sh chp -out`) with a container file, **always** specify a slot even if `-slot 1`, otherwise data will be lost.
 
 To remove a slot's data, overwrite it with random data using delete `-d` option of `e` command:
 
@@ -392,6 +392,14 @@ sudo csman.sh chp container.bin -out new-secret.bin -ck -i e -slot 1 --- -cko -i
 csman.sh e container.bin -s new-secret.bin -slot 2
 # or all at once, replaces slots 1,2,3,4
 csman.sh e container.bin -s new-secret.bin -s new-secret.bin.01 -s new-secret.bin.02 -s new-secret.bin.03 -slot 1
+```
+
+The following command changes the password of a slot in place. Note that `-slot 1` is **required** for output otherwise container file will be destroyed! As this command is a bit risky, the ones above are safer.
+
+```bash
+sudo csman.sh chp container.bin -ck -slot 1 --- -out container.bin -cko -slot 1 ---
+# put same container secret of slot 1, in slot 2 with maybe a different pass
+sudo csman.sh chp container.bin -ck -slot 1 --- -out container.bin -cko -slot 2 ---
 ```
 
 ## File Tools
