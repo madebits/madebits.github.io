@@ -103,6 +103,7 @@ Some overlapping terms explained:
 * **secret** - randomly generated (or user specified) binary 512 bytes. Binary values are shown as *base64* in tool. Secret is used binary as `cryptsetup` password:
   * 256 bytes (binary) are used as password for outer *aes-xts-plain64* with 512 bits key (-s 512 -h sha512)
   * 256 bytes (binary) are used as password for inner *twofish-cbc-essiv:sha256* with 256 bit key (-s 256 -h sha512)
+  * using `-ss` option uses all 512 bytes as same password both outer and inner volumes
 * **secret file** - binary file where *secret* is stored encrypted.
 * **password** - user password (or pass-phrase) used to encrypt *secret file* (hashed with `argon2`).
 * **key file** - user password can contain, additionally to the pass-phrase, one or more optional key files. The hashed header bytes content of key files is appended to the password. Order of specifying key files does not matter, but they have to be exact same files used during encryption and decryption. The same key file can be used more than once.
