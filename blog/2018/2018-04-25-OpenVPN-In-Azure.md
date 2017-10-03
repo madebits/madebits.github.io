@@ -29,4 +29,4 @@ iptables -A OUTPUT -o tun+ -j ACCEPT
 
 The `iptables` rules need to made persistent once tested (`sudo apt-get install iptables-persistent netfilter-persistent`).
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2018/2018-01-27-Dirac-Notation-Cheatsheet.md'>Dirac Notation Cheatsheet</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2018/2018-04-26-Lubuntu-18.04-Disable-initfsram-Resume.md'>Lubuntu 18.04 Disable initfsram Resume</a> <a rel='next' id='fnext' href='#blog/2018/2018-01-27-Dirac-Notation-Cheatsheet.md'>Dirac Notation Cheatsheet</a></ins>
