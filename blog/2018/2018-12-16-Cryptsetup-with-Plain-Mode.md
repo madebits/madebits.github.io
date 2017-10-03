@@ -302,7 +302,7 @@ cryptsetup close layer1
 
 ### Shared Blob
 
-We can use `--offset (-o)` and `--size` option (both defined as number of 512 byte sectors) to have several encrypted containers on same binary file. We can even open several of them at once, by adding `--shared` option to `cryptsetup open`:
+We can use `--offset (-o)` and `--size` option (both defined as number of 512 byte sectors) to have several non-overlapping encrypted containers on same binary file blob. We can even open several of them at once by adding `--shared` option to `cryptsetup open`:
 
 ```bash
 cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 open --type plain -o 100 --size 1000 container.bin container1
