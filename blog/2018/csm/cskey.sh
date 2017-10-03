@@ -28,6 +28,7 @@ cskSessionPass=""
 cskSessionSecretFile=""
 cskSessionAutoPass="0"
 cskSessionSaveDecodePassFile=""
+cskSessionSaltFile=""
 cskRndLen="64"
 
 user="${SUDO_USER:-$(whoami)}"
@@ -379,23 +380,26 @@ function readSessionPass()
 {
 	if [ -z "$cskSessionPass" ]; then
 		# session specific
+		local sData0=""
+		if [ -n "$cskSessionSaltFile" ]; then
+			if [ ! -e "$cskSessionSaltFile" ]; then
+				createRndFile "$cskSessionSaltFile"
+			fi
+			sData0=$(head -c 64 "${cskSessionSaltFile}" | base64 -w 0)
+			if [ -z "${sData0}" ]; then
+					onFailed "cannot read session salt: ${cskSessionSaltFile}"
+				else
+					logError "# read session salt from: ${cskSessionSaltFile}"
+			fi
+		fi
 		local sData1="$(uptime -s)"
-		local sData2="$(ps ax | grep -E '/systemd --user|/cron|/udisks' | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | tr -d '\n')"
-		local sessionData="${user}${sData1}${sData2}"
+		#local sData2="$(ps ax | grep -E '/systemd --user|/cron|/udisks' | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | tr -d '\n')"
+		local sessionData="${user}${sData0}${sData1}"
 		local sSecret="${sessionData}"
 		local rsp=""
 		if [ "$cskSessionAutoPass" = "0" ]; then
 			if [ "$cskInputMode" = "1" ] || [ "$cskInputMode" = "e" ]; then
-				read -e -p "Session password (or Enter for default): " rsp
-				if [ -e "$rsp" ]; then
-					local ff="$rsp"
-					rsp=$(head -c 64 "${ff}" | base64 -w 0)
-					if [ -z "$rsp" ]; then
-						onFailed "cannot read file: ${ff}"
-					else
-						logError "# read session password from file: ${ff}"
-					fi
-				fi
+				read -p "Session password (or Enter for default): " rsp
 			else
 				read -p "Session password (or Enter for default): " -s rsp
 			fi
@@ -477,6 +481,14 @@ function loadSessionSecret()
 	fi
 }
 
+# file
+function createRndFile()
+{
+	local file="$1"
+	if [ "$file" = "-" ]; then file="/dev/stdout"; fi 
+	head -c "$cskRndLen" /dev/urandom > "$file"
+}
+
 ########################################################################
 
 function showHelp()
@@ -502,6 +514,7 @@ function showHelp()
 	logError " -as file : (enc) read secret data from a session encrypted file (see -ao)"
 	logError " -aos outFile : (dec) write secret data to a session encrypted file"
 	logError " -aop outFile : (dec) write password data to a session encrypted file"
+	logErrir " -ar file : use file as session salt, will be created if not exists"
 	logError " -aa : do not ask for session encryption password (use default)"
 	logError " -r length : (rnd) length of random bytes (default 64)"
 	logError " -d : dump password and secret on stderr for debug"
@@ -558,6 +571,10 @@ function main()
 			;;
 			-aa)
 				cskSessionAutoPass="1"
+			;;
+			-ar)
+				cskSessionSaltFile="${2:?"! -ar saltFile"}"
+				shift
 			;;
 			-ap)
 				apf="${2:?"! -ap file"}"
@@ -624,8 +641,7 @@ function main()
 			createSessionPass "$cskFile"
 		;;
 		rnd|r)
-			if [ "$cskFile" = "-" ]; then cskFile="/dev/stdout"; fi 
-			head -c "$cskRndLen" /dev/urandom > "$cskFile"
+			createRndFile "$cskFile"
 		;;	
 		*)
 			logError "! unknown command: $cskCmd"
