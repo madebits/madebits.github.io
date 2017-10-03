@@ -4,7 +4,7 @@
 
 <!--- tags: linux encryption -->
 
-**CSMan** is a *bash* script around `cryptsetup` for Ubuntu.
+**CSMan** is a *bash* script wrapper for `cryptsetup` for Ubuntu.
 
 <div id='toc'></div>
 
