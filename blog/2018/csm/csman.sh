@@ -652,7 +652,7 @@ function main()
         #    openContainer "$@"  
         #;;
         close|c)
-            closeContainer "$@"
+            closeContainer "$1"
         ;;
         mount|m)
             mountContainer "$1"
