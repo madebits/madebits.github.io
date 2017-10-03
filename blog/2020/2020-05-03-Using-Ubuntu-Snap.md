@@ -128,7 +128,7 @@ x11                       gimp:x11                                   :x11       
 
 Examples of core snap [interfaces](https://snapcraft.io/docs/supported-interfaces):
 
-* [:home](https://snapcraft.io/docs/home-interface) *core* snap interface gives the application access to non-hidden files in real `$HOME` directory. This is off, unless a [classic](https://snapcraft.io/docs/snap-confinement) snap, or an [approved](https://snapcraft.io/docs/permission-requests) snap. That means you have no way to know, until you install the snap, which may be too late.
+* [:home](https://snapcraft.io/docs/home-interface) *core* snap interface gives the application access to non-hidden files in real `$HOME` directory. This is off, unless a [classic](https://snapcraft.io/docs/snap-confinement) snap, or an [approved](https://snapcraft.io/docs/permission-requests) snap. That means there is no way to know, until you install the snap, which may be too late, due to [hooks](https://snapcraft.io/docs/supported-snap-hooks).
 * [:personal-files](https://snapcraft.io/docs/personal-files-interface) allows access to hidden $HOME folders and files.
 * [:network](https://snapcraft.io/docs/network-interface) gives access to network (which I think is not good when combined with `:home`). It can be removed using `sudo snap disconnect gimp:network :network` and it can be added back using `sudo snap connect gimp:network :network`. These changes are preserved by `snap refresh`.
 * [:content](https://snapcraft.io/docs/content-interface) allows snaps of same publisher to share data with each-other.
