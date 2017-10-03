@@ -126,9 +126,22 @@ x11                       gimp:x11                                   :x11       
 
 Examples of core snap [interfaces](https://snapcraft.io/docs/supported-interfaces):
 
-* [:home](https://snapcraft.io/docs/home-interface) *core* snap interface gives the application access to non-hidden files in real `$HOME` directory. 
+* [:home](https://snapcraft.io/docs/home-interface) *core* snap interface gives the application access to non-hidden files in real `$HOME` directory. This is off, unless a [classic](https://snapcraft.io/docs/snap-confinement) snap, or an [approved](https://snapcraft.io/docs/permission-requests) snap. That means you have no way to know, until you install the snap, which may be too late.
 * [:personal-files](https://snapcraft.io/docs/personal-files-interface) allows access to hidden $HOME folders and files.
 * [:network](https://snapcraft.io/docs/network-interface) gives access to network (which I think is not good when combined with `:home`). It can be removed using `sudo snap disconnect gimp:network :network` and it can be added back using `sudo snap connect gimp:network :network`. These changes are preserved by `snap refresh`.
+* [:content](https://snapcraft.io/docs/content-interface) allows snaps of same publisher to share data with each-other.
+* [:browser-support] allows access to system via modern browser APIs.
+* [:password-manager-service] access to system password services.
+
+While `snap info --verbose gimp` works without having to install a snap, the `snap connections gimp` works only after a snap is installed. To view connections without having to install try:
+
+```
+snap download gimp # e.g gimp_252.snap file is created
+mkdir -p $HOME/tmp/mnt
+sudo mount -t squashfs -o ro gimp_252.snap $HOME/tmp/mnt
+```
+
+Then look in `meta` and `snap` folders for *hooks* and *plugs* defined in `yaml` files.
 
 ## Snap Home
 
