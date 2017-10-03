@@ -210,7 +210,7 @@ Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you
 
 #### Embedding Secret File
 
-The `cryptsetup` options can be used if needed to embed secret file into the container. Assuming secret file is less than 1024 bytes long, then the following commands create a container with offset and store secret there:
+The `cryptsetup` options can be used if needed to embed secret file into the container. Assuming secret file is less than 1024 bytes long, the following commands create a container with offset and store secret there:
 
 ```bash
 sudo csman.sh n container.bin secret.bin 1M -cf -N 1000 --- -co -o 2 ---
@@ -224,6 +224,18 @@ dd conv=notrunc if=secret.bin of=container.bin
 sudo csman.sh o container.bin container.bin -co -o 2 ---
 ```
 
+The `-slots count` option is provided as convenience to create 1024 byte slots. Using `-slots` overwrites `-co -o`  (the number used with `-o` needs to be twice the number of slots). You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number. By default, created containers have no slots to store keys unless `-slots count` is specified.
+
+```bash
+# these are same, create
+sudo csman.sh n container.bin secret.bin 1M -co -o 4 ---
+sudo csman.sh n container.bin secret.bin 1M -slots 2
+
+# these are also same, open
+sudo csman.sh o container.bin secret.bin 1M -co -o 4 ---
+sudo csman.sh o container.bin secret.bin 1M -slots 2
+```
+
 Do **not** manipulate container file as secret file using `cskey.sh` or other tooling (such as `csman.sh chp`), other than for reading (decoding) the secret. To extract secret file back from the container use:
 
 ```bash
@@ -233,31 +245,31 @@ dd if=container.bin of=secret.bin bs=1024 count=1
 # dd if=container.bin of=secret.bin bs=1024 count=1 skip=1
 ```
 
-Two convenience commands (no `sudo` needed) are provided to embed (`e`) and extract (`ex`) secret files from default @x1024 byte offset slots. Default slot is 1 (byte offset 0) and can be changed via `-slot slot` option. The order of files is important in these commands (secret is **last**). We assume the container has been created with `-co -o 4 ---` or `-slots 2` option (the number used with `-o` needs to be twice the number of slots):
+Two *convenience* commands (no `sudo` needed) are provided to embed (`e`) and extract (`ex`) secret files from default @x1024 byte offset slots. Default slot is 1 (byte offset 0) and can be changed via `-slot slot` option. The order of files is important in these commands (secret is **last**). We assume the container has been created with `-slots 2` option:
 
 ```bash
 # cskey.sh enc secret.bin -b 2 -su
-# default -slot 1
+# embed, default -slot 1
 csman e container.bin secret.bin
 csman e container.bin secret.bin.01 -slot 2
 
-# will overwrite secret file if exists
+# extract, will overwrite secret file if exists
 csman ex container.bin secret.bin
 csman ex container.bin secret.bin.01 -slot 2
 ```
 
 Ideally, generate two secret files for same key using `cskey.sh`, so that they are not same. 
 
-`cskey.sh` knows to read secret from a default slot using `-slot` option, or from a byte offset using `-o` option, and a `csman.sh` shortcut for `-co -o 4` is `-slots 2` (using `-slots` overwrites `-co -o`):
+`cskey.sh` knows to read secret from a default slot using `-slot` option, or from a byte offset using `-o` option:
 
 ```bash
 # open container using slot 1
 sudo csman.sh o container.bin container.bin -slots 2
+sudo csman.sh o container.bin container.bin -slots 2 -ck -slot 1 ---
+
 # open container using slot 2
 sudo csman.sh o container.bin container.bin -slots 2 -ck -slot 2 ---
 ```
-
-You need to remember `-slots` count used when container is created, but you can use always same number.
 
 ### Using Containers
 
