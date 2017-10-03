@@ -29,6 +29,7 @@
 [EnGadget](https://www.engadget.com/)
 [LifeHacker](https://lifehacker.com/)
 [AnandTech](https://www.anandtech.com/)
+[NeoWin](https://www.neowin.net/)
 [The Register](https://www.theregister.co.uk/)
 [DZone](https://dzone.com/)
 [ACM TechNews](https://technews.acm.org/)
