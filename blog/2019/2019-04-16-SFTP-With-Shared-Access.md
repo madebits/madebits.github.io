@@ -71,7 +71,6 @@ To test the configuration, we can use:
 ```bash
 sftp -vvv sftpuser001@localhost
 ssh -vvv sftpuser001@localhost
-ssh -o FingerprintHash=md5 -v sftpuser001@localhost
 tail -f /var/log/auth.log
 tail f- /var/log/syslog
 ```
