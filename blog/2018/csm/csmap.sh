@@ -211,7 +211,7 @@ function touchFile()
     local fileTime="$2"
     if [ -f "$file" ]; then
         #local user=${SUDO_USER:-$(whoami)}
-sudo bash -sx "$file" "$fileTime" <<'EOF'
+sudo bash -s "$file" "$fileTime" <<'EOF'
     now=$(date +"%Y-%M-%d %T") && date -s "$2" && touch "$1"
     # && date -s "$now"
 EOF
