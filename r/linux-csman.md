@@ -137,8 +137,8 @@ sudo install aes argon2 cskey.sh csman.sh /usr/local/bin/
 When `csman.sh` is started without arguments, it prints prefix hashes of these files, if present:
 
 ```
-9dbccb965  /usr/local/bin/csman.sh
-8a9a9c8e4  /usr/local/bin/cskey.sh
+ac3ab4465  /usr/local/bin/csman.sh
+28b098795  /usr/local/bin/cskey.sh
 50be633f6  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
 ```
