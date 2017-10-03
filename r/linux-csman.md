@@ -284,7 +284,7 @@ Encrypting a device (disk partition) is similar:
 sudo csman.sh /dev/sdc1 -oo
 ```
 
-The size option is not neede, but if specified, it needs to be `0G` (or `0M`) and it is ignored.
+The size option is not needed, but if specified, it needs to be `0G` (or `0M`) and it is ignored.
 
 The `-oo` option tells `csman.sh` to *only overwrite* the container data and do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data and you can run same command later without `-oo` to create the encrypted file system. If `-oo` is used, the secret file is ignored if specified.
 
