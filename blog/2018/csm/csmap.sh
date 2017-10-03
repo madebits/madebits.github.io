@@ -174,7 +174,7 @@ function openContainer()
     processOptions "$@"
     echo "Opening /dev/mapper/${name} ..."
 
-    local key=$(sudo -E "${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
+    local key=$(sudo "${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     touchFile "$lastSecret" "$lastSecretTime"
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "${csOptions[@]}" open "$device" "$name" -
     echo
@@ -214,7 +214,7 @@ function createSecret()
 {
     local secret="$1"
     echo "Creating ${secret} ..."
-    sudo -E "${toolsDir}/cskey.sh" enc "$secret" "${ckOptions[@]}"
+    sudo "${toolsDir}/cskey.sh" enc "$secret" "${ckOptions[@]}"
     ownFile "$secret"
 }
 
@@ -269,7 +269,7 @@ function createContainer()
     fi
     
     echo "(Re-)enter password to open the container for the first time ..."
-    local key=$(sudo -E "${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
+    local key=$(sudo "${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     echo
     touchFile "$lastSecret" "$lastSecretTime"
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "${csOptions[@]}" open "$container" "$name" -
@@ -303,7 +303,7 @@ function changePass()
         lastSecretTime=$(stat -c %z "$secret")
     fi
     shift
-    sudo -E "${toolsDir}/cskey.sh" chp "$secret" "$@"
+    sudo "${toolsDir}/cskey.sh" chp "$secret" "$@"
     ownFile "$secret"
     sleep 1
     touchFile "$secret" "$lastSecretTime"
