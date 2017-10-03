@@ -96,11 +96,16 @@ Repeat Mount and Disconnect commands.
 
 ## Update: VeraCrypt
 
+To mount:
+
 ```bash
 # --key-file file1.txt --tcrypt-hidden
 sudo cryptsetup --type tcrypt --veracrypt --veracrypt-query-pim open ./test.bin sometest
 sudo mount -o users /dev/mapper/sometest ~/mnt/
+```
+To unmount:
 
+```bash
 umount ~/mnt/
 cryptsetup remove sometest
 ```
@@ -114,5 +119,7 @@ cryptsetup remove sometest
 * https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_a_non-root_file_system#Loop_device
 * https://lumit.it/how-to-get-a-tails-luks-master-key/
 * https://www.tarsnap.com/scrypt.html
+
+* https://wiki.archlinux.org/title/TrueCrypt#Accessing_a_TrueCrypt_or_VeraCrypt_container_using_cryptsetup 
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-09-28-Tmux-on-Lubuntu.md'>Tmux on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-08-20-Sort-Photos-By-EXIF-Date.md'>Sort Photos By EXIF Date</a></ins>
