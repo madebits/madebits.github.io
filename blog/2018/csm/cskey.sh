@@ -7,7 +7,7 @@ set -e
 # none of values in this file is secret
 # change default argon2 params as it fits you here
 adt="1000"
-adm="16"
+adm="14"
 adp="8"
 
 # set to 1 to use my aes tool, 0 uses ccrypt
@@ -235,60 +235,78 @@ function readNewPass()
 	echo "$pass"
 }
 
+function encryptFile()
+{
+	local file="${1:-secret.bin}"
+	shift
+	local pass=$(readNewPass)
+	local key=""
+	if [ ! -z "$CS_KEY" ]; then
+		(>&2 echo "# Using key from CS_KEY")
+		key="$CS_KEY"
+	else
+		key=$(head -c 512 /dev/urandom | base64 -w 0)
+	fi
+	
+	if [ "$CS_ECHO_KEY" = "1" ]; then
+		(>&2 echo)
+		(>&2 echo "[$pass]")
+		(>&2 echo "[$key]")
+	fi
+	encodeKey "$file" "$pass" "$key" "$@"
+}
+
+function decryptFile()
+{
+	local file="${1:-secret.bin}"
+	shift
+	local pass=$(readPass)
+    decodeKey "$file" "$pass" "$@"
+    local key=""
+}
+
+function reEncryptFile()
+{
+	local file="${1:-secret.bin}"
+	shift
+	(>&2 echo "# Current")
+	local pass1=$(readPass)
+	(>&2 echo)
+	local key=$(decodeKey "$file" "$pass1" "$@" | base64 -w 0)
+	(>&2 echo "# New")
+	if [ ! -z "$CS_SAME_PASS" ]; then
+		(>&2 echo "# Using CS_SAME_PASS")
+		pass="$pass1"
+	else
+		pass=$(readNewPass)
+	fi
+	if [ "$CS_ECHO_KEY" = "1" ]; then
+		(>&2 echo)
+		(>&2 echo "[$pass]")
+		(>&2 echo "[$key]")
+	fi
+	if [ ! -z "$4" ]; then
+		shift 3
+		(>&2 echo "# Using new argon2 params:" $@ )
+	fi
+	encodeKey "$file" "$pass" "$key" "$@"
+	(>&2 echo "Done: $file")
+}
+
 # mode file
 function main()
 {
     local mode="$1"
-    local file="${2:-secret.bin}"
-    local key=""
+    shift
     case "$mode" in
         enc)
-			shift 2
-            pass=$(readNewPass)
-            
-            if [ ! -z "$CS_KEY" ]; then
-				(>&2 echo "# Using key from CS_KEY")
-				key="$CS_KEY"
-			else
-				key=$(head -c 512 /dev/urandom | base64 -w 0)
-            fi
-            
-            if [ "$CS_ECHO_KEY" = "1" ]; then
-				(>&2 echo)
-				(>&2 echo "[$pass]")
-				(>&2 echo "[$key]")
-			fi
-            encodeKey "$file" "$pass" "$key" "$@"
+			encryptFile "$@"
         ;;
         dec)
-			shift 2
-			pass=$(readPass)
-            decodeKey "$file" "$pass" "$@"
+			decryptFile "$@"
         ;;
         chp)
-			shift 2
-			(>&2 echo "# Current")
-			pass1=$(readPass)
-            (>&2 echo)
-            key=$(decodeKey "$file" "$pass1" "$@" | base64 -w 0)
-            (>&2 echo "# New")
-            if [ ! -z "$CS_SAME_PASS" ]; then
-				(>&2 echo "# Using CS_SAME_PASS")
-				pass="$pass1"
-			else
-				pass=$(readNewPass)
-            fi
-            if [ "$CS_ECHO_KEY" = "1" ]; then
-				(>&2 echo)
-				(>&2 echo "[$pass]")
-				(>&2 echo "[$key]")
-			fi
-			if [ ! -z "$6" ]; then
-				shift 3
-				(>&2 echo "# Using new argon2 params:" $@ )
-			fi
-            encodeKey "$file" "$pass" "$key" "$@"
-            (>&2 echo "Done: $file")
+			reEncryptFile "$@"
         ;;
         *)
             (>&2 echo "Usage: basename($0) [enc | dec | chp] file [t m p]")
