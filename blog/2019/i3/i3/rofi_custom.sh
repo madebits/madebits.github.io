@@ -40,8 +40,8 @@ if [ -z "$@"]; then
     echo "🔲 i3 New Workspace (W+^)"
     echo "▶️ i3 Move to New Workspace"
     echo "⏩ i3 Move All To New Workspace"
-    echo "📌 i3 Toggle Bar (W+y)"
-    echo "🛸 i3 Floating Toggle"
+    echo "📌 i3 Bar Toggle (W+y)"
+    echo "🛸 i3 Floating Toggle (W+Shift+space)"
     echo "💎 i3 Sticky Toggle"
     echo "📺 i3 Full Screen (W+f)"
     echo "⚙️ i3 Config"
@@ -109,7 +109,7 @@ else
             nws="$(i3NextFreeWorkspace)"
             i3-msg "rename workspace to \"${nws}\"" > /dev/null
             ;;
-        "🛸 i3 Floating Toggle")
+        "🛸 i3 Floating Toggle (W+Shift+space)")
             i3-msg 'floating toggle; move position center' > /dev/null
             ;;
         "💎 i3 Sticky Toggle")
@@ -118,7 +118,7 @@ else
         "📺 i3 Full Screen (W+f)")
             i3-msg 'fullscreen toggle' > /dev/null
             ;;
-        "📌 i3 Toggle Bar (W+y)")
+        "📌 i3 Bar Toggle (W+y)")
             i3-msg 'bar mode toggle' > /dev/null
             ;;
         "⚙️ i3 Config")
@@ -211,10 +211,10 @@ else
             ;;
             
         "🗂️ Ranger (W+g)")
-            xterm -e ranger > /dev/null &
+            ~/.config/i3/term.sh -e ranger > /dev/null &
             ;;
         "💻 Terminal (W+Enter|W+t)")
-            xterm > /dev/null &
+            ~/.config/i3/term.sh > /dev/null &
             ;;
         "📅 Calendar")
             zenity --calendar --text="$(date)" --width=320 > /dev/null &

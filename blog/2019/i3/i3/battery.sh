@@ -12,5 +12,5 @@ function alert()
 
 while : ; do
     alert
-    sleep 15m
+    sleep 10m
 done

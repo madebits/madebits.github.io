@@ -64,7 +64,7 @@
     frame_width = 2
 
     # Defines color of the frame around the notification window.
-    frame_color = "#FFFEDA"
+    frame_color = "#ecac54"
 
     # Define a color for the separator.
     # possible values are:
@@ -125,7 +125,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "✉️ <i>%a</i>\n<b>%s</b>\n%b\n%p"
+    format = "💬 <i>%a</i>\n<b>%s</b>\n%b\n%p"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
@@ -274,21 +274,21 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#B9D6F5"
+    background = "#eeecf2"
     foreground = "#222222"
     timeout = 10
     # Icon for notifications with low urgency, uncomment to enable
     #icon = 🔔
 
 [urgency_normal]
-    background = "#5F676A"
+    background = "#44865b"
     foreground = "#ffffff"
     timeout = 10
     # Icon for notifications with normal urgency, uncomment to enable
     #icon = ℹ️
 
 [urgency_critical]
-    background = "#c30101"
+    background = "#c14543"
     foreground = "#ffffff"
     #frame_color = "#ff0000"
     timeout = 0

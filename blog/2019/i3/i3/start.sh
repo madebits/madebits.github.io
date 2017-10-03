@@ -3,10 +3,13 @@
 eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
 export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 
-eval $(dbus-launch)
+if [ -z "$DBUS_SESSION_BUS_ADDRESS" ] ; then
+    eval $(dbus-launch --sh-syntax)
+    echo "D-Bus per-session daemon address is: $DBUS_SESSION_BUS_ADDRESS"
+fi
 
 # https://superuser.com/questions/389397/ubuntu-and-privilege-elevation-in-i3wm
-/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+#/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
 
 # see comment in file, if this is enabled no logout is possible
 sudo /usr/local/bin/gnome-kill

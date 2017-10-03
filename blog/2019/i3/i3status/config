@@ -6,6 +6,8 @@
 # ß
 # If the above line is not correctly displayed, fix your editor first!
 
+##7b699e
+
 general {
         colors = true
         interval = 15
@@ -31,23 +33,23 @@ order += "tztime local"
 # %frequency %ip (%bitrate)
 
 wireless _first_ {
-        format_up = "<span background='#7b699e'>📶 %essid %quality </span>"
-        format_down = "<span background='#7b699e'>📡 ? </span>"
+        format_up = "<span background='#655f71'>📶 %essid %quality </span>"
+        format_down = "<span background='#655f71'>📡 ? </span>"
         separator = false
         separator_block_width = 0
 }
 
 ethernet _first_ {
     # if you use %speed, i3status requires root privileges
-    #  (%speed)
-    format_up = "<span background='#7b699e'>🙂 %ip </span>"
-    format_down = "<span background='#7b699e'>😡 ? </span>"
+    #  (%speed) %ip
+    format_up = "<span background='#655f71'>🙂 </span>"
+    format_down = "<span background='#655f71'>😡 </span>"
     separator = false
     separator_block_width = 2
 }
 
 battery all {
-       format = "<span background='#7b699e'>%status %percentage 🔻%remaining </span>"
+       format = "<span background='#655f71'>%status %percentage 🔻%remaining </span>"
        format_down = "No battery"
        status_chr = "⚡ CHR"
        status_bat = "🔋 BAT"
@@ -62,24 +64,24 @@ battery all {
 
 tztime local {
     format = "<span background='#44865b'>%time</span>"
-    format_time = "📅 %b %a %d 🕛 %H:%M "
+    format_time = "📅 %b %a %d ⌚ %H:%M "
 }
 
 load {
-    format = "<span background='#7b699e'>🔥 %1min </span>"
+    format = "<span background='#655f71'>🏋️ %1min </span>"
     separator = false
     separator_block_width = 0
 }
 
 cpu_temperature 0 {
-    format = "<span background='#7b699e'>🌡️%degrees °C </span>"
+    format = "<span background='#655f71'>🌡️%degrees °C </span>"
     path = "/sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input"
     separator = false
     separator_block_width = 0
 }
 
 cpu_usage {
-    format = "<span background='#7b699e'>🚦%usage </span>"
+    format = "<span background='#655f71'>🚦%usage </span>"
     max_threshold = 70
     degraded_threshold = 40
     separator = false
@@ -87,22 +89,22 @@ cpu_usage {
 }
 
 disk "/" {
-    format = "<span background='#7b699e'>💿 %avail </span>"
+    format = "<span background='#655f71'>💿 %avail </span>"
     separator = false
     separator_block_width = 0
     prefix_type=custom
 }
 
 disk "/data2" {
-    format = "<span background='#7b699e'>📀 %avail </span>"
+    format = "<span background='#655f71'>📀 %avail </span>"
     prefix_type=custom
     separator = false
     separator_block_width = 2
 }
 
 volume master {
-    format = "<span background='#7b699e'>🔊 %volume </span>"
-    format_muted = "<span background='#7b699e'>🔇 %volume </span>"
+    format = "<span background='#655f71'> 🔊 %volume </span>"
+    format_muted = "<span background='#655f71'> 🔇 %volume </span>"
     device = "default"
     mixer = "Master"
     mixer_idx = 0

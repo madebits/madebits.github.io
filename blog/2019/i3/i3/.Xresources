@@ -70,3 +70,97 @@ XTerm*color15 : #EEEEEC
 
 Xcursor.theme: redglass
 Xcursor.size: 28
+
+! !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+! URxvt
+
+! General settings
+URxvt.saveLines: 4096
+URxvt.scrollBar: False
+URxvt.scrollstyle: rxvt
+URxvt.termName: xterm-256color
+URxvt.urgentOnBell: True
+URxvt.cursorBlink: False
+
+! Disable printing the terminal contents when pressing PrintScreen.
+URxvt.print-pipe: "cat > /dev/null"
+
+! Extensions
+! http://jeromebelleman.gitlab.io/posts/productivity/urxvt/
+! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/src/urxvt.pm
+! https://wiki.archlinux.org/index.php/rxvt-unicode
+! tabs: Shift+Down = new tab, ctrl+d = close tab, Shift+left / right = goto tab, Ctrl+left/right = move tab
+URxvt.perl-ext-common: default,font-size,tabbed,matcher,selection-to-clipboard,clipboard-past-on-right-click,confirm-paste
+
+! URxvt.tabbed.autohide: true
+URxvt.tabbed.tabbar-fg: 2
+URxvt.tabbed.tabbar-bg: 7
+URxvt.tabbed.tab-fg: 3
+URxvt.tabbed.tab-bg: 7
+
+URxvt.urlLauncher: /usr/bin/xdg-open
+URxvt.urlButton: 1
+URxvt.underlineURLs: True
+URxvt.matcher.rend.0: Uline Bold fg2
+
+! URxvt.copyCommand:  xclip -i -selection clipboard
+! URxvt.pasteCommand: xclip -o -selection clipboard
+
+! Fonts 13 13:4
+
+!Inconsolata
+URxvt.font: xft:Inconsolata-14
+! URxvt.boldFont: xft:Inconsolata-14
+URxvt.letterSpace: -1
+
+! Tango theme
+
+! fafafa
+URxvt.background: #fafafa
+URxvt.foreground: #161616
+
+! black
+! #2E3436
+URxvt.color0  : #2E3436
+URxvt.color8  : #555753
+! red
+URxvt.color1  : #CC0000
+URxvt.color9  : #EF2929
+! green
+URxvt.color2  : #4E9A06
+URxvt.color10 : #8AE234
+! yellow
+URxvt.color3  : #C4A000
+! #FCE94F
+URxvt.color11 : #B0A337
+! blue
+URxvt.color4  : #3465A4
+URxvt.color12 : #729FCF
+! magenta
+URxvt.color5  : #75507B
+URxvt.color13 : #AD7FA8
+! cyan
+URxvt.color6  : #06989A
+URxvt.color14 : #34E2E2
+! white
+URxvt.color7  : #D3D7CF
+URxvt.color15 : #EEEEEC
+
+
+URxvt.shading:       15
+urxvt*depth:        32
+
+URxvt.inputMethod: ibus
+URxvt.preeditType: OverTheSpot
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+URxvt.keysym.C-Up:     font-size:increase
+URxvt.keysym.C-Down:   font-size:decrease
+! URxvt.keysym.C-S-Up:   font-size:incglobal
+! URxvt.keysym.C-S-Down: font-size:decglobal
+! URxvt.keysym.C-equal:  font-size:reset
+! URxvt.keysym.C-slash:  font-size:show
+
