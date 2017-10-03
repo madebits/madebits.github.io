@@ -213,7 +213,7 @@ The password can also be read from first line in a file using `-p passwordFile`.
 
 ##### Key Files
 
-You are asked by default to specify **key files** before entering the password. Key files are part of the password. Up to 1024 first bytes are used from start of each key file hashed (SHA256) and appended to password string. Hashes are sorted, so order of specifying key files does not matter. You can specify key files one by one, or press *Enter* key without a path to stop (or use *Enter* key without any key file to skip key file entering). `Tab` completion for file paths works in key file entry prompt.
+You are asked by default to specify **key files** before entering the password. Key files are part of the password. Up to 1024 first bytes are used from start of each key file hashed (SHA256) and appended to password string. Hashes are sorted, so order of specifying key files does not matter. Same file can used more than once. You can specify key files one by one, or press *Enter* key without a path to stop (or use *Enter* key without any key file to skip key file entering). `Tab` completion for file paths works in key file entry prompt.
 
 If you do not want to be asked about key files use `-k` option. Key files can be specified also in command-line using one or more `-kf keyFile` options. Even if you use `-kf keyFile`, you will be still asked in command-line for any additional ones, unless you specify `-k`.
 
