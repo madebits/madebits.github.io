@@ -22,16 +22,17 @@ vim -u NONE
 Vim assumes you own the machine and its disk is encrypted, leaving generous usage traces by default. To start Vim in a mode where it does not leak usage information use:
 
 ```bash
+# do not load ~/.vimrc, no ~/.viminfo, no swap, 
 vim -u NONE -i NONE -n
 ```
 
 Where, `-i` means no *.viminfo* file and `-n` means no *swap* temporary file. If you forget any of these, use `vim --help` in shell to get a list of command-line options.
 
-A file name can be used after the above command-line options to edit it. To open a file read-only use `vim -R file.txt` (or `:set ro` from within Vim).
+A file path can be used after Vim command-line options to edit it. To open a file read-only use `vim -R file.txt` (or `:set ro` from within Vim).
 
 ### How to Quit Vim
 
-If you panic when starting `vim`, press *Esc* key one more times (so that Vim enters *command-mode*) and then press `:q!`. This will quit Vim without saving your changes. By chance, the reverse `q:` is the *raise panic level* command; it re-shows your panic keys. If `:q!` does not work to exit then `:qa!` will.
+If you panic after starting `vim`, press *Esc* key one more times (so that Vim enters *command-mode*) and then press `:q!`. This will quit Vim without saving your changes. By chance, the reverse `q:` is the *raise panic level* command; it re-shows your panic keys. If `:q!` does not work to exit, then `:qa!` will.
 
 ## Pre-Basics
 
