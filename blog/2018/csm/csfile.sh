@@ -118,6 +118,7 @@ function dcInfo()
 # Info: Last command should return 0
 EOF
     read -p "Press Enter to continue or Ctrl+C to exit: "
+    echo
 } >&2
 
 function makeTmpDir()
