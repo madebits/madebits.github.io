@@ -6,7 +6,9 @@
 
 I like [VSCode](https://code.visualstudio.com) and use it often to program a lot of JavaScript, but VSCode sucks at JavaScript. I would really like VSCode could support JavaScript same good as [WebStorm](https://www.jetbrains.com/webstorm/) does.
 
-Why does VSCode sucks at JavaScript? Because VSCode developers use [TypeScript](https://www.typescriptlang.org/). They only care about JavaScript as an afterthought - TypeScript works great, JavaScript kind of works too.
+Why does VSCode sucks at JavaScript? 
+
+    Because VSCode developers use [TypeScript](https://www.typescriptlang.org/). They only care about JavaScript as an afterthought - TypeScript works great, JavaScript kind of works too.
 
 Have a look at https://code.visualstudio.com/docs/languages/javascript and let me explain some of its highlight for you:
 
@@ -20,6 +22,8 @@ Have a look at https://code.visualstudio.com/docs/languages/javascript and let m
 
 * To take over the terrible programming experience of TypeScript to JavaScript decorate files with `//@ts-check`. Common, who do they expect to decorate each file one by one like that? Anyway, every time I tried that, it make the whole error checking experience terrible and had to turn it off. VSCode will think it is TypeScript and report non-sense, you have to give quickly up. Not sure if VSCode developers have ever tried programming JavaScript with it.
 
-How can VSCode be better at JavaScript? Well force VSCode developers to do maintain some JavaScript project in parallel using VSCode.
+How can VSCode be better at JavaScript? 
+
+    Force VSCode developers to do maintain some JavaScript project in parallel using VSCode.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-04-16-SFTP-With-Shared-Access.md'>SFTP With Shared Access</a></ins>
