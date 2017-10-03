@@ -19,6 +19,13 @@ group nogroup
 
 In Ubuntu, the client is better to run under `nobody`. If several VPN servers are used then `remote-random` helps randomly select them.
 
+To create the client [service](https://community.openvpn.net/openvpn/wiki/Systemd) use (for a file named `/etc/openvpn/myvpn.conf`):
+
+```bash
+sudo systemctl start openvpn-client@myvpn
+sudo systemctl enable openvpn-client@myvpn
+```
+
 ##Forcing All Traffic via OpenVpn
 
 I modified this script I found online to be able to deal with several local interfaces and cards.
