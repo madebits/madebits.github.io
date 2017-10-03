@@ -398,7 +398,7 @@ function createSessionSalt()
 		logError "# session: creating tmpfs in ${fs} (use -ar to choose another)"
 		mount -t tmpfs -o size=8m tmpfs "$fs"
 	fi
-	cskSessionSaltFile="$fs/csm1"
+	cskSessionSaltFile="$fs/$(uptime -s | tr -d ' :-')"
 }
 
 function readSessionPass()
