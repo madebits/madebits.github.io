@@ -9,6 +9,7 @@
 * [Medium](https://medium.com/)
 * [Ars Technica](https://arstechnica.com/)
 * [Channel9](https://channel9.msdn.com/)
+* [Live Science](https://www.livescience.com/news)
 
 <hr>
 
