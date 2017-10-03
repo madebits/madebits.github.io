@@ -8,14 +8,14 @@ I always wanted to write an own [Vim](https://www.vim.org/) text editor tutorial
 
 ## Starting and Stopping
 
-If you learn Vim, learn it without customization. In your own machine, you can use some other editor or IDE, or even some heavily [customized](https://github.com/xmementoit/vim-ide) Vim. It is only when you are in some other machine that you really need to use Vim. And this the reason for the first command to learn:
+If you learn Vim, learn it without customization. In your own machine, you can use some other editor or IDE, or even some heavily [customized](https://github.com/xmementoit/vim-ide) Vim. It is only when you are in some other machine or non-UI server that you really need to use Vim. And this the reason for the first command to learn:
 
 ```bash
 # start vim without any customization (do not load ~/.vimrc)
 vim -u NONE
 ```
 
-Anecdotally, a friend following that advice found once himself once a broken Linux server having only `ed` command available. The advice is still sound, thought the level you need to apply it may vary.
+Anecdotally, a friend following that advice found once himself once a broken Linux server having only `ed` command available and no network. The advice is still sound, thought the level you need to apply it may vary.
 
 If you panic when starting `vim`, press *Esc* key one more times (so that Vim enters *command-mode*) and then press `:q!`. This will quit Vim without saving your changes. By chance, the reverse `q:` is the *raise panic level* command; it re-shows your panic keys. If `:q!` does not work to exit then `:qa!` will.
 
@@ -44,6 +44,7 @@ There are several ways to save the text:
 * `:wq` save and quit (or `ZZ` or `:x`).
 * `w!` force write read-only file.
 * `w !sudo tee % > /dev/null` yes, no one remembers this one, but it will force write some file open without `sudo` as `sudo` (basically this means write buffer and pipe it via *sudo* using *tee* to filename).
+    - If you can plan in advance, use `SUDO_EDITOR=vim sudo -e somefile` to edit a file as *sudo* using Vim.
 * As noted before, `:q!` will not save your text and exit (you still have the nice memory of writing it) and `:qa!` will exit even if you have more than buffer.
 
 ##Vim Help
