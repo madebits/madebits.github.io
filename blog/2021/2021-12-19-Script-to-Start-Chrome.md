@@ -95,6 +95,12 @@ if [ "$lastExit" = "1" ]; then
         fi
     done
 
+    prefsFile="$profileDir/Default/Preferences"
+    prefsFileTmp="$profileDir/Default/Preferences.tmp"
+    /usr/bin/jq -c --arg dir "/home/${USER}/Desktop" '.profile.content_settings.exceptions.site_engagement = {} | .savefile.default_directory = $dir | .selectfile.last_directory = $dir | .google.services.signin_scoped_device_id = "00000000-0000-0000-0000-000000000000" | .media.device_id_salt = "00000000000000000000000000000000" | .media_router.receiver_id_hash_token = "0" | .web_apps.daily_metrics = {} | .profile.content_settings.exceptions.app_banner = {} | .partition.per_host_zoom_levels.x = {} | .profile.content_settings.exceptions.sound = {} | .profile.content_settings.exceptions.formfill_metadata = {} | .profile.content_settings.exceptions.app_banner = {} | .gaia_cookie.hash = "0" | .data_reduction.daily_original_length = [] | .data_reduction.daily_received_length = [] | .sessions.event_log = []' "${prefsFile}" > "${prefsFileTmp}"
+    mv "${prefsFileTmp}" "${prefsFile}"
+    notify-send -t 2 "👍 Chrome profile cleaned!"
+
 fi
 
 /usr/bin/google-chrome-stable ${options[@]} --disk-cache-dir=/dev/null --disk-cache-size=1 --media-cache-size=0 --incognito -start-maximized --no-first-run --user-data-dir=$profileDir
