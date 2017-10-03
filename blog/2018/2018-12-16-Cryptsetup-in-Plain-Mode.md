@@ -44,12 +44,12 @@ To increase size of the container file, we can use use again `dd` with *seek* pa
 dd iflag=fullblock if=/dev/urandom of=container.bin bs=1G count=10 seek=30
 ```
 
-Now `cryptsetup open` container, but do not mount it:
+Now `cryptsetup open` container (and either mount it or leave it unmounted):
 
 ```bash
-sudo e2fsck -f /dev/mapper/enc
+sudo e2fsck -f /dev/mapper/enc # if unmounted
 sudo resize2fs /dev/mapper/enc
-sudo e2fsck -f /dev/mapper/enc
+sudo e2fsck -f /dev/mapper/enc # if unmounted
 ```
 
 To shrink, after resize use `truncate` tool on container file.
@@ -95,7 +95,7 @@ sudo apt install cryptsetup bindfs argon2 ccrypt
 
 ###Key Generation
 
-`cskey.sh` bash script helps manage key contents. It uses `ccrypt` to save container key, or if present, it uses my [aes](#r/cpp-aes-tool.md) tool. The benefit of my `aes` tool is that it (same as *dm-crypt*) always decrypts the data even if the password is wrong, while `ccrypt` is designed to give an error, which I consider unsafe. We can use `cskey.sh` to generate a secret file (we only need to do this once):
+`cskey.sh` bash script helps manage key contents. It uses `ccrypt` to save container key, or if present in same folder, it uses my [aes](#r/cpp-aes-tool.md) tool. The benefit of my `aes` tool is that it (same as *dm-crypt*) always decrypts the data even if the password is wrong, while `ccrypt` is designed to give an error, which I consider unsafe. We can use `cskey.sh` to generate a secret file (we only need to do this once):
 
 ```bash
 ./cskey.sh enc secret.bin
