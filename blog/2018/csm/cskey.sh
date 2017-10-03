@@ -315,13 +315,13 @@ function getSecret()
 	CS_SECRET="${CS_SECRET:-}"
 	local secret=""
 	if [ -n "$cskSecret" ]; then
-		logError "# secret: user-specified"
+		logError "# secret: user specified"
 		secret="$cskSecret"
 	elif [ -n "$CS_SECRET" ]; then
 		logError "# secret: from CS_SECRET"
 		secret="$CS_SECRET"
 	else
-		logError "# secret: generated"
+		logError "# secret: generated new"
 		secret=$(head -c 512 /dev/urandom | base64 -w 0)
 	fi
 	echo "${secret}"
@@ -487,6 +487,19 @@ function createRndFile()
 	local file="$1"
 	if [ "$file" = "-" ]; then file="/dev/stdout"; fi 
 	head -c "$cskRndLen" /dev/urandom > "$file"
+	if [ "$1" != "-" ]; then
+		local count=$(($cskRndBatch + 0))
+		if [ "$count" -gt "64" ]; then
+			count=64
+		fi
+		for ((i=1 ; i <= $count; i++))
+		{
+			local pad=$(printf "%02d" ${i})
+			local file="${1}.${pad}"
+			logError "$file"
+			head -c "$cskRndLen" /dev/urandom > "$file"
+		}
+	fi
 }
 
 ########################################################################
@@ -517,6 +530,7 @@ function showHelp()
 	logErrir " -ar file : use file as session salt, will be created if not exists"
 	logError " -aa : do not ask for session encryption password (use default)"
 	logError " -r length : (rnd) length of random bytes (default 64)"
+	logError " -rb count : (rnd) generate file.count files"
 	logError " -d : dump password and secret on stderr for debug"
 	logError "Examples:"
 	logError ' sudo bash -c '"'"'secret=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -s <(echo -n "$secret") -d'"'"''
@@ -617,6 +631,11 @@ function main()
 			;;
 			-r)
 				cskRndLen="${2:?"! -r length"}"
+				shift
+			;;
+			-rb)
+				cskRndBatch="${2:?"! -rb count"}"
+				checkNumber "$cskRndBatch"
 				shift
 			;;
 			*)
