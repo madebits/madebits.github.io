@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-I always wanted to write a own Vim tutorial that I have around and can return to for a quick reference. There is no reason I can think of me to use Vim extensively nowadays, but there are always plenty of chances to use it, being so ubiquitous.
+I always wanted to write an own Vim tutorial that I have around and can return to for a quick reference. There is no reason I can think of me to use Vim extensively nowadays, but there are always plenty of chances to use it.
 
 ##Starting and Stopping
 
@@ -15,9 +15,9 @@ If you learn Vim, learn it up and now plain without customizations. In your own 
 vim -u NONE
 ```
 
-Anecdotally, a friend following that advice found once himself once a broken Linux server having only `ed` command available. Nerveless, the advice is still sound, thought the level you need to apply it may vary.
+Anecdotally, a friend following that advice found once himself once a broken Linux server having only `ed` command available. The advice is still sound, thought the level you need to apply it may vary.
 
-If you panic when starting `vim`, press *Esc* key one more times (so that Vim enters *command-mode*) and then press `:q!`. This will quit Vim without saving your changes (note that by chance the reverse `q:` is the *raise panic level* command; it re-shows your panic keys). I will write here commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*).
+If you panic when starting `vim`, press *Esc* key one more times (so that Vim enters *command-mode*) and then press `:q!`. This will quit Vim without saving your changes. Note that by chance, the reverse `q:` is the *raise panic level* command; it re-shows your panic keys. I will write here commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*).
 
 Vim assumes you own the machine and its disk is encrypted, leaving generous usage traces by default. If that is not the case, use `vim -u NONE -i NONE -n` to start Vim in a mode where it does not leak usage information (`-i` means no *.viminfo* file and `-n` means no *swap* temporary file). If you forget any of this, use `vim --help` in shell to get a list of command-line options.
 
@@ -25,39 +25,39 @@ Another occasionally useful command-line option is `vim -R file.txt` to open a f
 
 ##Pre-Basics
 
-If you started Vim without a filename, you can open a file from within Vim using `:edit filename` (or `:e`). `Tab` key can be used for auto-completion.
+If you started Vim without a filename, you can open a file from within Vim using `:edit filename` (or `:e`). *Tab* key can be used for auto-completion.
 
-The fastest way to produce text in Vim is to write it some other editor and save it as some file `text.txt`. Then once you start `vim` use `:r text.txt` to read it and put its text under the cursor position. Normally, file name completion should work after `:r` same as in shell using `Tab` key. This is also the best way to bring some existing pieces of text within Vim.
+The fastest way to produce text in Vim is to write it some other editor and save it as some file `text.txt`. Then once you start `vim` use `:r text.txt` to read it and put its text under the cursor position. Normally, file name completion should work after `:r` same as in shell using *Tab* key. This is also the best way to bring some existing pieces of text within a file in Vim.
 
-Move the cursor (in command-mode) using `j` - down, `k` - up, `h` - left, `l` - right. Usually, *arrow* keys work most of the time out the box too.
+Move the cursor (in *command-mode*) using `j` - down, `k` - up, `h` - left, `l` - right. Usually *arrow* keys work most of the time out the box too.
 
 To get help from within Vim use any of `:help`, `:h`, or *F1* key. Help opens in a separate *read-only* text buffer and you can close it using `:q` or `:close`. If you scroll down in help page (or press `/quick`) , you will find a link to *quickref*. Move cursor over and press `Ctrl+]` to open it. You can open it also directly using `: h quickref`. Quick reference contains most commands you will ever use (`:h text` will search help for *text*).
 
-To open shell without having to exit Vim by using `:shell` or `:sh`. Press `exit` to return back. If you pressed *Ctrl+z* by mistake, use `fg` in shell to get back to Vim. Using `:!sh` or `:!cmd` can be also used to run the shell (or run a command, use `!cmd %` for to replace `%` with current file name if you need it).
+To open shell without having to exit Vim use `:shell` or `:sh`. Run `exit` to return back from shell. If you pressed *Ctrl+z* by mistake while in Vim, use `fg` in shell to get back to Vim. Using `:!sh` or `:!cmd` can be also used to run the shell (or run a command, use `!cmd %` for to replace `%` with current file name if you need it).
 
-If you really want to save your text, there are several ways to do so:
+There are several ways to save the text:
 
-* `:w somefilename` will save current text buffer in *somefilename*
-* `:saveas somefilename` will save current text buffer in *somefilename* and use it for follow-up saves
-* `:w` will save current text buffer in current file (either open via `vim somefilename`, or set via first `w somefilename`)
+* `:w somefilename` will save current text buffer in *somefilename*.
+* `:saveas somefilename` will save current text buffer in *somefilename* and use it for follow-up saves.
+* `:w` will save current text buffer in current file (either open via `vim somefilename`, or set via first `w somefilename`).
 * `:wq` save and quit (or `ZZ` or `:x`).
-* `w!` force write read-only file
-* `w !sudo tee % > /dev/null` yes, no one remembers this one, but it will force write some file open without `sudo` as `sudo` (basically this means write buffer and pipe it via sudo using tee to filename)
-* As noted before, `:wq!` will not save your text and exit (you still have the nice memory of writing it)
+* `w!` force write read-only file.
+* `w !sudo tee % > /dev/null` yes, no one remembers this one, but it will force write some file open without `sudo` as `sudo` (basically this means write buffer and pipe it via *sudo* using *tee* to filename).
+* As noted before, `:wq!` will not save your text and exit (you still have the nice memory of writing it).
 
 ##Basic Vim
 
-As many people have noted, there is no basic Vim. You need to learn upfront enough commands to move around and edit text. In Vim there are two main modes:
+As many have noted, there is no basic Vim. You need to learn upfront enough commands to move around and edit text. In Vim there are two main modes:
 
-* **command-mode** (normal-mode) reachable by pressing *Esc* key or if that is broken `Ctrl+[`
-* **insert-mode** reachable from command-mode by initiating some text edit command
+* **command-mode** (normal-mode) is reachable by pressing *Esc* key or if that is broken *Ctrl+[*.
+* **insert-mode** is reachable from command-mode by initiating some text edit command
 
-Commands are usually are made of multiple key of the [form](https://danielmiessler.com/study/vim/#language): *operator (verb)* *modifier (scope)* *noun (motion)*.
+Commands are usually are made of multiple key of the [form](https://danielmiessler.com/study/vim/#language): *operator (verb)* *modifier (scope)* *noun (motion)* and can be combined creatively given enough time.
 
 Common movement commands (in *command-mode*):
 
-* `j` - down, `k` - up, `h` left, `l` -right (or arrow keys will mostly work) (can be combined also with numbers, e.g: `4j`); Ctrl+Y scroll one line down, Ctrl+E scroll one line up
-* `0` - beginning of line, `^` first not blank char on line, `$` - end of line, `g_` last non-blank char on line
+* `j` - down, `k` - up, `h` left, `l` -right (or arrow keys will mostly work) (can be combined also with numbers, e.g: `4j`); `Ctrl+y` scroll one line down, `Ctrl+e` scroll one line up.
+* `0` - beginning of line, `^` first not blank char on line, `$` - end of line, `g_` last non-blank char on line.
 * `fc` - *find* next char *c* and move cursor to it, `tc` find next char c and move cursor *to* it. `Fx`, `Tx` work same but jump to previous occurrence of *c*.
     * `;` repeat last `ftFT` forward, `,` repeat last `ftFT` backward, or just use `.`
 * `/text` - find *text*. `n` moves to next occurrence, `N` to previous one. Use `set hls` to highlight matches. `?text` is same, but searches backward.
@@ -70,29 +70,33 @@ Common movement commands (in *command-mode*):
 * `gg` - got top of file, `GG` go end of file.
 * `w` move one word forward, `b` move one word backward, `e` move to end of word; `W`, `B`, `E` work same but consider punctuations as part of words.
 * `%` move to matching char (`()`, `{}`, `[]`).
-* Usually combined with other commands: `)` or `s` move one sentence; `}` or `p` move one paragraph, `t` move one tag; `b` more one code block; all these can get confused in some source code files.
+* Usually combined with other commands: `)` or `s` move one sentence; `}` or `p` move one paragraph, `t` move one tag; `b` more one code block; all these can get confused in some source code files (in default configuration).
 * `gg=G` format whole text, where `=` is format command. `<` and `>` indent left or right.
 
 Common edit commands (in *command-mode*):
 
-* `i` insert before cursor, `a` append after cursor
-* `I` insert beginning of line, `A` append at end of line
-* `o` insert in new line after current, `O` insert in new line before current
+* `i` insert before cursor, `a` append after cursor.
+* `I` insert beginning of line, `A` append at end of line.
+* `o` insert in new line after current, `O` insert in new line before current.
 
-* `r` replace char under cursor; `R` or `s` are same as `r` and enter insert mode afterwards
+
+* `r` replace char under cursor; `R` or `s` are same as `r` and enter insert mode afterwards.
 * `c` change *motion* (using any motion command from above: `c5w`).
-* `C` change current line
-* `~` toggle case under cursor
-* `J` join current line with next one
+* `C` change current line.
+* `~` toggle case under cursor.
+* `J` join current line with next one.
 
-* `y` copy (yank) *motion* (using any motion command from above: `y5w`). (`"*y` to copy to *X11* clipboard, same for paste `"*p`)
-* `yy` copy current line
-* `p` paste after cursor; `P` paste before cursor. These commands can be combined, e.g.: `ddp` to swap lines.
+
+* `y` copy (yank) *motion* (using any motion command from above: `y5w`). (`"*y` to copy to *X11* clipboard, same for paste `"*p`, where `"*` means register `*` the clipboard).
+* `yy` copy current line.
+* `p` paste (put) text after cursor; `P` paste before cursor. These commands can be combined, e.g.: `ddp` to swap lines.
+
 
 * `x` delete char under cursor; `X` delete char before cursor.
 * `d` delete (cut) *motion* (using any motion command from above: `d5w`).
-* `dd` delete (cut) current line
-* `D` delete (cut) to end of line
+* `dd` delete (cut) current line.
+* `D` delete (cut) to end of line.
+
 
 * `u` undo; `Ctrl+r` redo
 * `.` repeat last action sequence (`number.` repeat last command sequence *number* times)
