@@ -261,7 +261,7 @@ csman ex container.bin -s secret.bin
 csman ex container.bin -s secret.bin.01 -slot 2
 ```
 
-Ideally, generate two secret files for same key using `cskey.sh`, so that they are not same. The `-s` option can be repeated for `e` command, in that case successive slots starting from the specified one are used for each secret.
+Ideally, generate two secret files for same key using `cskey.sh`, so that they are not same. The `-s` option can be repeated for `e` command, in that case successive slots starting from the specified one are used for each secret. The `e` command is destructive, if the specified slot does not exist, the container file will be damaged.
 
 `cskey.sh` knows to read secret from a default slot using `-slot` option, or from a byte offset using `-o` option:
 
