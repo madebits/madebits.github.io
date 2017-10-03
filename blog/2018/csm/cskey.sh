@@ -14,45 +14,45 @@ ap="${5:-8}"
 toolsDir="$(dirname $0)"
 useAes=0
 if [ -f "${toolsDir}/aes" ]; then
-    useAes=1
+	useAes=1
 fi
 
 function encryptedKeyLength()
 {
-    if [ "$useAes" = "1" ]; then
-        echo 560
-    else
-        echo 544
-    fi
+	if [ "$useAes" = "1" ]; then
+		echo 560
+	else
+		echo 544
+	fi
 }
 
 function encryptAes()
 {
-    local pass=$1
-    if [ "$useAes" = "1" ]; then
-        "${toolsDir}/aes" -r /dev/urandom -e -f <(echo -n "$pass")
-    else
-        ccrypt -e -f -k <(echo -n "$pass")
-    fi
+	local pass=$1
+	if [ "$useAes" = "1" ]; then
+		"${toolsDir}/aes" -r /dev/urandom -e -f <(echo -n "$pass")
+	else
+		ccrypt -e -f -k <(echo -n "$pass")
+	fi
 }
 
 function decryptAes()
 {
-    local pass=$1
-    if [ "$useAes" = "1" ]; then
-        "${toolsDir}/aes" -d -f <(echo -n "$pass")
-    else
-        ccrypt -d -k <(echo -n "$pass")
-    fi
+	local pass=$1
+	if [ "$useAes" = "1" ]; then
+		"${toolsDir}/aes" -d -f <(echo -n "$pass")
+	else
+		ccrypt -d -k <(echo -n "$pass")
+	fi
 }
 
 function touchFile()
 {
-    local file=$1
-    if [ -f "$file" ]; then
-        local md=$(stat -c %z "$file")
-        touch -d "$md" "$file"
-    fi
+	local file=$1
+	if [ -f "$file" ]; then
+		local md=$(stat -c %z "$file")
+		touch -d "$md" "$file"
+	fi
 }
 
 # file pass key
@@ -65,7 +65,7 @@ function encodeKey()
     hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
     
     if [ "$file" = "-" ]; then
-        file="/dev/stdout"
+		file="/dev/stdout"
     fi
     
     > "$file"
@@ -85,11 +85,11 @@ function decodeKey()
     local keyLength=$(encryptedKeyLength)
     
     if [ -e "$file" ] || [ "$file" = "-" ]; then
-        local fileData=$(head -c 600 "$file" | base64 -w 0)
-        local salt=$(echo -n "$fileData" | base64 -d | head -c 32 | base64 -w 0)
-        local data=$(echo -n "$fileData" | base64 -d | tail -c +33 | head -c "$keyLength" | base64 -w 0)
+		local fileData=$(head -c 600 "$file" | base64 -w 0)
+		local salt=$(echo -n "$fileData" | base64 -d | head -c 32 | base64 -w 0)
+		local data=$(echo -n "$fileData" | base64 -d | tail -c +33 | head -c "$keyLength" | base64 -w 0)
         local hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
-        touchFile "$file"
+		touchFile "$file"
         echo -n "$data" | base64 -d | decryptAes "$hash"
     else
         (>&2 echo "! no such file: $file")
@@ -99,78 +99,86 @@ function decodeKey()
 
 function readKeyFiles()
 {
-    declare -a files
-    local count=0
-    local hash=""
-    local fileHash=""
-    while :
-    do
-        count=$((count+1))
-        if [ "$CS_ECHO" = "3" ]; then
-            keyFile="$(zenity --file-selection --title='Select a File' 2> /dev/null)"
-        else
-            read -e -p "Key file $count (or Enter if none): " keyFile
-        fi
-        if [ ! -f "$keyFile" ]; then
-            break
-        fi
-        fileHash=$(head -c 1024 "$keyFile" | sha256sum | cut -d ' ' -f 1)
-        files+=( "$fileHash" )
-    done
-    if (( ${#files[@]} )); then
-        # read order does not matter
-        hash=$(printf '%s\n' "${files[@]}" | sort | sha256sum | cut -d ' ' -f 1)
-    fi
-    echo "$hash"
+	local msg="Key"
+	if [ ! -z "$1" ]; then
+		msg="New key"
+	fi
+	declare -a files
+	local count=0
+	local hash=""
+	local fileHash=""
+	while :
+	do
+		count=$((count+1))
+		if [ "$CS_ECHO" = "3" ]; then
+			keyFile="$(zenity --file-selection --title='Select a File' 2> /dev/null)"
+		else
+			read -e -p "${msg} file $count (or Enter if none): " keyFile
+		fi
+		if [ ! -f "$keyFile" ]; then
+			break
+		fi
+		fileHash=$(head -c 1024 "$keyFile" | sha256sum | cut -d ' ' -f 1)
+		files+=( "$fileHash" )
+	done
+	if (( ${#files[@]} )); then
+		# read order does not matter
+		hash=$(printf '%s\n' "${files[@]}" | sort | sha256sum | cut -d ' ' -f 1)
+	fi
+	echo "$hash"
 }
 
 function readPass()
 {
-    local hash=$(readKeyFiles)
-    if [ "$CS_ECHO" = "1" ]; then
-        read -p "Password: " pass
-    elif [ "$CS_ECHO" = "2" ]; then
-        pass=$(zenity --password --title="Password" 2> /dev/null)
-    elif [ "$CS_ECHO" = "3" ]; then
-        pass=$(zenity --entry --title="Password" --text="Password (visible):"  2> /dev/null)
-    else
-        read -p "Password: " -s pass
-    fi
-    if [ -z "$pass" ]; then
-        (>&2 echo "! no password")
-        exit 1
-    fi
-    pass="$pass$hash"
-    echo "$pass"
+	local hash=$(readKeyFiles)
+	if [ "$CS_ECHO" = "1" ]; then
+		read -p "Password: " pass
+	elif [ "$CS_ECHO" = "2" ]; then
+		pass=$(zenity --password --title="Password" 2> /dev/null)
+	elif [ "$CS_ECHO" = "3" ]; then
+		pass=$(zenity --entry --title="Password" --text="Password (visible):"  2> /dev/null)
+	else
+		read -p "Password: " -s pass
+	fi
+	if [ -z "$pass" ]; then
+		(>&2 echo "! no password")
+		exit 1
+	fi
+	pass="$pass$hash"
+	echo "$pass"
 }
 
 function readNewPass()
 {
-    local hash=$(readKeyFiles)
-    if [ "$CS_ECHO" = "1" ]; then
-        read -p "New password: " pass
-    elif [ "$CS_ECHO" = "2" ]; then
-        pass=$(zenity --password --title="New Password" 2> /dev/null)
-    elif [ "$CS_ECHO" = "3" ]; then
-        pass=$(zenity --entry --title="Password" --text="New Password (visible):"  2> /dev/null)
-    else
-        read -p "New password: " -s pass
-        (>&2 echo)
-        if [ -t 0 ] ; then
-            read -p "Renter password: " -s pass2
-            (>&2 echo)
-            if [ "$pass" != "$pass2" ]; then
-                (>&2 echo "! passwords do not match")
-                exit 1
-            fi
-        fi
+	local hash=$(readKeyFiles 1)
+	if [ "$CS_ECHO" = "1" ]; then
+		read -p "New password: " pass
+	elif [ "$CS_ECHO" = "2" ]; then
+		pass=$(zenity --password --title="New Password" 2> /dev/null)
+	elif [ "$CS_ECHO" = "3" ]; then
+		pass=$(zenity --entry --title="Password" --text="New Password (visible):"  2> /dev/null)
+	else
+		read -p "New password: " -s pass
+		if [ -z "$pass" ]; then
+			(>&2 echo "! no password")
+			exit 1
+		fi
+		(>&2 echo)
+		if [ -t 0 ] ; then
+			read -p "Renter password: " -s pass2
+			(>&2 echo)
+			if [ "$pass" != "$pass2" ]; then
+				(>&2 echo "! passwords do not match")
+				exit 1
+			fi
+		fi
     fi
-    if [ -z "$pass" ]; then
-        (>&2 echo "! no password")
-        exit 1
-    fi
-    pass="$pass$hash"
-    echo "$pass"
+	if [ -z "$pass" ]; then
+		(>&2 echo "! no password")
+		exit 1
+	fi
+	pass="$pass$hash"
+	echo "$pass"
 }
 
 # mode file
@@ -186,25 +194,26 @@ function main()
             pass=$(readNewPass)
             key=$(head -c 512 /dev/urandom | base64 -w 0)
             if [ "$CS_ECHO_KEY" = "1" ]; then
-                echo
-                echo "[$pass]"
-                echo "[$key]"
-            fi
+				(>&2 echo)
+				(>&2 "[$pass]")
+				(>&2 "[$key]")
+			fi
             encodeKey "$file" "$pass" "$key"
         ;;
         dec)
-            pass=$(readPass)
+			pass=$(readPass)
             decodeKey "$file" "$pass"
         ;;
         chp)
-            pass1=$(readPass)
+			pass1=$(readPass)
             (>&2 echo)
             key=$(decodeKey "$file" "$pass1" | base64 -w 0)
-            if [ "$CS_ECHO_KEY" = "1" ]; then
-                echo
-                echo $key
-            fi
             pass=$(readNewPass)
+            if [ "$CS_ECHO_KEY" = "1" ]; then
+				(>&2 echo)
+				(>&2 "[$pass]")
+				(>&2 "[$key]")
+			fi
             encodeKey "$file" "$pass" "$key"
         ;;
         *)
