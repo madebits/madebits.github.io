@@ -274,7 +274,7 @@ These commands can be run without `sudo`.
 
 ### Copy Folders
 
-Two copy file commands are provided to copy directories. First uses `tar` and `pv` and second invokes `rsync` with some parameters to improve progress reporting (removing training slashes from input directories):
+Two copy file commands are provided to copy directories. First uses `tar` and `pv` and second invokes `rsync` with some parameters to improve progress reporting (removing training slashes from input directories) (no `sudo` is needed):
 
 ```bash
 # faster
@@ -296,7 +296,7 @@ csman.sh dc . -q
 csman.sh dcq
 ```
 
-The `dc` command is useful to overwrite disk space from within an encrypted container. The command creates a temporary folder `csm-*` under the folder given as its first argument, where it writes files filled with zeros till partition runs out of disk space. If ever the command fails to clean these folders, they can be removed manually.
+The `dc` command is useful to overwrite disk space from within an encrypted container. The command creates a temporary folder `csm-*` under the folder given as its first argument, where it writes`zero.*` files filled with zeros till that disk partition runs out of free  disk space. If the command ever fails to clean these temporary folders, they can be removed manually (using `rm -rf`).
 
 
 
