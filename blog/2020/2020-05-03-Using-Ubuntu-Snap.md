@@ -257,7 +257,7 @@ User defined environment variables outside of snap are visible to snap. `XDG_` v
 
 Snap store [tracks](https://snapcraft.io/docs/snap-store-metrics) snap installs and usage. Geo-location data based on IPs are also collected.
 
-The unique tracking machine id is kept in `/var/lib/snapd/state.json` in `{"data": { "device": { "serial": "ID" } }}`. Snap usage data (kept also in`/var/lib/snapd/state.json`) includes start and stop times. Snaps are traced via unique cookies (found in `/var/lib/snapd/cookies` folder that match *snap-cookies* inside `/var/lib/snapd/state.json`.
+The unique tracking machine id is kept in `/var/lib/snapd/state.json` in `{"data": { "device": { "serial": "ID" } }}`. Snap usage data (kept also in`/var/lib/snapd/state.json`) includes start and stop times. Snaps are traced via unique cookies (found in `/var/lib/snapd/cookies` folder that match *snap-cookies* inside `/var/lib/snapd/state.json`. Snap cookie is passed to each snap via *SNAP* environment variables  `SNAP_COOKIE=Nv9FlFlPr7MwhvBbV66BxXLQbk6YlJ4hMntXdYbgNNBF`. Even if you reset your device id, your can still be continuously uniquely identified via the snap cookies.
 
 To reset your [device-serial](https://forum.snapcraft.io/t/cant-install-or-refresh-snaps-on-arch-linux/8690/27) use:
 
