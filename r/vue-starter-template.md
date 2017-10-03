@@ -11,6 +11,7 @@
 The template helps starting with following features:
 
 * UI uses [Bootstrap 4](http://getbootstrap.com/) (via SASS) and [Font Awesome](http://fontawesome.io/icons/) icons.
+* Full sample of using Bootstrap modal dialogs, including events.
 * Vue render JSX support.
 * [Vuex](https://vuex.vuejs.org/en/) is fully integrated along with persistence on client. Example actions are provided.
 * [vue-router](https://router.vuejs.org/en/) is used to handle routing. Nested routes are demonstrated.
@@ -88,6 +89,17 @@ node index.js
 ```
 
 Backend will run at port http://localhost:3000 by default.
+
+##VSCode Configuration
+
+* [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+* [Prettier - JavaScript formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+  ```
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "prettier.eslintIntegration": true
+  ```
+* [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
 
 ##Vue.Js Resources
 
