@@ -331,14 +331,14 @@ function listContainer()
         if [ -n "$m" ]; then
             m="mounted"
         fi
-        echo -e "Dir1:\t$mntDir1\t$m"
+        echo -e "Dir1:\t$mntDir1\t$m\troot"
     fi
     if [ -d "$mntDir2" ]; then
         local m="$(mount | grep "$mntDir2")"
         if [ -n "$m" ]; then
             m="mounted"
         fi
-        echo -e "Dir2:\t$mntDir2\t$m"
+        echo -e "Dir2:\t$mntDir2\t$m\t${user}"
     fi
 }
 
