@@ -19,11 +19,11 @@ CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or
 
 ### How it Works
 
-CSMan uses a randomly generated 512 byte binary key (called **secret**) as passwords for a `cryptsetup` *plain* mode container. The secret 512 bytes are stored in **secret files** encrypted with *AES* and protected with a user password (called **password**). 
+CSMan uses a randomly generated 512 byte binary key (called **secret**) as passwords for a `cryptsetup` *plain* mode container (`-s 512 -h sha512`). The secret 512 bytes are stored in **secret files** encrypted with *AES* and protected with a user password (called **password**). 
 
-The secret file encryption password is hashed using `argon2` before passed to AES tools (which do also their own hashing). To open a container both the secret file and password must be known. 
+The secret file encryption password is hashed using `argon2` before passed to AES tool (which does also their own hashing). To open a container both the secret file and password must be known. 
 
-Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords. AES used is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret, leads to different binary files. On difference from LUKS, user is responsible to store secret files separately from containers (maybe in another container).
+Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords. AES used to encrypt secret files is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret leads to different binary files. On difference from LUKS, user is responsible to store secret files separately from containers (maybe in another container).
 
 ### Terminology
 
