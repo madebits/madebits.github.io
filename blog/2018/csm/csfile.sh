@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/bash -x
 
 # csfile.sh
 
@@ -161,9 +161,10 @@ function rndDataSource()
 
 function dc()
 {
+    local res=""
     dcDir="${1:-$HOME/tmp}"
     makeTmpDir
-    trap cleanUp SIGHUP SIGINT SIGTERM
+    trap cleanUp SIGHUP SIGINT SIGTERM ERR
     mkdir -p "${dcDir}"
     local partition=$(df -P "${dcDir}" | tail -1 | tr -s ' ' | cut -d ' ' -f 1)
     dcInfo "${partition}"
@@ -173,8 +174,11 @@ function dc()
     printAvailable
     while : ; do
         echo -n .
+        set +e
         rndDataSource | dd count=1024 bs=1M >> "${dcDir}/zero.$RANDOM" 2>/dev/null
-        if [ $? -ne 0 ] ; then
+        res=$?
+        set -e
+        if [ $res -ne 0 ] ; then
             sync
             printAvailable
             break;
@@ -182,8 +186,11 @@ function dc()
     done
 
     while : ; do
+        set +e
         rndDataSource > "${dcDir}/zero.$RANDOM" 2>/dev/null
-        if [ $? -ne 0 ] ; then
+        res=$?
+        set -e
+        if [ $res -ne 0 ] ; then
             sync
             available=$(df -P "${dcDir}" | tail -1 | tr -s ' ' | cut -d ' ' -f 4)
             echo -n "$available"
