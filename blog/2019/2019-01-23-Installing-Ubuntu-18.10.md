@@ -148,9 +148,20 @@ Some [nautilus](https://wiki.archlinux.org/index.php/GNOME/Files) shortcuts:
 *  Ctrl+Q or Ctrl+W close (tab)
 *  Ctrl+R of F5 refresh
 *  Ctrl+F find, Ctrl+S select, Ctrl+A select all
-*  `touch ~/Templates/New.txt` templates
+
+Extra setup:
+
+*  `touch ~/Templates/New.txt` for text file templates
 * [folder-color](http://foldercolor.tuxfamily.org/) `sudo apt install folder-color`
 * `nautilus -q` to quit instances
+* To have `nautilus` generate video [thumbnails](https://askubuntu.com/questions/2608/nautilus-video-thumbnails-without-totem), I installed `sudo apt install ffmpegthumbnailer` (though [mpv](https://github.com/mpv-player/mpv/issues/3735) can also be used). It created `/usr/share/thumbnailers/ffmpegthumbnailer.thumbnailer` file with the following content:
+
+```
+[Thumbnailer Entry]
+TryExec=ffmpegthumbnailer
+Exec=ffmpegthumbnailer -i %i -o %o -s %s -f
+MimeType=video/jpeg;video/mp4;video/mpeg;video/quicktime;video/x-ms-asf;video/x-ms-wm;video/x-ms-wmv;video/x-msvideo;video/x-flv;video/x-matroska;video/webm;video/mp2t;
+```
 
 ###Hacks
 
@@ -246,7 +257,7 @@ sudo snap remove gnome-system-monitor
 sudo apt install gnome-system-monitor
 ```
 
-###Final Steps
+##Final Steps
 
 * Obligatory `/etc/hosts` entries:
 
@@ -292,15 +303,6 @@ ctrl+RIGHT script-binding nextfile
 
 fs
 image-display-duration=3
-```
-
-* To have `nautilus` generate video [thumbnails](https://askubuntu.com/questions/2608/nautilus-video-thumbnails-without-totem), I installed `sudo apt install ffmpegthumbnailer` (though [mpv](https://github.com/mpv-player/mpv/issues/3735) can also be used). It created `/usr/share/thumbnailers/ffmpegthumbnailer.thumbnailer` file with the following content:
-
-```
-[Thumbnailer Entry]
-TryExec=ffmpegthumbnailer
-Exec=ffmpegthumbnailer -i %i -o %o -s %s -f
-MimeType=video/jpeg;video/mp4;video/mpeg;video/quicktime;video/x-ms-asf;video/x-ms-wm;video/x-ms-wmv;video/x-msvideo;video/x-flv;video/x-matroska;video/webm;video/mp2t;
 ```
 
 ##Summary
