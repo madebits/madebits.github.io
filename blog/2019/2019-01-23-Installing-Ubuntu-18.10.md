@@ -194,15 +194,16 @@ Extra setup:
 * `eog` is not ok for me as mouse wheel does not work as I would like to. I `sudo apt install feh`, and create a `$HOME/bin/feh.sh` file:
 
     ```bash
-    #!/bin/bash
+    #!/bin/bash -
 
-    cmd="feh -F -B white --no-recursive"
+    cmd="feh -F -B white --no-recursive --auto-rotate --draw-filename --hide-pointer"
     path="${1:-.}"
     if [ -d "$path" ]; then
         exec $cmd "$path"
     elif [ -e "$path" ]; then
         file=$(realpath -- "$path")
         dir=$(dirname -- "$file")
+
         exec $cmd "$dir" --start-at "$file"
     fi
     ```
