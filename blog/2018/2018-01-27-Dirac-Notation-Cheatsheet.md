@@ -96,6 +96,6 @@ $$$ \langle v \rvert A \rvert w \rangle^\dagger = \langle w \rvert A^\dagger \rv
 
 ##Tensor Product
 
-$$$ \rvert v \rangle \otimes \rvert w \rangle = ( v_0 \rvert 0 \rangle + v_1 \rvert 1 \rangle ) \otimes ( w_0 \rvert 0 \rangle + w_1 \rvert 1 \rangle ) = v_0w_0 \rvert 00 \rangle + v_0w_1 \rvert 01 \rangle + v_1w_0 \rvert 10 \rangle + v_1w_1 \rvert 11 \rangle $$$
+$$$ \rvert v \rangle \otimes \rvert w \rangle = ( v_0 \rvert 0 \rangle + v_1 \rvert 1 \rangle ) \otimes ( w_0 \rvert 0 \rangle + w_1 \rvert 1 \rangle ) = v_0w_0 \rvert 0 \rangle \rvert 0 \rangle + v_0w_1 \rvert 0 \rangle \rvert 1 \rangle + v_1w_0 \rvert 1 \rangle \rvert 0 \rangle + v_1w_1 \rvert 1 \rangle \rvert 1 \rangle = v_0w_0 \rvert 00 \rangle + v_0w_1 \rvert 01 \rangle + v_1w_0 \rvert 10 \rangle + v_1w_1 \rvert 11 \rangle $$$
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-10-20-Patching-Node-Express-For-Async-Wait.md'>Patching Node Express For Async Wait</a></ins>
