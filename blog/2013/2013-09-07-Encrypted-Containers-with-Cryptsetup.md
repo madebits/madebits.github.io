@@ -163,6 +163,7 @@ cryptsetup --key-file=key.bin  -c aes-xts-plain64 -s 512 -o 111 open --type plai
 
 * https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_a_non-root_file_system#Loop_device
 * https://lumit.it/how-to-get-a-tails-luks-master-key/
+* https://www.tarsnap.com/scrypt.html
 
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2013/2013-09-28-Tmux-on-Lubuntu.md'>Tmux on Lubuntu</a> <a rel='next' id='fnext' href='#blog/2013/2013-08-20-Sort-Photos-By-EXIF-Date.md'>Sort Photos By EXIF Date</a></ins>
