@@ -10,46 +10,38 @@
 
 ## Introduction
 
-CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The follow are some of the hard-coded settings of CSMan:
+CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The follow are some of the hard-coded settings of the script:
 
 * Uses `cryptsetup` in *plain* mode with 512 byte keys (`-s 512 -h sha512`).
 * Supports only [EXT4](https://en.wikipedia.org/wiki/Ext4) volumes.
-* Uses two nested *dm-crypt* mappers: *aes-xts-plain64* and *twofish-cbc-essiv:sha256*.
-* Mounts for current user under: `$HOME/mnt/csm-*`.
+* Uses two nested *dm-crypt* mappers: (outer) *aes-xts-plain64* and (inner) *twofish-cbc-essiv:sha256*.
+* Mounts container accessible for current user under: `$HOME/mnt/csm-*`.
 
 ### How it Works
 
-CSMan use randomly generated 512 byte passwords (called **secret** in CSMan documentation) to with `cryptsetup` *plain* mode containers. The 512 byte passwords are stored in **secret files** encrypted with *AES* and protected with a user password (called **password** in CSMan documentation). The file encryption password is hashed using `argon2` before passed to AES tools (which do also their own hashing). To open a container both the secret file and password must be known. Similar to LUKS, one can use same password to protect more than one secret file, or protect secret in different files with different passwords (AES used is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret, leads to different binary files). On difference from LUKS, user is responsible to store secret files separately from containers (maybe in another container).
+CSMan uses randomly generated 512 byte binary keys (called **secret**) to with `cryptsetup` *plain* mode containers. The 512 byte passwords are stored in **secret files** encrypted with *AES* and protected with a user password (called **password**). The file encryption password is hashed using `argon2` before passed to AES tools (which do also their own hashing). To open a container both the secret file and password must be known. Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords (AES used is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret, leads to different binary files). On difference from LUKS, user is responsible to store secret files separately from containers (maybe in another container).
 
 ### Terminology
 
-Some overlapping terms are used more that once:
+Some overlapping terms explained:
 
-* **secret** - randomly generated (or user specified) 512 bytes (binary). Binary values are shown as *base64*.
-* **secret file** - file where secret is stored encrypted.
-* **password** - user password used to encrypt secret file.
-* **key file** - user password can contain additionally to a paraphrase one or more optional key files. Their header hashed content is added to the password. Order of specifying key files does not matter, but they have to be same files.
-* **session** - optional state stored as part of user session. There is by default no session, but it is possible to store passwords in named encrypted session slots in *tmpfs* and refer to them from there.
-* **session password** - an optional password used to protect contents stored in session.
+* **secret** - randomly generated (or user specified) 512 bytes (binary). Binary values are shown as *base64*. Secret is used as `cryptsetup` password.
+* **secret file** - file where *secret* is stored encrypted.
+* **password** - user password used to encrypt *secret file*.
+* **key file** - user password can contain additionally to the paraphrase one or more optional key files. Their header bytes hashed content is added to the password. Order of specifying key files does not matter, but they have to be exact same files used during encryption and decryption.
+* **session** - optional state stored as part of current user session. There is by default no session, but it is possible to store passwords in named encrypted session slots in *tmpfs* and refer to them from there.
+* **session password** - an optional password used to protect contents stored in *session*.
 
 ## Installation
 
 Download repository files and copy as *root* under `/usr/local/bin` the following files:
 
 * `csman.sh` - main tool.
-* `cskey.sh` - invoked by `csman.sh` for handling encryption keys.
+* `cskey.sh` - is invoked by `csman.sh` for handling encryption and decryption of keys.
 * `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool. If this tool is found next to `cskey.sh` it is used. Alternately you can install `ccrypt` from Ubuntu repositories. 
 * `argon2` - this is a self-compiled copy of `argon2` from [official](https://github.com/P-H-C/phc-winner-argon2) repository ([my copy](https://github.com/madebits/phc-winner-argon2)). `argon2` can be found also in Ubuntu repositories. If found next to `cskey.sh`, this copy is used in place of the system copy.
 
-## Usage
-
-> `csman.sh` and `cskey.sh` should be run always with `sudo`. 
-
-`csman.sh` is the main command to use. `csman.sh` delegates password and key operations to `cskey.sh` (which uses `aes` and `argon2`). You may need to use `cskey.sh` directly for advanced key manipulation. Running both commands without options lists their command-line arguments, e.g.: `sudo csman.sh` or `sudo cskey.sh`.
-
-The command-line arguments of these tools are a bit *peculiar* (because I thought that it is faster to specify options after the main arguments). The command-line arguments follow the scheme: *command file(s) options*.
-
-Every time `csman.sh` starts it prints prefix hashes of the files:
+Every time `csman.sh` starts, it prints prefix hashes of these files if present:
 
 ```
 1233e72ca  /usr/local/bin/csman.sh
@@ -60,43 +52,72 @@ a479365e9  /usr/local/bin/cskey.sh
 
 These hashes should normally not change unless a new version of files is copied and can be ignored.
 
-### Secret Files (cskey.sh)
+## Usage
 
-`csman.sh` creates and uses random read secret files using `cskey.sh`. It is not required to use `cskey.sh` directly, but knowing how to use it directly as shown in this section will make the later `csman.sh` commands clear.
+> `csman.sh` and `cskey.sh` should be run always with `sudo`. 
 
-#### Using /dev/urandom (-su)
+`csman.sh` is the main command to use. `csman.sh` delegates password and secret operations to `cskey.sh` (which uses `aes` and `argon2`). You may need to use `cskey.sh` directly for advanced key manipulation. Running both commands without options lists their command-line arguments, e.g.: 
 
-`cskey.sh` uses by default `/dev/urandom` to generate 480 bytes and `/dev/random` to generate 32 bytes of the total 512 secret bytes. Using `-su` option when generating secrets uses only `/dev/urandom` which [faster](https://security.stackexchange.com/questions/3936/is-a-rand-from-dev-urandom-secure-for-a-login-key) and [better](https://www.2uo.de/myths-about-urandom/). For all other operations where random data are needed `cskey.sh` uses `/dev/urandom`.  Secret files are binary. Use `base64` tool as needed to convert them to text.
-
-#### Creating Secret Files (enc | dec)
-
-To create a new secret file:
-
-```bash
-sudo cskey.sh enc secret.bin
+```
+sudo csman.sh
+sudo cskey.sh
 ```
 
-You will be asked for: a) `sudo` password, b) for any key files to use (key files can be specified as paths one by one by pressing Enter, use Enter without a path to stop entering of key files - if you are not using key files, just press Enter key), c) password to encrypt the secret file.
+The command-line arguments are a bit *peculiar* (because I thought that it is faster to specify options after the main arguments) and follow the scheme: *command file(s) options*.
 
-To get back the raw secret data use:
+### Secret Files
+
+`csman.sh` creates and uses random read *secret files* using `cskey.sh`. Secret files are binary. Use `base64` tool as needed to convert them to text.
+
+It is not required to use `cskey.sh` directly most of the time, but knowing how to use it as shown in this section will make the later `csman.sh` commands clear.
+
+#### Using URandom
+
+`cskey.sh` uses by default `/dev/urandom` to generate 480 bytes and `/dev/random` to generate 32 bytes of the total 512 secret bytes. 
+
+Using `-su` option when generating secrets uses only `/dev/urandom` which [faster](https://security.stackexchange.com/questions/3936/is-a-rand-from-dev-urandom-secure-for-a-login-key) and [better](https://www.2uo.de/myths-about-urandom/). 
+
+For all other operations where random data are needed `cskey.sh` uses `/dev/urandom`.  
+
+#### Creating Secret Files
+
+To create a new *secret file*:
+
+```bash
+sudo cskey.sh enc secret.bin -su
+```
+
+This command will generate a random secret and encrypt it with the password (combined with any key files) and store it as *secret.bin* file. You will be asked for: 
+
+* `sudo` password
+* for any key files to use. Key files can be specified in any order as paths one by one by pressing *Enter* key to confirm them. Use *Enter* key without a path to stop entering key files, or if you are not using key files press *Enter* key to skip entry (or use `-k` option not to be asked for key files). 
+* password to encrypt the secret file.
+
+To view back the used raw secret data just for the fun of it, you can use:
 
 ```bash
 sudo cskey.sh dec secret.bin | base64 -w 0
 ```
 
-This means you can combine the two commands if needed as shown to change password (or use `csman.sh chp` command which is easier):
+For even more fun, you can combine the two commands if needed as shown to change password (or use `csman.sh chp` command which is easier):
 
 ```bash
 sudo bash -c 'secret=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -s <(echo -n "$secret") -d'
 ```
 
+#### Creating Multiple Secret Files At Once
+
 Sometimes, you may want to quickly generate a lot of secret files at once using same password using backup `-b` option:
 
 ```bash
-sudo cskey.sh enc secret.bin -b 5 -bs -su
+sudo cskey.sh enc secret.bin -b 3 -bs -su
 ```
 
-This generates 6 files (*secret.bin*, *secret.bin.01*, *...*, *secret.bin.06*). All these files are encrypted with same password. Without `-bs` same secret will be stored on each file (due to AES mode files will be still binary different). With `-bs` a new different secret is generated for each file. `-su` makes secret generation faster by using `/dev/urandom`.
+This generates 3 files (*secret.bin*, *secret.bin.01*, *...*, *secret.bin.03*). All these files are encrypted with same password. 
+
+Without `-bs` option, same secret will be stored on each file (due to AES mode files will be still binary different).
+
+With `-bs` option, a new different secret is generated for each file. `-su` makes secret generation faster by using `/dev/urandom`.
 
 `sudo cskey.sh rnd file -rb 5` command is similar, but it generates just random files that only look like secret files.
 
