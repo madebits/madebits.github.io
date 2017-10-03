@@ -169,13 +169,21 @@ Examples of snap [interfaces](https://snapcraft.io/docs/supported-interfaces):
 
 * [:home](https://snapcraft.io/docs/home-interface) *core* snap interface gives the application access to non-hidden files in real `$HOME` directory. This is off, unless a [classic](https://snapcraft.io/docs/snap-confinement) snap, or an [approved](https://snapcraft.io/docs/permission-requests) snap. That means there is no way to know, until you install the snap, which may be too late, due to [hooks](https://snapcraft.io/docs/supported-snap-hooks).
 * [:personal-files](https://snapcraft.io/docs/personal-files-interface) allows access to hidden $HOME folders and files.
-* [:network](https://snapcraft.io/docs/network-interface) gives access to network (which is not good when combined with `:home`, as it is the case for `gimp` above). It can be removed using `sudo snap disconnect gimp:network :network` and it can be added back using `sudo snap connect gimp:network :network`. These changes are preserved by `snap refresh`. Connecting or disconnecting an interface may cause snap to execute code (via interface hooks).
+* [:network](https://snapcraft.io/docs/network-interface) gives access to network
+  -  `:network` is not good when combined with `:home` although most snaps have both auto-plugged, as it is the case for `gimp` above. It can be removed using `sudo snap disconnect gimp:network :network` and it can be added back using `sudo snap connect gimp:network :network`. These changes are preserved by `snap refresh`. Connecting or disconnecting an interface may cause snap to execute code (via interface hooks).
 * [content](https://snapcraft.io/docs/content-interface) allows snaps of same publisher to share data with each-other.
 * [:browser-support](https://snapcraft.io/docs/browser-support-interface) access to local system via modern browser APIs.
 * [:password-manager-service](https://snapcraft.io/docs/password-manager-service-interface) access to system password services.
 * [:x11](https://snapcraft.io/docs/x11-interface) monitor mouse/keyboard input and graphics output of other apps, a feature shared by all x11 applications.
 
-While `snap info --verbose gimp` works without having to install a snap, the `snap connections gimp` works only after a snap is installed. To view connections without having to install try:
+One can connect or disconnect defined *plugs* in a snap, but cannot add more, which is kind of [sad](https://askubuntu.com/questions/1178913/adding-a-plug-or-interface-to-existing-snap):
+
+```bash
+$ snap connect gimp:personal-files :personal-files
+error: snap "gimp" has no plug named "personal-files"
+```
+
+While `snap info --verbose gimp` works without having to install a snap, the `snap connections gimp` works only after a snap is installed (it also does not show plugs for configure / install / uninstall hooks). To view connections without having to install try:
 
 ```bash
 snap download gimp # e.g gimp_252.snap file is created
