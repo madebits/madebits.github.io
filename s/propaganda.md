@@ -129,6 +129,7 @@
 [The Washington Times](https://www.washingtontimes.com/news/world/)
 [Wall Street Journal](https://www.wsj.com/news/world)
 [Reddit World News](https://www.reddit.com/r/worldnews/)
+[YouTube World News](https://www.youtube.com/channel/UCvAvFl2OGsuDSoOo93Kd0nA)
 [BuzzfeedNews](https://www.buzzfeednews.com/)
 [The Antlantic](https://www.theatlantic.com/world/)
 [Pbs](https://www.pbs.org/wgbh/frontline/)
