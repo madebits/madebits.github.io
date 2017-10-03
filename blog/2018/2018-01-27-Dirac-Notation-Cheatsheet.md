@@ -34,7 +34,7 @@ $$$ \langle 0 \rvert 1 \rangle = \langle 1 \rvert 0 \rangle = 0 $$$
 
 Norm:
 
-$$$ \|| \rvert v \rangle \|| = \langle v \rvert v \rangle = v_0^2 + v_1^2$$$
+$$$ \|| \rvert v \rangle \||^2 = \langle v \rvert v \rangle = v_0^2 + v_1^2$$$
 
 ##Coefficients 
 
