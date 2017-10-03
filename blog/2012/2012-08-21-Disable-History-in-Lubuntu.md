@@ -106,10 +106,11 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 
 	Or alternatively, temporary specify: `export TMPDIR=~/tmp`.
 
-	In same way you can put your user cache folder and that of root to RAM, by adding to fstab, make sure these folder exists first:
+	In same way you can put your user cache folder and that of root to RAM, by adding to fstab, make sure these folder exists first (replace `user` with your `$USER`):
 	```
-	none /home/user/.cache tmpfs defaults,nodev,nosuid,noexec 0 0
-	none /home/user/.thumbnails tmpfs defaults,nodev,nosuid,noexec 0 0
+	tmpfs /home/user/.cache tmpfs defaults,nodev,nosuid,noexec,mode=1770,uid=user,gid=user 0 0
+	tmpfs /home/user/.thumbnails tmpfs defaults,nodev,nosuid,noexec,mode=1770,uid=user,gid=user 0 0
+	
 	none /root/.cache tmpfs defaults,nodev,nosuid,noexec 0 0
 	none /root/.thumbnails tmpfs defaults,nodev,nosuid,noexec 0 0
 	```
@@ -119,6 +120,14 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	mount --bind / /mnt/root
 	```
 	The original `/tmp` content is now in `/mnt/root/tmp`. You can verify the `tmpfs` mounts using either `mount` or `df -T /tmp` commands.
+
+	Other things to remount:
+
+	```
+	proc  /proc  proc  defaults,hidepid=2  0 0
+	tmpfs  /dev/shm  tmpfs  rw,nodev,nosuid,noexec,size=1024M,mode=1777 0 0
+	```
+
 1. I configured `locate` command not to search in my `/home/user` folder, by editing `/etc/updatedb.conf`, and appending my home folder to `PRUNEPATHS` there (space separated) (can be verified with `updatedb -v`). (To disable locate completely, use `sudo chmod -x /etc/cron.daily/mlocate` and `sudo rm /var/lib/mlocate/mlocate.db`).
 1. Setting up a protected encrypted folder in [Ubuntu](https://help.ubuntu.com/community/EncryptedPrivateDirectory) is done via:
 	```
