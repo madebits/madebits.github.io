@@ -100,11 +100,9 @@ sudo apt install chromium-browser
 
 I can go on with the rest of my system specific configuration.
 
-##Ah, Snap :(
+##Snap
 
-I have nothing against [snap](https://snapcraft.io/). It gives a whole class of users choice, and it is in the core strategy behind Ubuntu Core. I have a problem, when that [choice](https://askubuntu.com/questions/1039968/why-have-canonical-installed-core-gnome-apps-as-snaps-by-default) is not there. 
-
-Here I have a newly installed Ubuntu and I have not installed anything using `snap` on my own. Just what was there and software from official repositories (`deb` packages). My expectation would be there is nothing using `snap` in a fresh system using only software from official repositories. However, `snap` is already there active
+[snap](https://snapcraft.io/) gives a whole class of users choice, and it is in the core strategy behind Ubuntu Core. There seems to be a [decision](https://askubuntu.com/questions/1039968/why-have-canonical-installed-core-gnome-apps-as-snaps-by-default) to deliver parts of desktop as snaps by default to update them cleaner in the future. `snap` is already active:
 
 ```bash
 $ df -h -T | grep loop
@@ -123,13 +121,13 @@ $ df -h -T | grep loop
 
 ```
 
-There is one more thing to complain. Someone designed `snap` to use `squashfs` and now each *snap* needs a `loop` device. Suddenly, people end up seeing a lot of `loop` devices in system, even those that do not directly use `snap` like me. This is real nuisance for something that is expected to take world over.
+Someone designed `snap` to use `squashfs` and now each *snap* needs a `loop` device. Suddenly, people are seeing a lot of `loop` devices in system, even those that do not directly use `snap` like me. In place of fixing the root of problem and come with something better, Ubuntu developers are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices. 
 
-And what do they do? In place of fixing the root of problem and come with something better, they are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices. An initial bad decision is followed by even more bad decisions to cover up the initial bad one. What about *GNU coreutils*, will they hack them too? What about all third-party software (e.g. *VeraCrypt*)? Oh, they compiled its code in GNOME too. What is next one in the list? Getting rid of KDE, and so on.
+An initial bad decision is followed by even more bad decisions to cover up the initial bad one. What about *GNU coreutils*, will they hack them too? What about all third-party software (e.g. *VeraCrypt*)? Oh, they compiled its code in GNOME too. What is next one in the list? Getting rid of KDE, and so on.
 
 ###Getting Rid of Snaps
 
-Ubuntu desktop may not function properly if you do any of these.
+Ubuntu desktop may not function properly if you do any of these. This info is for completes only.
 
 To [remove](https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu) `snap` one can use:
 
