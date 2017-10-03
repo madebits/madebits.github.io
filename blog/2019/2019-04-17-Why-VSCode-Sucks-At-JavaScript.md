@@ -24,6 +24,6 @@ Have a look at https://code.visualstudio.com/docs/languages/javascript and let m
 
 How can VSCode be better at JavaScript? 
 
-> Force VSCode developers to do maintain some JavaScript project in parallel using VSCode.
+> Force VSCode developers to do maintain some JavaScript project in parallel using VSCode. The older the code base, the better.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-04-16-SFTP-With-Shared-Access.md'>SFTP With Shared Access</a></ins>
