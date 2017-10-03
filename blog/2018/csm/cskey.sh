@@ -451,7 +451,7 @@ function loadSessionSecret()
 		return
 	fi
 	readSessionPass
-	cskSecret=$(cat ${file} | decryptAes "$cskSessionPass" | base64 -w 0)
+	cskSecret="$(cat ${file} | decryptAes "$cskSessionPass" | base64 -w 0)"
 	if [ -z "$cskSecret" ]; then
 		onFailed "cannot read: ${file}"
 	fi
