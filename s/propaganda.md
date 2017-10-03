@@ -13,6 +13,7 @@
 [GHacks](http://www.ghacks.net/)
 [LinuxToday](http://www.linuxtoday.com/)
 [LinuxOrg](https://www.linux.org/)
+[Reddit UnixP0rn](https://www.reddit.com/r/unixporn/)
 [Medium](https://medium.com/)
 [Ars Technica](https://arstechnica.com/)
 [Channel9](https://channel9.msdn.com/)
