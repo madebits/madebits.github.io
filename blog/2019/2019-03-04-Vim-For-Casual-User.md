@@ -35,7 +35,7 @@ Move the cursor (in *command-mode*) using `j` - down, `k` - up, `h` - left, `l` 
 
 To get help from within Vim use any of `:help`, `:h`, or *F1* key. Help opens in a separate *read-only* text buffer and you can close it using `:q` or `:close`. If you scroll down in help page (or press `/quick`) , you will find a link to *quickref*. Move cursor over and press `Ctrl+]` to open it. You can open it also directly using `: h quickref`. Quick reference contains most commands you will ever use (`:h text` will search help for *text*).
 
-To open shell without having to exit Vim use `:shell` or `:sh`. Run `exit` to return back from shell. Using `:!sh` or `:!cmd` can be also used to run the shell (or run a command, use `!cmd %` for to replace `%` with current file name if you need it). 
+To open shell without having to exit Vim use `:shell` or `:sh`. Run `exit` to return back from shell. Using `:!sh` or `:!cmd` can be also used to run the shell (or run a command, use `!cmd %` for to replace `%` with current file name if you need it). To put output of command as text in current buffer use `:r !cmd`.
 
 * If you pressed *Ctrl+z* by mistake while in Vim, use `fg` in shell to get back to Vim. 
 * If pressing [Ctrl+s](https://en.wikipedia.org/wiki/Software_flow_control) by mistake in terminal within Vim, press *Ctrl+q* to resume flow.
@@ -61,7 +61,7 @@ In Vim there are two main modes:
 
 ## Basic Vim
 
-There is no basic Vim. You need to learn upfront enough commands to move around and edit text. Commands are usually are made of multiple keys of the [form](https://danielmiessler.com/study/vim/#language): *operator (verb)* *modifier (scope)* *noun (motion)* and can be combined creatively given enough time. The best way to learn the most basic commands is to use `vimtutor` as often as everything there becomes a habit.
+There is no basic Vim. You need to learn upfront enough commands to move around and edit text. Commands are usually are made of multiple keys of the [form](https://danielmiessler.com/study/vim/#language): *operator (verb)* *modifier (scope)* *noun (motion)* and can be combined creatively given enough time. The best way to learn the most basic commands is to use `vimtutor` as often as everything there becomes a habit. To see the current line use `Ctrl+g`.
 
 Common movement commands (in *command-mode*):
 
@@ -143,7 +143,7 @@ Macros (`:h @`):
 
 Replacing text:
 
-* `:s%/foo/bar/g` replace `foo` with `bar` globally
+* `:%s/foo/bar/g` replace `foo` with `bar` globally, add `c` after `g` to confirm every replacement
 * `:s/foo/bar/g` replace `foo` with `bar` in current line
 
 Using file explorer:
