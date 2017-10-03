@@ -27,6 +27,7 @@
 * [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
 * [EuroNews](https://www.euronews.com/news/international)
 * [B92](https://www.b92.net/eng/news/world.php)
+* [Daily Mail](https://www.dailymail.co.uk/news/worldnews/index.html)
 
 <hr>
 
@@ -43,6 +44,11 @@
 
 * [Press TV](https://www.presstv.com/)
 * [AlJazeera](https://www.aljazeera.com/news/)
+
+<hr>
+
+* [The Indian Express](https://indianexpress.com/section/world/)
+* [Hindustan Times](https://www.hindustantimes.com/world-news/)
 
 <hr>
 
