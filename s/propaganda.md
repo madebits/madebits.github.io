@@ -205,7 +205,7 @@
 
 ## Middle East
 
-[Press TV](https://www.presstv.com/)
+[Press TV](https://www.presstv.ir/)
 [Tasnim News](https://www.tasnimnews.com/en)
 [AlJazeera](https://www.aljazeera.com/news/)
 [YeniSafak](https://www.yenisafak.com/en/world)
