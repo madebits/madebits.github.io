@@ -3,6 +3,7 @@
 # cskey.sh
 
 set -eu
+set -o pipefail
 
 if [ $(id -u) != "0" ]; then
     (>&2 echo "! using sudo recommended")
@@ -176,6 +177,9 @@ function keyFileHash()
 {
 	local keyFile="$1"
 	head -c 1024 "$keyFile" | sha256sum | cut -d ' ' -f 1
+	if [ "$?" != "0" ]; then
+		onFailed "cannot read keyFile: ${keyFile}"
+	fi
 }
 
 function readKeyFiles()
@@ -216,6 +220,9 @@ function readPassFromFile()
 {
 	if [ -e "$1" ] || [ "$1" = "-" ]; then
 		head -n 1 "$1" | tr -d '\n'
+		if [ "$?" != "0" ]; then
+			onFailed "cannot read file: ${1}"
+		fi
 	else
 		onFailed "cannot read from file: $1"
 	fi

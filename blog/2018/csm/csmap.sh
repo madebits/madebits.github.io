@@ -3,6 +3,7 @@
 # csmap.sh
 
 set -eu
+set -o pipefail
 
 if [ $(id -u) != "0" ]; then
     (>&2 echo "! needs sudo")
