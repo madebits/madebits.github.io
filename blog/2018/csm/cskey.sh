@@ -476,12 +476,12 @@ function showHelp()
 	logError " -bs : (enc) generate a new secret for each -b file"
 	logError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
 	logError " -s file : (enc) read secret data as base64 -w 0 from file"
-	logError " -as file : (enc) read secret data from session encrypted file (see -ao)"
-	logError " -ao outFile : (dec) write key in session encrypted file"
+	logError " -as file : (enc) read secret data from a session encrypted file (see -ao)"
+	logError " -ao outFile : (dec) write secret data in a session encrypted file"
 	logError " -aa : auto session encryption password"
-	logError " -d : dump password and key on stderr for debug"
+	logError " -d : dump password and secret on stderr for debug"
 	logError "Examples:"
-	logError ' sudo bash -c '"'"'key=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -key <(echo -n "$key") -d'"'"''
+	logError ' sudo bash -c '"'"'secret=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -s <(echo -n "$secret") -d'"'"''
 }
 
 # cmd file options
