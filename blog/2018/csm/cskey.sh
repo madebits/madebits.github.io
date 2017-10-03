@@ -162,6 +162,9 @@ function decodeKey()
     
     if [ -e "$file" ] || [ "$file" = "-" ]; then
 		local fileData=$(head -c 600 "$file" | base64 -w 0)
+		if [ -z "$fileData" ]; then
+			onFailed "cannot read: $file"
+		fi
 		local salt=$(echo -n "$fileData" | base64 -d | head -c 32 | base64 -w 0)
 		local data=$(echo -n "$fileData" | base64 -d | tail -c +33 | head -c "$keyLength" | base64 -w 0)
         local hash=$(pass2hash "$pass" "$salt")
@@ -337,6 +340,10 @@ function reEncryptFile()
 	local pass1=$(readPass)
 	dumpError ""
 	local key=$(decodeKey "$file" "$pass1" | base64 -w 0)
+	if [ -z "$key" ]; then
+		onFailed "cannot get key"
+	fi
+	
 	dumpError "# New"
 	
 	if [ "$cskSameKeyFiles" != "1" ]; then
