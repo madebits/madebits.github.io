@@ -99,6 +99,15 @@ To move notifications to corner:
 
 Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcut](https://wiki.gnome.org/Design/OS/KeyboardShortcuts) to open applications.
 
+Some `nautilus` shortcuts:
+
+*  Ctrl+Shift+N new folder
+*  Ctrl+L edit address bar
+*  Ctrl+T new tab
+*  Ctrl+Q or Ctrl+W close (tab)
+*  Ctrl+R of F5 refresh
+*  Ctrl+F find, Ctrl+S select, Ctrl+A select all 
+
 ###Hacks
 
 * GEdit and other GNOME programs was showing *'Preferences'* menu only if run with *sudo*. I had to [run](https://askubuntu.com/questions/375049/where-are-gedits-preferences/671398#671398):
