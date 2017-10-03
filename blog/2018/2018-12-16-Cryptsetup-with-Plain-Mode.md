@@ -33,6 +33,15 @@ umount /mnt/tmp
 cryptsetup close enc
 ```
 
+To increase a plain type container file, we can use use again `dd` with *seek* parameter to skip it size in *bs* size blocks:
+
+```
+# resize container from 30G to 40G (i.e., +10G)
+dd iflag=fullblock if=/dev/urandom of=container.bin bs=1G count=10 seek=30
+# after mount use any file system tools to expand the partition
+# to reverse, use file system tools to shrink the partition, and use truncate tool
+```
+
 ##Better Plain Mode Passwords
 
 Given `--type plain` hashes password only once, the above is safe only if combined with some tool that hashes password more than once. 
