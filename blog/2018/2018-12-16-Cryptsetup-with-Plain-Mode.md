@@ -56,7 +56,7 @@ To shrink, after resize use `truncate` tool on container file.
 
 ##Better Plain Mode Passwords
 
-Given `--type plain` hashes password only once, the above is safe only if combined with some tool that hashes password more than once. 
+Given `--type plain` hashes password only once, plain mode is safe only if combined with some tool that hashes password more than once. 
 
 We can specify a password via some script to `cryptsetup open` by using (e.g.: via `sudo sh -c "..."`):
 
