@@ -171,7 +171,11 @@ done
 After this script is run, to make it persistent in Ubuntu run:
 
 ```
+sudo apt install iptables-persistent netfilter-persistent
+#sudo dpkg-reconfigure iptables-persistent
 sudo netfilter-persistent save
+sudo systemctl enable netfilter-persistent
+sudo systemctl status netfilter-persistent.service
 ```
 
 ##Minimal Firewall
