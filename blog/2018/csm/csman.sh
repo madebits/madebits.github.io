@@ -627,8 +627,8 @@ function openContainer()
         mountContainer "$name"
     fi
     echo "To close use:"
-    echo "$0 close ${oName}"
-    echo "$0 closeAll"    
+    echo "$(basename -- "$0") close ${oName}"
+    echo "$(basename -- "$0") closeAll"    
 }
 
 ########################################################################
