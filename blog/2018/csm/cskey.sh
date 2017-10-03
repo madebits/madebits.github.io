@@ -371,8 +371,8 @@ function readSessionPass()
 {
 	if [ -z "$cskSessionPass" ]; then
 		# session specific
-		local sData1=$(uptime -s)
-		local sData2=$(ps ax | grep -E 'systemd --user|cron|udisks' | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | tr -d '\n')
+		local sData1="$(uptime -s)"
+		local sData2="$(ps ax | grep -E '/systemd --user|/cron|/udisks' | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | tr -d '\n')"
 		local sessionData="${user}${sData1}${sData2}"
 		local sSecret="${sessionData}"
 		local rsp=""
@@ -385,7 +385,7 @@ function readSessionPass()
 		fi
 		logError
 		sSecret="${sessionData}${rsp}"
-		cskSessionPass=$(echo -n "${sSecret}" | sha256sum | cut -d ' ' -f 1)
+		cskSessionPass="$(echo -n "${sSecret}" | sha256sum | cut -d ' ' -f 1)"
 		debugData "${sSecret}" "${cskSessionPass}"
 	fi
 }
