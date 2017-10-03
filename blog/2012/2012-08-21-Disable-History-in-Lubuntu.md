@@ -268,6 +268,7 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	0.0.0.0 daisy.ubuntu.com
 	0.0.0.0 metrics.ubuntu.com
 	0.0.0.0 popcon.ubuntu.com
+	0.0.0.0 motd.ubuntu.com
 	```
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-08-25-Fully-Remove-Installed-Packages-in-Lubuntu.md'>Fully Remove Installed Packages in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2012/2012-08-01-Change-Wallpaper-at-Startup-in-Lubuntu.md'>Change Wallpaper at Startup in Lubuntu</a></ins>
