@@ -87,7 +87,7 @@ The secret file encryption password is hashed using `argon2` before passed to AE
 container=slots(default 4)|encrypted data
 ```
 
-Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords. AES used to encrypt secret files is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret leads to different binary files. Similar to [non-detached](https://wiki.archlinux.org/index.php/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header) LUKS, user is responsible to store secret files separately from containers (maybe in another container) or have them embedded (default). Unlike LUKS headers, secret files used by CSMan (with default aes tool) look random.
+Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords. AES tool used to encrypt secret files uses CBC mode, so using same password on same on different files containing same secret leads to different binary files. Similar to [non-detached](https://wiki.archlinux.org/index.php/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header) LUKS, user is responsible to store secret files separately from containers (maybe in another container) or have them embedded (default). Unlike LUKS headers, secret files used by CSMan (with default aes tool) look random.
 
 ### Terminology
 
@@ -117,7 +117,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 
 * `csman.sh` - main tool.
 * `cskey.sh` - is invoked by `csman.sh` for handling encryption and decryption of keys.
-* `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool. If this tool is found next to `cskey.sh` then it is used. Alternately, you can install `ccrypt` from Ubuntu repositories.
+* `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool - it is used by default to encrypt secret files. Other tools can be used via `-c` option.
 * `argon2` - this is a self-compiled copy of `argon2` from [official](https://github.com/P-H-C/phc-winner-argon2) repository without any changes ([my copy](https://github.com/madebits/phc-winner-argon2)). `argon2` can be found also in Ubuntu repositories. If found next to `cskey.sh`, this copy is used in place of the system copy.
 
 When `csman.sh` is started without arguments, it prints prefix hashes of these files, if present:
