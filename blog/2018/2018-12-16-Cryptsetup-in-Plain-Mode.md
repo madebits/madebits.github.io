@@ -321,14 +321,12 @@ function closeContainer()
     fuser -km "$mntDir2"
     set -e
     sleep 2
-    umount "$mntDir2"
-    rmdir "$mntDir2"
+    umount "$mntDir2" && rmdir "$mntDir2"
     set +e
     fuser -km "$mntDir1"
     set -e
     sleep 2
-    umount "$mntDir1"
-    rmdir "$mntDir1"
+    umount "$mntDir1" && rmdir "$mntDir1"
     cryptsetup close "$name"
     echo " Closed ${name}!"
 }
