@@ -667,7 +667,7 @@ function main()
     fi
     shift
     
-    if [ "$cskCmk" != "x" ]; then
+    if [ "$cskCmd" != "x" ]; then
         cskFile="${1:?"! file"}"
         shift
     fi
