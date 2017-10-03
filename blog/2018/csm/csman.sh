@@ -581,7 +581,7 @@ function createContainer()
     local overwriteContainer=""
     if [ -f "$container" ]; then
         echo "Container file exists: ${container}"
-        read -p "Overwrite? [y (overwrite) | e (erase) | Enter to exit]: " overwriteContainer
+        read -p "Overwrite? [y (overwrite) | e (erase files) | Enter to exit]: " overwriteContainer
         if [ "$overwriteContainer" = "y" ]; then
             writeContainer="1"
         elif [ "$overwriteContainer" = "e" ]; then
