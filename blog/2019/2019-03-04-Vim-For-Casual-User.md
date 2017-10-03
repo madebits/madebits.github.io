@@ -99,7 +99,8 @@ Common edit commands (in *command-mode*):
 
 
 * `u` undo; `Ctrl+r` redo
-* `.` repeat last action sequence (`number.` repeat last command sequence *number* times)
+* `.` repeat last action sequence (`number.` repeat last command sequence *number* times).
+* `:edit!` undo all unsaved changes in buffer.
 
 Edit commands can be combined with **i**nside or **a**round *text-object* bound options:
 
