@@ -102,7 +102,7 @@ I can go on with the rest of my system specific configuration.
 
 ##Ah, Snap :(
 
-I have nothing against [snap](https://snapcraft.io/). It gives a whole class of users choice, and it is in the core strategy behind Ubuntu Core. I have a problem, when that choice is not there. 
+I have nothing against [snap](https://snapcraft.io/). It gives a whole class of users choice, and it is in the core strategy behind Ubuntu Core. I have a problem, when that [choice](https://askubuntu.com/questions/1039968/why-have-canonical-installed-core-gnome-apps-as-snaps-by-default) is not there. 
 
 Here I have a newly installed Ubuntu and I have not installed anything using `snap` on my own. Just what was there and software from official repositories (`deb` packages). My expectation would be there is nothing using `snap` in a fresh system using only software from official repositories. However, `snap` is already there active
 
@@ -127,12 +127,21 @@ There is one more thing to complain. Someone designed `snap` to use `squashfs` a
 
 And what do they do? In place of fixing the root of problem and come with something better, they are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices. An initial bad decision is followed by even more bad decisions to cover up the initial bad one. What about *GNU coreutils*, will they hack them too? What about all third-party software (e.g. *VeraCrypt*)? Oh, they compiled its code in GNOME too. What is next one in the list? Getting rid of KDE, and so on.
 
+###Getting Rid of Snaps
+
 To [remove](https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu) `snap` one can use:
 
 ```bash
 sudo apt autoremove --purge snapd
 # to remove snaps appearing in gnome-software only
 sudo apt-get remove --purge gnome-software-plugin-snap
+```
+
+To [remove](https://www.reddit.com/r/Ubuntu/comments/8krkam/system_monitor_on_1804_is_a_snap_by_default/) specific pre-installed snaps:
+
+```bash
+sudo snap remove gnome-system-monitor
+sudo apt install gnome-system-monitor
 ```
 
 ##Summary
