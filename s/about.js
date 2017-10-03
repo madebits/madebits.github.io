@@ -95,6 +95,17 @@
 				} catch(e){}
 			});
 		} catch(e){}
+		try {
+			navigator.mediaDevices.enumerateDevices().then(function(devices) {
+				var d = [];
+				devices.forEach(function(device) {
+					d.push(device.kind + ": " + device.label +
+									" id = " + device.deviceId);	  
+				});
+				addClientData('MediaDevices', d.join(", "));
+			})
+			.catch(function(e) {});
+		} catch(e){}
 		if(navigator.doNotTrack && (navigator.doNotTrack == 1)) {
 			addClientData('DoNotTrack', 'Active');
 		}
