@@ -205,6 +205,8 @@ bindsym $mod+y bar mode toggle
 bindsym $mod+Escape $lock
 #bindsym $mod+t border toggle
 
+bindsym --release button2 kill
+
 #https://thomashunter.name/i3-configurator/
 # class                 border  bground text    indicator child_border
 client.focused          #993853 #993853 #FFFFFF #888888   #888888
