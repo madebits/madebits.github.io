@@ -281,6 +281,9 @@ bin  boot  dev  etc  home  lib  lib64  media  meta  mnt  opt  proc  root  run  s
 
 User defined environment variables outside of snap are visible to snap. Some of `XDG_` variables are changed to writable snap folders.
 
+The disk configuration the snap sees is in `/var/lib/snapd/mount/snap.gimp.fstab`.
+
+
 ## Snap Store
 
 Snap store [tracks](https://snapcraft.io/docs/snap-store-metrics) snap installs and usage. Geo-location data based on IPs are also collected.
