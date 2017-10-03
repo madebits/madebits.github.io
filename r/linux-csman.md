@@ -125,7 +125,7 @@ Without `-bs` option, same secret will be stored on each file (due to AES mode f
 
 With `-bs` option, a new different secret is generated for each file. `-su` makes secret generation faster by using `/dev/urandom`.
 
-`sudo cskey.sh rnd file -rb 5` command is similar, but it generates just random fixed size files that look like secret files.
+`sudo cskey.sh rnd file -rb 5` command is similar, but it generates random fixed size files that look like secret files with no other use.
 
 #### Password Options
 
