@@ -15,6 +15,9 @@ Create a new container file (`-i e` or `-i echo` makes password entry visible):
 ```bash
 # size can be in M (mega) or G (giga) bytes
 csman.sh new container.bin -size 1M -ck -i e --
+
+# of encrypt a non-boot partition, existing data will be lost
+csman.sh new /dev/sdc1 -ck -i e --
 ```
 
 Open a container, it gets a random *name* and it is mounted under `$HOME/mnt/csm-name` (or append `-name name`):
@@ -98,7 +101,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 
 * `csman.sh` - main tool.
 * `cskey.sh` - is invoked by `csman.sh` for handling encryption and decryption of keys.
-* `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool. If this tool is found next to `cskey.sh` then it is used. Alternately, you can install `ccrypt` from Ubuntu repositories. The default [aes](#r/cpp-aes-tool.md) tool uses non-authenticated encryption - the ambiguity is wished.
+* `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool. If this tool is found next to `cskey.sh` then it is used. Alternately, you can install `ccrypt` from Ubuntu repositories.
 * `argon2` - this is a self-compiled copy of `argon2` from [official](https://github.com/P-H-C/phc-winner-argon2) repository without any changes ([my copy](https://github.com/madebits/phc-winner-argon2)). `argon2` can be found also in Ubuntu repositories. If found next to `cskey.sh`, this copy is used in place of the system copy.
 
 When `csman.sh` is started without arguments, it prints prefix hashes of these files, if present:
@@ -244,7 +247,7 @@ The container file will be created, overwritten with random data, and formatted 
 Encrypting a device (disk partition) is similar:
 
 ```
-sudo cskey /dev/sdc1 -oo
+sudo csman.sh /dev/sdc1 -oo
 ```
 
 The size will be ignored, but if specified needs to be 0G (or 0M).
