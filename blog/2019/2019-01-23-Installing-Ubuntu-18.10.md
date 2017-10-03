@@ -279,7 +279,7 @@ sudo apt install gnome-system-monitor
 
 * `veracrypt` needs `sudo apt install libcanberra-gtk-module libcanberra-gtk3-module`.
 
-* Useful software: `sudo apt install mpv vlc speedcrunch keepassxc baobab`.
+* Useful software: `sudo apt install mpv vlc audacious speedcrunch keepassxc baobab`.
 
 * `mpv` config (`~/.config/mpv/`) (using also [nextfile](https://github.com/donmaiq/mpv-nextfile) [script](https://github.com/mpv-player/mpv/wiki/User-Scripts)):
 
