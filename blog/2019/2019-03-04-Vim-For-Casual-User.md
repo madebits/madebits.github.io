@@ -121,7 +121,7 @@ Macros (`:h @`):
 * `0"ay$` copy macro (or `v` to enter visual mode, select, then `"ay`)
 * `:help q` for more details
 
-Replacing text (do not bother more that this with substitute command, unless you have no other use for your life, better use macros):
+Replacing text:
 
 * `:s%/foo/bar/g` replace `foo` with `bar` globally
 * `:s/foo/bar/g` replace `foo` with `bar` in current line
