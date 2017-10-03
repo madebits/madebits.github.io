@@ -184,7 +184,7 @@ sudo bash -c 'secret=$(cskey.sh dec secret.bin | base64 -w 0) && cskey.sh enc se
 
 If *secret file* in *enc|dec* is specified as **?** it will read from command line.
 
-#### Creating Multiple Secret Files
+#### Multiple Secret Files
 
 Sometimes, you may want to quickly generate a lot of secret files at once using same password using backup `-b` option:
 
@@ -280,7 +280,7 @@ The `-oo` option tells `csman.sh` to only overwrite container data, but do nothi
 
 Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you can pass other `cryptsetup` options, such an offset (offset is specified in 512 byte units, e.g: `-o 2` for 1024 bytes) via `-co ... --` (outer layer) and `-ci ... --` (inner layer).
 
-#### Embedding Secret File
+#### Embedding Secret
 
 The `cryptsetup` options can be used if needed to embed secret file into the container. Assuming secret file is less than 1024 bytes long, the following commands create a container with offset and store secret there (more convenient commands follow, this is only an explanation):
 
@@ -432,7 +432,7 @@ sudo csman.sh x
 
 `csman.sh` changes timestamps of open container files to fake them. Sometimes, this may leave system time unsynchronized. Use `sudo csman.sh synctime` to fix that. To manually change timestamps of files use `sudo csman.sh touch fileOrDir time`. The time format to use is documented in command-line options.
 
-### Changing Secret File Password
+### Changing Password
 
 Changing the password of a secret file can be done via:
 
@@ -506,7 +506,7 @@ csman.sh cp src dst
 csman.sh rsync src dst
 ```
 
-### Clean Free Disk Space
+### Clean Disk Space
 
 It is possible to overwrite free disk partition space using a directory in that partition using (no `sudo` is needed):
 
