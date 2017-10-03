@@ -168,6 +168,7 @@
 [T-Online Nachrichten](https://www.t-online.de/nachrichten/)
 [TagesSchau](https://www.tagesschau.de/)
 [Zdf](https://zdf.de)
+[HessenSchau](https://www.hessenschau.de/index.html)
 [EuroNews](https://www.euronews.com/news/international)
 [Rte](https://www.rte.ie/news/world/)
 [Ansa](https://www.ansa.it/english/)
