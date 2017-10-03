@@ -170,11 +170,13 @@ If you specify `argon2` options during encrypt command (enc), you have to rememb
 
 ### Creating Containers
 
-To create an encrypted container you need to specify the container file or device, secret file and the size (create command is `create` or `n`):
+To create an encrypted container you need to specify the container file or device, **secret** file (see [Creating Secret Files](#r/linux-csman.md#creating-secret-files)) and the size (create command is `create` or `n`):
 
 ```bash
 sudo csman.sh n container.bin secret.bin 1M -cf -N 1000 ---
 ```
+
+
 
 The `-cf ... ---` can be used to pass EXT4 options for file system creation, such as, the number of *inodes* to use `-N 1000` (or `-T small`), or the EXT4 volume label `-L VOL1` (see `man mkfs.ext4`).
 
