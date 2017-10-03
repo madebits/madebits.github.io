@@ -230,7 +230,7 @@ function readPassFromFile()
 			onFailed "cannot read file: ${1}"
 		fi
 	else
-		onFailed "cannot read from file: ${1}"
+		onFailed "cannot read file: ${1}"
 	fi
 }
 
@@ -241,8 +241,13 @@ function readSessionPass()
 		local sData1=$(uptime -s)
 		local sData2=$(ps ax | grep -E 'systemd --user|cron|udisks' | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | tr -d '\n')
 		local sessionData="${user}${sData1}${sData2}"
-		read -p "Session password: " -s rsp
-		cskSessionKey="${rsp}${rsp}${rsp}${rsp}${sessionData}${rsp}${rsp}${rsp}${rsp}${rsp}"
+		if [ "$cskInputMode" = "1" ] || [ "$cskInputMode" = "e" ]; then
+			read -p "Session password: " rsp
+		else
+			read -p "Session password: " -s rsp
+		fi
+		# lengthen artificially
+		cskSessionKey="${rsp}${rsp^^}${rsp,,}${rsp}${sessionData}${rsp}${rsp,,}${rsp^^}${rsp}${rsp}"
 		if [ "$cskDebug" = "1" ]; then
 			dumpError "DEBUG [${cskSessionKey}]"
 		fi
@@ -263,7 +268,7 @@ function readSessionPassFromFile()
 		fi
 		echo -n "$p" | base64 -d | decryptAes "$cskSessionKey"
 	else
-		onFailed "cannot read from file: ${1}"
+		onFailed "cannot read file: ${1}"
 	fi
 }
 
@@ -377,7 +382,7 @@ function decryptFile()
 function reEncryptFile()
 {
 	local file="$1"
-	dumpError "# Current"
+	dumpError "# Current: ${file}"
 	readKeyFiles
 	local pass1=$(readPass)
 	dumpError ""
@@ -455,6 +460,27 @@ function createSessionPass()
 	ownFile "$file"
 }
 
+# file 1
+function loadSessionPass()
+{
+	local file="${1:-}"
+	if [ -z "$file" ]; then
+		return
+	fi
+	readSessionPass
+	set +e
+	local sPass=$(readSessionPassFromFile "$file")
+	set -e
+	if [ -z "$sPass" ]; then
+		onFailed "cannot read file: ${file}"
+	fi
+	if [ "${2:-}" = "1" ]; then
+		cskSessionPass2="$sPass"
+	else
+		cskSessionPass="$sPass"
+	fi
+}
+
 function showHelp()
 {
 	dumpError "Usage: $(basename "$0") [enc | dec | chp | ses] file [options]"
@@ -501,6 +527,9 @@ function main()
 	shift
 	cskFile="${1:?"! file"}"
 	shift
+	
+	local apf=""
+	local apnf=""
 	
 	while [ -n "${1:-}" ]; do
 		local current="${1:-}"
@@ -556,27 +585,11 @@ function main()
 				shift
 			;;
 			-ap)
-				local apf="${2:?"! -ap file"}"
-				readSessionPass
-				set +e
-				cskSessionPass=$(readSessionPassFromFile "$apf")
-				set -e
-				if [ -z "$cskSessionPass" ]; then
-					dumpError "! cannot read pass from ${apf}"
-					exit 1
-				fi
+				apf="${2:?"! -ap file"}"
 				shift
 			;;
 			-apn)
-				local apnf="${2:?"! -apn file"}"
-				readSessionPass
-				set +e
-				cskSessionPass2=$(readSessionPassFromFile "${apnf}")
-				set -e
-				if [ -z "$cskSessionPass2" ]; then
-					dumpError "! cannot read pass from ${apnf}"
-					exit 1
-				fi
+				apnf="${2:?"! -apn file"}"
 				shift
 			;;
 			-fn)
@@ -619,6 +632,9 @@ function main()
 		esac
 		shift
 	done
+		
+	loadSessionPass "${apf}" "0"
+	loadSessionPass "${apnf}" "1"
 
 	case "$cskCmd" in
 		enc|e)
