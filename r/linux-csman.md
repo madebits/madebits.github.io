@@ -206,7 +206,7 @@ In this example, session password will be echoed and user password for *secret.b
 
 The `-s` option tells `csman.sh` to only use one (outer AES) encryption layer.
 
-Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you can pass other `cryptsetup` options, such an offset (`-o 111`, offset is specified in 512 byte units) via `-co ... ---` (outer layer) and `-ci ... ---` (inner layer). 
+Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you can pass other `cryptsetup` options, such an offset (offset is specified in 512 byte units, e.g: `-o 2` for 1024 bytes) via `-co ... ---` (outer layer) and `-ci ... ---` (inner layer). 
 
 #### Embedding Secret File
 
