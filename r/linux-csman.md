@@ -268,6 +268,16 @@ By default, *secret.bin* is modified in place, which can be risky. To create a n
 sudo csman.sh chp secret.bin new-secret.bin -ck -i e ---
 ```
 
+## File Tools
+
+Two copy file commands are provided. They can be run without `sudo`. First uses `tar` and `pv` and second invokes `rsync` with some parameters (removing training slashes from input directories):
+
+```bash
+csman.sh cp src dst
+csman.sh rsync src dst
+```
+
+
 
 
 
