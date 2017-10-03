@@ -9,7 +9,7 @@ sel=$(zenity --window-icon=question --height 900 --width 640 --list --title="☀
  ↗️... 🌐Browser 📂Files 📧Email 💥Sublime 📝Geany 🗳️DropBox 🌎Firefox\
  📦VirtualBox 🔑VeraCrypt 🔐KeepassXC 🎦Vlc 🎶Audacious\
  🖼️Gimp 🏢Office 🧮Calculator 🗂️Ranger 💻Terminal\
- 💽Disks 🔄Updates 👨‍💻Synaptic 📚DiskSpace ⚡SysMon 🛠️i3Config 🔊Volume-Up 🔉Volume-Down 📲Logout 🔶Reboot ⛔Shutdown   2>/dev/null)
+ 💽Disks 🔄Updates 👨‍💻Synaptic 📚DiskSpace ⚡SysMon 🔋PowerStats 🛠️i3Config 🔊Volume-Up 🔉Volume-Down 📲Logout 🔶Reboot ⛔Shutdown   2>/dev/null)
 
 case "$sel" in
     🛠️i3Config)
@@ -99,6 +99,9 @@ case "$sel" in
         ;;
     🔉Volume-Down)
         pactl set-sink-volume 0 -20%
+        ;;
+    🔋PowerStats)
+         gnome-power-statistics
         ;;
     *)
         exit 1
