@@ -58,7 +58,7 @@ There are several ways to save the text:
 A few quirks:
 
 * If you pressed *Ctrl+z* by mistake while in Vim, use `fg` in bash shell to get back to Vim. 
-* If pressing [Ctrl+s](https://en.wikipedia.org/wiki/Software_flow_control) by mistake in terminal within Vim, press *Ctrl+q* to resume flow.
+* If you pressed [Ctrl+s](https://en.wikipedia.org/wiki/Software_flow_control) by mistake in terminal while in Vim, press *Ctrl+q* to resume flow.
 
 ## Vim Help
 
