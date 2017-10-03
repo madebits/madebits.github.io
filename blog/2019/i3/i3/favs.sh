@@ -3,7 +3,7 @@
 #https://emojipedia.org/search/?q=box
 
 bl=$(/etc/acpi/actions/bl-status.sh)
-up=$(uptime | cut -d ' ' -f 5 | tr -d ',')
+up=$(uptime | cut -d ',' -f 1)
 
 sel=$(zenity --window-icon=question --height 900 --width 640 --list --title="☀️ ${bl}% | 🧑 ${USER} | 🕛 ${up} | 💻 Apps" --column "Apps"\
  ↗️... 🌐Browser 📂Files 📧Email 💥Sublime 📝Geany 🗳️DropBox 🌎Firefox\
