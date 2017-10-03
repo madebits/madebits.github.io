@@ -6,6 +6,8 @@ exec --no-startup-id ~/.config/i3/start.sh
 exec --no-startup-id /usr/bin/nm-applet
 exec --no-startup-id /usr/bin/pulseaudio
 exec --no-startup-id /usr/bin/redshift
+#exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+
 # left mouse
 exec --no-startup-id xmodmap -e "pointer = 3 2 1"
 
@@ -128,6 +130,8 @@ bindsym $mod+8 workspace number $workspace8
 bindsym $mod+9 workspace number $workspace9
 bindsym $mod+0 workspace number $workspace10
 
+bindsym $mod+dead_circumflex exec --no-startup-id ~/.config/i3/i3-new-workspace.sh
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $workspace1
 bindsym $mod+Shift+2 move container to workspace number $workspace2
@@ -207,7 +211,7 @@ bindsym $mod+e exec --no-startup-id nautilus
 
 bindsym $mod+y bar mode toggle
 bindsym $mod+Escape $lock
-#bindsym $mod+t border toggle
+#bindsym $mod+Shift+t border toggle
 
 bindsym --release button2 kill
 bindsym --release button3 $favs
@@ -226,6 +230,8 @@ bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +10%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -10%
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 
+bindsym XF86Search exec --no-startup-id catfish
+
 #bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 #bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 
@@ -235,3 +241,4 @@ bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 exec --no-startup-id i3-msg 'workspace $workspace1; exec /usr/bin/chromium-browser'
 
 workspace_auto_back_and_forth yes
+

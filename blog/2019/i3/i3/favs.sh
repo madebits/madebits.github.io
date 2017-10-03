@@ -6,12 +6,14 @@ bl=$(/etc/acpi/actions/bl-status.sh)
 up=$(uptime | cut -d ',' -f 1)
 mem=$(free -h | grep Mem: | tr -s ' ' | cut -d ' ' -f 3,2,4)
 
-sel=$(zenity --window-icon=question --height 900 --width 640 --list --title="🧑 ${USER} | 🕛 ${up} | Ⓜ️ ${mem} | ☀️ ${bl}% | 💻 Apps" --column "Apps"\
+sel=$(zenity --window-icon=question --height 1000 --width 640 --list --title="🧑 ${USER} | 🕛 ${up} | Ⓜ️ ${mem} | ☀️ ${bl}% | 💻 Apps" --column "Apps"\
  ↗️... ☠️i3Kill 🌐Browser 📂Files 📧Email 💥Sublime 📝Geany 🗳️DropBox 🌎Firefox\
  📦VirtualBox 🔑VeraCrypt 🔐KeepassXC 🎦Vlc 🎶Audacious\
  🖼️Gimp 🏢Office 🧮Calculator 🗂️Ranger 💻Terminal\
- 💽Disks 🔄Updates 👨‍💻Synaptic 📚DiskSpace ⚡SysMon 🔋PowerStats 🛠️i3Config 🎛️i3Toggle-Layout 🔊Volume-Up 🔉Volume-Down 📲Logout ♻️Reboot ⛔Shutdown   2>/dev/null)
+ 💽Disks 🔄Updates 👨‍💻Synaptic 📚DiskSpace ⚡SysMon 🔋PowerStats\
+ 🛠️i3Config 🎛️i3Toggle-Layout 🔲i3New-Workspace 🔊Volume-Up 🔉Volume-Down 🔇Volume-0 📲Logout ♻️Reboot ⛔Shutdown   2>/dev/null)
 
+sleep 0.1
 case "$sel" in
     ☠️i3Kill)
         i3-msg 'kill'
@@ -95,7 +97,7 @@ case "$sel" in
         systemctl poweroff -i
         ;;
     ↗️...)
-        sleep 0.1
+        #sleep 0.1
         rofi -modi 'window#drun#run' -show window -show-icons -sort -width 90 -lines 30 -sidebar-mode -columns 4 &
         ;;
     🔊Volume-Up)
@@ -104,8 +106,14 @@ case "$sel" in
     🔉Volume-Down)
         pactl set-sink-volume 0 -20%
         ;;
+    🔇Volume-0)
+        pactl set-sink-volume 0 0
+        ;;
     🎛️i3Toggle-Layout)
          i3-msg 'layout toggle tabbed stacking split' &
+        ;;
+    🔲i3New-Workspace)
+        ~/.config/i3/i3-new-workspace.sh
         ;;
     🔋PowerStats)
          exec gnome-power-statistics
