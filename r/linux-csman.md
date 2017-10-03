@@ -220,7 +220,7 @@ dd conv=notrunc if=secret.bin of=container.bin
 sudo csman.sh o container.bin container.bin -co -o 2 ---
 ```
 
-Do not manipulate container file as secret file using `cskey.sh` or other tooling (such as `csman.sh chp`), other than for reading (decoding) the secret. To extract secret file back from the container use:
+Do **not** manipulate container file as secret file using `cskey.sh` or other tooling (such as `csman.sh chp`), other than for reading (decoding) the secret. To extract secret file back from the container use:
 
 ```bash
 dd if=container.bin of=secret.bin bs=1024 count=1
