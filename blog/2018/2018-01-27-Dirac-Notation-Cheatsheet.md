@@ -4,7 +4,7 @@
 
 <!--- tags: math -->
 
-[Dirac](https://en.wikipedia.org/wiki/Bra%E2%80%93ket_notation) notation quick reference. Assume a two dimensional space with complex coefficients.
+[Dirac](https://en.wikipedia.org/wiki/Bra%E2%80%93ket_notation) notation quick reference. Assume a $$$\mathbf{C^2}$$$ [Hilbert](https://en.wikipedia.org/wiki/Hilbert_space) space.
 
 ##Bra $$$-$$$ Ket
 
