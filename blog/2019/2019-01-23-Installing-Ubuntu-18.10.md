@@ -130,7 +130,9 @@ Exec=env GTK_THEME=Ambiance:light gthumb %U
 
 * If GNOME shell [freezes](https://wiki.archlinux.org/index.php/GNOME/Troubleshooting#Shell_freezes), type `Ctrl+Alt+F3`, login and run `pkill -HUP gnome-shell`.
 
-* I copied *ttf* [fonts](https://askubuntu.com/questions/3697/how-do-i-install-fonts) from a Windows VM to `~/.local/share/fonts`.  
+* I copied *ttf* [fonts](https://askubuntu.com/questions/3697/how-do-i-install-fonts) from a Windows VM to `~/.local/share/fonts`.
+
+* Graphical `update-manager` was closing after update check. I had to clean all files in `/var/lib/apt/lists` and run `sudo apt update` to fix the issue.
 
 ##Other Useful Tools
 
