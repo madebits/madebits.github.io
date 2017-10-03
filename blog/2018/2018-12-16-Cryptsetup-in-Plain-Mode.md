@@ -259,7 +259,7 @@ function main()
                 exit 1
             fi
             shift 2
-            
+
             local secret="$1"
             if [ -z "$secret" ]; then
                 (>&2 echo "! secret required")
@@ -276,7 +276,13 @@ function main()
             "${toolsDir}/cs-key.sh" dec "$secret" | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$device" "$name" -
             echo
             mkdir -p "$mntDir1"
+            set +e
             mount "/dev/mapper/$name" "$mntDir1"
+            if [ "$?" != "0" ]; then
+                cryptsetup close "$name"
+                exit 1
+            fi
+            set -e
             mkdir -p "$mntDir2"
             user=${SUDO_USER:-$(whoami)}
             bindfs -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
@@ -308,8 +314,8 @@ function main()
                 (>&2 echo "! name required")
                 exit 1
             fi
-            shift 2 
-            
+            shift 2
+
             local secret="$1"
             if [ -z "$secret" ]; then
                 (>&2 echo "! secret required")
@@ -345,7 +351,7 @@ function main()
             echo "Creating ${secret} ..."
 
             "${toolsDir}/cs-key.sh" enc "$secret"
-            echo "You will asked to re-enter password to open the container for first time ..."
+            echo "You will asked to re-enter password to open the container for the first time ..."
             "${toolsDir}/cs-key.sh" dec "$secret" | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$container" "$name" -
 
             echo "Creating file system ..."
