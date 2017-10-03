@@ -180,7 +180,7 @@ To change password of `secret.bin` (file is overwritten in place, so backup it b
 # enter new pass
 ```
 
-With `cs-key.sh` ready, we can now automate open / close with a second script for convenience (it is not really needed), lets name it `cs-map.sh`:
+With `cs-key.sh` ready, we can now automate open / close with a second script for convenience (it is not really needed), lets name it `cs-map.sh` (`cs-key.sh` should be in same folder):
 
 ```bash
 #!/bin/bash
