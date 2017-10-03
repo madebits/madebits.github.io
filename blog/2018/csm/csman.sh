@@ -552,16 +552,16 @@ function showHelp()
     logError " $bn touch|t fileOrDir [time]"
     logError "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\""
     logError "Where [ openCreateOptions ]:"
-    logError " -cso cryptsetup options --- : outer encryption layer"
-    logError " -csi cryptsetup options --- : inner encryption layer"
-    logError " -csk cskey.sh options ---"
-    logError " -cfs mkfs ext4 options --- : (create)"
+    logError " -co cryptsetup options --- : outer encryption layer"
+    logError " -ci cryptsetup options --- : inner encryption layer"
+    logError " -ck cskey.sh options ---"
+    logError " -cf mkfs ext4 options --- : (create)"
     logError " -l : (open) live"
     logError " -n name : (open) use csm-name"
     logError " -c : (open|create) clean screen after password entry"
     logError " -s : (open|create) use only one (outer) encryption layer"
     logError "Example:"
-    logError " sudo csmap.sh open container.bin -l -csk -k -h -p 8 -m 14 -t 1000 -- ---"
+    logError " sudo csmap.sh open container.bin -l -ck -k -h -p 8 -m 14 -t 1000 -- ---"
 }
 
 function processOptions()
@@ -569,7 +569,7 @@ function processOptions()
     while [ -n "${1:-}" ]; do
         local current="${1:-}"
         case "$current" in
-            -cso)
+            -co)
                 shift
                 csOptions=()
                 while [ "${1:-}" != "---" ]; do
@@ -577,7 +577,7 @@ function processOptions()
                     shift
                 done
             ;;
-            -csi)
+            -ci)
                 shift
                 csiOptions=()
                 while [ "${1:-}" != "---" ]; do
@@ -585,7 +585,7 @@ function processOptions()
                     shift
                 done
             ;;
-            -csk)
+            -ck)
                 shift
                 ckOptions=()
                 while [ "${1:-}" != "---" ]; do
@@ -593,7 +593,7 @@ function processOptions()
                     shift
                 done
             ;;
-            -cfs)
+            -cf)
                 shift
                 mkfsOptions=()
                 while [ "${1:-}" != "---" ]; do
@@ -604,7 +604,7 @@ function processOptions()
             -c|-cls)
                 csmCleanScreen="1"
             ;;
-            -n)
+            -n|-name)
                 csmName="${2:-}"
                 shift
             ;;
