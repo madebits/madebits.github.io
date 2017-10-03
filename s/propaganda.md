@@ -26,7 +26,8 @@
 * [ACM Queue](https://queue.acm.org/)
 * [Tech Crunch](https://techcrunch.com/)
 * [Reddit InternetIsBeautiful](https://www.reddit.com/r/internetisbeautiful)
-* [Beta News](https://betanews.com/)
+* [BetaNews](https://betanews.com/)
+* [The Inquirer](https://www.theinquirer.net/type/news)
 * [Ted](https://www.ted.com/)
 
 <hr>
