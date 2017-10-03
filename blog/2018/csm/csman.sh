@@ -36,6 +36,7 @@ csmChain="1"
 csmMount="1"
 cmsMountReadOnly="0"
 csmListShowKey="0"
+csmCreateOverwriteOnly="0"
 
 ########################################################################
 
@@ -657,6 +658,21 @@ function createSecret()
     ownFile "$secret"
 }
 
+function checkFreeSpace()
+{
+    local size="$1"
+    local sizeNum="$2"
+    local dir="$(dirname -- "$(realpath -- "${container}")")"
+    local availMb=$(df --block-size=1 --output=avail "${dir}" | tail -n 1)
+    availMb=$((availMb / 1024 / 1024))
+    if [ "${size: -1}" = "G" ]; then
+        availMb=$((availMb / 1024)) #gb
+    fi
+    if (( sizeNum > availMb )); then
+        onFailed "${sizeNum}${size: -1} is bigger than free space ${availMb}${size: -1} in ${dir}"
+    fi
+}
+
 # name secret container size rest
 function createContainer()
 {
@@ -707,6 +723,10 @@ function createContainer()
 
     processOptions "$@"
     
+    if [ "${csmCreateOverwriteOnly}" = "1" ]; then
+        echo "# create container only"
+    fi
+    
     if [ "$writeContainer" = "1" ]; then
         if [ "$blockDevice" = "1" ]; then
             if [ "$sizeNum" -gt 0 ]; then
@@ -727,6 +747,9 @@ function createContainer()
             if [ "$sizeNum" -le 0 ]; then
                 onFailed "Invalid size: ${sizeNum}"
             fi
+            
+            checkFreeSpace "${size}" "${sizeNum}"
+    
             echo "Creating ${container} with ${sizeNum}${size: -1} ..."
             if [ "${size: -1}" = "G" ]; then
                 ddContainer "$container" "1G" "$sizeNum"
@@ -739,6 +762,11 @@ function createContainer()
         fi
     else
         echo "Reusing existing data (size $size is ingored): $container"
+    fi
+    
+    if [ "${csmCreateOverwriteOnly}" = "1" ]; then
+        echo "# create container only: done"
+        return
     fi
     
     if [ -f "$secret" ] && [ "$secret" != "--" ]; then
@@ -923,6 +951,7 @@ function showHelp()
     logError " -u : (open) do not mount on open"
     logError " -r : (open) mount user read-only"
     logError " -lk : (list) list raw keys"
+    logError " -oo : (create) dd only"
     logError "Example:"
     logError " sudo csmap.sh open container.bin -l -ck -k -h -p 8 -m 14 -t 1000 -- ---"
 }
@@ -993,6 +1022,9 @@ function processOptions()
             ;;
             -lk)
                 csmListShowKey="1"
+            ;;
+            -oo)
+                csmCreateOverwriteOnly="1"
             ;;
             *)
                 onFailed "unknown option: $current"
