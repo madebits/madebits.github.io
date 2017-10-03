@@ -8,7 +8,7 @@ Several small useful tool for monitor and screen management in Ubuntu:
 
 ##Xrandr
 
-(xrandr)[https://xorg-team.pages.debian.net/xorg/howto/use-xrandr.html] is the lowest most versatile command to configure displays. If you attach a new monitor and not want to restart X11 to detect it use first:
+[xrandr](https://xorg-team.pages.debian.net/xorg/howto/use-xrandr.html) is the lowest most versatile command to configure displays. If you attach a new monitor and not want to restart X11 to detect it use first:
 
 ```
 xrandr --auto
