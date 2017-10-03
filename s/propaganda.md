@@ -46,14 +46,15 @@
 
 ### Learning
 
-[Channel9](https://channel9.msdn.com/)
-[MVA](https://mva.microsoft.com/)
+[MSShows](https://docs.microsoft.com/en-us/shows/)
+[MSLearn](https://docs.microsoft.com/en-us/learn/)
 [Ted](https://www.ted.com/)
 [CCC](https://media.ccc.de/)
 [OCW](https://ocw.mit.edu/index.htm)
 [LSO](https://lagunita.stanford.edu/)
 [KhanAcademy](https://www.khanacademy.org/math)
 [BetterExplained](https://betterexplained.com/)
+[CodingMath](https://www.youtube.com/user/codingmath)
 
 ### Linux
 
