@@ -51,7 +51,35 @@ Subsystem sftp /usr/lib/openssh/sftp-server
    Match all
 ```
 
-A few things to notice here, there is no need for *Subsystem sftp internal-sftp* (I have commented it out), and the *umask* 002 is used to allow users to access each others files. Once done, we need to restart ssh daemon:
+A few things to notice here, there is no need for *Subsystem sftp internal-sftp* (I have commented it out), and the *umask* 002 is used to allow users to access each others files. 
+
+Similarly, assuming we have another `sftphome` group for users that need access to their home only via SFTP, we could add`to configuration:
+
+```
+   Match Group sftphome
+   ChrootDirectory %h
+   ForceCommand internal-sftp
+   X11Forwarding no
+   AllowTcpForwarding no
+   PermitOpen none
+   PermitTunnel no
+   Match all
+```
+
+For home *user*s, the permissions on their folders needs to be:
+
+```
+sudo chown root:root /home/user
+sudo chmod 755 /home/user 
+
+sudo mkdir -p /home/user/public
+sudo chown root:sftphome /home/user/public
+sudo chmod 755 /home/user/public
+```
+
+We have to be careful to set *nologin* shell for such home users too (or [use](https://askubuntu.com/questions/49271/how-to-setup-a-sftp-server-with-users-chrooted-in-their-home-directories) `AllowGroups`). 
+
+Once done, we need to restart ssh daemon:
 
 ```bash
 sudo systemctl restart sshd
@@ -60,8 +88,9 @@ sudo systemctl restart sshd
 To test the configuration, we can use:
 
 ```bash
-sftp sftpuser001@localhost 
+sftp -vvv sftpuser001@localhost 
 tail -f /var/log/auth.log
+tail f- /var/log/syslog
 ```
 
 Some [tutorials](https://wiki.archlinux.org/index.php/SFTP_chroot) show an additional step to `mount -o bind` jail folder to another one and use that in SFTP / user home configuration. That is not needed, but may add an extra level of `chroot` security.
