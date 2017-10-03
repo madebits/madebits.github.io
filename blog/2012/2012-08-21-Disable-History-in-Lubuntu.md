@@ -121,7 +121,7 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	```
 	The original `/tmp` content is now in `/mnt/root/tmp`. You can verify the `tmpfs` mounts using either `mount` or `df -T /tmp` commands.
 
-	Other things to remount:
+	Other things to [mount](https://github.com/trimstray/the-practical-linux-hardening-guide) in fstab:
 
 	```
 	proc  /proc  proc  defaults,hidepid=2  0 0
