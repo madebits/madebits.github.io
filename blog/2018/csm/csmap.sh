@@ -18,6 +18,7 @@ lastSecret=""
 lastSecretTime=""
 csOptions=()
 ckOptions=()
+cskCleanScreen="0"
 
 currentScriptPid=$$
 function failed()
@@ -174,8 +175,11 @@ function openContainer()
     processOptions "$@"
     echo "Opening /dev/mapper/${name} ..."
 
-    local key=$(sudo "${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
+    local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     touchFile "$lastSecret" "$lastSecretTime"
+    if [ "$cskCleanScreen" = "1" ]; then
+        tput reset
+    fi
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "${csOptions[@]}" open "$device" "$name" -
     echo
     cryptsetup status "/dev/mapper/$name"
@@ -214,7 +218,7 @@ function createSecret()
 {
     local secret="$1"
     echo "Creating ${secret} ..."
-    sudo "${toolsDir}/cskey.sh" enc "$secret" "${ckOptions[@]}"
+    "${toolsDir}/cskey.sh" enc "$secret" "${ckOptions[@]}"
     ownFile "$secret"
 }
 
@@ -269,7 +273,7 @@ function createContainer()
     fi
     
     echo "(Re-)enter password to open the container for the first time ..."
-    local key=$(sudo "${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
+    local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     echo
     touchFile "$lastSecret" "$lastSecretTime"
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "${csOptions[@]}" open "$container" "$name" -
@@ -303,7 +307,7 @@ function changePass()
         lastSecretTime=$(stat -c %z "$secret")
     fi
     shift
-    sudo "${toolsDir}/cskey.sh" chp "$secret" "$@"
+    "${toolsDir}/cskey.sh" chp "$secret" "$@"
     ownFile "$secret"
     sleep 1
     touchFile "$secret" "$lastSecretTime"
@@ -320,6 +324,7 @@ function touchDiskFile()
         time=$(stat -c %z "$1")
     fi
     echo "Setting file times to: $time"
+    ownFile "$1"
     touchFile "$1" "$time"
     stat "$1"
 }
@@ -329,9 +334,9 @@ function touchFile()
     local file="$1"
     local fileTime="$2"
     if [ -f "$file" ]; then
-    sudo bash -s "$file" "$fileTime" <<-'EOF'
-        now=$(date +"%F %T.%N %z") && date -s "$2" > /dev/null && touch "$1" && date -s "$now"
-        EOF
+    #sudo bash -s "$file" "$fileTime" <<-'EOF'
+        now=$(date +"%F %T.%N %z") && date -s "$2" > /dev/null && touch "$1" && date -s "$now" > /dev/null
+    #   EOF
     fi
 }
 
@@ -452,6 +457,9 @@ function processOptions()
                     ckOptions+=( "${1:-}" )
                     shift
                 done
+            ;;
+            -c|-cls)
+                cskCleanScreen="1"
             ;;
             *)
             showError "unknown option: $current"

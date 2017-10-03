@@ -4,6 +4,10 @@
 
 set -eu
 
+if [ $(id -u) != "0" ]; then
+    (>&2 echo "! using sudo recommended")
+fi
+
 # none of values in this file is secret
 # change default argon2 params in cskHashToolOptions as it fits you here
 # https://crypto.stackexchange.com/questions/37137/what-is-the-recommended-number-of-iterations-for-argon2
@@ -29,6 +33,7 @@ csmNoKeyFiles2="0"
 cskKey=""
 cskChpFile=""
 
+user="${SUDO_USER:-$(whoami)}"
 currentScriptPid=$$
 toolsDir="$(dirname $0)"
 useAes="0"
@@ -54,6 +59,14 @@ function touchFile()
 	if [ -f "$file" ]; then
 		local md=$(stat -c %z "$file")
 		touch -d "$md" "$file"
+	fi
+}
+
+# file
+function ownFile()
+{
+	if [ -f "$1" ]; then
+		chown $(id -un "$user"):$(id -gn "$user") "$1"
 	fi
 }
 
@@ -136,6 +149,7 @@ function encodeKey()
     # random file size
     local r=$((1 + RANDOM % 512))
     head -c "$r" /dev/urandom >> "$file"
+    ownFile "$file"
     touchFile "$file"
 }
 
