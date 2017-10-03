@@ -52,7 +52,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 Every time `csman.sh` starts, it prints prefix hashes of these files, if present:
 
 ```
-9ac23c690  /usr/local/bin/csman.sh
+87b60ebd4  /usr/local/bin/csman.sh
 a4a5d332c  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
@@ -261,7 +261,7 @@ csman ex container.bin -s secret.bin
 csman ex container.bin -s secret.bin.01 -slot 2
 ```
 
-Ideally, generate two secret files for same key using `cskey.sh`, so that they are not same. 
+Ideally, generate two secret files for same key using `cskey.sh`, so that they are not same. The `-s` option can be repeated for `e` command, in that case successive slots starting from the specified one are used for each secret.
 
 `cskey.sh` knows to read secret from a default slot using `-slot` option, or from a byte offset using `-o` option:
 
@@ -349,16 +349,11 @@ sudo csman.sh x
 Changing the password of a secret file can be done via:
 
 ```bash
-sudo csman.sh chp secret.bin -ck -i e ---
+# old file is left as is, a new file is created
+sudo csman.sh chp secret.bin -out new-secret.bin -ck -i e ---
 ```
 
 The `-ck` is used to pass option to `cskey.sh` to decrypt the file and `-cko` is used (if needed) to pass options to `cskey.sh` to encrypt the new output file.
-
-By default, *secret.bin* is modified in place, which can be risky. To create a new copy use:
-
-```bash
-sudo csman.sh chp secret.bin -out new-secret.bin -ck -i e ---
-```
 
 If you have more than one secret file using same password, you can make use of sessions to change password of several files at once unattended. I assume here there are no key files used (if key files are used, pass them using `-kf keyfile`):
 
@@ -379,10 +374,10 @@ If you have an existing secret file and want to replicate it for use with slots,
 
 ```bash
 sudo csman.sh chp secret.bin -out new-secret.bin -ck -i e --- -cko -i e -b 3 ---
-# or if secret is in some container slot use (do not forget -out otherwise container will get lost)
+# or if secret is in some container slot use
 sudo csman.sh chp container.bin -out new-secret.bin -ck -i e -slot 1 --- -cko -i e -b 3 ---
-# slots can then be replaced with embed command
-csman.sh e container.bin -s new-secret.bin -slot 1
+# slots can then be replaced all at once with embed command
+csman.sh e container.bin -s new-secret.bin -s new-secret.bin.01 -s new-secret.bin.02 -s new-secret.bin.03 -slot 1
 ```
 
 ## File Tools
