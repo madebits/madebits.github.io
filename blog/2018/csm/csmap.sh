@@ -2,7 +2,7 @@
 
 # csmap.sh
 
-set -e
+set -eu
 
 if [ $(id -u) != "0" ]; then
     (>&2 echo "! needs sudo")
@@ -17,11 +17,17 @@ lastContainerTime=""
 lastSecret=""
 lastSecretTime=""
 
+SCRIPT_PID=$$
+function failed()
+{
+    kill -9 "$SCRIPT_PID"
+}
+
 # error
 function showError()
 {
     (>&2 echo "! $1")
-    exit 1
+    failed
 }
 
 function newName()
@@ -121,12 +127,12 @@ function mountContainer()
         rmdir "$mntDir1"
         resetTime
         echo " Closed ${name} !"
-        exit 1
+        failed
     fi
     set -e
     mkdir -p "$mntDir2"
     bindfs -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
-    echo "Mounted ${device} at ${mntDir2}."
+    echo "Mounted ${name} at ${mntDir2}."
 }
 
 # name
@@ -147,7 +153,7 @@ function openContainer()
     local oName=${name:4}
     shift
 
-    local secret="$1"
+    local secret="${1:-}"
     checkArg "$secret" "secret"
     lastSecret="$secret"
     if [ -f "$secret" ]; then
@@ -155,7 +161,7 @@ function openContainer()
     fi
     shift
 
-    local device="$1"
+    local device="${1:-}"
     checkArg "$device" "container"
     lastContainer="$device"
     if [ -f "$device" ]; then
@@ -182,7 +188,7 @@ function ddContainer()
     local container="$1"
     local bs="$2"
     local count="$3"
-    local seek="$4"
+    local seek="${4:-}"
     
     if [ -z "$seek" ]; then
         sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" status=progress
@@ -214,11 +220,11 @@ function createContainer()
 {
     local name=$(validName "-")
     
-    local secret="$1"
+    local secret="${1:-}"
     checkArg "$secret" "secret"
     shift
 
-    local container="$1"
+    local container="${1:-}"
     checkArg "$container" "container"
     if [ -f "$container" ]; then
         read -p "Overwrite container file ${container} [y | any key to exit]: " overwriteContainer
@@ -228,11 +234,11 @@ function createContainer()
     fi
     shift
 
-    local size="$1"
+    local size="${1:-}"
     checkArg "$size" "size"
     shift
 
-    local sizeNum="${size:$length:-1}"
+    local sizeNum="${size: : -1}"
     checkNumber "$sizeNum"
 
     echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
@@ -287,7 +293,7 @@ function closeAll()
 
 function changePass()
 {
-    local secret="$1"
+    local secret="${1:-}"
     checkArg "$secret" "secret"
     if [ -f "$secret" ]; then
         lastSecretTime=$(stat -c %z "$secret")
@@ -303,9 +309,9 @@ function touchDiskFile()
 {
     if [ ! -f "$1" ]; then
         (>&2 echo "! no file $1")
-        exit 1
+        failed
     fi
-    local time="$2"
+    local time="${2:-}"
     if [ -z "$time" ]; then
         time=$(stat -c %z "$1")
     fi
@@ -335,6 +341,8 @@ function resetTime()
 
 function cleanUp()
 {
+    tput sgr 0
+    echo
     closeContainer "$lastName"
     resetTime
     exit 0
@@ -362,10 +370,10 @@ function increaseContainer()
 {
     local name=$(validName "$1")
     shift
-    local size="$1"
+    local size="${1:-}"
     checkArg "$size" "size"
     shift
-    local sizeNum="${size:$length:-1}"
+    local sizeNum="${size: : -1}"
     checkNumber "$sizeNum"
 
     container=$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)
@@ -406,7 +414,7 @@ function showHelp()
     (>&2 echo "    size should end in M or G")
     (>&2 echo " $bn changePass secret [t m p]")
     (>&2 echo " $bn resize name")
-    (>&2 echo " $bn increase name size") 
+    (>&2 echo " $bn increase name bySize") 
     (>&2 echo "    size should end in M or G")
     (>&2 echo " $bn touch file [time]")
     (>&2 echo "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\"")
@@ -463,7 +471,6 @@ function main()
         ;;
         *)
             showHelp
-            exit 1
         ;;
     esac
 }
