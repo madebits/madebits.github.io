@@ -32,6 +32,9 @@ csmNoKeyFiles="0"
 csmNoKeyFiles2="0"
 cskKey=""
 cskChpFile=""
+cskSessionPass=""
+cskSessionPass2=""
+cskSessionKey=""
 
 user="${SUDO_USER:-$(whoami)}"
 currentScriptPid=$$
@@ -121,7 +124,7 @@ function pass2hash()
 function debugKey()
 {
 	if [ "$cskDebug" = "1" ]; then
-		dumpError ""
+		dumpError
 		dumpError "DEBUG [$1]"
 		dumpError "DEBUG [$2]"
 	fi
@@ -189,7 +192,7 @@ function readKeyFiles()
 	local count=0
 	local keyFile=""
 	
-	if [ "$csmNoKeyFiles" = "1" ]; then
+	if [ "$csmNoKeyFiles" = "1" ] || [ -n "$cskSessionPass" ]; then
 		return
 	fi
 	
@@ -218,6 +221,7 @@ function computeKeyFilesHash()
 	echo "$hash"
 }
 
+# file
 function readPassFromFile()
 {
 	if [ -e "$1" ] || [ "$1" = "-" ]; then
@@ -226,7 +230,37 @@ function readPassFromFile()
 			onFailed "cannot read file: ${1}"
 		fi
 	else
-		onFailed "cannot read from file: $1"
+		onFailed "cannot read from file: ${1}"
+	fi
+}
+
+function readSessionPass()
+{
+	if [ -z "$cskSessionKey" ]; then
+		local sessionData=$(uptime -s)
+		read -p "Session password: " -s rsp
+		cskSessionKey="${rsp}${rsp}${rsp}${rsp}${sessionData}{$user}${rsp}${rsp}${rsp}${rsp}${rsp}"
+		if [ "$cskDebug" = "1" ]; then
+			dumpError "DEBUG [${cskSessionKey}]"
+		fi
+		dumpError
+	fi
+}
+
+# file
+function readSessionPassFromFile()
+{
+	if [ -e "$1" ] || [ "$1" = "-" ]; then
+		if [ -z "$cskSessionKey" ]; then
+			onFailed "no session password"
+		fi
+		local p=$(cat "$1" | base64 -w 0)
+		if [ -z "$p" ]; then
+			onFailed "cannot read file: ${1}"
+		fi
+		echo -n "$p" | base64 -d | decryptAes "$cskSessionKey"
+	else
+		onFailed "cannot read from file: ${1}"
 	fi
 }
 
@@ -264,9 +298,14 @@ function readPassword()
 
 function readPass()
 {
+	if [ -n "$cskSessionPass" ]; then
+		echo "$cskSessionPass"
+		return
+	fi
+	
 	local hash=$(computeKeyFilesHash)
 	local pass=$(readPassword "${1:-}")
-	pass="$pass$hash"
+	pass="${pass}${hash}"
 	echo "$pass"
 }
 
@@ -346,6 +385,8 @@ function reEncryptFile()
 	
 	dumpError "# New"
 	
+	cskSessionPass="$cskSessionPass2"
+	
 	if [ "$cskSameKeyFiles" != "1" ]; then
 		csmNoKeyFiles="$csmNoKeyFiles2"
 		csmKeyFiles=( "${csmKeyFiles2[@]}" )
@@ -391,10 +432,29 @@ function checkNumber()
 		exit 1
 	fi
 }
+# file
+function createSessionPass()
+{
+	local file="$1"
+	if [ "$file" = "-" ]; then
+		file="/dev/stdout"
+	fi
+	readKeyFiles
+	local pass=$(readPass)
+	dumpError
+	readSessionPass
+	if [ "$cskDebug" = "1" ]; then
+		dumpError ""
+		dumpError "DEBUG [$pass]"
+		dumpError "DEBUG [$cskSessionKey]"
+	fi
+	echo -n "$pass" | encryptAes "$cskSessionKey" > "$file"
+	ownFile "$file"
+}
 
 function showHelp()
 {
-	dumpError "Usage: $(basename "$0") [enc | dec | chp] file [options]"
+	dumpError "Usage: $(basename "$0") [enc | dec | chp | ses] file [options]"
 	dumpError "Options:"
 	dumpError " -i inputMode : used for password"
 	dumpError "    Password input modes:"
@@ -406,6 +466,8 @@ function showHelp()
 	dumpError " -c encryptMode : use 1 for aes tool, 0 or any other value uses ccrypt"
 	dumpError " -p passFile : (enc | chp) read pass from first line in passFile"
 	dumpError " -pn passFile : (chp) read pass from first line in passFile, used for new file"
+	dumpError " -ap file : read pass from session file"
+	dumpError " -apn file : (chp) read pass from session file, used for new file"
 	dumpError " -s : (chp) use same password for new file, -pn is ignored"
 	dumpError " -sk : (chp) use same key files for new file, -kfn, -kn are ignored"
 	dumpError " -sh : (chp) use same hash tool options for new file, -hn is ignored"
@@ -490,6 +552,30 @@ function main()
 				cskPassFile2=$(readPassFromFile "$passFile")
 				shift
 			;;
+			-ap)
+				local apf="${2:?"! -ap file"}"
+				readSessionPass
+				set +e
+				cskSessionPass=$(readSessionPassFromFile "$apf")
+				set -e
+				if [ -z "$cskSessionPass" ]; then
+					dumpError "! cannot read pass from ${apf}"
+					exit 1
+				fi
+				shift
+			;;
+			-apn)
+				local apnf="${2:?"! -apn file"}"
+				readSessionPass
+				set +e
+				cskSessionPass2=$(readSessionPassFromFile "${apnf}")
+				set -e
+				if [ -z "$cskSessionPass2" ]; then
+					dumpError "! cannot read pass from ${apnf}"
+					exit 1
+				fi
+				shift
+			;;
 			-fn)
 				cskFile2="${2:?"! -fn file"}"
 				shift
@@ -540,6 +626,9 @@ function main()
 		;;
 		chp|c)
 			reEncryptFile "$cskFile"
+		;;
+		ses|s)
+			createSessionPass "$cskFile"
 		;;
 		*)
 			dumpError "! unknown command: $cskCmd"
