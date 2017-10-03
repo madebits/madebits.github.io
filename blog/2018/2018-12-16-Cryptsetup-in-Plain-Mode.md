@@ -35,7 +35,7 @@ umount /mnt/tmp
 cryptsetup close enc
 ```
 
-##Resizing a Container
+##Resizing Containers
 
 To increase size of the container file, we can use use again `dd` with *seek* parameter to skip it size in *bs* size blocks:
 
