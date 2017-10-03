@@ -247,7 +247,7 @@ csman ex container.bin secret.bin
 csman ex container.bin secret.bin.01 -es 2
 ```
 
-Ideally, generate two secret files for same key and password using `cskey.sh`, so that they are not same. `cskey.sh` knows to read from a default slot using `-es` option, or from a byte offset using `-o` option:
+Ideally, generate two secret files for same key using `cskey.sh`, so that they are not same. `cskey.sh` knows to read from a default slot using `-es` option, or from a byte offset using `-o` option:
 
 ```bash
 # open container using slot 1
