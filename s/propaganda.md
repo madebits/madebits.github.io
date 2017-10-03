@@ -165,6 +165,8 @@
 [France 24](https://www.france24.com/en/)
 [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
 [T-Online Nachrichten](https://www.t-online.de/nachrichten/)
+[TagesSchau](https://www.tagesschau.de/)
+[Zdf](https://zdf.de)
 [EuroNews](https://www.euronews.com/news/international)
 [Rte](https://www.rte.ie/news/world/)
 [Ansa](https://www.ansa.it/english/)
