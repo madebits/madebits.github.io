@@ -52,7 +52,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 Every time `csman.sh` starts, it prints prefix hashes of these files, if present:
 
 ```
-25b187a13  /usr/local/bin/csman.sh
+62d96ae31  /usr/local/bin/csman.sh
 de2d6e6e7  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
@@ -217,7 +217,7 @@ sudo csman.sh n container.bin secret.bin 1M -cf -N 1000 --- -co -o 2 ---
 # to set or replace secret
 dd conv=notrunc if=secret.bin of=container.bin
 
-# to store more than one secret file use
+# to store more than one secret file use (-o 4)
 # dd conv=notrunc seek=1 bs=1024 if=secret2.bin of=container.bin
 
 # open container, container is also the secret now
@@ -232,6 +232,23 @@ dd if=container.bin of=secret.bin bs=1024 count=1
 # or read secret from some other offset copy
 # dd if=container.bin of=secret.bin bs=1024 count=1 skip=1
 ```
+
+Two convenience commands are provided to embed and extract secret files from default @x1024 byte offset slots. Default slot is 1 and can be changed via `-es slot` option. The order of files is important in these commands (secret is last). We assume the container has been created with `-co -o 4 ---` option (the number used with `-o` needs to be twice the number of slots):
+
+```bash
+# assume -co -o 4 --- # twice number of slots needed
+# cskey.sh enc secret.bin -b 2 -su
+# default -es 1
+csman e container.bin secret.bin
+csman e container.bin secret.bin.01 -es 2
+
+# will overwrite secret file if exists
+csman ex container.bin secret.bin
+csman e container.bin secret.bin.01 -es 2
+```
+
+Ideally, generate two secret files for same key and password using `cskey.sh`, so that they are not same.
+
 
 ### Using Containers
 
