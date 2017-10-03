@@ -18,6 +18,13 @@
 * [MIT News](http://news.mit.edu/)
 * [Reddit Programming](https://www.reddit.com/r/programming/)
 * [Ted](https://www.ted.com/)
+* [EnGadget](https://www.engadget.com/)
+* [LifeHacker](https://lifehacker.com/)
+* [AnandTech](https://www.anandtech.com/)
+* [The Register](https://www.theregister.co.uk/)
+* [DZone](https://dzone.com/)
+* [ACM TechNews](https://technews.acm.org/)
+* [Tech Crunch](https://techcrunch.com/)
 
 <hr>
 
