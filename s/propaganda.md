@@ -43,6 +43,8 @@
 [Ted](https://www.ted.com/)
 [LXer](http://lxer.com/)
 [ItsFoss](https://itsfoss.com/)
+[Linuxize](https://linuxize.com/)
+[CCC](https://media.ccc.de/)
 
 ##USA
 
@@ -66,7 +68,6 @@
 [The Telegraph](https://www.telegraph.co.uk/news/world/)
 [Daily Mail](https://www.dailymail.co.uk/news/worldnews/index.html)
 [Express](https://www.express.co.uk/news/world)
-[Financial Times](https://www.ft.com/world)
 [Reuters](https://www.reuters.com/)
 
 ###Europe
@@ -83,6 +84,7 @@
 [RT News](http://rt.com/news/)
 [Sputnik News](https://sputniknews.com/)
 [TASS](http://tass.com/world)
+[SouthFront](https://southfront.org/)
 
 ##China
 
