@@ -233,28 +233,28 @@ dd if=container.bin of=secret.bin bs=1024 count=1
 # dd if=container.bin of=secret.bin bs=1024 count=1 skip=1
 ```
 
-Two convenience commands are provided to embed and extract secret files from default @x1024 byte offset slots. Default slot is 1 and can be changed via `-es slot` option. The order of files is important in these commands (secret is last). We assume the container has been created with `-co -o 4 ---` option (the number used with `-o` needs to be twice the number of slots):
+Two convenience commands are provided to embed and extract secret files from default @x1024 byte offset slots. Default slot is 1 (byte offset 0) and can be changed via `-es slot` option. The order of files is important in these commands (secret is **last**). We assume the container has been created with `-co -o 4 ---` option (the number used with `-o` needs to be twice the number of slots):
 
 ```bash
 # assume -co -o 4 --- # twice number of slots needed
 # cskey.sh enc secret.bin -b 2 -su
-# default -es 1
+# default -es 1, no sudo is needed
 csman e container.bin secret.bin
 csman e container.bin secret.bin.01 -es 2
 
 # will overwrite secret file if exists
 csman ex container.bin secret.bin
 csman ex container.bin secret.bin.01 -es 2
-
-# cskey.sh knows to read from a default slot using -es, or from a byte offset using -o
-# open container using slot 2
-sudo csman.sh o container.bin container.bin -co -o 4 --- -ck -es 2 ---
-# open container using slot 1
-sudo csman.sh o container.bin container.bin -co -o 4 ---
 ```
 
-Ideally, generate two secret files for same key and password using `cskey.sh`, so that they are not same.
+Ideally, generate two secret files for same key and password using `cskey.sh`, so that they are not same. `cskey.sh` knows to read from a default slot using `-es` option, or from a byte offset using `-o` option:
 
+```bash
+# open container using slot 1
+sudo csman.sh o container.bin container.bin -co -o 4 ---
+# open container using slot 2
+sudo csman.sh o container.bin container.bin -co -o 4 --- -ck -es 2 ---
+```
 
 ### Using Containers
 
