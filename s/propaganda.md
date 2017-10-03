@@ -197,11 +197,13 @@
 [AlJazeera](https://www.aljazeera.com/news/)
 [YeniSafak](https://www.yenisafak.com/en/world)
 [SANA](https://www.sana.sy/en/)
+[LiveUaMap](https://syria.liveuamap.com/)
 [AlMasdar News](https://www.almasdarnews.com/article/category/world-news/)
 [AlManar](https://english.almanar.com.lb/)
 [Gulf News](https://gulfnews.com/world)
 [Haaretz](https://www.haaretz.com/world-news)
 [The Times of Israel](https://www.timesofisrael.com/)
+[Memo](https://www.middleeastmonitor.com/category/news-2/)
 
 ## India
 
