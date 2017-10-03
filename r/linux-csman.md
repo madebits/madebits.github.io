@@ -158,13 +158,13 @@ To create a container you need to specify container file or device, secret file 
 sudo csman.sh n container.bin secret.bin 1M -cf -N 1000 ---
 ```
 
-The `-cf ... ---` can be used to pass EXT4 options for file system creation, such as number of *inodes* to use `-N`, or volume label `-L` (see `man mkfs.ext4`).
+The `-cf ... ---` can be used to pass EXT4 options for file system creation, such as, the number of *inodes* to use `-N`, or the EXT4 volume label `-L` (see `man mkfs.ext4`).
 
-The size to use can be only in units of M or G (for MiB, GiB as powers of 1024).
+The size to use can be only in units of M or G (for MiB, GiB, as powers of 1024).
 
-If file exists, you be asked to overwrite its data (in this case specified size will be ignored), or to just re-create the file system, or press Enter to abort and keep existing file data. You may choose to create only file system if file is already created with random data, or you plan to overwrite free space from within the encrypted container once mounted.
+If file exists, you be asked if you want to overwrite its data (in this case specified size will be ignored), or to just re-create the file system, or press *Enter* to abort and keep existing file data. You may choose to create only file system if file is already created with random data, or you plan to overwrite free space with zeros from within the encrypted container once mounted.
 
-The file will be created, overwritten and formated. You will asked to re-enter the password the first time encrypted container is opened for file-system creation.
+The file will be created, overwritten with random data, and formated with a new file system. You will asked to re-enter the password the first time encrypted container is opened for file-system creation.
 
 Encrypting a device (disk partition) is similar:
 
@@ -172,7 +172,7 @@ Encrypting a device (disk partition) is similar:
 sudo cskey /dev/sdc1 secret.bin 0G -oo
 ```
 
-The size will be ignored, but has to be specified as 0G (or 0M). If not zero `csman.sh` will assume a mistake (you wanted to create a file, but passed a device) and fail.
+The size will be ignored, but has to be specified as 0G (or 0M). If non-zero `csman.sh` will assume a mistake (you wanted to create a file, but passed a device) and fail.
 
 The `-oo` option tells `csman.sh` to only overwrite data, but do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data, but you can run same command later without `-oo` to create the encrypted file system.
 
@@ -182,13 +182,13 @@ The `-oo` option tells `csman.sh` to only overwrite data, but do nothing else. T
 sudo csman create /dev/sdc1 secret.bin -c -ck -ap @foo -i e -k ---
 ```
 
-In this example, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-c` option clears the terminal screen after password entry (`cskey.sh` invocation).
+In this example, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-c` option clears the terminal screen after password entry (after `cskey.sh` invocation).
 
 Apart of `cryptsetup -s 512 -h sha512` options that are hard-coded, you can pass other `cryptsetup` options via `-co ... ---` (outer layer) and `-ci ... ---` (inner layer). The `-s` option tells `csman.sh` to only use one (outer AES) encryption layer.
 
 ### Using Containers
 
-`cryptsetup` requires names for devices and `csman.sh` follows same convention. The container names are prefixed with `csm-`. You can specify names in command and options either with `csm-` prefix, or without it. If you specify no name, a random one one is generated and printed out. The name is used as part of mount folder. If you want to have a known fixed path to copy files consider specifying a name when opening the container using `-n name` option.
+`cryptsetup` requires names for devices and `csman.sh` follows same convention. The container names are prefixed with `csm-`. You can specify names in command and options either with `csm-` prefix, or without it. The name is used as part of mount folder. If you want to have a pre-known path to copy files consider specifying a name when opening the container using `-n name` option. If you specify no name, a random one one is generated and printed out by *open* command. 
 
 The open command is `open` or `o`:
 
@@ -204,7 +204,7 @@ It is possible to open the container, but leave it unmounted by passing `-u` to 
 
 #### Open Read-Only and Live
 
-There are some additional options that can specified with open command. `-r` to mount read-only, and `-l` to keep container open live - the open command does not exit in this case, it waits for you to press twice *Enter* key to close the container. 
+There are some additional options that can be specified with open command. `-r` to mount read-only, and `-l` to keep container open live - the open command does not exit in this case, it waits for you to press twice *Enter* key to close the container. 
 
 For these commands there are a few open command shortcuts: `o` *open*, `ol` *open ... -l* and `olr` *open ... -r -l*.
 
@@ -218,7 +218,7 @@ sudo csman.sh l
 
 It will show also where containers are mounted under `%HOME/mnt/csm-name`. The folders under `%HOME/mnt/csm-*` are read / write to current logged user.
 
-The above command also shows how much total and free space is present in each container. The `-lk` option dumps raw `cryptsetup` keys used for container. These keys can be used to raw-open the containers.
+The above command also shows how much total and free space is present in each container. The `-lk` option dumps raw `cryptsetup` keys used for container. These keys can be used to raw-open the containers directly via `cryptsetup`.
 
 ### Live Resize
 
@@ -256,7 +256,7 @@ Changing the password of a secret file can be done via:
 sudo csman.sh chp secret.bin -ck -i e ---
 ```
 
-The `-ck` is used to pass option to `cskey.sh` to decrypt the file and `-cko` is used if needed to pass options to `skey.sh` to create the new file.
+The `-ck` is used to pass option to `cskey.sh` to decrypt the file and `-cko` is used if needed to pass options to `cskey.sh` to encrypt the new output file.
 
 By default, *secret.bin* is modified in place, which can be risky. To create a new copy use:
 
