@@ -96,10 +96,11 @@ function openContainer()
 
     local mntDir1=$(mntDirRoot "$name")
     local mntDir2=$(mntDirUser "$name")
-
+	local user=${SUDO_USER:-$(whoami)}
     echo "Opening /dev/mapper/${name} ..."
 
-    "${toolsDir}/cs-key.sh" dec "$secret" | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$device" "$name" -
+    local key=$(sudo -u "$user" "${toolsDir}/cs-key.sh" dec "$secret" | base64 -w 0)
+    echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$device" "$name" -
     echo
     mkdir -p "$mntDir1"
     set +e
@@ -110,7 +111,7 @@ function openContainer()
     fi
     set -e
     mkdir -p "$mntDir2"
-    user=${SUDO_USER:-$(whoami)}
+    
     bindfs -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
     echo "Mounted ${device} at ${mntDir2}. To close use:"
     echo "$0 close ${oName}"
@@ -150,7 +151,8 @@ function createContainer()
 
     echo "Creating ${secret} ..."
 
-    "${toolsDir}/cs-key.sh" enc "$secret"
+	local user=${SUDO_USER:-$(whoami)}
+    sudo -u "$user" "${toolsDir}/cs-key.sh" enc "$secret"
     echo "You will asked to re-enter password to open the container for the first time ..."
     "${toolsDir}/cs-key.sh" dec "$secret" | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$container" "$name" -
 
