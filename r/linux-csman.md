@@ -156,7 +156,7 @@ csman.sh
 cskey.sh
 ```
 
-The command-line arguments are a bit *peculiar* (because I thought, for better or not, that it is faster to specify options after the main arguments) and follow the scheme: *command file(s) options*. The `cskey.sh` options are passed from `csman.sh` within `-ck ... --`.
+The command-line arguments are a bit *peculiar* (because I thought, for better or not, that it is faster to specify options after the main arguments) and follow the scheme: *command file(s) options*. The `cskey.sh` options are passed from `csman.sh` within `-ck ... --` or via `@ ... @`.
 
 ### Secret Files
 
