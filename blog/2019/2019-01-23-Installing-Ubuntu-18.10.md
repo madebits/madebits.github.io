@@ -135,6 +135,7 @@ Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcu
 * Gno-Menu https://extensions.gnome.org/extension/608/gnomenu/
 
 * Panel-OSD https://extensions.gnome.org/extension/708/panel-osd/
+    After working on first run, its state is ERROR now
 
 * AlternateTab https://extensions.gnome.org/extension/15/alternatetab/
 
@@ -148,6 +149,7 @@ Some [nautilus](https://wiki.archlinux.org/index.php/GNOME/Files) shortcuts:
 *  Ctrl+Q or Ctrl+W close (tab)
 *  Ctrl+R of F5 refresh
 *  Ctrl+F find, Ctrl+S select, Ctrl+A select all
+*  Ctrl+H toggle hidden files
 
 Extra setup:
 
@@ -163,6 +165,7 @@ Extra setup:
     MimeType=video/jpeg;video/mp4;video/mpeg;video/quicktime;video/x-ms-asf;video/x-ms-wm;video/x-ms-wmv;video/x-msvideo;video/x-flv;video/x-matroska;video/webm;video/mp2t;
     ```
 * https://github.com/flozz/nautilus-terminal
+* User [scripts](https://wiki.ubuntuusers.de/Nautilus/Skripte/) can be put in `~/.local/share/nautilus/scripts/` folder.
 
 ###Hacks
 
@@ -277,7 +280,7 @@ fi
 
 ##Snap
 
-[snap](https://snapcraft.io/) gives a whole class of users choice, and it is in the core strategy behind Ubuntu Core. There seems to be a [decision](https://askubuntu.com/questions/1039968/why-have-canonical-installed-core-gnome-apps-as-snaps-by-default) to deliver parts of desktop as snaps by default to update them cleaner in the future. `snap` is already active for GNOME parts:
+There seems to be a [decision](https://askubuntu.com/questions/1039968/why-have-canonical-installed-core-gnome-apps-as-snaps-by-default) to deliver parts of desktop as [snaps](https://snapcraft.io/) by default to update them cleaner in the future. `snap` is already active for GNOME parts:
 
 ```bash
 $ df -h -T | grep loop
@@ -296,7 +299,7 @@ $ df -h -T | grep loop
 
 ```
 
-Someone designed `snap` to use `squashfs` and now each *snap* needs a `loop` device. In place of fixing the root of problem and come up with something better, Ubuntu developers are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices.
+Someone [designed](https://docs.snapcraft.io/) `snap` to use `squashfs` and now each *snap* needs a `loop` device. Ubuntu developers are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices.
 
 Useful `.bash_aliases` alias:
 
@@ -373,6 +376,6 @@ sudo apt install gnome-system-monitor
 
 ##Summary
 
-Ubuntu 18.10 UI is usable with minor tweaks without having to install some other desktop variant. GNOME is still full of bugs, but the overall UI is acceptable. I can imagine using next LTS release UI as default desktop. Expect to see more things like `snap` and `ubuntu-report` being added there by default.
+Ubuntu 18.10 UI is usable with minor tweaks without having to install some other desktop variant. GNOME is still full of bugs and consumes more battery than LXDE, but the overall UI is tolerable. I can imagine using next LTS release UI as default desktop. Expect to see more things like `snap` and `ubuntu-report` being added there by default.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-01-24-Docker-s-Blackhole-Like-Behavior.md'>Docker s Blackhole Like Behavior</a> <a rel='next' id='fnext' href='#blog/2018/2018-12-16-Cryptsetup-in-Plain-Mode.md'>Cryptsetup in Plain Mode</a></ins>
