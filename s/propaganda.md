@@ -103,6 +103,7 @@
 [LeetCode](https://leetcode.com/problemset/all/)
 [JuliaEvans](https://jvns.ca/)
 [LennartPoettering](http://0pointer.net/blog/)
+[HighScalability](http://highscalability.com/)
 
 ### Science
 
