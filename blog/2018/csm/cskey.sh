@@ -2,20 +2,34 @@
 
 # cskey.sh
 
-set -e
+set -eu
 
 # none of values in this file is secret
 # change default argon2 params as it fits you here
-adt="1000"
-adm="14"
+# https://crypto.stackexchange.com/questions/37137/what-is-the-recommended-number-of-iterations-for-argon2
 adp="8"
+adm="14"
+adt="4000"
 
-# set to 1 to use my aes tool, 0 uses ccrypt
+# can be passed from outside
+CS_ECHO="${CS_ECHO:-0}"
+CS_ECHO_KEY="${CS_ECHO_KEY:-0}"
+CS_KEY="${CS_KEY:-}"
+CS_SAME_PASS="${CS_SAME_PASS:-}"
+CS_BACKUP="${CS_BACKUP:-0}"
+
 toolsDir="$(dirname $0)"
+# set to 1 to use my aes tool, 0 uses ccrypt
 useAes=0
 if [ -f "${toolsDir}/aes" ]; then
 	useAes=1
 fi
+
+SCRIPT_PID=$$
+function failed()
+{
+	kill -9 "$SCRIPT_PID"
+}
 
 function encryptedKeyLength()
 {
@@ -55,6 +69,16 @@ function touchFile()
 	fi
 }
 
+# pass salt
+function pass2hash()
+{
+	local pass="$1"
+	local salt="$2"
+	# argon2 has a build-in limit of 126 chars on pass length
+	pass=$(echo -n "$pass" | sha512sum | cut -d ' ' -f 1 | tr -d '\n' | while read -n 2 code; do printf "\x$code"; done | base64 -w 0)
+	echo -n "$pass" | argon2 "$salt" -id -t $at -m $am -p $ap -l 128 -r
+}
+
 # file pass key
 function encodeKey()
 {
@@ -69,7 +93,7 @@ function encodeKey()
     debugKey "$pass" "$key"
     
     local salt=$(head -c 32 /dev/urandom | base64 -w 0)
-    hash=$(echo -n "$pass" | argon2 "$salt" -id -t $at -p $ap -m $am -l 128 -r)
+    hash=$(pass2hash "$pass" "$salt")
     
     if [ "$file" = "-" ]; then
 		file="/dev/stdout"
@@ -99,18 +123,18 @@ function decodeKey()
 		local fileData=$(head -c 600 "$file" | base64 -w 0)
 		local salt=$(echo -n "$fileData" | base64 -d | head -c 32 | base64 -w 0)
 		local data=$(echo -n "$fileData" | base64 -d | tail -c +33 | head -c "$keyLength" | base64 -w 0)
-        local hash=$(echo -n "$pass" | argon2 "$salt" -id -t $at -p $ap -m $am -l 128 -r)
+        local hash=$(pass2hash "$pass" "$salt")
 		touchFile "$file"
         echo -n "$data" | base64 -d | decryptAes "$hash"
     else
         (>&2 echo "! no such file: $file")
-        exit 1
+        failed
     fi
 }
 
 function readKeyFiles()
 {
-	declare -a files
+	files=()
 	local count=0
 	local hash=""
 	local fileHash=""
@@ -171,7 +195,7 @@ function readPassMapping()
 		if [ "$p" = "#" ]; then
 			i=$((i+1))
 			if [ "$i" -ge "${passLen}" ]; then
-				exit 1
+				failed
 			fi
 			p="${pass:$i:1}"
 			decoded="${decoded}${p}"
@@ -195,9 +219,8 @@ function readPassMapping()
 	echo "$decoded"
 }
 
-function readPass()
+function readPassword()
 {
-	local hash=$(readKeyFiles)
 	if [ "$CS_ECHO" = "1" ]; then
 		read -p "Password: " pass
 	elif [ "$CS_ECHO" = "2" ]; then
@@ -211,17 +234,25 @@ function readPass()
 	fi
 	if [ -z "$pass" ]; then
 		(>&2 echo "! no password")
-		exit 1
+		failed
 	fi
+	echo "$pass"
+}
+
+function readPass()
+{
+	local hash=$(readKeyFiles)
+	local pass=$(readPassword)
 	pass="$pass$hash"
 	echo "$pass"
 }
 
 function readNewPass()
 {
-	local pass=$(readPass)
+	local hash=$(readKeyFiles)
+	local pass=$(readPassword)
 	if [ -z "$pass" ]; then
-		exit 1
+		failed
 	fi
 	if [ -z "$CS_ECHO" ] || [ "$CS_ECHO" -le "0" ] ; then
 		(>&2 echo)
@@ -230,10 +261,11 @@ function readNewPass()
 			(>&2 echo)
 			if [ "$pass" != "$pass2" ]; then
 				(>&2 echo "! passwords do not match")
-				exit 1
+				failed
 			fi
 		fi
     fi
+    pass="$pass$hash"
 	echo "$pass"
 }
 
@@ -259,7 +291,12 @@ function encryptFile()
 	else
 		key=$(head -c 512 /dev/urandom | base64 -w 0)
 	fi
+	echo "${file}"
 	encodeKey "$file" "$pass" "$key" "$@"
+	if [ "$CS_BACKUP" = "1" ]; then
+		echo "${file}.bak"
+		encodeKey "${file}.bak" "$pass" "$key" "$@"
+	fi
 }
 
 function decryptFile()
@@ -287,12 +324,17 @@ function reEncryptFile()
 		pass=$(readNewPass)
 	fi
 
-	if [ ! -z "$4" ]; then
+	if [ ! -z "${4:-}" ]; then
 		shift 3
 		(>&2 echo "# Using new argon2 params:" $@ )
 	fi
 
+	echo "${file}"
 	encodeKey "$file" "$pass" "$key" "$@"
+	if [ "$CS_BACKUP" = "1" ]; then
+		echo "${file}.bak"
+		encodeKey "${file}.bak" "$pass" "$key" "$@"
+	fi
 	(>&2 echo "Done: $file")
 }
 
@@ -304,6 +346,10 @@ function main()
     case "$mode" in
         enc)
 			encryptFile "$@"
+		;;
+		enc2)
+			CS_BACKUP=1
+			encryptFile "$@"
         ;;
         dec)
 			decryptFile "$@"
@@ -311,14 +357,17 @@ function main()
         chp)
 			reEncryptFile "$@"
         ;;
+        chp2)
+			CS_BACKUP=1
+			reEncryptFile "$@"
+        ;;
         *)
-            (>&2 echo "Usage: $(basename "$0") [enc | dec | chp] file [t m p]")
+            (>&2 echo "Usage: $(basename "$0") [enc | enc2 | dec | chp | chp2] file [t m p]")
             (>&2 echo " file is overwritten by enc and chp, backup it as needed before")
             (>&2 echo " default argon2 t m p are: $adt $adm $adp")
             (>&2 echo 'Examples:')
             (>&2 echo ' CS_KEY=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt 1000 16 8')
             (>&2 echo ' CS_SAME_PASS=1 cskey.sh chp d.txt 1000 14 8 1000 16 8')
-            exit 1
         ;;
     esac
 }
