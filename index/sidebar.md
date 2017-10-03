@@ -1,3 +1,4 @@
+* [Vim For Casual User](#blog/2019/2019-03-04-Vim-For-Casual-User.md)
 * [Docker s Blackhole Like Behavior](#blog/2019/2019-01-24-Docker-s-Blackhole-Like-Behavior.md)
 * [Installing Ubuntu 18.10](#blog/2019/2019-01-23-Installing-Ubuntu-18.10.md)
 * [Cryptsetup in Plain Mode](#blog/2018/2018-12-16-Cryptsetup-in-Plain-Mode.md)
@@ -5,4 +6,3 @@
 * [OpenVPN In Azure](#blog/2018/2018-04-25-OpenVPN-In-Azure.md)
 * [Gksu Is Dead Long Live Pkexec](#blog/2018/2018-04-24-Gksu-Is-Dead-Long-Live-Pkexec.md)
 * [Dirac Notation Cheatsheet](#blog/2018/2018-01-27-Dirac-Notation-Cheatsheet.md)
-* [Patching Node Express For Async Wait](#blog/2017/2017-10-20-Patching-Node-Express-For-Async-Wait.md)

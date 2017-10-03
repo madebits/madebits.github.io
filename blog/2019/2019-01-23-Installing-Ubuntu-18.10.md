@@ -483,4 +483,4 @@ I learned something about [brightness](https://unix.stackexchange.com/questions/
 
 Ubuntu 18.10 UI is usable with minor tweaks without having to install some other desktop variant. GNOME is still full of bugs and consumes more battery than LXDE, but the overall UI is tolerable. I can imagine using next LTS release UI as default desktop. Expect to see more things like `snap` and `ubuntu-report` being added there by default.
 
-<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-01-24-Docker-s-Blackhole-Like-Behavior.md'>Docker s Blackhole Like Behavior</a> <a rel='next' id='fnext' href='#blog/2018/2018-12-16-Cryptsetup-in-Plain-Mode.md'>Cryptsetup in Plain Mode</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-01-24-Docker-s-Blackhole-Like-Behavior.md'>Docker Blackhole Like Behavior</a> <a rel='next' id='fnext' href='#blog/2018/2018-12-16-Cryptsetup-in-Plain-Mode.md'>Cryptsetup in Plain Mode</a></ins>
