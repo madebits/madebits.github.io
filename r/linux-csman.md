@@ -130,6 +130,7 @@ curl -L https://github.com/madebits/linux-csman/archive/master.zip -o csman.zip 
 
 ```
 # 2. install
+sudo apt install cryptsetup
 sudo install aes argon2 cskey.sh csman.sh /usr/local/bin/
 ```
 
