@@ -1,4 +1,4 @@
-#Installing Ubuntu 18.10
+# Installing Ubuntu 18.10
 
 2019-01-23
 
@@ -8,20 +8,20 @@ I gave [Ubuntu](https://blog.ubuntu.com/) 18.10 a try in VirtualBox and 18.04 in
 
 <div id='toc'></div>
 
-##Remove Swap Partition
+## Remove Swap Partition
 
-Installer gave me errors when I tried to modify partitions of default encrypted disk setup (I guess they need to be modified by live CD before installer) and I ended up with using defaults. 
+Installer gave me errors when I tried to modify partitions of default encrypted disk setup (I guess they need to be modified by live CD before installer) and I ended up with using defaults.
 
 I wanted to remove the default swap partition that was created:
 
 ```bash
-lsblk 
+lsblk
 NAME                    MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
-sda                       8:0    0    30G  0 disk  
+sda                       8:0    0    30G  0 disk
 +-sda1                    8:1    0   731M  0 part  /boot
-+-sda2                    8:2    0     1K  0 part  
-+-sda5                    8:5    0  29,3G  0 part  
-  +-sda5_crypt          253:0    0  29,3G  0 crypt 
++-sda2                    8:2    0     1K  0 part
++-sda5                    8:5    0  29,3G  0 part
+  +-sda5_crypt          253:0    0  29,3G  0 crypt
     +-ubuntu--vg-root   253:1    0  28,3G  0 lvm   /
     +-ubuntu--vg-swap_1 253:2    0   976M  0 lvm   # I do not want this
 ```
@@ -40,7 +40,7 @@ sudo vgdisplay
 # Free  PE / Size       253 / 1012,00 MiB
 
 sudo lvextend -l +253  /dev/ubuntu-vg/root
-sudo resize2fs /dev/ubuntu-vg/root 
+sudo resize2fs /dev/ubuntu-vg/root
 
 sudo lvdisplay
 ```
@@ -50,11 +50,11 @@ Finally, I got:
 ```bash
 lsblk
 NAME                  MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
-sda                     8:0    0    30G  0 disk  
+sda                     8:0    0    30G  0 disk
 +-sda1                  8:1    0   731M  0 part  /boot
-+-sda2                  8:2    0     1K  0 part  
-+-sda5                  8:5    0  29,3G  0 part  
-  +-sda5_crypt        253:0    0  29,3G  0 crypt 
++-sda2                  8:2    0     1K  0 part
++-sda5                  8:5    0  29,3G  0 part
+  +-sda5_crypt        253:0    0  29,3G  0 crypt
     +-ubuntu--vg-root 253:1    0  29,3G  0 lvm   /
 ```
 
@@ -66,7 +66,7 @@ RESUME=none
 
 And run `sudo update-initramfs -u`. Additionally, I claimed all disk space with: `sudo tune2fs -m 0 /dev/mapper/ubuntu--vg-root`.
 
-##Encrypted Disk Layout Details
+## Encrypted Disk Layout Details
 
 The [/dev/sda2](https://askubuntu.com/questions/950307/why-guided-partitioning-create-a-sda2-of-1-kb) is the extended partition. What is shown as *1K* is the [unaligned](https://unix.stackexchange.com/questions/128290/what-is-this-1k-logical-partition) area in it.
 
@@ -92,21 +92,26 @@ exit
 reboot
 ```
 
-###Changing LUKS Password
+### Changing LUKS Password
 
-To change disk [password](https://askubuntu.com/questions/109898/how-to-change-the-password-of-an-encrypted-lvm-system-done-with-the-alternate-i), either use `sudo gnome-disks` or:
+To change disk [password](https://askubuntu.com/questions/109898/how-to-change-the-password-of-an-encrypted-lvm-system-done-with-the-alternate-i), either use `gnome-disks` or:
 
 ```bash
 # find device
 cat /etc/crypttab
+# find by UUID
+ls -l /dev/disk/by-uuid/{ use uuid here }
+
 # find used slots
 sudo cryptsetup luksDump /dev/sda3
+
 # change or add new slot
 sudo cryptsetup luksAddKey /dev/sda3 -S 0
+
 # sudo cryptsetup luksRemoveKey /dev/sda3
 ```
 
-##GNOME
+## GNOME
 
 I have still to find someone that can use [GNOME](https://wiki.archlinux.org/index.php/GNOME) as it is out of the box. So first things first:
 
@@ -126,7 +131,7 @@ Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcu
 
 * SysPeek-GS https://extensions.gnome.org/extension/1409/syspeek-gs/
 
-    This extension expects in its source code that there is an application `gnome-system-monitor.desktop` which is not there due to being installed as snap, so I had to do the following: 
+    This extension expects in its source code that there is an application `gnome-system-monitor.desktop` which is not there due to being installed as snap, so I had to do the following:
 
     ```bash
     sudo cp /var/lib/snapd/desktop/applications/gnome-system-monitor_gnome-system-monitor.desktop /usr/share/applications/gnome-system-monitor.desktop
@@ -139,7 +144,7 @@ Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcu
 
 * AlternateTab https://extensions.gnome.org/extension/15/alternatetab/
 
-###GNOME Files
+### GNOME Files
 
 Some [nautilus](https://wiki.archlinux.org/index.php/GNOME/Files) shortcuts:
 
@@ -167,7 +172,7 @@ Extra setup:
 * https://github.com/flozz/nautilus-terminal
 * User [scripts](https://wiki.ubuntuusers.de/Nautilus/Skripte/) can be put in `~/.local/share/nautilus/scripts/` folder.
 
-###Hacks
+### Hacks
 
 * GEdit and other GNOME programs was showing *'Preferences'* menu only if run with *sudo*. I had to [run](https://askubuntu.com/questions/375049/where-are-gedits-preferences/671398#671398):
 
@@ -181,7 +186,7 @@ Extra setup:
 
 * VirtualBox mouse was freezing. I found a [solution](https://ubuntuforums.org/showthread.php?t=2395969) that seems to work: *Go into the preferences of your VirtualBox Manager. Click on "Input" and make sure that "Auto Capture Keyboard" is not selected for "VirtualBox Manager" and "Virtual Machine".*
 
-* `gthumb` had a dark theme, ignoring system theme. I had to edit its [desktop](https://askubuntu.com/questions/1017886/gthumb-version-3-4-3-with-light-background-colors-in-menus-and-browser-like) file: 
+* `gthumb` had a dark theme, ignoring system theme. I had to edit its [desktop](https://askubuntu.com/questions/1017886/gthumb-version-3-4-3-with-light-background-colors-in-menus-and-browser-like) file:
 
     ```
     Exec=env GTK_THEME=Ambiance:light gthumb %U
@@ -228,7 +233,7 @@ Extra setup:
         $cmd "$dir" --start-at "$file"
     fi
     ```
-    
+
     And added `HOME/.local/share/applications/feh.desktop` file:
 
     ```
@@ -249,12 +254,12 @@ Extra setup:
 
     Then in GNome Files, I made it default for images (using *Properties* menu).
 
-##First Tools
+## First Tools
 
 I did a minimal Ubuntu install. I am happy they offer that, as in the past I had to un-install most of things. I installed some initial set of tools to get started:
 
 ```bash
-sudo apt remove --purge ubuntu-report 
+sudo apt remove --purge ubuntu-report
 sudo apt remove --purge popularity-contest
 
 sudo apt install synaptic
@@ -329,7 +334,7 @@ sudo snap remove gnome-system-monitor
 sudo apt install gnome-system-monitor
 ```
 
-##Final Steps
+## Final Steps
 
 * Obligatory `/etc/hosts` entries:
 
@@ -377,7 +382,7 @@ sudo apt install gnome-system-monitor
     image-display-duration=3
     ```
 
-##GNOME Eating CPU
+## GNOME Eating CPU
 
 Even without doing anything `gnome-shell` [eats](https://bugs.launchpad.net/ubuntu/+source/gnome-shell/+bug/1773959) some small percent of CPU, doing something with some socket:
 
@@ -418,9 +423,9 @@ strace: [ Process PID=2252 runs in 64 bit mode. ]
 
 ```
 
-This does not help with battery life. 
+This does not help with battery life.
 
-###i3wm
+### i3wm
 
 I decided to co-install `sudo apt install i3`. It is not [first](#blog/2014/2014-02-04-Using-i3wm-on-Lubuntu.md) time I use [i3](https://plus.google.com/communities/112960345026405927743) and I do not really [like](http://xahlee.info/linux/why_tiling_window_manager_sucks.html) it, but it is very low resource and for that purpose ideal if battery life is important.
 
@@ -435,23 +440,23 @@ I decided to co-install `sudo apt install i3`. It is not [first](#blog/2014/2014
 * [$HOME/.config/i3/.Xresources](./blog/2019/i3/i3/.Xresources) - this is more or less same as in [here](https://github.com/briancaffey/.i3)
 * [$HOME/.config/i3status/config](./blog/2019/i3/i3status/config)
 
-####GTK
+#### GTK
 
 * [$HOME/.gtkrc-2.0](./blog/2019/i3/gtk/.gtkrc-2.0)
 * [$HOME/.config/gtk-3.0/settings.ini](./blog/2019/i3/gtk/settings.ini)
 
-####Tools
+#### Tools
 
 * [$HOME/.config/ranger/rc.conf](./blog/2019/i3/ranger/rc.conf)
 * [$HOME/.config/ranger/rifle.conf](./blog/2019/i3/ranger/rifle.conf)
 * [$HOME/.config/ranger/scope.sh](./blog/2019/i3/ranger/scope.sh)
 * [$HOME/.config/rofi/config](./blog/2019/i3/rofi/config)
 
-####Notifications
+#### Notifications
 
 * [$HOME/.config/dunst/dunstrc](./blog/2019/i3/dunst/dunstrc)
 
-####Screen Brightness
+#### Screen Brightness
 
 I learned something about [brightness](https://unix.stackexchange.com/questions/322814/xf86monbrightnessup-xf86monbrightnessdown-special-keys-not-working) handling for Intel:
 
@@ -461,7 +466,7 @@ I learned something about [brightness](https://unix.stackexchange.com/questions/
 * [/etc/acpi/events/bl-down](./blog/2019/i3/acpi/events/bl-down)
 * [/etc/acpi/events/bl-up](./blog/2019/i3/acpi/events/bl-up)
 
-####Other
+#### Other
 
 * [/etc/polkit-1/localauthority/50-local.d/com.ubuntu.disable-suspend.pkla](./blog/2019/i3/com.ubuntu.disable-suspend.pkla) - disable [suspend](https://askubuntu.com/questions/972114/ubuntu-17-10-cant-disable-suspend-with-systemd-hybrid-sleep)
 * `HOME/.bashrc` changes:
@@ -489,10 +494,10 @@ mouse:usb:v046dpc52b:name:Logitech Unifying Device. Wireless PID:400a:
  MOUSE_DPI=600@166
  MOUSE_WHEEL_CLICK_ANGLE=3
     ```
- To list devices use `sudo libinput list-devices`, to see events use `sudo libinput debug-events --verbose`. To [apply](https://github.com/systemd/systemd/issues/10459) changes use `sudo systemd-hwdb update` and `sudo udevadm trigger /dev/input/event*`. 
+ To list devices use `sudo libinput list-devices`, to see events use `sudo libinput debug-events --verbose`. To [apply](https://github.com/systemd/systemd/issues/10459) changes use `sudo systemd-hwdb update` and `sudo udevadm trigger /dev/input/event*`.
 
 
-##Summary
+## Summary
 
 Ubuntu 18.10 UI is usable with minor tweaks without having to install some other desktop variant. GNOME is still full of bugs and consumes more battery than LXDE, but the overall UI is tolerable. I can imagine using next LTS release UI as default desktop. Expect to see more things like `snap` and `ubuntu-report` being added there by default.
 
