@@ -84,7 +84,10 @@ Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcu
 I did a minimal Ubuntu install. I am so happy they offer that, as in the past I had to un-install most of things. I installed some initial set of tools to get started:
 
 ```bash
-sudo apt remove --purge ubuntu-report
+sudo apt remove --purge ubuntu-report 
+# please fire the dev that stored state in ~/.cache
+# was the new intern in the team the only that agreed to implement ubuntu-report?
+
 sudo apt install synaptic
 sudo apt install gnome-tweaks
 sudo apt install gnome-system-tools
