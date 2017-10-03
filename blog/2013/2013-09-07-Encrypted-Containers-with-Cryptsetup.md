@@ -99,7 +99,7 @@ Repeat Mount and Disconnect commands.
 To mount:
 
 ```bash
-# --key-file file1.txt --tcrypt-hidden
+# --key-file=file1.txt --tcrypt-hidden
 sudo cryptsetup --type tcrypt --veracrypt --veracrypt-query-pim open ./test.bin sometest
 sudo mount -o user /dev/mapper/sometest ~/mnt/
 ```
