@@ -18,7 +18,7 @@ lastSecret=""
 lastSecretTime=""
 csOptions=()
 ckOptions=()
-cskCleanScreen="0"
+csmCleanScreen="0"
 
 currentScriptPid=$$
 function failed()
@@ -177,7 +177,7 @@ function openContainer()
 
     local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     touchFile "$lastSecret" "$lastSecretTime"
-    if [ "$cskCleanScreen" = "1" ]; then
+    if [ "$csmCleanScreen" = "1" ]; then
         tput reset
     fi
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "${csOptions[@]}" open "$device" "$name" -
@@ -460,7 +460,7 @@ function processOptions()
                 done
             ;;
             -c|-cls)
-                cskCleanScreen="1"
+                csmCleanScreen="1"
             ;;
             *)
             showError "unknown option: $current"
