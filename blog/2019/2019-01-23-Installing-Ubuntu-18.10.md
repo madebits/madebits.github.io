@@ -474,6 +474,7 @@ I learned something about [brightness](https://unix.stackexchange.com/questions/
     fi
     ```
 * [$HOME/.w3m/keymap](./blog/2019/i3/w3m/keymap)
+* To set mouse cursor theme, I [used](https://askubuntu.com/questions/126491/how-do-i-change-the-cursor-and-its-size): `sudo update-alternatives --config x-cursor-theme`.
 
 ##Summary
 
