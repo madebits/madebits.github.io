@@ -348,9 +348,9 @@ function readNewPass()
 function getSecret()
 {
     local secret=""
-    if [ -n "$cskSecret" ]; then
+    if [ -n "${cskSecret}" ]; then
         logError "# secret: user specified (-s or -as)"
-        secret="$cskSecret"
+        secret="${cskSecret}"
     else
         # skip some bytes
         head -c $RANDOM /dev/urandom > /dev/null
