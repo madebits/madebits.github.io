@@ -71,6 +71,9 @@
 [LinuxJournal](https://www.linuxjournal.com/)
 [NoobsLab](https://www.noobslab.com/)
 [UbuntuHandbook](http://ubuntuhandbook.org/)
+[OMGUbuntu](https://www.omgubuntu.co.uk/)
+[TechMint](https://www.tecmint.com/)
+[LinuxAndUbuntu](http://www.linuxandubuntu.com/)
 
 ### Programming
 
