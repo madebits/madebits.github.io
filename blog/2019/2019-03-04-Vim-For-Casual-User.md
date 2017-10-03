@@ -144,6 +144,7 @@ Macros (`:h @`):
 Replacing text:
 
 * `:%s/foo/bar/g` replace `foo` with `bar` globally, add `c` after `g` to confirm every replacement
+    - use `:set ic` to ignore case
 * `:s/foo/bar/g` replace `foo` with `bar` in current line
 
 Using file explorer:
