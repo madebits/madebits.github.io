@@ -481,7 +481,7 @@ I learned something about [brightness](https://unix.stackexchange.com/questions/
 
 * [$HOME/.w3m/keymap](./blog/2019/i3/w3m/keymap)
 * To set mouse cursor theme, I [used](https://askubuntu.com/questions/126491/how-do-i-change-the-cursor-and-its-size): `sudo update-alternatives --config x-cursor-theme`.
-* For Logitech M325 mouse, I created `/etc/udev/hwdb.d/71-mouse-local.hwdb` and copied from ` /lib/udev/hwdb.d/70-mouse.hwdb` the 325 lines and set `MOUSE_WHEEL_CLICK_ANGLE=4` from the default `20` to slow down the scroll:
+* For Logitech M325 mouse, I [created](https://unix.stackexchange.com/questions/307663/change-scroll-speed-with-libinput) `/etc/udev/hwdb.d/71-mouse-local.hwdb` and copied from ` /lib/udev/hwdb.d/70-mouse.hwdb` the 325 lines and set `MOUSE_WHEEL_CLICK_ANGLE=4` from the default `20` to slow down the scroll:
     ```
 # Logitech Wireless Mouse M325
 mouse:usb:v046dp400a:name:Logitech M325:
