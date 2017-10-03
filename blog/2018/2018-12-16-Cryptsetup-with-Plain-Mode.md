@@ -6,6 +6,8 @@
 
 `cryptsetup` in *plain* mode is a very versatile tool to create encrypted containers.
 
+<div id='toc'></div>
+
 ##Creating and Using Encrypted Containers
 
 To create or open a plain (non-LUKS) container use (all shown commands need `sudo`):
