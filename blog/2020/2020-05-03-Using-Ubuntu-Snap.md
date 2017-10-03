@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-<a href="https://en.wikipedia.org/wiki/Snap_(package_manager)">Snap</a> is not easy avoidable anymore in Ubuntu desktop, so I spend some time to keep a few notes from documentation I had to scan to understand it.
+<a href="https://en.wikipedia.org/wiki/Snap_(package_manager)">Snap</a> is not easy avoidable anymore in Ubuntu desktop, so I spend some time to keep a few notes from documentation (and `man snap`) I had to scan to understand it.
 
 <div id='toc'></div>
 
