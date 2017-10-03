@@ -109,14 +109,14 @@
 [The New York Times](https://www.nytimes.com/section/world)
 [The Washington Times](https://www.washingtontimes.com/news/world/)
 [Wall Street Journal](https://www.wsj.com/news/world)
-[Reddit World News](https://www.reddit.com/r/worldnews/)
 [YouTube World News](https://www.youtube.com/channel/UCvAvFl2OGsuDSoOo93Kd0nA)
 [BuzzfeedNews](https://www.buzzfeednews.com/)
-[The Antlantic](https://www.theatlantic.com/world/)
+[The Atlantic](https://www.theatlantic.com/world/)
+[ForeignPolicy](https://foreignpolicy.com/)
+[Rand](https://www.rand.org/)
 [RealClearDefense](https://www.realcleardefense.com/)
 [Pbs](https://www.pbs.org/wgbh/frontline/)
 [The Onion](https://www.theonion.com/)
-
 
 ### Canada & Australia
 
@@ -145,6 +145,7 @@
 
 ### Europe
 
+[Handelsblatt](https://www.handelsblatt.com/)
 [EuroNews](https://www.euronews.com/european-affairs/european-news)
 [France 24](https://www.france24.com/en/)
 [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
@@ -172,9 +173,9 @@
 [SouthFront](https://southfront.org/)
 [RussiaBeyond](https://www.rbth.com/science-and-tech)
 [GlobalAffairs](https://eng.globalaffairs.ru/)
-[FilmHub](https://russianfilmhub.com/genre/russian-war-movies/)
-[TheDuran](https://theduran.locals.com/?showPosts=1) 
 [AMercouris](https://www.youtube.com/c/AlexanderMercourisReal/videos)
+[RussianInsight](https://www.youtube.com/c/RussiaInsight1/videos)
+[Combat Approved](https://www.youtube.com/channel/UCFUidKQ8v0RqAke2zbVDY_g/videos)
 
 ## China & Asia
 
