@@ -181,6 +181,7 @@ bar {
         font pango:DejaVu Sans Bold 8
         status_command i3status
         bindsym button3 $favs
+        position top
 }
 
 # vasian
@@ -198,10 +199,19 @@ bindsym $mod+a $favs
 bindsym $mod+b exec --no-startup-id chromium-browser
 bindsym $mod+n exec --no-startup-id nautilus
 bindsym $mod+e exec --no-startup-id nautilus
+bindsym $mod+g exec --no-startup-id xterm -e ranger
 
 bindsym $mod+y bar mode toggle
 bindsym $mod+Escape $lock
 #bindsym $mod+Shift+t border toggle
+
+bindsym --release Print exec --no-startup-id gnome-screenshot -i
+
+#floating_minimum_size 150 x 50
+#floating_maximum_size 640 x 480
+#for_window [class="SpeedCrunch"] floating enable, resize set 30% 90%, move position center
+bindsym --release XF86Calculator exec --no-startup-id speedcrunch
+#XF86Sleep
 
 bindsym --release button2 kill
 bindsym --release button3 $favs

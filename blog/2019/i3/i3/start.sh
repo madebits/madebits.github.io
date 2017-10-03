@@ -10,5 +10,7 @@ xset s off
 eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
 export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 
+eval $(dbus-launch)
+
 # https://superuser.com/questions/389397/ubuntu-and-privilege-elevation-in-i3wm
 /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
