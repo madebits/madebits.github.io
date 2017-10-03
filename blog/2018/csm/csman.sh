@@ -151,7 +151,7 @@ function validName()
     if [[ "$name" != csm-* ]]; then
         name="csm-${name}"
     fi
-    name="${name//[^a-zA-Z0-9-]/}"
+    name="${name//[^[:lower:][:upper:][:digit:]-]/}"
     checkArg "$name" "name"
     echo "$name"
 }
