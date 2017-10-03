@@ -8,7 +8,7 @@ I always wanted to write an own [Vim](https://www.vim.org/) text editor tutorial
 
 ##Starting and Stopping
 
-If you learn Vim, learn it up and now plain without customizations. In your own machine, you can use some other editor or IDE, or even some heavily [customized](https://github.com/xmementoit/vim-ide) Vim. It is only when you are in some other machine that you really need to use Vim. And this the reason for the first command to learn:
+If you learn Vim, learn it without customizations. In your own machine, you can use some other editor or IDE, or even some heavily [customized](https://github.com/xmementoit/vim-ide) Vim. It is only when you are in some other machine that you really need to use Vim. And this the reason for the first command to learn:
 
 ```
 # start vim without any customizations (do not load ~/.vimrc)
@@ -17,7 +17,7 @@ vim -u NONE
 
 Anecdotally, a friend following that advice found once himself once a broken Linux server having only `ed` command available. The advice is still sound, thought the level you need to apply it may vary.
 
-If you panic when starting `vim`, press *Esc* key one more times (so that Vim enters *command-mode*) and then press `:q!`. This will quit Vim without saving your changes. Note that by chance, the reverse `q:` is the *raise panic level* command; it re-shows your panic keys. I will write here commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*).
+If you panic when starting `vim`, press *Esc* key one more times (so that Vim enters *command-mode*) and then press `:q!`. This will quit Vim without saving your changes. Note that by chance, the reverse `q:` is the *raise panic level* command; it re-shows your panic keys. I will write here commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). If `:q!` does not work then `:qa!` will.
 
 Vim assumes you own the machine and its disk is encrypted, leaving generous usage traces by default. If that is not the case, use `vim -u NONE -i NONE -n` to start Vim in a mode where it does not leak usage information (`-i` means no *.viminfo* file and `-n` means no *swap* temporary file). If you forget any of this, use `vim --help` in shell to get a list of command-line options.
 
@@ -29,7 +29,7 @@ If you started Vim without a filename, you can open a file from within Vim using
 
 The fastest way to produce text in Vim is to write it in some other editor and save as some file `text.txt`. Start `vim` and use `:r text.txt` to read it and put its text under the cursor position. File name completion should work after `:r` same as in shell using *Tab* key. This is also the best way to bring some existing pieces of text within a file in Vim (if you have no GUI clipboard).
 
-Move the cursor (in *command-mode*) using `j` - down, `k` - up, `h` - left, `l` - right. Usually *arrow* keys work most of the time out the box too.
+Move the cursor (in *command-mode*) using `j` - down, `k` - up, `h` - left, `l` - right. *Arrow* keys work most of the time out the box too.
 
 To get help from within Vim use any of `:help`, `:h`, or *F1* key. Help opens in a separate *read-only* text buffer and you can close it using `:q` or `:close`. If you scroll down in help page (or press `/quick`) , you will find a link to *quickref*. Move cursor over and press `Ctrl+]` to open it. You can open it also directly using `: h quickref`. Quick reference contains most commands you will ever use (`:h text` will search help for *text*).
 
@@ -43,7 +43,7 @@ There are several ways to save the text:
 * `:wq` save and quit (or `ZZ` or `:x`).
 * `w!` force write read-only file.
 * `w !sudo tee % > /dev/null` yes, no one remembers this one, but it will force write some file open without `sudo` as `sudo` (basically this means write buffer and pipe it via *sudo* using *tee* to filename).
-* As noted before, `:wq!` will not save your text and exit (you still have the nice memory of writing it).
+* As noted before, `:q!` will not save your text and exit (you still have the nice memory of writing it) and `:qa!` will exit even if you have more than buffer.
 
 ##Basic Vim
 
@@ -56,7 +56,7 @@ Commands are usually are made of multiple key of the [form](https://danielmiessl
 
 Common movement commands (in *command-mode*):
 
-* `j` - down, `k` - up, `h` left, `l` -right (or arrow keys will mostly work) (can be combined also with numbers, e.g: `4j`); `Ctrl+y` scroll one line down, `Ctrl+e` scroll one line up.
+* `j` - down, `k` - up, `h` left, `l` -right (or arrow keys will mostly work) (can be combined also with numbers, e.g: `4j`); appending `g` in front of `jkhl` will allow moving around display lines (`g` can be used same with `0^$`).
 * `0` - beginning of line, `^` first not blank char on line, `$` - end of line, `g_` last non-blank char on line.
 * `fc` - *find* next char *c* and move cursor to it, `tc` find next char c and move cursor *to* it. `Fx`, `Tx` work same but jump to previous occurrence of *c*.
     * `;` repeat last `ftFT` forward, `,` repeat last `ftFT` backward, or just use `.`
@@ -64,7 +64,7 @@ Common movement commands (in *command-mode*):
 * `*` find next occurrence of work under cursor (`n` and `N` and highlight work same as for `/`).
 * `Ctrl+i` - jump to previous location, `Ctrl+o` jump back
 * `M` move to middle of screen, `L` move to bottom of screen; `Ctrl+D` - move half-page down, `Ctrl+U` move half-page up; `Ctrl+F` move down a page, `Ctrl+B` move up a page.
-* `zz` (not `ZZ`) will center cursor line on screen.
+* `zz` (not `ZZ`) will center cursor line on screen.  `Ctrl+y` scroll one line down, `Ctrl+e` scroll one line up, while keeping cursor in current line.
 * `:number` or `numberG`- go to line number, `:+number` - go number lines down, `:-number` go number lines up. 
     * It may help to run `:set number` (or `:set nu`) before to show line numbers. For extra Zen use `:set rnu` (or `:set relativenumber`) for relative numbers. Using both also works. Using `no` before removes them (e.g. `:set nonumber`).
 * `gg` - got top of file, `GG` go end of file.
@@ -128,8 +128,8 @@ Replacing text (do not bother more that this with substitute command, unless you
 
 Using file explorer:
 
-* `:Explore` to open file explorer (`F1` for help within it)
-* `Ctrl+6` (`^`) to switch back and forth from open file to explorer 
+* `:Explore` or `:E` or `:e.` opens file explorer (`F1` for help within it)
+* `Ctrl+6` (`^`) switches back and forth from open file to explorer on same window 
 
 Using tabs:
 
