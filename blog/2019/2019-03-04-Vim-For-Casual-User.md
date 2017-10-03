@@ -148,7 +148,7 @@ Marking text positions:
 
 Using external commands to filter buffer text:
 
-* `range!cmd` where range is `%`` all text, `.`` current line, `m,n` lines *m,n*
+* `range!cmd` where range is `%` all text, `.` current line, `m,n` lines *m,n*
 
 To encrypt current buffer text:
 
