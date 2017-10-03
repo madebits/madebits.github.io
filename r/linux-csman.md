@@ -91,7 +91,7 @@ This generates 6 files (*secret.bin*, *secret.bin.01*, *...*, *secret.bin.06*). 
 
 #### Password Input Options
 
-If no password input options are specified, `cskey.sh` prompts to read password from command-line, this is same as `-i 0` option. Using `-i 1` or `i e` read password from console echoed (visible). Command-line help lists other `-i` options.
+If no password input options are specified, `cskey.sh` prompts to read password from command-line, this is same as `-i 0` option. Using `-i 1` or `-i e` read password from console echoed (visible). Command-line help lists other `-i` options.
 
 The password can also be read from first line in a file using `-p passwordFile`.
 
