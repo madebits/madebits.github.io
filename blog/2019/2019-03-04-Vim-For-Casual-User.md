@@ -107,7 +107,7 @@ Edit commands can be combined with **i**nside or **a**round *text-object* bound 
 
 * `ciw` - change inside word, `caw` - change inside word. Mounded motions include: `w` word, `s` sentence, `p` paragraph, `t` tag, `'` single quote, `"` double quote, and  `(`, `[`, `{` stand per their own.
 
-While in *insert-mode*, `Ctrl+R 0` will paste text without having leave that mode (see `:h i_ctrl-r`). `Ctrl+o` will allow running a single command and coming back to insert-mode. `Ctrl+h` will delete previous char (same as *Backspace*) and `Ctrl+w` will delete previous word, while `Ctrl+u` will delete to start of line. `Ctrl+n` and `Ctrl+p` enable auto-completion from words found in open buffers.
+While in *insert-mode*, `Ctrl+R 0` will paste text without having leave that mode, where `0` is register name (see `:h i_ctrl-r`). `Ctrl+o` will allow running a single command and coming back to insert-mode. `Ctrl+h` will delete previous char (same as *Backspace*) and `Ctrl+w` will delete previous word, while `Ctrl+u` will delete to start of line. `Ctrl+n` and `Ctrl+p` enable auto-completion from words found in open buffers.
 
 Vim has also a **visual-mode** entered by any of: `v` char selection, `V` line selection, `Ctrl+V` block selection. Arrow keys expand selection (on which side can be toggled with `o`) and `gv` re-selects. In visual-mode, you select first the text and then run any command on it.
 
@@ -151,6 +151,12 @@ Marking text positions:
 Using external commands to filter buffer text:
 
 * `range!cmd` where range is `%` all text, `.` current line, `m,n` lines *m,n*
+
+Integrated spell checker can be activated via `:set spell`:
+
+`z=` show lists of suggestions. Type *number* Enter to replace word.
+`[s` next, `s]` previous suggestion.
+`zg` add / `zw` remove word from dictionary.
 
 To encrypt current buffer text:
 
