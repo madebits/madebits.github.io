@@ -449,6 +449,8 @@ function ddContainer()
     else
         sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" seek="$seek" status=progress
     fi
+    sleep 1
+    #sync -f "$container"
 }
 
 # secret
@@ -503,7 +505,6 @@ function createContainer()
         else
             onFailed "size can be M or G"
         fi
-        sync
     else
         echo "Using existing file (size $size is ingored): $container"
     fi
@@ -543,7 +544,7 @@ function createContainer()
 
     echo "Creating filesystem in $dev ..."
     mkfs -t ext4 -m 0 "${mkfsOptions[@]}" "$dev"
-    sync
+    echo "Created file system."
     sleep 1
     closeContainerByName "$name"
     ownFile "$container"
