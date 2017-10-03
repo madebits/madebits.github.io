@@ -4,11 +4,11 @@
 
 <!--- tags: linux -->
 
-I always wanted to write an own [Vim](https://www.vim.org/) text editor tutorial that I have around and can return to for a quick reference. There is no reason for me to use Vim extensively nowadays, but there are always plenty of chances to use it.
+I wanted to write an own [Vim](https://www.vim.org/) text editor tutorial that I have around for a quick reference.
 
 ## Starting and Stopping
 
-If you learn Vim, learn it without customization. In your own machine, you can use some other editor or IDE, or even some heavily [customized](https://github.com/xmementoit/vim-ide) Vim. It is only when you are in some other machine or non-UI server that you really need to use Vim. And this the reason for the first command to learn:
+If you learn Vim, learn it without any customizations. In your own machine, you can use some other editor or IDE, or even some heavily [customized](https://github.com/xmementoit/vim-ide) Vim. It is when you are in some other machine or non-UI server that you really need to use Vim. And this the reason for the first command to learn:
 
 ```bash
 # start vim without any customization (do not load ~/.vimrc)
@@ -19,7 +19,7 @@ Anecdotally, a friend following that advice found once himself once a broken Lin
 
 If you panic when starting `vim`, press *Esc* key one more times (so that Vim enters *command-mode*) and then press `:q!`. This will quit Vim without saving your changes. By chance, the reverse `q:` is the *raise panic level* command; it re-shows your panic keys. If `:q!` does not work to exit then `:qa!` will.
 
-I will write here commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). `Ctrl+d` and `Tab` can be used to auto-complete commands after `:`.
+I will write here Vim commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). `Ctrl+d` and `Tab` can be used to auto-complete commands after `:`. Wherever possible, I write control combinations using lowercase key as in `Ctrl+d` (and not `Ctrl+D` as they are written in Vim documentation).
 
 Vim assumes you own the machine and its disk is encrypted, leaving generous usage traces by default. If that is not the case, use `vim -u NONE -i NONE -n` to start Vim in a mode where it does not leak usage information (`-i` means no *.viminfo* file and `-n` means no *swap* temporary file). If you forget any of this, use `vim --help` in shell to get a list of command-line options.
 
@@ -29,12 +29,7 @@ Another occasionally useful command-line option is `vim -R file.txt` to open a f
 
 If you started Vim without a filename, you can open a file from within Vim using `:edit filename` (or `:e`). *Tab* key can be used for auto-completion on file names.
 
-The fastest way to produce text in Vim is to write it in some other editor and save as some file `text.txt`. Start `vim` and use `:r text.txt` to read it and put its text under the cursor position. File name completion should work after `:r` same as in shell using *Tab* key. This is also the best way to bring some existing pieces of text within a file in Vim (if you have no GUI clipboard).
-
-Move the cursor (in *command-mode*) using `j` - down, `k` - up, `h` - left, `l` - right. *Arrow* keys work most of the time out the box too.
-
-* If you pressed *Ctrl+z* by mistake while in Vim, use `fg` in shell to get back to Vim. 
-* If pressing [Ctrl+s](https://en.wikipedia.org/wiki/Software_flow_control) by mistake in terminal within Vim, press *Ctrl+q* to resume flow.
+The fastest way to produce text in Vim is to write it in some other editor and save it as some file `text.txt`. Start `vim` and use `:r text.txt` to read it and put its text under the cursor position. File name completion should work after `:r` same as in shell using *Tab* key. This is also the best way to bring some existing pieces of text within a file in Vim (if you have no clipboard).
 
 There are several ways to save the text:
 
@@ -47,7 +42,12 @@ There are several ways to save the text:
     - If you can plan in advance, use `SUDO_EDITOR=vim sudo -e somefile` to edit a file as *sudo* using Vim.
 * As noted before, `:q!` will not save your text and exit (you still have the nice memory of writing it) and `:qa!` will exit even if you have more than buffer.
 
-##Vim Help
+A few quirks:
+
+* If you pressed *Ctrl+z* by mistake while in Vim, use `fg` in bash shell to get back to Vim. 
+* If pressing [Ctrl+s](https://en.wikipedia.org/wiki/Software_flow_control) by mistake in terminal within Vim, press *Ctrl+q* to resume flow.
+
+## Vim Help
 
 To get help from within Vim use any of `:help`, `:h`, or *F1* key. Help opens in a separate *read-only* text buffer and you can close it using `:q` or `:close`. Use `Ctrl+w Ctrl+w` to jump between window buffers.
 
@@ -59,16 +59,18 @@ In Vim there are two main modes:
 
 * **command-mode** (aka: **normal-mode**) is reachable by pressing *Esc* key or if that is broken *Ctrl+[*. *Ctrl+c* works too and it is the best to use in non-ANSI keyboards.
     * In most terminals, *Alt+normal mode command key* will work form within *insert-mode*. 
-    * *Ctrl+o normal mode command* works too from within *insert-mode*.
+    * *Ctrl+o normal mode command* works also from within *insert-mode*.
 * **insert-mode** is reachable from command-mode by initiating some text edit command.
 
 ## Basic Vim
 
-There is no basic Vim. You need to learn upfront enough commands to move around and edit text. Commands are usually are made of multiple keys of the [form](https://danielmiessler.com/study/vim/#language): *operator (verb)* *modifier (scope)* *noun (motion)* and can be combined creatively given enough time. The best way to learn the most basic commands is to use `vimtutor` as often as everything there becomes a habit. To see the current line use `Ctrl+g`.
+There is no basic Vim. You need to learn upfront enough commands to move around and edit text. Commands are usually are made of multiple keys of the [form](https://danielmiessler.com/study/vim/#language): *operator (verb)* *modifier (scope)* *noun (motion)* and can be combined creatively given enough time. The best way to learn the most basic commands is to use `vimtutor` as often as everything there becomes a habit.
 
 Common movement commands (in *command-mode*):
 
-* `j` - down, `k` - up, `h` left, `l` -right (or arrow keys will mostly work) (can be combined also with numbers, e.g: `4j`); appending `g` in front of `jkhl` will allow moving around display lines (`g` can be used same with `0^$`).
+* `Ctrl+g` shows current line position in file. `:set ruler` will show bottom status if not already visible.
+* `j` - down, `k` - up, `h` left, `l` -right (arrow keys also work) (can be combined also with numbers, e.g: `4j`).
+    * appending `g` in front of `jkhl` will allow moving around display lines (`g` can be used same with `0^$`).
 * `0` - beginning of line, `^` first not blank char on line, `$` - end of line, `g_` last non-blank char on line.
 * `fc` - *find* next char *c* and move cursor to it, `tc` find next char c and move cursor *to* it. `Fx`, `Tx` work same but jump to previous occurrence of *c*. All these commands work on current line only.
   * `;` repeats last `ftFT` forward, `,` repeats last `ftFT` backward
