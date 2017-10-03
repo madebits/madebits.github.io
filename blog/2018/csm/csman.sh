@@ -459,7 +459,9 @@ function openContainer()
     
     isContainerFileOpen "$device"
     if [ -n "$csmIsContainerFileOpen" ]; then
-        onFailed "${device} is already open as ${csmIsContainerFileOpen}"
+        listContainer ${csmIsContainerFileOpen}
+        logError
+        onFailed "${device} is already open (${csmIsContainerFileOpen})"
     fi
     
     local secret="${1:-}"
