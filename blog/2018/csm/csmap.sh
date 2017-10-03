@@ -199,6 +199,9 @@ function openContainer()
     echo "Opening /dev/mapper/${name} ..."
 
     local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
+    if [ -z "$key" ]; then
+        showError "cannot read: $secret"
+    fi
     touchFile "$lastSecret" "$lastSecretTime"
     clearScreen
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "${csOptions[@]}" open "$device" "$name" -
@@ -297,6 +300,9 @@ function createContainer()
     
     echo "(Re-)enter password to open the container for the first time ..."
     local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
+    if [ -z "$key" ]; then
+        showError "cannot read: $secret"
+    fi
     echo
     clearScreen
     touchFile "$lastSecret" "$lastSecretTime"
@@ -327,11 +333,13 @@ function changePass()
 {
     local secret="${1:-}"
     checkArg "$secret" "secret"
+    shift
+    processOptions "$@"
     if [ -f "$secret" ]; then
         lastSecretTime=$(stat -c %z "$secret")
     fi
     shift
-    "${toolsDir}/cskey.sh" chp "$secret" "$@"
+    "${toolsDir}/cskey.sh" chp "$secret" "${ckOptions[@]}"
     ownFile "$secret"
     touchFile "$secret" "$lastSecretTime"
 }
@@ -456,7 +464,7 @@ function showHelp()
     dumpError " $bn umount name"
     dumpError " $bn create secret container size [ openCreateOptions ]"
     dumpError "    size should end in M or G"
-    dumpError " $bn changePass secret [ cskey.sh options ]"
+    dumpError " $bn changePass secret [ -csk cskey.sh options ]"
     dumpError " $bn resize name"
     dumpError " $bn increase name bySize"
     dumpError "    size should end in M or G"
