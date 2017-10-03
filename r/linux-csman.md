@@ -367,7 +367,7 @@ It is possible to open the container, but leave it unmounted by passing `-u` to 
 
 #### Open Options
 
-There are some additional options that can be specified with open command. `-r` to mount *read-only*, and `-l` to keep container open *live* - the open command does not exit in this case, it waits for you to press twice *Enter* key to close the container. 
+There are some additional options that can be specified with open command. `-r` to mount *read-only*, and `-l` to keep container open *live* - the open command does not exit in this case, it waits for you to press twice *Enter* key to close the container.
 
 For these commands there are a few open command shortcuts: `o` *open*, `ol` *open ... -l* and `olr` *open ... -r -l*.
 
