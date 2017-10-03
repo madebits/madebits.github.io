@@ -85,9 +85,7 @@ mount /dev/sda2 /boot
 mount /dev/sda1 /boot/efi
 mount --types=proc proc /proc
 mount --types=sysfs sys /sys
-
 ...
-
 exit
 reboot
 ```
