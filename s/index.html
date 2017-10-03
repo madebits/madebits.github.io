@@ -8,7 +8,9 @@ width: 100%;
 
 <div id="entry" class="jumbotron mbg-entry-background">
 <h1><span class="linklogo"></span> <span class="linklogo"><strong><span class="mbg-logo-left">Made</span><span class="mbg-logo-right">Bits</span></strong></span></h1>
+<!--
 <h2><a href="#blog" class="nounderline"><i class="fa fa-comments"></i> Blog</a></h2>
+-->
 <h2><a href="#s/repositories.html" class="nounderline"><i class="fa fa-cloud-download"></i> Repos</a></h2>
 <h2><a href="#s/about.html" class="nounderline"><i class="fa fa-envelope"></i> About</a></h2>
 </div>
@@ -21,7 +23,8 @@ width: 100%;
 	$('#entry').click(function(event) {
 		//event.preventDefault();
 		if(event.target.tagName.toUpperCase() !== 'A') {
-			window.location.href='#blog';
+			//window.location.href='#blog';
+			window.location.href='#s/repositories.html';
 		}
 		return true;
 	});
