@@ -15,7 +15,7 @@ If you learn Vim, learn it without any customizations. In your own machine, you 
 vim -u NONE
 ```
 
-Anecdotally, a friend following that advice found once himself once a broken Linux server having only `ed` command available and no network. The advice is still sound, thought the level you need to apply it may vary.
+Anecdotally, a friend following this advice found once himself once a broken Linux server having only `ed` command available and no network. The advice is still sound, thought the level you need to apply it may vary.
 
 If you panic when starting `vim`, press *Esc* key one more times (so that Vim enters *command-mode*) and then press `:q!`. This will quit Vim without saving your changes. By chance, the reverse `q:` is the *raise panic level* command; it re-shows your panic keys. If `:q!` does not work to exit then `:qa!` will.
 
