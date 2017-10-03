@@ -78,6 +78,7 @@ function tcp()
 ########################################################################
 
 rcpBackupDir=""
+rpcParallel="0"
 
 function rcp()
 {
@@ -92,11 +93,20 @@ function rcp()
         sameDir "$s" "${rcpBackupDir}"
         sameDir "$d" "${rcpBackupDir}"
         echo "Copying $s to $d (with backup in $3) ..."
-        time rsync --info=progress2 -ahWS --delete --stats "$s/" "$d" --backup-dir="${rcpBackupDir}"
+        if (( rpcParallel > 0 )); then
+            echo "# $rpcParallel instances"
+            time ls -1 "$s" | xargs -n 1 -I {} -P "${rpcParallel}" rsync --info=none -aWS --delete "$s/"{} "$d/" --backup-dir="${rcpBackupDir}"
+        else
+            time rsync --info=progress2 -ahWS --delete --stats "$s/" "$d/" --backup-dir="${rcpBackupDir}"
+        fi
     else
         echo "Copying $s to $d ..."
-        #--progress 
-        time rsync --info=progress2 -ahWS --delete --stats "$s/" "$d"
+        if (( rpcParallel > 0 )); then
+            echo "# $rpcParallel instances"
+            time ls -1 "$s" | xargs -n 1 -I {} -P "${rpcParallel}" rsync --info=all -aWS --delete "$s/"{} "$d/"
+        else
+            time rsync --info=progress2 -ahWS --delete --stats "$s/" "$d/"
+        fi
     fi
     echo "Done"
 }
@@ -169,11 +179,9 @@ function rndDataSource()
 function dc()
 {
     local res=""
-    dcDir="${1:?"dir missing use - for $HOME/tmp"}"
-    if [ "${dcDir}" = "-" ]; then
+    if [ -z "${dcDir}" ]; then
         dcDir="$HOME/tmp"
     fi
-    shift
     processOptions "$@"
     makeTmpDir
     trap cleanUp SIGHUP SIGINT SIGTERM ERR
@@ -190,9 +198,9 @@ function dc()
    
     printAvailable
     while : ; do
-        echo -n .
+        echo -n +
         set +e
-        rndDataSource | dd count=1024 bs=1M >> "${dcDir}/zero.$RANDOM" 2>/dev/null
+        rndDataSource | dd iflag=fullblock count=1024 bs=1M conv=fdatasync >> "${dcDir}/zero.$RANDOM" 2>/dev/null
         res=$?
         set -e
         if [ $res -ne 0 ] ; then
@@ -235,8 +243,16 @@ function processOptions()
                 rcpBackupDir="${2:?"! -rb backupDir"}"
                 shift
             ;;
+            -rp)
+                rpcParallel="${2:?"! -rp instances"}" 
+                shift
+            ;;
             -dr)
                 dcUseRnd="1"
+            ;;
+            -dd)
+                dcDir="${2:?"! -dd tmpDir"}"
+                shift
             ;;
             *)
                 onFailed "unknown option: $current"
@@ -263,12 +279,14 @@ Where [options]:
  
  -tp : (tcp) use pv
  -rb backupDir : (rcp) rsync backup dir
+ -rp instances : (rpc) use xargs -P instances
  -dr : (dc) use random data (default 0s)
+ -dd tmpDir : (dc) temp dir to use, default $HOME/tmp
+              csfile-$RANDOM folder is created within
 
 Notes:
 
- (tcp | rcp ) : copy content within srcDir to dstDir
- (dc) : use - as dir for default $HOME/tmp, a csfile-$RANDOM folder is created within
+ tcp | rcp : copies content within srcDir to dstDir
     
 EOF
 
@@ -296,6 +314,7 @@ function main()
             dc "$@"
         ;;
         *)
+            logError "unknown option: $runCmd"
             showHelp
             exit 1
         ;;
