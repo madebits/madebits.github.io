@@ -70,7 +70,7 @@
 [LinuxLinks](https://www.linuxlinks.com/)
 [LinuxJournal](https://www.linuxjournal.com/)
 [NoobsLab](https://www.noobslab.com/)
-[ubuntuhandbook](http://ubuntuhandbook.org/)
+[UbuntuHandbook](http://ubuntuhandbook.org/)
 
 ### Programming
 
