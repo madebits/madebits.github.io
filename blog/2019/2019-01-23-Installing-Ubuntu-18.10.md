@@ -259,6 +259,31 @@ sudo apt install gnome-system-monitor
 
 * Useful software: `sudo apt install mpv vlc speedcrunch speedcrunch keepassxc baobab`.
 
+* `mpv` config (`~/.config/mpv/`) (using also [nextfile](https://github.com/donmaiq/mpv-nextfile) script):
+
+```
+#input.conf
+
+- quit
+x quit
+s quit
+S quit
+ctrl+s quit
+Alt+s quit
+ESC quit
+LEFT playlist-prev force
+RIGHT playlist-next force
+WHEEL_UP playlist-prev
+WHEEL_DOWN playlist-next
+ctrl+LEFT script-binding previousfile
+ctrl+RIGHT script-binding nextfile
+
+# mpv.conf
+
+fs
+image-display-duration=3
+```
+
 ##Summary
 
 Apart of GNOME taskbar, which I really do not like, as it consumes the limited vertical space on screen:
