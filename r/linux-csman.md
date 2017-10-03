@@ -19,7 +19,7 @@ sudo csman.sh new container.bin 1M -s secret.bin -ck -i e ---
 rm secret.bin
 ```
 
-Open a container, it gets a random name and is mounted under `$HOME/mnt/csm-*` (or append `-n name`):
+Open a container, it gets a random *name* and it is mounted under `$HOME/mnt/csm-name` (or append `-n name`):
 
 ```bash
 sudo csman.sh open container.bin -ck -i e --- -n one
