@@ -100,8 +100,8 @@ Some overlapping terms explained:
 4) secret file=salt+aes encrypted secret+random pad => slot
 ```
 
-* **secret** - randomly generated (or user specified) binary 768 bytes. Binary values are shown as *base64* in tool. Secret is used binary as `cryptsetup` password:
-  * 512 bytes (binary) are used as password for outer *aes-xts-plain64* with 512 bits key (-s 512 -h sha512)
+* **secret** - randomly generated (or user specified) binary 512 bytes. Binary values are shown as *base64* in tool. Secret is used binary as `cryptsetup` password:
+  * 256 bytes (binary) are used as password for outer *aes-xts-plain64* with 512 bits key (-s 512 -h sha512)
   * 256 bytes (binary) are used as password for inner *twofish-cbc-essiv:sha256* with 256 bit key (-s 256 -h sha512)
 * **secret file** - binary file where *secret* is stored encrypted.
 * **password** - user password (or pass-phrase) used to encrypt *secret file* (hashed with `argon2`).
@@ -147,7 +147,7 @@ The command-line arguments are a bit *peculiar* (because I thought that it is fa
 
 `csman.sh` creates and uses random *secret files* using `cskey.sh`. Secret files are binary. Use `base64` tool as needed to convert them to text.
 
-Secret files are made of 32 random bytes of `argon2` salt, 768=512+256 random bytes of `cryptsetup` password encrypted, and are padded with random data to have random file lengths up to 1024 bytes. Due to encryption, the length of secret files is longer than 768 bytes, but is less than 1024.
+Secret files are made of 32 random bytes of `argon2` salt, 512 random bytes of `cryptsetup` password encrypted, and are padded with random data to have random file lengths up to 1024 bytes. Due to encryption, the length of secret files is longer than 512 bytes, but is less than 1024.
 
 It is not required to use `cskey.sh` directly most of the time, but knowing how to use it as shown in this section will make the `csman.sh` commands later clearer.
 
