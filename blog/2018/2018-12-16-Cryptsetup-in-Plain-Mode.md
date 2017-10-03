@@ -1,4 +1,4 @@
-#Cryptsetup with Plain Mode
+#Cryptsetup in Plain Mode
 
 2018-12-16
 
