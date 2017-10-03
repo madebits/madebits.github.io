@@ -43,6 +43,10 @@ Mounted snaps consume `loop` devices:
 $ df -h | grep gimp
 /dev/loop17                  176M  176M     0 100% /snap/gimp/262
 /dev/loop20                  176M  176M     0 100% /snap/gimp/265
+
+# or
+$ df -h /snap/gimp/265
+/dev/loop20                  176M  176M     0 100% /snap/gimp/265
 ```
 
 I am not sure why they need to mount all revisions, I guess just to make `mount` and `df` commands unusable (`df -h -x squashfs`). They have patched, however, `gnome-disks` not to show snap loop devices. 
@@ -132,6 +136,12 @@ unity7                    gimp:unity7                                :unity7    
 wayland                   gimp:wayland                               :wayland                          -
 x11                       gimp:x11                                   :x11                              -
 
+```
+
+To see what snaps use a given interface we can use:
+
+```
+$ snap interface network
 ```
 
 Examples of snap [interfaces](https://snapcraft.io/docs/supported-interfaces):
