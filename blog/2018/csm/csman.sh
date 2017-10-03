@@ -385,18 +385,6 @@ function openContainer()
     local oName=${name:4}
     shift
 
-    local secret="${1:-}"
-    checkArg "$secret" "secret"
-    lastSecret="$secret"
-    if [ -f "$secret" ]; then
-        lastSecretTime=$(stat -c %z "$secret")
-    fi
-    if [ ! -e "$secret" ]; then
-        resetTime
-        onFailed "cannot open: $secret"
-    fi
-    shift
-
     local device="${1:-}"
     checkArg "$device" "container"
     lastContainer="$device"
@@ -406,6 +394,18 @@ function openContainer()
     if [ ! -e "$device" ]; then
         resetTime
         onFailed "cannot open: $device"
+    fi
+    shift
+    
+    local secret="${1:-}"
+    checkArg "$secret" "secret"
+    lastSecret="$secret"
+    if [ -f "$secret" ]; then
+        lastSecretTime=$(stat -c %z "$secret")
+    fi
+    if [ ! -e "$secret" ]; then
+        resetTime
+        onFailed "cannot open: $secret"
     fi
     shift
     
@@ -464,10 +464,6 @@ function createContainer()
 {
     local name=$(validName "-")
     
-    local secret="${1:-}"
-    checkArg "$secret" "secret"
-    shift
-
     local writeContainer="1"
     local container="${1:-}"
     checkArg "$container" "container"
@@ -482,6 +478,10 @@ function createContainer()
             onFailed "nothing to do"
         fi
     fi
+    shift
+    
+    local secret="${1:-}"
+    checkArg "$secret" "secret"
     shift
 
     local size="${1:-}"
@@ -661,13 +661,13 @@ function showHelp()
     local bn=$(basename -- "$0")
     local kn=$(basename -- "${csmkeyTool}")
     logError "Usage:"
-    logError " $bn open|o secret device [ openCreateOptions ]"
+    logError " $bn open|o device secret [ openCreateOptions ]"
     logError " $bn close|c name"
     logError " $bn closeAll|ca"
     logError " $bn list|l"
     logError " $bn mount|m name"
     logError " $bn umount|u name"
-    logError " $bn create|n secret container size [ openCreateOptions ]"
+    logError " $bn create|n container secret size [ openCreateOptions ]"
     logError "    size should end in M or G"
     logError " $bn resize|r name"
     logError " $bn increase|i name bySize"
