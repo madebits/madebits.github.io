@@ -475,7 +475,7 @@ The `cs-map.sh` script can be used as follows:
 ```bash
 sudo ./cs-map open secret.bin container.bin
 
-# mounted at $HOME/mnt/cms_XXXX_user
+# mounted at $HOME/mnt/csm_XXXX_user
 # and when done, to close it use
 
 sudo ./cs-map close XXXX
