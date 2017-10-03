@@ -149,6 +149,13 @@ function closeContainer()
     echo " Closed ${name} !"
 }
 
+function clearScreen()
+{
+    if [ "$csmCleanScreen" = "1" ]; then
+        tput reset
+    fi
+}
+
 # name secret container rest
 function openContainer()
 {
@@ -193,9 +200,7 @@ function openContainer()
 
     local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     touchFile "$lastSecret" "$lastSecretTime"
-    if [ "$csmCleanScreen" = "1" ]; then
-        tput reset
-    fi
+    clearScreen
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "${csOptions[@]}" open "$device" "$name" -
     echo
     cryptsetup status "/dev/mapper/$name"
@@ -288,9 +293,12 @@ function createContainer()
         createSecret "$secret"
     fi
     
+    clearScreen
+    
     echo "(Re-)enter password to open the container for the first time ..."
     local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     echo
+    clearScreen
     touchFile "$lastSecret" "$lastSecretTime"
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "${csOptions[@]}" open "$container" "$name" -
 
@@ -450,7 +458,7 @@ function showHelp()
     dumpError " -cso cryptsetup options --"
     dumpError " -csk cskey.sh options --"
     dumpError " -n name : (open*) use csm-name"
-    dumpError " -c : (open*) clean screen"
+    dumpError " -c : (open*|create) clean screen after password entry"
     dumpError "Example:"
     dumpError " sudo csmap.sh openLive container.bin -csk -k -h -p 8 -m 14 -t 1000 --"
 }
