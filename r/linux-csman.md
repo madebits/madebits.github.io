@@ -282,7 +282,7 @@ By default, *secret.bin* is modified in place, which can be risky. To create a n
 sudo csman.sh chp secret.bin new-secret.bin -ck -i e ---
 ```
 
-If you have more than one file using same password, you can make use of sessions to change password of several files at once unattended. I assume here there are no key files used (if key files are used, pass them using `-kf keyfile`):
+If you have more than one secret file using same password, you can make use of sessions to change password of several files at once unattended. I assume here there are no key files used (if key files are used, pass them using `-kf keyfile`):
 
 ```bash
 # save old pass in session
