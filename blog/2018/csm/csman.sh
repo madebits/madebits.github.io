@@ -1166,7 +1166,7 @@ function main()
         ;;
         x)
             set +e
-            "${csmkeyTool}" x -
+            "${csmkeyTool}" x
             set -e
         ;&
         closeAll|ca)
