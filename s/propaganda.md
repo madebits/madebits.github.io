@@ -160,6 +160,7 @@
 ## China
 
 [South China Morning Post](https://www.scmp.com/news/world)
+[Sina](http://english.sina.com/news/world/)
 [China Daily](http://www.chinadaily.com.cn/world)
 [Xinhua Net](http://www.xinhuanet.com/english/world/index.htm)
 
