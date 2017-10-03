@@ -137,6 +137,28 @@ function makeTmpDir()
     dcDir="${tmp}"
 }
 
+dcUseRnd="0"
+
+function testRndDataSource()
+{
+    openssl enc -aes-256-ctr -pass pass:"test" -nosalt < <(echo -n "test") > /dev/null
+}
+
+function rndDataSource()
+{
+    if [ "$dcUseRnd" = "1" ]; then
+        # https://unix.stackexchange.com/questions/248235/always-error-writing-output-file-in-openssl
+        testRndDataSource
+        # https://wiki.archlinux.org/index.php/Securely_wipe_disk/Tips_and_tricks#dd_-_advanced_example
+        local tpass=$(tr -cd '[:alnum:]' < /dev/urandom | head -c128)
+        set +e
+        openssl enc -aes-256-ctr -pass pass:"$tpass" -nosalt </dev/zero 2>/dev/null
+        set -e
+    else
+        cat /dev/zero
+    fi
+}
+
 function dc()
 {
     dcDir="${1:-$HOME/tmp}"
@@ -151,7 +173,7 @@ function dc()
     printAvailable
     while : ; do
         echo -n .
-        dd if=/dev/zero count=1024 bs=1M >> "${dcDir}/zero.$RANDOM" 2>/dev/null
+        rndDataSource | dd count=1024 bs=1M >> "${dcDir}/zero.$RANDOM" 2>/dev/null
         if [ $? -ne 0 ] ; then
             sync
             printAvailable
@@ -160,7 +182,7 @@ function dc()
     done
 
     while : ; do
-        cat /dev/zero > "${dcDir}/zero.$RANDOM" 2>/dev/null
+        rndDataSource > "${dcDir}/zero.$RANDOM" 2>/dev/null
         if [ $? -ne 0 ] ; then
             sync
             available=$(df -P "${dcDir}" | tail -1 | tr -s ' ' | cut -d ' ' -f 4)
@@ -189,6 +211,10 @@ function processOptions()
                 rcpBackupDir="${2:?"! -rb backupDir"}"
                 shift
             ;;
+            -dr)
+                dcUseRnd="1"
+                echo "# using random data for overwrite"
+            ;;
             *)
                 onFailed "unknown option: $current"
             ;;
@@ -214,6 +240,7 @@ Where [options]:
  
  -tp : (tcp) use pv
  -rb backupDir : (rcp) rsync backup dir
+ -dr : (dc) use random data (default 0s)
 
 Notes:
 
