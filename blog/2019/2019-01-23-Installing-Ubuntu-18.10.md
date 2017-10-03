@@ -131,6 +131,8 @@ To move notifications to corner:
 
 * Panel-OSD https://extensions.gnome.org/extension/708/panel-osd/
 
+* AlternateTab https://extensions.gnome.org/extension/15/alternatetab/
+
 Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcut](https://wiki.gnome.org/Design/OS/KeyboardShortcuts) to open applications.
 
 Some [nautilus](https://wiki.archlinux.org/index.php/GNOME/Files) shortcuts:
