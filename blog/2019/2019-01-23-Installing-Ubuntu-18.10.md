@@ -8,7 +8,7 @@ I gave Ubuntu 18.10 a try in VirtualBox and here is a summary of some of the thi
 
 ##Remove Swap Partition
 
-Installer gave me errors when I tried to modify partitions of default encrypted disk setup. I am not really sure how much control installer offers to fine-tune that, and I ended up with using defaults. 
+Installer gave me errors when I tried to modify partitions of default encrypted disk setup (I guess they need to be modified by live CD before installer) and I ended up with using defaults. 
 
 I wanted to remove the default swap partition that was created:
 
@@ -57,6 +57,8 @@ sda                     8:0    0    30G  0 disk
 ```
 
 [sda2](https://askubuntu.com/questions/950307/why-guided-partitioning-create-a-sda2-of-1-kb) is the extended partition. What is shown as *1K* is the [unaligned](https://unix.stackexchange.com/questions/128290/what-is-this-1k-logical-partition) area in it.
+
+Note that `/boot` is not encrypted by default. Rather that deal with effort to [encrypt](https://dustymabe.com/2015/07/06/encrypting-more-boot-joins-the-party/) it (`grub` will still be unencrypted), an additional BIOS disk password (or VM disk encryption password) maybe better.
 
 ##GNOME
 
