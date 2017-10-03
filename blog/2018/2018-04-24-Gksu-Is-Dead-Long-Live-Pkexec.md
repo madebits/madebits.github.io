@@ -53,7 +53,7 @@ echo $@
 
 ##Second Problem
 
-If you try to run a command that need access to user interface from `pkexec`, such as, this `zenity` command in the script below:
+If you try to run a command that needs access to the user interface from `pkexec`, such as, this `zenity` command in the script below:
 
 ```bash
 if [[ $(id -u) != "0" ]]; then
