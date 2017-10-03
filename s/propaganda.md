@@ -118,6 +118,8 @@
 [BBC](https://www.bbc.co.uk/news/world/)
 [TheGuardian](https://www.theguardian.com/international)
 [Reuters](https://www.reuters.com/)
+[TheTimes](https://www.thetimes.co.uk/)
+[TheIndependent](https://www.independent.co.uk/)
 [The Telegraph](https://www.telegraph.co.uk/news/world/)
 [Daily Mail](https://www.dailymail.co.uk/news/worldnews/index.html)
 [Express](https://www.express.co.uk/news/world)
