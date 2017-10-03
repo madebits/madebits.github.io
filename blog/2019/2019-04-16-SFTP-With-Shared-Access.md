@@ -107,4 +107,14 @@ We have to be careful to also set *nologin* shell for such home users (or [use](
 
 It is also a good idea to set file-system [quotas](https://www.digitalocean.com/community/tutorials/how-to-set-filesystem-quotas-on-ubuntu-18-04) for STFP users.
 
+## Ssh Host FingerPrint
+
+To find SSH host finger print we can use:
+
+```
+ssh-keyscan localhost 2>/dev/null | ssh-keygen -E md5 -lf -
+```
+
+When clients connect first time they will be asked to verify the server fingerprint and we can share the shown server SSH fingerprints with users upfront.
+
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-03-25-MongoDb-with-SSL.md'>MongoDb with SSL</a></ins>
