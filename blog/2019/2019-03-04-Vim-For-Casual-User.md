@@ -10,7 +10,7 @@ I always wanted to write an own [Vim](https://www.vim.org/) text editor tutorial
 
 If you learn Vim, learn it without customization. In your own machine, you can use some other editor or IDE, or even some heavily [customized](https://github.com/xmementoit/vim-ide) Vim. It is only when you are in some other machine that you really need to use Vim. And this the reason for the first command to learn:
 
-```
+```bash
 # start vim without any customization (do not load ~/.vimrc)
 vim -u NONE
 ```
