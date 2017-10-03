@@ -66,6 +66,8 @@ To view *thumb-print* of the server certificate we can use:
 ```bash
 # hostMongo.pem is `$HOST_NAME.pem`
 openssl x509 -noout -fingerprint -sha256 -inform pem -in hostMongo.pem
+# show all details
+openssl x509 -noout -text -in hostMongo.pem
 ```
 
 #### Helper Script
