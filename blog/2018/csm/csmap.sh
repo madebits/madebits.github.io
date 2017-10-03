@@ -228,6 +228,7 @@ EOF
 function resetTime()
 {
     touchFile "$lastContainer" "$lastContainerTime"
+    sleep 1
     touchFile "$lastSecret" "$lastSecretTime"
 }
 
