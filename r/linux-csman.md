@@ -30,7 +30,9 @@ Download repository files and copy as root under `/usr/local/bin` the following 
 
 `csman.sh` is the main command to use. `csman.sh` delegates password and key operations to `cskey.sh`. You may need to use `cskey.sh` directly for advanced key manipulation. Running both commands without options lists their command-line arguments, e.g.: `sudo csman.sh`.
 
-The command-line argument of these tools are a bit peculiar because I thought that it is faster to specify options after the main arguments. The command-line arguments follow therefore this general scheme: *command files options*.
+The command-line argument of these tools are a bit peculiar because I thought that it is faster to specify options after the main arguments. The command-line arguments follow therefore this general scheme: *command file(s) options*.
+
+
 
 
 
