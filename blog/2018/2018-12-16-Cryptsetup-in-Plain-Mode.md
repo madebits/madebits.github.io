@@ -97,16 +97,28 @@ at="${3:-1000}"
 am="${4:-14}"
 ap="${5:-8}"
 
+# set to 1 to use my aes tool, 0 uses ccrypt
+toolsDir="$(dirname $0)"
+useAes=0
+
 function encryptAes()
 {
     local pass=$1
-    ccrypt -e -f -k <(echo -n "$pass")
+    if [ "$useAes" = "1" ]; then
+        "${toolsDir}/aes" -e -f <(echo -n "$pass")
+    else
+        ccrypt -e -f -k <(echo -n "$pass")
+    fi
 }
 
 function decryptAes()
 {
     local pass=$1
-    ccrypt -d -k <(echo -n "$pass")
+    if [ "$useAes" = "1" ]; then
+        "${toolsDir}/aes" -d -f <(echo -n "$pass")
+    else
+        ccrypt -d -k <(echo -n "$pass")
+    fi
 }
 
 # file pass key
@@ -118,8 +130,11 @@ function encodeKey()
     local salt=$(head -c 32 /dev/urandom | base64 -w 0)
     hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
     > "$file"
-    echo -n "$salt" >> "$file"
-    echo -n "$key" | encryptAes "$hash" | base64 -w 0 >> "$file"
+    echo -n "$salt" | base64 -d >> "$file"
+    echo -n "$key" | base64 -d | encryptAes "$hash" >> "$file"
+    # random file size
+    local r=$((1 + RANDOM % 256))
+    head -c "$r" /dev/urandom >> "$file"
 }
 
 # file pass
@@ -129,8 +144,8 @@ function decodeKey()
     local pass="$2"
 
     if [ -f "$file" ]; then
-        local salt=$(head -c 44 "$file")
-        local data=$(tail -c +45 "$file")
+        local salt=$(head -c 32 "$file" | base64 -w 0)
+        local data=$(tail -c +33 "$file" | head -c 716 | base64 -w 0)
         local hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
         echo -n "$data" | base64 -d | decryptAes "$hash"
     else
@@ -166,6 +181,7 @@ function main()
         enc)
             readPass
             local key=$(head -c 512 /dev/urandom | base64 -w 0)
+            #echo $key | base64 -d
             encodeKey "$file" "$pass" "$key"
         ;;
         dec)
