@@ -119,7 +119,17 @@ To specify password via some script above use (e.g.: via `sudo sh -c "..."`):
 echo -n password | cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain /data2/temp/container.bin enc -
 ```
 
-Given `--type plain` hashes password only once, the above is useful if you combine it with some command that hashes password more than once.
+Given `--type plain` hashes password only once, the above is useful if you combine it with some command that hashes password more than once. For example, generate a long password and encrypt it using `scrypt`:
+
+```
+head -c 521 /dev/urandom | scrypt enc -t 60 -m 1000000 - secret.bin
+# enter here the password
+# keep secret.bin together with container.bin
+
+# to use secret.bin
+sudo sh -c "scrypt dec -t 60 -m 1000000 secret.bin | cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain /data2/temp/container.bin enc -"
+#  enter here the password
+```
 
 To close the open container use:
 
