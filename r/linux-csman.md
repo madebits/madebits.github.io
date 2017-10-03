@@ -222,7 +222,7 @@ dd conv=notrunc if=secret.bin of=container.bin
 sudo csman.sh o container.bin container.bin -co -o 2 ---
 ```
 
-The `-slots count` option is provided as convenience to create 1024 byte slots. If not set, it defaults to `-slots 4`. Using `-slots` overwrites `-co -o` (the number used with `-o` needs to be twice the number of slots). Use `-slots 0` if you need no slots, or if you do not want to overwrite `-co -o`. You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number. If slots is set bigger than `0`, then create command also embeds secret file in the first slot. If slots count is bigger than one and secret.bin.01, to secret.bin.03 files exists, they are also embedded in the other slots. Slots are not intended as a replacement for container file backups.
+The `-slots count` option is provided as convenience to create 1024 byte slots. If not set, it defaults to `-slots 4`. Using `-slots` overwrites `-co -o` (the number used with `-o` needs to be twice the number of slots). Use `-slots 0` if you need no slots, or if you do not want to overwrite `-co -o` (the `-s0`  option is a shortcut for `-slots 0`). You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number. If slots is set bigger than `0`, then create command also embeds secret file in the first slot. If slots count is bigger than one and secret.bin.01, to secret.bin.03 files exists, they are also embedded in the other slots. Slots are not intended as a replacement for container file backups.
 
 ```bash
 # these are same, but only second one embeds secret during create
@@ -275,6 +275,12 @@ sudo csman.sh o container.bin -slots 2 -ck -slot 2 ---
 ```
 
 The `cskey.sh -slot` option only works with `cskey.sh dec` command and it is ignored by `cskey.sh enc` command, the original output file is always truncated by `cskey.sh enc`.
+
+To remove a slot's data, overwrite it with random data:
+
+```bash
+cskey.sh rnd - -r 1024 | csman.sh e container.bin -s - -slot 2
+```
 
 ### Using Containers
 
