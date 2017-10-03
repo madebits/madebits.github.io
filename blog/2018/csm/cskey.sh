@@ -28,6 +28,7 @@ cskSessionPass=""
 cskSessionSecretFile=""
 cskSessionAutoPass="0"
 cskSessionSaveDecodePassFile=""
+cskRndLen="64"
 
 user="${SUDO_USER:-$(whoami)}"
 currentScriptPid=$$
@@ -478,7 +479,7 @@ function loadSessionSecret()
 
 function showHelp()
 {
-	logError "Usage: $(basename "$0") [enc | dec | ses] file [options]"
+	logError "Usage: $(basename "$0") [enc | dec | ses | rnd] file [options]"
 	logError "Options:"
 	logError " -i inputMode : used for password"
 	logError "    Password input modes:"
@@ -500,6 +501,7 @@ function showHelp()
 	logError " -aos outFile : (dec) write secret data to a session encrypted file"
 	logError " -aop outFile : (dec) write password data to a session encrypted file"
 	logError " -aa : do not ask for session encryption password (use default)"
+	logError " -r length : (rnd) length of random bytes (default 64)"
 	logError " -d : dump password and secret on stderr for debug"
 	logError "Examples:"
 	logError ' sudo bash -c '"'"'secret=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -s <(echo -n "$secret") -d'"'"''
@@ -594,6 +596,10 @@ function main()
 				cskSessionSaveDecodePassFile="${2:?"! -aop file"}"
 				shift
 			;;
+			-r)
+				cskRndLen="${2:?"! -r length"}"
+				shift
+			;;
 			*)
 				logError "! unknown option: $current"
 				exit 1
@@ -615,6 +621,10 @@ function main()
 		ses|s)
 			createSessionPass "$cskFile"
 		;;
+		rnd|r)
+			if [ "$cskFile" = "-" ]; then cskFile="/dev/stdout"; fi 
+			head -c "$cskRndLen" /dev/urandom > "$cskFile"
+		;;	
 		*)
 			logError "! unknown command: $cskCmd"
 			showHelp
