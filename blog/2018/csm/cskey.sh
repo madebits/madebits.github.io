@@ -383,7 +383,16 @@ function readSessionPass()
 		local rsp=""
 		if [ "$cskSessionAutoPass" = "0" ]; then
 			if [ "$cskInputMode" = "1" ] || [ "$cskInputMode" = "e" ]; then
-				read -p "Session password (or Enter for default): " rsp
+				read -e -p "Session password (or Enter for default): " rsp
+				if [ -e "$rsp" ]; then
+					local ff="$rsp"
+					rsp=$(head -c 64 "${ff}" | base64 -w 0)
+					if [ -z "$rsp" ]; then
+						onFailed "cannot read file: ${ff}"
+					else
+						logError "# read session password from file: ${ff}"
+					fi
+				fi
 			else
 				read -p "Session password (or Enter for default): " -s rsp
 			fi
