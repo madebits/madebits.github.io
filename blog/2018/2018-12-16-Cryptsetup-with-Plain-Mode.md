@@ -255,7 +255,8 @@ It can be used as follows:
 ```bash
 sudo ./cs-map open enc1 secret.bin container.bin
 
-# and when done
+# mounted at $HOME/mnt/enc1_user
+# and when done, to close it use
 
 sudo ./cs-map close enc1
 ```
