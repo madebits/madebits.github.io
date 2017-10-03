@@ -6,7 +6,7 @@
 
 This a summary of steps to setup [OpenVPN](https://openvpn.net/index.php/open-source/downloads.html) in Azure, in a Ubuntu Server 16.04 virtual machine. This VPN can used as personal VPN to access the Internet/vnet via the VM, but it cannot be used to connect to [virtual network](https://docs.microsoft.com/en-us/azure/app-service/web-sites-integrate-with-vnet) from an *app service*.
 
-To set up OpenVPN in Ubuntu server, I followed steps in a [DigitalOcean tutorial](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04) steps. I choose to use `port 443` and `protocol tcp` in OpenVPN server configuration.
+To set up OpenVPN in Ubuntu server, I followed steps in a [DigitalOcean tutorial](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04) steps. I choose to use `port 443` and `proto tcp` in OpenVPN server configuration.
 
 In Azure, you need (at least) to open port `tpc/443` free for VM, in *Networking*, *InBound Port Rules* (e.g., allow *HTTPS* from predefined ones).
 
