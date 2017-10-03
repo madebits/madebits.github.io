@@ -242,7 +242,13 @@ sudo csman.sh l
 
 It will show also where containers are mounted under `%HOME/mnt/csm-name`. The folders under `%HOME/mnt/csm-*` are read / write to current logged user.
 
-The above command also shows how much total and free space is present in each container. The `-lk` option dumps raw `cryptsetup` keys used for container. These keys can be used to raw-open the containers directly via `cryptsetup`.
+The above command also shows how much total and free space is present in each container. Adding `-lk` option dumps raw `cryptsetup` keys used for container. These keys can be used to raw-open the containers directly via `cryptsetup`.
+
+To see a list of all devices in system use:
+
+```bash
+csman.sh d
+```
 
 ### Live Resize
 
