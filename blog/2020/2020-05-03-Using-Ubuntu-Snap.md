@@ -4,17 +4,21 @@
 
 <!--- tags: linux -->
 
-<a href="https://en.wikipedia.org/wiki/Snap_(package_manager)">Snap</a> is not easy avoidable anymore in Ubuntu desktop, so I spend some time to keep a few notes from documentation (and `man snap`) I had to scan to understand it.
+<a href="https://en.wikipedia.org/wiki/Snap_(package_manager)">Snap</a> is not easy avoidable anymore in Ubuntu desktop, so I am sharing my notes from reading its documentation (and `man snap`) in an effort to understand it.
 
 <div id='toc'></div>
 
 ## Snap Files
 
-Snap uses `snap` package [files](https://snapcraft.io/docs/snap-format), which are [SquashFS](https://en.wikipedia.org/wiki/SquashFS) package files, using a low-overhead read-only compressed file [system](https://tldp.org/HOWTO/SquashFS-HOWTO/index.html). Snap application files (obtained via `snap install gimp`) are stored in `/var/lib/snapd/snaps/`, which seems [cannot](https://askubuntu.com/questions/1029562/move-snap-packages-to-another-location-directory) be easy changed. They are managed by `snapd` service (`systemctl status snapd.service`) that connects their snap defined interfaces and enforces [security](https://snapcraft.io/docs/snap-confinement), given snaps can be [published](https://snapcraft.io/docs/permission-requests) by everyone.
+Snap uses `snap` package [files](https://snapcraft.io/docs/snap-format), which are [SquashFS](https://en.wikipedia.org/wiki/SquashFS) package files, a low-overhead, read-only, compressed file [system](https://tldp.org/HOWTO/SquashFS-HOWTO/index.html). 
+
+Snap application files are obtained, for example, via `snap install gimp` -- I am using [gimp](https://snapcraft.io/gimp) as an example snap application. They are stored in `/var/lib/snapd/snaps/`, which seems [cannot](https://askubuntu.com/questions/1029562/move-snap-packages-to-another-location-directory) be easy changed. 
+
+Snap applications are managed by `snapd` service (`systemctl status snapd.service`) that connects their snap defined interfaces and enforces [security](https://snapcraft.io/docs/snap-confinement), given snaps can be [published](https://snapcraft.io/docs/permission-requests) by everyone.
 
 ## Snap Mounts
 
-Based on snap [documentation](https://snapcraft.io/docs/system-snap-directory) the system top level `/snap` folder is where `*.snap` application files are mounted read-only, with `/span/<app>/current` being a link to current revision:
+The system top level `/snap` [folder](https://snapcraft.io/docs/system-snap-directory) is where `*.snap` application files are mounted *read-only*, with `/span/gimp/current` being a link to the current revision:
 
 ```bash
 $ mount | column -t | grep snap | grep gimp
@@ -31,6 +35,8 @@ $ ls -lh /var/lib/snapd/snaps/gimp_262.snap
 -rw------- 1 root root 176M Apr 13 12:19 /var/lib/snapd/snaps/gimp_262.snap
 ```
 
+Given snaps usually include files to run in many platforms, they are bigger than the corresponding `deb` packages.
+
 Mounted snaps consume `loop` devices:
 
 ```bash
@@ -39,9 +45,9 @@ $ df -h | grep gimp
 /dev/loop20                  176M  176M     0 100% /snap/gimp/265
 ```
 
-I am not sure why they need to mount all revisions, I guess just to make `mount` and `df` commands unusable (`df -h -x squashfs`), but they have patched `gnome-disks` not to show snap loop devices. 
+I am not sure why they need to mount all revisions, I guess just to make `mount` and `df` commands unusable (`df -h -x squashfs`). They have patched, however, `gnome-disks` not to show snap loop devices. 
 
-The binary files declared within snap meta files are linked to `/snap/bin` (it seem to be added to `$PATH` in Ubuntu):
+The binary files declared within snap meta files are linked to `/snap/bin` (which is added to system `$PATH` in Ubuntu):
 
 ```bash
 $ ls -l /snap/bin | grep gimp
@@ -54,7 +60,7 @@ To view commands of a snap use:
 $ snap info gimp
 ```
 
-All commands link to `/usr/bin/snap` which uses a common trick to figure out what command is, based on link invocation information. The `./snap` folder contains details how the snap package was built:
+All commands link to `/usr/bin/snap` which uses a common trick to figure out what command is, based on link invocation information. The `/snap/gimp/current/snap` folder contains details how the snap package was built:
 
 ```bash
 $ ls -l /snap/gimp/current/snap
@@ -86,7 +92,7 @@ gimp                  2.10.18                        265   latest/edge      snap
 $ sudo snap remove gimp --revision 262
 ```
 
-One can make a bash [script](https://www.linuxuprising.com/2019/04/how-to-remove-old-snap-versions-to-free.html) to automate this given the lost people who created snap forgot to make that an option:
+One can make a bash [script](https://www.linuxuprising.com/2019/04/how-to-remove-old-snap-versions-to-free.html) to automate this given the lost people who created snap *forgot* to make that an option:
 
 ```bash
 #!/bin/bash
@@ -100,7 +106,7 @@ LANG=en_US.UTF-8 snap list --all | awk '/disabled/{print $1, $3}' |
     done
 ```
 
-Ideally snaps should not be running when running above script, but that is now hard in Ubuntu, so maybe a restart will be needed after running the script.
+Ideally, snaps should not be running when running above script, but that is now hard in Ubuntu, so a system restart may be needed after running the above script.
 
 ## Connections: Interfaces = Plugs and Slots
 
@@ -126,12 +132,12 @@ x11                       gimp:x11                                   :x11       
 
 ```
 
-Examples of core snap [interfaces](https://snapcraft.io/docs/supported-interfaces):
+Examples of snap [interfaces](https://snapcraft.io/docs/supported-interfaces):
 
 * [:home](https://snapcraft.io/docs/home-interface) *core* snap interface gives the application access to non-hidden files in real `$HOME` directory. This is off, unless a [classic](https://snapcraft.io/docs/snap-confinement) snap, or an [approved](https://snapcraft.io/docs/permission-requests) snap. That means there is no way to know, until you install the snap, which may be too late, due to [hooks](https://snapcraft.io/docs/supported-snap-hooks).
 * [:personal-files](https://snapcraft.io/docs/personal-files-interface) allows access to hidden $HOME folders and files.
-* [:network](https://snapcraft.io/docs/network-interface) gives access to network (which I think is not good when combined with `:home`). It can be removed using `sudo snap disconnect gimp:network :network` and it can be added back using `sudo snap connect gimp:network :network`. These changes are preserved by `snap refresh`.
-* [:content](https://snapcraft.io/docs/content-interface) allows snaps of same publisher to share data with each-other.
+* [:network](https://snapcraft.io/docs/network-interface) gives access to network (which is not good when combined with `:home`, as it is the case for `gimp` above). It can be removed using `sudo snap disconnect gimp:network :network` and it can be added back using `sudo snap connect gimp:network :network`. These changes are preserved by `snap refresh`.
+* [content](https://snapcraft.io/docs/content-interface) allows snaps of same publisher to share data with each-other.
 * [:browser-support] allows access to system via modern browser APIs.
 * [:password-manager-service] access to system password services.
 
@@ -168,7 +174,9 @@ System versions of these also exit for root snap packaged services (`sudo snap s
 * `SNAP_DATA=/var/snap/gimp/current`
 * `SNAP_COMMON=/var/snap/gimp/common`
 
-To make a [snapshot](https://snapcraft.io/docs/snapshots) of all data use `snap save` (saved in `/var/lib/snapd/snapshots` folder). To view saved data snapshots, use `snap saved`. It list snapshot `id` is in the first *Set* column. To remove a snapshot use `snap forget id`.
+### Snap Data Snapshots
+
+To make a [snapshot](https://snapcraft.io/docs/snapshots) of all data use `snap save` (saved in `/var/lib/snapd/snapshots` folder). To view saved data snapshots, use `snap saved`. It lists snapshot `id` is in the first *Set* column. To remove a snapshot use `snap forget id`.
 
 ### Application Configuration
 
