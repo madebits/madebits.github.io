@@ -62,7 +62,7 @@ sda                     8:0    0    30G  0 disk
 
 ##GNOME
 
-I have still to find someone that can use GNome as it is out of the box. So first things first:
+I have still to find someone that can use GNOME as it is out of the box. So first things first:
 
 ```bash
 sudo apt-get update
