@@ -114,9 +114,11 @@ function touchFile()
     local file="$1"
     local fileTime="$2"
     if [ -f "$file" ]; then
+    set +e
     #sudo bash -s "$file" "$fileTime" <<-'EOF'
         now=$(date +"%F %T.%N %z") && date -s "$2" > /dev/null && touch "$1" && date -s "$now" > /dev/null
     #   EOF
+    set -e
     fi
 }
 

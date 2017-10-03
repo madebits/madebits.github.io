@@ -77,7 +77,9 @@ function touchFile()
 	local file="$1"
 	if [ -f "$file" ]; then
 		local md=$(stat -c %z "$file")
-		touch -d "$md" "$file"
+		set +e
+		touch -d "$md" "$file" 2> /dev/null
+		set -e
 	fi
 }
 
