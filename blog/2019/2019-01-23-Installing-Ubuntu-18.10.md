@@ -119,7 +119,7 @@ On Firefox, installed [GNOME Shell Integration](https://addons.mozilla.org/en-US
 
 Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcut](https://wiki.gnome.org/Design/OS/KeyboardShortcuts) to open applications.
 
-###Minimal Selection of GNome Extensions
+###Minimal Selection of GNOME Extensions
 
 * Dash to Panel https://extensions.gnome.org/extension/1160/dash-to-panel/
     I can live with this one only
@@ -156,12 +156,12 @@ Extra setup:
 * `nautilus -q` to quit instances
 * To have `nautilus` generate video [thumbnails](https://askubuntu.com/questions/2608/nautilus-video-thumbnails-without-totem), I installed `sudo apt install ffmpegthumbnailer` (though [mpv](https://github.com/mpv-player/mpv/issues/3735) can also be used). It created `/usr/share/thumbnailers/ffmpegthumbnailer.thumbnailer` file with the following content:
 
-```
-[Thumbnailer Entry]
-TryExec=ffmpegthumbnailer
-Exec=ffmpegthumbnailer -i %i -o %o -s %s -f
-MimeType=video/jpeg;video/mp4;video/mpeg;video/quicktime;video/x-ms-asf;video/x-ms-wm;video/x-ms-wmv;video/x-msvideo;video/x-flv;video/x-matroska;video/webm;video/mp2t;
-```
+    ```
+    [Thumbnailer Entry]
+    TryExec=ffmpegthumbnailer
+    Exec=ffmpegthumbnailer -i %i -o %o -s %s -f
+    MimeType=video/jpeg;video/mp4;video/mpeg;video/quicktime;video/x-ms-asf;video/x-ms-wm;video/x-ms-wmv;video/x-msvideo;video/x-flv;video/x-matroska;video/webm;video/mp2t;
+    ```
 
 ###Hacks
 
