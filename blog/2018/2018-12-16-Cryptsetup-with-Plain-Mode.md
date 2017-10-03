@@ -39,7 +39,7 @@ To increase size of the container file, we can use use again `dd` with *seek* pa
 # resize container from 30G to 40G (i.e., +10G)
 dd iflag=fullblock if=/dev/urandom of=container.bin bs=1G count=10 seek=30
 # after open, use any file system tools to expand the partition
-# to reverse, use file system tools to shrink the partition, and then use truncate tool
+# to reverse, use any file system tools to shrink the partition and then use truncate tool
 ```
 
 ##Better Plain Mode Passwords
