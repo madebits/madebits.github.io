@@ -1,4 +1,4 @@
-.Rhistory
-.settings
-.swp
-.vscode
+*.Rhistory
+*.settings
+*.swp
+*.vscode
