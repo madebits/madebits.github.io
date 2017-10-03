@@ -15,6 +15,7 @@ Somehow [F.F.AdBlock](https://github.com/Mechazawa/FuckFuckAdblock) user script 
 // @grant           none
 // ==/UserScript==
 
+// https://github.com/sitexw/FuckAdBlock/blob/master/fuckadblock.js
 // https://stackoverflow.com/questions/10485992/hijacking-a-variable-with-a-userscript-for-chrome
 var code = function() {
 
@@ -23,6 +24,9 @@ var code = function() {
     onNotDetected(cb) { if(cb) cb(); return this; }
     on(on, cb) { if(!on && cb) cb(); return this; }
     setOption() { return this; }
+    check() { return this; }
+    clearEvent() { return this; }
+    emitEvent() { return this; }
   }
 
   Object.defineProperty(window, 'FuckAdBlock', { value: FuckAdBlock, enumerable: true, writable: false });
