@@ -176,7 +176,7 @@ To create an encrypted container you need to specify the container file or devic
 sudo csman.sh n container.bin secret.bin 1M -cf -N 1000 ---
 ```
 
-The `-cf ... ---` can be used to pass EXT4 options for file system creation, such as, the number of *inodes* to use `-N 1000`, or the EXT4 volume label `-L VOL1` (see `man mkfs.ext4`).
+The `-cf ... ---` can be used to pass EXT4 options for file system creation, such as, the number of *inodes* to use `-N 1000` (or `-T small`), or the EXT4 volume label `-L VOL1` (see `man mkfs.ext4`).
 
 The size to use can be only in units of M or G (for MiB, GiB, as powers of 1024).
 
