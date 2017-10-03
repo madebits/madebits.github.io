@@ -385,6 +385,7 @@ function readSessionPass()
 		local sData0=""
 		if [ -n "$cskSessionSaltFile" ]; then
 			if [ ! -e "$cskSessionSaltFile" ]; then
+				logError "# creating new session salt file: ${cskSessionSaltFile}"
 				createRndFile "$cskSessionSaltFile"
 			fi
 			sData0=$(head -c 64 "${cskSessionSaltFile}" | base64 -w 0)
@@ -422,7 +423,7 @@ function readSessionPassFromFile()
 		fi
 		local p=$(cat "$1" | base64 -w 0)
 		if [ -z "$p" ]; then
-			onFailed "cannot session password from: ${1}"
+			onFailed "cannot read session password from: ${1}"
 		fi
 		echo -n "$p" | base64 -d | decryptAes "$cskSessionPass"
 	else
@@ -462,7 +463,7 @@ function loadSessionPass()
 	local pass=$(readSessionPassFromFile "$file")
 	set -e
 	if [ -z "${pass}" ] || [ "${pass: -5}" != "CSKEY" ]; then
-		onFailed "cannot read session password from: ${file}"
+		onFailed "invalid session password in: ${file}"
 	fi
 	pass="${pass:0:${#pass}-5}" #remove token
 	debugData "${pass}"
