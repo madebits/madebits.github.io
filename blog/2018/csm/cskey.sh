@@ -355,7 +355,7 @@ function encodeMany()
 	fi
 	for ((i=1 ; i <= $count; i++))
 	{
-		local pad=$(printf "%02d" ${i})
+		local pad=$(printf "%02d" ${i}) # printf -v padd "..."
 		local file="${1}.${pad}"
 		logError "$file"
 		if [ "$cskBackupNewSecret" = "1" ]; then
@@ -420,7 +420,7 @@ function readSessionPass()
 		# session specific
 		local sData0=""
 		if [ -z "$cskSessionSaltFile" ]; then
-			cskSessionSaltFile="${cskSessionLocation}/$(uptime -s | tr -d ' :-')"
+			cskSessionSaltFile="${cskSessionLocation}/session"
 		fi
 		if [ -n "$cskSessionSaltFile" ]; then
 			if [ ! -e "$cskSessionSaltFile" ]; then
@@ -434,9 +434,9 @@ function readSessionPass()
 					logError "# session: reading seed from: ${cskSessionSaltFile}"
 			fi
 		fi
-		local sData1="$(uptime -s)"
+		#local sData1="$(uptime -s | tr -d ' :-')"
 		#local sData2="$(ps ax | grep -E '/systemd --user|/cron|/udisks' | grep -v grep | tr -s ' ' | cut -d ' ' -f 2 | tr -d '\n')"
-		local sessionData="${user}${sData0}${sData1}"
+		local sessionData="${user}"
 		local sSecret="${sessionData}"
 		local rsp="${cskSessionAutoKeyFile}"
 		if [ -z "${rsp}" ] && [ "${cskSessionAutoKey}" = "0" ]; then
