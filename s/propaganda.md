@@ -106,6 +106,7 @@
 [NBC News](https://www.nbcnews.com/world)
 [USA Today](https://usatoday.com/)
 [Fox News](https://www.foxnews.com/world)
+[Bloomberg](https://www.bloomberg.com/europe)
 [The New York Times](https://www.nytimes.com/section/world)
 [The Washington Times](https://www.washingtontimes.com/news/world/)
 [Wall Street Journal](https://www.wsj.com/news/world)
@@ -115,6 +116,7 @@
 [ForeignPolicy](https://foreignpolicy.com/)
 [Rand](https://www.rand.org/)
 [RealClearDefense](https://www.realcleardefense.com/)
+[ZeroHedge](https://www.zerohedge.com/)
 [Pbs](https://www.pbs.org/wgbh/frontline/)
 [The Onion](https://www.theonion.com/)
 
