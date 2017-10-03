@@ -200,18 +200,22 @@ function umountContainer()
     local mntDir1=$(mntDirRoot "$name")
     local mntDir2=$(mntDirUser "$name")
     
-    set +e
-    fuser -km "$mntDir2"
-    set -e
-    sleep 1
-    umount "$mntDir2" && rmdir "$mntDir2"
-    set +e
-    fuser -km "$mntDir1"
-    set -e
-    sleep 1
-    set +e
-    umount "$mntDir1" && rmdir "$mntDir1"
-    set -e
+    if [ -d "$mntDir2" ]; then
+        set +e
+        fuser -km "$mntDir2"
+        set -e
+        sleep 1
+        umount "$mntDir2" && rmdir "$mntDir2"
+    fi
+    if [ -d "$mntDir1" ]; then
+        set +e
+        fuser -km "$mntDir1"
+        set -e
+        sleep 1
+        set +e
+        umount "$mntDir1" && rmdir "$mntDir1"
+        set -e
+    fi
 }
 
 # name
@@ -277,6 +281,7 @@ function closeContainer()
     closeContainerByName "$name"
 }
 
+# list
 function closeAll()
 {
     for filename in /dev/mapper/*; do
@@ -285,8 +290,56 @@ function closeAll()
         [ "$name" != "control" ] || continue
         [[ "$name" == csm-* ]] || continue
         [ "${name: -1}" != "_" ] || continue
-        closeContainer "$name"
+        if [ "${1:-}" = "1" ]; then
+            listContainer "$name"
+            echo
+        else
+            closeContainer "$name"
+        fi
     done
+}
+
+function listContainer()
+{
+    local name=$(validName "${1:-}")
+    local oName=${name:4}
+    echo -e "Name:\t$oName\t$name"
+    local container="$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)"
+    local mode="$(cryptsetup status "$name" | grep mode: | cut -d ' ' -f 7)"
+    if [ -z "$container" ]; then
+        return
+    fi
+    local cipher=""
+    echo -e "File:\t$container\t$mode"
+    local dev="$(getDevice "$name" "0")"
+    if [ -e "$dev" ]; then
+        time=$(stat -c %z "$dev")
+        echo -e "Open:\t${time}"
+        cipher="$(cryptsetup status "$name" | grep cipher: | cut -d ' ' -f 5)"
+        echo -e "Device:\t${dev}\t${cipher}"
+    fi
+    dev="$(getDevice "$name" "1")"
+    if [ -e "$dev" ]; then
+        cipher="$(cryptsetup status "$dev" | grep cipher: | cut -d ' ' -f 5)"
+        echo -e "Device:\t${dev}\t${cipher}"
+    fi
+    local mntDir1=$(mntDirRoot "$name")
+    local mntDir2=$(mntDirUser "$name")
+    if [ -d "$mntDir1" ]; then
+        
+        local m="$(mount | grep "$mntDir1")"
+        if [ -n "$m" ]; then
+            m="mounted"
+        fi
+        echo -e "Dir1:\t$mntDir1\t$m"
+    fi
+    if [ -d "$mntDir2" ]; then
+        local m="$(mount | grep "$mntDir2")"
+        if [ -n "$m" ]; then
+            m="mounted"
+        fi
+        echo -e "Dir2:\t$mntDir2\t$m"
+    fi
 }
 
 ########################################################################
@@ -298,9 +351,15 @@ function openContainerByName()
     local name="$2"
     local device="$3"
     
+    local cro=""
+    if [ "$cmsMountReadOnly" = "1" ]; then
+        echo "# opening read-only"
+        cro="--readonly"
+    fi
+    
     local dev="$(getDevice "$name" "0")"
     echo "Opening ${dev} ..."
-    echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "${csOptions[@]}" open "${device}" "${name}" -
+    echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared $cro "${csOptions[@]}" open "${device}" "${name}" -
     cryptsetup status "${dev}"
     
     if [ "$csmChain" = "1" ]; then
@@ -308,7 +367,7 @@ function openContainerByName()
         local dev1="$(getDevice "$name" "1")"
         echo "Opening ${dev1} ..."
         set +e
-        echo -n "${key}" | base64 -d | cat - <(echo -n "different key") | cryptsetup --type plain -c twofish-cbc-essiv:sha256 -s 256 -h sha512 "${csiOptions[@]}" open "${dev}" "${name1}" -
+        echo -n "${key}" | base64 -d | cat - <(echo -n "different key") | cryptsetup --type plain -c twofish-cbc-essiv:sha256 -s 256 -h sha512 $cro "${csiOptions[@]}" open "${dev}" "${name1}" -
         if [ "$?" != "0" ]; then
             closeContainerByName "$name"
             failed
@@ -527,7 +586,7 @@ function increaseContainer()
     local sizeNum="${size: : -1}"
     checkNumber "$sizeNum"
 
-    container=$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)
+    container="$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)"
     if [ ! -f "$container" ]; then
         onFailed "no such container file ${container}"
     fi
@@ -605,6 +664,7 @@ function showHelp()
     logError " $bn open|o secret device [ openCreateOptions ]"
     logError " $bn close|c name"
     logError " $bn closeAll|ca"
+    logError " $bn list|l"
     logError " $bn mount|m name"
     logError " $bn umount|u name"
     logError " $bn create|n secret container size [ openCreateOptions ]"
@@ -747,6 +807,9 @@ function main()
         ;;
         closeAll|ca|x)
             closeAll
+        ;;
+        list|l)
+            closeAll "1"
         ;;
         resize|r)
             resizeContainer "$1"
