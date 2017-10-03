@@ -4,7 +4,11 @@
 
 <!--- tags: linux devops -->
 
-We want to set up a `shared` SFTP folder jailed within `/data/jail` directory in Ubuntu server. First create an SFTP only user group to restrict access:
+We want to set up a `shared` SFTP folder jailed within `/data/jail` directory in Ubuntu server. 
+
+## Common Shared Folder Users
+
+First create an SFTP only user group to restrict access:
 
 ```bash
 sudo groupadd sftponly
@@ -53,32 +57,6 @@ Subsystem sftp /usr/lib/openssh/sftp-server
 
 A few things to notice here, there is no need for *Subsystem sftp internal-sftp* (I have commented it out), and the *umask* 002 is used to allow users to access each others files. 
 
-Similarly, assuming we have another `sftphome` group for users that need access to their home only via SFTP, we could add`to configuration:
-
-```
-   Match Group sftphome
-   ChrootDirectory %h
-   ForceCommand internal-sftp
-   X11Forwarding no
-   AllowTcpForwarding no
-   PermitOpen none
-   PermitTunnel no
-   Match all
-```
-
-For home *user*s, the permissions on their folders needs to be:
-
-```
-sudo chown root:root /home/user
-sudo chmod 755 /home/user 
-
-sudo mkdir -p /home/user/public
-sudo chown root:sftphome /home/user/public
-sudo chmod 755 /home/user/public
-```
-
-We have to be careful to set *nologin* shell for such home users too (or [use](https://askubuntu.com/questions/49271/how-to-setup-a-sftp-server-with-users-chrooted-in-their-home-directories) `AllowGroups`). 
-
 Once done, we need to restart ssh daemon:
 
 ```bash
@@ -94,5 +72,35 @@ tail f- /var/log/syslog
 ```
 
 Some [tutorials](https://wiki.archlinux.org/index.php/SFTP_chroot) show an additional step to `mount -o bind` jail folder to another one and use that in SFTP / user home configuration. That is not needed, but may add an extra level of `chroot` security.
+
+## Home Only Users
+
+Similarly, assuming we have another `sftphome` group for users that need access to their $HOME only via SFTP, we could add to configuration:
+
+```
+   Match Group sftphome
+   ChrootDirectory %h
+   ForceCommand internal-sftp
+   X11Forwarding no
+   AllowTcpForwarding no
+   PermitOpen none
+   PermitTunnel no
+   Match all
+```
+
+For home only *user*s, the permissions on their folders needs to be:
+
+```
+sudo chown root:root /home/user
+sudo chmod 755 /home/user 
+
+sudo mkdir -p /home/user/public
+sudo chown root:sftphome /home/user/public
+sudo chmod 775 /home/user/public
+```
+
+We have to be careful to also set *nologin* shell for such home users (or [use](https://askubuntu.com/questions/49271/how-to-setup-a-sftp-server-with-users-chrooted-in-their-home-directories) `AllowGroups`).
+
+It is also a good idea to set file-system [quotas](https://www.digitalocean.com/community/tutorials/how-to-set-filesystem-quotas-on-ubuntu-18-04) for STFP users.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-03-25-MongoDb-with-SSL.md'>MongoDb with SSL</a></ins>
