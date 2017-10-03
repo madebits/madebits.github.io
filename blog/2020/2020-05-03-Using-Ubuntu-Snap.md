@@ -96,6 +96,14 @@ $ pstree -pu
 
 Snap creates temporary folders for run snaps, e.g for `gimp` under `/tmp/snap.gimp/tmp/` (it looks to me, to be without execute rights).
 
+## Snap Desktop Files
+
+Snap `*.desktop` files are under `/var/lib/snapd/desktop/`. To customize them, copy the `*.desktop` file from `/var/lib/snapd/desktop/` under `~/.local/share/applications`. For example, for `chromium`:
+
+```
+Exec=env BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/chromium_chromium.desktop /snap/bin/chromium --disk-cache-dir=/dev/null --disk-cache-size=1 --incognito -start-maximized --no-first-run %U
+```
+
 ## Snap Configuration
 
 To get [configuration](https://snapcraft.io/docs/configuration-in-snaps) options of a snap use (*set/unset* option can be used to set/clear them):
