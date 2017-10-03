@@ -234,7 +234,7 @@ Alternatively, use `sudo csman.sh increase name size`. The *size* is the delta s
 
 ### Closing Containers
 
-The open command with `-l` option will close the container if user presses twice *Enter* key, or if terminal is closed.
+The open command with `-l` option will close the container if user presses twice *Enter* key.
 
 To close a container named *n1* (*csm-n1*) use `close` or `c` command:
 
