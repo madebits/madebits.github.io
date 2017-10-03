@@ -1,3 +1,4 @@
+* [Dirac Notation Cheatsheet](#blog/2018/2018-01-27-Dirac-Notation-Cheatsheet.md)
 * [Patching Node Express For Async Wait](#blog/2017/2017-10-20-Patching-Node-Express-For-Async-Wait.md)
 * [Blocking BlockAdBlock](#blog/2017/2017-10-13-Blocking-BlockAdBlock.md)
 * [VSCode Extensions](#blog/2017/2017-10-08-VSCode-Extensions.md)
@@ -5,4 +6,3 @@
 * [iptables for OpenVpn](#blog/2017/2017-10-03-iptables-for-OpenVpn.md)
 * [From Requirements To Stories](#blog/2017/2017-09-11-From-Requirements-To-Stories.md)
 * [Product Definition Life Cycle](#blog/2017/2017-08-10-Product-Definition-Life-Cycle.md)
-* [Docker Machine On Windows](#blog/2017/2017-06-14-Docker-Machine-On-Windows.md)

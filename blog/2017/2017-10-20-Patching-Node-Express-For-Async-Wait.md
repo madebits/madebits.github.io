@@ -48,4 +48,5 @@ app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
 ```
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2017/2017-10-13-Blocking-BlockAdBlock.md'>Blocking BlockAdBlock</a></ins>
+
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2018/2018-01-27-Dirac-Notation-Cheatsheet.md'>Dirac Notation Cheatsheet</a> <a rel='next' id='fnext' href='#blog/2017/2017-10-13-Blocking-BlockAdBlock.md'>Blocking BlockAdBlock</a></ins>

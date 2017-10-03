@@ -1,1 +1,1 @@
-var homeUrl='blog/2017/2017-10-20-Patching-Node-Express-For-Async-Wait.md';
+var homeUrl='blog/2018/2018-01-27-Dirac-Notation-Cheatsheet.md';
