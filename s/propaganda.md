@@ -8,6 +8,7 @@
 * [LinuxToday](http://www.linuxtoday.com/)
 * [Medium](https://medium.com/)
 * [Ars Technica](https://arstechnica.com/)
+* [Channel9](https://channel9.msdn.com/)
 
 <hr>
 
