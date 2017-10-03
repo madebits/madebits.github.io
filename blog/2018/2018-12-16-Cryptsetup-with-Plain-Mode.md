@@ -39,6 +39,8 @@ sudo sh -c "scrypt dec -t 60 -m 1000000 secret.bin | cryptsetup -v -c aes-xts-pl
 #  enter here the password
 ```
 
+While `scrypt` is the easiest tool to use, you may also consider combining `argon2` and `ccrypt` to achieve same.
+
 To close the open container use:
 
 ```
