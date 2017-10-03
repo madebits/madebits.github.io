@@ -1,6 +1,6 @@
 2011
 
-#Simplicity Home Theater (HTPC)
+# Simplicity Home Theater (HTPC)
 
 **Simplicity Home Theater** is a file browser and launcher for home theater personal computers ([HTPC](http://en.wikipedia.org/wiki/10-foot_user_interface)) running Microsoft Windows. Simplicity can be used to directly browse hard-disk folders and launch content, such as movies.
 
@@ -8,7 +8,7 @@
 
 ![inline](r/msnet-simplicity-home-theater/s02t.jpg) ![inline](r/msnet-simplicity-home-theater/m01t.jpg) ![inline](r/msnet-simplicity-home-theater/m02t.jpg)
 
-##Usage
+## Usage
 
 The best way of using Simplicity Home Theater is to have at least two user accounts on your machine. On one user account set Windows text size to 200% and configure Simplicity Home Theater to auto start - this will be the account to use while connected in TV. The other account can then be used (locally or remotely) to manage the PC and the files using Windows Shell.
 
@@ -47,6 +47,7 @@ All Simplicity functions can be reached either via mouse or via keyboard. Simpli
 |MediaPreviousTrack|Same as Up key.|
 |F5|On browser windows, refreshes content.|
 
+
 There are two ways to start Simplicity Home Theater when you login:
 
 * Create a shortcut to it in your system Startup folder (*C:\Users\USER\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup*), and optionally add `/fullscreen` command-line option to the shortcut path. Set also your system **taskbar in auto-hide mode**. Full screen works also when taskbar is visible (thought you may not like taskbar showing on top while launching applications).
@@ -56,7 +57,7 @@ Passing a path to Simplicity Home Theater command-line opens browses to that pat
 
 Only one instance of Simplicity Home Theater can be run at a time.
 
-##Configuration
+## Configuration
 
 Simplicity takes the current configuration from several files, by default located in a folder called `Simplicity Home Theater` under local application data of current user profile (e.g.: *C:\Users\USER\AppData\Local\Simplicity Home Theater*). The configuration files are created with default values on first run.
 
@@ -92,7 +93,7 @@ If the configuration files are put empty or copied in same location as Simplicit
 1. debuglog.txt - (write) is created at every startup if config.txt option debuglog=1.
 
 
-##MediaPreview
+## MediaPreview
 
 **MediaPreview** is a separate application that is intended to be used in combination with **Simplicity Home Theater**. MediaPreview can preview most image files, and if `ffmpeg.exe` is available (see below), it can preview also most movie files. MediaPreview can preview single movies and images, or folders of such (thumbnails). To add MediaPreview as a launcher in Simplicity Home Theater, copy it to the same folder where Simplicity.exe is and the following to launchers.txt file.
 
@@ -117,7 +118,7 @@ Where the MediaPreview command-line options are:
 * /slidespeed - number in seconds between 3 and 60 (default 5) for slide show speed. The speed is measured single show of a page fully finishes.
 * /loop - by default MediaPreview closes when trying to preview after files are finished. If /loop is specified preview continues back from beginning (or back from end in upwards).
 * /noautorotate - by default images are automatically rotated based on EXIF information. The default behavior can be disabled by specifying this option.
-* /border - if specified a border is added images (when more than one per page).
+* /border - if specified, a border is added to images (when more than one per page).
 *
 Keyboard and mouse options of MediaPreview are similar to those of Simplicity Home Theater:
 
