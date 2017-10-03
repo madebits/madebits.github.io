@@ -102,7 +102,7 @@ Backend will run at port http://localhost:3000 by default.
 * [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
   ```
   "vetur.format.defaultFormatter": {
-        "html": "prettier"
+    "html": "prettier"
   }
   ```
 * [Vue Peek](https://marketplace.visualstudio.com/items?itemName=dariofuzinato.vue-peek)
