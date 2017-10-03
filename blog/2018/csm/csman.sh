@@ -276,7 +276,6 @@ function closeContainerByName()
             set +e
             lastContainer="$(getContainerFile "$name")"
             set -e
-            resetTime
         fi
         cryptsetup close "$(innerName "$name")"
     fi
@@ -284,6 +283,7 @@ function closeContainerByName()
     if [ -e "$dev" ]; then
         cryptsetup close "$name"
     fi
+    resetTime
     echo " Closed ${name} !"
 }
 
