@@ -4,7 +4,7 @@
 
 <!--- tags: linux devops -->
 
-We want to set up a `shared` SFTP folder jailed within `/data/jail` directory in a Ubuntu server. For that, first create an SFTP only user group to restrict access:
+We want to set up a `shared` SFTP folder jailed within `/data/jail` directory in Ubuntu server. For that, first create an SFTP only user group to restrict access:
 
 ```bash
 sudo groupadd sftponly
@@ -46,10 +46,16 @@ Subsystem sftp /usr/lib/openssh/sftp-server
    ForceCommand internal-sftp -u 002
    X11Forwarding no
    AllowTcpForwarding no
+   PermitOpen none
+   PermitTunnel no
    Match all
 ```
 
-A few things to notice here, there is no need for *Subsystem sftp internal-sftp* (I have commented it out), and the *umask* 002 is used to allow users to access each others files.
+A few things to notice here, there is no need for *Subsystem sftp internal-sftp* (I have commented it out), and the *umask* 002 is used to allow users to access each others files. Once done, we need to restart ssh daemon:
+
+```bash
+sudo systemctl restart sshd
+```
 
 To test the configuration, we can use:
 
@@ -58,6 +64,6 @@ sftp sftpuser001@localhost
 tail -f /var/log/auth.log
 ```
 
-Some [guides](https://wiki.archlinux.org/index.php/SFTP_chroot) show and additional step to `mount -o bind` jail folder to another one and use that in SFTP / user home configuration. That is not needed, but may add an extra level of `chroot` security.
+Some [tutorials](https://wiki.archlinux.org/index.php/SFTP_chroot) show an additional step to `mount -o bind` jail folder to another one and use that in SFTP / user home configuration. That is not needed, but may add an extra level of `chroot` security.
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-03-25-MongoDb-with-SSL.md'>MongoDb with SSL</a></ins>
