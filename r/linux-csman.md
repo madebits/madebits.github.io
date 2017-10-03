@@ -113,14 +113,23 @@ Some overlapping terms explained:
 
 ## Installation
 
-Download repository files and copy as *root* under `/usr/local/bin` the following files:
+To install or update, download repository files and copy as *root* under `/usr/local/bin` the following files:
 
 * `csman.sh` - main tool.
 * `cskey.sh` - is invoked by `csman.sh` for handling encryption and decryption of keys.
 * `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool - it is used by default to encrypt secret files. Other tools can be used via `-c` option.
 * `argon2` - this is a self-compiled copy of `argon2` from [official](https://github.com/P-H-C/phc-winner-argon2) repository without any changes ([my copy](https://github.com/madebits/phc-winner-argon2)). `argon2` can be found also in Ubuntu repositories. If found next to `cskey.sh`, this copy is used in place of the system copy.
 
+The following commands handle the installation:
+
 ```
+# 1. download
+# sudo apt install curl unzip
+curl -L https://github.com/madebits/linux-csman/archive/master.zip -o csman.zip && unzip -u csman.zip && rm csman.zip && cd linux-csman-master/
+```
+
+```
+# 2. install
 sudo install aes argon2 cskey.sh csman.sh /usr/local/bin/
 ```
 
