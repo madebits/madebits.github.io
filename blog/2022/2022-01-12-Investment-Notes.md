@@ -73,7 +73,7 @@ The *property win rate p.a.* depends on the location and property quality, but i
 
 - Positive with regard to property is that it can be rented using an [Indexmietvertrag](https://ratgeber.immowelt.de/a/indexmietvertrag-wenn-die-inflation-die-miete-in-die-hoehe-treibt.html). The idea here is to keep win rate p.a same by adjusting cold rent based on [inflation](https://de.statista.com/statistik/daten/studie/609521/umfrage/monatlicher-mietindex-fuer-deutschland/).
 
-The problem is it is hard to find a property worth renting for 100000. The prices are around 300000. This means that one has to have at least 150000 own capital and finance rest 150000 via a bank. 
+It is hard to find a property worth renting for 100000. The prices are around 300000. This means that one has to have at least 150000 own capital and finance rest 150000 via a bank. 
 
 Positive:
 
