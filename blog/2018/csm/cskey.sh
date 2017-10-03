@@ -420,11 +420,11 @@ function readSessionPassFromFile()
 		fi
 		local p=$(cat "$1" | base64 -w 0)
 		if [ -z "$p" ]; then
-			onFailed "cannot read file: ${1}"
+			onFailed "cannot session password from: ${1}"
 		fi
 		echo -n "$p" | base64 -d | decryptAes "$cskSessionPass"
 	else
-		onFailed "cannot read file: ${1}"
+		onFailed "cannot read from: ${1}"
 	fi
 }
 
@@ -460,7 +460,7 @@ function loadSessionPass()
 	local pass=$(readSessionPassFromFile "$file")
 	set -e
 	if [ -z "${pass}" ] || [ "${pass: -5}" != "CSKEY" ]; then
-		onFailed "cannot read file: ${file}"
+		onFailed "cannot read session password from: ${file}"
 	fi
 	pass="${pass:0:${#pass}-5}" #remove token
 	debugData "${pass}"
@@ -477,7 +477,7 @@ function loadSessionSecret()
 	readSessionPass
 	cskSecret="$(cat ${file} | decryptAes "$cskSessionPass" | base64 -w 0)"
 	if [ -z "$cskSecret" ]; then
-		onFailed "cannot read: ${file}"
+		onFailed "cannot read session secret from: ${file}"
 	fi
 }
 
