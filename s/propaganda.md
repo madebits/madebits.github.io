@@ -19,6 +19,7 @@
 * [USA Today](https://usatoday.com/)
 * [Fox News](https://www.foxnews.com/world)
 * [The New York Times](https://www.nytimes.com/section/world)
+* [The Washington Times](https://www.washingtontimes.com/news/world/)
 * [Reddit](https://www.reddit.com/r/worldnews/)
 
 <hr>
