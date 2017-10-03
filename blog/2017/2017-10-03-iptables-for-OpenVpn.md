@@ -22,6 +22,7 @@ In Ubuntu, the client is better to run under `nobody`. If several VPN servers ar
 To create the client [service](https://community.openvpn.net/openvpn/wiki/Systemd) use (for a file named `/etc/openvpn/myvpn.conf`):
 
 ```bash
+sudo apt install openvpn
 sudo systemctl start openvpn-client@myvpn
 sudo systemctl enable openvpn-client@myvpn
 ```
