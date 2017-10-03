@@ -146,7 +146,7 @@ function newName()
     while :
     do
         #a-zA-Z0-9
-        newName=$(cat /dev/urandom | tr -dc '[:lower:]' | fold -w 4 | head -n1)
+        newName=$(cat /dev/urandom | tr -dc '[:lower:]' | fold -w 3 | head -n1)
         if [ ! -e "/dev/mapper/${newName}" ]; then
             break
         fi
@@ -499,7 +499,7 @@ function openContainer()
         oName=${name:4}
     fi
     
-    echo "Reading ${device} secret from ${secret}"
+    echo "Reading ${device} secret from ${secret} ($name)"
     local key=$("${csmkeyTool}" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     if [ -z "$key" ]; then
         onFailed "cannot get secret"
