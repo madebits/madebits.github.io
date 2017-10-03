@@ -189,6 +189,7 @@
 [China Daily](http://www.chinadaily.com.cn/world)
 [Xinhua Net](http://www.xinhuanet.com/english/world/index.htm)
 [CGTN](https://www.cgtn.com/world)
+[GlobalTimes](https://www.globaltimes.cn/)
 [Straits Times](https://www.straitstimes.com/world)
 [TodayOnLine](https://www.todayonline.com/world)
 
