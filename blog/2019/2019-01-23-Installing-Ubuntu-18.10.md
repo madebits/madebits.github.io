@@ -79,6 +79,10 @@ I added also some CPU load indicator (first one I found that looked ok):
 
 * SysPeek-GS https://extensions.gnome.org/extension/1409/syspeek-gs/
 
+A well-done menu:
+
+* Gno-Menu https://extensions.gnome.org/extension/608/gnomenu/
+
 Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcut](https://wiki.gnome.org/Design/OS/KeyboardShortcuts) to open applications.
 
 ##Other Useful Tools
