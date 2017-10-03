@@ -477,7 +477,7 @@ I learned something about [brightness](https://unix.stackexchange.com/questions/
     fi
     ```
 
-    `w3m` works for mouse scroll within `man` in `urxvt`. Within `w3m` the `m` key activates mouse selection to copy text (or presing `Shift` in `urxvt` allows direct mouse selection in [any](http://nion.modprobe.de/blog/archives/634-copy-paste-in-text-mode-applications.html) console application).
+    `w3m` works for mouse scroll within `man` in `urxvt`. Within `w3m` the *m* key activates mouse selection to copy text (or pressing *Shift* in `urxvt` allows direct mouse selection in [any](http://nion.modprobe.de/blog/archives/634-copy-paste-in-text-mode-applications.html) console application). *Shift+q* exits `w3m` without confirmation.
 
 * [$HOME/.w3m/keymap](./blog/2019/i3/w3m/keymap)
 * To set mouse cursor theme, I [used](https://askubuntu.com/questions/126491/how-do-i-change-the-cursor-and-its-size): `sudo update-alternatives --config x-cursor-theme`.
