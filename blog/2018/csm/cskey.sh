@@ -433,6 +433,8 @@ function readSessionPass()
         if [ -n "$cskSessionSaltFile" ]; then
             if [ ! -e "$cskSessionSaltFile" ]; then
                 logError "# session: creating new seed: ${cskSessionSaltFile}"
+                touch "$cskSessionSaltFile"
+                chmod o-r "$cskSessionSaltFile"
                 createRndFile "$cskSessionSaltFile"
             fi
             sData0=$(head -c 64 -- "${cskSessionSaltFile}" | base64 -w 0)
@@ -516,6 +518,8 @@ function createSessionPass()
     debugData "${cskSessionKey}" "${pass}"
 
     # add a token to pass
+    touch "${file}"
+    chmod o-r "${file}"
     echo -n "${pass}CSKEY" | encryptAes "$cskSessionKey" > "${file}"
     #ownFile "$file"
     logError
