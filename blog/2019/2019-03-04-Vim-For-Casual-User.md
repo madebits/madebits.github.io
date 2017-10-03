@@ -81,7 +81,7 @@ Common edit commands (in *command-mode*):
 * `o` insert in new line after current, `O` insert in new line before current.
 
 
-* `r` replace char under cursor; `R` or `s` are same as `r` and enter insert mode afterwards.
+* `r` replace char under cursor; `R` or `s` are similar (`R` replaces more than one char at a time) as `r` and enter insert mode afterwards.
 * `c` change *motion* (using any motion command from above: `c5w`).
 * `C` change current line.
 * `~` toggle case under cursor. `gu` lowercase `gU` uppercase.
