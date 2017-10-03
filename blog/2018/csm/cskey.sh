@@ -376,6 +376,7 @@ function showHelp()
 	dumpError " -b count : (enc | chp) generate file.count backup copies"
 	dumpError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
 	dumpError " -hn hashToolOptions -- : (chp) default -hn ${cskHashToolOptions2[@]} --, used for new file"
+	dumpError " -key file : (enc) read key data from file"
 	dumpError " -d -- (enc | chp) dump password and key on screen for debug"
 	dumpError "Examples:"
 	dumpError ' key=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt -key <(echo -n "$key") -h -p 8 -m 16 -t 1000 --'
