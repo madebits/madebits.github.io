@@ -33,15 +33,15 @@ umount /mnt/tmp
 cryptsetup close enc
 ```
 
-##Better Plain Passwords
+##Better Plain Mode Passwords
 
-First, note that we can specify a password via some script to `cryptsetup` open by using (e.g.: via `sudo sh -c "..."`):
+Given `--type plain` hashes password only once, the above is useful if we combine it with some command that hashes password more than once. First, note that we can specify a password via some script to `cryptsetup` open by using (e.g.: via `sudo sh -c "..."`):
 
 ```
 echo -n "password" | cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain container.bin enc -
 ```
 
-Given `--type plain` hashes password only once, the above is useful if we combine it with some command that hashes password more than once. We can generate a long random secret and encrypt it using `scrypt`. `scrypt` tool uses AES in CTR mode to encrypt data after better hashing password:
+We can generate a long random secret and encrypt it using `scrypt`. `scrypt` tool uses AES in CTR mode to encrypt data after better hashing password:
 
 ```
 head -c 512 /dev/urandom | scrypt enc -t 60 -m 1000000 - secret.bin
@@ -54,7 +54,7 @@ sudo sh -c "scrypt dec -t 60 -m 1000000 secret.bin | cryptsetup -v -c aes-xts-pl
 #  enter here the password to open the container
 ```
 
-While `scrypt` is the easiest tool to use, you may also consider combining `argon2` and `ccrypt` to achieve same.
+While `scrypt` is the easiest tool to use, you may also consider combining `argon2` and `ccrypt` tools to achieve same.
 
 ##Finding Container Key 
 
