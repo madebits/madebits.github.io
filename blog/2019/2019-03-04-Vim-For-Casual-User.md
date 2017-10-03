@@ -170,10 +170,14 @@ Macros (`:h @`) are easier to get right than search / replace:
 * `qa` record macro in register *a* (a-z). Type commands here. `qA` appends to macro *a*.
 * `q` stop recording
 * `@a` play back macro in register *a*, `@@` replays last macro, `number@a` play *a* *number* times, and `number@@` replays last macro *number* times.
+* `:help q` for more details
+
+Registers:
+
 * `:registers` will show all registers, including the macro ones.
 * `"ap` paste register *a* (to edit as needed, *^[* is Esc key in a macro body)
 * `0"ay$` copy macro (or `v` to enter visual mode, select, then `"ay`)
-* `:help q` for more details
+* The `+` and `*` registers reference system clipboard (secondary and primary). Examples: `gg"+yG` copy all text, `*+p` paste after cursor, `"*dd` cut line.
 
 Replacing text:
 
