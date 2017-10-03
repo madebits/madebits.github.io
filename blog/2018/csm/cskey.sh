@@ -14,26 +14,16 @@ fi
 
 #state
 cskFile=""
-cskFile2=""
 cskDebug="0"
 cskInputMode="0"
 cskBackup="0"
 cskBackupNewKey="0"
 cskHashToolOptions=( "-p" "8" "-m" "14" "-t" "1000" )
-cskHashToolOptions2=( "${cskHashToolOptions[@]}" )
-cskSamePass="0"
-cskSameKeyFiles="0"
-cskSameHashToolOptions="0"
 cskPassFile=""
-cskPassFile2=""
-csmKeyFiles=()
-csmKeyFiles2=()
-csmNoKeyFiles="0"
-csmNoKeyFiles2="0"
+cskKeyFiles=()
+cskNoKeyFiles="0"
 cskKey=""
-cskChpFile=""
 cskSessionPass=""
-cskSessionPass2=""
 cskSessionSecret=""
 cskSessionKeyFile=""
 cskSessionAutoPass="0"
@@ -203,7 +193,7 @@ function readKeyFiles()
 	local count=0
 	local keyFile=""
 	
-	if [ "$csmNoKeyFiles" = "1" ] || [ -n "$cskSessionPass" ]; then
+	if [ "$cskNoKeyFiles" = "1" ] || [ -n "$cskSessionPass" ]; then
 		return
 	fi
 	
@@ -218,16 +208,16 @@ function readKeyFiles()
 		if [ ! -f "$keyFile" ]; then
 			break
 		fi
-		csmKeyFiles+=( "$(keyFileHash "$keyFile")" )
+		cskKeyFiles+=( "$(keyFileHash "$keyFile")" )
 	done
 }
 
 function computeKeyFilesHash()
 {
 	local hash=""
-	if (( ${#csmKeyFiles[@]} )); then
+	if (( ${#cskKeyFiles[@]} )); then
 		# read order does not matter
-		hash=$(printf '%s\n' "${csmKeyFiles[@]}" | sort | sha256sum | cut -d ' ' -f 1)
+		hash=$(printf '%s\n' "${cskKeyFiles[@]}" | sort | sha256sum | cut -d ' ' -f 1)
 	fi
 	echo "$hash"
 }
@@ -388,63 +378,8 @@ function decryptFile()
 {
 	readKeyFiles
 	local pass=$(readPass)
+	dumpError
     decodeKey "$1" "$pass"
-}
-
-function reEncryptFile()
-{
-	local file="$1"
-	dumpError "## Current: ${file}"
-	readKeyFiles
-	local pass1=$(readPass)
-	dumpError ""
-	if [ -n "$cskSessionKeyFile" ]; then
-		onFailed "-ao is not a valid option for chp"
-	fi
-	local key=$(decodeKey "$file" "$pass1" | base64 -w 0)
-	if [ -z "$key" ]; then
-		onFailed "cannot get key"
-	fi
-	
-	dumpError "## New"
-	
-	cskSessionPass="$cskSessionPass2"
-	
-	if [ "$cskSameKeyFiles" != "1" ]; then
-		csmNoKeyFiles="$csmNoKeyFiles2"
-		csmKeyFiles=( "${csmKeyFiles2[@]}" )
-	else
-		csmNoKeyFiles="1"
-		dumpError "#  using same key files"
-	fi
-	
-	if [ "$cskSamePass" = "1" ]; then
-		dumpError "#  using same password"
-		pass="$pass1"
-	else
-		if [ -n "$cskPassFile2" ]; then
-			cskPassFile="$cskPassFile2"
-		fi
-		readKeyFiles
-		pass=$(readNewPass)
-	fi
-
-	if [ "$cskSameHashToolOptions" != "1" ]; then
-		cskHashToolOptions=( "${cskHashToolOptions2[@]}" )
-	else
-		dumpError "#  using same hash tool options"
-	fi
-	
-	if [ -n "$cskFile2" ]; then
-		file="$cskFile2"
-	fi
-	
-	if [ -n "$cskChpFile" ]; then
-		file="$cskChpFile"
-	fi
-	
-	encodeMany "$file" "$pass" "$key"
-	dumpError "Done: $file"
 }
 
 function checkNumber()
@@ -487,7 +422,7 @@ function createSessionKey()
 	ownFile "$file"
 }
 
-# file 1
+# file
 function loadSessionPass()
 {
 	local file="${1:-}"
@@ -501,11 +436,7 @@ function loadSessionPass()
 	if [ -z "$sPass" ]; then
 		onFailed "cannot read file: ${file}"
 	fi
-	if [ "${2:-}" = "1" ]; then
-		cskSessionPass2="$sPass"
-	else
-		cskSessionPass="$sPass"
-	fi
+	cskSessionPass="$sPass"
 }
 
 # file
@@ -524,7 +455,7 @@ function loadSessionKey()
 
 function showHelp()
 {
-	dumpError "Usage: $(basename "$0") [enc | dec | chp | ses] file [options]"
+	dumpError "Usage: $(basename "$0") [enc | dec | ses] file [options]"
 	dumpError "Options:"
 	dumpError " -i inputMode : used for password"
 	dumpError "    Password input modes:"
@@ -534,29 +465,20 @@ function showHelp()
 	dumpError "     3|u read from 'zenity --password'"
 	dumpError "     4 read from 'zenity --text'"
 	dumpError " -c encryptMode : use 1 for aes tool, 0 or any other value uses ccrypt"
-	dumpError " -p passFile : (enc | chp) read pass from first line in passFile"
-	dumpError " -pn passFile : (chp) read pass from first line in passFile, used for new file"
+	dumpError " -p passFile : (enc) read pass from first line in passFile"
 	dumpError " -ap file : read pass from session file, other pass input options are ignored"
-	dumpError " -apn file : (chp) read pass from session file, used for new file, other pass input options are ignored"
-	dumpError " -s : (chp) use same password for new file, -pn is ignored"
-	dumpError " -sk : (chp) use same key files for new file, -kfn, -kn are ignored"
-	dumpError " -sh : (chp) use same hash tool options for new file, -hn is ignored"
-	dumpError " -k : (enc | chp) do not ask for keyfiles"
-	dumpError " -kn : (chp) do not ask for keyfiles, used for new file"
-	dumpError " -kf keyFile : (enc | chp) use keyFile"
-	dumpError " -kfn keyFile : (chp) use keyFile, used for new file"
-	dumpError " -b count : (enc | chp) generate file.count backup copies"
-	dumpError " -bk : (enc | chp) generate a new key for each -b file"
+	dumpError " -k : (enc) do not ask for keyfiles"
+	dumpError " -kf keyFile : (enc) use keyFile (combine with -k)"
+	dumpError " -b count : (enc) generate file.count backup copies"
+	dumpError " -bk : (enc) generate a new key for each -b file"
 	dumpError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
-	dumpError " -hn hashToolOptions -- : (chp) default -hn ${cskHashToolOptions2[@]} --, used for new file"
 	dumpError " -key file : (enc) read key data as base64 -w 0 from file"
 	dumpError " -akey file : (enc) read key data from session encrypted file (see -ao)"
-	dumpError " -o outFile : (chp) write to outFile in place of file"
 	dumpError " -ao outFile : (dec) write key in session encrypted file"
 	dumpError " -aa : auto session password"
 	dumpError " -d : dump password and key on stderr for debug"
 	dumpError "Examples:"
-	dumpError ' key=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt -key <(echo -n "$key") -h -p 8 -m 16 -t 1000 --'
+	dumpError ' sudo bash -c '"'"'key=$(cskey.sh dec d.txt | base64 -w 0) && cskey.sh enc d.txt -key <(echo -n "$key") -d'"'"''
 }
 
 # cmd file options
@@ -573,7 +495,6 @@ function main()
 	shift
 	
 	local apf=""
-	local apnf=""
 	local akeyf=""
 	
 	while [ -n "${1:-}" ]; do
@@ -602,31 +523,9 @@ function main()
 					shift
 				done
 			;;
-			-hn)
-				shift
-				cskHashToolOptions2=()
-				while [ "${1:-}" != "--" ]; do
-					cskHashToolOptions2+=( "${1:-}" )
-					shift
-				done
-			;;
-			-s|-sp)
-				cskSamePass="1"
-			;;
-			-sk)
-				cskSameKeyFiles="1"
-			;;
-			-sh)
-				cskSameHashToolOptions="1"
-			;;
 			-p)
 				local passFile="${2:?"! -p passFile"}"
 				cskPassFile=$(readPassFromFile "$passFile")
-				shift
-			;;
-			-pn)
-				local passFile="${2:?"! -pn passFile"}"
-				cskPassFile2=$(readPassFromFile "$passFile")
 				shift
 			;;
 			-aa)
@@ -636,33 +535,20 @@ function main()
 				apf="${2:?"! -ap file"}"
 				shift
 			;;
-			-apn)
-				apnf="${2:?"! -apn file"}"
-				shift
-			;;
-			-fn)
-				cskFile2="${2:?"! -fn file"}"
-				shift
-			;;
 			-k)
-				csmNoKeyFiles="1"
-			;;
-			-kn)
-				csmNoKeyFiles2="1"
+				cskNoKeyFiles="1"
 			;;
 			-kf)
 				local kf="${2:?"! -kf file"}"
-				csmKeyFiles+=( "$(keyFileHash "$kf")" )
-				shift
-			;;
-			-kfn)
-				local kfn="${2:?"! -kfn file"}"
-				csmKeyFiles2+=( "$(keyFileHash "$kfn")" )
+				cskKeyFiles+=( "$(keyFileHash "$kf")" )
 				shift
 			;;
 			-key)
 				local kk="${2:?"! -key file"}"
-				cskKey=$(cat "$kk")
+				cskKey=$(cat "${kk}")
+				if [ -z "$cskKey" ]; then
+					onFailed "cannot read: ${kk}"
+				fi
 				shift
 			;;
 			-akey)
@@ -671,10 +557,6 @@ function main()
 			;;
 			-c)
 				useAes="${2:?"! -c encryptMode"}"
-				shift
-			;;
-			-o)
-				cskChpFile="${2:?"! -o outFile"}"
 				shift
 			;;
 			-ao)
@@ -689,8 +571,7 @@ function main()
 		shift
 	done
 		
-	loadSessionPass "${apf}" "0"
-	loadSessionPass "${apnf}" "1"
+	loadSessionPass "${apf}"
 	loadSessionKey "${akeyf}"
 
 	case "$cskCmd" in
@@ -699,9 +580,6 @@ function main()
 		;;
 		dec|d)
 			decryptFile "$cskFile"
-		;;
-		chp|c)
-			reEncryptFile "$cskFile"
 		;;
 		ses|s)
 			createSessionPass "$cskFile"
