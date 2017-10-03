@@ -511,10 +511,15 @@ function ddContainer()
     local count="$3"
     local seek="${4:-}"
     
+    # https://wiki.archlinux.org/index.php/Securely_wipe_disk/Tips_and_tricks#dd_-_advanced_example
+    local tpass=$(tr -cd '[:alnum:]' < /dev/urandom | head -c128)
+       
     if [ -z "$seek" ]; then
-        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" status=progress
+        openssl enc -aes-256-ctr -pass pass:"$tpass" -nosalt </dev/zero | dd iflag=fullblock of="$container" bs="$bs" count="$count" status=progress
+        #sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" status=progress
     else
-        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" seek="$seek" status=progress
+        #sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" seek="$seek" status=progress
+        openssl enc -aes-256-ctr -pass pass:"$tpass" -nosalt </dev/zero | dd iflag=fullblock of="$container" bs="$bs" count="$count" seek="$seek" status=progress
     fi
     sleep 1
     #sync -f "$container"
@@ -533,10 +538,14 @@ function createSecret()
 function createContainer()
 {
     local name=$(validName "-")
-    
-    local writeContainer="1"
+        
     local container="${1:-}"
     checkArg "$container" "container"
+    shift
+    
+    local blockDevice="0"
+    local writeContainer="1"
+    local overwriteContainer=""
     if [ -f "$container" ]; then
         echo "Container file exists: ${container}"
         read -p "Overwrite? [y (overwrite) | e (erase) | Enter to exit]: " overwriteContainer
@@ -548,7 +557,19 @@ function createContainer()
             onFailed "nothing to do"
         fi
     fi
-    shift
+    if [ -b "$container" ]; then
+        blockDevice="1"
+        echo "Are you sure encrypt block device: ${container}"
+        read -p "Overwrite? [y (overwrite) | e (erase file system) | Enter to exit]: " overwriteContainer
+        if [ "$overwriteContainer" = "y" ]; then
+            writeContainer="1"
+        elif [ "$overwriteContainer" = "e" ]; then
+            writeContainer="0"
+        else
+            onFailed "nothing to do"
+        fi
+        echo "Size will be ingored for block devices"
+    fi
     
     local secret="${1:-}"
     checkArg "$secret" "secret"
@@ -564,16 +585,22 @@ function createContainer()
     processOptions "$@"
     
     if [ "$writeContainer" = "1" ]; then
-        echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
-        if [ "${size: -1}" = "G" ]; then
-            ddContainer "$container" "1G" "$sizeNum"
-        elif [ "${size: -1}" = "M" ]; then
-            ddContainer "$container" "1M" "$sizeNum"
+        if [ "$blockDevice" = "1" ]; then
+            echo "Overwriting block device: ${container} ..."
+            local tpass=$(tr -cd '[:alnum:]' < /dev/urandom | head -c128)
+            openssl enc -aes-256-ctr -pass pass:"$tpass" -nosalt </dev/zero | dd iflag=fullblock of="$container" bs="1M" status=progress
         else
-            onFailed "size can be M or G"
+            echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
+            if [ "${size: -1}" = "G" ]; then
+                ddContainer "$container" "1G" "$sizeNum"
+            elif [ "${size: -1}" = "M" ]; then
+                ddContainer "$container" "1M" "$sizeNum"
+            else
+                onFailed "size can be M or G"
+            fi
         fi
     else
-        echo "Using existing file (size $size is ingored): $container"
+        echo "Reusing existing data (size $size is ingored): $container"
     fi
     
     if [ -f "$secret" ]; then
@@ -614,7 +641,9 @@ function createContainer()
     echo "Created file system."
     sleep 1
     closeContainerByName "$name"
-    ownFile "$container"
+    if [ "$blockDevice" != "1" ]; then
+        ownFile "$container"
+    fi
     echo "Done! To open container use:"
     echo "$0 open ${container} ${secret}"
 }
