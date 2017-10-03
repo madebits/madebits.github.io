@@ -42,6 +42,7 @@
 [Chip.de](https://www.chip.de/nachrichten)
 [ComputerWoche.de](https://www.computerwoche.de/)
 [DeskModder.de](https://www.deskmodder.de/blog/)
+[media.ccc.de](https://media.ccc.de/)
 
 ### Learning
 
