@@ -379,7 +379,7 @@ If you have an existing secret file and want to replicate it for use with slots,
 
 ```bash
 sudo csman.sh chp secret.bin -out new-secret.bin -ck -i e --- -cko -i e -b 3 ---
-# or is secret is in some container slot use
+# or if secret is in some container slot use (do not forget -out otherwise container will get lost)
 sudo csman.sh chp container.bin -out new-secret.bin -ck -i e -slot 1 --- -cko -i e -b 3 ---
 # slots can then be replaced with embed command
 csman.sh e container.bin -s new-secret.bin -slot 1
