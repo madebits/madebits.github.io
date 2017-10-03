@@ -339,18 +339,27 @@ function changePass()
 
 function touchDiskFile()
 {
-    if [ ! -f "${1:-}" ]; then
-        dumpError "! no file $1"
-        failed
-    fi
+    file="${1:-}"
+    checkArg "$file" "fileOrDir"
     local time="${2:-}"
     if [ -z "$time" ]; then
-        time=$(stat -c %z "$1")
+        time=$(stat -c %z "$file")
     fi
     echo "Setting file times to: $time"
-    ownFile "$1"
-    touchFile "$1" "$time"
-    stat "$1"
+    if [ -f "$file" ]; then
+        ownFile "$file"
+        touchFile "$file" "$time"
+        stat "$file"
+    elif [ -d "$file" ]; then
+        find "$file" -type f | while IFS=$'\n' read -r f; do
+            echo " $f"
+            ownFile "$f"
+            touchFile "$f" "$time"
+        done
+    else
+        showError "not found: $file"
+    fi
+    echo "Done"
 }
 
 function touchFile()
@@ -452,7 +461,7 @@ function showHelp()
     dumpError " $bn resize name"
     dumpError " $bn increase name bySize"
     dumpError "    size should end in M or G"
-    dumpError " $bn touch file [time]"
+    dumpError " $bn touch fileOrDir [time]"
     dumpError "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\""
     dumpError "Where openCreateOptions:"
     dumpError " -cso cryptsetup options --"
