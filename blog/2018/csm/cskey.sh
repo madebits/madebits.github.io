@@ -25,6 +25,7 @@ csmKeyFiles=()
 csmKeyFiles2=()
 csmNoKeyFiles="0"
 csmNoKeyFiles2="0"
+cskKey=""
 
 currentScriptPid=$$
 toolsDir="$(dirname $0)"
@@ -273,7 +274,10 @@ function getKey()
 	# can be passed from outside
 	CS_KEY="${CS_KEY:-}"
 	local key=""
-	if [ ! -z "$CS_KEY" ]; then
+	if [ -n "$cskKey" ]; then
+		dumpError "#  using user-define key"
+		key="$cskKey"
+	elif [ -n "$CS_KEY" ]; then
 		dumpError "#  using key from CS_KEY"
 		key="$CS_KEY"
 	else
@@ -374,7 +378,7 @@ function showHelp()
 	dumpError " -hn hashToolOptions -- : (chp) default -hn ${cskHashToolOptions2[@]} --, used for new file"
 	dumpError " -d -- (enc | chp) dump password and key on screen for debug"
 	dumpError "Examples:"
-	dumpError ' CS_KEY=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt -h -p 8 -m 16 -t 1000 --'
+	dumpError ' key=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt -key <(echo -n "$key") -h -p 8 -m 16 -t 1000 --'
 }
 
 # cmd file options
@@ -490,6 +494,15 @@ function main()
 					exit 1
 				fi
 				csmKeyFiles2+=( "$(keyFileHash "$kfn")" )
+				shift
+			;;
+			-key)
+				local kk="${2:-}"
+				if [ -z "$kk" ]; then
+					dumpError "! required -key file"
+					exit 1
+				fi
+				cskKey=$(head -c 512 "$kk")
 				shift
 			;;
 			*)

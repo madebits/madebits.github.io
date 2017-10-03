@@ -16,7 +16,8 @@ lastContainer=""
 lastContainerTime=""
 lastSecret=""
 lastSecretTime=""
-CSKEY_OPS="${CSKEY_OPS:-}"
+csOptions=()
+ckOptions=()
 
 currentScriptPid=$$
 function failed()
@@ -24,11 +25,24 @@ function failed()
     kill -9 "$currentScriptPid"
 }
 
+function dumpError()
+{
+    (>&2 echo "$@")
+}
+
 # error
 function showError()
 {
-    (>&2 echo "! $1")
+    dumpError "! $1"
     failed
+}
+
+# value valueName
+function checkArg()
+{
+    if [ -z "$1" ]; then
+        showError "required $2"
+    fi
 }
 
 function newName()
@@ -43,16 +57,6 @@ function newName()
         fi
     done
     echo "$newName"
-}
-
-# value valueName
-function checkArg()
-{
-    local value=$1
-    local key=$2
-    if [ -z "$value" ]; then
-        showError "${key} required"
-    fi
 }
 
 # name
@@ -72,23 +76,20 @@ function validName()
 # name
 function mntDirRoot()
 {
-    local name=$1
-    echo "$HOME/mnt/${name}"
+    echo "$HOME/mnt/$1"
 }
 
 # name
 function mntDirUser()
 {
-    local name=$1
-    echo "$(mntDirRoot "$name")-user"
+    echo "$(mntDirRoot "$1")-user"
 }
 
 # file
 function ownFile()
 {
-    local file="$1"
-    if [ -f "$file" ]; then
-        chown $(id -un "$user"):$(id -gn "$user") "$file"
+    if [ -f "$1" ]; then
+        chown $(id -un "$user"):$(id -gn "$user") "$1"
     fi
 }
 
@@ -169,12 +170,13 @@ function openContainer()
         lastContainerTime=$(stat -c %z "$device")
     fi
     shift
-
+    
+    processOptions "$@"
     echo "Opening /dev/mapper/${name} ..."
 
-    local key=$(sudo -E "${toolsDir}/cskey.sh" dec "$secret" $CSKEY_OPS | base64 -w 0)
+    local key=$(sudo -E "${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     touchFile "$lastSecret" "$lastSecretTime"
-    echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "$@" open "$device" "$name" -
+    echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 --shared "${csOptions[@]}" open "$device" "$name" -
     echo
     cryptsetup status "/dev/mapper/$name"
     mountContainer "$name"
@@ -212,7 +214,7 @@ function createSecret()
 {
     local secret="$1"
     echo "Creating ${secret} ..."
-    sudo -E "${toolsDir}/cskey.sh" enc "$secret" $CSKEY_OPS
+    sudo -E "${toolsDir}/cskey.sh" enc "$secret" "${ckOptions[@]}"
     ownFile "$secret"
 }
 
@@ -242,6 +244,7 @@ function createContainer()
     local sizeNum="${size: : -1}"
     checkNumber "$sizeNum"
 
+    processOptions "$@"
     echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
     if [ "${size: -1}" = "G" ]; then
         ddContainer "$container" "1G" "$sizeNum"
@@ -266,10 +269,10 @@ function createContainer()
     fi
     
     echo "(Re-)enter password to open the container for the first time ..."
-    local key=$(sudo -E "${toolsDir}/cskey.sh" dec "$secret" $CSKEY_OPS | base64 -w 0)
+    local key=$(sudo -E "${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
     echo
     touchFile "$lastSecret" "$lastSecretTime"
-    echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$container" "$name" -
+    echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "${csOptions[@]}" open "$container" "$name" -
 
     echo "Creating filesystem in /dev/mapper/$name ..."
     mkfs -m 0 -t ext4 "/dev/mapper/$name"
@@ -309,7 +312,7 @@ function changePass()
 function touchDiskFile()
 {
     if [ ! -f "$1" ]; then
-        (>&2 echo "! no file $1")
+        dumpError "! no file $1"
         failed
     fi
     local time="${2:-}"
@@ -403,30 +406,66 @@ function increaseContainer()
 function showHelp()
 {
     local bn=$(basename "$0")
-    (>&2 echo "Usage:")
-    (>&2 echo " $bn open secret device [ additional cryptsetup parameters ]")
-    (>&2 echo " $bn openLive secret device [ additional cryptsetup parameters ]")
-    (>&2 echo " $bn openNamed name secret device [ additional cryptsetup parameters ]")
-    (>&2 echo " $bn close name")
-    (>&2 echo " $bn closeAll")
-    (>&2 echo " $bn mount name")
-    (>&2 echo " $bn umount name")
-    (>&2 echo " $bn create secret container size [ additional cryptsetup parameters ]")
-    (>&2 echo "    size should end in M or G")
-    (>&2 echo " $bn changePass secret [t m p]")
-    (>&2 echo " $bn resize name")
-    (>&2 echo " $bn increase name bySize") 
-    (>&2 echo "    size should end in M or G")
-    (>&2 echo " $bn touch file [time]")
-    (>&2 echo "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\"")
-    (>&2 echo " To pass cskey.sh options in open/create use:")
-    (>&2 echo "    CSKEY_OPS='-k -h -p 8 -m 14 -t 1000 --' sudo -E csmap.sh openLive container.bin")
+    dumpError "Usage:"
+    dumpError " $bn open secret device [ openCreateOptions ]"
+    dumpError " $bn openLive secret device [ openCreateOptions ]"
+    dumpError " $bn openNamed name secret device [ openCreateOptions ]"
+    dumpError " $bn close name"
+    dumpError " $bn closeAll"
+    dumpError " $bn mount name"
+    dumpError " $bn umount name"
+    dumpError " $bn create secret container size [ openCreateOptions ]"
+    dumpError "    size should end in M or G"
+    dumpError " $bn changePass secret [ cskey.sh options ]"
+    dumpError " $bn resize name"
+    dumpError " $bn increase name bySize"
+    dumpError "    size should end in M or G"
+    dumpError " $bn touch file [time]"
+    dumpError "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\""
+    dumpError "Where openCreateOptions:"
+    dumpError " -cso cryptsetup options --"
+    dumpError " -csk cskey.sh options --"
+    dumpError "Example:"
+    dumpError " sudo csmap.sh openLive container.bin -csk -k -h -p 8 -m 14 -t 1000 --"
+}
+
+function processOptions()
+{
+    while [ -n "${1:-}" ]; do
+        local current="${1:-}"
+        case "$current" in
+            -cso)
+                shift
+                csOptions=()
+                while [ "${1:-}" != "--" ]; do
+                    csOptions+=( "${1:-}" )
+                    shift
+                done
+            ;;
+            -csk)
+                shift
+                ckOptions=()
+                while [ "${1:-}" != "--" ]; do
+                    ckOptions+=( "${1:-}" )
+                    shift
+                done
+            ;;
+            *)
+            showError "unknown option: $current"
+            ;;
+        esac
+        shift
+    done
 }
 
 function main()
 {
     showChecksum
-    local mode="$1"
+    local mode="${1:-}"
+    if [ -z "$mode" ]; then
+        showHelp
+        exit 1
+    fi
     shift
 
     case "$mode" in
