@@ -4,7 +4,7 @@
 
 <!--- tags: linux devops -->
 
-We want to set up a `shared` SFTP folder jailed within `/data/jail` directory in Ubuntu server. For that, first create an SFTP only user group to restrict access:
+We want to set up a `shared` SFTP folder jailed within `/data/jail` directory in Ubuntu server. First create an SFTP only user group to restrict access:
 
 ```bash
 sudo groupadd sftponly
@@ -16,9 +16,9 @@ Once the user group is there, we can create as many SFTP only users as we like u
 sudo adduser sftpuser001 --ingroup sftponly --shell /usr/sbin/nologin --home /data/jail/shared
 ```
 
-All such users are given same home folder.
+All such users are assigned same home folder.
 
-Lets make sure we have the needed folders in place. All folder that lead to *shared* folder need to be owned by *root* and have mode *755*, if not use these commands:
+Lets make sure we have the needed folders in place. All folders that lead to *shared* folder need to be owned by *root* and have mode *755*, if not use these commands:
 
 ```bash
 sudo mkdir -p /data/jail/shared
