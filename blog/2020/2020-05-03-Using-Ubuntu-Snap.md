@@ -221,7 +221,7 @@ env | grep SNAP
 
 ## Snap Store
 
-Snap store [tracks](https://snapcraft.io/docs/snap-store-metrics) snap installs and usage. 
+Snap store [tracks](https://snapcraft.io/docs/snap-store-metrics) snap installs and usage. Geo-location data based on IPs are also collected.
 
 The unique tracking machine id is kept in `/var/lib/snapd/state.json` in `{"data": { "device": { "serial": "ID" } }}`. Snap usage data (kept also in`/var/lib/snapd/state.json`) includes start and stop times. Snaps are traced via unique cookies (found in `/var/lib/snapd/cookies` folder that match *snap-cookies* inside `/var/lib/snapd/state.json`. You may need to edit `/var/lib/snapd/state.json` manually in case of snap issues.
 
