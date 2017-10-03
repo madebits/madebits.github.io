@@ -4,11 +4,11 @@
 
 <!--- tags: linux -->
 
-<a href="https://en.wikipedia.org/wiki/Snap_(package_manager)">Snap</a> is not possible to easy avoid anymore in later Ubuntu, so I spend some time to keep a few notes from documentation I had to scan to understand it.
+<a href="https://en.wikipedia.org/wiki/Snap_(package_manager)">Snap</a> is not easy avoidable anymore in Ubuntu desktop, so I spend some time to keep a few notes from documentation I had to scan to understand it.
 
 ## Snap Files
 
-Snap uses `snap` file [format](https://snapcraft.io/docs/snap-format), which are [SquashFS](https://en.wikipedia.org/wiki/SquashFS) package files, using a low-overhead read-only compressed file [system](https://tldp.org/HOWTO/SquashFS-HOWTO/index.html). Snap application files (obtained via `snap install gimp`) are stored in `/var/lib/snapd/snaps/`, which seems [cannot](https://askubuntu.com/questions/1029562/move-snap-packages-to-another-location-directory) be easy changed. They are managed by `snapd` service (`systemctl status snapd.service`) that connects their snap conventional interfaces and enforces security.
+Snap uses `snap` package [files](https://snapcraft.io/docs/snap-format), which are [SquashFS](https://en.wikipedia.org/wiki/SquashFS) package files, using a low-overhead read-only compressed file [system](https://tldp.org/HOWTO/SquashFS-HOWTO/index.html). Snap application files (obtained via `snap install gimp`) are stored in `/var/lib/snapd/snaps/`, which seems [cannot](https://askubuntu.com/questions/1029562/move-snap-packages-to-another-location-directory) be easy changed. They are managed by `snapd` service (`systemctl status snapd.service`) that connects their snap defined interfaces and enforces security.
 
 ## Snap Mounts
 
@@ -29,7 +29,7 @@ $ ls -lh /var/lib/snapd/snaps/gimp_262.snap
 -rw------- 1 root root 176M Apr 13 12:19 /var/lib/snapd/snaps/gimp_262.snap
 ```
 
-Mounted snaps as to expected consume `loop` devices:
+Mounted snaps consume `loop` devices:
 
 ```bash
 $ df -h | grep gimp
@@ -69,7 +69,7 @@ gimp                  2.10.18                        265   latest/edge      snap
 $ sudo snap remove gimp --revision 262
 ```
 
-One can make a bash [script](https://www.linuxuprising.com/2019/04/how-to-remove-old-snap-versions-to-free.html) to automate this given the lost people who created snap, forgot to make that an option:
+One can make a bash [script](https://www.linuxuprising.com/2019/04/how-to-remove-old-snap-versions-to-free.html) to automate this given the lost people who created snap forgot to make that an option:
 
 ```bash
 #!/bin/bash
