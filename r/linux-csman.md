@@ -223,17 +223,18 @@ With `-bs` option, a new different secret is generated for each file. Adding `-s
 
 #### Password Options
 
-If no password input options are specified, `cskey.sh` prompts to read password from command-line (same as `-i 0` option). Using `-i 1` or `-i e` reads password from console echoed (visible). Command-line help lists other `-i` options.
+If no password input options are specified, `cskey.sh` prompts user to read the password from terminal (same as `-i 0` option). Using `-i 1` or `-i e` reads password from console echoed (visible). Command-line help lists the other possible `-i` options.
 
-The password can also be read from first line in a file using `-p passwordFile`.
+The password can also be read from first line of a file using `-p passwordFile`.
 
 ##### Key Files
 
-Passwords used alone can be weak. Key files helps protect against weak passwords. You are asked by default to specify **key files** *before* entering the password.
+Passwords when used alone can be weak. *Key files* protect against weak passwords. You are asked by default by `cskey.sh` to specify **key files** *before* entering the password.
 
-Key files are part of the password. Up to 1024 first bytes are used from start of each key file hashed (SHA512) and appended to password string. Hashes are sorted, so order of specifying key files does not matter. Same file can used more than once. You can specify key files one by one, or press *Enter* key without a path to stop (or use *Enter* key without any key file to skip key file entering). `Tab` completion for file paths works in key file entry prompt.
+Key files, when used, are treated as part of the password.
+  - Up to 1024 first bytes are used from beginning of each key file, hashed (SHA512), and appended to the password string. Hashes are sorted, so the order of specifying key files does not matter. Same file can used more than once. You can specify key files one by one, and / or press *Enter* key without a path to stop supplying any more of those. The `Tab` completion for file paths works in the *key file* entry prompt.
 
-If you do not want to be asked about key files use `-k` option. Key files can be specified also in command-line using one or more `-kf keyFile` options. Even if you use `-kf keyFile`, you will be still asked in command-line for any additional ones, unless you specify `-k`.
+If you do not want to be asked about *key files* use the `-k` option. Key files can be specified also in command-line using one or more `-kf keyFile` options. Even when you use `-kf keyFile`, you will be still asked in command-line for any additional ones, unless you specify `-k`.
 
 ##### Sessions
 
