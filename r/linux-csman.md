@@ -53,7 +53,7 @@ Every time `csman.sh` starts, it prints prefix hashes of these files, if present
 
 ```
 25b187a13  /usr/local/bin/csman.sh
-afa569537  /usr/local/bin/cskey.sh
+de2d6e6e7  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
 ```
