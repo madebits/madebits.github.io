@@ -5,33 +5,52 @@
 set -eu
 
 # none of values in this file is secret
-# change default argon2 params as it fits you here
+# change default argon2 params in cskHashToolOptions as it fits you here
 # https://crypto.stackexchange.com/questions/37137/what-is-the-recommended-number-of-iterations-for-argon2
-argon2pmt="8,14,1000"
 
-# can be passed from outside
-CS_ECHO="${CS_ECHO:-0}"
-CS_ECHO_KEY="${CS_ECHO_KEY:-0}"
-CS_KEY="${CS_KEY:-}"
-CS_SAME_PASS="${CS_SAME_PASS:-}"
-CS_BACKUP="${CS_BACKUP:-0}"
-CS_PMT="${CS_PMT:-}"
+#state
+cskFile=""
+cskFile2=""
+cskDebug="0"
+cskInputMode="0"
+cskBackup="0"
+cskHashToolOptions="-p 8 -m 14 -t 1000"
+cskHashToolOptions2="$cskHashToolOptions"
+cskSamePass="0"
+cskSameKeyFiles="0"
+cskPassFile=""
+cskPassFile2=""
+csmKeyFiles=()
+csmKeyFiles2=()
+csmNoKeyFiles="0"
+csmNoKeyFiles2="0"
 
+currentScriptPid=$$
 toolsDir="$(dirname $0)"
-# set to 1 to use my aes tool, 0 uses ccrypt
 useAes=0
 if [ -f "${toolsDir}/aes" ]; then
 	useAes=1
 fi
 
-if [ -n "$CS_PMT" ]; then
-	argon2pmt="$CS_PMT"
-fi
-
-SCRIPT_PID=$$
-function failed()
+function dumpError()
 {
-	kill -9 "$SCRIPT_PID"
+	(>&2 echo "$@")
+}
+
+function onFailed()
+{
+	dumpError "! " "$@"
+	kill -9 "${currentScriptPid}"
+}
+
+# file
+function touchFile()
+{
+	local file="$1"
+	if [ -f "$file" ]; then
+		local md=$(stat -c %z "$file")
+		touch -d "$md" "$file"
+	fi
 }
 
 function encryptedKeyLength()
@@ -45,7 +64,7 @@ function encryptedKeyLength()
 
 function encryptAes()
 {
-	local pass=$1
+	local pass="$1"
 	if [ "$useAes" = "1" ]; then
 		"${toolsDir}/aes" -r /dev/urandom -e -f <(echo -n "$pass")
 	else
@@ -55,7 +74,7 @@ function encryptAes()
 
 function decryptAes()
 {
-	local pass=$1
+	local pass="$1"
 	if [ "$useAes" = "1" ]; then
 		"${toolsDir}/aes" -d -f <(echo -n "$pass")
 	else
@@ -63,36 +82,31 @@ function decryptAes()
 	fi
 }
 
-function touchFile()
-{
-	local file=$1
-	if [ -f "$file" ]; then
-		local md=$(stat -c %z "$file")
-		touch -d "$md" "$file"
-	fi
-}
-
-# pass salt "p,m,t"
+# pass salt
 function pass2hash()
 {
 	local pass="$1"
 	local salt="$2"
-	local aa="${3:-$argon2pmt}"
-	local aaArgs=(${aa//,/ })
-	if [ "${#aaArgs[@]}" -ne "3" ]; then
-		(>&2 echo "! p,m,t")
-		failed
-	fi
-	local ap="${aaArgs[0]}"
-	local am="${aaArgs[1]}"
-	local at="${aaArgs[2]}"
 	local acmd="argon2"
 	if [ -f "${toolsDir}/${acmd}" ]; then
 		acmd="${toolsDir}/${acmd}"
 	fi
+
 	# argon2 has a build-in limit of 126 chars on pass length
+	local state=$(set +o)
 	pass=$(echo -n "$pass" | sha512sum | cut -d ' ' -f 1 | tr -d '\n' | while read -n 2 code; do printf "\x$code"; done | base64 -w 0)
-	echo -n "$pass" | "$acmd" "$salt" -id -t $at -m $am -p $ap -l 128 -r
+	eval "$state"
+	echo -n "$pass" | "$acmd" "$salt" -id $cskHashToolOptions -l 128 -r
+}
+
+# pass key
+function debugKey()
+{
+	if [ "$cskDebug" = "1" ]; then
+		dumpError ""
+		dumpError "DEBUG [$1]"
+		dumpError "DEBUG [$2]"
+	fi
 }
 
 # file pass key
@@ -102,12 +116,10 @@ function encodeKey()
     local pass="$2"
     local key="$3"
     
-    local pmt="${4:-$argon2pmt}"
-    
     debugKey "$pass" "$key"
     
     local salt=$(head -c 32 /dev/urandom | base64 -w 0)
-    hash=$(pass2hash "$pass" "$salt" "$pmt")
+    hash=$(pass2hash "$pass" "$salt")
     
     if [ "$file" = "-" ]; then
 		file="/dev/stdout"
@@ -129,31 +141,37 @@ function decodeKey()
     local pass="$2"
     local keyLength=$(encryptedKeyLength)
     
-    local pmt="${3:-$argon2pmt}"
-    
     if [ -e "$file" ] || [ "$file" = "-" ]; then
 		local fileData=$(head -c 600 "$file" | base64 -w 0)
 		local salt=$(echo -n "$fileData" | base64 -d | head -c 32 | base64 -w 0)
 		local data=$(echo -n "$fileData" | base64 -d | tail -c +33 | head -c "$keyLength" | base64 -w 0)
-        local hash=$(pass2hash "$pass" "$salt" "$pmt")
+        local hash=$(pass2hash "$pass" "$salt")
 		touchFile "$file"
         echo -n "$data" | base64 -d | decryptAes "$hash"
     else
-        (>&2 echo "! no such file: $file")
-        failed
+        onFailed "no such file: $file"
     fi
+}
+
+function keyFileHash()
+{
+	local keyFile="$1"
+	head -c 1024 "$keyFile" | sha256sum | cut -d ' ' -f 1
 }
 
 function readKeyFiles()
 {
-	files=()
 	local count=0
-	local hash=""
-	local fileHash=""
+	local keyFile=""
+	
+	if [ "$csmNoKeyFiles" = "1" ]; then
+		return
+	fi
+	
 	while :
 	do
 		count=$((count+1))
-		if [ "$CS_ECHO" = "3" ]; then
+		if [ "$cskInputMode" = "4" ]; then
 			keyFile="$(zenity --file-selection --title='Select a File' 2> /dev/null)"
 		else
 			read -e -p "Key file $count (or Enter if none): " keyFile
@@ -161,227 +179,331 @@ function readKeyFiles()
 		if [ ! -f "$keyFile" ]; then
 			break
 		fi
-		fileHash=$(head -c 1024 "$keyFile" | sha256sum | cut -d ' ' -f 1)
-		files+=( "$fileHash" )
+		csmKeyFiles+=( "$(keyFileHash "$keyFile")" )
 	done
-	if (( ${#files[@]} )); then
+}
+
+function computeKeyFilesHash()
+{
+	local hash=""
+	if (( ${#csmKeyFiles[@]} )); then
 		# read order does not matter
-		hash=$(printf '%s\n' "${files[@]}" | sort | sha256sum | cut -d ' ' -f 1)
+		hash=$(printf '%s\n' "${csmKeyFiles[@]}" | sort | sha256sum | cut -d ' ' -f 1)
 	fi
 	echo "$hash"
 }
 
-function dumpKbLine()
+function readPassFromFile()
 {
-	(>&2 echo "$1")
-}
-
-# experimental
-function readPassMapping()
-{
-	local alpha=( a b c d e f g h i j k l m n o p q r s t u v w x y z 
-	A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 
-    \< \> \[ \] \( \) \{ \} / \\ \$ \? ! \| \~ \& % . , : \; + - _ \# = 
-    0 1 2 3 4 5 6 7 8 9 )
-	local coded=( $(shuf -e "${alpha[@]}") )
-
-	dumpKbLine "# Password keymap (chars after # or not in map are taken as they are): "
-	dumpKbLine ""
-	dumpKbLine "$(echo "${alpha[@]}" | fold -w 52 | head -n 1 )"
-	dumpKbLine "$(echo "${coded[@]}" | fold -w 52 | head -n 1 )"
-	dumpKbLine "$(echo --- )"
-	dumpKbLine "$(echo "${alpha[@]}" | fold -w 52 | head -n 2 | tail -n 1 )"
-	dumpKbLine "$(echo "${coded[@]}" | fold -w 52 | head -n 2 | tail -n 1 )"
-	dumpKbLine "$(echo --- )"
-	dumpKbLine "$(echo "${alpha[@]}" | fold -w 52 | head -n 3 | tail -n 1 )"
-	dumpKbLine "$(echo "${coded[@]}" | fold -w 52 | head -n 3 | tail -n 1 )"
-	dumpKbLine "$(echo --- )"
-	dumpKbLine "$(echo "${alpha[@]}" | fold -w 52 | head -n 4 | tail -n 1 )"
-	dumpKbLine "$(echo "${coded[@]}" | fold -w 52 | head -n 4 | tail -n 1 )"
-	
-	read -p "Password: " pass
-	local passLen=${#pass}
-	local decoded=""
-	for (( i=0; i<${passLen}; i++ )); do
-		p="${pass:$i:1}"
-		if [ "$p" = "#" ]; then
-			i=$((i+1))
-			if [ "$i" -ge "${passLen}" ]; then
-				failed
-			fi
-			p="${pass:$i:1}"
-			decoded="${decoded}${p}"
-		else
-			found="0"
-			for j in "${!coded[@]}"; do
-				c="${coded[j]}"
-				if [ "$c" = "$p" ]; then
-					found="1"
-					a="${alpha[j]}"
-					decoded="${decoded}${a}"
-					break
-				fi
-			done
-			if [ "$found" = "0" ]; then
-				decoded="${decoded}${p}"
-			fi
-		fi
-	done
-	
-	echo "$decoded"
+	if [ -e "$1" ] || [ "$1" = "-" ]; then
+		head -n 1 "$1" | tr -d '\n'
+	else
+		onFailed "cannot read from file: $1"
+	fi
 }
 
 function readPassword()
 {
-	if [ "$CS_ECHO" = "1" ]; then
+	if [ -n "$cskPassFile" ]; then
+		pass="$cskPassFile"
+	elif [ "$cskInputMode" = "1" ]; then
 		read -p "Password: " pass
-	elif [ "$CS_ECHO" = "2" ]; then
+	elif [ "$cskInputMode" = "2" ]; then
+		pass=$(xclip -o)
+	elif [ "$cskInputMode" = "3" ]; then
 		pass=$(zenity --password --title="Password" 2> /dev/null)
-	elif [ "$CS_ECHO" = "3" ]; then
+	elif [ "$cskInputMode" = "4" ]; then
 		pass=$(zenity --entry --title="Password" --text="Password (visible):"  2> /dev/null)
-	elif [ "$CS_ECHO" = "4" ]; then
-		pass=$(readPassMapping)
 	else
 		read -p "Password: " -s pass
+		if [ "${1:-}" = "1" ]; then
+			# new password from console, ask to re-enter
+			dumpError ""
+			if [ -t 0 ] ; then
+				read -p "Renter password: " -s pass2
+				dumpError ""
+				if [ "$pass" != "$pass2" ]; then
+					onFailed "passwords do not match"
+				fi
+			fi
+		fi
 	fi
 	if [ -z "$pass" ]; then
-		(>&2 echo "! no password")
-		failed
+		onFailed "no password"
 	fi
 	echo "$pass"
 }
 
 function readPass()
 {
-	local hash=$(readKeyFiles)
-	local pass=$(readPassword)
+	local hash=$(computeKeyFilesHash)
+	local pass=$(readPassword "${1:-}")
 	pass="$pass$hash"
 	echo "$pass"
 }
 
 function readNewPass()
 {
-	local hash=$(readKeyFiles)
-	local pass=$(readPassword)
-	if [ -z "$pass" ]; then
-		failed
-	fi
-	if [ -z "$CS_ECHO" ] || [ "$CS_ECHO" -le "0" ] ; then
-		(>&2 echo)
-		if [ -t 0 ] ; then
-			read -p "Renter password: " -s pass2
-			(>&2 echo)
-			if [ "$pass" != "$pass2" ]; then
-				(>&2 echo "! passwords do not match")
-				failed
-			fi
-		fi
-    fi
-    pass="$pass$hash"
-	echo "$pass"
+	readPass "1"
 }
 
-# pass key
-function debugKey()
+# file pass key
+function encodeMany()
 {
-	if [ "$CS_ECHO_KEY" = "1" ]; then
-		(>&2 echo)
-		(>&2 echo "[$1]")
-		(>&2 echo "[$2]")
+	dumpError "#  using hash tool parameters:" "$cskHashToolOptions"
+	echo "$1"
+	encodeKey "$1" "$2" "$3"
+	
+	local count=$(($cskBackup + 0))
+	if [ "$count" -gt "64" ]; then
+		count=64
 	fi
+	for ((i=1 ; i <= $count; i++))
+	{
+		local file="${1}.${i}"
+		echo "$file"
+		encodeKey "$file" "$2" "$3"
+	}
 }
 
-function encryptFile()
+function getKey()
 {
-	local file="${1:-secret.bin}"
-	shift
-	local pass=$(readNewPass)
+	# can be passed from outside
+	CS_KEY="${CS_KEY:-}"
 	local key=""
 	if [ ! -z "$CS_KEY" ]; then
-		(>&2 echo "# Using key from CS_KEY")
+		dumpError "#  using key from CS_KEY"
 		key="$CS_KEY"
 	else
 		key=$(head -c 512 /dev/urandom | base64 -w 0)
 	fi
-	echo "${file}"
-	encodeKey "$file" "$pass" "$key" "$@"
-	if [ "$CS_BACKUP" = "1" ]; then
-		echo "${file}.bak"
-		encodeKey "${file}.bak" "$pass" "$key" "$@"
-	fi
+	echo "$key"
+}
+
+function encryptFile()
+{
+	readKeyFiles
+	local pass=$(readNewPass)
+	local key=$(getKey)
+	encodeMany "$1" "$pass" "$key"
 }
 
 function decryptFile()
 {
-	local file="${1:-secret.bin}"
-	shift
+	readKeyFiles
 	local pass=$(readPass)
-    decodeKey "$file" "$pass" "$@"
-    local key=""
+    decodeKey "$1" "$pass"
 }
 
 function reEncryptFile()
 {
-	local file="${1:-secret.bin}"
-	shift
-	(>&2 echo "# Current")
+	local file="$1"
+	dumpError "# Current"
+	readKeyFiles
 	local pass1=$(readPass)
-	(>&2 echo)
-	local key=$(decodeKey "$file" "$pass1" "$@" | base64 -w 0)
-	(>&2 echo "# New")
-	if [ ! -z "$CS_SAME_PASS" ]; then
-		(>&2 echo "# Using CS_SAME_PASS")
+	dumpError ""
+	local key=$(decodeKey "$file" "$pass1" | base64 -w 0)
+	dumpError "# New"
+	
+	if [ "$cskSameKeyFiles" -ne "1" ]; then
+		csmNoKeyFiles="$csmNoKeyFiles2"
+		csmKeyFiles=("${csmKeyFiles2[@]}")
+	else
+		csmNoKeyFiles="1"
+		dumpError "#  using same key files"
+	fi
+	
+	if [ "$cskSamePass" = "1" ]; then
+		dumpError "#  using same password"
 		pass="$pass1"
 	else
+		if [ -n "$cskPassFile2" ]; then
+			cskPassFile="$cskPassFile2"
+		fi
+		readKeyFiles
 		pass=$(readNewPass)
 	fi
 
-	if [ ! -z "${2:-}" ]; then
-		shift 1
-		(>&2 echo "# Using new argon2 params:" "$@" )
-	fi
-
-	echo "${file}"
-	encodeKey "$file" "$pass" "$key" "$@"
-	if [ "$CS_BACKUP" = "1" ]; then
-		echo "${file}.bak"
-		encodeKey "${file}.bak" "$pass" "$key" "$@"
-	fi
-	(>&2 echo "Done: $file")
+	cskHashToolOptions="$cskHashToolOptions2"
+	
+	if [ -n "$cskFile2" ]; then
+		file="$cskFile2"
+	fi	
+	
+	encodeMany "$file" "$pass" "$key"
+	dumpError "Done: $file"
 }
 
-# mode file
+function checkNumber()
+{
+	local re='^[0-9]+$'
+	if ! [[ "$1" =~ $re ]] ; then
+		dumpError "$1 not a number"
+		exit 1
+	fi
+}
+
+function showHelp()
+{
+	dumpError "Usage: $(basename "$0") [enc | dec | chp] file [options]"
+	dumpError "Options:"
+	dumpError " -i inputMode -- used for password"
+	dumpError "    Password input modes:"
+	dumpError "     0 read from console, no echo (default)"
+	dumpError "     1 read from console with echo"
+	dumpError "     2 read from 'xclip -o'"
+	dumpError "     3 read from zenity --password"
+	dumpError "     4 read from zenity --text"
+	dumpError " -p passFile -- read pass from first line in passFile"
+	dumpError " -pn passFile -- (chp) read pass from first line in passFile, used for new file"
+	dumpError " -s -- (chp) use same password for new file, -pn is ignored"
+	dumpError " -sk -- (chp) use same key files for new file, -kfn, -kn are ignored"
+	dumpError " -k -- do not ask for keyfiles"
+	dumpError " -kn -- (chp) do not ask for keyfiles, used for new file"
+	dumpError " -kf keyFile -- use keyFile"
+	dumpError " -kfn keyFile -- (chp) use keyFile, used for new file"
+	dumpError " -b count -- generate file.count backup copies"
+	dumpError " -h \"hashToolOptions\" -- default \"${cskHashToolOptions}\""
+	dumpError " -hn \"hashToolOptions\" -- (chp) default \"${cskHashToolOptions}\", used for new file"
+	dumpError " -d -- dump password and key on screen for debug"
+	dumpError "Examples:"
+	dumpError ' CS_KEY=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt -h "-p 8 -m 16 -t 1000"'
+}
+
+# cmd file options
 function main()
 {
-    local mode="$1"
-    shift
-    case "$mode" in
-        enc)
-			encryptFile "$@"
+	local cskCmd="${1:-}"
+	if [ -z "$cskCmd" ]; then
+		showHelp
+		exit 1
+	fi
+	shift
+	cskFile="${1:-}"
+	if [ -z "$cskFile" ]; then
+		dumpError "! required file"
+		exit 1
+	fi
+	shift
+	
+	while [ -n "${1:-}" ]; do
+		local current="${1:-}"
+		case "$current" in
+			-d)
+				cskDebug="1"
+			;;
+			-i)
+				cskInputMode="${2:-}"
+				if [ -z "$cskInputMode" ]; then
+					dumpError "! required -i inputMode"
+					exit 1
+				fi
+				shift
+			;;
+			-b)
+				cskBackup="${2:-}"
+				if [ -z "$cskBackup" ]; then
+					dumpError "! required -b backupCount"
+					exit 1
+				fi
+				checkNumber "$cskBackup"
+				shift
+			;;
+			-h)
+				cskHashToolOptions="${2:-}"
+				if [ -z "$cskHashToolOptions" ]; then
+					dumpError "! required -h hashToolOptions"
+					exit 1
+				fi
+				shift
+			;;
+			-hn)
+				cskHashToolOptions2="${2:-}"
+				if [ -z "$cskHashToolOptions2" ]; then
+					dumpError "! required -hn hashToolOptions"
+					exit 1
+				fi
+				shift
+			;;
+			-s)
+				cskSamePass="1"
+			;;
+			-sk)
+				cskSameKeyFiles="1"
+			;;
+			-p)
+				local passFile="${2:-}"
+				if [ -z "$cskHashToolOptions2" ]; then
+					dumpError "! required -p passFile"
+					exit 1
+				fi
+				cskPassFile=$(readPassFromFile "$passFile")
+				shift
+			;;
+			-pn)
+				local passFile="${2:-}"
+				if [ -z "$cskHashToolOptions2" ]; then
+					dumpError "! required -pn passFile"
+					exit 1
+				fi
+				cskPassFile2=$(readPassFromFile "$passFile")
+				shift
+			;;
+			-fn)
+				cskFile2="${2:-}"
+				if [ -z "$cskFile2" ]; then
+					dumpError "! required -fn file"
+					exit 1
+				fi
+				shift
+			;;
+			-k)
+				csmNoKeyFiles="1"
+			;;
+			-kn)
+				csmNoKeyFiles2="1"
+			;;
+			-kf)
+				local kf="${2:-}"
+				if [ -z "$kf" ]; then
+					dumpError "! required -kf file"
+					exit 1
+				fi
+				csmKeyFiles+=( "$(keyFileHash "$kf")" )
+				shift
+			;;
+			-kfn)
+				local kfn="${2:-}"
+				if [ -z "$kfn" ]; then
+					dumpError "! required -kfn file"
+					exit 1
+				fi
+				csmKeyFiles2+=( "$(keyFileHash "$kfn")" )
+				shift
+			;;
+			*)
+				dumpError "! unknown option: $current"
+				exit 1
+			;;
+		esac
+		shift
+	done
+
+	case "$cskCmd" in
+		enc|e)
+			encryptFile "$cskFile"
 		;;
-		enc2)
-			CS_BACKUP=1
-			encryptFile "$@"
-        ;;
-        dec)
-			decryptFile "$@"
-        ;;
-        chp)
-			reEncryptFile "$@"
-        ;;
-        chp2)
-			CS_BACKUP=1
-			reEncryptFile "$@"
-        ;;
-        *)
-            (>&2 echo "Usage: $(basename "$0") [enc | enc2 | dec | chp | chp2] file [\"p,m,t\"]")
-            (>&2 echo " file is overwritten by enc and chp, backup it as needed before")
-            (>&2 echo " default argon2 \"p,m,t\" are: \"$argon2pmt\"")
-            (>&2 echo 'Examples:')
-            (>&2 echo ' CS_KEY=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt "8,16,1000"')
-            (>&2 echo ' CS_SAME_PASS=1 cskey.sh chp d.txt "8,14,1000" "8,16,1000"')
-        ;;
-    esac
+		dec|d)
+			decryptFile "$cskFile"
+		;;
+		chp|c)
+			reEncryptFile "$cskFile"
+		;;
+		*)
+			dumpError "! unknown command: $cskCmd"
+			showHelp
+		;;
+	esac
 }
 
 main "$@"
