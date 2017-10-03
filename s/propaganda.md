@@ -125,7 +125,9 @@
 [Wall Street Journal](https://www.wsj.com/news/world)
 [Reddit World News](https://www.reddit.com/r/worldnews/)
 [BuzzfeedNews](https://www.buzzfeednews.com/)
+[The Antlantic](https://www.theatlantic.com/world/)
 [The Onion](https://www.theonion.com/)
+
 
 ### Canada & Australia
 
