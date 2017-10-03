@@ -168,13 +168,13 @@ The code depending on whether SSL is used or not checks the validity of the serv
 Node.js driver can do something similar to chain / hostname verification if used as follows:
 
 ```js
-var certFileBuf = fs.readFileSync('/mongoCA.crt');
-var mongoUrl = 'mongodb://...?ssl=true';
+var certFileBuf = fs.readFileSync('/mongoCA.crt')
+var mongoUrl = 'mongodb://...?ssl=true'
 var options = {
   server: { sslCA: certFileBuf, sslValidate: true }
-};
+}
 const mongoClient = mongodb.MongoClient
-this.client = await mongoClient.connect(mongoUrl, options);
+this.client = await mongoClient.connect(mongoUrl, options)
 ```
 
 ## SSL for RabbitMQ
@@ -284,12 +284,15 @@ In Node.js, the official `amqplib` driver provides an example:
 const url = require('url')
 const amqp = require('amqplib')
 
-const rmqUrl = 'amqps://user:passsword@server:5774/myVhost?heartbeat=240&connection_timeout=5';
+const rmqUrl = 'amqps://user:passsword@server:5774/myVhost?heartbeat=240&connection_timeout=5'
 
 const rmq = new url.URL(rmqUrl)
 let opts = {}
 if(rmq.protocol === 'amqps:') {
-    opts = { ca: [fs.readFileSync('/mongoCA.crt')] }
+    opts = { 
+        ca: [fs.readFileSync('/mongoCA.crt')],
+        servername: rmq.hostname
+    }
 }
 let conn = await amqp.connect(rmqUrl, opts)
 ```
