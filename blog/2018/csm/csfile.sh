@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash -
 
 # csfile.sh
 
@@ -115,6 +115,7 @@ function rcp()
 
 dcDir=""
 dcStart=$(date +%s)
+dcShowInfo=""1
 
 function cleanUp {
     if [ -d "${dcDir}" ]; then
@@ -134,6 +135,9 @@ function printAvailable {
 
 function dcInfo()
 {
+    if [ "${dcShowInfo}" != "1" ]; then
+        return
+    fi
     cat <<EOF
 # Info: Before running dc tool, call once manually on your partition:
 
@@ -254,6 +258,9 @@ function processOptions()
                 dcDir="${2:?"! -dd tmpDir"}"
                 shift
             ;;
+            -dq)
+                dcShowInfo="0"
+            ;;
             *)
                 onFailed "unknown option: $current"
             ;;
@@ -283,6 +290,7 @@ Where [options]:
  -dr : (dc) use random data (default 0s)
  -dd tmpDir : (dc) temp dir to use, default $HOME/tmp
               csfile-$RANDOM folder is created within
+ -dq : (dc) do not ask to confim (and no info)
 
 Notes:
 
