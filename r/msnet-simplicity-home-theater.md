@@ -2,7 +2,7 @@
 
 #Simplicity Home Theater (HTPC)
 
-**Simplicity Home Theater** is a file browser and launcher for home theater personal computers ([HTPC](http://en.wikipedia.org/wiki/10-foot_user_interface)) running Microsoft Windows. Simplicity can be used to directly browses hard disk folders and launch content, such as movies.
+**Simplicity Home Theater** is a file browser and launcher for home theater personal computers ([HTPC](http://en.wikipedia.org/wiki/10-foot_user_interface)) running Microsoft Windows. Simplicity can be used to directly browse hard-disk folders and launch content, such as movies.
 
 ![inline](r/msnet-simplicity-home-theater/s00t.jpg) ![inline](r/msnet-simplicity-home-theater/s01t.jpg) ![inline](r/msnet-simplicity-home-theater/s03t.jpg)
 
@@ -14,7 +14,7 @@ The best way of using Simplicity Home Theater is to have at least two user accou
 
 Simplicity enables browsing of system folders and launching of single files using the associated default system application or user defined custom launcher applications. Simplicity starts by showing all system logical drives or the last path browsed in the previous session. Use the keyboard Up / Down keys to move up and down list items or mouse wheel. To browse (explore) a folder, select it and press enter key.
 
-To launch a file, select it and press enter. The file launcher list will show. It can by default run only the system associated application for the file type, but you can your own applications, by editing lauchers.txt configuration file. The launchers list for folders can be accessed via context menu (key and mouse).
+To launch a file, select it and press enter. The file launcher list will show. It can by default run only the system associated application for the file type, but you can your own applications, by editing `lauchers.txt` configuration file. The launchers list for folders can be accessed via context menu (key and mouse).
 
 From the launchers list you can also view more details about selected path. Same details are shown if you press space key on browser list, or click on the path bar shown below the browser list. The details list shows the parent paths, and several options, such as deleting the file or folder, or viewing full path.
 
@@ -118,7 +118,7 @@ Where the MediaPreview command-line options are:
 * /loop - by default MediaPreview closes when trying to preview after files are finished. If /loop is specified preview continues back from beginning (or back from end in upwards).
 * /noautorotate - by default images are automatically rotated based on EXIF information. The default behavior can be disabled by specifying this option.
 * /border - if specified a border is added images (when more than one per page).
-* 
+*
 Keyboard and mouse options of MediaPreview are similar to those of Simplicity Home Theater:
 
 |Key|Function|
