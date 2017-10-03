@@ -4,7 +4,7 @@
 
 <!--- tags: mongodb, rabbitmq -->
 
-Use of self-signed certificates for SSL provides freedom generate as many of them as needed conveniently on our own and it comes handy for internal infrastructure. I show here how to enable SSL from both [MongoDb](https://docs.mongodb.com/manual/tutorial/configure-ssl/) and [RabbitMQ](https://www.rabbitmq.com/ssl.html) using same certificate. Only server is authenticated to clients via SSL, any client can be connected to servers if credentials are known to client (so we rely here on having long *passwords* for clients).
+SSL *self-signed* certificates for SSL provides a convenient mechanism to manage security for internal infrastructure. I show here how to enable SSL from both [MongoDb](https://docs.mongodb.com/manual/tutorial/configure-ssl/) and [RabbitMQ](https://www.rabbitmq.com/ssl.html) using same certificate. Only server is authenticated to clients via SSL in this configuration. Any client can be connected to servers if authentication credentials are known to client.
 
 <div id='toc'></div>
 
@@ -28,7 +28,7 @@ openssl req -x509 -new -extensions v3_ca -key mongoCA.key -days 3650 -out mongoC
 
 The information about CA needs to be filled here when asked to match company data. There is no requirement on a self-signed CA that the company information is correct or real.
 
-CA files needs to be saved and `mongoCA.crt` needs to be distributed to clients. 
+CA files needs to be saved and `mongoCA.crt` needs to be distributed to clients.
 
 ### Server Certificates
 
