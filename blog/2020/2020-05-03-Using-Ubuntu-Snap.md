@@ -257,9 +257,17 @@ User defined environment variables outside of snap are visible to snap. `XDG_` v
 
 Snap store [tracks](https://snapcraft.io/docs/snap-store-metrics) snap installs and usage. Geo-location data based on IPs are also collected.
 
-The unique tracking machine id is kept in `/var/lib/snapd/state.json` in `{"data": { "device": { "serial": "ID" } }}`. Snap usage data (kept also in`/var/lib/snapd/state.json`) includes start and stop times. Snaps are traced via unique cookies (found in `/var/lib/snapd/cookies` folder that match *snap-cookies* inside `/var/lib/snapd/state.json`. You may need to edit `/var/lib/snapd/state.json` manually in case of snap issues.
+The unique tracking machine id is kept in `/var/lib/snapd/state.json` in `{"data": { "device": { "serial": "ID" } }}`. Snap usage data (kept also in`/var/lib/snapd/state.json`) includes start and stop times. Snaps are traced via unique cookies (found in `/var/lib/snapd/cookies` folder that match *snap-cookies* inside `/var/lib/snapd/state.json`.
 
-The device-serial in `/var/lib/snapd/state.json` looks as follows: `d1360083-b6e6-40f1-a248-3470767daa9d`. It can be changed to any of these *more unique* values `00000000-0000-0000-0000-000000000000` or `00000000-0000-0000-0000-000000000001`. A machine restart is needed immediately after this change, before a snap refresh happens.
+To reset your [device-serial](https://forum.snapcraft.io/t/cant-install-or-refresh-snaps-on-arch-linux/8690/27) use:
+
+```bash
+$ sudo systemctl stop snapd
+$ sudo cat /var/lib/snapd/state.json | \
+    jq 'delpaths([["data", "auth", "device"]])' > state.json-new
+$ sudo cp state.json-new /var/lib/snapd/state.json
+$ sudo systemctl start snapd
+```
 
 The device-serial ID and list of installed snaps and their usage data are sent to store on every refresh, which happens automatically and periodically. Refresh period can be controlled using [refresh.hold](https://snapcraft.io/docs/keeping-snaps-up-to-date#heading--refresh-hold), and postponed up to 2 months. To pause them for [longer](https://askubuntu.com/questions/930593/how-to-disable-autorefresh-in-snap) add in `/etc/hosts` (need to be removed when `snap install` or `snap refresh`):
 
