@@ -14,36 +14,45 @@ ap="${5:-8}"
 toolsDir="$(dirname $0)"
 useAes=0
 if [ -f "${toolsDir}/aes" ]; then
-	useAes=1
+    useAes=1
 fi
 
 function encryptedKeyLength()
 {
-	if [ "$useAes" = "1" ]; then
-		echo 560
-	else
-		echo 544
-	fi
+    if [ "$useAes" = "1" ]; then
+        echo 560
+    else
+        echo 544
+    fi
 }
 
 function encryptAes()
 {
-	local pass=$1
-	if [ "$useAes" = "1" ]; then
-		"${toolsDir}/aes" -r /dev/urandom -e -f <(echo -n "$pass")
-	else
-		ccrypt -e -f -k <(echo -n "$pass")
-	fi
+    local pass=$1
+    if [ "$useAes" = "1" ]; then
+        "${toolsDir}/aes" -r /dev/urandom -e -f <(echo -n "$pass")
+    else
+        ccrypt -e -f -k <(echo -n "$pass")
+    fi
 }
 
 function decryptAes()
 {
-	local pass=$1
-	if [ "$useAes" = "1" ]; then
-		"${toolsDir}/aes" -d -f <(echo -n "$pass")
-	else
-		ccrypt -d -k <(echo -n "$pass")
-	fi
+    local pass=$1
+    if [ "$useAes" = "1" ]; then
+        "${toolsDir}/aes" -d -f <(echo -n "$pass")
+    else
+        ccrypt -d -k <(echo -n "$pass")
+    fi
+}
+
+function touchFile()
+{
+    local file=$1
+    if [ -f "$file" ]; then
+        local md=$(stat -c %y "$file")
+        touch -d "$md" "$file"
+    fi
 }
 
 # file pass key
@@ -56,7 +65,7 @@ function encodeKey()
     hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
     
     if [ "$file" = "-" ]; then
-		file="/dev/stdout"
+        file="/dev/stdout"
     fi
     
     > "$file"
@@ -65,6 +74,7 @@ function encodeKey()
     # random file size
     local r=$((1 + RANDOM % 512))
     head -c "$r" /dev/urandom >> "$file"
+    touchFile "$file"
 }
 
 # file pass
@@ -75,10 +85,11 @@ function decodeKey()
     local keyLength=$(encryptedKeyLength)
     
     if [ -e "$file" ] || [ "$file" = "-" ]; then
-		local fileData=$(head -c 600 "$file" | base64 -w 0)
-		local salt=$(echo -n "$fileData" | base64 -d | head -c 32 | base64 -w 0)
-		local data=$(echo -n "$fileData" | base64 -d | tail -c +33 | head -c "$keyLength" | base64 -w 0)
+        local fileData=$(head -c 600 "$file" | base64 -w 0)
+        local salt=$(echo -n "$fileData" | base64 -d | head -c 32 | base64 -w 0)
+        local data=$(echo -n "$fileData" | base64 -d | tail -c +33 | head -c "$keyLength" | base64 -w 0)
         local hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
+        touchFile "$file"
         echo -n "$data" | base64 -d | decryptAes "$hash"
     else
         (>&2 echo "! no such file: $file")

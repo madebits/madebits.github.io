@@ -122,6 +122,7 @@ function openContainer()
     mkdir -p "$mntDir2"
     
     bindfs -u $(id -u "$user") -g $(id -g "$user") "$mntDir1" "$mntDir2"
+
     echo "Mounted ${device} at ${mntDir2}. To close use:"
     echo "$0 close ${oName}"
     echo "$0 closeAll"    
