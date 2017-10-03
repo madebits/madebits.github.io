@@ -54,7 +54,13 @@ $$$ \sum_{i=0}^{N-1} \rvert e_i \rangle \langle e_i \rvert = \mathbb{1} $$$
 
 Outer product:
 
-$$$\rvert 0 \rangle \langle 0 \rvert = \prod_{\rvert 0 \rangle} (\rvert 0 \rangle) $$$
+$$$ \rvert 0 \rangle \langle 0 \rvert = \prod_{\rvert 0 \rangle} = \prod_0 $$$
+
+$$$ \rvert 1 \rangle \langle 1 \rvert = \prod_{\rvert 1 \rangle} = \prod_1 $$$
+
+Projection example:
+
+$$$ \prod_{\rvert 0 \rangle} (\rvert v \rangle) = \rvert 0 \rangle \langle 0 \rvert \rvert v \rangle = \rvert 0 \rangle \langle 0 \rvert ( v_0 \rvert 0 \rangle + v_1 \rvert 1 \rangle ) = v_0 \rvert 0 \rangle $$$
 
 Matrices:
 
