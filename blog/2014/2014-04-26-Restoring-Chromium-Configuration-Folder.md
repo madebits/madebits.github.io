@@ -61,7 +61,7 @@ The rest is a trick to deal with search engines. They are stored in `Web Data` f
 
 I can use this file to start Chromium once a while - the config folder size goes down then from over 20MB to less than 2MB.
 
-As related tip, apart of using 'uBlock' in browser, my `/etc/hosts` contains the following entries just to be sure:
+As a related tip, apart of using 'uBlock' in browser, my `/etc/hosts` contains the following entries, just to be sure:
 
 ```
 0.0.0.0 google-analytics.com
