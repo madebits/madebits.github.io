@@ -38,7 +38,7 @@ If you panic after starting `vim`, press *Esc* key one more times (so that Vim e
 
 ## Edit and Save
 
-I write Vim editor commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). `Ctrl+d` and `Tab` can be used to auto-complete commands after `:`. I write control combinations using lowercase key as in `Ctrl+d` (and not `Ctrl+D` as they are written in Vim documentation).
+I write Vim editor commands as `:q!`, which implies entering **command-mode** first by pressing *Esc* key and then pressing `:q!` (where `:` enters the *ex-mode*). `Ctrl+d` and `Tab` can be used to auto-complete commands after `:`. I write *Ctrl* key combinations using lowercase key as in `Ctrl+d` (and not `Ctrl+D` as they are written in Vim documentation).
 
 If you started Vim without a file path, you can open a file from within Vim using `:edit filename` (or `:e`). *Tab* key can be used for auto-completion on file names.
 
