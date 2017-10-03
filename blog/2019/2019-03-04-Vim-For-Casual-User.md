@@ -52,7 +52,7 @@ As many have noted, there is no basic Vim. You need to learn upfront enough comm
 * **command-mode** (normal-mode) is reachable by pressing *Esc* key or if that is broken *Ctrl+[*. In most terminals, *Alt+normal mode command key* will work form within *insert-mode*.
 * **insert-mode** is reachable from command-mode by initiating some text edit command
 
-Commands are usually are made of multiple key of the [form](https://danielmiessler.com/study/vim/#language): *operator (verb)* *modifier (scope)* *noun (motion)* and can be combined creatively given enough time.
+Commands are usually are made of multiple key of the [form](https://danielmiessler.com/study/vim/#language): *operator (verb)* *modifier (scope)* *noun (motion)* and can be combined creatively given enough time. The best way to learn basic commands is to use `vimtutor` as often as you remembers everything.
 
 Common movement commands (in *command-mode*):
 
@@ -62,7 +62,7 @@ Common movement commands (in *command-mode*):
   * `;` repeats last `ftFT` forward, `,` repeats last `ftFT` backward
 * `/text` - find *text*. `n` moves to next occurrence, `N` to previous one. Use `set hls` to highlight matches and `:noh` to temporary disable search highlight. `?text` is same, but searches backward.
 * `*` and `#` find next and previous occurrence of word under cursor (`n` and `N` and highlight work same as for `/`).
-* `Ctrl+i` - jump to previous location, `Ctrl+o` jump back
+* `Ctrl+i` - jump to previous location, `Ctrl+o` jump back. `gi` moves to last node in edit tree.
 * `H` move to top, `M` move to middle, `L` move to bottom of screen
 * `Ctrl+D` - move half-page down, `Ctrl+U` move half-page up; `Ctrl+F` move down a page, `Ctrl+B` move up a page.
 * `zz` (not `ZZ`) will center cursor line on screen. `Ctrl+y` scroll one line down, `Ctrl+e` scroll one line up, while keeping cursor in current line.
