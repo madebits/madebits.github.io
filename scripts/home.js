@@ -1,1 +1,1 @@
-var homeUrl='blog/2019/2019-08-30-When-to-use-Vuex.md';
+var homeUrl='blog/2019/2019-09-04-Agile-Backlog-As-Gantt-Frontier.md';

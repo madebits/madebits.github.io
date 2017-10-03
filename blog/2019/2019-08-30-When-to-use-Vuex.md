@@ -177,4 +177,4 @@ othergMutations
 )
 ```
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-04-16-SFTP-With-Shared-Access.md'>SFTP With Shared Access</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-09-04-Agile-Backlog-As-Gantt-Frontier.md'>Agile Backlog As Gantt Frontier</a> <a rel='next' id='fnext' href='#blog/2019/2019-04-16-SFTP-With-Shared-Access.md'>SFTP With Shared Access</a></ins>
