@@ -124,6 +124,7 @@
 [The Telegraph](https://www.telegraph.co.uk/news/world/)
 [Daily Mail](https://www.dailymail.co.uk/news/worldnews/index.html)
 [Express](https://www.express.co.uk/news/world)
+[APNews](https://www.apnews.com/)
 
 ### Europe
 
