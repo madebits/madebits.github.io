@@ -37,6 +37,7 @@ csmMount="1"
 cmsMountReadOnly="0"
 csmListShowKey="0"
 csmCreateOverwriteOnly="0"
+csmOpenDiskLabel=""
 
 ########################################################################
 
@@ -436,7 +437,7 @@ function listContainer()
         set +e
         local label="$(e2label "$dev" 2> /dev/null)"
         set -e
-        echo -e "Device:\t${dev}\t${cipher}\t${label}"
+        echo -e "Device:\t${dev}\t${cipher}\t${label:-<no label>}"
         if [ "$csmListShowKey" = "1" ]; then
             local k=$(getDmKey "$dev")
             echo -e "RawKey:\t$k"
@@ -530,17 +531,24 @@ function openContainerByName()
     # set default label if volume has no label, may fail if no FS
     if [ -n "$lastDev" ]; then
         local label=""
-        set +e
-        label="$(e2label "$lastDev" 2> /dev/null)"
-        set -e
-        if [ -z "$label" ] && [ -f "$device" ]; then
-            label=$(getVolumeDefaultLabel "$device")
-            if [ -n "$label" ]; then
-                set +e
-                e2label "$lastDev" "$label" 2> /dev/null
-                set -e
+        if [ -n "${csmOpenDiskLabel}" ]; then
+            set +e
+            e2label "$lastDev" "${csmOpenDiskLabel}"
+            set -e
+        else
+            set +e
+            label="$(e2label "$lastDev" 2> /dev/null)"
+            set -e
+            if [ -z "$label" ] && [ -f "$device" ]; then
+                label=$(getVolumeDefaultLabel "$device")
+                if [ -n "$label" ]; then
+                    set +e
+                    e2label "$lastDev" "$label" 2> /dev/null
+                    set -e
+                fi
             fi
         fi
+        
         set +e
         label="$(e2label "$lastDev" 2> /dev/null)"
         set -e
@@ -953,6 +961,7 @@ Where [ openCreateOptions ]:
  -cf mkfs ext4 options --- : (create)
  -l : (open) live
  -n name : (open) use csm-name
+ -sl label : (open) set ext4 label
  -c : (open|create) clean screen after password entry
  -s : (open|create) use only one (outer) encryption layer
  -u : (open) do not mount on open
@@ -1015,6 +1024,10 @@ function processOptions()
             ;;
             -n|-name)
                 csmName="${2:-}"
+                shift
+            ;;
+            -sl)
+                csmOpenDiskLabel="${2:-}"
                 shift
             ;;
             -l)
