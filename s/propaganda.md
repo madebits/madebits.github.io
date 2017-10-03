@@ -108,6 +108,7 @@
 [Live Science](https://www.livescience.com/news)
 [MIT News](https://news.mit.edu/)
 [Aeon](https://aeon.co/science)
+[Nautilus](http://nautil.us/blog)
 
 ## USA
 
