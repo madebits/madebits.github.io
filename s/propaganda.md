@@ -107,6 +107,7 @@
 [Science Daily](https://www.sciencedaily.com)
 [Live Science](https://www.livescience.com/news)
 [MIT News](https://news.mit.edu/)
+[Aeon](https://aeon.co/science)
 
 ## USA
 
