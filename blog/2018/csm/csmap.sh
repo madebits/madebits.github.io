@@ -339,6 +339,7 @@ function changePass()
         lastSecretTime=$(stat -c %z "$secret")
     fi
     shift
+    echo " Processing ${secret} ..."
     "${toolsDir}/cskey.sh" chp "$secret" "${ckOptions[@]}"
     ownFile "$secret"
     touchFile "$secret" "$lastSecretTime"
