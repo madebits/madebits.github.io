@@ -158,3 +158,4 @@ this.client = await mongoClient.connect(mongoUrl, options);
 
 
 
+<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-03-10-How-To-Speak-Like-A-Leader.md'>How To Speak Like A Leader</a></ins>

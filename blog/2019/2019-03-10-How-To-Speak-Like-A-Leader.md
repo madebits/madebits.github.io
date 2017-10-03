@@ -37,4 +37,4 @@ There was an interesting [post](https://news.ycombinator.com/item?id=19349676) o
 1. Figure out the tip of problem and leave team get involved early on to handle the problem and solutions. Help non-performers on the private. Talk less, let others be doers, make others the hero of their [stories](https://www.youtube.com/watch?v=iBa9EoEbb38).
     * Ask for clarification.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-03-04-Vim-For-Casual-User.md'>Vim For Casual User</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-03-25-MongoDb-with-SSL.md'>MongoDb with SSL</a> <a rel='next' id='fnext' href='#blog/2019/2019-03-04-Vim-For-Casual-User.md'>Vim For Casual User</a></ins>
