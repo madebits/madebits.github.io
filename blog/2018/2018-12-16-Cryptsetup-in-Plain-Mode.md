@@ -8,7 +8,7 @@
 
 <div id='toc'></div>
 
-##Creating and Using Encrypted Containers
+##Using Encrypted Containers
 
 To create or open a plain (non-LUKS) container use (all shown commands need `sudo`):
 
@@ -74,7 +74,7 @@ sudo resize2fs /dev/mapper/enc 20G
 truncate -s 20G container.bin
 ```
 
-##Better Plain Mode Passwords
+##Better Passwords
 
 Given `--type plain` hashes password only once, plain mode is safe only if combined with some tool that hashes password more than once. 
 
@@ -176,7 +176,7 @@ dmsetup table --target crypt --showkey /dev/mapper/enc | cut -d ' ' -f 5 | xxd -
 cryptsetup --key-file=key.bin -c aes-xts-plain64 -s 512 -o 111 open --type plain container.bin enc
 ```
 
-##Other Plain Mode Goodies
+##Plain Mode Goodies
 
 [Arch Wiki](https://wiki.archlinux.org/index.php/Dm-crypt/Device_encryption#Encrypting_devices_with_plain_mode) has two interesting uses of plain mode.
 
