@@ -56,7 +56,7 @@ sda                     8:0    0    30G  0 disk
     +-ubuntu--vg-root 253:1    0  29,3G  0 lvm   /
 ```
 
-##GNome
+##GNOME
 
 I have still to find someone that can use GNome as it is out of the box. So first things first:
 
@@ -65,7 +65,7 @@ sudo apt-get update
 sudo apt install chrome-gnome-shell
 ```
 
-Firefox install [GNOME Shell Integration](https://addons.mozilla.org/en-US/firefox/addon/gnome-shell-integration/). Now, we easy check and install a minimum set of [extensions](https://extensions.gnome.org/local/).
+On Firefox, installed [GNOME Shell Integration](https://addons.mozilla.org/en-US/firefox/addon/gnome-shell-integration/). Now, I easy install a minimum set of [extensions](https://extensions.gnome.org/local/).
 
 ###Minimal Selection of GNome Extensions
 
