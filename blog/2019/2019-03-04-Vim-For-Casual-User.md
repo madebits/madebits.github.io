@@ -113,10 +113,10 @@ Vim has also a **visual-mode**, entered by any of: `v` char selection, `V` line 
 
 Macros (`:h @`):
 
-* `qa` record macro in register *a* (a-z). Type command here.
+* `qa` record macro in register *a* (a-z). Type command here. `qA` appends to macro *a*.
 * `q` stop recording
-* `@a` play back macro in register *a*, `@@` replays last macro, and `number@@` replays last macro *number* times.
-* `:registers` will show all registers, include macro ones.
+* `@a` play back macro in register *a*, `@@` replays last macro, `number@a` play *a* *number* times, and `number@@` replays last macro *number* times.
+* `:registers` will show all registers, including the macro ones.
 * `"ap` paste register *a* (to edit as needed)
 * `0"ay$` copy macro (or `v` to enter visual mode, select, then `"ay`)
 * `:help q` for more details
