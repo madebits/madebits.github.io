@@ -13,9 +13,9 @@
 ## Technology
 
 [Hacker News](https://news.ycombinator.com/)
-[Daily Rotation](http://www.dailyrotation.com/)
+[TopTech](https://alltop.com/tech)
+[TopLinux](https://alltop.com/linux)
 [SlashDot](https://slashdot.org/)
-[How To Geek](https://www.howtogeek.com/)
 [GHacks](https://www.ghacks.net/)
 [Medium](https://medium.com/)
 [ArsTechnica](https://arstechnica.com/)
@@ -30,12 +30,10 @@
 [ACM TechNews](https://technews.acm.org/)
 [ACM Queue](https://queue.acm.org/)
 [Tech Crunch](https://techcrunch.com/)
-[Reddit InternetIsBeautiful](https://www.reddit.com/r/internetisbeautiful)
 [BetaNews](https://betanews.com/)
-[The Inquirer](https://www.theinquirer.net/type/news)
 [ZDNet](https://www.zdnet.com/)
 [WeLiveSecurity](https://www.welivesecurity.com/)
-
+[How To Geek](https://www.howtogeek.com/)
 
 [Heise](https://www.heise.de/newsticker/)
 [Golem.de](https://www.golem.de/)
@@ -58,34 +56,13 @@
 
 ### Linux
 
-[LinuxToday](https://www.linuxtoday.com/)
-[LinuxOrg](https://www.linux.org/)
-[Reddit UnixP0rn](https://www.reddit.com/r/unixporn/)
-[Reddit LinuxQuestions](https://www.reddit.com/r/linuxquestions/)
-[Reddit Linux](https://www.reddit.com/r/linux/)
-[ItsFoss](https://itsfoss.com/)
-[Linuxize](https://linuxize.com/)
-[LinuxSlashDot](https://linux.slashdot.org/)
 [StackExchangeUnix](https://unix.stackexchange.com/questions)
 [AskUbuntu](https://askubuntu.com/questions)
 [Phoronix](https://www.phoronix.com/scan.php?page=home)
-[LinuxLinks](https://www.linuxlinks.com/)
-[NoobsLab](https://www.noobslab.com/)
-[UbuntuHandbook](http://ubuntuhandbook.org/)
-[OMGUbuntu](https://www.omgubuntu.co.uk/)
-[TechMint](https://www.tecmint.com/)
-[LinuxAndUbuntu](http://www.linuxandubuntu.com/)
-[WebUpd8](http://www.webupd8.org/)
-[UbuntuHandbook](http://ubuntuhandbook.org/)
-[TechDriveIn](https://www.techdrivein.com/)
-[UnixMen](https://www.unixmen.com/)
-[UbuntuGeek](http://www.ubuntugeek.com/)
-[LinuxNews](http://linux-news.org/)
-[LinuxInsider](https://www.linuxinsider.com/)
+[LinuxToday](https://www.linuxtoday.com/)
 
 ### Programming
 
-[Reddit Programming](https://www.reddit.com/r/programming/)
 [.Net Blog](https://devblogs.microsoft.com/dotnet/)
 [CodingHorror](https://blog.codinghorror.com/)
 [TheDailyWTF](https://thedailywtf.com/)
@@ -168,6 +145,7 @@
 
 ### Europe
 
+[EuroNews](https://www.euronews.com/european-affairs/european-news)
 [France 24](https://www.france24.com/en/)
 [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
 [T-Online Nachrichten](https://www.t-online.de/nachrichten/)
@@ -185,11 +163,16 @@
 [RT News](https://rt.com/news/)
 [Sputnik News](https://sputniknews.com/)
 [TASS](https://tass.com/world)
+[Interfax](https://interfax.com/newsroom/top-stories/)
 [SiberianTimes](https://siberiantimes.com/home/)
 [TheMoscowTimes](https://www.themoscowtimes.com/news)
+[Pravda](https://english.pravda.ru/)
 [PravdaReport](http://www.pravdareport.com/world/)
-[RussiaInsider](https://russia-insider.com/en)
+[RussiaInsider](https://russia-insider.com/enRussiaBeyond)
 [SouthFront](https://southfront.org/)
+[RussiaBeyond](https://www.rbth.com/science-and-tech)
+[GlobalAffairs](https://eng.globalaffairs.ru/)
+[FilmHub](https://russianfilmhub.com/genre/russian-war-movies/)
 
 ## China & Asia
 
@@ -228,14 +211,7 @@
 
 ## Other
 
-[AllTop](https://alltop.com/tech)
-[SkimFeed](https://skimfeed.com/)
-[LiveLeak](https://www.liveleak.com/)
 [LibGen](https://www.yandex.com/search/?text=libgen)
 [Sci-Hub](https://www.yandex.com/search/?text=Sci-Hub%20whereis)
 [BoingBoing](https://boingboing.net/)
-[Top.st](https://top.st/)
 [Corona](https://interaktiv.morgenpost.de/corona-virus-karte-infektionen-deutschland-weltweit/)
-
-
-
