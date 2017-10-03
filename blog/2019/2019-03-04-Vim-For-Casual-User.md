@@ -27,7 +27,7 @@ Another occasionally useful command-line option is `vim -R file.txt` to open a f
 
 If you started Vim without a filename, you can open a file from within Vim using `:edit filename` (or `:e`). *Tab* key can be used for auto-completion.
 
-The fastest way to produce text in Vim is to write it in some other editor and save as some file `text.txt`. Start `vim` and use `:r text.txt` to read it and put its text under the cursor position. File name completion should work after `:r` same as in shell using *Tab* key. This is also the best way to bring some existing pieces of text within a file in Vim.
+The fastest way to produce text in Vim is to write it in some other editor and save as some file `text.txt`. Start `vim` and use `:r text.txt` to read it and put its text under the cursor position. File name completion should work after `:r` same as in shell using *Tab* key. This is also the best way to bring some existing pieces of text within a file in Vim (if you have no GUI clipboard).
 
 Move the cursor (in *command-mode*) using `j` - down, `k` - up, `h` - left, `l` - right. Usually *arrow* keys work most of the time out the box too.
 
