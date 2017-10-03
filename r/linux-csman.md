@@ -10,7 +10,7 @@
 
 ## Introduction
 
-CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The follow are some of the hard-coded choices of the script:
+CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The following are some of the hard-coded choices of the script:
 
 * Uses `cryptsetup` in *plain* mode with 512 byte passwords (`-s 512 -h sha512`).
 * Supports only [EXT4](https://en.wikipedia.org/wiki/Ext4) volumes.
@@ -21,6 +21,10 @@ CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or
 
 CSMan uses a randomly generated 512 byte binary key (called **secret**) as passwords for a `cryptsetup` *plain* mode container (`-s 512 -h sha512`). The secret 512 bytes are stored in **secret files** encrypted with *AES* and protected with a user password (called **password**).
 
+```
+cryptsetup <= random secret key (512 bit) <= password encrypted secret file (Argon / AES)
+```
+
 The secret file encryption password is hashed using `argon2` before passed to AES tool (which does also their own hashing). To open a container both the secret file and password must be known. 
 
 Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords. AES used to encrypt secret files is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret leads to different binary files. On difference from LUKS, user is responsible to store secret files separately from containers (maybe in another container).
@@ -29,8 +33,8 @@ Similar to LUKS, one can use same password safely to protect more than one secre
 
 Some overlapping terms explained:
 
-* **secret** - randomly generated (or user specified) 512 bytes (binary). Binary values are shown as *base64* in tool. Secret is used as `cryptsetup` password.
-* **secret file** - file where *secret* is stored encrypted.
+* **secret** - randomly generated (or user specified) 512 bytes (binary). Binary values are shown as *base64* in tool. Secret is used binary as `cryptsetup` password.
+* **secret file** - binary file where *secret* is stored encrypted.
 * **password** - user password (or pass-phrase) used to encrypt *secret file* (hashed with `argon2`).
 * **key file** - user password can contain, additionally to the pass-phrase, one or more optional key files. The hashed header bytes content of key files is appended to the password. Order of specifying key files does not matter, but they have to be exact same files used during encryption and decryption.
 * **session** - optional state stored as part of current user session. There is by default no session, but it is possible to store passwords in named encrypted session slots in a *tmpfs* for current logged user and refer to them from there.
@@ -43,7 +47,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 * `csman.sh` - main tool.
 * `cskey.sh` - is invoked by `csman.sh` for handling encryption and decryption of keys.
 * `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool. If this tool is found next to `cskey.sh` it is used. Alternately you can install `ccrypt` from Ubuntu repositories. 
-* `argon2` - this is a self-compiled copy of `argon2` from [official](https://github.com/P-H-C/phc-winner-argon2) repository ([my copy](https://github.com/madebits/phc-winner-argon2)). `argon2` can be found also in Ubuntu repositories. If found next to `cskey.sh`, this copy is used in place of the system copy.
+* `argon2` - this is a self-compiled copy of `argon2` from [official](https://github.com/P-H-C/phc-winner-argon2) repository without any changes ([my copy](https://github.com/madebits/phc-winner-argon2)). `argon2` can be found also in Ubuntu repositories. If found next to `cskey.sh`, this copy is used in place of the system copy.
 
 Every time `csman.sh` starts, it prints prefix hashes of these files, if present:
 
@@ -75,7 +79,7 @@ The command-line arguments are a bit *peculiar* (because I thought that it is fa
 
 Secret files are made of 32 random bytes of `argon2` salt, 512 random bytes of `cryptsetup` password encrypted, and are padded with random data to have random file lengths.
  
-It is not required to use `cskey.sh` directly most of the time, but knowing how to use it as shown in this section will make the later `csman.sh` commands clearer.
+It is not required to use `cskey.sh` directly most of the time, but knowing how to use it as shown in this section will make the `csman.sh` commands later clearer.
 
 #### Using URandom
 
