@@ -230,9 +230,8 @@ function main()
                 (>&2 echo "! name required")
                 exit 1
             fi
-            shift 
-            shift
-
+            shift 2
+            
             local secret="$1"
             if [ -z "$secret" ]; then
                 (>&2 echo "! secret required")
@@ -281,8 +280,8 @@ function main()
                 (>&2 echo "! name required")
                 exit 1
             fi
-            shift 
-            shift
+            shift 2 
+            
             local secret="$1"
             if [ -z "$secret" ]; then
                 (>&2 echo "! secret required")
