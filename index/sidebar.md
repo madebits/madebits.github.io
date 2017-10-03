@@ -1,3 +1,4 @@
+* [Extensions](#blog/2021/2021-11-24-Extensions.md)
 * [Using Ubuntu Snap](#blog/2020/2020-05-03-Using-Ubuntu-Snap.md)
 * [ETL Solutions](#blog/2019/2019-11-13-ETL-Solutions.md)
 * [Agile Backlog As Gantt Frontier](#blog/2019/2019-09-04-Agile-Backlog-As-Gantt-Frontier.md)
@@ -5,4 +6,3 @@
 * [SFTP With Shared Access](#blog/2019/2019-04-16-SFTP-With-Shared-Access.md)
 * [MongoDb with SSL](#blog/2019/2019-03-25-MongoDb-with-SSL.md)
 * [How To Speak Like A Leader](#blog/2019/2019-03-10-How-To-Speak-Like-A-Leader.md)
-* [Vim For Casual User](#blog/2019/2019-03-04-Vim-For-Casual-User.md)
