@@ -28,6 +28,7 @@
 		// $.get("//api.ipify.org?format=json", function(response) {
 		// 	addClientData('Ip', response.ip); // + ' <img src="https://api.wipmania.com/myflag.png" width="10" height="10">');
 		// }, "json");
+		/*
 		$.get('//freegeoip.net/xml/', null, function(response) {
 			try {
 				var r = $(response);
@@ -44,7 +45,7 @@
   				if(m) addClientData('Location', m);
   			} catch(e){}
 		}, 'xml');
-
+		*/
 		addClientData('Os', window.navigator.platform);
 		if(window.navigator.languages) addClientData('Languages', window.navigator.languages.join(', '));
 		addClientData('Browser', window.navigator.userAgent);

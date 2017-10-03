@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self' madebits.github.io; style-src 'unsafe-inline' 'self' madebits.github.io; script-src 'unsafe-eval' 'unsafe-inline' 'self' madebits.github.io pagead2.googlesyndication.com www.gstatic.com www.google-analytics.com madebits.disqus.com a.disquscdn.com referrer.disqus.com cdnjs.cloudflare.com; img-src 'self' madebits.github.io data: a.disquscdn.com www.google-analytics.com referrer.disqus.com stats.g.doubleclick.net dl.dropboxusercontent.com; child-src disqus.com googleads.g.doubleclick.net; connect-src 'self' madebits.github.io api.github.com freegeoip.net dl.dropboxusercontent.com crossorigin.me; font-src 'self' madebits.github.io cdnjs.cloudflare.com">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self' madebits.github.io; style-src 'unsafe-inline' 'self' madebits.github.io; script-src 'unsafe-eval' 'unsafe-inline' 'self' madebits.github.io cdnjs.cloudflare.com; img-src 'self' madebits.github.io data: dl.dropboxusercontent.com; connect-src 'self' madebits.github.io api.github.com dl.dropboxusercontent.com crossorigin.me; font-src 'self' madebits.github.io cdnjs.cloudflare.com">
 	<meta http-equiv="cache-control" content="max-age=0, no-cache, no-store" >
 	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" >
 	<meta http-equiv="pragma" content="no-cache" >
@@ -21,9 +21,9 @@
 	<link rel="stylesheet" href="scripts/hj/styles/github-gist.css">
 	<script async src="scripts/hj/highlight.pack.js"></script>
 	<link rel="stylesheet" type="text/css" media="screen" href="styles/app.css">
-	<!-- link href="index/atom.xml" type="application/atom+xml" rel="alternate" title="ATOM Feed" / -->
 	<script type="text/x-mathjax-config">MathJax.Hub.Config({ showProcessingMessages: false, messageStyle: "none", tex2jax: {inlineMath: [['$$$','$$$'], ['\\(','\\)']]}, showMathMenu: false, "HTML-CSS": { linebreaks: { automatic: true, width: "container" } } });</script>
-	<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script async type="text/javascript" src="scripts/MathJax-2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<!-- script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 	<!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
 	<!-- script async src="scripts/jquery.cookiebar.min.js"></script -->
 	<script src="scripts/sammy-0.7.6.min.js"></script>
@@ -41,10 +41,10 @@
 			<div class="navbar-header">
 			<!--
 				<button type="button" class="navbar-toggle collapsed mbg-navtoggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					-- <span class="sr-only">Toggle navigation</span>
+					 <span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
-					<span class="icon-bar"></span> --
+					<span class="icon-bar"></span> 
 					<span class="text-muted"><i class="fa fa-bars"></i></span>
 				</button>
 				-->
@@ -106,7 +106,7 @@
 					(adsbygoogle = window.adsbygoogle || []).push({});
 					</script>
 				</div> -->
-				<div id="mbg-comments" class="hidden-print"></div>
+				<!--  <div id="mbg-comments" class="hidden-print"></div> -->
 			</section>
 			<!-- <br clear="all"> -->
 			<footer id="mbg-footer" class="hidden-print">
