@@ -163,4 +163,4 @@ To decrypt current GPG text (`Ctrl+L` to refresh screen):
 
 I found myself last reading [Practical Vim](http://vimcasts.org/publications/) and would recommend it after you are familiar with the basics above.
 
-<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-01-24-Docker-s-Blackhole-Like-Behavior.md'>Docker Blackhole Like Behavior</a></ins>
+<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-03-10-How-To-Speak-Like-A-Leader.md'>How To Speak Like A Leader</a> <a rel='next' id='fnext' href='#blog/2019/2019-01-24-Docker-s-Blackhole-Like-Behavior.md'>Docker s Blackhole Like Behavior</a></ins>

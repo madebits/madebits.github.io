@@ -1,1 +1,1 @@
-var homeUrl='blog/2019/2019-03-04-Vim-For-Casual-User.md';
+var homeUrl='blog/2019/2019-03-10-How-To-Speak-Like-A-Leader.md';
