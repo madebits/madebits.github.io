@@ -23,10 +23,6 @@
 [MSDN Magazine](https://msdn.microsoft.com/en-us/magazine/default.aspx)
 [Wired](https://www.wired.com/tag/programming/)
 [Developer Tech](https://www.developer-tech.com/)
-[Heise](https://www.heise.de/newsticker/)
-[Golem.de](https://www.golem.de/)
-[Chip.de](https://www.chip.de/nachrichten)
-[ComputerWoche.de](https://www.computerwoche.de/)
 [EnGadget](https://www.engadget.com/)
 [LifeHacker](https://lifehacker.com/)
 [AnandTech](https://www.anandtech.com/)
@@ -41,7 +37,16 @@
 [The Inquirer](https://www.theinquirer.net/type/news)
 [ZDNet](https://www.zdnet.com/)
 [FrontEndDaily](https://twitter.com/FrontEndDaily)
+[.Net Blog](https://devblogs.microsoft.com/dotnet/)
+[WeLiveSecurity](https://www.welivesecurity.com/)
 
+### Technology News in German
+
+[Heise](https://www.heise.de/newsticker/)
+[Golem.de](https://www.golem.de/)
+[Chip.de](https://www.chip.de/nachrichten)
+[ComputerWoche.de](https://www.computerwoche.de/)
+[DeskModder.de](https://www.deskmodder.de/blog/)
 
 ### Technology Videos & Learning
 
@@ -51,6 +56,7 @@
 [CCC](https://media.ccc.de/)
 [OCW](https://ocw.mit.edu/index.htm)
 [LSO](https://lagunita.stanford.edu/)
+[KhanAcademy](https://www.khanacademy.org/math)
 [BetterExplained](https://betterexplained.com/)
 
 ### Linux
@@ -65,6 +71,8 @@
 [AskUbuntu](https://askubuntu.com/questions)
 [Phoronix](https://www.phoronix.com/scan.php?page=home)
 [LinuxLinks](https://www.linuxlinks.com/)
+[LinuxJournal](https://www.linuxjournal.com/)
+[NoobsLab](https://www.noobslab.com/)
 
 ### Science
 
@@ -83,6 +91,7 @@
 [The New York Times](https://www.nytimes.com/section/world)
 [The Washington Times](https://www.washingtontimes.com/news/world/)
 [Reddit World News](https://www.reddit.com/r/worldnews/)
+[The Onion](https://www.theonion.com/)
 
 ### Canada & Australia
 
@@ -103,6 +112,7 @@
 [Deutsche Welle](https://www.dw.com/en/top-stories/world/s-1429)
 [T-Online Nachrichten](https://www.t-online.de/nachrichten/)
 [EuroNews](https://www.euronews.com/news/international)
+[NetzPolitik](https://netzpolitik.org/)
 [B92](https://www.b92.net/eng/news/world.php)
 
 ## Russia
@@ -134,8 +144,11 @@
 ## Other
 
 [AllTop](https://alltop.com/tech)
+[SkimFeed](https://skimfeed.com/)
 [LiveLeak](https://www.liveleak.com/)
 [LibGen](http://libgen.io/)
+[BoingBoing](https://boingboing.net/)
+[Top.st](https://top.st/)
 
 
 
