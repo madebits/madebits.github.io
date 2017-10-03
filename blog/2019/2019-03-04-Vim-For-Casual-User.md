@@ -70,7 +70,7 @@ If you scroll down in help page (or press `/quick`) , you will find a link to *q
 
 In Vim, there are two main modes:
 
-* **command-mode** (aka: **normal-mode**) is reachable by pressing *Esc* key or if that is broken *Ctrl+[*. *Ctrl+c* works too and it is the best to use in non-ANSI keyboards.
+* **command-mode** (aka: **normal-mode**) is reachable by pressing *Esc* key or if that is broken *Ctrl+[*. *Ctrl+c* works too and it is the best to use in non-QWERTY keyboards.
     * In most terminals, *Alt+normal mode command key* will work form within *insert-mode*. 
     * *Ctrl+o normal mode command* works also from within *insert-mode*.
 * **insert-mode** is reachable from command-mode by initiating some text edit command.
