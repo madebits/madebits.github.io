@@ -82,7 +82,7 @@ While `scrypt` is the easiest tool to use, you may also consider combining `argo
 
 ##Using Argon2 and Ccrypt
 
-Let us create a bash helper script:
+Let us create a bash helper script `cs-key.sh` to manage key contents:
 
 ```bash
 #!/bin/bash
