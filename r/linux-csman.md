@@ -33,7 +33,7 @@ Close a container by name:
 ```bash
 sudo csman.sh close one
 
-# or close all open
+# or close all open containers
 sudo csman.sh closeAll
 ```
 
