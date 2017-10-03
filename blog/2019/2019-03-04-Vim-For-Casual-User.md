@@ -139,7 +139,7 @@ Vim has also a **visual-mode** entered by any of: `v` char selection, `V` line s
 
 Macros (`:h @`):
 
-* `qa` record macro in register *a* (a-z). Type command here. `qA` appends to macro *a*.
+* `qa` record macro in register *a* (a-z). Type commands here. `qA` appends to macro *a*.
 * `q` stop recording
 * `@a` play back macro in register *a*, `@@` replays last macro, `number@a` play *a* *number* times, and `number@@` replays last macro *number* times.
 * `:registers` will show all registers, including the macro ones.
@@ -183,28 +183,29 @@ Integrated spell checker can be activated via `:set spell`:
 Running external commands:
 
 * To open shell without having to exit Vim use `:shell` or `:sh`. Run `exit` to return back from shell. 
-* Using `:!sh` or `:!cmd` can be also used to run the shell (or run a command, use `!cmd %` for to replace `%` with current file name if you need it). 
-* To put output of command as text in current buffer use `:r !cmd`.
+* Using `:!sh` or `:!cmd` can be also used to run the shell (or run a command, such as `!ls`).
+    * Use `!cmd %` for to replace `%` with current file name if you need it. 
+* To read and append output of command as text in current buffer use `:r !cmd`.
 
-Using external commands to filter buffer text:
+Using external commands to filter buffer text (think of `!` as pipe `|`):
 
 * `range!cmd` where range is `%` all text, `.` current line, `m,n` lines *m,n*
 
 To encrypt current buffer text:
 
 * `%!gpg -ca --compress-algo zip -z 9 --cipher-algo AES256`
-* `%!gpg --pinentry-mode loopback --passphrase "password" -ca --compress-algo zip -z 9 --cipher-algo AES256` - same but you can pass password directly
+    * `%!gpg --pinentry-mode loopback --passphrase "password" -ca --compress-algo zip -z 9 --cipher-algo AES256` - same as above but you can pass password directly
 
 To decrypt current GPG text (`Ctrl+L` to refresh screen):
 
 * `%!gpg -d 2> /dev/null`
 
-To encrypt a file with Vim's build-in encryption, open or create the file then:
+To encrypt a file with Vim's build-in encryption, open or create a file then:
 
 * In normal mode enter `:setlocal cm=blowfish2` and then `:X` and enter the password twice and then save file `:wq`. 
 
 ## Readings
 
-I found myself last reading [Practical Vim](http://vimcasts.org/publications/) and would recommend it after you are familiar with the basics above.
+I found myself last reading [Practical Vim](http://vimcasts.org/publications/) and would recommend it once you are familiar with the Vim basics above.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-03-10-How-To-Speak-Like-A-Leader.md'>How To Speak Like A Leader</a> <a rel='next' id='fnext' href='#blog/2019/2019-01-24-Docker-s-Blackhole-Like-Behavior.md'>Docker s Blackhole Like Behavior</a></ins>
