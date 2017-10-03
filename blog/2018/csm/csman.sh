@@ -187,6 +187,14 @@ function getDevice()
     echo "/dev/mapper/$name"
 }
 
+function cleanMntDir()
+{
+    set +e
+    rmdir "$HOME/mnt/tmpcsm" 2> /dev/null
+    find "$HOME/mnt/" -maxdepth 1  -type d -name '?csm-*' -print0 | xargs -0 -n 1 -I {} rmdir {} 2> /dev/null
+    set -e
+}
+
 # name
 function mntDirRoot()
 {
@@ -910,6 +918,7 @@ function processOptions()
 function main()
 {
     showChecksum
+    cleanMntDir
     local mode="${1:-}"
     if [ -z "$mode" ]; then
         showHelp
@@ -925,7 +934,7 @@ function main()
         open|o)
             openContainer "-" "$@"
             if [ "$csmLive" = "1" ]; then
-                trap cleanUp SIGHUP SIGINT SIGTERM
+                trap cleanUp SIGHUP SIGINT SIGTERM EXIT
                 tput setaf 1
                 read -p "Press Enter twice or Ctrl+C to close the container ..."
                 logError
