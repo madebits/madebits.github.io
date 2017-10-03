@@ -27,6 +27,7 @@ csmKeyFiles2=()
 csmNoKeyFiles="0"
 csmNoKeyFiles2="0"
 cskKey=""
+cskChpFile=""
 
 currentScriptPid=$$
 toolsDir="$(dirname $0)"
@@ -344,7 +345,11 @@ function reEncryptFile()
 	
 	if [ -n "$cskFile2" ]; then
 		file="$cskFile2"
-	fi	
+	fi
+	
+	if [ -n "$cskChpFile" ]; then
+		file="$cskChpFile"
+	fi
 	
 	encodeMany "$file" "$pass" "$key"
 	dumpError "Done: $file"
@@ -385,6 +390,7 @@ function showHelp()
 	dumpError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
 	dumpError " -hn hashToolOptions -- : (chp) default -hn ${cskHashToolOptions2[@]} --, used for new file"
 	dumpError " -key file : (enc) read key data from file"
+	dumpError " -o outFile : (chp) write to outFile in place of file"
 	dumpError " -d -- (enc | chp) dump password and key on screen for debug"
 	dumpError "Examples:"
 	dumpError ' key=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt -key <(echo -n "$key") -h -p 8 -m 16 -t 1000 --'
@@ -521,6 +527,14 @@ function main()
 				useAes="${2:-}"
 				if [ -z "$useAes" ]; then
 					dumpError "! required -c encryptMode"
+					exit 1
+				fi
+				shift
+			;;
+			-o)
+				cskChpFile="${2:-}"
+				if [ -z "$cskChpFile" ]; then
+					dumpError "! required -o outFile"
 					exit 1
 				fi
 				shift
