@@ -125,7 +125,7 @@ My expectation would be there is nothing using `snap` in a fresh system using on
 
 There is one more very disturbing thing to complain. Someone designs `snap` to use `squashfs` and now each *snap* needs a `loop` device. Suddenly, people end up seeing a lot of `loop` devices in system, even those that do not use `snap` like me. This is real nuisance for something that is expected to take world over.
 
-And what do they do? In place of fixing the root of problem and come with something better, they are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such `gnome-disks` not to list snap `loop` devices. An initial bad decision, is followed by even more bad decisions to cover up the initial bad one. What about *GNU coreutils*, will they hack them too? What about all third party software (e.g. *VeraCrypt*)? Oh, they compiled its code in GNOME too, next one in the list?
+And what do they do? In place of fixing the root of problem and come with something better, they are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices. An initial bad decision is followed by even more bad decisions to cover up the initial bad one. What about *GNU coreutils*, will they hack them too? What about all third-party software (e.g. *VeraCrypt*)? Oh, they compiled its code in GNOME too, next one in the list?
 
 ##Summary
 
