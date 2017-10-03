@@ -30,6 +30,7 @@ cskSessionAutoPass="0"
 cskSessionSaveDecodePassFile=""
 cskSessionSaltFile=""
 cskRndLen="64"
+cskRndBatch="0"
 
 user="${SUDO_USER:-$(whoami)}"
 currentScriptPid=$$
