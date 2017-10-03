@@ -31,7 +31,7 @@ AES tool encrypts / decrypts one file at a time (CBC encryption mode).
 
 If input (`-i file`) is not specified or `-i -` then `stdin` is used. If output (`-o file`) is not specified or `-o -` then `stdout` is used. If the output file exists it will be overwritten!
 
-The password is specified as string on command-line. On Bash shell:
+The password is specified as string on command-line, which is usually convenient, but it be scan be unsafe. In Bash shell:
 
 1. To skip commands stored in history file (given `aes` needs the password in command-line) use a **space** before the command (check bash `HISTIGNORE` documentation for more details). E.g. (note space after $ prompt): 
 
@@ -39,7 +39,7 @@ The password is specified as string on command-line. On Bash shell:
    $ ./aes -i file.txt -o file.bin -p password
    ```
 
-1. If you like to type in the password on Bash shell use:
+1. If you like to type in the password in Bash shell use:
  ```
  read -s pass && ./aes -i file.txt -o file.bin -p "$pass"
  read -s pass && ./aes -d -i file.bin -o file.txt -p "$pass"
@@ -53,7 +53,7 @@ The password is specified as string on command-line. On Bash shell:
 ./aes -p test < test.txt | ./aes -d -p test > test1.txt ; [ -z "$(diff test.txt test1.txt)" ] ; echo $?
 ```
 
-In a similar way, this commands outputs "abc":
+In a similar way, this command outputs "abc":
 
 ```
 echo "abc" | ./aes -p "t" | base64 | base64 -d | ./aes -d -p "t"
@@ -90,7 +90,7 @@ Some of `aes` options you can use are:
 * -r read random data needed for encryption from `/dev/urandom` (default C `rand()` function is used).
 * -c now many times we hash the password to obtain the encryption key (see also -a below) (default 1024).
 * -h some number - *this is evil (TM)* and it needs some more explanation. Without -h (or -h 0), `aes` tool stores the file as (iv,salt,encrypted data), this is multiple of 8 and the offset of begin of each part is known. If we specify an offset with -h we store that much random data first in file (random,iv,salt,encrypted data), so the file length is no more necessary a multiple of 8, and the offsets of the parts are not directly known (see also -a below) (default is -h 0).
-* -a [level] is an automatic shortcut for -c and -h (default level for -a if not specified is 5). When using -a, then -c, -h are ignored and their values are auto calculated from password based on the formulas shown next, where `passwordSum` is the sum of all password characters as an integer (and `**` is math power):
+* -a [level] is an automatic shortcut for -c and -h (default level for -a is 5). When using -a, then -c, -h are ignored and their values are auto calculated from password based on the formulas shown next, where `passwordSum` is the sum of all password characters as an integer (and `**` is math power):
 
  ```
  -c ( ( 10 ** level ) + ( level * ( passwordSum % 1024 ) ) )
