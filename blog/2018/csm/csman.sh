@@ -28,6 +28,7 @@ mkfsOptions=()
 csmChain="1"
 csmMount="1"
 cmsMountReadOnly="0"
+csmListShowKey="0"
 
 ########################################################################
 
@@ -113,13 +114,17 @@ function touchDiskFile()
 function touchFile()
 {
     local file="$1"
-    local fileTime="$2"
+    local fileTime="${2:-}"
     if [ -f "$file" ]; then
-    set +e
-    #sudo bash -s "$file" "$fileTime" <<-'EOF'
-        now=$(date +"%F %T.%N %z") && date -s "$2" > /dev/null && touch "$1" && date -s "$now" > /dev/null
-    #   EOF
-    set -e
+        if [ -z "${fileTime}" ]; then
+        fileTime=$(stat -c %z "$HOME")
+        fi
+        set +e
+        #sudo bash -s "$file" "$fileTime" <<-'EOF'
+            now=$(date +"%F %T.%N %z") && date -s "${fileTime}" > /dev/null && touch "$file"
+            date -s "$now" > /dev/null
+        #   EOF
+        set -e
     fi
 }
 
@@ -263,6 +268,12 @@ function closeContainerByName()
     
     local dev="$(getDevice "$name" "1")"
     if [ -e "$dev" ]; then
+        if [ -z "$lastContainer" ]; then
+            set +e
+            lastContainer="$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)"
+            set -e
+            resetTime
+        fi
         cryptsetup close "$(innerName "$name")"
     fi
     dev="$(getDevice "$name" "0")"
@@ -317,11 +328,19 @@ function listContainer()
         echo -e "Open:\t${time}"
         cipher="$(cryptsetup status "$name" | grep cipher: | cut -d ' ' -f 5)"
         echo -e "Device:\t${dev}\t${cipher}"
+        if [ "$csmListShowKey" = "1" ]; then
+            local k=$(dmsetup table --target crypt --showkey "${dev}" | cut -d ' ' -f 5)
+            echo -e "RawKey:\t$k"
+        fi
     fi
     dev="$(getDevice "$name" "1")"
     if [ -e "$dev" ]; then
         cipher="$(cryptsetup status "$dev" | grep cipher: | cut -d ' ' -f 5)"
         echo -e "Device:\t${dev}\t${cipher}"
+        if [ "$csmListShowKey" = "1" ]; then
+            local k=$(dmsetup table --target crypt --showkey "${dev}" | cut -d ' ' -f 5)
+            echo -e "RawKey:\t$k"
+        fi
     fi
     local mntDir1=$(mntDirRoot "$name")
     local mntDir2=$(mntDirUser "$name")
@@ -694,6 +713,7 @@ function showHelp()
     logError " -s : (open|create) use only one (outer) encryption layer"
     logError " -u : (open) do not mount on open"
     logError " -r : (open) mount user read-only"
+    logError " -lk : (list) list raw keys"
     logError "Example:"
     logError " sudo csmap.sh open container.bin -l -ck -k -h -p 8 -m 14 -t 1000 -- ---"
 }
@@ -762,6 +782,9 @@ function processOptions()
             -r)
                 cmsMountReadOnly="1"
             ;;
+            -lk)
+                csmListShowKey="1"
+            ;;
             *)
                 onFailed "unknown option: $current"
             ;;
@@ -817,6 +840,7 @@ function main()
             closeAll
         ;;
         list|l)
+            processOptions "$@"
             closeAll "1"
         ;;
         resize|r)
