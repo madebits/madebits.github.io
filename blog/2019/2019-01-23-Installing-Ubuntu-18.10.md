@@ -154,6 +154,6 @@ Apart of GNOME taskbar, which I really do not like, as it consumes the limited v
 * auto-hide is not so easy to use within VirtualBox;
 * if you are used with free vertical space from other environments, it is hard to accept lack of that option;
 
-I think with minor tweaks, Ubuntu 18.10 UI is usable, without having to install some other desktop variant. The overall UI direction looks ok, I can imagine using next LTS release UI as default desktop. I expect to see more crap like `snap` and `ubuntu-report` being added there by default.
+I think with minor tweaks, Ubuntu 18.10 UI is usable, without having to install some other desktop variant. The overall UI direction looks ok, I can imagine using next LTS release UI as default desktop. I expect to see more things like `snap` and `ubuntu-report` being added there by default.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-01-24-Docker-s-Blackhole-Like-Behavior.md'>Docker s Blackhole Like Behavior</a> <a rel='next' id='fnext' href='#blog/2018/2018-12-16-Cryptsetup-in-Plain-Mode.md'>Cryptsetup in Plain Mode</a></ins>
