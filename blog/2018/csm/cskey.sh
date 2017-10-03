@@ -168,7 +168,7 @@ function encodeSecret()
     local pass="$2"
     local secret="$3"
     
-    debugData "$pass" "$secret"
+    debugData "Pass:" "$pass" "Secret:" "$secret"
     
     local salt=$(head -c 32 /dev/urandom | base64 -w 0)
     hash=$(pass2hash "$pass" "$salt")
@@ -215,9 +215,9 @@ function decodeSecret()
             readSessionPass
             restrictFile "${cskSessionSecretFile}"
             echo -n "$data" | base64 -d | decryptAes "$hash" | encryptAes "$cskSessionKey" > "${cskSessionSecretFile}"
-            debugData "secret" "$(echo -n "$data" | base64 -d | decryptAes "$hash" | base64 -w 0)"
+            debugData "Secret:" "$(echo -n "$data" | base64 -d | decryptAes "$hash" | base64 -w 0)"
             logError "# session: stored secret in: ${cskSessionSecretFile}"
-            debugData "$(cat -- ${cskSessionSecretFile} | base64 -w 0)"
+            debugData "SessionSecret:" "$(cat -- ${cskSessionSecretFile} | base64 -w 0)"
             logError
         fi
         echo -n "$data" | base64 -d | decryptAes "$hash"
@@ -342,18 +342,18 @@ function readNewPass()
 
 function getSecret()
 {
-    # can be passed from outside
-    CS_SECRET="${CS_SECRET:-}"
     local secret=""
     if [ -n "$cskSecret" ]; then
-        logError "# secret: user specified"
+        logError "# secret: user specified (-s or -as)"
         secret="$cskSecret"
-    elif [ -n "$CS_SECRET" ]; then
-        logError "# secret: from CS_SECRET"
-        secret="$CS_SECRET"
     else
-        logError "# secret: generated new"
-        secret=$(head -c 512 /dev/urandom | base64 -w 0)
+        logError "# secret: generating new, move mouse around if stuck"
+        # skip some bytes
+        head -c $RANDOM /dev/urandom > /dev/null
+        # that 32 bytes from /dev/random are enough
+        # but length matters anyway :)
+        secret=$(cat <(head -c 480 /dev/urandom) <(head -c 32 /dev/random) | base64 -w 0)
+        #secret=$(head -c 512 /dev/urandom | base64 -w 0)
     fi
     echo "${secret}"
 }
@@ -471,7 +471,7 @@ function readSessionPass()
         fi
         sSecret="${sessionData}${rsp}"
         cskSessionKey="$(echo -n "${sSecret}" | sha256sum | cut -d ' ' -f 1)"
-        debugData "${sSecret}" "${cskSessionKey}"
+        debugData "SessionSecret:" "${sSecret}" "SessionKey:" "${cskSessionKey}"
     fi
 }
 
@@ -614,7 +614,7 @@ Options:
  -b count : (enc) generate file.count backup copies
  -bs : (enc) generate a new secret for each -b file
  -h hashToolOptions -- : (enc|dec) default -h ${cskHashToolOptions[@]} --
- -s file : (enc) read secret data as 'base64 -w 0' from file
+ -s file : (enc) read secret data (512 binary bytes encoded as 'base64 -w 0') from file
  -as file : (enc) session : read secret data from a session file (see -aso)
  -aso outFile : (dec) session: write secret data to a encrypted file
  -apo outFile : (dec) session: write password data to a encrypted file
