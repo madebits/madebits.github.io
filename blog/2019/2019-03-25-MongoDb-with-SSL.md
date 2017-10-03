@@ -198,7 +198,7 @@ docker run --restart always -d --hostname my-rabbit -p 5774:5671 -p 15774:15671 
 Then we can activate management plugin and add an admin user as follows:
 
 ```bash
-docker exec -i -t rmq03 /bin/bash
+docker exec -it rmq03 /bin/bash
 
 rabbitmq-plugins enable rabbitmq_shovel rabbitmq_shovel_management
 
