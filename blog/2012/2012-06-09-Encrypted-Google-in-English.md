@@ -6,7 +6,7 @@
 
 Until today, https://encrypted.google.com was always in English even in non-English speaking countries, such as Germany, which I found nice. Today, I found it redirects me to the German version. I run in private mode, without any Google login, so it is not a matter of cookies, or settings.
 
-To make it start with and search the international English version, I used now https://encrypted.google.com/?hl=en and updated my browser home button shortcut to it.
+To make it start with and search the international English version, I used now https://encrypted.google.com/?hl=en and updated my browser home button shortcut to it. Update: https://www.google.com/webhp?pws=0&gl=us&gws_rd=cr seems to work too.
 
 Alternatively, https://encrypted.google.com/?gl=us (or both https://encrypted.google.com/?hl=en&gl=us) can be used to get USA results.
 
