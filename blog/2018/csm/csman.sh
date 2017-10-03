@@ -305,15 +305,46 @@ function closeAll()
         [ "$name" != "control" ] || continue
         [[ "$name" == csm-* ]] || continue
         [ "${name: -1}" != "_" ] || continue
-        if [ "${1:-}" = "1" ]; then
+        case "${1:-}" in
+            1)
             listContainer "$name"
             echo
-        else
+            ;;
+            2)
+                if isSameContainerFile "$name" "${2:-}" ; then
+                    csmIsContainerFileOpen="$name"
+                    return
+                fi
+            ;;
+            *)
             closeContainer "$name"
-        fi
+            ;;
+        esac
     done
 }
 
+# file
+csmIsContainerFileOpen=""
+function isContainerFileOpen()
+{
+    csmIsContainerFileOpen=""
+    closeAll 2 "$1"
+}
+
+# name file
+
+function isSameContainerFile()
+{
+    local container="$(getContainerFile "$1")"
+    if [ "$container" = "$2" ]; then
+        return 0
+    fi
+    return 1
+}
+
+
+
+# name
 function getContainerFile()
 {
     local name=$(validName "${1:-}")
@@ -425,6 +456,11 @@ function openContainer()
         onFailed "cannot open: $device"
     fi
     shift
+    
+    isContainerFileOpen "$device"
+    if [ -n "$csmIsContainerFileOpen" ]; then
+        onFailed "${device} is already open as ${csmIsContainerFileOpen}"
+    fi
     
     local secret="${1:-}"
     checkArg "$secret" "secret"
