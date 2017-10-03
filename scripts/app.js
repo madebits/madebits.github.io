@@ -1027,7 +1027,7 @@ var applyStyle = function(containerId) {
   					"JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
 					];
  				var d = new Date(p1.text().trim());
- 				var text = d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
+ 				var text = d.getUTCDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
  				p1.text(text);
 			}catch(e){}
 			
