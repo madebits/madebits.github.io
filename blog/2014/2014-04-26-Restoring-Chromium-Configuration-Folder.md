@@ -10,9 +10,9 @@ I always start Chromium web browser in incognito mode in Ubuntu using by default
 --disk-cache-dir=/dev/null --disk-cache-size=1 --incognito -start-maximized --no-first-run --user-data-dir=/home/$USER/Private/chromium
 ```
 
-Despite this, Chromium stores a lot of data in its profile folder. I have no idea why these data are good for me and I have found no use for them. The safest way to store data is not to collect them in the first place. To clean them I created a small script that starts Chrome with a clean profile and takes over only my settings, bookmarks, and extensions from the old one.
+Despite this, Chromium stores a lot of data in its profile folder. I have no idea why these data are good for me and I have found no use for them. To clean them, I created a small script that starts Chrome with a clean profile and takes over only my settings, bookmarks, and extensions from the old one.
 
-The script below, if used to start Chromium periodically will prevent it from collecting any historic data over time locally in incognito mode. The script works for my Chromium browser profile in Ubuntu:
+The script below, if used to start Chromium periodically will prevent it from collecting any historic data over time locally in incognito mode:
 
 ```
 #!/bin/bash
@@ -57,9 +57,9 @@ rm -rf "${DIRTMP1}/"
 
 The first part of the script re-creates the current profile and takes over from the old the extensions and their state, the bookmarks, and the the preferences.
 
-The rest is a trick to deal with search engines. They are stored in `Web Data` file, a `sqlite3` DB. I start Chromium first time to have it re-create Web Data file. Then I kill it, and set my own search engine configuration to it (it basically disables search from the address bar). Then I start Chromium again and remove the old profile. You need to install: `sudo apt-get install sqlite3`
+The rest is a trick to deal with search engines. They are stored in `Web Data` file, a `sqlite3` DB. I start Chromium first time to have it re-create Web Data file. Then I kill it, and set my own search engine configuration (it basically disables search from the address bar). Then I start Chromium again and remove the old profile. You need to install: `sudo apt-get install sqlite3`
 
-I can use this file to start Chromium once a while - the config folder size goes down then from over 20MB to less than 2MB.
+I can use this file to start Chromium once a while - the profile folder size goes down then from over 20MB to less than 2MB.
 
 As a related tip, apart of using 'uBlock' in browser, my `/etc/hosts` contains the following entries, just to be sure:
 
