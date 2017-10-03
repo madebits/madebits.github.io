@@ -30,7 +30,7 @@ There was an interesting [post](https://news.ycombinator.com/item?id=19349676) o
     * There are three levels of thinking: a) strategically (long term, executive team), b) tactically (who and why, engineering management), c) operationally (what and how, engineers, but it help to know the why).
 1. How you can influence those above you can impact your team effectiveness, even if your team is not aware of that.
     * Try teaching something new (successes/failures) to your managers when you speak to them. Speak about side projects, news, videos, experiences that can have some future impact on product.
-1. Think about your Audience. Your team's job is execution, executives job is prioritization. 
+1. Think about your Audience. Your team's job is execution, executives job is prioritization.
     * Give your manager only the information he wants / needs.
     * Communicate: status of project, external blockers, progress (as metrics), important personnel issues.
     * People will ask for more information if they want it.
