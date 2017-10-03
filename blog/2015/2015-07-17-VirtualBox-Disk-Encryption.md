@@ -33,9 +33,23 @@ If you ever want to move the encrypted `.vdi` file to a new virtual machine, you
 
 The first line in `CRYPT/KeyStore` value is the algorithm used, the rest are encryption data. They are not dependent on `uuid` (I tested that by changing the `uuid` of the `.vdi` file and importing it to a new VM). It seems same password in different VMs will generate different XTS DEKs (some random salt is used stored in `CRYPT/KeyStore`). Just knowing the password and the `.vdi` will not help recover the data. You need a copy of `CRYPT/KeyStore` value.
 
+##Disabling Logs
+
+The following can be put in shell script to start VMs without logs:
+
+```
+#/bin/bash
+
+export VBOX_RELEASE_LOG_DEST=nofile
+export VBOXSVC_RELEASE_LOG_DEST=nofile
+export VBOX_GUI_SELECTORWINDOW_RELEASE_LOG_DEST=nofile
+
+VirtualBox --startvm $1
+```
+
 ##Remember To Backup
 
-You have to be careful if you use VirtualBox disk encryption or you may lose data. I run into a problem with `--compact` and encryption and reported a [bug](https://www.virtualbox.org/ticket/14496). First `vboxmanage --compact` cannot compact an encrypted volume. It will work without errors, but it will not compact. Compact work only with unencrypted disk images. The problem is if you ever compact a `.vdi` file, you cannot encrypt it. I [compacted](https://superuser.com/questions/529149/how-to-compact-virtualboxs-vdi-file-size) first my `.vdi` file, and then tried to encrypt it I got the following error:
+I run into a problem with `--compact` and encryption and reported a [bug](https://www.virtualbox.org/ticket/14496). First `vboxmanage --compact` cannot compact an encrypted volume. It will work without errors, but it will not compact. Compact work only with unencrypted disk images. The problem is if you ever compact a `.vdi` file, you cannot encrypt it. I [compacted](https://superuser.com/questions/529149/how-to-compact-virtualboxs-vdi-file-size) first my `.vdi` file, and then tried to encrypt it I got the following error:
 
 ```
 Could not prepare disk images for encryption (VERR_VD_BLOCK_FREE): (VERR_VD_BLOCK_FREE).
@@ -71,6 +85,6 @@ pub:-:1024:17:54422A4B98AB5139:2010-05-18:::-:Oracle Corporation (VirtualBox arc
 fpr:::::::::7B0FAB3A13B907435925D9C954422A4B98AB5139:
 ```
 
-**Update:** Being an early adopter, means you have to deal with some problems. I have an Arch Linux guest and systemd (221) does not properly [recognize](http://permalink.gmane.org/gmane.comp.sysutils.systemd.devel/33072) VirtualBox, therefore vboxservice is not started. To remedy this, run ` systemctl edit --full vboxservice.service` , set `ConditionVirtualization=true` and do a `systemctl daemon-reload`. With latest `virtualbox-guest-utils` update on Arch, my second VM monitor in VirtualBox [stopped](https://bugs.archlinux.org/task/45748?string=virtualbox&project=5&type%5B0%5D=&sev%5B0%5D=&pri%5B0%5D=&due%5B0%5D=&reported%5B0%5D=&cat%5B0%5D=33&status%5B0%5D=open&percent%5B0%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=) working.
+**Update:**  In a Arch Linux guest and systemd (221) does not properly [recognize](http://permalink.gmane.org/gmane.comp.sysutils.systemd.devel/33072) VirtualBox, therefore vboxservice is not started. To remedy this, run ` systemctl edit --full vboxservice.service` , set `ConditionVirtualization=true` and do a `systemctl daemon-reload`. With latest `virtualbox-guest-utils` update on Arch, my second VM monitor in VirtualBox [stopped](https://bugs.archlinux.org/task/45748?string=virtualbox&project=5&type%5B0%5D=&sev%5B0%5D=&pri%5B0%5D=&due%5B0%5D=&reported%5B0%5D=&cat%5B0%5D=33&status%5B0%5D=open&percent%5B0%5D=&opened=&dev=&closed=&duedatefrom=&duedateto=&changedfrom=&changedto=&openedfrom=&openedto=&closedfrom=&closedto=) working.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2015/2015-07-21-Pure-UI-In-Javascript.md'>Pure UI In Javascript</a> <a rel='next' id='fnext' href='#blog/2015/2015-06-24-Sun-and-Planets.md'>Sun and Planets</a></ins>
