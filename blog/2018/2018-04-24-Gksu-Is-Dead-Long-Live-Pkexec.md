@@ -106,7 +106,7 @@ We can use the idea above to create a final poor man's `gksu.sh` replacement scr
 
 if [[ $(id -u) != "0" ]]; then
     absScriptPath="$( cd "$(dirname "$0")" ; pwd -P )/$(basename "$0")"
-    pkexec "$absScriptPath" "$DISPLAY" "$XAUTHORITY" "$@"
+    pkexec "$absScriptPath" "$DISPLAY" "$XAUTHORITY" "$DBUS_SESSION_BUS_ADDRESS" "$@"
     exit 0
 fi
 # root here
@@ -114,7 +114,10 @@ export DISPLAY="$1"
 shift
 export XAUTHORITY="$1"
 shift
+export DBUS_SESSION_BUS_ADDRESS="$1"
+shift
 $@
+
 ```
 
 This script can be used as follows:
