@@ -658,11 +658,11 @@ function ddContainer()
     local seek="${4:-}"
 
     if [ -z "$seek" ]; then
-        time rndDataSource | dd iflag=fullblock of="$container" bs="$bs" count="$count" status=progress
+        time rndDataSource | dd iflag=fullblock of="$container" bs="$bs" count="$count" status=progress conv=fdatasync
         #sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" status=progress
     else
         #sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs="$bs" count="$count" seek="$seek" status=progress
-        time rndDataSource | dd iflag=fullblock of="$container" bs="$bs" count="$count" seek="$seek" status=progress
+        time rndDataSource | dd iflag=fullblock of="$container" bs="$bs" count="$count" seek="$seek" status=progress conv=fdatasync
     fi
     sleep 1
     #sync -f "$container"
