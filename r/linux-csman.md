@@ -13,10 +13,10 @@
 Create a new container file (`-i e` or `-i echo` makes password entry visible):
 
 ```bash
-# size can be in M (mega) or G (giga) bytes
+# create container in a file, size can be in M (mega) or G (giga) bytes
 csman.sh new container.bin -size 1M -ck -i e --
 
-# of encrypt a non-boot partition, existing data will be lost
+# create (encrypt) container in a non-boot partition, existing data will be lost
 csman.sh new /dev/sdc1 -ck -i e --
 ```
 
@@ -30,7 +30,7 @@ csman.sh open container.bin -ck -i e -- -name one
 csman.sh open container.bin -ck -i e -- -live
 ```
 
-Close a container by name:
+Close a container by *name*:
 
 ```bash
 csman.sh close one
@@ -66,7 +66,7 @@ csman embed container.bin -s secret.bin
 
 ## Introduction
 
-CSMan is an opinionated bash script wrapper around `cryptsetup` to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The following are some of the hard-coded choices of the script:
+CSMan is an opinionated bash script wrapper around `cryptsetup` used to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live boot partitions. The following are some of the hard-coded choices of the script:
 
 * Uses `cryptsetup` in *plain* mode with 512 byte passwords (`-s 512 -h sha512`).
 * Supports only [EXT4](https://en.wikipedia.org/wiki/Ext4) volumes.
@@ -75,29 +75,29 @@ CSMan is an opinionated bash script wrapper around `cryptsetup` to encrypt disk 
 
 ### How it Works
 
-CSMan uses a randomly generated 512 byte binary key (called **secret**) as password for a `cryptsetup` *plain* mode container (`-s 512 -h sha512`). The secret 512 bytes are stored in **secret files** encrypted with *AES* and protected with a user password (called **password**).
+CSMan uses a randomly generated 512 byte binary key (called **secret**) as password for a `cryptsetup` *plain* mode container (`-s 512 -h sha512`). The secret 512 bytes are stored in **secret files** encrypted with *AES* via a user password (called **password**) hashed via `argon2`. The *secret file* can be stored outside the container or inside the container (header).
 
 ```
 cryptsetup <= password <= password encrypted secret file (Argon / AES)
 ```
 
-The secret file encryption password is hashed using `argon2` before passed to AES tool (which does also their own hashing). To open a container both the secret file and password must be known. By default, the secret file is embedded in the container (in a key **slot**).
+The secret file encryption password is hashed using `argon2` before passed to AES tool (which applies also its own PBKDF2 SHA256 hashing). To open a container both the *secret file* and its user password must be known. By default, the secret file is embedded in the container (in a header key **slot**).
 
 ```
 container=slots(default 4)|encrypted data
 ```
 
-Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords. AES tool used to encrypt secret files uses CBC mode, so using same password on same on different files containing same secret leads to different binary files. Similar to [non-detached](https://wiki.archlinux.org/index.php/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header) LUKS, user is responsible to store secret files separately from containers (maybe in another container) or have them embedded (default). Unlike LUKS headers, secret files used by CSMan (with default aes tool) look random.
+Similar to LUKS, one can use same password safely to protect more than one secret file, or to protect same secret in different files with different passwords. AES tool used to encrypt secret files uses CBC mode, so using same password on same on different files containing same secret leads to different binary files. Similar to [non-detached](https://wiki.archlinux.org/index.php/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header) LUKS, user is responsible to store secret files separately from containers (maybe in another container) or have them embedded (default). Unlike LUKS headers, secret files used by CSMan (with default `aes` tool) look random.
 
 ### Terminology
 
 Some overlapping terms explained:
 
 ```
-1) password => sha512 => + <= optional key file headers (sha256 of: sha256 of max 1024 first bytes)
+1) user password => sha512 => + <= optional key file headers (sha256 of: sha256 of max 1024 first bytes)
 2) 32 bytes random salt | argon2 (id) =>
 3) aes (PBKDF2 sha256) <= 512 bytes random secret =>
-4) secret file=salt+aes encrypted secret+random pad => slot
+4) secret file=salt+aes encrypted secret+random pad => key slot
 ```
 
 * **secret** - randomly generated (or user specified) binary 512 bytes. Binary values are shown as *base64* in tool. Secret is used binary as `cryptsetup` password:
@@ -106,17 +106,17 @@ Some overlapping terms explained:
   * using `-ss` option uses all 512 bytes as same password both outer and inner volumes
 * **secret file** - binary file where *secret* is stored encrypted.
 * **password** - user password (or pass-phrase) used to encrypt *secret file* (hashed with `argon2`).
-* **key file** - user password can contain, additionally to the pass-phrase, one or more optional key files. The hashed header bytes content of key files is appended to the password. Order of specifying key files does not matter, but they have to be exact same files used during encryption and decryption. The same key file can be used more than once.
+* **key file** - user password can contain, additionally to the pass-phrase, one or more optional *key files*. The hashed header bytes content of key files is appended to the password. Order of specifying key files does not matter, but they have to be exact same files used during encryption and decryption. The same key file can be used more than once.
 * **session** - optional state stored as part of current user session. There is by default no session, but it is possible to store passwords in named encrypted session slots in a *tmpfs* for current logged user and refer to them from there.
 * **session password** - an optional password used additionally to temporary random session key to protect contents stored in *session*.
-* **slot** - a 1024 byte section in the beginning of the container file where secret files can be embedded.
+* key **slot** - a 1024 byte section in the beginning of the container file where secret files can be embedded.
 
 ## Installation
 
 To install or update, download repository files and copy as *root* under `/usr/local/bin` the following files:
 
 * `csman.sh` - main tool.
-* `cskey.sh` - is invoked by `csman.sh` for handling encryption and decryption of keys.
+* `cskey.sh` - key tool, it is invoked by `csman.sh` for handling encryption and decryption of keys.
 * `aes` - a compiled copy of my [aes](#r/cpp-aes-tool.md) tool - it is used by default to encrypt secret files. Other tools can be used via `-c` option.
 * `argon2` - this is a self-compiled copy of `argon2` from [official](https://github.com/P-H-C/phc-winner-argon2) repository without any changes ([my copy](https://github.com/madebits/phc-winner-argon2)). `argon2` can be found also in Ubuntu repositories. If found next to `cskey.sh`, this copy is used in place of the system copy.
 
@@ -143,20 +143,20 @@ ac3ab4465  /usr/local/bin/csman.sh
 8d79a5339  /usr/local/bin/argon2
 ```
 
-These hashes should normally be same unless a new version of files is copied.
+These hashes should normally be the same ones all the time, unless a new version of files is copied.
 
 ## Usage
 
 > `csman.sh` and `cskey.sh` should be run **always** with `sudo`. `csman.sh` will invoke `sudo` if started without it.
 
-`csman.sh` is the main command to use. `csman.sh` delegates password and secret operations to `cskey.sh` (which uses `aes` and `argon2`). You may need to use `cskey.sh` directly for advanced key manipulation. Running both commands without options lists their command-line arguments, e.g.:
+`csman.sh` is the main command to use. `csman.sh` delegates password and secret operations to `cskey.sh` (which uses `aes` and `argon2`). You may need to use `cskey.sh` directly for advanced secret file manipulation. Running both commands without options lists their command-line arguments, e.g.:
 
 ```
 csman.sh
 cskey.sh
 ```
 
-The command-line arguments are a bit *peculiar* (because I thought that it is faster to specify options after the main arguments) and follow the scheme: *command file(s) options*.
+The command-line arguments are a bit *peculiar* (because I thought that it is faster to specify options after the main arguments) and follow the scheme: *command file(s) options*. The `cskey.sh` options are passed from `csman.sh` within `-ck ... --`.
 
 ### Secret Files
 
