@@ -33,14 +33,24 @@ umount /mnt/tmp
 cryptsetup close enc
 ```
 
+##Resizing a Container
+
 To increase size of the container file, we can use use again `dd` with *seek* parameter to skip it size in *bs* size blocks:
 
-```
+```bash
 # resize container from 30G to 40G (i.e., +10G)
 dd iflag=fullblock if=/dev/urandom of=container.bin bs=1G count=10 seek=30
-# after open, use any file system tools to expand the partition
-# to reverse, use any file system tools to shrink the partition and then use truncate tool
 ```
+
+Now `cryptsetup open` container, but do not mount it:
+
+```
+sudo e2fsck -f /dev/mapper/enc
+sudo resize2fs /dev/mapper/enc
+sudo e2fsck -f /dev/mapper/enc
+```
+
+To shrink, after resize use `truncate` tool on container file.
 
 ##Better Plain Mode Passwords
 
@@ -120,7 +130,7 @@ function readPass()
     read -p "New password: " -s pass
     echo
     if [ -t 0 ] ; then
-        read -p "Renter new password: " -s pass2
+        read -p "Renter password: " -s pass2
         echo
         if [ "$pass" != "$pass2" ]; then
             (>&2 echo "! passwords do not match")
@@ -213,7 +223,7 @@ function main()
     local name="$2"
     local mntDir1="$HOME/mnt/${name}"
     local mntDir2="$HOME/mnt/${name}_user"
-    
+
     case "$mode" in
         open)
             if [ -z "$name" ]; then
@@ -251,11 +261,20 @@ function main()
                 (>&2 echo "! name required")
                 exit 1
             fi
+            set +e
+            fuser -km "$mntDir2"
+            set -e
+            sleep 2
             umount "$mntDir2"
             rmdir "$mntDir2"
+            set +e
+            fuser -km "$mntDir1"
+            set -e
+            sleep 2
             umount "$mntDir1"
             rmdir "$mntDir1"
             cryptsetup close "$name"
+            echo "Done"
         ;;
         create)
             if [ -z "$name" ]; then
