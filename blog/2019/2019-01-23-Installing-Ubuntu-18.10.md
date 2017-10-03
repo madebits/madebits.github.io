@@ -56,7 +56,7 @@ sda                     8:0    0    30G  0 disk
     +-ubuntu--vg-root 253:1    0  29,3G  0 lvm   /
 ```
 
-[sda2](https://askubuntu.com/questions/950307/why-guided-partitioning-create-a-sda2-of-1-kb) extended partition, what is shown as *1K* is the [unaligned](https://unix.stackexchange.com/questions/128290/what-is-this-1k-logical-partition) area in it.
+[sda2](https://askubuntu.com/questions/950307/why-guided-partitioning-create-a-sda2-of-1-kb) is the extended partition. What is shown as *1K* is the [unaligned](https://unix.stackexchange.com/questions/128290/what-is-this-1k-logical-partition) area in it.
 
 ##GNOME
 
