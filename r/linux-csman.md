@@ -238,9 +238,9 @@ If you do not want to be asked about *key files* use the `-k` option. Key files 
 
 ##### Sessions
 
-It is possible to store passwords (but not key files) in a **session** for current logged user. Session makes use of named *@slots* to write and read passwords. To store a password that you are about to enter in slot `foo` use `-apo @foo` in command-line of `cskey.sh`. You can specify later the stored password by using `-ap @foo`. If combined with `-k and -kf` then no passwords are asked (apart of optional session password).
+It is possible to store passwords (but not *key files*) in a **session** for the current logged user. Session makes use of named *@slots* to write and read passwords encrypted in `tmpsf` memory storage. To store a password that you are about to enter in slot `foo` use `-apo @foo` in command-line of `cskey.sh`. You can specify later the stored password by using `-ap @foo`. If combined with `-k and -kf` then no passwords are asked (apart of the optional *session* password).
 
-The session is created only if you make use of it as a `tmpfs` mounted volume in `$HOME/mnt/tmpcsm`. When you shutdown the system the temporary volume disappears (or use `cskey.sh x` or `csman.sh x` to clean session data). The session encrypts passwords using a session seed generated randomly in session volume (root access only). It is optional (press *Enter* key when asked to skip it), but it is recommended to also use a **session password**, which if specified, is used additionally to the seed to encrypt password data. You may use different session passwords for different slots. Each slot is stored as an encrypted file in session volume. If you do not want to be asked to provide a session password specify `-aa`.
+The session is created only if you make use of it as a `tmpfs` mounted volume in `$HOME/mnt/tmpcsm`. When you shutdown the system, or logout, the temporary volume disappears (or use `cskey.sh x` or `csman.sh x` to clean session data). The session encrypts passwords using a session seed generated randomly in session volume (`root` access only). It is optional (press *Enter* key when asked to skip it), but it is recommended to also use a **session password**, which if specified, is used additionally to the seed to encrypt password data. You may use different session passwords for different slots. Each slot is stored as an encrypted file in the session `tmpfs` volume. If you do not want to be asked to provide a session password specify `-aa`.
 
 Session slots can be also created directly using:
 
@@ -255,13 +255,13 @@ sudo cskey.sh dec secret.bin -ap @foo | base64 -w 0
 
 ##### Hashing
 
-It is possible to overwrite default options used for `argon2` tool using ` -h -p 8 -m 14 -t 1000 -` (note `-` in the end is required). All options have to be specified and are passed verbatim to `argon2`. The defaults used, if not specified, are shown in command-line help when you run `sudo cskey.sh`.
+It is possible to overwrite default options used for `argon2` tool using ` -h -p 8 -m 14 -t 1000 -` (note `-` in the end is required). All options have to be specified and are passed verbatim to `argon2`. The defaults used, if not specified, are shown in command-line help when you run `cskey.sh` without arguments.
 
-If you specify `argon2` options during encrypt command (enc), you have to remember them and provide them same for decryption (dec) to work.
+If you specify `argon2` options during encrypt command (enc), you have to remember them and provide them same for decryption (*dec*) to work.
 
 ### Creating Containers
 
-To create an encrypted container you need to specify the container file name (can be any) or device, the size and **secret** file (see [Creating Secret Files](#r/linux-csman.md#creating-secret-files)). Create command is `create`, or `new`, or `n`. Secret file will be created if it does not exist and by default it is also embedded into first container slot:
+To create an encrypted container, you need to specify the container file name (can be any) or the disk partition, the size and **secret** file (see [Creating Secret Files](#r/linux-csman.md#creating-secret-files)). Create command is `create`, or `new`, or `n`. Secret file will be created if it does not exist and by default it is also embedded into the first container header key *slot*:
 
 ```bash
 sudo csman.sh n container.bin -S 1M -s secret.bin -cf -T small -m 0 --
@@ -269,14 +269,14 @@ sudo csman.sh n container.bin -S 1M -s secret.bin -cf -T small -m 0 --
 
 * The size (`-size` or `-S`) to use can be only in units of M or G (for MiB, GiB, as powers of 1024).
 
-* Secret file is optional. If not specified, slot 1 of container is used to store secret file. If `-slots 0` then secret file is required. If specified and `-slots` > 0 then secret is written in secret file and secret file content is embedded also in slot 1 of container.
+* Secret file is optional. If not specified, slot 1 of container is used to store secret file. If `-slots 0` is used, then secret file is required. If specified and `-slots` > 0 then secret is written in secret file and secret file content is embedded also in slot 1 of container.
   * If secret file exists, you will be asked to reuse it or overwrite it (create it new). If secret file is `--` then per convention no secret file is used and encryption key is directly generated after hashing from password. This is ok for quick things up and now, but it is not possible to change the container password. With secret files, password change or using more than one password are possible.
 
 * The `-cf ... --` can be used to pass EXT4 options for file system creation, such as, the number of *inodes* to use `-N 1000` (or `-T small`), or the EXT4 volume label `-L VOL1`. See `man mkfs.ext4`.
 
-If container file exists, you be asked if you want to overwrite its data (in this case specified size will be ignored), or to just re-create the file system, or press *Enter* to abort and keep existing file data. You may choose to create only file system if file is already created with random data, or you plan to overwrite free space with zeros later from within the encrypted container once mounted.
+If the container file exists, you will be asked if you want to overwrite its data (in this case specified size will be ignored), or to only re-create the container file system on the existing file, or to press *Enter* to abort and preserve the existing file data. You may choose to create only the container file system if file is already created with random data, or if you plan to overwrite free space with zeros later from within the encrypted container once mounted.
 
-The container file will be created, overwritten with random data, and formatted with a new EXT4 file system. You will asked to re-enter the password the first time encrypted container is opened for file-system creation.
+The container file will be created, overwritten with random data before the file system is created, and then formatted with a new EXT4 file system. You will asked to re-enter the password the first time the new encrypted container is opened for file-system creation.
 
 Encrypting a device (disk partition) is similar:
 
@@ -284,9 +284,9 @@ Encrypting a device (disk partition) is similar:
 sudo csman.sh /dev/sdc1 -oo
 ```
 
-The size will be ignored, but if specified needs to be 0G (or 0M).
+The size option is not neede, but if specified, it needs to be `0G` (or `0M`) and it is ignored.
 
-The `-oo` option tells `csman.sh` to only overwrite container data, but do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data, but you can run same command later without `-oo` to create the encrypted file system. If `-oo` is used, the secret file is ignored if specified.
+The `-oo` option tells `csman.sh` to *only overwrite* the container data and do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data and you can run same command later without `-oo` to create the encrypted file system. If `-oo` is used, the secret file is ignored if specified.
 
 * `csman.sh` invokes `cskey.sh` to process *secret.bin* file (create it, ask for password), so you can use same password input and hash options as for `cskey.sh` using `-ck ... --` (or `@ ... @`). For example:
 
@@ -294,7 +294,7 @@ The `-oo` option tells `csman.sh` to only overwrite container data, but do nothi
   sudo csman create /dev/sdc1 -s secret.bin -one -ck -ap @foo -i e -k --
   ```
 
-  Here, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-one` option tells `csman.sh` to only use one (outer AES) encryption layer.
+  In this example, the session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-one` option tells `csman.sh` to only use one (outer AES) encryption layer.
 
   As another example, we can embed the secret in slot 2 during creation (default is slot 1):
 
@@ -306,7 +306,7 @@ Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you
 
 #### Embedding Secret
 
-The `cryptsetup` options can be used if needed to embed secret file into the container. Assuming secret file is less than 1024 bytes long, the following commands create a container with offset and store secret there (more convenient commands follow, this is only an explanation):
+The `cryptsetup` options can be used if needed to embed a secret file into the container. Assuming secret file is less than 1024 bytes long, the following commands create a container with offset and store secret there (*more convenient commands follow later, this here is only an explanation*):
 
 ```bash
 sudo csman.sh n container.bin -S 1M -s secret.bin -cf -N 1000 -- -co -o 2 --
@@ -320,7 +320,7 @@ dd conv=notrunc if=secret.bin of=container.bin
 sudo csman.sh o container.bin container.bin -co -o 2 --
 ```
 
-The `-slots count` option is provided as convenience to create 1024 byte slots.
+The `-slots count` option is provided as convenience to create as many as count 1024 byte slots.
 
 * If not set, it defaults to `-slots 4`. Using `-slots` overwrites `-co -o` (the number used with `-o` needs to be twice the number of slots). Use `-slots 0` if you need no slots, or if you do not want to overwrite `-co -o`. `-s0`  option is a shortcut for `-slots 0`. You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number. If slots is set bigger than `0`, then create command also embeds secret file in the first slot. If slots count is bigger than one and secret.bin.01, to secret.bin.03 files exists, they are also embedded in the other slots. Slots are not intended as a replacement for container file backups.
 
