@@ -208,7 +208,7 @@
 [AllTop](https://alltop.com/tech)
 [SkimFeed](https://skimfeed.com/)
 [LiveLeak](https://www.liveleak.com/)
-[LibGen](http://libgen.io/)
+[LibGen](https://yandex.com/search/?text=libgen)
 [BoingBoing](https://boingboing.net/)
 [Top.st](https://top.st/)
 
