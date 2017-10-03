@@ -64,9 +64,33 @@ RESUME=none
 
 And run `sudo update-initramfs -u`. Additionally, I claimed all disk space with: `sudo tune2fs -m 0 /dev/mapper/ubuntu--vg-root`.
 
+###Encrypted Disk Layout Details
+
 Above, [sda2](https://askubuntu.com/questions/950307/why-guided-partitioning-create-a-sda2-of-1-kb) is the extended partition. What is shown as *1K* is the [unaligned](https://unix.stackexchange.com/questions/128290/what-is-this-1k-logical-partition) area in it.
 
 `/boot` is not [encrypted](https://askubuntu.com/questions/109898/how-to-change-the-password-of-an-encrypted-lvm-system-done-with-the-alternate-i) by default. Rather that deal with effort to [encrypt](https://dustymabe.com/2015/07/06/encrypting-more-boot-joins-the-party/) it (`grub` will still be unencrypted and you have to take extra care during kernel / grub / distribution updates), an additional BIOS disk password (or VM disk encryption password) maybe better.
+
+For [reference](https://vitobotta.com/2018/01/11/ubuntu-full-disk-encryption-manual-partitioning-uefi/), if we need to login as root in grub and fix something:
+
+```
+sudo mkdir /mnt/root
+sudo cryptsetup luksOpen /dev/sda3 sda3_crypt
+sudo mount /dev/mapper/system-root /mnt/root
+sudo mount --bind /dev /mnt/root/dev
+sudo mount --bind /run /mnt/root/run
+sudo chroot /mnt/root
+umount /boot
+mkdir /boot
+mount /dev/sda2 /boot
+mount /dev/sda1 /boot/efi
+mount --types=proc proc /proc
+mount --types=sysfs sys /sys
+
+...
+
+exit
+reboot
+```
 
 ##GNOME
 
