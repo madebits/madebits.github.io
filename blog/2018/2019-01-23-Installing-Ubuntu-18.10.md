@@ -4,11 +4,13 @@
 
 <!--- tags: linux -->
 
-I gave Ubuntu 18.10 a try in VirtualBox and here is a summary of some the things I had to do.
+I gave Ubuntu 18.10 a try in VirtualBox and here is a summary of some of the things I had to do, for own reference.
 
 ##Remove Swap Partition
 
-Some installer crashed when I tried to modify partitions of default encrypted disk setup, and I ma not really sure how much control installer offers to fine-tune that, so I ended up with using defaults. I wanted to remove the default swap partition that was created:
+Installer gave me errors when I tried to modify partitions of default encrypted disk setup. I am not really sure how much control installer offers to fine-tune that, and I ended up with using defaults. 
+
+I wanted to remove the default swap partition that was created:
 
 ```bash
 lsblk 
@@ -41,7 +43,7 @@ resize2fs /dev/ubuntu-vg/root
 sudo lvdisplay
 ```
 
-After that, I got:
+Finally, I got:
 
 ```bash
 lsblk
