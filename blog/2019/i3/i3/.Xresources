@@ -26,11 +26,13 @@ XTerm*metaSendsEscape: true
 
 ! Copy and paste with clipboard
 XTerm*selectToClipboard: true
-XTerm*translations: #override \
+XTerm*VT100.translations: #override \
     Ctrl Shift <KeyPress> C: copy-selection(CLIPBOARD) \n\
     Ctrl Shift <KeyPress> V: insert-selection(CLIPBOARD) \n\
+    Ctrl Shift <KeyPress> V: insert-selection(PRIMARY) \n\
     Ctrl Alt <Key>S: secure() \n\
-    <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
+    <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)  \n\
+    <Btn3Down>: insert-selection(CLIPBOARD)
 
 ! Allow selecting email/url by double-click
 XTerm*charClass: 

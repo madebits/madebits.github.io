@@ -14,8 +14,6 @@ exec --no-startup-id xmodmap -e "pointer = 3 2 1"
 set $lock exec --no-startup-id /usr/bin/i3lock -u -i ~/bin/img/i3lock.png
 exec --no-startup-id xss-lock -- /usr/bin/i3lock -n -u -i ~/bin/img/i3lock.png
 
-set $favs exec --no-startup-id ~/.config/i3/favs.sh
-
 focus_follows_mouse no
 #exec --no-startup-id setxkbmap -option grp:alt_shift_toggle us,de
 
@@ -23,10 +21,7 @@ focus_follows_mouse no
 
 set $mod Mod4
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
 #font pango:monospace 8
-
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 font pango:DejaVu Sans Mono 8
@@ -51,7 +46,9 @@ bindsym $mod+q kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 #bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop
-bindsym Ctrl+Tab exec rofi -modi 'window#drun#run' -show window -show-icons -sort -width 90  -lines 30 -sidebar-mode -columns 4
+set $apps exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show window -sort -width 90  -lines 30 -sidebar-mode -columns 4 -terminal xterm
+set $favs exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show i3 -sort -width 90  -lines 30 -sidebar-mode -columns 4 -terminal xterm
+bindsym --release Ctrl+Tab $apps
 
 # change focus
 # alternatively, you can use the cursor keys:
@@ -97,16 +94,16 @@ bindsym $mod+d focus parent
 # focus the child container
 bindsym $mod+Shift+d focus child
 
-set $workspace1 "1: ❤️"
-set $workspace2 "2: 💛"
-set $workspace3 "3: 💚"
-set $workspace4 "4: 💙"
-set $workspace5 "5: 💜"
-set $workspace6 "6: 🔶"
-set $workspace7 "7: 🔷"
-set $workspace8 "8: 🔴"
-set $workspace9 "9: 🔵"
-set $workspace10 "10: ⚪"
+set $workspace1 "1: ❤️❤️"
+set $workspace2 "2: 💛💛"
+set $workspace3 "3: 💚💚"
+set $workspace4 "4: 💙💙"
+set $workspace5 "5: 💜💜"
+set $workspace6 "6: 🔶🔶"
+set $workspace7 "7: 🔷🔷"
+set $workspace8 "8: 🔴🔴"
+set $workspace9 "9: 🔵🔵"
+set $workspace10 "10: ⚪⚪"
 
 # switch to workspace
 bindsym $mod+1 workspace number $workspace1
@@ -181,6 +178,7 @@ bar {
         font pango:DejaVu Sans Bold 8
         status_command i3status
         bindsym button3 $favs
+        bindsym button1 $apps
         position top
 }
 
@@ -210,6 +208,9 @@ bindsym --release Print exec --no-startup-id gnome-screenshot -i
 #floating_minimum_size 150 x 50
 #floating_maximum_size 640 x 480
 #for_window [class="SpeedCrunch"] floating enable, resize set 30% 90%, move position center
+
+
+
 bindsym --release XF86Calculator exec --no-startup-id speedcrunch
 #XF86Sleep
 
@@ -226,9 +227,13 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #888888   #888888
 
 client.background       #FFFFFF
 
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +10%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -10%
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+for_window [class="System-config-printer.py"] floating enable
+
+# sudo apt install pavucontrol
+for_window [class="Pavucontrol"] floating enable
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 bindsym XF86Search exec --no-startup-id catfish
 
