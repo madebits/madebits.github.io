@@ -94,9 +94,9 @@ Time is relative. A number such as 2^120 means that if a computer makes 100 gues
 
 ##Generating Random Numbers
 
-As mentioned above the IV and salt do not need to be really random - they just need to be different for each encrypted stream of data. The stream cipher library implemented here does not offer a way to create a salt or an IV, given that different applications may use different ways to generate and distribute them. A simple way to get an IV and salt byte array of a given length is to use a pseudo-random byte generator.
+As mentioned above IV and salt do not need to be really random - they just need to be different for each encrypted stream of data. The stream cipher library implemented here does not offer a way to create a salt or an IV, given that different applications may use different ways to generate and distribute them. A simple way to get an IV and salt byte array of a given length is to use a pseudo-random byte generator.
 
-Normal pseudo-random byte generators have usually a short sequence period and are not very are not useful to generate the IVs and salts, because the generated pseudo-random data will be repeated after some time. A simple, but useful cryptographically strong pseudo-random generator can be created based on a secure hash function, such as, SHA256. The idea is to hash the output of SHA256 repetitively.
+Normal pseudo-random byte generators have usually a short sequence period and are not useful to generate IVs and salts, because the generated pseudo-random data will be repeated after some time. A simple, but useful cryptographically strong pseudo-random generator can be created based on a secure hash function, such as, SHA256. The idea is to hash the output of SHA256 repetitively.
 
 `StrongRandomGenerator` class in code (StrongRandomGenerator.cs) provides an implementation of a cryptographically strong random generator based on SHA256. It can be initialized with some random seed, or, by default, it uses various system parameters as a seed, and can be used as follows:
 
