@@ -75,7 +75,7 @@ drwxr-xr-x 2 root root     50 Apr 28 15:16 hooks
 -rwxr-xr-x 1 root root  18564 Apr 28 14:30 snapcraft.yaml
 ```
 
-The gimp process, runs under current user:
+The `gimp` process, runs confined under current user:
 
 ```bash
 $ pstree -pu
@@ -93,6 +93,7 @@ $ pstree -pu
            │                 └─{gimp}(3875)
 
 ```
+
 
 ## Snap Configuration
 
