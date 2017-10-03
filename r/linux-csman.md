@@ -50,7 +50,7 @@ csman.sh chp container.bin -ck -i e --
 
 ## Introduction
 
-CSMan is an opinionated wrapper bash script around `cryptsetup` to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The following are some of the hard-coded choices of the script:
+CSMan is an opinionated bash script wrapper around `cryptsetup` to encrypt disk file containers or disk data partitions. CSMan cannot be used (out of the box) to encrypt live partitions. The following are some of the hard-coded choices of the script:
 
 * Uses `cryptsetup` in *plain* mode with 512 byte passwords (`-s 512 -h sha512`).
 * Supports only [EXT4](https://en.wikipedia.org/wiki/Ext4) volumes.
@@ -105,7 +105,7 @@ When `csman.sh` is started without arguments, it prints prefix hashes of these f
 
 ```
 2b0cf4743  /usr/local/bin/csman.sh
-c2d9e378d  /usr/local/bin/cskey.sh
+f6ef31aeb  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
 ```
