@@ -54,7 +54,7 @@ d4896ff9f  /usr/local/bin/cskey.sh
 8d79a5339  /usr/local/bin/argon2
 ```
 
-These hashes should normally not change unless a new version of files is copied and can be ignored.
+These hashes should normally be same unless a new version of files is copied.
 
 ## Usage
 
@@ -93,9 +93,9 @@ sudo cskey.sh enc secret.bin -su
 
 This command will generate a random secret and encrypt it with the password (combined with any key files) and store it as *secret.bin* file. You will be asked for: 
 
-* `sudo` password
-* for any key files to use. Key files can be specified in any order as paths one by one by pressing *Enter* key to confirm them. Use *Enter* key without a path to stop entering key files, or if you are not using key files press *Enter* key to skip entry (or use `-k` option not to be asked for key files). 
-* password to encrypt the secret file.
+1. `sudo` password
+2. any key files to use. Key files can be specified in any order as paths one by one by pressing *Enter* key to confirm them. Use *Enter* key without a path to stop entering key files, or if you are not using key files press *Enter* key to skip entry (or use `-k` option not to be asked for key files). 
+3. password to encrypt the secret file.
 
 To view back the used raw secret data (for fun) use:
 
