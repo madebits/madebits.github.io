@@ -86,9 +86,13 @@ function pass2hash()
 	local ap="${aaArgs[0]}"
 	local am="${aaArgs[1]}"
 	local at="${aaArgs[2]}"
+	local acmd="argon2"
+	if [ -f "${toolsDir}/${acmd}" ]; then
+		acmd="${toolsDir}/${acmd}"
+	fi
 	# argon2 has a build-in limit of 126 chars on pass length
 	pass=$(echo -n "$pass" | sha512sum | cut -d ' ' -f 1 | tr -d '\n' | while read -n 2 code; do printf "\x$code"; done | base64 -w 0)
-	echo -n "$pass" | argon2 "$salt" -id -t $at -m $am -p $ap -l 128 -r
+	echo -n "$pass" | "$acmd" "$salt" -id -t $at -m $am -p $ap -l 128 -r
 }
 
 # file pass key
