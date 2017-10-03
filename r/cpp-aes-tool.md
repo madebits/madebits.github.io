@@ -4,7 +4,7 @@
 
 <!--- tags: cpp encryption -->
 
-AES tool is a free command-line tool that encrypts / decrypts one file at a time using a password. I wanted an encryption tool to have around for casual encryption of files that meets my expectations :
+AES tool is a free command-line tool that encrypts / decrypts one file at a time using a password. I wanted a small encryption tool to have around for casual encryption of files, that meets my expectations:
 
 * Self-contained, only dependant on standard C library.
 * Cross-platform. C source code available (GPL). Easy to compile on your own on any platform.
