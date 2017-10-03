@@ -2,6 +2,8 @@
 
 2021-11-26
 
+<!--- tags: linux -->
+
 To be able to change the brightness of the laptop screen in a more fine grained way than via the keyboard `Fn` keys (that use `+/-5%` steps) install `brightnessctl`:
 
 ```bash
