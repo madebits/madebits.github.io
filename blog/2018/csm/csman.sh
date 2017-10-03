@@ -549,7 +549,7 @@ function createContainer()
     closeContainerByName "$name"
     ownFile "$container"
     echo "Done! To open container use:"
-    echo "$0 open ${secret} ${container}"
+    echo "$0 open ${container} ${secret}"
 }
 
 
@@ -790,7 +790,9 @@ function main()
             if [ "$csmLive" = "1" ]; then
                 trap cleanUp SIGHUP SIGINT SIGTERM
                 tput setaf 1
-                read -p "Press Enter or Ctrl+C to close the container ..."
+                read -p "Press Enter twice or Ctrl+C to close the container ..."
+                logError
+                read -p "Press Enter once more or Ctrl+C to close the container ..."
                 tput sgr 0
                 logError
                 cleanUp
