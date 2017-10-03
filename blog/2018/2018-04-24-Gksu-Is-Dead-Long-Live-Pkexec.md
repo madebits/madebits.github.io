@@ -8,6 +8,8 @@ Well, [no](https://forums.linuxmint.com/viewtopic.php?t=268140) more `gksu` in l
 With `gksu` I could add code similar to the following to re-run a script that contained `zenity` UI started from a non-root user as root: 
 
 ```bash
+#!/bin/bash
+
 if [[ $(id -u) != "0" ]]; then
     gksu "$0" $@
     exit 0
@@ -37,7 +39,7 @@ Error executing ./t.sh: No such file or directory
 
 It seems `pkexec` works reliably only with absolute paths. One [way](https://stackoverflow.com/questions/4774054/reliable-way-for-a-bash-script-to-get-the-full-path-to-itself) to achieve that:
 
-```
+```bash
 if [[ $(id -u) != "0" ]]; then
     absScriptPath="$( cd "$(dirname "$0")" ; pwd -P )/$(basename "$0")"
     pkexec "$absScriptPath" $@
@@ -51,7 +53,7 @@ echo $@
 
 If you try to run a command that need access to user interface from `pkexec`, such as, `zenity` command in the script below:
 
-```
+```bash
 if [[ $(id -u) != "0" ]]; then
     absScriptPath="$( cd "$(dirname "$0")" ; pwd -P )/$(basename "$0")"
     pkexec "$absScriptPath" $@
@@ -73,7 +75,7 @@ Unable to init server: Could not connect: Connection refused
 
 The `man pkexec` is very clear: "*pkexec will not allow you to run X11 applications as another user since the $DISPLAY and $XAUTHORITY environment variables are not set*". You have to [edit](https://unix.stackexchange.com/questions/203136/how-do-i-run-gui-applications-as-root-by-using-pkexec) the *polkit* files, and that per each application! Definitively, not the way to go. Can we do better:
 
-```
+```bash
 if [[ $(id -u) != "0" ]]; then
     absScriptPath="$( cd "$(dirname "$0")" ; pwd -P )/$(basename "$0")"
     pkexec "$absScriptPath" "$DISPLAY" "$XAUTHORITY" "$@"
