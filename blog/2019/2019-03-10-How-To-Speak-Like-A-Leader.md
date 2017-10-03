@@ -4,7 +4,7 @@
 
 <!--- tags: management -->
 
-There was an interesting [post](https://news.ycombinator.com/item?id=19349676) on Hacker News today on how to speak like a leader and I decided to collect here a summary of main points for future reference.
+There was an interesting [post](https://news.ycombinator.com/item?id=19349676) on Hacker News today on how to speak like a leader. Here is a summary of main points for future reference.
 
 1. Speak about *options* not *demands*. Think about *pros* and *cons* of every option.
     * Saying something is an option leaves door open for insecurity, whereas saying we *have to* do something and being wrong makes you look incompetent to represent a team.
