@@ -87,13 +87,13 @@ Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcu
 
 ###Hacks
 
-GEdit was showing *'Preferences'* menu only if run with *sudo*. I had to [run](https://askubuntu.com/questions/375049/where-are-gedits-preferences/671398#671398):
+* GEdit was showing *'Preferences'* menu only if run with *sudo*. I had to [run](https://askubuntu.com/questions/375049/where-are-gedits-preferences/671398#671398):
 
-```
-gsettings set org.gnome.settings-daemon.plugins.xsettings overrides '@a{sv} {"Gtk/ShellShowsAppMenu": <int32 0>}'
-```
+    ```
+    gsettings set org.gnome.settings-daemon.plugins.xsettings overrides '@a{sv} {"Gtk/ShellShowsAppMenu": <int32 0>}'
+    ```
 
-VirtuaBox mouse was freezing. I found a [solution](https://ubuntuforums.org/showthread.php?t=2395969) that seems to work: *Go into the preferences of your VirtualBox Manager. Click on "Input" and make sure that "Auto Capture Keyboard" is not selected for "VirtualBox Manager" and "Virtual Machine".*
+* VirtuaBox mouse was freezing. I found a [solution](https://ubuntuforums.org/showthread.php?t=2395969) that seems to work: *Go into the preferences of your VirtualBox Manager. Click on "Input" and make sure that "Auto Capture Keyboard" is not selected for "VirtualBox Manager" and "Virtual Machine".*
 
 ##Other Useful Tools
 
