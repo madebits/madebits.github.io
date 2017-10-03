@@ -4,7 +4,7 @@
 
 <!--- tags: linux encryption -->
 
-**CSMan** is a *bash* script wrapper for `cryptsetup` for Ubuntu.
+**CSMan** is a Ubuntu *bash* script wrapper for `cryptsetup`.
 
 <div id='toc'></div>
 
@@ -19,7 +19,7 @@ CSMan enables using `cryptsetup` conveniently to encrypt disk file containers or
 
 ### How it Works
 
-CSMan uses a randomly generated 512 byte binary key (called **secret**) as passwords for a `cryptsetup` *plain* mode container (`-s 512 -h sha512`). The secret 512 bytes are stored in **secret files** encrypted with *AES* and protected with a user password (called **password**). 
+CSMan uses a randomly generated 512 byte binary key (called **secret**) as passwords for a `cryptsetup` *plain* mode container (`-s 512 -h sha512`). The secret 512 bytes are stored in **secret files** encrypted with *AES* and protected with a user password (called **password**).
 
 The secret file encryption password is hashed using `argon2` before passed to AES tool (which does also their own hashing). To open a container both the secret file and password must be known. 
 
