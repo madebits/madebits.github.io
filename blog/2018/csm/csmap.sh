@@ -19,6 +19,7 @@ lastSecretTime=""
 csOptions=()
 ckOptions=()
 csmCleanScreen="0"
+csmName=""
 
 currentScriptPid=$$
 function failed()
@@ -173,6 +174,13 @@ function openContainer()
     shift
     
     processOptions "$@"
+    
+    if [ -n "$csmName" ]; then
+        name=$(validName "${csmName}")
+        lastName="$name"
+        oName=${name:4}
+    fi
+    
     echo "Opening /dev/mapper/${name} ..."
 
     local key=$("${toolsDir}/cskey.sh" dec "$secret" "${ckOptions[@]}" | base64 -w 0)
@@ -433,7 +441,8 @@ function showHelp()
     dumpError "Where openCreateOptions:"
     dumpError " -cso cryptsetup options --"
     dumpError " -csk cskey.sh options --"
-    dumpError " -c : clean screen, valid with open* only"
+    dumpError " -n name : (open*) use csm-name"
+    dumpError " -c : (open*) clean screen"
     dumpError "Example:"
     dumpError " sudo csmap.sh openLive container.bin -csk -k -h -p 8 -m 14 -t 1000 --"
 }
@@ -461,6 +470,10 @@ function processOptions()
             ;;
             -c|-cls)
                 csmCleanScreen="1"
+            ;;
+            -n)
+                csmName="${2:-}"
+                shift
             ;;
             *)
             showError "unknown option: $current"
