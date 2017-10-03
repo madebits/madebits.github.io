@@ -149,9 +149,9 @@ function createContainer()
     echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
 
     if [ "${size: -1}" == "G" ]; then
-        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs=1G count="$sizeNum"
+        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs=1G count="$sizeNum" status=progress
     elif [ "${size: -1}" == "M" ]; then
-        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs=1M count="$sizeNum"
+        sudo -u "$user" dd iflag=fullblock if=/dev/urandom of="$container" bs=1M count="$sizeNum" status=progress
     else
         (>&2 echo "! size can be M or G")
         exit 1  
