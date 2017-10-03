@@ -163,6 +163,10 @@ function openContainer()
     if [ -f "$secret" ]; then
         lastSecretTime=$(stat -c %z "$secret")
     fi
+    if [ ! -e "$secret" ]; then
+        resetTime
+        showError "cannot open: $secret"
+    fi
     shift
 
     local device="${1:-}"
@@ -170,6 +174,10 @@ function openContainer()
     lastContainer="$device"
     if [ -f "$device" ]; then
         lastContainerTime=$(stat -c %z "$device")
+    fi
+    if [ ! -e "$device" ]; then
+        resetTime
+        showError "cannot open: $device"
     fi
     shift
     
