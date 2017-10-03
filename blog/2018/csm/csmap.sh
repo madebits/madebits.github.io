@@ -131,6 +131,7 @@ function openContainer()
     mount "/dev/mapper/$name" "$mntDir1"
     if [ "$?" != "0" ]; then
         cryptsetup close "$name"
+        rmdir "$mntDir1"
         resetTime
         exit 1
     fi
