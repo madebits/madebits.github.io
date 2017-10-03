@@ -207,6 +207,23 @@ Extra setup:
         exec $cmd "$dir" --start-at "$file"
     fi
     ```
+
+    The above was my first try. However, `feh` in Ubuntu repos is a bit old and does not support numeric sorting. I got a [newer](https://debian.pkgs.org/10/debian-main-amd64/feh_3.1.1-1_amd64.deb.html) copy and then my script looked as follows:
+
+    ```bash
+    #!/bin/bash -
+
+    cmd="$HOME/bin/feh/feh -C $HOME/.local/share/fonts/ -e arial/10 -M arial/10 -F -B white --no-recursive --auto-rotate --draw-filename --hide-pointer --auto-zoom --sort name --version-sort"
+    path="${1:-.}"
+    if [ -d "$path" ]; then
+        exec $cmd "$path"
+    elif [ -e "$path" ]; then
+        file=$(realpath -- "$path")
+        dir=$(dirname -- "$file")
+
+        $cmd "$dir" --start-at "$file"
+    fi
+    ```
     
     And added `HOME/.local/share/applications/feh.desktop` file:
 
@@ -217,7 +234,7 @@ Extra setup:
     Terminal=0
     TryExec=/home/user/bin/feh.sh
     Exec=/home/user/bin/feh.sh %F
-    Icon=/home/user/bin/img/feh.png
+    Icon=/home/user/bin/feh/feh.png
     Type=Application
     Categories=Graphics;
     StartupNotify=false
