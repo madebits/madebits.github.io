@@ -363,7 +363,7 @@ function showHelp()
     (>&2 echo " $bn increase name size") 
     (>&2 echo "    size should end in M or G")
     (>&2 echo " $bn touch file [time]")
-    (>&2 echo "    if set, time has to be in format of: \"$(date +"%F %T.%N %z")\"")
+    (>&2 echo "    if set, time has to be in format: \"$(date +"%F %T.%N %z")\"")
 }
 
 function main()
