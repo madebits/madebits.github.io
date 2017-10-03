@@ -18,13 +18,13 @@ If one can afford container instance downtime and all your import data are mount
 
 Another thing that may contribute to large size are container logs (`docker logs`). Logs can be cleaned [manually](https://stackoverflow.com/questions/42510002/how-to-clear-the-logs-properly-for-a-docker-container) using:
 
-```
+```bash
 sudo sh -c "truncate -s 0 /var/lib/docker/containers/*/*-json.log"
 ```
 
 It is better to [configure](https://docs.docker.com/engine/reference/commandline/dockerd/#on-linux) the daemon (if you can afford [restarting](https://docs.docker.com/v17.09/engine/reference/commandline/dockerd/) it):
 
-```
+```json
 {
   "log-driver": "json-file",
   "log-opts": {"max-size": "10m", "max-file": "3"},

@@ -61,7 +61,7 @@ Rest of files are not needed anymore after this point can be deleted: ` $HOST_NA
 
 To view *thumb-print* of the server certificate we can use:
 
-```
+```bash
 # hostMongo.pem is `$HOST_NAME.pem`
 openssl x509 -noout -fingerprint -sha256 -inform pem -in hostMongo.pem
 ```
@@ -100,7 +100,7 @@ db.createUser({ user: "myAdmin", pwd: "password", roles: [ { role: "root", db: "
 
 We have several options how to verify server SSL certificate in client depending on the driver used. The following code shows how we can verify certificate in C# driver:
 
-```C#
+```c#
 var connectionStr="mongo://...?ssl=true"
 var url = new MongoUrl(connectionStr);
 var clientSettings = MongoClientSettings.FromUrl(url);
@@ -183,13 +183,13 @@ Setting up [TLS](https://www.rabbitmq.com/ssl.html) for RabbitMQ is similar to t
 
 Let assume, we use the following command to start RabbitMQ:
 
-```
+```bash
 docker run --restart always -d --hostname my-rabbit -p 5774:5671 -p 15774:15671 -v /data/rmq/03/:/var/lib/rabbitmq/mnesia/rabbit\@my-rabbit -v /data/config/rabbit03/:/config -e RABBITMQ_CONFIG_FILE='/config/rabbitmq' --name rmq03 rabbitmq:3.7.14-management
 ```
 
 Then we can activate management plugin and add an admin user as follows:
 
-```
+```bash
 docker exec -i -t rmq03 /bin/bash
 
 rabbitmq-plugins enable rabbitmq_shovel rabbitmq_shovel_management
@@ -229,7 +229,7 @@ We can access also RabbitMQ Management via web using SSL if configured as shown 
 
 For .NET, the RabbitMQ client configuration to use SSL is simple:
 
-```
+```c#
 var url = new Uri(Ctx.Get("rmq"));
 var factory = new ConnectionFactory()
 {
@@ -280,7 +280,7 @@ Connection = factory.CreateConnection();
 
 In Node.js, the official `amqplib` driver provides an example:
 
-```
+```js
 const url = require('url')
 const amqp = require('amqplib')
 

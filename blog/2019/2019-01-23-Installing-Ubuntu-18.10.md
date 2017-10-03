@@ -74,7 +74,7 @@ The [/dev/sda2](https://askubuntu.com/questions/950307/why-guided-partitioning-c
 
 For [reference](https://vitobotta.com/2018/01/11/ubuntu-full-disk-encryption-manual-partitioning-uefi/), if we need to login as root in grub and fix something:
 
-```
+```bash
 sudo mkdir /mnt/root
 sudo cryptsetup luksOpen /dev/sda3 sda3_crypt
 sudo mount /dev/mapper/system-root /mnt/root
@@ -96,7 +96,7 @@ reboot
 
 To change disk [password](https://askubuntu.com/questions/109898/how-to-change-the-password-of-an-encrypted-lvm-system-done-with-the-alternate-i), either use `sudo gnome-disks` or:
 
-```
+```bash
 # find device
 cat /etc/crypttab
 # find used slots
@@ -128,7 +128,7 @@ Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcu
 
     This extension expects in its source code that there is an application `gnome-system-monitor.desktop` which is not there due to being installed as snap, so I had to do the following: 
 
-    ```
+    ```bash
     sudo cp /var/lib/snapd/desktop/applications/gnome-system-monitor_gnome-system-monitor.desktop /usr/share/applications/gnome-system-monitor.desktop
     ```
 
@@ -270,7 +270,7 @@ sudo apt install chromium-browser
 
 Got an error from `synaptic` (*W: Download is performed unsandboxed as root as file '/root/.synaptic/tmp//tmp_sh' couldn't be accessed by user '_apt'.*) and had to [run](https://bugs.launchpad.net/ubuntu/+source/aptitude/+bug/1543280):
 
-```
+```bash
 adduser --force-badname --system --home /nonexistent \
 --no-create-home --quiet _apt || true
 
@@ -381,7 +381,7 @@ sudo apt install gnome-system-monitor
 
 Even without doing anything `gnome-shell` [eats](https://bugs.launchpad.net/ubuntu/+source/gnome-shell/+bug/1773959) some small percent of CPU, doing something with some socket:
 
-```
+```bash
 $ sudo strace -c -p $(pgrep gnome-shell$)
 strace: Process 2252 attached
 strace: [ Process PID=2252 runs in x32 mode. ]
@@ -466,7 +466,7 @@ I learned something about [brightness](https://unix.stackexchange.com/questions/
 * [/etc/polkit-1/localauthority/50-local.d/com.ubuntu.disable-suspend.pkla](./blog/2019/i3/com.ubuntu.disable-suspend.pkla) - disable [suspend](https://askubuntu.com/questions/972114/ubuntu-17-10-cant-disable-suspend-with-systemd-hybrid-sleep)
 * `HOME/.bashrc` changes:
 
-    ```
+    ```bash
     export TERMINAL=xterm
     # show current command in title https://unix.stackexchange.com/questions/104018/set-dynamic-window-title-based-on-command-input
     trap 'echo -ne "\033]0;$BASH_COMMAND\007"' DEBUG
