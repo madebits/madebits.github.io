@@ -138,13 +138,11 @@ $ df -h -T | grep loop
 
 ```
 
-Someone designed `snap` to use `squashfs` and now each *snap* needs a `loop` device. Suddenly, people are seeing a lot of `loop` devices in system, even those that do not directly use `snap` like me. In place of fixing the root of problem and come with something better, Ubuntu developers are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices. 
-
-An initial bad decision is followed by even more bad decisions to cover up the initial bad one. What about *GNU coreutils*, will they hack them too? What about all third-party software (e.g. *VeraCrypt*)? Oh, they compiled its code in GNOME too. What is next one in the list? Getting rid of KDE, and so on.
+Someone designed `snap` to use `squashfs` and now each *snap* needs a `loop` device. In place of fixing the root of problem and come up with something better, Ubuntu developers are starting to [modify](https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/1637984) GNOME desktop UI tools now, such as `gnome-disks`, not to list snap `loop` devices.
 
 ###Getting Rid of Snaps
 
-Ubuntu desktop may not function properly if you do any of these. This info is listed here for completes only.
+Ubuntu desktop may not function properly if you do any of these. This info is listed here for completeness only.
 
 To [remove](https://askubuntu.com/questions/1035915/how-to-remove-snap-store-from-ubuntu) `snap` one can use:
 
