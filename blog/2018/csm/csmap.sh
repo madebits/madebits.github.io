@@ -176,6 +176,24 @@ function ddContainer()
     fi
 }
 
+# size
+function checkNumber()
+{
+    local re='^[0-9]+$'
+    if ! [[ "$1" =~ $re ]] ; then
+        (>&2 echo "! $1 not a number")
+        exit 1
+    fi
+}
+
+# secret
+function createSecret()
+{
+    local secret="$1"
+    echo "Creating ${secret} ..."
+    sudo -E -u "$user" "${toolsDir}/cskey.sh" enc "$secret"
+}
+
 # name secret container size rest
 function createContainer()
 {
@@ -187,6 +205,13 @@ function createContainer()
 
     local container="$1"
     checkArg "$container" "container"
+    if [ -f "$container" ]; then
+        read -p "Overwrite container file ${container} [y | any key to exit]: " overwriteContainer
+        if [ "$overwriteContainer" != "y" ]; then
+            (>&2 echo "! nothing to do")
+            exit 1
+        fi
+    fi
     shift
 
     local size="$1"
@@ -194,31 +219,45 @@ function createContainer()
     shift
 
     local sizeNum="${size:$length:-1}"
+    checkNumber "$sizeNum"
 
     echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
-    if [ "${size: -1}" == "G" ]; then
+    if [ "${size: -1}" = "G" ]; then
         ddContainer "$container" "1G" "$sizeNum"
-    elif [ "${size: -1}" == "M" ]; then
+    elif [ "${size: -1}" = "M" ]; then
         ddContainer "$container" "1M" "$sizeNum"
     else
         (>&2 echo "! size can be M or G")
         exit 1  
     fi
     sync
-
-    echo "Creating ${secret} ..."
-    sudo -E -u "$user" "${toolsDir}/cskey.sh" enc "$secret"
-    echo "You will asked to re-enter password to open the container for the first time ..."
+    
+    if [ -f "$secret" ]; then
+        lastSecret="$secret"
+        lastSecretTime=$(stat -c %z "$secret")
+        read -p "Overwrite secret file $secret [y | any key to reuse]: " overwriteSecret
+        case "$overwriteSecret" in
+            y)
+            createSecret "$secret"
+            ;;
+        esac
+    else
+        createSecret "$secret"
+    fi
+    
+    echo "(Re-)enter password to open the container for the first time ..."
     local key=$(sudo -E -u "$user" "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
+    echo
+    touchFile "$lastSecret" "$lastSecretTime"
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$container" "$name" -
 
-    echo "Creating file system ..."
+    echo "Creating filesystem in /dev/mapper/$name ..."
     mkfs -m 0 -t ext4 "/dev/mapper/$name"
     sync
     sleep 2
     cryptsetup close "$name"
     ownFile "$container"
-    echo "Done! Container is closed. To open container use:"
+    echo "Done! To open container use:"
     echo "$0 open ${secret} ${container}"
 }
 
@@ -313,6 +352,7 @@ function increaseContainer()
     checkArg "$size" "size"
     shift
     local sizeNum="${size:$length:-1}"
+    checkNumber "$sizeNum"
 
     container=$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)
     if [ ! -f "$container" ]; then
@@ -320,14 +360,14 @@ function increaseContainer()
         exit 1
     fi
     local currentSize=$(stat -c "%s" "$container")
-    if [ "${size: -1}" == "G" ]; then
+    if [ "${size: -1}" = "G" ]; then
         local sizeG=$(($currentSize / (1024 * 1024 * 1024)))
         if [ "$sizeG" = "0" ]; then # keep it simple
             (>&2 echo "! cannot determine current size in G")
             exit 1
         fi
         ddContainer "$container" "1G" "$sizeNum" "$sizeG"
-    elif [ "${size: -1}" == "M" ]; then
+    elif [ "${size: -1}" = "M" ]; then
         local sizeM=$(($currentSize / (1024 * 1024)))
         if [ "$sizeM" = "0" ]; then
             (>&2 echo "! cannot determine current size in M")
