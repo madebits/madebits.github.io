@@ -95,7 +95,7 @@ function rcp()
         echo "Copying $s to $d (with backup in $3) ..."
         if (( rpcParallel > 0 )); then
             echo "# $rpcParallel instances"
-            time find "$s" -maxdepth 1 -print0 | xargs -r -0 -n 1 -I {} -P "${rpcParallel}" rsync --info=none -aWS --delete "$s/"{} "$d/" --backup-dir="${rcpBackupDir}"
+            time  find "$s" -maxdepth 1 -mindepth 1 -type f,d -printf "%f\0" | xargs -r -0 -n 1 -I {} -P "${rpcParallel}" rsync --info=none -aWS --delete "$s/"{} "$d/" --backup-dir="${rcpBackupDir}"
         else
             time rsync --info=progress2 -ahWS --delete --stats "$s/" "$d/" --backup-dir="${rcpBackupDir}"
         fi
@@ -103,7 +103,7 @@ function rcp()
         echo "Copying $s to $d ..."
         if (( rpcParallel > 0 )); then
             echo "# $rpcParallel instances"
-            time find "$s" -maxdepth 1 -print0 | xargs -r -0 -n 1 -I {} -P "${rpcParallel}" rsync --info=none -aWS --delete "$s/"{} "$d/"
+            time  find "$s" -maxdepth 1 -mindepth 1 -type f,d -printf "%f\0" | xargs -r -0 -n 1 -I {} -P "${rpcParallel}" rsync --info=none -aWS --delete "$s/"{} "$d/"
         else
             time rsync --info=progress2 -ahWS --delete --stats "$s/" "$d/"
         fi
