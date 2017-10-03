@@ -21,6 +21,8 @@ cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain conta
 
 # only on creation
 mkfs -m 0 -t ext4 /dev/mapper/enc
+# to set a label use either -L label with mkfs or later:
+# sudo e2label /dev/mapper/enc label
 
 mount /dev/mapper/enc /mnt/tmp
 # re-mount to access as current user without sudo
