@@ -472,6 +472,7 @@ I learned something about [brightness](https://unix.stackexchange.com/questions/
         export PAGER="most"
     fi
     ```
+* [$HOME/.w3m/keymap](./blog/2019/i3/w3m/keymap)
 
 ##Summary
 
