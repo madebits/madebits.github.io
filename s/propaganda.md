@@ -17,7 +17,6 @@
 * [Live Science](https://www.livescience.com/news)
 * [Heise](https://www.heise.de/newsticker/)
 * [MIT News](http://news.mit.edu/)
-* [Ted](https://www.ted.com/)
 * [EnGadget](https://www.engadget.com/)
 * [LifeHacker](https://lifehacker.com/)
 * [AnandTech](https://www.anandtech.com/)
@@ -28,6 +27,7 @@
 * [Tech Crunch](https://techcrunch.com/)
 * [Reddit InternetIsBeautiful](https://www.reddit.com/r/internetisbeautiful)
 * [Beta News](https://betanews.com/)
+* [Ted](https://www.ted.com/)
 
 <hr>
 
