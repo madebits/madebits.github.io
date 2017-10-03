@@ -224,7 +224,7 @@ dd conv=notrunc if=secret.bin of=container.bin
 sudo csman.sh o container.bin container.bin -co -o 2 ---
 ```
 
-The `-slots count` option is provided as convenience to create 1024 byte slots. Using `-slots` overwrites `-co -o`  (the number used with `-o` needs to be twice the number of slots). You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number. By default, created containers have no slots to store keys unless `-slots count` is specified.
+The `-slots count` option is provided as convenience to create 1024 byte slots. Using `-slots` overwrites `-co -o` (the number used with `-o` needs to be twice the number of slots). You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number, such as 2 or 4. By default, created containers have no slots to store secrets unless `-slots count` is specified.
 
 ```bash
 # these are same, create
