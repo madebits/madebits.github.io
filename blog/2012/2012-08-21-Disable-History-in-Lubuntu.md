@@ -243,7 +243,7 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 
 	`bash` will start will current history loaded, but will not save any history unless `histon` is called.
 
-1. In newer versions of Ubuntu, to stop error reporting use:
+1. In newer versions of Ubuntu, to stop error reporting use (`/etc/default/apport` file helps disable `apport` completely):
 
 	```
 	sudo systemctl stop whoopsie.service
