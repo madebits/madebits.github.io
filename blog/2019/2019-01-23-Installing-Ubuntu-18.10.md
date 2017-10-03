@@ -85,7 +85,7 @@ I did a minimal Ubuntu install. I am so happy they offer that, as in the past I 
 
 ```bash
 sudo apt remove --purge ubuntu-report 
-# please fire the dev that stored configuration in ~/.cache
+# please fire the dev that stored configuration in ~/.cache ($XDG_CONFIG_HOME ?)
 # was the new intern in the team the only one that agreed to implement ubuntu-report?
 
 sudo apt install synaptic
