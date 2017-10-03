@@ -17,7 +17,7 @@ The template helps starting with following features:
 * [vue-i18n](http://kazupon.github.io/vue-i18n/en/) internationalization fully integrated.
 * Sample starter code to help with Ajax (via [axios](https://github.com/axios/axios)), logging, authentication, timers.
 * ES2015+ via Babel with `async` / `await`.
-* Unit tests with Karma and jasmine in chrome headless with code coverage.
+* Unit tests with Karma and jasmine in chrome headless with code coverage. Example of [vue-test-utils](https://vue-test-utils.vuejs.org/en/) included.
 
 ##Getting Started
 
@@ -96,5 +96,7 @@ Backend will run at port http://localhost:3000 by default.
 * [Vuex](https://vuex.vuejs.org/en/)
 * [Vue Style Guide](https://vuejs.org/v2/style-guide/)
 * [vue-i18n](http://kazupon.github.io/vue-i18n/en/)
+* [vue-test-utils](https://vue-test-utils.vuejs.org/en/)
+
 
 
