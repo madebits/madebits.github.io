@@ -10,8 +10,6 @@ This a summary of steps to setup [OpenVPN](https://openvpn.net/index.php/open-so
 
 To set up OpenVPN in Ubuntu server, I followed steps in a [DigitalOcean tutorial](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04) steps. I choose to use `port 443` and `proto tcp` in OpenVPN server configuration.
 
-In Azure, you need (at least) to open port `tpc/443` free for VM, in *Networking*, *InBound Port Rules* (e.g., allow *HTTPS* from predefined ones).
-
 My Ubuntu Server VM has a dynamic IP, so I used the Azure host name in `remote` field on client configuration:
 
 ```
@@ -34,5 +32,7 @@ iptables -A OUTPUT -o tun+ -j ACCEPT
 ```
 
 The new `iptables` rules need to made persistent once tested (`sudo apt-get install iptables-persistent netfilter-persistent`).
+
+In Azure, you need (at least) to open port `tpc/443` free for VM, in *Networking*, *InBound Port Rules* (e.g., allow *HTTPS* from predefined ones).
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2018/2018-04-26-Lubuntu-18.04-Disable-initfsram-Resume.md'>Lubuntu 18.04 Disable initfsram Resume</a> <a rel='next' id='fnext' href='#blog/2018/2018-04-24-Gksu-Is-Dead-Long-Live-Pkexec.md'>Gksu Is Dead Long Live Pkexec</a></ins>
