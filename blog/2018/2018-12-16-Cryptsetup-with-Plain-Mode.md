@@ -66,8 +66,8 @@ cryptsetup --key-file=key.bin  -c aes-xts-plain64 -s 512 -o 111 open --type plai
 **References**
 
 * https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_a_non-root_file_system#Loop_device
+* https://wiki.archlinux.org/index.php/Dm-crypt/Device_encryption#Encrypting_devices_with_plain_mode
 * https://lumit.it/how-to-get-a-tails-luks-master-key/
 * https://www.tarsnap.com/scrypt.html
-
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2018/2018-04-26-Lubuntu-18.04-Disable-initfsram-Resume.md'>Lubuntu 18.04 Disable initfsram Resume</a></ins>
