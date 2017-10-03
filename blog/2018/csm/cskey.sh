@@ -70,7 +70,7 @@ function encryptAes()
 {
 	local pass="$1"
 	if [ "$useAes" = "1" ]; then
-		"${toolsDir}/aes" -r /dev/urandom -e -f <(echo -n "$pass")
+		"${toolsDir}/aes" -c 5000000 -r /dev/urandom -e -f <(echo -n "$pass")
 	else
 		ccrypt -e -f -k <(echo -n "$pass")
 	fi
@@ -80,7 +80,7 @@ function decryptAes()
 {
 	local pass="$1"
 	if [ "$useAes" = "1" ]; then
-		"${toolsDir}/aes" -d -f <(echo -n "$pass")
+		"${toolsDir}/aes" -c 5000000 -d -f <(echo -n "$pass")
 	else
 		ccrypt -d -k <(echo -n "$pass")
 	fi
@@ -389,7 +389,7 @@ function showHelp()
 	dumpError " -bk : (enc | chp) generate a new key for each -b file"
 	dumpError " -h hashToolOptions -- : default -h ${cskHashToolOptions[@]} --"
 	dumpError " -hn hashToolOptions -- : (chp) default -hn ${cskHashToolOptions2[@]} --, used for new file"
-	dumpError " -key file : (enc) read key data from file"
+	dumpError " -key file : (enc) read key data as base64 -w 0 from file"
 	dumpError " -o outFile : (chp) write to outFile in place of file"
 	dumpError " -d -- (enc | chp) dump password and key on screen for debug"
 	dumpError "Examples:"
@@ -520,7 +520,7 @@ function main()
 					dumpError "! required -key file"
 					exit 1
 				fi
-				cskKey=$(head -c 512 "$kk")
+				cskKey=$(cat "$kk")
 				shift
 			;;
 			-c)
