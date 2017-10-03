@@ -390,9 +390,9 @@ function readSessionPass()
 			fi
 			sData0=$(head -c 64 "${cskSessionSaltFile}" | base64 -w 0)
 			if [ -z "${sData0}" ]; then
-					onFailed "cannot read session salt: ${cskSessionSaltFile}"
+					onFailed "cannot read session salt from: ${cskSessionSaltFile}"
 				else
-					logError "# read session salt from: ${cskSessionSaltFile}"
+					logError "# reading session salt from: ${cskSessionSaltFile}"
 			fi
 		fi
 		local sData1="$(uptime -s)"
@@ -445,10 +445,19 @@ function createSessionPass()
 	fi
 	readSessionPass
 	debugData "${cskSessionPass}" "${pass}"
+	
+	local fsp=""
+	if [ -f "$file" ]; then
+		read -p "Overwrite ${file}? [y - (overwrite) | Enter (leave as is)]: " fsp
+		if [ "$fsp" != "y" ]; then
+			return
+		fi
+	fi
 
 	# add a token to pass
 	echo -n "${pass}CSKEY" | encryptAes "$cskSessionPass" > "$file"
 	ownFile "$file"
+	logError "# created session password file: ${file}" 
 }
 
 # file
