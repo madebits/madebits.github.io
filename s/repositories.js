@@ -17,6 +17,7 @@
 		}
 		var html = '';
 		$.each(data, function(idx, item) {
+			if(item.fork) return;
 			var link = '#r/{0}'.format(item.name);
 			var linkText = mbTitle.formatPageTitle(item.name);
 			var year = '*';
