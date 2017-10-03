@@ -55,10 +55,13 @@ Backup and restore container key:
 
 ```bash
 # backup: first 1024 bytes are copied to secret.bin
-csman ex container.bin -s secret.bin
+csman extract container.bin -s secret.bin
+
+# optional, change password of backup
+# csman.sh chp secret.bin -ck -i e --
 
 # restore
-csman e container.bin -s secret.bin
+csman embed container.bin -s secret.bin
 ```
 
 ## Introduction
