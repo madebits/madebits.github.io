@@ -76,7 +76,6 @@
 
 [Reddit Programming](https://www.reddit.com/r/programming/)
 [.Net Blog](https://devblogs.microsoft.com/dotnet/)
-[MSDN Magazine](https://msdn.microsoft.com/en-us/magazine/default.aspx)
 [CodingHorror](https://blog.codinghorror.com/)
 [TheDailyWTF](https://thedailywtf.com/)
 [NetFlix Blog](https://medium.com/netflix-techblog)
@@ -142,6 +141,7 @@
 [Sputnik News](https://sputniknews.com/)
 [TASS](https://tass.com/world)
 [TheMoscowTimes](https://www.themoscowtimes.com/news)
+[PravdaReport](http://www.pravdareport.com/world/)
 [SouthFront](https://southfront.org/)
 
 ## China
