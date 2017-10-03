@@ -429,7 +429,8 @@ sudo csman.sh chp secret.bin -out new-secret.bin -ck -i e --
 ```
 
 * If `-out` is not specified *secret.bin* is modified in place.
-* The `-ck` is used to pass option to `cskey.sh` to decrypt the file and `-cko` is used (if needed) to pass options to `cskey.sh` to encrypt the new output file.
+* The `-ck ... --` is used to pass option to `cskey.sh` to decrypt the file and `-cko .. --` is used (if needed) to pass options to `cskey.sh` to encrypt the new output file. 
+* If `-cko` is not specified, then same `-ck` options are used also for encryption.
 
 If you have more than one secret file using same password, you can make use of sessions to change password of several files at once unattended. I assume here there are no key files used (if key files are used, pass them using `-kf keyfile`):
 
