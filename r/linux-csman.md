@@ -13,39 +13,39 @@
 Create a new container file (`-i e` or `-i echo` makes password entry visible):
 
 ```bash
-# size can be in M (mega) or G (giga) bytes
-sudo csman.sh new container.bin -size 1M -ck -i e --
+# size can be in M (mega) or G (giga) bytes, your sudo password will be asked
+csman.sh new container.bin -size 1M -ck -i e --
 ```
 
 Open a container, it gets a random *name* and it is mounted under `$HOME/mnt/csm-name` (or append `-name name`):
 
 ```bash
 # append -exec to allow running executables from container, append -ro to mount read-only
-sudo csman.sh open container.bin -ck -i e -- -name one
+csman.sh open container.bin -ck -i e -- -name one
 
 # or block terminal till container is open, press Ctrl+C to close
-sudo csman.sh open container.bin -ck -i e -- -live
+csman.sh open container.bin -ck -i e -- -live
 ```
 
 Close a container by name:
 
 ```bash
-sudo csman.sh close one
+csman.sh close one
 
 # or close all open containers
-sudo csman.sh closeAll
+csman.sh closeAll
 ```
 
 List all CSMan open containers:
 
 ```bash
-sudo csman.sh list
+csman.sh list
 ```
 
 Change password:
 
 ```bash
-sudo csman.sh chp container.bin -ck -i e --
+csman.sh chp container.bin -ck -i e --
 ```
 
 ## Introduction
