@@ -73,7 +73,7 @@ drwxr-xr-x 2 root root     50 Apr 28 15:16 hooks
 
 ## Snap Configuration
 
-To get configuration options of a snap use (*set/unset* option can be used to set/clear them):
+To get [configuration](https://snapcraft.io/docs/configuration-in-snaps) options of a snap use (*set/unset* option can be used to set/clear them):
 
 ```bash
 $ sudo snap get -d gimp
@@ -211,7 +211,7 @@ env | grep SNAP
 
 ## Summary
 
-Ubuntu snap is an interesting concept, with several unpolished corners, that creates an illusion of security, and is here to stay. 
+Ubuntu snap is an interesting concept, with impressive achievements and with several unpolished corners, that creates an illusion of security, and is here to stay.
 
 * Consider only installing snaps maintained by [Canonical](https://forum.snapcraft.io/t/snaps-officially-supported-by-canonical/1719), or other parties you trust.
 * https://snapcraft.io/store is scarce on snap details. Some people write a link to their *yaml* definition in read-me there, some not. The store itself gives no details on permissions needed by a snap, during install, use, and removal. The only way to know what is inside, is to download and examine files on your own.
