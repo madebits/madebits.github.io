@@ -273,7 +273,7 @@ XDG_DATA_HOME=/home/user/snap/gimp/252/.local/share
 XDG_CONFIG_DIRS=/snap/gimp/252/gnome-platform/etc/xdg:...:/etc/xdg
 
 $ env | grep HOME
-HOME=/home/u7/snap/gimp/252
+HOME=/home/user/snap/gimp/252
 
 $ ls /
 bin  boot  dev  etc  home  lib  lib64  media  meta  mnt  opt  proc  root  run  sbin  snap  srv  sys  tmp  usr  var  writable
