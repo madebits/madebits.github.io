@@ -123,6 +123,12 @@ I added also some CPU load indicator (first one I found that looked ok):
 
 * SysPeek-GS https://extensions.gnome.org/extension/1409/syspeek-gs/
 
+    This extension expects in its source code that there is an application `gnome-system-monitor.desktop` which is not there due to being installed as snap, so I had to do the following: 
+
+    ```
+    sudo cp /var/lib/snapd/desktop/applications/gnome-system-monitor_gnome-system-monitor.desktop /usr/share/applications/gnome-system-monitor.desktop
+    ```
+
 A well-done menu:
 
 * Gno-Menu https://extensions.gnome.org/extension/608/gnomenu/
