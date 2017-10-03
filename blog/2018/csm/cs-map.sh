@@ -101,7 +101,6 @@ function openContainer()
 
     local device="$1"
     checkArg "$device" "container"
-
     shift
 
     local mntDir1=$(mntDirRoot "$name")
