@@ -27,7 +27,7 @@ cryptsetup <= random secret key (512 bit) <= password encrypted secret file (Arg
 
 The secret file encryption password is hashed using `argon2` before passed to AES tool (which does also their own hashing). To open a container both the secret file and password must be known. 
 
-Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords. AES used to encrypt secret files is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret leads to different binary files. Similar to [non-detached](https://wiki.archlinux.org/index.php/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header) LUKS, user is responsible to store secret files separately from containers (maybe in another container). Unlike LUKS headers, secret files used by CSMan (with default aes tool) look random.
+Similar to LUKS, one can use same password safely to protect more than one secret file, or protect same secret in different files with different passwords. AES used to encrypt secret files is in CBC (`aes`) or CFB (`ccrypt`) mode, so using same password on same on different files containing same secret leads to different binary files. Similar to [non-detached](https://wiki.archlinux.org/index.php/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header) LUKS, user is responsible to store secret files separately from containers (maybe in another container) (or embed them as needed). Unlike LUKS headers, secret files used by CSMan (with default aes tool) look random.
 
 ### Terminology
 
