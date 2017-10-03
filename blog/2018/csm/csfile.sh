@@ -63,7 +63,7 @@ function tcp()
     local d="$2"
     shift 2
     processOptions "$@"
-    mkdir -p "$s"
+    mkdir -p "$d"
     
     echo "Copying $s to $d ..."
         
@@ -87,7 +87,7 @@ function rcp()
     local d="$2"
     shift 2
     processOptions "$@"
-    mkdir -p "$s"
+    mkdir -p "$d"
     
     if [ -n "${rcpBackupDir}" ]; then
         sameDir "$s" "${rcpBackupDir}"
