@@ -437,6 +437,7 @@ function loadSessionPass()
 	if [ -z "${pass}" ]; then
 		onFailed "cannot read file: ${file}"
 	fi
+	debugData "${pass}"
 	cskSessionPassFile="${pass}"
 }
 
