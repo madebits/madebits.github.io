@@ -207,6 +207,7 @@ function keyFileHash()
 	if [ "$?" != "0" ]; then
 		onFailed "cannot read keyFile: ${keyFile}"
 	fi
+	touchFile "$keyFile"
 }
 
 function readKeyFiles()
