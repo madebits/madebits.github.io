@@ -113,6 +113,12 @@ mount /dev/mapper/enc /mnt/tmp
 bindfs -u $(id -u) -g $(id -g) /mnt/tmp $HOME/tmp
 ```
 
+To specify password via some script above use (e.g.: via `sudo sh -c "..."`):
+
+```
+echo -n password | cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 -o 111 open --type plain /data2/temp/container.bin enc -
+```
+
 To close the open container use:
 
 ```
