@@ -32,10 +32,10 @@ function onFailed()
 
 function checkSrcDst()
 {
-    if [ -z "$1" ]; then
+    if [ -z "${1:-}" ]; then
         onFailed "src required"
     fi
-    if [ -z "$2" ]; then
+    if [ -z "${2:-}" ]; then
         onFailed "dst required"
     fi
     
@@ -59,14 +59,18 @@ tcpUsePv="0"
 function tcp()
 {
     checkSrcDst "$1" "$2"
-    mkdir -p "$2"
+    local s="$1"
+    local d="$2"
+    shift 2
+    processOptions "$@"
+    mkdir -p "$s"
     
-    echo "Copying $1 to $2 ..."
+    echo "Copying $s to $d ..."
         
     if [ "$tcpUsePv" = "1" ]; then
-        time tar --ignore-failed-read -C "$1" -cf - . | pv | tar --ignore-failed-read -C "$2" -xf -
+        time tar --ignore-failed-read -C "$s" -cf - . | pv | tar --ignore-failed-read -C "$d" -xf -
     else
-        time tar --ignore-failed-read -C "$1" -cf - . | tar --ignore-failed-read -C "$2" -xf -
+        time tar --ignore-failed-read -C "$s" -cf - . | tar --ignore-failed-read -C "$d" -xf -
     fi
     echo "Done"
 }
@@ -78,17 +82,21 @@ rcpBackupDir=""
 function rcp()
 {
     checkSrcDst "$1" "$2"
-    mkdir -p "$2"
+    local s="$1"
+    local d="$2"
+    shift 2
+    processOptions "$@"
+    mkdir -p "$s"
     
     if [ -n "${rcpBackupDir}" ]; then
-        sameDir "$1" "${rcpBackupDir}"
-        sameDir "$2" "${rcpBackupDir}"
-        echo "Copying $1 to $2 (with backup in $3) ..."
-        time rsync --info=progress2 -ahWS --delete --stats "$1/" "$2" --backup-dir="${rcpBackupDir}"
+        sameDir "$s" "${rcpBackupDir}"
+        sameDir "$d" "${rcpBackupDir}"
+        echo "Copying $s to $d (with backup in $3) ..."
+        time rsync --info=progress2 -ahWS --delete --stats "$s/" "$d" --backup-dir="${rcpBackupDir}"
     else
-        echo "Copying $1 to $2 ..."
+        echo "Copying $s to $d ..."
         #--progress 
-        time rsync --info=progress2 -ahWS --delete --stats "$1/" "$2"
+        time rsync --info=progress2 -ahWS --delete --stats "$s/" "$d"
     fi
     echo "Done"
 }
@@ -148,7 +156,6 @@ function rndDataSource()
 {
     if [ "$dcUseRnd" = "1" ]; then
         # https://unix.stackexchange.com/questions/248235/always-error-writing-output-file-in-openssl
-        testRndDataSource
         # https://wiki.archlinux.org/index.php/Securely_wipe_disk/Tips_and_tricks#dd_-_advanced_example
         local tpass=$(tr -cd '[:alnum:]' < /dev/urandom | head -c128)
         set +e
@@ -162,7 +169,12 @@ function rndDataSource()
 function dc()
 {
     local res=""
-    dcDir="${1:-$HOME/tmp}"
+    dcDir="${1:?"dir missing use - for $HOME/tmp"}"
+    if [ "${dcDir}" = "-" ]; then
+        dcDir="$HOME/tmp"
+    fi
+    shift
+    processOptions "$@"
     makeTmpDir
     trap cleanUp SIGHUP SIGINT SIGTERM ERR
     mkdir -p "${dcDir}"
@@ -170,6 +182,11 @@ function dc()
     dcInfo "${partition}"
     dcStart=$(date +%s)
     echo -e "Using folder ${dcDir}\nOverwriting free partition space in ${partition} (may take some time):"
+
+    if [ "$dcUseRnd" = "1" ]; then
+        echo "# using random data for overwrite"
+        testRndDataSource
+    fi
    
     printAvailable
     while : ; do
@@ -220,7 +237,6 @@ function processOptions()
             ;;
             -dr)
                 dcUseRnd="1"
-                echo "# using random data for overwrite"
             ;;
             *)
                 onFailed "unknown option: $current"
@@ -241,7 +257,7 @@ Usage:
 
  $bn tcp srcDir dstDir [options]
  $bn rcp srcDir dstDir [options]
- $bn dc [dir]  [options]
+ $bn dc dir [options]
 
 Where [options]:
  
@@ -252,7 +268,7 @@ Where [options]:
 Notes:
 
  (tcp | rcp ) : copy content within srcDir to dstDir
- (dc) : default dir is $HOME/tmp, a csfile-$RANDOM folder is created within
+ (dc) : use - as dir for default $HOME/tmp, a csfile-$RANDOM folder is created within
     
 EOF
 
