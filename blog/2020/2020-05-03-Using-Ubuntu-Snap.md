@@ -344,6 +344,14 @@ The device-serial ID and list of installed snaps and their usage data are sent t
 
 Given Ubuntu distributes parts of desktop via snap, disable of refresh means some desktop software software updates cannot be delivered.
 
+## Limited Hacking
+
+I tried `rclone` snap and it did not work. It needs access to profile for dot config files, but it has only home. Fixing that by reading `rclone` docs and passing config file via environment variables, brought up the next issue, and so on. The snap state is also old. This leave me as user with no choice, but download and install `rclone` on my own. This will in general endanger users.
+
+A similar situation with `chromium` browser arises, where the snap is inadequate for many users. This will result in direct installs of Google Chrome binaries from Google web site.
+
+While *snap* is maybe ok for GNOME and other Ubuntu parts, it is not a replacement for current third-party software via `apt`.
+
 ## Summary
 
 Ubuntu snap is an interesting concept, with impressive achievements and with several unpolished corners, that creates an illusion of security, and that is here to stay.
