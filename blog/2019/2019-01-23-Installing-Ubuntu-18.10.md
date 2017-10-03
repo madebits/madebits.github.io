@@ -104,7 +104,7 @@ sudo cryptsetup luksAddKey /dev/sda3 -S 0
 
 ##GNOME
 
-I have still to find someone that can use GNOME as it is out of the box. So first things first:
+I have still to find someone that can use [GNOME](https://wiki.archlinux.org/index.php/GNOME) as it is out of the box. So first things first:
 
 ```bash
 sudo apt-get update
