@@ -429,7 +429,7 @@ function readSessionPass()
 		local sessionData="${user}${sData0}${sData1}"
 		local sSecret="${sessionData}"
 		local rsp="${cskSessionAutoKeyFile}"
-		if [ -z "rsp" ] && [ "$cskSessionAutoKey" = "0" ]; then
+		if [ -z "${rsp}" ] && [ "${cskSessionAutoKey}" = "0" ]; then
 			logError
 			if [ "$cskInputMode" = "1" ] || [ "$cskInputMode" = "e" ]; then
 				read -p "Session key (or Enter for default): " rsp
