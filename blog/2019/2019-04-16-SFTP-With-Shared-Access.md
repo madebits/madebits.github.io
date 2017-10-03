@@ -13,7 +13,7 @@ sudo groupadd sftponly
 Once the user group is there, we can create as many SFTP only users as we like using:
 
 ```bash
-sudo adduser sftpuser001 --ingroup sftponly --shell /usr/sbin/nologin --home /data/jail/shared
+sudo adduser sftpuser001 --ingroup sftponly --shell /usr/sbin/nologin --home /data/jail/shared --no-create-home
 ```
 
 All such users are assigned same home folder.
