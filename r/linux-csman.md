@@ -220,6 +220,12 @@ dd conv=notrunc if=secret.bin of=container.bin
 sudo csman.sh o container.bin container.bin -co -o 2 ---
 ```
 
+Do not manipulate container file as secret file using `cskey.sh` or other tooling (such as `csman.sh chp`), other than for reading (decoding) the secret. To extract secret file back from the container use:
+
+```bash
+dd if=container.bin of=secret.bin bs=1024 count=1
+```
+
 ### Using Containers
 
 `cryptsetup` requires names for devices and `csman.sh` follows same convention. The container names are prefixed with `csm-`. You can specify names in command and options either with `csm-` prefix, or without it. The name is used as part of mount folder. If you want to have a pre-known path to copy files consider specifying a name when opening the container using `-n name` option. If you specify no name, a random one is generated and printed out by *open* command. 
