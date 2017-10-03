@@ -74,7 +74,7 @@ function rcp()
     checkSrcDst "$1" "$2"
     mkdir -p "$2"
     
-    if [ -n "$3" ]; then
+    if [ -n "${3:-}" ]; then
         sameDir "$1" "$3"
         sameDir "$2" "$3"
         echo "Copying $1 to $2 (with backup in $3) ..."
@@ -173,9 +173,17 @@ showHelp()
 {
     local bn="$(basename -- $0)"
     cat <<EOF
+Usage:
+
 $bn tcp srcDir dstDir
 $bn rcp srcDir dstDir [backupDir]
 $bn dc [dir]
+
+Notes:
+
+    (tcp | rcp ) : copy content within srcDir to dstDir
+    (dc) : default dir is $HOME/tmp, a csfile-$RANDOM folder is created within
+    
 EOF
 
 } >&2
