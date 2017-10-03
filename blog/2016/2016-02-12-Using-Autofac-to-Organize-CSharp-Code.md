@@ -159,6 +159,10 @@ public class TestBase {
         AF = new Fixture();
         //AF.Customize(new AutoConfiguredMoqCustomization());
         AF.Customize(new AutoMoqCustomization());
+
+        // this is better, as it inits members automatically
+        // same as I do manually below
+        // AF = new Fixture().Customize(new AutoMoqCustomization { ConfigureMembers = true });
     }
 }
 
