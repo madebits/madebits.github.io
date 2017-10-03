@@ -408,6 +408,17 @@ function listContainer()
 
 ########################################################################
 
+function umountDevice()
+{
+    local device="$1"
+    if [ -b "${device}" ]; then
+        set +e
+        ls ${device}?* 2>/dev/null | xargs -n 1 -I {} fuser -km {}
+        ls ${device}?* 2>/dev/null | xargs -n 1 umount
+        set -e
+    fi
+}
+
 #key name device
 function openContainerByName()
 {
@@ -415,11 +426,7 @@ function openContainerByName()
     local name="$2"
     local device="$3"
     
-    if [ -b "${device}" ]; then
-        set +e
-        umount ${device}?* 2>/dev/null
-        set -e
-    fi
+    umountDevice "${device}"
     
     local cro=""
     if [ "$cmsMountReadOnly" = "1" ]; then
@@ -609,10 +616,8 @@ function createContainer()
     
     if [ "$writeContainer" = "1" ]; then
         if [ "$blockDevice" = "1" ]; then
+            umountDevice "${container}"
             testRndDataSource
-            set +e
-            umount ${container}?* 2>/dev/null
-            set -e
             echo "Overwriting block device: ${container} ..."
             #hmm, we have to ingore errors here
             echo "# script will go on in case of errors here, read the output and decide if all ok ..."
