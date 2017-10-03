@@ -5,10 +5,10 @@
 set -e
 
 # none of values in this file is secret
-# change argon2 params as it fits you here
-at="${3:-1000}"
-am="${4:-14}"
-ap="${5:-8}"
+# change default argon2 params as it fits you here
+adt="1000"
+adm="16"
+adp="8"
 
 # set to 1 to use my aes tool, 0 uses ccrypt
 toolsDir="$(dirname $0)"
@@ -61,6 +61,11 @@ function encodeKey()
     local file="$1"
     local pass="$2"
     local key="$3"
+    
+    local at="${4:-$adt}"
+	local am="${5:-$adm}"
+	local ap="${6:-$adp}"
+    
     local salt=$(head -c 32 /dev/urandom | base64 -w 0)
     hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
     
@@ -83,6 +88,10 @@ function decodeKey()
     local file="$1"
     local pass="$2"
     local keyLength=$(encryptedKeyLength)
+    
+    local at="${3:-$adt}"
+	local am="${4:-$adm}"
+	local ap="${5:-$adp}"
     
     if [ -e "$file" ] || [ "$file" = "-" ]; then
 		local fileData=$(head -c 600 "$file" | base64 -w 0)
@@ -234,6 +243,7 @@ function main()
     local key=""
     case "$mode" in
         enc)
+			shift 2
             pass=$(readNewPass)
             
             if [ ! -z "$CS_KEY" ]; then
@@ -248,33 +258,48 @@ function main()
 				(>&2 echo "[$pass]")
 				(>&2 echo "[$key]")
 			fi
-            encodeKey "$file" "$pass" "$key"
+            encodeKey "$file" "$pass" "$key" "$@"
         ;;
         dec)
+			shift 2
 			pass=$(readPass)
-            decodeKey "$file" "$pass"
+            decodeKey "$file" "$pass" "$@"
         ;;
         chp)
+			shift 2
 			(>&2 echo "# Current")
 			pass1=$(readPass)
             (>&2 echo)
-            key=$(decodeKey "$file" "$pass1" | base64 -w 0)
+            key=$(decodeKey "$file" "$pass1" "$@" | base64 -w 0)
             (>&2 echo "# New")
-            pass=$(readNewPass)
+            if [ ! -z "$CS_SAME_PASS" ]; then
+				(>&2 echo "# Using CS_SAME_PASS")
+				pass="$pass1"
+			else
+				pass=$(readNewPass)
+            fi
             if [ "$CS_ECHO_KEY" = "1" ]; then
 				(>&2 echo)
 				(>&2 echo "[$pass]")
 				(>&2 echo "[$key]")
 			fi
-            encodeKey "$file" "$pass" "$key"
+			if [ ! -z "$6" ]; then
+				shift 3
+				(>&2 echo "# Using new argon2 params:" $@ )
+			fi
+            encodeKey "$file" "$pass" "$key" "$@"
+            (>&2 echo "Done: $file")
         ;;
         *)
-            (>&2 echo "Usage: $0 [enc | dec | chp] file [t m p]")
-            (>&2 echo "file is overwritten by enc and chp, backup it as needed before")
-            (>&2 echo 'Example: CS_KEY=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt 1000 16 8')
+            (>&2 echo "Usage: basename($0) [enc | dec | chp] file [t m p]")
+            (>&2 echo " file is overwritten by enc and chp, backup it as needed before")
+            (>&2 echo " default argon2 t m p are: $adt $adm $adp")
+            (>&2 echo 'Examples:')
+            (>&2 echo ' CS_KEY=$(cskey.sh dec s.txt | base64 -w 0) cskey.sh enc d.txt 1000 16 8')
+            (>&2 echo ' CS_SAME_PASS=1 cskey.sh chp d.txt 1000 14 8 1000 16 8')
             exit 1
         ;;
     esac
 }
 
-main $1 $2
+main "$@"
