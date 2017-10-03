@@ -734,7 +734,7 @@ function createContainer()
     local overwriteContainer=""
     if [ -f "$container" ]; then
         echo "Container file exists: $(ls -sh "${container}")"
-        read -p "Overwrite? [y (overwrite) | e (erase files) | Enter to exit]: " overwriteContainer
+        read -p "Overwrite? [y (overwrite) | e (create filesystem only) | Enter to exit]: " overwriteContainer
         if [ "$overwriteContainer" = "y" ]; then
             writeContainer="1"
         elif [ "$overwriteContainer" = "e" ]; then
@@ -751,7 +751,7 @@ function createContainer()
         local bSize=$(getDeviceSize "${container}")
         echo "Are you sure to encrypt block device: ${bSize} ${container}"
         echo "Size parameter will be ingored for block devices"
-        read -p "Overwrite? [y (overwrite) | e (erase files) | Enter to exit]: " overwriteContainer
+        read -p "Overwrite? [y (overwrite) | e (create filesystem only) | Enter to exit]: " overwriteContainer
         if [ "$overwriteContainer" = "y" ]; then
             writeContainer="1"
         elif [ "$overwriteContainer" = "e" ]; then
