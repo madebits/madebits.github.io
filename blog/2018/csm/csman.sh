@@ -348,7 +348,11 @@ function isSameContainerFile()
 function getContainerFile()
 {
     local name=$(validName "${1:-}")
-    cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7
+    local f="$(cryptsetup status "$name" | grep loop: | cut -d ' ' -f 7)"
+    if [ -z "$f" ]; then
+        f="$(cryptsetup status csm-dwpi | grep device: | cut -d ' ' -f 5)"
+    fi
+    echo "$f"
 }
 
 function listContainer()
@@ -410,6 +414,12 @@ function openContainerByName()
     local key="$1"
     local name="$2"
     local device="$3"
+    
+    if [ -b "${device}" ]; then
+        set +e
+        umount ${device}?* 2>/dev/null
+        set -e
+    fi
     
     local cro=""
     if [ "$cmsMountReadOnly" = "1" ]; then
@@ -600,15 +610,20 @@ function createContainer()
     if [ "$writeContainer" = "1" ]; then
         if [ "$blockDevice" = "1" ]; then
             testRndDataSource
+            set +e
+            umount ${container}?* 2>/dev/null
+            set -e
             echo "Overwriting block device: ${container} ..."
             #hmm, we have to ingore errors here
-            echo "# script will go on in case of errors here, please read the output and decide if all ok ..."
-            echo "# it is ok to see when done: dd: error writing '...': No space left on device"
+            echo "# script will go on in case of errors here, read the output and decide if all ok ..."
+            echo "# when done, it is ok to see: dd: error writing '...': No space left on device"
             set +e
             time rndDataSource | dd iflag=fullblock of="$container" bs=1M status=progress
             set -e
+            echo "# sync disk data, this may take a while if other write operations are running ..."
+            sync
         else
-            echo "Creating ${container} with ${sizeNum}${size: -1} (/dev/mapper/${name}) ..."
+            echo "Creating ${container} with ${sizeNum}${size: -1} ..."
             if [ "${size: -1}" = "G" ]; then
                 ddContainer "$container" "1G" "$sizeNum"
             elif [ "${size: -1}" = "M" ]; then
