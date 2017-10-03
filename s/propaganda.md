@@ -148,6 +148,7 @@
 [Press TV](https://www.presstv.com/)
 [AlJazeera](https://www.aljazeera.com/news/)
 [YeniSafak](https://www.yenisafak.com/en/world)
+[AlMasdarNews](https://www.almasdarnews.com/article/category/world-news/)
 [Haaretz](https://www.haaretz.com/world-news)
 [The Times of Israel](https://www.timesofisrael.com/)
 

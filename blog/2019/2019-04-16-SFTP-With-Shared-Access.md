@@ -124,4 +124,4 @@ sftp -o FingerprintHash=md5 -v sftpuser001@localhost
 ssh -o FingerprintHash=md5 -v sftpuser001@localhost
 ```
 
-<ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-04-17-Why-VSCode-Sucks-At-JavaScript.md'>Why VSCode Sucks At JavaScript</a> <a rel='next' id='fnext' href='#blog/2019/2019-03-25-MongoDb-with-SSL.md'>MongoDb with SSL</a></ins>
+<ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-03-25-MongoDb-with-SSL.md'>MongoDb with SSL</a></ins>
