@@ -106,8 +106,8 @@ sudo mount -o user /dev/mapper/sometest ~/mnt/
 To unmount:
 
 ```bash
-umount ~/mnt/
-cryptsetup remove sometest
+sudo umount ~/mnt/
+sudo cryptsetup remove sometest
 ```
 
 **References**
