@@ -1,12 +1,16 @@
-# MongoDb with SSL
+# SSL for MongoDb and RabbitMQ
 
 2019-03-25
 
-<!--- tags: mongodb -->
+<!--- tags: mongodb, rabbitmq -->
+
+Use of self-signed certificates for SSL provides freedom generate as many of them as needed conveniently on our own and it comes handy for internal infrastructure. I show here how to enable SSL from both [MongoDb](https://docs.mongodb.com/manual/tutorial/configure-ssl/) and [RabbitMQ](https://www.rabbitmq.com/ssl.html) using same certificate. Only server is authenticated to clients via SSL, any client can be connected to servers if credentials are known to client (so we rely here on having long *passwords* for clients).
+
+## SSL for MongoDb 
 
 To set up MongoDb with self-signed certificates for SSL, we need to follow several [steps](https://www.cloudandheat.com/blog/deploy-a-mongodb-3-0-replica-set-with-x-509-authentication-and-self-signed-certificates/).
 
-## Certificate Authority
+### Certificate Authority
 
 We need to create a CA key which needs a password:
 
@@ -24,7 +28,7 @@ The information about CA needs to be filled here when asked to match company dat
 
 CA files needs to be saved and `mongoCA.crt` needs to be distributed to clients. 
 
-## Server Certificates
+### Server Certificates
 
 For each server where MongoDB runs we need to generate a separate certificate. 
 
@@ -55,7 +59,14 @@ cat $HOST_NAME.key $HOST_NAME.crt > $HOST_NAME.pem
 
 Rest of files are not needed anymore after this point can be deleted: ` $HOST_NAME.csr`, `$HOST_NAME.key `, `$HOST_NAME.crt`. MongoDB only needs `$HOST_NAME.pem` file and `mongoCA.crt`.
 
-## MongoDB Daemon Configuration
+To view *thumb-print* of the server certificate we can use:
+
+```
+# hostMongo.pem is `$HOST_NAME.pem`
+openssl x509 -noout -fingerprint -sha256 -inform pem -in hostMongo.pem
+```
+
+### MongoDB Daemon Configuration
 
 The following options can either be passed via parameters to `mongod --ssl --sslCAFile /config/certs/mongoCA.crt --sslPEMKeyFile /config/certs/mongoHost.pem` or via a configuration file `mongod -f /config/mongo.conf`:
 
@@ -74,10 +85,18 @@ We do not require clients present their certificate to server (MongoDB password 
 If MongoDB is run via Docker, these files needs to be accessible to the container:
 
 ```bash
-docker run --restart always -d -p 27021:27017 -v /data2/data/mongo/01/:/data/db/ -v /data2/data/config/mongo01/:/config/ --name mongo01 mongo:4.0 -f /config/mongo.conf --auth
+docker run --restart always -d -p 27021:27017 -v /data/mongo/01/:/data/db/ -v /data/config/mongo01/:/config/ --name mongo01 mongo:4.0 -f /config/mongo.conf --auth
 ```
 
-## MongoDB Client Configuration
+A MongoDB user needs to be created before --auth` flag is set:
+
+```
+use admin
+
+db.createUser({ user: "myAdmin", pwd: "password", roles: [ { role: "root", db: "admin" } ] } );
+```
+
+### MongoDB Client Configuration
 
 We have several options how to verify server SSL certificate in client depending on the driver used. The following code shows how we can verify certificate in C# driver:
 
@@ -144,7 +163,7 @@ var client = new MongoClient(clientSettings);
 return client;
 ```
 
-The code depending on whether SSL is used or not checks the validity of the server certificate either based on its thumb-print if configured, or via its chain information and host name.
+The code depending on whether SSL is used or not checks the validity of the server certificate either based on its thumb-print if configured, or via its chain information and host name. In production code, `SslSettings` needs to be cached.
 
 Node.js driver can do something similar to chain / hostname verification if used as follows:
 
@@ -156,6 +175,138 @@ var options = {
 };
 const mongoClient = mongodb.MongoClient
 this.client = await mongoClient.connect(mongoUrl, options);
+```
+
+## SSL for RabbitMQ
+
+Setting up [TLS](https://www.rabbitmq.com/ssl.html) for RabbitMQ is similar to the MongoDB setup above. We can reuse the CA authority certificate and if RabbitMQ is on same machine as MongoDB server, we can also share the server certificate.
+
+Let assume, we use the following command to start RabbitMQ:
+
+```
+docker run --restart always -d --hostname my-rabbit -p 5774:5671 -p 15774:15671 -v /data/rmq/03/:/var/lib/rabbitmq/mnesia/rabbit\@my-rabbit -v /data/config/rabbit03/:/config -e RABBITMQ_CONFIG_FILE='/config/rabbitmq' --name rmq03 rabbitmq:3.7.14-management
+```
+
+Then we can activate management plugin and add an admin user as follows:
+
+```
+docker exec -i -t rmq03 /bin/bash
+
+rabbitmq-plugins enable rabbitmq_shovel rabbitmq_shovel_management
+
+rabbitmqctl add_user admin password
+rabbitmqctl set_user_tags admin administrator
+rabbitmqctl set_permissions -p / admin ".*" ".*" ".*"
+```
+
+Then we need to set up in `/data/config/rabbit03` a file named `rabbitmq.conf` with following information (`certs` folder is copied or linked under `/data/config/rabbit03`):
+
+```
+loopback_users.guest = true
+listeners.tcp.default = 5672
+hipe_compile = false
+#management.listener.port = 15672
+
+listeners.ssl.default = 5671
+ssl_options.cacertfile = /config/certs/mongoCA.crt
+ssl_options.certfile   = /config/certs/mongoHost.pem
+ssl_options.keyfile    = /config/certs/mongoHost.pem
+ssl_options.verify     = verify_none
+ssl_options.fail_if_no_peer_cert = false
+
+management.listener.ssl = true
+management.ssl.port       = 15671
+management.ssl.cacertfile = /config/certs/mongoCA.crt
+management.ssl.certfile   = /config/certs/mongoHost.pem
+management.ssl.keyfile    = /config/certs/mongoHost.pem
+```
+
+We merged above for MongoDB both private and public keys in `mongoHost.pem` so we can use same file in both places. The non-SSL TPC port is useful for `rabbitmqctl`, but we do not map it to host.
+
+We can access also RabbitMQ Management via web using SSL if configured as shown above, but given SSL is self-signed, we have to accept the connection manually when using `https://server:15774` in browser. In this case, we may want to look at the certificate thumb-print manually in browser to make sure it matches out server ones, before we enter the login credentials.
+
+### RabbitMQ Client Configuration
+
+For .NET the RabbitMQ client configuration to use SSL is simple:
+
+```
+var url = new Uri(Ctx.Get("rmq"));
+var factory = new ConnectionFactory()
+{
+    Uri = url,
+    RequestedHeartbeat = 15,
+    NetworkRecoveryInterval = TimeSpan.FromSeconds(5),
+    AutomaticRecoveryEnabled = true,
+};
+var query = url.ParseQueryString();
+if ((query.ContainsKey("ssl") && (query["ssl"] == "true")) {
+    var caFile = (string)Config.Get("db.caFile");
+    if (string.IsNullOrWhiteSpace(caFile) || !File.Exists(caFile))
+    {
+        throw new FileNotFoundException($"Rmq: Cannot find CaFile: [{caFile}]");
+    }
+    var ca = new X509Certificate2(caFile);
+    factory.Ssl = new SslOption {
+        ServerName = url.Host,
+        Enabled = true,
+        //Certs = new X509CertificateCollection(new [] { ca }),
+        CertificateValidationCallback = (sender, cert, chain, error) =>
+        {
+            var caMatch = false;
+            var hostMatch = false;
+            foreach (var c in chain.ChainElements)
+            {
+                if (c.Certificate.Equals(ca))
+                {
+                    caMatch = true;
+                }
+                if (c.Certificate.Subject.Contains($"CN={url.Host},"))
+                {
+                    hostMatch = true;
+                }
+
+                if (caMatch && hostMatch)
+                {
+                    break;
+                }
+            }
+            return caMatch && hostMatch;
+        }
+    };
+}
+
+Connection = factory.CreateConnection();
+```
+
+I have extended the RabbitMQ URL format to contain `ssl=true`, to mimin MongoDB one, and I am using this [helper class](https://stackoverflow.com/questions/2884551/get-individual-query-parameters-from-uri) to parse URL parameters:
+
+```
+public static class UriExtensions
+{
+    private static readonly Regex _regex = new Regex(@"[?&](\w[\w.]*)=([^?&]+)", RegexOptions.Compiled);
+
+    public static IReadOnlyDictionary<string, string> ParseQueryString(this Uri uri)
+    {
+        var match = _regex.Match(uri.PathAndQuery);
+        var parameters = new Dictionary<string, string>();
+        while (match.Success)
+        {
+            parameters.Add(match.Groups[1].Value, match.Groups[2].Value);
+            match = match.NextMatch();
+        }
+        return parameters;
+    }
+}
+```
+
+In Node.js, the official drive has an example:
+
+```
+const amqp = require('amqplib')
+
+const opts = {  ca: [fs.readFileSync('/mongoCA.crt')] }
+let conn = await amqp.connect('amqp://user:passsword@server:5774/myVhost', opts)
+// to parse custom ssl=true if needed here, we can use Node.js url library
 ```
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-03-10-How-To-Speak-Like-A-Leader.md'>How To Speak Like A Leader</a></ins>
