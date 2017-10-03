@@ -147,7 +147,7 @@ NAME              MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
 dmsetup table --target crypt --showkey /dev/mapper/enc | cut -d ' ' -f 5 | xxd -r -p > key.bin
 
 # and use that key.bin file later to reopen the container
-cryptsetup --key-file=key.bin -c aes-xts-plain64 -s 512 -o 111 open --type plain /data2/temp/container.bin enc
+cryptsetup --key-file=key.bin -c aes-xts-plain64 -s 512 -o 111 open --type plain container.bin enc
 ```
 
 ##Other Plain Mode Goodies
