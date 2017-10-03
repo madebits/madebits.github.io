@@ -4,7 +4,7 @@
 
 <!--- tags: linux -->
 
-I wanted to write an own [Vim](https://www.vim.org/) text editor tutorial that I have around for a quick reference.
+I wanted to write an own [Vim](https://www.vim.org/) text editor tutorial that I have around as quick reference.
 
 ## Starting and Stopping
 
