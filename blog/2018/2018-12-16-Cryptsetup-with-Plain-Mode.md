@@ -150,8 +150,8 @@ function main()
 
         ;;
         *)
-            (>&2 echo "$0 enc secret.bin | $0 dec secret.bin | $0 chp secret.bin")
-            (>&2 echo "secret.bin is overwritten by enc and chp, backup it as needed before")
+            (>&2 echo "Usage: $0 [enc | dec | chp] file")
+            (>&2 echo "file is overwritten by enc and chp, backup it as needed before")
             exit 1
         ;;
     esac
