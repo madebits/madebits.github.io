@@ -178,9 +178,9 @@ function createContainer()
     echo "Creating ${secret} ..."
 
     local user=${SUDO_USER:-$(whoami)}
-    sudo -u "$user" "${toolsDir}/cskey.sh" enc "$secret"
+    sudo -E -u "$user" "${toolsDir}/cskey.sh" enc "$secret"
     echo "You will asked to re-enter password to open the container for the first time ..."
-    local key=$(sudo -u "$user" "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
+    local key=$(sudo -E -u "$user" "${toolsDir}/cskey.sh" dec "$secret" | base64 -w 0)
     echo -n "$key" | base64 -d | cryptsetup --type plain -c aes-xts-plain64 -s 512 -h sha512 "$@" open "$container" "$name" -
 
     echo "Creating file system ..."
@@ -209,7 +209,7 @@ function changePass()
     local secret="$1"
     checkArg "$secret" "secret"
     local user=${SUDO_USER:-$(whoami)}
-    sudo -u "$user" "${toolsDir}/cskey.sh" chp "$secret"
+    sudo -E -u "$user" "${toolsDir}/cskey.sh" chp "$secret"
 }
 
 function touchFile()

@@ -99,14 +99,18 @@ function decodeKey()
 
 function readPass()
 {
-    read -p "New password: " -s pass
-    (>&2 echo)
-    if [ -t 0 ] ; then
-        read -p "Renter password: " -s pass2
+    if [ "$CS_ECHO" == "1" ]; then
+        read -p "New password: " pass
+    else
+        read -p "New password: " -s pass
         (>&2 echo)
-        if [ "$pass" != "$pass2" ]; then
-            (>&2 echo "! passwords do not match")
-            exit 1
+        if [ -t 0 ] ; then
+            read -p "Renter password: " -s pass2
+            (>&2 echo)
+            if [ "$pass" != "$pass2" ]; then
+                (>&2 echo "! passwords do not match")
+                exit 1
+            fi
         fi
     fi
     if [ -z "$pass" ]; then
@@ -129,14 +133,19 @@ function main()
             encodeKey "$file" "$pass" "$key"
         ;;
         dec)
-            if [ "$CSM_ECHO" == "1" ]; then
+            if [ "$CS_ECHO" == "1" ]; then
                 read -p "Enter password: " pass
+            else
+                read -p "Enter password: " -s pass
             fi
-            read -p "Enter password: " -s pass
             decodeKey "$file" "$pass"
         ;;
         chp)
-            read -p "Current password: " -s pass1
+            if [ "$CS_ECHO" == "1" ]; then
+                read -p "Current password: " pass1
+            else
+                read -p "Current password: " -s pass1
+            fi
             (>&2 echo)
             key=$(decodeKey "$file" "$pass1" | base64 -w 0)
             readPass
