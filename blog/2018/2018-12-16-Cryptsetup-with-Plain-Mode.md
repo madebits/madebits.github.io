@@ -104,7 +104,7 @@ cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 open --type plain -o 100 --siz
 cryptsetup -v -c aes-xts-plain64 -s 512 -h sha512 open --type plain -o 1100 --size 1000 --shared container.bin container2
 ```
 
-Related to `--offset` and `--size` is `--skip` that tells cryptsetup first sector number to use for IV calculation (by default same as that set by  `--offset`). I am not sure why that info is exposed to use user.
+Related to `--offset` and `--size` is `--skip` that tells cryptsetup first sector number to use for IV calculation (by default 0 is used). I am not sure why that info is exposed to use user, very likely to enable using a different IV seed for each part.
 
 **References**
 
