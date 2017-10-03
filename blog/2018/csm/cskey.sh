@@ -103,6 +103,8 @@ function readPass()
         read -p "Password: " pass
     elif [ "$CS_ECHO" = "2" ]; then
         pass=$(zenity --password --title="Password" 2> /dev/null)
+    elif [ "$CS_ECHO" = "3" ]; then
+        pass=$(zenity --entry --title="Password" --text="Password (visible):"  2> /dev/null)
     else
         read -p "Password: " -s pass
     fi
@@ -119,6 +121,8 @@ function readNewPass()
         read -p "New password: " pass
     elif [ "$CS_ECHO" = "2" ]; then
         pass=$(zenity --password --title="New Password" 2> /dev/null)
+    elif [ "$CS_ECHO" = "3" ]; then
+        pass=$(zenity --entry --title="Password" --text="New Password (visible):"  2> /dev/null)
     else
         read -p "New password: " -s pass
         (>&2 echo)
