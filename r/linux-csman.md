@@ -233,13 +233,11 @@ dd if=container.bin of=secret.bin bs=1024 count=1
 # dd if=container.bin of=secret.bin bs=1024 count=1 skip=1
 ```
 
-Two convenience commands are provided to embed and extract secret files from default @x1024 byte offset slots. Default slot is 1 (byte offset 0) and can be changed via `-slot slot` option. The order of files is important in these commands (secret is **last**). We assume the container has been created with `-co -o 4 ---` or `-slots 2` option (the number used with `-o` needs to be twice the number of slots):
+Two convenience commands (no `sudo` needed) are provided to embed (`e`) and extract (`ex`) secret files from default @x1024 byte offset slots. Default slot is 1 (byte offset 0) and can be changed via `-slot slot` option. The order of files is important in these commands (secret is **last**). We assume the container has been created with `-co -o 4 ---` or `-slots 2` option (the number used with `-o` needs to be twice the number of slots):
 
 ```bash
-# assume -co -o 4 --- # twice number of -slots needed
 # cskey.sh enc secret.bin -b 2 -su
 # default -slot 1
-# no sudo is needed
 csman e container.bin secret.bin
 csman e container.bin secret.bin.01 -slot 2
 
@@ -250,7 +248,7 @@ csman ex container.bin secret.bin.01 -slot 2
 
 Ideally, generate two secret files for same key using `cskey.sh`, so that they are not same. 
 
-`cskey.sh` knows to read secret from a default slot using `-slot` option, or from a byte offset using `-o` option, and a `csman.sh` shortcut for `-co -o 4` is `-slots 2`:
+`cskey.sh` knows to read secret from a default slot using `-slot` option, or from a byte offset using `-o` option, and a `csman.sh` shortcut for `-co -o 4` is `-slots 2` (using `-slots` overwrites `-co -o`):
 
 ```bash
 # open container using slot 1
