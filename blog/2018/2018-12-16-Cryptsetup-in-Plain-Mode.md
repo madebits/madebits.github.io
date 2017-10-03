@@ -82,7 +82,7 @@ While `scrypt` is the easiest tool to use, you may also consider combining `argo
 
 ##Using Argon2 and Ccrypt
 
-Files:
+We need the following helper bash scripts (ideally copy them as root in `/usr/local/bin`):
 
 * [cs-key.sh](blog/2018/csm/cs-key.sh)
 * [cs-map.sh](blog/2018/csm/cs-map.sh)
