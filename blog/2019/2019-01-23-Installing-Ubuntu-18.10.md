@@ -106,6 +106,8 @@ ls -l /dev/disk/by-uuid/{ use uuid here }
 sudo cryptsetup luksDump /dev/sda3
 
 # change or add new slot
+sudo cryptsetup luksChangeKey /dev/sda3
+# not safe
 sudo cryptsetup luksAddKey /dev/sda3 -S 0
 
 # sudo cryptsetup luksRemoveKey /dev/sda3
