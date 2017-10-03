@@ -2,6 +2,8 @@
 
 2019-03-25
 
+<!--- tags: mongodb -->
+
 To set up MongoDb with self-signed certificates for SSL, we need to follow several [steps](https://www.cloudandheat.com/blog/deploy-a-mongodb-3-0-replica-set-with-x-509-authentication-and-self-signed-certificates/).
 
 ## Certificate Authority
@@ -47,7 +49,7 @@ openssl x509 -CA mongoCA.crt -CAkey mongoCA.key -CAcreateserial -req -days 3650 
 
 MongoDB needs a PEM file that contains both the certificate private key and the signed CRT:
 
-```
+```bash
 cat $HOST_NAME.key $HOST_NAME.crt > $HOST_NAME.pem 
 ```
 
@@ -155,7 +157,5 @@ var options = {
 const mongoClient = mongodb.MongoClient
 this.client = await mongoClient.connect(mongoUrl, options);
 ```
-
-
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2019/2019-03-10-How-To-Speak-Like-A-Leader.md'>How To Speak Like A Leader</a></ins>
