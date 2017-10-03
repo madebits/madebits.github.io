@@ -4,7 +4,7 @@
 
 <!--- tags: cpp wince mfc -->
 
-Process Explorer for PocketPC and WindowsCE is a tool based on *toolhelp.dll* that reports various data about processed running on the device. Process Explorer has been mentioned also in [book](r/cpp-mfc-pocketpc-explorer/book.png). 
+Process Explorer for PocketPC and WindowsCE is a tool based on *toolhelp.dll* that reports various data about processed running on the device. Process Explorer has been mentioned also in a [book](r/cpp-mfc-pocketpc-explorer/book.png). 
 
 ![](r/cpp-mfc-pocketpc-explorer/CEZoom2.gif)
 
