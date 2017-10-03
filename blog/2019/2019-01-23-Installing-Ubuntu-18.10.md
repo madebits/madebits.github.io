@@ -162,6 +162,7 @@ Extra setup:
     Exec=ffmpegthumbnailer -i %i -o %o -s %s -f
     MimeType=video/jpeg;video/mp4;video/mpeg;video/quicktime;video/x-ms-asf;video/x-ms-wm;video/x-ms-wmv;video/x-msvideo;video/x-flv;video/x-matroska;video/webm;video/mp2t;
     ```
+* https://github.com/flozz/nautilus-terminal
 
 ###Hacks
 
@@ -178,9 +179,9 @@ Extra setup:
 
 * `gthumb` had a dark theme, ignoring system theme. I had to edit its [desktop](https://askubuntu.com/questions/1017886/gthumb-version-3-4-3-with-light-background-colors-in-menus-and-browser-like) file: 
 
-```
-Exec=env GTK_THEME=Ambiance:light gthumb %U
-```
+    ```
+    Exec=env GTK_THEME=Ambiance:light gthumb %U
+    ```
 
 * The frequent apps list is in `~/.local/share/gnome-shell/application_state`.
 
