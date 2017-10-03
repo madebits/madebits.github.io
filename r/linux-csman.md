@@ -21,7 +21,7 @@ CSMan use randomly generated 512 byte passwords (called **secret** in CSMan docu
 
 ### Terminology
 
-Some overlapping terms are used more that once and I had to be creative to distinguish them consistently:
+Some overlapping terms are used more that once:
 
 * **secret** - randomly generated (or user specified) 512 bytes (binary). Binary values are shown as *base64*.
 * **secret file** - file where secret is stored encrypted.
@@ -45,7 +45,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 
 `csman.sh` is the main command to use. `csman.sh` delegates password and key operations to `cskey.sh` (which uses `aes` and `argon2`). You may need to use `cskey.sh` directly for advanced key manipulation. Running both commands without options lists their command-line arguments, e.g.: `sudo csman.sh` or `sudo cskey.sh`.
 
-The command-line arguments of these tools are a bit *peculiar* because I thought that it is faster to specify options after the main arguments. The command-line arguments follow therefore this general scheme: *command file(s) options*.
+The command-line arguments of these tools are a bit *peculiar* (because I thought that it is faster to specify options after the main arguments). The command-line arguments follow the scheme: *command file(s) options*.
 
 
 
