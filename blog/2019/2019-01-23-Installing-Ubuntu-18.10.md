@@ -134,7 +134,7 @@ To [remove](https://askubuntu.com/questions/1035915/how-to-remove-snap-store-fro
 ```bash
 sudo apt autoremove --purge snapd
 # to remove snaps appearing in gnome-software only
-sudo apt-get remove --purge gnome-software-plugin-snap
+sudo apt remove --purge gnome-software-plugin-snap
 ```
 
 To [remove](https://www.reddit.com/r/Ubuntu/comments/8krkam/system_monitor_on_1804_is_a_snap_by_default/) specific pre-installed snaps:
