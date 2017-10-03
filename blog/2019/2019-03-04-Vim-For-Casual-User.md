@@ -1,4 +1,4 @@
-#Vim For The Casual User
+# Vim For The Casual User
 
 2019-03-04
 
@@ -6,7 +6,7 @@
 
 I always wanted to write an own [Vim](https://www.vim.org/) text editor tutorial that I have around and can return to for a quick reference. There is no reason for me to use Vim extensively nowadays, but there are always plenty of chances to use it.
 
-##Starting and Stopping
+## Starting and Stopping
 
 If you learn Vim, learn it without customization. In your own machine, you can use some other editor or IDE, or even some heavily [customized](https://github.com/xmementoit/vim-ide) Vim. It is only when you are in some other machine that you really need to use Vim. And this the reason for the first command to learn:
 
@@ -23,7 +23,7 @@ Vim assumes you own the machine and its disk is encrypted, leaving generous usag
 
 Another occasionally useful command-line option is `vim -R file.txt` to open a file read-only (or `set ro` from within Vim).
 
-##Pre-Basics
+## Pre-Basics
 
 If you started Vim without a filename, you can open a file from within Vim using `:edit filename` (or `:e`). *Tab* key can be used for auto-completion.
 
@@ -45,7 +45,7 @@ There are several ways to save the text:
 * `w !sudo tee % > /dev/null` yes, no one remembers this one, but it will force write some file open without `sudo` as `sudo` (basically this means write buffer and pipe it via *sudo* using *tee* to filename).
 * As noted before, `:q!` will not save your text and exit (you still have the nice memory of writing it) and `:qa!` will exit even if you have more than buffer.
 
-##Basic Vim
+## Basic Vim
 
 As many have noted, there is no basic Vim. You need to learn upfront enough commands to move around and edit text. In Vim there are two main modes:
 
@@ -111,7 +111,7 @@ While in *insert-mode*, `Ctrl+R 0` will paste text without having leave that mod
 
 Vim has also a **visual-mode**, entered by any of: `v` char selection, `V` line selection, `Ctrl+V` block selection. Arrow keys expand selection (on which side can be toggled with `o`) and `gv` re-selects. In visual-mode, you select first the text and then run any command on it.
 
-##Casual Zen
+## Casual Zen
 
 Macros (`:h @`):
 
@@ -161,7 +161,7 @@ To decrypt current GPG text (`Ctrl+L` to refresh screen):
 
 * `%!gpg -d 2> /dev/null`
 
-##Readings
+## Readings
 
 I found myself last reading [Practical Vim](http://vimcasts.org/publications/) and would recommend it after you are familiar with the basics above.
 
