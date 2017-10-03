@@ -168,13 +168,15 @@ To create a container you need to specify container file or device, secret file 
 sudo csman.sh n container.bin secret.bin 1M -cf -N 1000 ---
 ```
 
-The `-cf ... ---` can be used to pass EXT4 options for file system creation, such as, the number of *inodes* to use `-N`, or the EXT4 volume label `-L` (see `man mkfs.ext4`).
+The `-cf ... ---` can be used to pass EXT4 options for file system creation, such as, the number of *inodes* to use `-N 1000`, or the EXT4 volume label `-L VOL1` (see `man mkfs.ext4`).
 
 The size to use can be only in units of M or G (for MiB, GiB, as powers of 1024).
 
-If file exists, you be asked if you want to overwrite its data (in this case specified size will be ignored), or to just re-create the file system, or press *Enter* to abort and keep existing file data. You may choose to create only file system if file is already created with random data, or you plan to overwrite free space with zeros from within the encrypted container once mounted.
+If container file exists, you be asked if you want to overwrite its data (in this case specified size will be ignored), or to just re-create the file system, or press *Enter* to abort and keep existing file data. You may choose to create only file system if file is already created with random data, or you plan to overwrite free space with zeros later from within the encrypted container once mounted.
 
 The file will be created, overwritten with random data, and formated with a new file system. You will asked to re-enter the password the first time encrypted container is opened for file-system creation.
+
+If secret file exists, you will be asked to reuse it or overwrite it (create it new).
 
 Encrypting a device (disk partition) is similar:
 
@@ -182,7 +184,7 @@ Encrypting a device (disk partition) is similar:
 sudo cskey /dev/sdc1 secret.bin 0G -oo
 ```
 
-The size will be ignored, but has to be specified as 0G (or 0M). If non-zero `csman.sh` will assume a mistake (you wanted to create a file, but passed a device) and fail.
+The size will be ignored, but has to be specified as 0G (or 0M). If non-zero `csman.sh` will assume a mistake (you wanted to create a file, but passed a device path) and fail.
 
 The `-oo` option tells `csman.sh` to only overwrite data, but do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data, but you can run same command later without `-oo` to create the encrypted file system.
 
@@ -194,7 +196,7 @@ sudo csman create /dev/sdc1 secret.bin -c -ck -ap @foo -i e -k ---
 
 In this example, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-c` option clears the terminal screen after password entry (after `cskey.sh` invocation).
 
-Apart of `cryptsetup -s 512 -h sha512` options that are hard-coded, you can pass other `cryptsetup` options via `-co ... ---` (outer layer) and `-ci ... ---` (inner layer). The `-s` option tells `csman.sh` to only use one (outer AES) encryption layer.
+Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you can pass other `cryptsetup` options via `-co ... ---` (outer layer) and `-ci ... ---` (inner layer). The `-s` option tells `csman.sh` to only use one (outer AES) encryption layer.
 
 ### Using Containers
 
