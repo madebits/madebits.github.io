@@ -773,12 +773,12 @@ function createContainer()
             testRndDataSource
             echo "Overwriting block device: ${container} ..."
             #hmm, we have to ingore errors here
-            echo "# script will go on in case of errors here, read the output and decide if all ok ..."
-            echo "# when done, it is ok to see: dd: error writing '${container}': No space left on device"
+            echo "# info: script will go on in case of errors here, read the output and decide if all ok ..."
+            echo "# info: when done, it is ok to see: dd: error writing '${container}': No space left on device"
             set +e
             time rndDataSource | dd iflag=fullblock of="$container" bs=1M status=progress
             set -e
-            echo "# sync disk data, this may take a while if other write operations are running ..."
+            echo "# info: sync data, this may take a while if other write operations are running ..."
             sync
         else
             if [ "$sizeNum" -le 0 ]; then

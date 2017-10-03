@@ -102,6 +102,14 @@ function ownFile()
     fi
 }
 
+# file
+function restrictFile()
+{
+    # umask
+    touch "$1"
+    chmod o-r "$1"
+}
+
 ########################################################################
 
 function encryptedSecretLength()
@@ -203,9 +211,10 @@ function decodeSecret()
         local data=$(echo -n "$fileData" | base64 -d | tail -c +33 | head -c "${secretLength}" | base64 -w 0)
         local hash=$(pass2hash "$pass" "$salt")
         touchFile "$file"
-        if [ -n "$cskSessionSecretFile" ]; then
+        if [ -n "${cskSessionSecretFile}" ]; then
             readSessionPass
-            echo -n "$data" | base64 -d | decryptAes "$hash" | encryptAes "$cskSessionKey" > "$cskSessionSecretFile"
+            restrictFile "${cskSessionSecretFile}"
+            echo -n "$data" | base64 -d | decryptAes "$hash" | encryptAes "$cskSessionKey" > "${cskSessionSecretFile}"
             debugData "secret" "$(echo -n "$data" | base64 -d | decryptAes "$hash" | base64 -w 0)"
             logError "# session: stored secret in: ${cskSessionSecretFile}"
             debugData "$(cat -- ${cskSessionSecretFile} | base64 -w 0)"
@@ -433,8 +442,7 @@ function readSessionPass()
         if [ -n "$cskSessionSaltFile" ]; then
             if [ ! -e "$cskSessionSaltFile" ]; then
                 logError "# session: creating new seed: ${cskSessionSaltFile}"
-                touch "$cskSessionSaltFile"
-                chmod o-r "$cskSessionSaltFile"
+                restrictFile "$cskSessionSaltFile"
                 createRndFile "$cskSessionSaltFile"
             fi
             sData0=$(head -c 64 -- "${cskSessionSaltFile}" | base64 -w 0)
@@ -518,8 +526,7 @@ function createSessionPass()
     debugData "${cskSessionKey}" "${pass}"
 
     # add a token to pass
-    touch "${file}"
-    chmod o-r "${file}"
+    restrictFile "${file}"
     echo -n "${pass}CSKEY" | encryptAes "$cskSessionKey" > "${file}"
     #ownFile "$file"
     logError
