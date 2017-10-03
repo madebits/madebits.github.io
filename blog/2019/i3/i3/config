@@ -3,7 +3,7 @@ exec_always --no-startup-id /usr/bin/xrdb -load ~/.config/i3/.Xresources
 #exec_always --no-startup-id ~/bin/feh/feh --bg-scale ~/.config/i3/bg.jpg
 exec_always --no-startup-id ~/.fehbg
 exec --no-startup-id ~/.config/i3/start.sh
-exec --no-startup-id /usr/bin/nm-applet
+exec_always --no-startup-id /usr/bin/nm-applet
 exec --no-startup-id pasystray
 exec --no-startup-id /usr/bin/pulseaudio
 exec --no-startup-id /usr/bin/redshift
@@ -30,7 +30,7 @@ set $mod Mod4
 #font pango:monospace 8
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -52,8 +52,8 @@ bindsym $mod+q kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 #bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop
-set $apps exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show window -sort -width 80  -lines 17 -sidebar-mode -columns 4 -terminal xterm -location 2 -yoffset 19
-set $favs exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show i3 -sort -width 80  -lines 17 -sidebar-mode -columns 4 -terminal xterm -location 2 -yoffset 19
+set $apps exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show window -sort -width 80  -lines 17 -sidebar-mode -columns 4 -terminal xterm -location 2 -yoffset 23
+set $favs exec rofi -modi 'window#drun#run#i3:.config/i3/rofi_custom.sh' -show-icons -show i3 -sort -width 80  -lines 17 -sidebar-mode -columns 4 -terminal xterm -location 2 -yoffset 23
 bindsym --release Ctrl+Tab $apps
 
 # change focus
@@ -91,6 +91,9 @@ bindsym $mod+Tab $layout
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
+floating_minimum_size 128 x 96
+floating_maximum_size 1024 x 768
+
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
 
@@ -100,16 +103,28 @@ bindsym $mod+d focus parent
 # focus the child container
 bindsym $mod+Shift+d focus child
 
-set $workspace1 "1: ❤️❤️"
-set $workspace2 "2: 💛💛"
-set $workspace3 "3: 💚💚"
-set $workspace4 "4: 💙💙"
-set $workspace5 "5: 💜💜"
-set $workspace6 "6: 🔶🔶"
-set $workspace7 "7: 🔷🔷"
-set $workspace8 "8: 🔴🔴"
-set $workspace9 "9: 🔵🔵"
-set $workspace10 "10: ⚪⚪"
+#set $workspace1 "1: ❤️❤️"
+#set $workspace2 "2: 💛💛"
+#set $workspace3 "3: 💚💚"
+#set $workspace4 "4: 💙💙"
+#set $workspace5 "5: 💜💜"
+#set $workspace6 "6: 🔶🔶"
+#set $workspace7 "7: 🔷🔷"
+#set $workspace8 "8: 🔴🔴"
+#set $workspace9 "9: 🔵🔵"
+#set $workspace10 "10: ⚪⚪"
+
+set $workspace1 "1: 🍓🍓"
+set $workspace2 "2: 🍊🍊"
+set $workspace3 "3: 🍋🍋"
+set $workspace4 "4: 🍏🍏"
+set $workspace5 "5: 🥝🥝"
+set $workspace6 "6: 🍒🍒"
+set $workspace7 "7: 🍅🍅"
+set $workspace8 "8: 🌽🌽"
+set $workspace9 "9: 🍑🍑"
+set $workspace10 "10: 🍄🍄"
+
 
 # switch to workspace
 bindsym $mod+1 workspace number $workspace1
@@ -178,16 +193,16 @@ bar {
             #background #363636
             #statusline #DEDEDE
             #separator #666666
-            background #5F676A
+            #background #5F676A
             #statusline #f1f1f1
             #separator  #B9D6F5
             #background #2f343f
-            #background #33231f
+            background #241b35
             statusline #efeff0
             separator  #9fa3a5
         }
-        font pango:DejaVu Sans Bold 8
-        status_command i3status
+        font pango:DejaVu Sans Mono 10
+        status_command i3status # | ~/.config/i3status/i3-custom.sh
         bindsym button3 $favs
         bindsym button1 $apps
         position top
@@ -227,16 +242,26 @@ bindsym --release button2 kill
 bindsym --release button3 $favs
 
 #https://thomashunter.name/i3-configurator/
+#set $cfs #81584e
+#set $cfi #5F676A
+#set $cuf #ccbcb8
+set $cfs #5b4486
+set $cfi #44865b
+set $cuf #bdb4ce
 # class                 border  bground text    indicator child_border
-client.focused          #81584e #81584e #FFFFFF #888888   #888888
-client.focused_inactive #5F676A #5F676A #FFFFFF #888888   #888888
-client.unfocused        #ccbcb8 #ccbcb8 #000000 #888888   #888888
+client.focused          $cfs $cfs #FFFFFF #888888   #888888
+client.focused_inactive $cfi $cfi #FFFFFF #888888   #888888
+client.unfocused        $cuf $cuf #000000 #888888   #888888
 client.urgent           #A1301D #A1301D #FFFFFF #888888   #888888
 client.placeholder      #000000 #0C0C0C #FFFFFF #888888   #888888
 
 client.background       #FFFFFF
 
 for_window [class="System-config-printer.py"] floating enable
+for_window [class="File-roller"] floating enable
+for_window [class="SpeedCrunch"] floating enable
+for_window [class="vlc"] floating enable
+for_window [class="mpv"] floating enable
 
 # sudo apt install pavucontrol
 for_window [class="Pavucontrol"] floating enable
@@ -246,7 +271,7 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 bindsym XF86Search exec --no-startup-id catfish
 
-#for_window [class="SpeedCrunch"] floating enable
+
 
 #bindsym XF86MonBrightnessUp exec xbacklight -inc 20
 #bindsym XF86MonBrightnessDown exec xbacklight -dec 20

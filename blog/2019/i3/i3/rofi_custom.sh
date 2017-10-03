@@ -4,16 +4,16 @@
 
 ws=(
 ""
-"1: ❤️❤️"
-"2: 💛💛"
-"3: 💚💚"
-"4: 💙💙"
-"5: 💜💜"
-"6: 🔶🔶"
-"7: 🔷🔷"
-"8: 🔴🔴"
-"9: 🔵🔵"
-"10: ⚪⚪"
+"1: 🍉🍉"
+"2: 🍊🍊"
+"3: 🍋🍋"
+"4: 🍏🍏"
+"5: 🥝🥝"
+"6: 🍒🍒"
+"7: 🍅🍅"
+"8: 🌽🌽"
+"9: 🍑🍑"
+"10: 🍄🍄"
 )
 
 function i3NextFreeWorkspace()
@@ -22,7 +22,7 @@ function i3NextFreeWorkspace()
     for i in {1..10} ; do
         if [[ $json != *"\"num\":$i"* ]] ; then
             echo "${ws[i]}"
-            break
+            return
         fi
     done
     # default
@@ -38,13 +38,13 @@ if [ -z "$@"]; then
     echo "☠️ i3 Kill (A+F4|W+Q|W+F4|B2)"
     echo "🎛️ i3 Toggle Layout (W+Tab|W+w)"
     echo "🔲 i3 New Workspace (W+^)"
-    echo "⛵ i3 Move to New Workspace"
+    echo "▶️ i3 Move to New Workspace"
+    echo "⏩ i3 Move All To New Workspace"
     echo "📌 i3 Toggle Bar (W+y)"
-    echo "📤 i3 Floating On"
-    echo "📥 i3 Floating Off"
+    echo "🛸 i3 Floating Toggle"
     echo "💎 i3 Sticky Toggle"
     echo "📺 i3 Full Screen (W+f)"
-    echo "🛠️ i3 Config"
+    echo "⚙️ i3 Config"
     echo "🌀 i3 Reload (W+S+r)"
     echo "🔊 Volume"
     
@@ -87,7 +87,7 @@ if [ -z "$@"]; then
     echo "♻️ Reboot"
     echo "⛔ Shutdown"
 else
-    cmd=$@
+    cmd="$@"
     case $cmd in
         "☠️ i3 Kill (A+F4|W+Q|W+F4|B2)")
             i3-msg 'kill' > /dev/null
@@ -98,19 +98,19 @@ else
         "🔲 i3 New Workspace (W+^)")
             i3-msg workspace number "$(i3NextFreeWorkspace)" > /dev/null
             ;;
-        "⛵ i3 Move to New Workspace")
+        "▶️ i3 Move to New Workspace")
             nws="$(i3NextFreeWorkspace)"
             #i3-msg "move container to workspace number ${nws}; workspace number ${nws}" > /dev/null
             i3-msg "move container to workspace number ${nws}" > /dev/null
             sleep 0.2 > /dev/null
             i3-msg workspace number "$nws" > /dev/null
             ;;
-        "📤 i3 Floating On")
-            i3-msg floating enable > /dev/null
-            i3-msg move position center > /dev/null
+        "⏩ i3 Move All To New Workspace")
+            nws="$(i3NextFreeWorkspace)"
+            i3-msg "rename workspace to \"${nws}\"" > /dev/null
             ;;
-        "📥 i3 Floating Off")
-            i3-msg floating disable > /dev/null
+        "🛸 i3 Floating Toggle")
+            i3-msg 'floating toggle; move position center' > /dev/null
             ;;
         "💎 i3 Sticky Toggle")
             i3-msg 'sticky toggle' > /dev/null
@@ -121,7 +121,7 @@ else
         "📌 i3 Toggle Bar (W+y)")
             i3-msg 'bar mode toggle' > /dev/null
             ;;
-        "🛠️ i3 Config")
+        "⚙️ i3 Config")
             geany -i $HOME/.config/i3status/config $HOME/.config/i3/start.sh $HOME/.config/i3/rofi_custom.sh $HOME/.config/i3/config > /dev/null &
             ;;
         "🌀 i3 Reload (W+S+r)")
