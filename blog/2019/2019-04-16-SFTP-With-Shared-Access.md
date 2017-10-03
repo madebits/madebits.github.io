@@ -60,13 +60,17 @@ A few things to notice here, there is no need for *Subsystem sftp internal-sftp*
 Once done, we need to restart ssh daemon:
 
 ```bash
+# optional, test config
+sudo sshd -t
+# restart, use status in case of errors
 sudo systemctl restart sshd
 ```
 
 To test the configuration, we can use:
 
 ```bash
-sftp -vvv sftpuser001@localhost 
+sftp -vvv sftpuser001@localhost
+ssh -vvv sftpuser001@localhost 
 tail -f /var/log/auth.log
 tail f- /var/log/syslog
 ```
@@ -98,6 +102,8 @@ sudo mkdir -p /home/user/public
 sudo chown root:sftphome /home/user/public
 sudo chmod 775 /home/user/public
 ```
+
+What SFTP chroot really cares is that jail folder is at most `*55`, not who owns it. So in case of single users, you can also own the jail */home/user* folder by *user:sftphome* and then you do not need *public* folder inside it.
 
 We have to be careful to also set *nologin* shell for such home users (or [use](https://askubuntu.com/questions/49271/how-to-setup-a-sftp-server-with-users-chrooted-in-their-home-directories) `AllowGroups`).
 
