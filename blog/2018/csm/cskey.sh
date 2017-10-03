@@ -67,7 +67,7 @@ function encodeKey()
 	local ap="${6:-$adp}"
     
     local salt=$(head -c 32 /dev/urandom | base64 -w 0)
-    hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
+    hash=$(echo -n "$pass" | argon2 "$salt" -id -t $at -p $ap -m $am -l 128 -r)
     
     if [ "$file" = "-" ]; then
 		file="/dev/stdout"
@@ -97,7 +97,7 @@ function decodeKey()
 		local fileData=$(head -c 600 "$file" | base64 -w 0)
 		local salt=$(echo -n "$fileData" | base64 -d | head -c 32 | base64 -w 0)
 		local data=$(echo -n "$fileData" | base64 -d | tail -c +33 | head -c "$keyLength" | base64 -w 0)
-        local hash=$(echo -n "$pass" | argon2 "$salt" -t $at -p $ap -m $am -l 128 -r)
+        local hash=$(echo -n "$pass" | argon2 "$salt" -id -t $at -p $ap -m $am -l 128 -r)
 		touchFile "$file"
         echo -n "$data" | base64 -d | decryptAes "$hash"
     else
