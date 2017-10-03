@@ -850,6 +850,8 @@ function main()
             local tfs="$HOME/mnt/tmpcsm"
             if [ -d "${tfs}" ]; then
                 set +e
+                fuser -km "${tfs}"
+                sleep 1
                 umount "${tfs}" 2> /dev/null
                 logError "# umount: ${tfs}"
                 rmdir "${tfs}"
