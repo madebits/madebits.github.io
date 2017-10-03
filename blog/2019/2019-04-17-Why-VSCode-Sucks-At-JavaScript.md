@@ -16,7 +16,7 @@ Have a look at https://code.visualstudio.com/docs/languages/javascript and let m
 
 * *VS Code provides IntelliSense within your JavaScript projects; for many npm libraries such as*, basically, for all those that come with TypeScript information.
 
-* *`jsconfig.json` files are not required ...*, but the TypeScript compiler uses them and common while you do not want to use TypeScript, then at least take over its bad parts to JavaScript. TypeScript developers are used to that, JavaScript people can get used to that pain too.
+* *`jsconfig.json` files are not required ...*, but the TypeScript compiler uses them and while you do not want to use TypeScript, then at least take over its bad parts. TypeScript developers are used to that, JavaScript people can get used to that pain too.
 
 * *Go to Definition* - most of the time will not work, unless you use write JavaScript that looks like TypeScript, better map F12 to plain text search.
 
