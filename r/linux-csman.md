@@ -105,7 +105,7 @@ When `csman.sh` is started without arguments, it prints prefix hashes of these f
 
 ```
 2b0cf4743  /usr/local/bin/csman.sh
-f6ef31aeb  /usr/local/bin/cskey.sh
+dc6e2451b  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
 ```
