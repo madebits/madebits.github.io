@@ -148,16 +148,16 @@ Marking text positions:
 * `ma` mark current position with *a* (`a-z` same file, `A-Z` to mark between open files)
 * `'a` move to mark *a* line, or `d'a` delete from current potion to mark *a*
 
-Using external commands to filter buffer text:
-
-* `range!cmd` where range is `%` all text, `.` current line, `m,n` lines *m,n*
-
 Integrated spell checker can be activated via `:set spell`:
 
 * `z=` show lists of suggestions. Type *number* *Enter* to replace word.
 * `[s` next, `s]` previous suggestion.
 * `zg` add / `zw` remove word from dictionary.
 * `Ctrl+x s` spell from within *insert mode*.
+
+Using external commands to filter buffer text:
+
+* `range!cmd` where range is `%` all text, `.` current line, `m,n` lines *m,n*
 
 To encrypt current buffer text:
 
