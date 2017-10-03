@@ -37,6 +37,7 @@ An incomplete list of useful [VSCode extensions](https://marketplace.visualstudi
 
 * [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) - comming from SublimeText where spell check is build in, I find this extension indispensable, especially when I used VSCode as a text editor. It is not as good as SublimeText, but still usable. It would be nice VSCode had this support built in.
 
+* [statusbar-commands](https://marketplace.visualstudio.com/items?itemName=anweber.statusbar-commands) - add custom buttons to status bar using `statusbar_command.commands` setting.
 
 * [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced) - Ctrl+Shift+M and you have a much better preview for markdown documents that the [built in](https://code.visualstudio.com/docs/languages/markdown) one (which is also not bad).
 
@@ -103,7 +104,16 @@ VSCode is usable out of the box. Some customization is needed thought and here i
     ],
     "prettier.singleQuote": true,
     "prettier.semi": false,
-    "prettier.eslintIntegration": true
+    "prettier.eslintIntegration": true,
+    "terminal.integrated.scrollback": 5000,
+    "statusbar_command.commands": [
+        {
+             "text": "$(terminal)",
+             "tooltip": "toggle terminal",
+             "alignment": "left",
+             "command": "workbench.action.terminal.toggleTerminal"
+         }
+     ],
 }
 ```
 
