@@ -38,6 +38,7 @@ cmsMountReadOnly="0"
 csmListShowKey="0"
 csmCreateOverwriteOnly="0"
 csmOpenDiskLabel=""
+csmFileCheckFreeSpace="1"
 
 ########################################################################
 
@@ -492,6 +493,41 @@ function umountDevice()
     fi
 }
 
+# dev container
+function setVolumeLabel()
+{
+    local lastDev="$1"
+    local device="$2"
+    # set default label if volume has no label, may fail if no FS
+    if [ -n "$lastDev" ]; then
+        local label=""
+        if [ -n "${csmOpenDiskLabel}" ]; then
+            set +e
+            e2label "$lastDev" "${csmOpenDiskLabel}"
+            set -e
+        else
+            set +e
+            label="$(e2label "$lastDev" 2> /dev/null)"
+            set -e
+            if [ -z "$label" ] && [ -f "$device" ]; then
+                label=$(getVolumeDefaultLabel "$device")
+                if [ -n "$label" ]; then
+                    set +e
+                    e2label "$lastDev" "$label" 2> /dev/null
+                    set -e
+                fi
+            fi
+        fi
+        
+        set +e
+        label="$(e2label "$lastDev" 2> /dev/null)"
+        set -e
+        if [ -n "$label" ]; then
+            echo "# label: $label"
+        fi
+    fi
+}
+
 #key name device
 function openContainerByName()
 {
@@ -528,34 +564,7 @@ function openContainerByName()
         lastDev="${dev1}"
     fi
     
-    # set default label if volume has no label, may fail if no FS
-    if [ -n "$lastDev" ]; then
-        local label=""
-        if [ -n "${csmOpenDiskLabel}" ]; then
-            set +e
-            e2label "$lastDev" "${csmOpenDiskLabel}"
-            set -e
-        else
-            set +e
-            label="$(e2label "$lastDev" 2> /dev/null)"
-            set -e
-            if [ -z "$label" ] && [ -f "$device" ]; then
-                label=$(getVolumeDefaultLabel "$device")
-                if [ -n "$label" ]; then
-                    set +e
-                    e2label "$lastDev" "$label" 2> /dev/null
-                    set -e
-                fi
-            fi
-        fi
-        
-        set +e
-        label="$(e2label "$lastDev" 2> /dev/null)"
-        set -e
-        if [ -n "$label" ]; then
-            echo "# label: $label"
-        fi
-    fi
+    setVolumeLabel "$lastDev" "$device"
 }
 
 # name secret container rest
@@ -673,6 +682,9 @@ function createSecret()
 
 function checkFreeSpace()
 {
+    if [ "${csmFileCheckFreeSpace}" != "1" ]; then
+        return
+    fi
     local size="$1"
     local sizeNum="$2"
     local dir="$(dirname -- "$(realpath -- "${container}")")"
@@ -686,6 +698,17 @@ function checkFreeSpace()
     fi
 }
 
+function getDeviceSize()
+{
+    local size=$(blockdev --getsize64 "$1")
+    size=$((size / 1024 / 1024)) # MB
+    if (( size > 1024 )); then
+        echo -n "$((size / 1024))G"
+    else
+        echo -n "${size}M"
+    fi
+}
+
 # name secret container size rest
 function createContainer()
 {
@@ -694,34 +717,6 @@ function createContainer()
     local container="${1:-}"
     checkArg "$container" "container"
     shift
-    
-    local blockDevice="0"
-    local writeContainer="1"
-    local overwriteContainer=""
-    if [ -f "$container" ]; then
-        echo "Container file exists: ${container}"
-        read -p "Overwrite? [y (overwrite) | e (erase files) | Enter to exit]: " overwriteContainer
-        if [ "$overwriteContainer" = "y" ]; then
-            writeContainer="1"
-        elif [ "$overwriteContainer" = "e" ]; then
-            writeContainer="0"
-        else
-            onFailed "nothing to do"
-        fi
-    fi
-    if [ -b "$container" ]; then
-        blockDevice="1"
-        echo "Are you sure encrypt block device: ${container}"
-        read -p "Overwrite? [y (overwrite) | e (erase files) | Enter to exit]: " overwriteContainer
-        if [ "$overwriteContainer" = "y" ]; then
-            writeContainer="1"
-        elif [ "$overwriteContainer" = "e" ]; then
-            writeContainer="0"
-        else
-            onFailed "nothing to do"
-        fi
-        echo "Size will be ingored for block devices (must be 0)"
-    fi
     
     local secret="${1:-}"
     checkArg "$secret" "secret"
@@ -733,7 +728,39 @@ function createContainer()
 
     local sizeNum="${size: : -1}"
     checkNumber "$sizeNum"
-
+    
+    local blockDevice="0"
+    local writeContainer="1"
+    local overwriteContainer=""
+    if [ -f "$container" ]; then
+        echo "Container file exists: $(ls -sh "${container}")"
+        read -p "Overwrite? [y (overwrite) | e (erase files) | Enter to exit]: " overwriteContainer
+        if [ "$overwriteContainer" = "y" ]; then
+            writeContainer="1"
+        elif [ "$overwriteContainer" = "e" ]; then
+            writeContainer="0"
+        else
+            onFailed "nothing to do"
+        fi
+    fi
+    if [ -b "$container" ]; then
+        if [ "$sizeNum" -gt 0 ]; then
+            onFailed "Invalid size: ${size} (use 0G)"
+        fi
+        blockDevice="1"
+        local bSize=$(getDeviceSize "${container}")
+        echo "Are you sure to encrypt block device: ${bSize} ${container}"
+        echo "Size parameter will be ingored for block devices"
+        read -p "Overwrite? [y (overwrite) | e (erase files) | Enter to exit]: " overwriteContainer
+        if [ "$overwriteContainer" = "y" ]; then
+            writeContainer="1"
+        elif [ "$overwriteContainer" = "e" ]; then
+            writeContainer="0"
+        else
+            onFailed "nothing to do"
+        fi
+    fi
+    
     processOptions "$@"
     
     if [ "${csmCreateOverwriteOnly}" = "1" ]; then
@@ -742,9 +769,6 @@ function createContainer()
     
     if [ "$writeContainer" = "1" ]; then
         if [ "$blockDevice" = "1" ]; then
-            if [ "$sizeNum" -gt 0 ]; then
-                onFailed "Invalid size: ${sizeNum} (must be set to 0 and will be ignored)"
-            fi
             umountDevice "${container}"
             testRndDataSource
             echo "Overwriting block device: ${container} ..."
@@ -758,7 +782,7 @@ function createContainer()
             sync
         else
             if [ "$sizeNum" -le 0 ]; then
-                onFailed "Invalid size: ${sizeNum}"
+                onFailed "Invalid size: ${size}"
             fi
             
             checkFreeSpace "${size}" "${sizeNum}"
@@ -774,7 +798,7 @@ function createContainer()
             ownFile "$container"
         fi
     else
-        echo "Reusing existing data (size $size is ingored): $container"
+        echo "Reusing existing data (size ${size} will be ingored): $container"
     fi
     
     if [ "${csmCreateOverwriteOnly}" = "1" ]; then
@@ -967,6 +991,7 @@ Where [ openCreateOptions ]:
  -u : (open) do not mount on open
  -r : (open) mount user read-only
  -lk : (list) list raw keys
+ -sfc : (create) skip free disk space check for files
  -oo : (create) dd only
 Example:
  sudo csmap.sh open container.bin -l -ck -k -h -p 8 -m 14 -t 1000 -- ---
@@ -1044,6 +1069,9 @@ function processOptions()
             ;;
             -lk)
                 csmListShowKey="1"
+            ;;
+            -sfc)
+                csmFileCheckFreeSpace="0"
             ;;
             -oo)
                 csmCreateOverwriteOnly="1"
