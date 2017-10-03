@@ -239,7 +239,7 @@ sudo csman.sh n container.bin 1M -s secret.bin -ck -b 1 -su ---
 sudo csman.sh n container.bin 1M -s secret.bin -ck -b 3 -su ---
 ```
 
-Do **not** manipulate a container file as if it were a secret file using `cskey.sh` or other tooling (such as `csman.sh chp`), other than for reading (decoding) the secret. To extract secret file back from the container use:
+Do **not** manipulate a container file slots as if it were a secret file using `cskey.sh enc` or other tooling (such as `csman.sh chp -out`), other than for reading (decoding) the secret. To extract secret file back from the container use:
 
 ```bash
 dd if=container.bin of=secret.bin bs=1024 count=1
@@ -273,6 +273,8 @@ sudo csman.sh o container.bin -slots 2 -ck -slot 1 ---
 # open container using slot 2
 sudo csman.sh o container.bin -slots 2 -ck -slot 2 ---
 ```
+
+The `cskey.sh -slot` option only works with `cskey.sh dec` command and it is ignored by `cskey.sh enc` command, the original output file is always truncated by `cskey.sh enc`.
 
 ### Using Containers
 
