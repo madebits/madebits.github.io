@@ -43,7 +43,7 @@ resize2fs /dev/ubuntu-vg/root
 sudo lvdisplay
 ```
 
-Finally, I got:
+Finally, I got (note that [sda2](https://askubuntu.com/questions/950307/why-guided-partitioning-create-a-sda2-of-1-kb) is  unallocated unaligned area between partitions):
 
 ```bash
 lsblk
