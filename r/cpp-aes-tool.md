@@ -99,7 +99,7 @@ Some of less useful `aes` tool options *weaken* the default settings, but are us
 
 * `-k  256` to specify AES 128, 192, or 256 bit (256 bit is default).
 * `-a` use non-authenticated encryption, by default authenticated encryption is used.
-* `-m` to use PBKDF1 for `-c interationCount` (default is PBKDF2). The `-m` option makes sense only if `-a` is also specified and it is ignored otherwise.
+* `-m` to use PBKDF1 for `-c iterationCount` (default is PBKDF2). The `-m` option makes sense only if `-a` is also specified and it is ignored otherwise.
 * `-s` use 16 byte salt for CBC. By default, the CBC salt length is same as `-k` size. AE salt is always 32 bytes.
 
 The `-p`, `-k`, `-a`, `-m`, `-s`, `-c` options must specified **same** during decryption, otherwise you cannot access your data.
