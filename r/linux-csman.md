@@ -170,28 +170,28 @@ If you specify `argon2` options during encrypt command (enc), you have to rememb
 
 ### Creating Containers
 
-To create an encrypted container you need to specify the container file or device, **secret** file (see [Creating Secret Files](#r/linux-csman.md#creating-secret-files)) and the size (create command is `create` or `n`). Secret file will be created if it does not exist:
+To create an encrypted container you need to specify the container file name (can be any) or device, the size and **secret** file (see [Creating Secret Files](#r/linux-csman.md#creating-secret-files)). Create command is `create` or `n`. Secret file will be created if it does not exist:
 
 ```bash
-sudo csman.sh n container.bin 1M -s secret.bin -cf -N 1000 ---
+sudo csman.sh n container.bin 1M -s secret.bin -cf -N 1000 -m 0 ---
 ```
 
-If secret file is `--` then per convention no secret file is used and encryption key is directly generated after hashing from password. This is ok for quick things up and now, but it is no more possible to change the container password. With secret files, password changes, or using more than one password is possible. 
+* The size to use can be only in units of M or G (for MiB, GiB, as powers of 1024).
 
-The `-cf ... ---` can be used to pass EXT4 options for file system creation, such as, the number of *inodes* to use `-N 1000` (or `-T small`), or the EXT4 volume label `-L VOL1` (see `man mkfs.ext4`).
+* If secret file is `--` then per convention no secret file is used and encryption key is directly generated after hashing from password. This is ok for quick things up and now, but it is no more possible to change the container password. With secret files, password changes, or using more than one password is possible. 
 
-The size to use can be only in units of M or G (for MiB, GiB, as powers of 1024).
+* The `-cf ... ---` can be used to pass EXT4 options for file system creation, such as, the number of *inodes* to use `-N 1000` (or `-T small`), or the EXT4 volume label `-L VOL1` (see `man mkfs.ext4`).
 
 If container file exists, you be asked if you want to overwrite its data (in this case specified size will be ignored), or to just re-create the file system, or press *Enter* to abort and keep existing file data. You may choose to create only file system if file is already created with random data, or you plan to overwrite free space with zeros later from within the encrypted container once mounted.
 
-The file will be created, overwritten with random data, and formated with a new file system. You will asked to re-enter the password the first time encrypted container is opened for file-system creation.
+* The container file will be created, overwritten with random data, and formated with a new EXT4 file system. You will asked to re-enter the password the first time encrypted container is opened for file-system creation.
 
 If secret file exists, you will be asked to reuse it or overwrite it (create it new).
 
 Encrypting a device (disk partition) is similar:
 
 ```
-sudo cskey /dev/sdc1 secret.bin 0G -oo
+sudo cskey /dev/sdc1 0G -s secret.bin -oo
 ```
 
 The size will be ignored, but has to be specified as 0G (or 0M). If non-zero `csman.sh` will assume a mistake (you wanted to create a file, but passed a device path) and fail.
@@ -201,12 +201,10 @@ The `-oo` option tells `csman.sh` to only overwrite data, but do nothing else. T
 `csman.sh` invokes `cskey.sh` to process *secret.bin* file (create it, ask for password), so you can use same password input and hash options as for `cskey.sh` using `-ck ... ---`. For example:
 
 ```bash
-sudo csman create /dev/sdc1 secret.bin -c -ck -ap @foo -i e -k ---
+sudo csman create /dev/sdc1 -s secret.bin -one -c -ck -ap @foo -i e -k ---
 ```
 
-In this example, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-c` option clears the terminal screen after password entry (after `cskey.sh` invocation).
-
-The `-s` option tells `csman.sh` to only use one (outer AES) encryption layer.
+In this example, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-c` option clears the terminal screen after password entry (after `cskey.sh` invocation). The `-one` option tells `csman.sh` to only use one (outer AES) encryption layer.
 
 Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you can pass other `cryptsetup` options, such an offset (offset is specified in 512 byte units, e.g: `-o 2` for 1024 bytes) via `-co ... ---` (outer layer) and `-ci ... ---` (inner layer). 
 
