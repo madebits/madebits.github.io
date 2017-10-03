@@ -13,10 +13,7 @@
 Create a new container file (`-i e` makes password entry visible):
 
 ```bash
-sudo csman.sh new container.bin 1M -s secret.bin -ck -i e ---
-
-# if needed, backup or delete encrypted secret file, it is embedded already in container after creation
-rm secret.bin
+sudo csman.sh new container.bin 1M -ck -i e ---
 ```
 
 Open a container, it gets a random *name* and it is mounted under `$HOME/mnt/csm-name` (or append `-name name`):
@@ -106,8 +103,8 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 When `csman.sh` is started without arguments, it prints prefix hashes of these files, if present:
 
 ```
-6ba7b94dd  /usr/local/bin/csman.sh
-a61744e2c  /usr/local/bin/cskey.sh
+5c5148e62  /usr/local/bin/csman.sh
+0c25372f8  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
 ```
@@ -234,7 +231,8 @@ sudo csman.sh n container.bin 1M -s secret.bin -cf -T small -m 0 ---
 
 * The size to use can be only in units of M or G (for MiB, GiB, as powers of 1024).
 
-* If secret file exists, you will be asked to reuse it or overwrite it (create it new). If secret file is `--` then per convention no secret file is used and encryption key is directly generated after hashing from password. This is ok for quick things up and now, but it is not possible to change the container password. With secret files, password change or using more than one password are possible.
+* Secret file is optional. If not specified, slot 1 of container is used to store secret file. If `-slots 0` then secret file is required. If specified and `-slots` > 0 then secret is written in secret file and secret file content is embedded also in slot 1 of container.
+  * If secret file exists, you will be asked to reuse it or overwrite it (create it new). If secret file is `--` then per convention no secret file is used and encryption key is directly generated after hashing from password. This is ok for quick things up and now, but it is not possible to change the container password. With secret files, password change or using more than one password are possible.
 
 * The `-cf ... ---` can be used to pass EXT4 options for file system creation, such as, the number of *inodes* to use `-N 1000` (or `-T small`), or the EXT4 volume label `-L VOL1`. See `man mkfs.ext4`.
 
@@ -259,6 +257,12 @@ The `-oo` option tells `csman.sh` to only overwrite container data, but do nothi
   ```
 
   In this example, session password will be echoed and user password for *secret.bin* will be read from session slot *@foo*. The `-one` option tells `csman.sh` to only use one (outer AES) encryption layer.
+
+  As another example, we can embed the secret in slot 2 during creation (default is slot 1):
+
+  ```bash
+  sudo csman.sh create container.bin 1M -ck -i e -slot 2 ---
+  ```
 
 Apart of `cryptsetup -s 512 -h sha512 --shared` options that are hard-coded, you can pass other `cryptsetup` options, such an offset (offset is specified in 512 byte units, e.g: `-o 2` for 1024 bytes) via `-co ... ---` (outer layer) and `-ci ... ---` (inner layer). 
 
