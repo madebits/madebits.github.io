@@ -156,7 +156,7 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 
 	All these disk cleanup commands are boring to manually type all the time, so I set up a small script:
 
-	```
+	```bash
 	#!/bin/bash
 	#call before once manually
 	#sudo tune2fs -m 0 /dev/sda1
@@ -223,6 +223,24 @@ alias findlast='watch -n 10 --differences find ~/ -mmin -5 -type f -printf "%TT 
 	```
 	sudo foremost -t jpg -i /dev/sda1 -o /media/udata/test
 	```
-	
+
+1. The following trick helps to start bash without history saving active. In `$HOME/.bash_aliases` file add:
+
+	```
+	alias histoff='unset HISTFILE'
+	alias histon='export HISTFILE=/home/$USER/Private/.bash_history; history -a; history -r'
+	```
+
+	Then in `$HOME/.bashrc` add after aliases are loaded:
+
+	```
+	if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+	fi
+	histon
+	histoff
+	```
+
+	`bash` will start will current history loaded, but will not save any history unless `histon` is called.
 
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2012/2012-08-25-Fully-Remove-Installed-Packages-in-Lubuntu.md'>Fully Remove Installed Packages in Lubuntu</a> <a rel='next' id='fnext' href='#blog/2012/2012-08-01-Change-Wallpaper-at-Startup-in-Lubuntu.md'>Change Wallpaper at Startup in Lubuntu</a></ins>
