@@ -194,7 +194,7 @@ sudo cskey /dev/sdc1 0G -oo
 
 The size will be ignored, but has to be specified as 0G (or 0M). If non-zero `csman.sh` will assume a mistake (you wanted to create a file, but passed a device path) and fail.
 
-The `-oo` option tells `csman.sh` to only overwrite container data, but do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data, but you can run same command later without `-oo` to create the encrypted file system. If `-oo` is used the secret file is ignored if specified.
+The `-oo` option tells `csman.sh` to only overwrite container data, but do nothing else. This option is useful if you do not want to wait for overwrite to finish. In this case, only free space will be overwritten with random data, but you can run same command later without `-oo` to create the encrypted file system. If `-oo` is used, the secret file is ignored if specified.
 
 `csman.sh` invokes `cskey.sh` to process *secret.bin* file (create it, ask for password), so you can use same password input and hash options as for `cskey.sh` using `-ck ... ---`. For example:
 
