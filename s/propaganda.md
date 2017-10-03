@@ -114,6 +114,7 @@
 [Nautilus](http://nautil.us/blog)
 [SingularityHub](https://singularityhub.com/)
 [PhysOrg](https://phys.org/)
+[PhysicsWorld](https://physicsworld.com/)
 
 ## USA
 
