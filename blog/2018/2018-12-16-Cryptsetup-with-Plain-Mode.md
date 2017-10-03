@@ -333,7 +333,7 @@ You may wish to use the script also to create a container file (size can be eith
 sudo ./cs-map.sh create enc1 secret.bin container.bin 30M
 ```
 
-These script use the following helper tools:
+These scripts use the following helper tools:
 
 ```
 sudo apt install cryptsetup bindfs argon2 ccrypt
