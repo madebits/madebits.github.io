@@ -16,6 +16,8 @@
 * [Science Daily](https://www.sciencedaily.com)
 * [Live Science](https://www.livescience.com/news)
 * [Heise](https://www.heise.de/newsticker/)
+* [Golem.de](https://www.golem.de/)
+* [Chip.de](https://www.chip.de/nachrichten)
 * [MIT News](http://news.mit.edu/)
 * [EnGadget](https://www.engadget.com/)
 * [LifeHacker](https://lifehacker.com/)
