@@ -95,6 +95,8 @@ Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcu
 
 * VirtualBox mouse was freezing. I found a [solution](https://ubuntuforums.org/showthread.php?t=2395969) that seems to work: *Go into the preferences of your VirtualBox Manager. Click on "Input" and make sure that "Auto Capture Keyboard" is not selected for "VirtualBox Manager" and "Virtual Machine".*
 
+* The frequent apps list is in `~/.local/share/gnome-shell/application_state`.
+
 ##Other Useful Tools
 
 I did a minimal Ubuntu install. I am so happy they offer that, as in the past I had to un-install most of things. I installed some initial set of tools to get started:
