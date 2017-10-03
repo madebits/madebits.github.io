@@ -55,6 +55,16 @@ function mntDirUser()
     echo "$(mntDirRoot "$name")_user"
 }
 
+# file
+function ownFile()
+{
+    local file="$1"
+    if [ -f "$file" ]; then
+        local user=${SUDO_USER:-$(whoami)}
+        chown $(id -un "$user"):$(id -gn "$user") "$file"
+    fi
+}
+
 # name
 function closeContainer()
 {
@@ -96,7 +106,7 @@ function openContainer()
 
     local mntDir1=$(mntDirRoot "$name")
     local mntDir2=$(mntDirUser "$name")
-	local user=${SUDO_USER:-$(whoami)}
+    local user=${SUDO_USER:-$(whoami)}
     echo "Opening /dev/mapper/${name} ..."
 
     local key=$(sudo -u "$user" "${toolsDir}/cs-key.sh" dec "$secret" | base64 -w 0)
@@ -151,7 +161,7 @@ function createContainer()
 
     echo "Creating ${secret} ..."
 
-	local user=${SUDO_USER:-$(whoami)}
+    local user=${SUDO_USER:-$(whoami)}
     sudo -u "$user" "${toolsDir}/cs-key.sh" enc "$secret"
     echo "You will asked to re-enter password to open the container for the first time ..."
     local key=$(sudo -u "$user" "${toolsDir}/cs-key.sh" dec "$secret" | base64 -w 0)
@@ -162,6 +172,7 @@ function createContainer()
     sync
     sleep 2
     cryptsetup close "$name"
+    ownFile "$container"
     echo "Done! Container is closed. To open container use:"
     echo "$0 open ${secret} ${container}"
 }
@@ -179,10 +190,10 @@ function closeAll()
 
 function changePass()
 {
-	local secret="$1"
+    local secret="$1"
     checkArg "$secret" "secret"
-	local user=${SUDO_USER:-$(whoami)}
-	sudo -u "$user" "${toolsDir}/cs-key.sh" chp "$secret"
+    local user=${SUDO_USER:-$(whoami)}
+    sudo -u "$user" "${toolsDir}/cs-key.sh" chp "$secret"
 }
 
 function showHelp()
@@ -219,7 +230,7 @@ function main()
             closeAll
         ;;
         changePass|chp)
-			changePass "$1"
+            changePass "$1"
         ;;
         *)
             showHelp
