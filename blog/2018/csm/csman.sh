@@ -138,7 +138,7 @@ function newName()
     while :
     do
         #a-zA-Z0-9
-        newName=$(cat /dev/urandom | tr -dc 'a-z' | fold -w 4 | head -n1)
+        newName=$(cat /dev/urandom | tr -dc '[:lower:]' | fold -w 4 | head -n1)
         if [ ! -e "/dev/mapper/${newName}" ]; then
             break
         fi
