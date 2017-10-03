@@ -143,7 +143,7 @@ Examples of snap [interfaces](https://snapcraft.io/docs/supported-interfaces):
 
 While `snap info --verbose gimp` works without having to install a snap, the `snap connections gimp` works only after a snap is installed. To view connections without having to install try:
 
-```
+```bash
 snap download gimp # e.g gimp_252.snap file is created
 mkdir -p $HOME/tmp/mnt
 sudo mount -t squashfs -o ro gimp_252.snap $HOME/tmp/mnt
@@ -155,7 +155,7 @@ Then look in `meta` and `snap` folders for *hooks* and *plugs* defined in `yaml`
 
 The parts of `$HOME` that a snap application needs are mapped under `$HOME/snap` folder:
 
-```
+```bash
 $ ls -l ~/snap/gimp
 total 8
 drwxr-xr-x 4 d7 d7 4096 Mai  3 20:04 265
@@ -194,7 +194,7 @@ ls -d snap/*/common/.cache | xargs rm -rf
 
 To view the world as a snap sees it from within, we can get a [shell](https://snapcraft.io/tutorials/advanced-snap-usage#6-and-more) using:
 
-```
+```bash
 snap run --shell gimp
 # then within snap shell
 env | grep SNAP
