@@ -44,6 +44,7 @@ if [ -z "$@"]; then
     echo "🛸 i3 Floating Toggle (W+Shift+space)"
     echo "💎 i3 Sticky Toggle"
     echo "📺 i3 Full Screen (W+f)"
+    echo "⏹️ i3 Border Toggle (W+Shift+b)"
     echo "⚙️ i3 Config"
     echo "🌀 i3 Reload (W+S+r)"
     echo "🔊 Volume"
@@ -79,6 +80,7 @@ if [ -z "$@"]; then
     echo "🔋 Power Stats"
     echo "📚 Disk Space"
     echo "️🖨️ Printers"
+    echo "🧰 Hardware"
     
     echo "🗂️ Ranger (W+g)"
     echo "💻 Terminal (W+Enter|W+t)"
@@ -122,6 +124,9 @@ else
             ;;
         "📌 i3 Bar Toggle (W+y)")
             /usr/bin/i3-msg 'bar mode toggle' > /dev/null
+            ;;
+        "⏹️ i3 Border Toggle (W+Shift+b)")
+            /usr/bin/i3-msg 'border toggle' > /dev/null
             ;;
         "⚙️ i3 Config")
             /usr/bin/geany -i $HOME/.config/i3status/config $HOME/.config/i3/start.sh $HOME/.config/i3/rofi_custom.sh $HOME/.config/i3/config > /dev/null &
@@ -216,6 +221,9 @@ else
             ;;
         "️🖨️ Printers")
             system-config-printer > /dev/null &
+            ;;
+        "🧰 Hardware")
+            /usr/bin/hardinfo > /dev/null &
             ;;
             
         "🗂️ Ranger (W+g)")

@@ -1,4 +1,4 @@
-URxvt.background: #fafafa
+URxvt.background: #f2f1f1
 URxvt.foreground: #1C1C1C
 
 ! black
@@ -12,7 +12,7 @@ URxvt.color2  : #4E9A06
 URxvt.color10 : #8AE234
 ! yellow
 URxvt.color3  : #C4A000
-URxvt.color11 : #FCE94F
+URxvt.color11 : #AA5500
 ! blue
 URxvt.color4  : #3465A4
 URxvt.color12 : #729FCF

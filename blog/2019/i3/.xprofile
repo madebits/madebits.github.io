@@ -1,0 +1,1 @@
+/usr/bin/xrdb -load /home/d7/.config/i3/.Xresources

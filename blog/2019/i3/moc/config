@@ -1,5 +1,5 @@
 Theme = nightly_enhanced
-#MusicDir=
+MusicDir=/home/user/tmp/music
 KeyMap = keymap
 Repeat = yes
 ShowStreamErrors = no
