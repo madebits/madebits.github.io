@@ -52,7 +52,7 @@ Download repository files and copy as *root* under `/usr/local/bin` the followin
 Every time `csman.sh` starts, it prints prefix hashes of these files, if present:
 
 ```
-ebfcd1538  /usr/local/bin/csman.sh
+c3bb7d75c  /usr/local/bin/csman.sh
 a4a5d332c  /usr/local/bin/cskey.sh
 37d86519f  /usr/local/bin/aes
 8d79a5339  /usr/local/bin/argon2
@@ -226,7 +226,7 @@ dd conv=notrunc if=secret.bin of=container.bin
 sudo csman.sh o container.bin container.bin -co -o 2 ---
 ```
 
-The `-slots count` option is provided as convenience to create 1024 byte slots. If not set, it defaults to `-slots 4`. Using `-slots` overwrites `-co -o` (the number used with `-o` needs to be twice the number of slots). Use `-slots 0` if you need no slots, or if you do not want to overwrite `-co -o`. You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number. If slots is set bigger than `0`, then create command also embeds secret file in first slot.
+The `-slots count` option is provided as convenience to create 1024 byte slots. If not set, it defaults to `-slots 4`. Using `-slots` overwrites `-co -o` (the number used with `-o` needs to be twice the number of slots). Use `-slots 0` if you need no slots, or if you do not want to overwrite `-co -o`. You need to remember `-slots` count used when container is created and use it also with open command, but you can use always same number. If slots is set bigger than `0`, then create command also embeds secret file in first slot. If slots count is bigger than one and secret.bin.01, to secret.bin.03 files exists, they are also embedded in other slot.
 
 ```bash
 # these are same, but only second one embeds secret during create
@@ -236,6 +236,11 @@ sudo csman.sh n container.bin 1M -s secret.bin -slots 4
 # these are also same, open
 sudo csman.sh o container.bin -s secret.bin -co -o 8 ---
 sudo csman.sh o container.bin -s secret.bin -slots 4
+
+# to create a secret backup and embed both in first two slots on create use
+sudo csman.sh n container.bin 1M -s secret.bin -ck -b 1 -su -
+# or backup key in all default 4 slots (creates or uses secret.bin, secret.bin.01, .., secret.bin.03)
+sudo csman.sh n container.bin 1M -s secret.bin -ck -b 3 -su -
 ```
 
 Do **not** manipulate container file as secret file using `cskey.sh` or other tooling (such as `csman.sh chp`), other than for reading (decoding) the secret. To extract secret file back from the container use:
