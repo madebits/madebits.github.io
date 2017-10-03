@@ -107,6 +107,8 @@ Not having used GNOME in a while, I had to remind myself of *Windows+A* [shortcu
 
 * The frequent apps list is in `~/.local/share/gnome-shell/application_state`.
 
+* If GNOME shell [freezes](https://wiki.archlinux.org/index.php/GNOME/Troubleshooting#Shell_freezes), type `Ctrl+Alt+F3`, login and run `pkill -HUP gnome-shell`.
+
 ##Other Useful Tools
 
 I did a minimal Ubuntu install. I am so happy they offer that, as in the past I had to un-install most of things. I installed some initial set of tools to get started:
