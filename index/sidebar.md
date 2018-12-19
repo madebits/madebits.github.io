@@ -1,4 +1,4 @@
-* [Cryptsetup with Plain Mode](#blog/2018/2018-12-16-Cryptsetup-with-Plain-Mode.md)
+* [Cryptsetup in Plain Mode](#blog/2018/2018-12-16-Cryptsetup-in-Plain-Mode.md)
 * [Lubuntu 18.04 Disable initfsram Resume](#blog/2018/2018-04-26-Lubuntu-18.04-Disable-initfsram-Resume.md)
 * [OpenVPN In Azure](#blog/2018/2018-04-25-OpenVPN-In-Azure.md)
 * [Gksu Is Dead Long Live Pkexec](#blog/2018/2018-04-24-Gksu-Is-Dead-Long-Live-Pkexec.md)

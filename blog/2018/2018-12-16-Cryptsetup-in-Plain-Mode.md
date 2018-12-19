@@ -1,4 +1,4 @@
-#Cryptsetup with Plain Mode
+#Cryptsetup in Plain Mode
 
 2018-12-16
 
@@ -230,9 +230,8 @@ function main()
                 (>&2 echo "! name required")
                 exit 1
             fi
-            shift 
-            shift
-
+            shift 2
+            
             local secret="$1"
             if [ -z "$secret" ]; then
                 (>&2 echo "! secret required")
@@ -281,8 +280,8 @@ function main()
                 (>&2 echo "! name required")
                 exit 1
             fi
-            shift 
-            shift
+            shift 2 
+            
             local secret="$1"
             if [ -z "$secret" ]; then
                 (>&2 echo "! secret required")
@@ -424,5 +423,6 @@ Related to `--offset` and `--size` is `--skip`, that tells `cryptsetup` the firs
 * https://lumit.it/how-to-get-a-tails-luks-master-key/
 * https://www.tarsnap.com/scrypt.html
 * https://en.wikipedia.org/wiki/Argon2
+* https://www.gnu.org/software/bash/manual/bashref.html
 
 <ins class='nfooter'><a rel='next' id='fnext' href='#blog/2018/2018-04-26-Lubuntu-18.04-Disable-initfsram-Resume.md'>Lubuntu 18.04 Disable initfsram Resume</a></ins>
