@@ -16,4 +16,22 @@ Ideally, a compact process would happen as deltas are added, so that the effect 
 
 If one can afford container instance downtime and all your import data are mounted outside container, then there is easy workaround. Bring container down, *prune* unused containers and recreate them. This will free the space (alternatively starting container with `run --rm` may achieve same when they are down). It could be that use-cases like our MongoDB container are rare, but the problem is present. When having many long running containers, one has to deal with disappearing disk space in automated ways.
 
+Another thing that may contribute to large size are container logs (`docker logs`). Logs can be cleaned [manually](https://stackoverflow.com/questions/42510002/how-to-clear-the-logs-properly-for-a-docker-container) using:
+
+```bash
+sudo sh -c "truncate -s 0 /var/lib/docker/containers/*/*-json.log"
+```
+
+It is better to [configure](https://docs.docker.com/engine/reference/commandline/dockerd/#on-linux) the daemon (if you can afford [restarting](https://docs.docker.com/v17.09/engine/reference/commandline/dockerd/) it):
+
+```json
+{
+  "log-driver": "json-file",
+  "log-opts": {"max-size": "10m", "max-file": "3"},
+   "live-restore": true
+}
+```
+
+[Live restore](https://docs.docker.com/config/containers/live-restore/) keeps containers running when daemon is down.
+
 <ins class='nfooter'><a rel='prev' id='fprev' href='#blog/2019/2019-03-04-Vim-For-Casual-User.md'>Vim For Casual User</a> <a rel='next' id='fnext' href='#blog/2019/2019-01-23-Installing-Ubuntu-18.10.md'>Installing Ubuntu 18.10</a></ins>
