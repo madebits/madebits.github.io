@@ -57,8 +57,8 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id /usr/bin/xkill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 #bindsym $mod+Shift+a exec --no-startup-id i3-dmenu-desktop
-set $apps exec --no-startup-id rofi -modi 'window#i3:.config/i3/rofi_custom.sh#drun#run' -show-icons -show window -sort -width 81  -lines 17 -sidebar-mode -columns 4 -terminal .config/i3/term.sh -location 1 -yoffset 23
-set $favs exec --no-startup-id rofi -modi 'window#i3:.config/i3/rofi_custom.sh#drun#run' -show-icons -show i3 -sort -width 81  -lines 17 -sidebar-mode -columns 4 -terminal .config/i3/term.sh -location 1 -yoffset 23
+set $apps exec --no-startup-id rofi -fake-transparency -fake-background screenshot -modi 'window#i3:.config/i3/rofi_custom.sh#drun#run' -show-icons -show window -sort -width 81  -lines 17 -sidebar-mode -columns 4 -terminal .config/i3/term.sh -location 1 -yoffset 23
+set $favs exec --no-startup-id rofi -fake-transparency -fake-background screenshot -modi 'window#i3:.config/i3/rofi_custom.sh#drun#run' -show-icons -show i3 -sort -width 81  -lines 17 -sidebar-mode -columns 4 -terminal .config/i3/term.sh -location 1 -yoffset 23
 bindsym --release Ctrl+Tab $apps
 
 # change focus
@@ -100,7 +100,7 @@ bindsym $mod+Shift+space floating toggle
 
 floating_minimum_size 128 x 72
 #floating_maximum_size 1024 x 768
-floating_maximum_size 1910 x 1020
+floating_maximum_size 1920 x 1030
 
 # change focus between tiling / floating windows
 #bindsym $mod+space focus mode_toggle
@@ -135,7 +135,8 @@ bindsym $mod+8 workspace number $workspace8
 bindsym $mod+9 workspace number $workspace9
 bindsym $mod+0 workspace number $workspace10
 
-bindsym $mod+dead_circumflex exec --no-startup-id ~/.config/i3/rofi_custom.sh "🔲 i3 New Workspace (W+^)"
+set $nws exec --no-startup-id ~/.config/i3/rofi_custom.sh "🔲 i3 New Workspace (W+^)"
+bindsym $mod+dead_circumflex $nws
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $workspace1; workspace number $workspace1
@@ -203,17 +204,19 @@ bar {
         font pango:DejaVu Sans Mono 10
         status_command i3status # | ~/.config/i3status/i3-custom.sh
         bindsym button3 $favs
+        bindsym button2 $nws
         bindsym button1 $apps
         position top
 }
 
-hide_edge_borders smart
+hide_edge_borders vertical
+#default_floating_border pixel 1
 
 set $nextw workspace next
 set $prevw workspace prev
 bindsym Mod1+Tab $nextw
-bindsym Mod1+Right $nextw
-bindsym Mod1+Left $prevw
+#bindsym Mod1+Right $nextw
+#bindsym Mod1+Left $prevw
 bindsym Mod1+Shift+Tab $prevw
 
 bindsym $mod+d $favs
@@ -229,7 +232,7 @@ bindsym $mod+g exec --no-startup-id ~/.config/i3/term.sh -e ~/git/ranger/ranger.
 bindsym $mod+y bar mode toggle
 bindsym $mod+Escape $lock
 bindsym XF86AudioNext $lock
-#bindsym $mod+Shift+t border toggle
+bindsym $mod+Shift+b border toggle
 
 bindsym --release Print exec --no-startup-id /usr/bin/gnome-screenshot -i
 
@@ -249,9 +252,12 @@ bindsym --release button3 $favs
 #set $cfi #5F676A
 #set $cuf #ccbcb8
 #set $cfs #3f2f5d
-set $cfs #3f2f5d
-set $cfi #44865b
-set $cuf #bdb4ce
+set $cfs #282a36
+#set $cfs #3f2f5d
+#set $cfi #44865b
+set $cfi #90a4ae
+set $cuf #a8aeb9
+#set $cuf #bdb4ce
 #set $cuf #a8aeb9
 
 # class                 border  bground text    indicator child_border
@@ -276,7 +282,7 @@ for_window [class="Gimp"] floating enable
 for_window [class="Catfish"] floating enable
 for_window [class="Gnome-disks"] floating enable
 for_window [class="keepassxc"] floating enable
-for_window [class="Gnome-system-monitor"] floating enable
+#for_window [class="Gnome-system-monitor"] floating enable
 for_window [class="Gnome-power-statistics"] floating enable
 
 # sudo apt install pavucontrol

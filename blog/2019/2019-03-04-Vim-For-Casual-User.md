@@ -169,6 +169,10 @@ To decrypt current GPG text (`Ctrl+L` to refresh screen):
 
 * `%!gpg -d 2> /dev/null`
 
+To encrypt a file with Vim's build-in encryption, open or create the file then:
+
+* In normal mode enter `:setlocal cm=blowfish2` and then `:X` and enter the password twice and then save file `:wq`. 
+
 ## Readings
 
 I found myself last reading [Practical Vim](http://vimcasts.org/publications/) and would recommend it after you are familiar with the basics above.

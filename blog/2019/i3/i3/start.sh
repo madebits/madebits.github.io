@@ -19,3 +19,6 @@ sudo /usr/local/bin/gnome-kill
 #for id in $(xinput list | grep 'Logitech USB Receiver' |  grep pointer | cut -d '=' -f 2 | cut -f 1); do xinput --set-button-map $id 3 2 1; done
 
 ~/.config/i3/battery.sh & disown
+
+#/usr/bin/xinput set-button-map "$(/usr/bin/xinput list --name-only | grep -i touch)" 3 2 1 &
+/usr/bin/xinput --disable "$(/usr/bin/xinput list --name-only | grep -i touch)"

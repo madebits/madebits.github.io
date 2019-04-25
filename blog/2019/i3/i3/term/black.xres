@@ -1,5 +1,5 @@
 urxvt*foreground: white
-urxvt*background: black
+urxvt*background: #202020
 
 *color0:  #2E3436
 *color1:  #a40000
