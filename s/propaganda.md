@@ -164,7 +164,7 @@
 
 ## Russia
 
-[RT News](https://rt.com/news/) | [RT News 2](https://rumble.com/c/RTNews)
+[RT News](https://rt.com/news/) [RT News 2](https://rumble.com/c/RTNews)
 [Sputnik News](https://sputniknews.com/)
 [TASS](https://tass.com/world)
 [Interfax](https://interfax.com/newsroom/top-stories/)
