@@ -218,7 +218,7 @@
 
 [The Dreizin Report](https://thedreizinreport.com/) | [The Dreizin Report 2](https://rumble.com/c/c-1658445)
 [Moon of Alabama](https://www.moonofalabama.org/)
-[AMercouris](https://www.youtube.com/c/AlexanderMercourisReal/videos) | (AMercouris 2)[https://rumble.com/c/c-1392846)
+[AMercouris](https://www.youtube.com/c/AlexanderMercourisReal/videos) | [AMercouris 2](https://rumble.com/c/c-1392846)
 [The Duran](https://www.youtube.com/c/TheDuran) [The Duran 2](https://rumble.com/c/theduran)
 [The New Atlas](https://www.youtube.com/c/TheNewAtlas/videos) [The New Atlas 2](https://rumble.com/c/c-1459863)
 [DPA](https://www.youtube.com/c/DefensePoliticsAsia/videos) | (DPA Site)(https://defensepoliticsasia.com/)
