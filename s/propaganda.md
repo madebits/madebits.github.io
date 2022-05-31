@@ -225,6 +225,7 @@
 [smoothiex12](https://www.youtube.com/user/smoothieX12/videos) [smoothiex12Site](https://smoothiex12.blogspot.com/)
 [GGreenwald](https://rumble.com/c/GGreenwald)
 [Liveuamap](https://liveuamap.com/)
+[MilitarySummary](https://rumble.com/c/c-1613003)
 [SonAR](https://sonar21.com/)
 [The GrayZone](https://www.youtube.com/channel/UCEXR8pRTkE2vFeJePNe9UcQ/videos)
 [MarcFriedrich](https://www.youtube.com/c/MarcFriedrich7/videos)
