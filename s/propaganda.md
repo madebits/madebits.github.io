@@ -216,7 +216,7 @@
 
 ## Analysis
 
-[The Dreizin Report](https://thedreizinreport.com/) | [The Dreizin Report 2]()https://rumble.com/c/c-1658445
+[The Dreizin Report](https://thedreizinreport.com/) | [The Dreizin Report 2](https://rumble.com/c/c-1658445)
 [Moon of Alabama](https://www.moonofalabama.org/)
 [AMercouris](https://www.youtube.com/c/AlexanderMercourisReal/videos) | (AMercouris 2)[https://rumble.com/c/c-1392846)
 [The Duran](https://www.youtube.com/c/TheDuran) [The Duran 2](https://rumble.com/c/theduran)
