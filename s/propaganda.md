@@ -216,13 +216,13 @@
 
 ## Analysis
 
-[The Dreizin Report](https://thedreizinreport.com/) | [The Dreizin Report 2](https://rumble.com/c/c-1658445)
+[The Dreizin Report](https://thedreizinreport.com/) [The Dreizin Report 2](https://rumble.com/c/c-1658445)
 [Moon of Alabama](https://www.moonofalabama.org/)
-[AMercouris](https://www.youtube.com/c/AlexanderMercourisReal/videos) | [AMercouris 2](https://rumble.com/c/c-1392846)
+[AMercouris](https://www.youtube.com/c/AlexanderMercourisReal/videos) [AMercouris 2](https://rumble.com/c/c-1392846)
 [The Duran](https://www.youtube.com/c/TheDuran) [The Duran 2](https://rumble.com/c/theduran)
 [The New Atlas](https://www.youtube.com/c/TheNewAtlas/videos) [The New Atlas 2](https://rumble.com/c/c-1459863)
-[DPA](https://www.youtube.com/c/DefensePoliticsAsia/videos) | [DPASite](https://defensepoliticsasia.com/)
-[smoothiex12](https://www.youtube.com/user/smoothieX12/videos) | [smoothiex12Site](https://smoothiex12.blogspot.com/)
+[DPA](https://www.youtube.com/c/DefensePoliticsAsia/videos) [DPASite](https://defensepoliticsasia.com/)
+[smoothiex12](https://www.youtube.com/user/smoothieX12/videos) [smoothiex12Site](https://smoothiex12.blogspot.com/)
 [GGreenwald](https://rumble.com/c/GGreenwald)
 [Liveuamap](https://liveuamap.com/)
 [SonAR](https://sonar21.com/)
