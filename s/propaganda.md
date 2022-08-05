@@ -164,7 +164,7 @@
 
 ## Russia
 
-[RT News](https://rt.com/news/)
+[RT News](https://rt.com/news/) [RT News 2](https://rumble.com/c/RTNews)
 [Sputnik News](https://sputniknews.com/)
 [TASS](https://tass.com/world)
 [Interfax](https://interfax.com/newsroom/top-stories/)
@@ -176,7 +176,6 @@
 [SouthFront](https://southfront.org/)
 [RussiaBeyond](https://www.rbth.com/science-and-tech)
 [GlobalAffairs](https://eng.globalaffairs.ru/)
-[AMercouris](https://www.youtube.com/c/AlexanderMercourisReal/videos)
 [RussianInsight](https://www.youtube.com/c/RussiaInsight1/videos)
 [Combat Approved](https://www.youtube.com/channel/UCFUidKQ8v0RqAke2zbVDY_g/videos)
 
@@ -214,6 +213,23 @@
 [Hindustan Times](https://www.hindustantimes.com/world-news/)
 [India Today](https://www.indiatoday.in/world)
 [Times Of India](https://timesofindia.indiatimes.com/world)
+
+## Analysis
+
+[The Dreizin Report](https://thedreizinreport.com/) [The Dreizin Report 2](https://rumble.com/c/c-1658445)
+[Moon of Alabama](https://www.moonofalabama.org/)
+[AMercouris](https://www.youtube.com/c/AlexanderMercourisReal/videos) [AMercouris 2](https://rumble.com/c/c-1392846)
+[The Duran](https://www.youtube.com/c/TheDuran) [The Duran 2](https://rumble.com/c/theduran)
+[The New Atlas](https://www.youtube.com/c/TheNewAtlas/videos) [The New Atlas 2](https://rumble.com/c/c-1459863)
+[DPA](https://www.youtube.com/c/DefensePoliticsAsia/videos) [DPASite](https://defensepoliticsasia.com/)
+[smoothiex12](https://www.youtube.com/user/smoothieX12/videos) [smoothiex12Site](https://smoothiex12.blogspot.com/)
+[GGreenwald](https://rumble.com/c/GGreenwald)
+[Liveuamap](https://liveuamap.com/)
+[MilitarySummary](https://rumble.com/c/c-1613003)
+[SonAR](https://sonar21.com/)
+[The GrayZone](https://www.youtube.com/channel/UCEXR8pRTkE2vFeJePNe9UcQ/videos)
+[MarcFriedrich](https://www.youtube.com/c/MarcFriedrich7/videos)
+[SahraWagenknecht](https://www.youtube.com/c/SahraWagenknechtMdB/videos)
 
 ## Other
 
